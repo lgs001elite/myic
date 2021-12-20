@@ -1,0 +1,75 @@
+build/beaconing_nrf52840_xxAA_s140_7.2.0_Debug/obj/nrf_mesh_weak.o: \
+ /home/gaosheng/mesh/my_mesh/nrf5_SDK_for_Mesh_v5.0.0_src/examples/common/src/nrf_mesh_weak.c \
+ /usr/share/segger_embedded_studio_for_arm_5.62/include/stdint.h \
+ /home/gaosheng/mesh/my_mesh/nRF5_SDK_17.0.2_d674dde/components/softdevice/s140/headers/nrf_error.h \
+ ../../mesh/prov/api/nrf_mesh_prov.h \
+ /home/gaosheng/mesh/my_mesh/nRF5_SDK_17.0.2_d674dde/components/softdevice/s140/headers/ble.h \
+ /home/gaosheng/mesh/my_mesh/nRF5_SDK_17.0.2_d674dde/components/softdevice/s140/headers/nrf_svc.h \
+ /home/gaosheng/mesh/my_mesh/nRF5_SDK_17.0.2_d674dde/components/softdevice/s140/headers/nrf_error.h \
+ /home/gaosheng/mesh/my_mesh/nRF5_SDK_17.0.2_d674dde/components/softdevice/s140/headers/ble_err.h \
+ /home/gaosheng/mesh/my_mesh/nRF5_SDK_17.0.2_d674dde/components/softdevice/s140/headers/ble_gap.h \
+ /home/gaosheng/mesh/my_mesh/nRF5_SDK_17.0.2_d674dde/components/softdevice/s140/headers/ble_hci.h \
+ /home/gaosheng/mesh/my_mesh/nRF5_SDK_17.0.2_d674dde/components/softdevice/s140/headers/ble_ranges.h \
+ /home/gaosheng/mesh/my_mesh/nRF5_SDK_17.0.2_d674dde/components/softdevice/s140/headers/ble_types.h \
+ /home/gaosheng/mesh/my_mesh/nRF5_SDK_17.0.2_d674dde/components/softdevice/s140/headers/ble_l2cap.h \
+ /home/gaosheng/mesh/my_mesh/nRF5_SDK_17.0.2_d674dde/components/softdevice/s140/headers/ble_gatt.h \
+ /home/gaosheng/mesh/my_mesh/nRF5_SDK_17.0.2_d674dde/components/softdevice/s140/headers/ble_gattc.h \
+ /home/gaosheng/mesh/my_mesh/nRF5_SDK_17.0.2_d674dde/modules/nrfx/mdk/nrf.h \
+ /home/gaosheng/mesh/my_mesh/nRF5_SDK_17.0.2_d674dde/modules/nrfx/mdk/nrf52840.h \
+ /home/gaosheng/mesh/my_mesh/nRF5_SDK_17.0.2_d674dde/components/toolchain/cmsis/include/core_cm4.h \
+ /home/gaosheng/mesh/my_mesh/nRF5_SDK_17.0.2_d674dde/components/toolchain/cmsis/include/cmsis_version.h \
+ /home/gaosheng/mesh/my_mesh/nRF5_SDK_17.0.2_d674dde/components/toolchain/cmsis/include/cmsis_compiler.h \
+ /home/gaosheng/mesh/my_mesh/nRF5_SDK_17.0.2_d674dde/components/toolchain/cmsis/include/cmsis_gcc.h \
+ /home/gaosheng/mesh/my_mesh/nRF5_SDK_17.0.2_d674dde/components/toolchain/cmsis/include/mpu_armv7.h \
+ /home/gaosheng/mesh/my_mesh/nRF5_SDK_17.0.2_d674dde/modules/nrfx/mdk/system_nrf52840.h \
+ /home/gaosheng/mesh/my_mesh/nRF5_SDK_17.0.2_d674dde/modules/nrfx/mdk/nrf52840_bitfields.h \
+ /home/gaosheng/mesh/my_mesh/nRF5_SDK_17.0.2_d674dde/modules/nrfx/mdk/nrf51_to_nrf52840.h \
+ /home/gaosheng/mesh/my_mesh/nRF5_SDK_17.0.2_d674dde/modules/nrfx/mdk/nrf52_to_nrf52840.h \
+ /home/gaosheng/mesh/my_mesh/nRF5_SDK_17.0.2_d674dde/modules/nrfx/mdk/compiler_abstraction.h \
+ /home/gaosheng/mesh/my_mesh/nRF5_SDK_17.0.2_d674dde/components/softdevice/s140/headers/ble_gatts.h \
+ /usr/share/segger_embedded_studio_for_arm_5.62/include/stdbool.h \
+ ../../mesh/prov/api/nrf_mesh_config_prov.h \
+ ../../mesh/prov/api/nrf_mesh_prov_types.h \
+ ../../mesh/core/api/nrf_mesh_defines.h \
+ ../../mesh/prov/api/nrf_mesh_prov_events.h \
+ ../../mesh/prov/api/nrf_mesh_prov_bearer.h \
+ ../../mesh/core/include/list.h \
+ /usr/share/segger_embedded_studio_for_arm_5.62/include/stddef.h \
+ /usr/share/segger_embedded_studio_for_arm_5.62/include/__crossworks.h \
+ ../../mesh/core/api/nrf_mesh_assert.h ../../mesh/core/api/nrf_mesh.h \
+ ../../mesh/core/include/timer.h \
+ /home/gaosheng/mesh/my_mesh/nRF5_SDK_17.0.2_d674dde/components/softdevice/s140/headers/ble_gap.h \
+ ../../mesh/core/api/nrf_mesh_defines.h \
+ ../../mesh/core/api/nrf_mesh_config_core.h \
+ /home/gaosheng/mesh/my_mesh/nRF5_SDK_17.0.2_d674dde/components/softdevice/s140/headers/nrf_sdm.h \
+ /home/gaosheng/mesh/my_mesh/nRF5_SDK_17.0.2_d674dde/components/softdevice/s140/headers/nrf_error_sdm.h \
+ /home/gaosheng/mesh/my_mesh/nRF5_SDK_17.0.2_d674dde/components/softdevice/s140/headers/nrf_soc.h \
+ /home/gaosheng/mesh/my_mesh/nRF5_SDK_17.0.2_d674dde/components/softdevice/s140/headers/nrf_error_soc.h \
+ /home/gaosheng/mesh/my_mesh/nRF5_SDK_17.0.2_d674dde/components/libraries/util/app_util.h \
+ /home/gaosheng/mesh/my_mesh/nRF5_SDK_17.0.2_d674dde/modules/nrfx/mdk/compiler_abstraction.h \
+ /home/gaosheng/mesh/my_mesh/nRF5_SDK_17.0.2_d674dde/components/libraries/util/nordic_common.h \
+ /home/gaosheng/mesh/my_mesh/nRF5_SDK_17.0.2_d674dde/components/softdevice/s140/headers/nrf52/nrf_mbr.h \
+ /home/gaosheng/mesh/my_mesh/nRF5_SDK_17.0.2_d674dde/components/softdevice/s140/headers/nrf_svc.h \
+ ../../mesh/core/api/nrf_mesh_assert_gcc.h \
+ ../../mesh/core/include/bitfield.h \
+ /usr/share/segger_embedded_studio_for_arm_5.62/include/string.h \
+ ../../mesh/core/include/toolchain.h ../../mesh/dfu/api/nrf_mesh_dfu.h \
+ ../../mesh/core/api/nrf_mesh_config_core.h \
+ ../../mesh/dfu/api/nrf_mesh_config_dfu.h ../../mesh/core/api/nrf_mesh.h \
+ ../../mesh/dfu/api/nrf_mesh_dfu_types.h \
+ ../../mesh/dfu/include/dfu_types_internal.h \
+ ../../mesh/dfu/api/nrf_mesh_dfu_types.h \
+ ../../mesh/core/include/timer_scheduler.h \
+ ../../mesh/core/include/timer.h ../../mesh/core/include/packet.h \
+ ../../mesh/core/include/utils.h ../../mesh/core/include/hal.h \
+ ../../mesh/core/include/log.h \
+ /usr/share/segger_embedded_studio_for_arm_5.62/include/stdarg.h \
+ /home/gaosheng/mesh/my_mesh/nRF5_SDK_17.0.2_d674dde/components/libraries/util/nordic_common.h \
+ ../../mesh/core/include/cache.h ../../mesh/core/include/bl_if.h \
+ ../../mesh/core/include/bl_info_types.h \
+ ../../mesh/core/api/nrf_mesh_opt.h ../../mesh/core/include/toolchain.h \
+ ../../mesh/core/include/internal_event.h \
+ ../../mesh/prov/include/provisioning.h \
+ ../../mesh/prov/include/prov_pdu.h \
+ ../../mesh/prov/api/nrf_mesh_prov_types.h \
+ ../../mesh/core/api/nrf_mesh_utils.h ../../mesh/core/include/utils.h

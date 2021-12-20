@@ -1,0 +1,7 @@
+{
+    "files.associations": {
+        "routingtx.h": "c",
+        "routingrx.h": "c",
+        "dst_db.h": "c"
+    }
+}

@@ -1,0 +1,2082 @@
+# SEGGER J-Link RTT Viewer V7.52d Terminal Log File
+# Compiled: 17:18:13 on Aug 17 2021
+# Logging started @ 17 Sep 2021 15:12:03
+00> <t:          0>, main.c,  535, ----- Bluetooth Mesh Beacon Example -----
+00> <t:       8776>, main.c,  541, Initialization complete!
+00> <t:       8788>, main.c,  555, Bluetooth Mesh Beacon example started!
+00> <t:      17508>, advertiser.c,  250, timerepeat_event: 1
+00> <t:      27535>, advertiser.c,  250, timerepeat_event: 2
+00> <t:      36683>, main.c,  313, byte4 : 8!, p_type: 1
+00> <t:      37653>, advertiser.c,  250, timerepeat_event: 3
+00> <t:      46653>, main.c,  313, byte4 : 8!, p_type: 1
+00> <t:      47512>, advertiser.c,  250, timerepeat_event: 4
+00> <t:      56534>, main.c,  313, byte4 : 8!, p_type: 1
+00> <t:      57567>, advertiser.c,  250, timerepeat_event: 5
+00> <t:      66613>, main.c,  313, byte4 : 8!, p_type: 1
+00> <t:      67681>, advertiser.c,  250, timerepeat_event: 6
+00> <t:      76524>, main.c,  313, byte4 : 8!, p_type: 1
+00> <t:      77571>, advertiser.c,  250, timerepeat_event: 7
+00> <t:      86648>, main.c,  313, byte4 : 8!, p_type: 1
+00> <t:      87641>, advertiser.c,  250, timerepeat_event: 8
+00> <t:      97503>, advertiser.c,  250, timerepeat_event: 9
+00> <t:     106594>, main.c,  313, byte4 : 8!, p_type: 1
+00> <t:     107530>, advertiser.c,  250, timerepeat_event: 10
+00> <t:     116483>, main.c,  313, byte4 : 8!, p_type: 1
+00> <t:     117666>, advertiser.c,  250, timerepeat_event: 11
+00> <t:     126337>, main.c,  313, byte4 : 8!, p_type: 1
+00> <t:     127633>, advertiser.c,  250, timerepeat_event: 12
+00> <t:     136240>, main.c,  313, byte4 : 8!, p_type: 1
+00> <t:     137537>, advertiser.c,  250, timerepeat_event: 13
+00> <t:     147453>, advertiser.c,  250, timerepeat_event: 14
+00> <t:     157290>, advertiser.c,  250, timerepeat_event: 15
+00> <t:     166261>, main.c,  313, byte4 : 8!, p_type: 1
+00> <t:     167413>, advertiser.c,  250, timerepeat_event: 16
+00> <t:     167416>, advertiser.c,  269, sink discovery end!
+00> <t:     167418>, main.c,  108, adv_discovery_disable_bea
+00> <t:     176368>, main.c,  313, byte4 : 8!, p_type: 1
+00> <t:     186345>, main.c,  313, byte4 : 8!, p_type: 1
+00> <t:     202193>, main.c,  313, byte4 : 8!, p_type: 2
+00> <t:     202196>, main.c,  359, Receing adv payload, sink node !
+00> <t:     202198>, main.c,  362, The payload is(size: 24):<t:     202201>, main.c,  367,  g_received_file_real_size:1 
+00> <t:     202861>, main.c,  370,  17 <t:     202863>, main.c,  367,  g_received_file_real_size:2 
+00> <t:     203525>, main.c,  370,  3 <t:     203527>, main.c,  367,  g_received_file_real_size:3 
+00> <t:     204187>, main.c,  370,  0 <t:     204189>, main.c,  367,  g_received_file_real_size:4 
+00> <t:     204847>, main.c,  370,  A <t:     204849>, main.c,  367,  g_received_file_real_size:5 
+00> <t:     205508>, main.c,  370,  D7 <t:     205510>, main.c,  367,  g_received_file_real_size:6 
+00> <t:     206168>, main.c,  370,  18 <t:     206170>, main.c,  367,  g_received_file_real_size:7 
+00> <t:     206828>, main.c,  370,  30 <t:     206830>, main.c,  367,  g_received_file_real_size:8 
+00> <t:     207488>, main.c,  370,  30 <t:     207491>, main.c,  367,  g_received_file_real_size:9 
+00> <t:     208149>, main.c,  370,  3A <t:     208151>, main.c,  367,  g_received_file_real_size:10 
+00> <t:     208809>, main.c,  370,  35 <t:     208811>, main.c,  367,  g_received_file_real_size:11 
+00> <t:     209470>, main.c,  370,  39 <t:     209472>, main.c,  367,  g_received_file_real_size:12 
+00> <t:     210130>, main.c,  370,  D <t:     210132>, main.c,  367,  g_received_file_real_size:13 
+00> <t:     210790>, main.c,  370,  A <t:     210792>, main.c,  367,  g_received_file_real_size:14 
+00> <t:     211451>, main.c,  370,  45 <t:     211453>, main.c,  367,  g_received_file_real_size:15 
+00> <t:     212111>, main.c,  370,  70 <t:     212113>, main.c,  367,  g_received_file_real_size:16 
+00> <t:     212771>, main.c,  370,  69 <t:     212773>, main.c,  367,  g_received_file_real_size:17 
+00> <t:     213432>, main.c,  370,  73 <t:     213434>, main.c,  367,  g_received_file_real_size:18 
+00> <t:     214092>, main.c,  370,  6F <t:     214094>, main.c,  367,  g_received_file_real_size:19 
+00> <t:     214752>, main.c,  370,  64 <t:     214755>, main.c,  367,  g_received_file_real_size:20 
+00> <t:     215413>, main.c,  370,  65 <t:     215415>, main.c,  367,  g_received_file_real_size:21 
+00> <t:     216073>, main.c,  370,  20 <t:     216075>, main.c,  367,  g_received_file_real_size:22 
+00> <t:     216733>, main.c,  370,  31 <t:     216736>, main.c,  367,  g_received_file_real_size:23 
+00> <t:     217394>, main.c,  370,  D <t:     217396>, main.c,  367,  g_received_file_real_size:24 
+00> <t:     218054>, main.c,  370,  A <t:     218712>, main.c,  373, **********  The received seq is: D7, the address is : 3., g_present_packet_seq: FF  ********
+00> <t:     218716>, main.c,  280, Starting to send acks!
+00> <t:     218719>, main.c,  164, ******* Enable adv ******
+00> <t:     224060>, main.c,  313, byte4 : 8!, p_type: 2
+00> <t:     226009>, advertiser.c,  246, g_if_stop_discovery_count: 37
+00> <t:     226012>, advertiser.c,  250, timerepeat_event: 1
+00> <t:     234154>, main.c,  313, byte4 : 8!, p_type: 2
+00> <t:     235892>, advertiser.c,  246, g_if_stop_discovery_count: 37
+00> <t:     235895>, advertiser.c,  250, timerepeat_event: 2
+00> <t:     245775>, advertiser.c,  246, g_if_stop_discovery_count: 37
+00> <t:     245778>, advertiser.c,  250, timerepeat_event: 3
+00> <t:     252210>, main.c,  313, byte4 : 8!, p_type: 2
+00> <t:     252212>, main.c,  359, Receing adv payload, sink node !
+00> <t:     252215>, main.c,  362, The payload is(size: 24):<t:     252218>, main.c,  367,  g_received_file_real_size:25 
+00> <t:     252879>, main.c,  370,  17 <t:     252881>, main.c,  367,  g_received_file_real_size:26 
+00> <t:     253541>, main.c,  370,  3 <t:     253543>, main.c,  367,  g_received_file_real_size:27 
+00> <t:     254203>, main.c,  370,  3 <t:     254205>, main.c,  367,  g_received_file_real_size:28 
+00> <t:     254863>, main.c,  370,  A <t:     254865>, main.c,  367,  g_received_file_real_size:29 
+00> <t:     255523>, main.c,  370,  B5 <t:     255526>, main.c,  367,  g_received_file_real_size:30 
+00> <t:     256184>, main.c,  370,  18 <t:     256186>, main.c,  367,  g_received_file_real_size:31 
+00> <t:     256844>, main.c,  370,  A <t:     256846>, main.c,  367,  g_received_file_real_size:32 
+00> <t:     257505>, main.c,  370,  5B <t:     257507>, main.c,  367,  g_received_file_real_size:33 
+00> <t:     258165>, main.c,  370,  53 <t:     258167>, main.c,  367,  g_received_file_real_size:34 
+00> <t:     258825>, main.c,  370,  61 <t:     258828>, main.c,  367,  g_received_file_real_size:35 
+00> <t:     259486>, main.c,  370,  6E <t:     259488>, main.c,  367,  g_received_file_real_size:36 
+00> <t:     260146>, main.c,  370,  20 <t:     260148>, main.c,  367,  g_received_file_real_size:37 
+00> <t:     260806>, main.c,  370,  46 <t:     260809>, main.c,  367,  g_received_file_real_size:38 
+00> <t:     261467>, main.c,  370,  72 <t:     261469>, main.c,  367,  g_received_file_real_size:39 
+00> <t:     262127>, main.c,  370,  61 <t:     262129>, main.c,  367,  g_received_file_real_size:40 
+00> <t:     262788>, main.c,  370,  6E <t:     262790>, main.c,  367,  g_received_file_real_size:41 
+00> <t:     263448>, main.c,  370,  63 <t:     263450>, main.c,  367,  g_received_file_real_size:42 
+00> <t:     264108>, main.c,  370,  69 <t:     264110>, main.c,  367,  g_received_file_real_size:43 
+00> <t:     264769>, main.c,  370,  73 <t:     264771>, main.c,  367,  g_received_file_real_size:44 
+00> <t:     265429>, main.c,  370,  63 <t:     265431>, main.c,  367,  g_received_file_real_size:45 
+00> <t:     266089>, main.c,  370,  6F <t:     266092>, main.c,  367,  g_received_file_real_size:46 
+00> <t:     266750>, main.c,  370,  2C <t:     266752>, main.c,  367,  g_received_file_real_size:47 
+00> <t:     267410>, main.c,  370,  20 <t:     267412>, main.c,  367,  g_received_file_real_size:48 
+00> <t:     268070>, main.c,  370,  43 <t:     268728>, main.c,  373, **********  The received seq is: B5, the address is : 3., g_present_packet_seq: FF  ********
+00> <t:     268735>, advertiser.c,  246, g_if_stop_discovery_count: 37
+00> <t:     268737>, advertiser.c,  250, timerepeat_event: 4
+00> <t:     268740>, advertiser.c,  281, get_if_send_ack!
+00> <t:     268742>, main.c,  108, adv_discovery_disable_bea
+00> <t:     268745>, main.c,  280, Starting to send acks!
+00> <t:     268748>, main.c,  164, ******* Enable adv ******
+00> <t:     268751>, main.c,  108, adv_discovery_disable_bea
+00> <t:     268754>, main.c,  280, Starting to send acks!
+00> <t:     268757>, main.c,  164, ******* Enable adv ******
+00> <t:     268760>, main.c,  108, adv_discovery_disable_bea
+00> <t:     268763>, main.c,  280, Starting to send acks!
+00> <t:     268766>, main.c,  164, ******* Enable adv ******
+00> <t:     268770>, main.c,  108, adv_discovery_disable_bea
+00> <t:     268773>, main.c,  280, Starting to send acks!
+00> <t:     268777>, main.c,  164, ******* Enable adv ******
+00> <t:     272076>, main.c,  313, byte4 : 8!, p_type: 2
+00> <t:     277082>, advertiser.c,  246, g_if_stop_discovery_count: 37
+00> <t:     277085>, advertiser.c,  250, timerepeat_event: 5
+00> <t:     282010>, main.c,  313, byte4 : 8!, p_type: 2
+00> <t:     286951>, advertiser.c,  246, g_if_stop_discovery_count: 37
+00> <t:     286954>, advertiser.c,  250, timerepeat_event: 6
+00> <t:     296813>, advertiser.c,  246, g_if_stop_discovery_count: 37
+00> <t:     296816>, advertiser.c,  250, timerepeat_event: 7
+00> <t:     297853>, main.c,  313, byte4 : 8!, p_type: 2
+00> <t:     297856>, main.c,  359, Receing adv payload, sink node !
+00> <t:     297858>, main.c,  362, The payload is(size: 24):<t:     297861>, main.c,  367,  g_received_file_real_size:49 
+00> <t:     298521>, main.c,  370,  17 <t:     298524>, main.c,  367,  g_received_file_real_size:50 
+00> <t:     299184>, main.c,  370,  3 <t:     299186>, main.c,  367,  g_received_file_real_size:51 
+00> <t:     299846>, main.c,  370,  3 <t:     299848>, main.c,  367,  g_received_file_real_size:52 
+00> <t:     300507>, main.c,  370,  A <t:     300509>, main.c,  367,  g_received_file_real_size:53 
+00> <t:     301167>, main.c,  370,  41 <t:     301170>, main.c,  367,  g_received_file_real_size:54 
+00> <t:     301828>, main.c,  370,  18 <t:     301830>, main.c,  367,  g_received_file_real_size:55 
+00> <t:     302488>, main.c,  370,  6E <t:     302490>, main.c,  367,  g_received_file_real_size:56 
+00> <t:     303149>, main.c,  370,  69 <t:     303151>, main.c,  367,  g_received_file_real_size:57 
+00> <t:     303809>, main.c,  370,  61 <t:     303811>, main.c,  367,  g_received_file_real_size:58 
+00> <t:     304469>, main.c,  370,  5D <t:     304471>, main.c,  367,  g_received_file_real_size:59 
+00> <t:     305130>, main.c,  370,  D <t:     305132>, main.c,  367,  g_received_file_real_size:60 
+00> <t:     305790>, main.c,  370,  A <t:     305792>, main.c,  367,  g_received_file_real_size:61 
+00> <t:     306450>, main.c,  370,  30 <t:     306452>, main.c,  367,  g_received_file_real_size:62 
+00> <t:     307111>, main.c,  370,  31 <t:     307113>, main.c,  367,  g_received_file_real_size:63 
+00> <t:     307771>, main.c,  370,  3A <t:     307773>, main.c,  367,  g_received_file_real_size:64 
+00> <t:     308431>, main.c,  370,  31 <t:     308434>, main.c,  367,  g_received_file_real_size:65 
+00> <t:     309092>, main.c,  370,  36 <t:     309094>, main.c,  367,  g_received_file_real_size:66 
+00> <t:     309752>, main.c,  370,  D <t:     309754>, main.c,  367,  g_received_file_real_size:67 
+00> <t:     310412>, main.c,  370,  A <t:     310415>, main.c,  367,  g_received_file_real_size:68 
+00> <t:     311073>, main.c,  370,  43 <t:     311075>, main.c,  367,  g_received_file_real_size:69 
+00> <t:     311733>, main.c,  370,  61 <t:     311735>, main.c,  367,  g_received_file_real_size:70 
+00> <t:     312393>, main.c,  370,  72 <t:     312396>, main.c,  367,  g_received_file_real_size:71 
+00> <t:     313054>, main.c,  370,  65 <t:     313056>, main.c,  367,  g_received_file_real_size:72 
+00> <t:     313714>, main.c,  370,  66 <t:     314372>, main.c,  373, **********  The received seq is: 41, the address is : 3., g_present_packet_seq: FF  ********
+00> <t:     314378>, advertiser.c,  246, g_if_stop_discovery_count: 37
+00> <t:     314381>, advertiser.c,  250, timerepeat_event: 8
+00> <t:     314384>, advertiser.c,  281, get_if_send_ack!
+00> <t:     314386>, main.c,  108, adv_discovery_disable_bea
+00> <t:     314389>, main.c,  280, Starting to send acks!
+00> <t:     314392>, main.c,  164, ******* Enable adv ******
+00> <t:     314395>, main.c,  108, adv_discovery_disable_bea
+00> <t:     314398>, main.c,  280, Starting to send acks!
+00> <t:     314400>, main.c,  164, ******* Enable adv ******
+00> <t:     314404>, main.c,  108, adv_discovery_disable_bea
+00> <t:     314407>, main.c,  280, Starting to send acks!
+00> <t:     314410>, main.c,  164, ******* Enable adv ******
+00> <t:     314413>, main.c,  108, adv_discovery_disable_bea
+00> <t:     314416>, main.c,  280, Starting to send acks!
+00> <t:     314420>, main.c,  164, ******* Enable adv ******
+00> <t:     321893>, main.c,  313, byte4 : 8!, p_type: 2
+00> <t:     323411>, advertiser.c,  246, g_if_stop_discovery_count: 37
+00> <t:     323414>, advertiser.c,  250, timerepeat_event: 9
+00> <t:     331798>, main.c,  313, byte4 : 8!, p_type: 2
+00> <t:     333307>, advertiser.c,  246, g_if_stop_discovery_count: 37
+00> <t:     333310>, advertiser.c,  250, timerepeat_event: 10
+00> <t:     343188>, advertiser.c,  246, g_if_stop_discovery_count: 37
+00> <t:     343191>, advertiser.c,  250, timerepeat_event: 11
+00> <t:     347613>, main.c,  313, byte4 : 8!, p_type: 2
+00> <t:     347616>, main.c,  359, Receing adv payload, sink node !
+00> <t:     347619>, main.c,  362, The payload is(size: 24):<t:     347621>, main.c,  367,  g_received_file_real_size:73 
+00> <t:     348283>, main.c,  370,  17 <t:     348285>, main.c,  367,  g_received_file_real_size:74 
+00> <t:     348944>, main.c,  370,  3 <t:     348946>, main.c,  367,  g_received_file_real_size:75 
+00> <t:     349604>, main.c,  370,  3 <t:     349607>, main.c,  367,  g_received_file_real_size:76 
+00> <t:     350265>, main.c,  370,  A <t:     350267>, main.c,  367,  g_received_file_real_size:77 
+00> <t:     350925>, main.c,  370,  B2 <t:     350927>, main.c,  367,  g_received_file_real_size:78 
+00> <t:     351585>, main.c,  370,  18 <t:     351588>, main.c,  367,  g_received_file_real_size:79 
+00> <t:     352246>, main.c,  370,  31 <t:     352248>, main.c,  367,  g_received_file_real_size:80 
+00> <t:     352906>, main.c,  370,  3A <t:     352908>, main.c,  367,  g_received_file_real_size:81 
+00> <t:     353567>, main.c,  370,  32 <t:     353569>, main.c,  367,  g_received_file_real_size:82 
+00> <t:     354227>, main.c,  370,  30 <t:     354229>, main.c,  367,  g_received_file_real_size:83 
+00> <t:     354887>, main.c,  370,  D <t:     354889>, main.c,  367,  g_received_file_real_size:84 
+00> <t:     355548>, main.c,  370,  A <t:     355550>, main.c,  367,  g_received_file_real_size:85 
+00> <t:     356208>, main.c,  370,  45 <t:     356210>, main.c,  367,  g_received_file_real_size:86 
+00> <t:     356868>, main.c,  370,  76 <t:     356871>, main.c,  367,  g_received_file_real_size:87 
+00> <t:     357529>, main.c,  370,  65 <t:     357531>, main.c,  367,  g_received_file_real_size:88 
+00> <t:     358189>, main.c,  370,  72 <t:     358191>, main.c,  367,  g_received_file_real_size:89 
+00> <t:     358849>, main.c,  370,  79 <t:     358852>, main.c,  367,  g_received_file_real_size:90 
+00> <t:     359510>, main.c,  370,  74 <t:     359512>, main.c,  367,  g_received_file_real_size:91 
+00> <t:     360170>, main.c,  370,  68 <t:     360172>, main.c,  367,  g_received_file_real_size:92 
+00> <t:     360831>, main.c,  370,  69 <t:     360833>, main.c,  367,  g_received_file_real_size:93 
+00> <t:     361491>, main.c,  370,  6E <t:     361493>, main.c,  367,  g_received_file_real_size:94 
+00> <t:     362151>, main.c,  370,  67 <t:     362154>, main.c,  367,  g_received_file_real_size:95 
+00> <t:     362812>, main.c,  370,  27 <t:     362814>, main.c,  367,  g_received_file_real_size:96 
+00> <t:     363472>, main.c,  370,  73 <t:     364130>, main.c,  373, **********  The received seq is: B2, the address is : 3., g_present_packet_seq: FF  ********
+00> <t:     364136>, advertiser.c,  246, g_if_stop_discovery_count: 37
+00> <t:     364139>, advertiser.c,  250, timerepeat_event: 12
+00> <t:     364142>, advertiser.c,  281, get_if_send_ack!
+00> <t:     364144>, main.c,  108, adv_discovery_disable_bea
+00> <t:     364147>, main.c,  280, Starting to send acks!
+00> <t:     364150>, main.c,  164, ******* Enable adv ******
+00> <t:     364153>, main.c,  108, adv_discovery_disable_bea
+00> <t:     364156>, main.c,  280, Starting to send acks!
+00> <t:     364158>, main.c,  164, ******* Enable adv ******
+00> <t:     364162>, main.c,  108, adv_discovery_disable_bea
+00> <t:     364165>, main.c,  280, Starting to send acks!
+00> <t:     364168>, main.c,  164, ******* Enable adv ******
+00> <t:     364171>, main.c,  108, adv_discovery_disable_bea
+00> <t:     364174>, main.c,  280, Starting to send acks!
+00> <t:     364178>, main.c,  164, ******* Enable adv ******
+00> <t:     369978>, main.c,  313, byte4 : 8!, p_type: 2
+00> <t:     371500>, advertiser.c,  246, g_if_stop_discovery_count: 37
+00> <t:     371503>, advertiser.c,  250, timerepeat_event: 13
+00> <t:     379942>, main.c,  313, byte4 : 8!, p_type: 2
+00> <t:     381405>, advertiser.c,  246, g_if_stop_discovery_count: 37
+00> <t:     381408>, advertiser.c,  250, timerepeat_event: 14
+00> <t:     390026>, main.c,  313, byte4 : 8!, p_type: 2
+00> <t:     391410>, advertiser.c,  246, g_if_stop_discovery_count: 37
+00> <t:     391413>, advertiser.c,  250, timerepeat_event: 15
+00> <t:     401473>, advertiser.c,  246, g_if_stop_discovery_count: 37
+00> <t:     401476>, advertiser.c,  250, timerepeat_event: 16
+00> <t:     405882>, main.c,  313, byte4 : 8!, p_type: 2
+00> <t:     405885>, main.c,  359, Receing adv payload, sink node !
+00> <t:     405887>, main.c,  362, The payload is(size: 24):<t:     405890>, main.c,  367,  g_received_file_real_size:97 
+00> <t:     406551>, main.c,  370,  17 <t:     406553>, main.c,  367,  g_received_file_real_size:98 
+00> <t:     407213>, main.c,  370,  3 <t:     407215>, main.c,  367,  g_received_file_real_size:99 
+00> <t:     407873>, main.c,  370,  3 <t:     407876>, main.c,  367,  g_received_file_real_size:100 
+00> <t:     408534>, main.c,  370,  A <t:     408536>, main.c,  367,  g_received_file_real_size:101 
+00> <t:     409194>, main.c,  370,  B3 <t:     409196>, main.c,  367,  g_received_file_real_size:102 
+00> <t:     409855>, main.c,  370,  18 <t:     409857>, main.c,  367,  g_received_file_real_size:103 
+00> <t:     410515>, main.c,  370,  65 <t:     410517>, main.c,  367,  g_received_file_real_size:104 
+00> <t:     411175>, main.c,  370,  74 <t:     411178>, main.c,  367,  g_received_file_real_size:105 
+00> <t:     411836>, main.c,  370,  27 <t:     411838>, main.c,  367,  g_received_file_real_size:106 
+00> <t:     412496>, main.c,  370,  73 <t:     412498>, main.c,  367,  g_received_file_real_size:107 
+00> <t:     413157>, main.c,  370,  20 <t:     413159>, main.c,  367,  g_received_file_real_size:108 
+00> <t:     413817>, main.c,  370,  72 <t:     413819>, main.c,  367,  g_received_file_real_size:109 
+00> <t:     414477>, main.c,  370,  6F <t:     414480>, main.c,  367,  g_received_file_real_size:110 
+00> <t:     415138>, main.c,  370,  6C <t:     415140>, main.c,  367,  g_received_file_real_size:111 
+00> <t:     415798>, main.c,  370,  6C <t:     415800>, main.c,  367,  g_received_file_real_size:112 
+00> <t:     416459>, main.c,  370,  2E <t:     416461>, main.c,  367,  g_received_file_real_size:113 
+00> <t:     417119>, main.c,  370,  D <t:     417121>, main.c,  367,  g_received_file_real_size:114 
+00> <t:     417779>, main.c,  370,  A <t:     417782>, main.c,  367,  g_received_file_real_size:115 
+00> <t:     418440>, main.c,  370,  30 <t:     418442>, main.c,  367,  g_received_file_real_size:116 
+00> <t:     419100>, main.c,  370,  31 <t:     419102>, main.c,  367,  g_received_file_real_size:117 
+00> <t:     419761>, main.c,  370,  3A <t:     419763>, main.c,  367,  g_received_file_real_size:118 
+00> <t:     420421>, main.c,  370,  32 <t:     420423>, main.c,  367,  g_received_file_real_size:119 
+00> <t:     421081>, main.c,  370,  31 <t:     421084>, main.c,  367,  g_received_file_real_size:120 
+00> <t:     421742>, main.c,  370,  D <t:     422399>, main.c,  373, **********  The received seq is: B3, the address is : 3., g_present_packet_seq: FF  ********
+00> <t:     422406>, advertiser.c,  246, g_if_stop_discovery_count: 37
+00> <t:     422409>, advertiser.c,  250, timerepeat_event: 1
+00> <t:     422411>, advertiser.c,  281, get_if_send_ack!
+00> <t:     422414>, main.c,  108, adv_discovery_disable_bea
+00> <t:     422417>, main.c,  280, Starting to send acks!
+00> <t:     422419>, main.c,  164, ******* Enable adv ******
+00> <t:     422423>, main.c,  108, adv_discovery_disable_bea
+00> <t:     422425>, main.c,  280, Starting to send acks!
+00> <t:     422428>, main.c,  164, ******* Enable adv ******
+00> <t:     422431>, main.c,  108, adv_discovery_disable_bea
+00> <t:     422435>, main.c,  280, Starting to send acks!
+00> <t:     422438>, main.c,  164, ******* Enable adv ******
+00> <t:     422441>, main.c,  108, adv_discovery_disable_bea
+00> <t:     422444>, main.c,  280, Starting to send acks!
+00> <t:     422448>, main.c,  164, ******* Enable adv ******
+00> <t:     422455>, main.c,  313, byte4 : 8!, p_type: 2
+00> <t:     427231>, main.c,  313, byte4 : 8!, p_type: 2
+00> <t:     429714>, advertiser.c,  246, g_if_stop_discovery_count: 37
+00> <t:     429717>, advertiser.c,  250, timerepeat_event: 2
+00> <t:     437205>, main.c,  313, byte4 : 8!, p_type: 2
+00> <t:     439781>, advertiser.c,  246, g_if_stop_discovery_count: 37
+00> <t:     439784>, advertiser.c,  250, timerepeat_event: 3
+00> <t:     449817>, advertiser.c,  246, g_if_stop_discovery_count: 37
+00> <t:     449820>, advertiser.c,  250, timerepeat_event: 4
+00> <t:     453046>, main.c,  313, byte4 : 8!, p_type: 2
+00> <t:     453049>, main.c,  359, Receing adv payload, sink node !
+00> <t:     453052>, main.c,  362, The payload is(size: 24):<t:     453054>, main.c,  367,  g_received_file_real_size:121 
+00> <t:     453716>, main.c,  370,  17 <t:     453718>, main.c,  367,  g_received_file_real_size:122 
+00> <t:     454378>, main.c,  370,  3 <t:     454380>, main.c,  367,  g_received_file_real_size:123 
+00> <t:     455039>, main.c,  370,  3 <t:     455041>, main.c,  367,  g_received_file_real_size:124 
+00> <t:     455700>, main.c,  370,  A <t:     455702>, main.c,  367,  g_received_file_real_size:125 
+00> <t:     456360>, main.c,  370,  81 <t:     456362>, main.c,  367,  g_received_file_real_size:126 
+00> <t:     457020>, main.c,  370,  18 <t:     457023>, main.c,  367,  g_received_file_real_size:127 
+00> <t:     457681>, main.c,  370,  65 <t:     457683>, main.c,  367,  g_received_file_real_size:128 
+00> <t:     458341>, main.c,  370,  20 <t:     458343>, main.c,  367,  g_received_file_real_size:129 
+00> <t:     459002>, main.c,  370,  66 <t:     459004>, main.c,  367,  g_received_file_real_size:130 
+00> <t:     459662>, main.c,  370,  6F <t:     459664>, main.c,  367,  g_received_file_real_size:131 
+00> <t:     460322>, main.c,  370,  72 <t:     460325>, main.c,  367,  g_received_file_real_size:132 
+00> <t:     460983>, main.c,  370,  67 <t:     460985>, main.c,  367,  g_received_file_real_size:133 
+00> <t:     461643>, main.c,  370,  65 <t:     461645>, main.c,  367,  g_received_file_real_size:134 
+00> <t:     462304>, main.c,  370,  74 <t:     462306>, main.c,  367,  g_received_file_real_size:135 
+00> <t:     462964>, main.c,  370,  20 <t:     462966>, main.c,  367,  g_received_file_real_size:136 
+00> <t:     463624>, main.c,  370,  61 <t:     463627>, main.c,  367,  g_received_file_real_size:137 
+00> <t:     464285>, main.c,  370,  6E <t:     464287>, main.c,  367,  g_received_file_real_size:138 
+00> <t:     464945>, main.c,  370,  79 <t:     464947>, main.c,  367,  g_received_file_real_size:139 
+00> <t:     465606>, main.c,  370,  74 <t:     465608>, main.c,  367,  g_received_file_real_size:140 
+00> <t:     466266>, main.c,  370,  68 <t:     466268>, main.c,  367,  g_received_file_real_size:141 
+00> <t:     466926>, main.c,  370,  69 <t:     466929>, main.c,  367,  g_received_file_real_size:142 
+00> <t:     467587>, main.c,  370,  6E <t:     467589>, main.c,  367,  g_received_file_real_size:143 
+00> <t:     468247>, main.c,  370,  67 <t:     468249>, main.c,  367,  g_received_file_real_size:144 
+00> <t:     468908>, main.c,  370,  3F <t:     469565>, main.c,  373, **********  The received seq is: 81, the address is : 3., g_present_packet_seq: FF  ********
+00> <t:     469572>, advertiser.c,  246, g_if_stop_discovery_count: 37
+00> <t:     469575>, advertiser.c,  250, timerepeat_event: 5
+00> <t:     469577>, advertiser.c,  281, get_if_send_ack!
+00> <t:     469580>, main.c,  108, adv_discovery_disable_bea
+00> <t:     469583>, main.c,  280, Starting to send acks!
+00> <t:     469585>, main.c,  164, ******* Enable adv ******
+00> <t:     469588>, main.c,  108, adv_discovery_disable_bea
+00> <t:     469591>, main.c,  280, Starting to send acks!
+00> <t:     469594>, main.c,  164, ******* Enable adv ******
+00> <t:     469597>, main.c,  108, adv_discovery_disable_bea
+00> <t:     469600>, main.c,  280, Starting to send acks!
+00> <t:     469603>, main.c,  164, ******* Enable adv ******
+00> <t:     469606>, main.c,  108, adv_discovery_disable_bea
+00> <t:     469609>, main.c,  280, Starting to send acks!
+00> <t:     469612>, main.c,  164, ******* Enable adv ******
+00> <t:     475338>, main.c,  313, byte4 : 8!, p_type: 2
+00> <t:     476265>, advertiser.c,  246, g_if_stop_discovery_count: 37
+00> <t:     476268>, advertiser.c,  250, timerepeat_event: 6
+00> <t:     485443>, main.c,  313, byte4 : 8!, p_type: 2
+00> <t:     486404>, advertiser.c,  246, g_if_stop_discovery_count: 37
+00> <t:     486407>, advertiser.c,  250, timerepeat_event: 7
+00> <t:     496456>, advertiser.c,  246, g_if_stop_discovery_count: 37
+00> <t:     496459>, advertiser.c,  250, timerepeat_event: 8
+00> <t:     501286>, main.c,  313, byte4 : 8!, p_type: 2
+00> <t:     501289>, main.c,  359, Receing adv payload, sink node !
+00> <t:     501291>, main.c,  362, The payload is(size: 24):<t:     501294>, main.c,  367,  g_received_file_real_size:145 
+00> <t:     501953>, main.c,  370,  17 <t:     501955>, main.c,  367,  g_received_file_real_size:146 
+00> <t:     502619>, main.c,  370,  3 <t:     502621>, main.c,  367,  g_received_file_real_size:147 
+00> <t:     503279>, main.c,  370,  3 <t:     503281>, main.c,  367,  g_received_file_real_size:148 
+00> <t:     503940>, main.c,  370,  A <t:     503942>, main.c,  367,  g_received_file_real_size:149 
+00> <t:     504600>, main.c,  370,  6E <t:     504602>, main.c,  367,  g_received_file_real_size:150 
+00> <t:     505260>, main.c,  370,  18 <t:     505263>, main.c,  367,  g_received_file_real_size:151 
+00> <t:     505921>, main.c,  370,  32 <t:     505923>, main.c,  367,  g_received_file_real_size:152 
+00> <t:     506581>, main.c,  370,  D <t:     506583>, main.c,  367,  g_received_file_real_size:153 
+00> <t:     507242>, main.c,  370,  A <t:     507244>, main.c,  367,  g_received_file_real_size:154 
+00> <t:     507902>, main.c,  370,  44 <t:     507904>, main.c,  367,  g_received_file_real_size:155 
+00> <t:     508562>, main.c,  370,  6F <t:     508565>, main.c,  367,  g_received_file_real_size:156 
+00> <t:     509223>, main.c,  370,  6E <t:     509225>, main.c,  367,  g_received_file_real_size:157 
+00> <t:     509883>, main.c,  370,  27 <t:     509885>, main.c,  367,  g_received_file_real_size:158 
+00> <t:     510544>, main.c,  370,  74 <t:     510546>, main.c,  367,  g_received_file_real_size:159 
+00> <t:     511204>, main.c,  370,  20 <t:     511206>, main.c,  367,  g_received_file_real_size:160 
+00> <t:     511864>, main.c,  370,  77 <t:     511867>, main.c,  367,  g_received_file_real_size:161 
+00> <t:     512525>, main.c,  370,  6F <t:     512527>, main.c,  367,  g_received_file_real_size:162 
+00> <t:     513185>, main.c,  370,  72 <t:     513188>, main.c,  367,  g_received_file_real_size:163 
+00> <t:     513846>, main.c,  370,  72 <t:     513848>, main.c,  367,  g_received_file_real_size:164 
+00> <t:     514506>, main.c,  370,  79 <t:     514508>, main.c,  367,  g_received_file_real_size:165 
+00> <t:     515167>, main.c,  370,  2E <t:     515169>, main.c,  367,  g_received_file_real_size:166 
+00> <t:     515827>, main.c,  370,  D <t:     515829>, main.c,  367,  g_received_file_real_size:167 
+00> <t:     516487>, main.c,  370,  A <t:     516489>, main.c,  367,  g_received_file_real_size:168 
+00> <t:     517148>, main.c,  370,  30 <t:     517805>, main.c,  373, **********  The received seq is: 6E, the address is : 3., g_present_packet_seq: FF  ********
+00> <t:     517812>, advertiser.c,  246, g_if_stop_discovery_count: 37
+00> <t:     517815>, advertiser.c,  250, timerepeat_event: 9
+00> <t:     517817>, advertiser.c,  281, get_if_send_ack!
+00> <t:     517820>, main.c,  108, adv_discovery_disable_bea
+00> <t:     517823>, main.c,  280, Starting to send acks!
+00> <t:     517825>, main.c,  164, ******* Enable adv ******
+00> <t:     517828>, main.c,  108, adv_discovery_disable_bea
+00> <t:     517831>, main.c,  280, Starting to send acks!
+00> <t:     517834>, main.c,  164, ******* Enable adv ******
+00> <t:     517837>, main.c,  108, adv_discovery_disable_bea
+00> <t:     517841>, main.c,  280, Starting to send acks!
+00> <t:     517843>, main.c,  164, ******* Enable adv ******
+00> <t:     517847>, main.c,  108, adv_discovery_disable_bea
+00> <t:     517850>, main.c,  280, Starting to send acks!
+00> <t:     517854>, main.c,  164, ******* Enable adv ******
+00> <t:     525602>, main.c,  313, byte4 : 8!, p_type: 2
+00> <t:     527374>, advertiser.c,  246, g_if_stop_discovery_count: 37
+00> <t:     527377>, advertiser.c,  250, timerepeat_event: 10
+00> <t:     535504>, main.c,  313, byte4 : 8!, p_type: 2
+00> <t:     537445>, advertiser.c,  246, g_if_stop_discovery_count: 37
+00> <t:     537448>, advertiser.c,  250, timerepeat_event: 11
+00> <t:     547374>, advertiser.c,  246, g_if_stop_discovery_count: 37
+00> <t:     547377>, advertiser.c,  250, timerepeat_event: 12
+00> <t:     551351>, main.c,  313, byte4 : 8!, p_type: 2
+00> <t:     551354>, main.c,  359, Receing adv payload, sink node !
+00> <t:     551356>, main.c,  362, The payload is(size: 24):<t:     551359>, main.c,  367,  g_received_file_real_size:169 
+00> <t:     552021>, main.c,  370,  17 <t:     552024>, main.c,  367,  g_received_file_real_size:170 
+00> <t:     552684>, main.c,  370,  3 <t:     552687>, main.c,  367,  g_received_file_real_size:171 
+00> <t:     553346>, main.c,  370,  3 <t:     553348>, main.c,  367,  g_received_file_real_size:172 
+00> <t:     554006>, main.c,  370,  A <t:     554008>, main.c,  367,  g_received_file_real_size:173 
+00> <t:     554666>, main.c,  370,  E2 <t:     554669>, main.c,  367,  g_received_file_real_size:174 
+00> <t:     555327>, main.c,  370,  18 <t:     555329>, main.c,  367,  g_received_file_real_size:175 
+00> <t:     555987>, main.c,  370,  54 <t:     555989>, main.c,  367,  g_received_file_real_size:176 
+00> <t:     556648>, main.c,  370,  68 <t:     556650>, main.c,  367,  g_received_file_real_size:177 
+00> <t:     557308>, main.c,  370,  65 <t:     557310>, main.c,  367,  g_received_file_real_size:178 
+00> <t:     557968>, main.c,  370,  72 <t:     557971>, main.c,  367,  g_received_file_real_size:179 
+00> <t:     558629>, main.c,  370,  65 <t:     558631>, main.c,  367,  g_received_file_real_size:180 
+00> <t:     559289>, main.c,  370,  27 <t:     559291>, main.c,  367,  g_received_file_real_size:181 
+00> <t:     559950>, main.c,  370,  73 <t:     559952>, main.c,  367,  g_received_file_real_size:182 
+00> <t:     560610>, main.c,  370,  20 <t:     560612>, main.c,  367,  g_received_file_real_size:183 
+00> <t:     561270>, main.c,  370,  74 <t:     561273>, main.c,  367,  g_received_file_real_size:184 
+00> <t:     561931>, main.c,  370,  68 <t:     561933>, main.c,  367,  g_received_file_real_size:185 
+00> <t:     562591>, main.c,  370,  65 <t:     562594>, main.c,  367,  g_received_file_real_size:186 
+00> <t:     563252>, main.c,  370,  20 <t:     563254>, main.c,  367,  g_received_file_real_size:187 
+00> <t:     563912>, main.c,  370,  4A <t:     563914>, main.c,  367,  g_received_file_real_size:188 
+00> <t:     564573>, main.c,  370,  69 <t:     564575>, main.c,  367,  g_received_file_real_size:189 
+00> <t:     565233>, main.c,  370,  6E <t:     565235>, main.c,  367,  g_received_file_real_size:190 
+00> <t:     565893>, main.c,  370,  67 <t:     565896>, main.c,  367,  g_received_file_real_size:191 
+00> <t:     566554>, main.c,  370,  64 <t:     566556>, main.c,  367,  g_received_file_real_size:192 
+00> <t:     567214>, main.c,  370,  65 <t:     567872>, main.c,  373, **********  The received seq is: E2, the address is : 3., g_present_packet_seq: FF  ********
+00> <t:     567878>, advertiser.c,  246, g_if_stop_discovery_count: 37
+00> <t:     567881>, advertiser.c,  250, timerepeat_event: 13
+00> <t:     567884>, advertiser.c,  281, get_if_send_ack!
+00> <t:     567886>, main.c,  108, adv_discovery_disable_bea
+00> <t:     567889>, main.c,  280, Starting to send acks!
+00> <t:     567892>, main.c,  164, ******* Enable adv ******
+00> <t:     567895>, main.c,  108, adv_discovery_disable_bea
+00> <t:     567898>, main.c,  280, Starting to send acks!
+00> <t:     567900>, main.c,  164, ******* Enable adv ******
+00> <t:     567904>, main.c,  108, adv_discovery_disable_bea
+00> <t:     567907>, main.c,  280, Starting to send acks!
+00> <t:     567910>, main.c,  164, ******* Enable adv ******
+00> <t:     567913>, main.c,  108, adv_discovery_disable_bea
+00> <t:     567916>, main.c,  280, Starting to send acks!
+00> <t:     567920>, main.c,  164, ******* Enable adv ******
+00> <t:     573218>, main.c,  313, byte4 : 8!, p_type: 2
+00> <t:     577567>, advertiser.c,  246, g_if_stop_discovery_count: 37
+00> <t:     577570>, advertiser.c,  250, timerepeat_event: 14
+00> <t:     583336>, main.c,  313, byte4 : 8!, p_type: 2
+00> <t:     587533>, advertiser.c,  246, g_if_stop_discovery_count: 37
+00> <t:     587536>, advertiser.c,  250, timerepeat_event: 15
+00> <t:     597532>, advertiser.c,  246, g_if_stop_discovery_count: 37
+00> <t:     597535>, advertiser.c,  250, timerepeat_event: 16
+00> <t:     599191>, main.c,  313, byte4 : 8!, p_type: 2
+00> <t:     599194>, main.c,  359, Receing adv payload, sink node !
+00> <t:     599196>, main.c,  362, The payload is(size: 24):<t:     599199>, main.c,  367,  g_received_file_real_size:193 
+00> <t:     599859>, main.c,  370,  17 <t:     599861>, main.c,  367,  g_received_file_real_size:194 
+00> <t:     600521>, main.c,  370,  3 <t:     600523>, main.c,  367,  g_received_file_real_size:195 
+00> <t:     601184>, main.c,  370,  3 <t:     601186>, main.c,  367,  g_received_file_real_size:196 
+00> <t:     601847>, main.c,  370,  A <t:     601849>, main.c,  367,  g_received_file_real_size:197 
+00> <t:     602507>, main.c,  370,  24 <t:     602509>, main.c,  367,  g_received_file_real_size:198 
+00> <t:     603168>, main.c,  370,  18 <t:     603170>, main.c,  367,  g_received_file_real_size:199 
+00> <t:     603828>, main.c,  370,  6F <t:     603830>, main.c,  367,  g_received_file_real_size:200 
+00> <t:     604489>, main.c,  370,  72 <t:     604491>, main.c,  367,  g_received_file_real_size:201 
+00> <t:     605149>, main.c,  370,  63 <t:     605151>, main.c,  367,  g_received_file_real_size:202 
+00> <t:     605809>, main.c,  370,  65 <t:     605812>, main.c,  367,  g_received_file_real_size:203 
+00> <t:     606470>, main.c,  370,  6C <t:     606472>, main.c,  367,  g_received_file_real_size:204 
+00> <t:     607130>, main.c,  370,  61 <t:     607132>, main.c,  367,  g_received_file_real_size:205 
+00> <t:     607791>, main.c,  370,  69 <t:     607793>, main.c,  367,  g_received_file_real_size:206 
+00> <t:     608451>, main.c,  370,  6E <t:     608453>, main.c,  367,  g_received_file_real_size:207 
+00> <t:     609111>, main.c,  370,  20 <t:     609114>, main.c,  367,  g_received_file_real_size:208 
+00> <t:     609772>, main.c,  370,  66 <t:     609774>, main.c,  367,  g_received_file_real_size:209 
+00> <t:     610432>, main.c,  370,  6F <t:     610434>, main.c,  367,  g_received_file_real_size:210 
+00> <t:     611093>, main.c,  370,  72 <t:     611095>, main.c,  367,  g_received_file_real_size:211 
+00> <t:     611753>, main.c,  370,  20 <t:     611755>, main.c,  367,  g_received_file_real_size:212 
+00> <t:     612413>, main.c,  370,  44 <t:     612416>, main.c,  367,  g_received_file_real_size:213 
+00> <t:     613074>, main.c,  370,  61 <t:     613076>, main.c,  367,  g_received_file_real_size:214 
+00> <t:     613734>, main.c,  370,  76 <t:     613736>, main.c,  367,  g_received_file_real_size:215 
+00> <t:     614395>, main.c,  370,  69 <t:     614397>, main.c,  367,  g_received_file_real_size:216 
+00> <t:     615055>, main.c,  370,  64 <t:     615713>, main.c,  373, **********  The received seq is: 24, the address is : 3., g_present_packet_seq: FF  ********
+00> <t:     615719>, advertiser.c,  246, g_if_stop_discovery_count: 37
+00> <t:     615722>, advertiser.c,  250, timerepeat_event: 1
+00> <t:     615725>, advertiser.c,  281, get_if_send_ack!
+00> <t:     615727>, main.c,  108, adv_discovery_disable_bea
+00> <t:     615730>, main.c,  280, Starting to send acks!
+00> <t:     615733>, main.c,  164, ******* Enable adv ******
+00> <t:     615736>, main.c,  108, adv_discovery_disable_bea
+00> <t:     615739>, main.c,  280, Starting to send acks!
+00> <t:     615741>, main.c,  164, ******* Enable adv ******
+00> <t:     615745>, main.c,  108, adv_discovery_disable_bea
+00> <t:     615748>, main.c,  280, Starting to send acks!
+00> <t:     615751>, main.c,  164, ******* Enable adv ******
+00> <t:     615754>, main.c,  108, adv_discovery_disable_bea
+00> <t:     615757>, main.c,  280, Starting to send acks!
+00> <t:     615761>, main.c,  164, ******* Enable adv ******
+00> <t:     615767>, main.c,  313, byte4 : 8!, p_type: 2
+00> <t:     621374>, main.c,  313, byte4 : 8!, p_type: 2
+00> <t:     624793>, advertiser.c,  246, g_if_stop_discovery_count: 37
+00> <t:     624796>, advertiser.c,  250, timerepeat_event: 2
+00> <t:     631377>, main.c,  313, byte4 : 8!, p_type: 2
+00> <t:     634911>, advertiser.c,  246, g_if_stop_discovery_count: 37
+00> <t:     634914>, advertiser.c,  250, timerepeat_event: 3
+00> <t:     644910>, advertiser.c,  246, g_if_stop_discovery_count: 37
+00> <t:     644913>, advertiser.c,  250, timerepeat_event: 4
+00> <t:     647219>, main.c,  313, byte4 : 8!, p_type: 2
+00> <t:     647221>, main.c,  359, Receing adv payload, sink node !
+00> <t:     647224>, main.c,  362, The payload is(size: 24):<t:     647227>, main.c,  367,  g_received_file_real_size:217 
+00> <t:     647888>, main.c,  370,  17 <t:     647890>, main.c,  367,  g_received_file_real_size:218 
+00> <t:     648550>, main.c,  370,  3 <t:     648552>, main.c,  367,  g_received_file_real_size:219 
+00> <t:     649210>, main.c,  370,  3 <t:     649212>, main.c,  367,  g_received_file_real_size:220 
+00> <t:     649871>, main.c,  370,  A <t:     649873>, main.c,  367,  g_received_file_real_size:221 
+00> <t:     650531>, main.c,  370,  6F <t:     650533>, main.c,  367,  g_received_file_real_size:222 
+00> <t:     651191>, main.c,  370,  18 <t:     651194>, main.c,  367,  g_received_file_real_size:223 
+00> <t:     651852>, main.c,  370,  37 <t:     651854>, main.c,  367,  g_received_file_real_size:224 
+00> <t:     652512>, main.c,  370,  D <t:     652514>, main.c,  367,  g_received_file_real_size:225 
+00> <t:     653173>, main.c,  370,  A <t:     653175>, main.c,  367,  g_received_file_real_size:226 
+00> <t:     653833>, main.c,  370,  74 <t:     653835>, main.c,  367,  g_received_file_real_size:227 
+00> <t:     654493>, main.c,  370,  68 <t:     654496>, main.c,  367,  g_received_file_real_size:228 
+00> <t:     655154>, main.c,  370,  65 <t:     655156>, main.c,  367,  g_received_file_real_size:229 
+00> <t:     655814>, main.c,  370,  20 <t:     655816>, main.c,  367,  g_received_file_real_size:230 
+00> <t:     656475>, main.c,  370,  65 <t:     656477>, main.c,  367,  g_received_file_real_size:231 
+00> <t:     657135>, main.c,  370,  6D <t:     657137>, main.c,  367,  g_received_file_real_size:232 
+00> <t:     657795>, main.c,  370,  62 <t:     657798>, main.c,  367,  g_received_file_real_size:233 
+00> <t:     658456>, main.c,  370,  72 <t:     658458>, main.c,  367,  g_received_file_real_size:234 
+00> <t:     659116>, main.c,  370,  6F <t:     659118>, main.c,  367,  g_received_file_real_size:235 
+00> <t:     659777>, main.c,  370,  69 <t:     659779>, main.c,  367,  g_received_file_real_size:236 
+00> <t:     660437>, main.c,  370,  64 <t:     660439>, main.c,  367,  g_received_file_real_size:237 
+00> <t:     661097>, main.c,  370,  65 <t:     661100>, main.c,  367,  g_received_file_real_size:238 
+00> <t:     661758>, main.c,  370,  72 <t:     661760>, main.c,  367,  g_received_file_real_size:239 
+00> <t:     662418>, main.c,  370,  79 <t:     662420>, main.c,  367,  g_received_file_real_size:240 
+00> <t:     663079>, main.c,  370,  20 <t:     663736>, main.c,  373, **********  The received seq is: 6F, the address is : 3., g_present_packet_seq: FF  ********
+00> <t:     663743>, advertiser.c,  246, g_if_stop_discovery_count: 37
+00> <t:     663746>, advertiser.c,  250, timerepeat_event: 5
+00> <t:     663748>, advertiser.c,  281, get_if_send_ack!
+00> <t:     663751>, main.c,  108, adv_discovery_disable_bea
+00> <t:     663754>, main.c,  280, Starting to send acks!
+00> <t:     663756>, main.c,  164, ******* Enable adv ******
+00> <t:     663759>, main.c,  108, adv_discovery_disable_bea
+00> <t:     663762>, main.c,  280, Starting to send acks!
+00> <t:     663765>, main.c,  164, ******* Enable adv ******
+00> <t:     663768>, main.c,  108, adv_discovery_disable_bea
+00> <t:     663772>, main.c,  280, Starting to send acks!
+00> <t:     663774>, main.c,  164, ******* Enable adv ******
+00> <t:     663778>, main.c,  108, adv_discovery_disable_bea
+00> <t:     663781>, main.c,  280, Starting to send acks!
+00> <t:     663785>, main.c,  164, ******* Enable adv ******
+00> <t:     670826>, main.c,  313, byte4 : 8!, p_type: 2
+00> <t:     671130>, advertiser.c,  246, g_if_stop_discovery_count: 37
+00> <t:     671133>, advertiser.c,  250, timerepeat_event: 6
+00> <t:     680919>, main.c,  313, byte4 : 8!, p_type: 2
+00> <t:     681085>, advertiser.c,  246, g_if_stop_discovery_count: 37
+00> <t:     681088>, advertiser.c,  250, timerepeat_event: 7
+00> <t:     691010>, advertiser.c,  246, g_if_stop_discovery_count: 37
+00> <t:     691013>, advertiser.c,  250, timerepeat_event: 8
+00> <t:     696761>, main.c,  313, byte4 : 8!, p_type: 2
+00> <t:     696764>, main.c,  359, Receing adv payload, sink node !
+00> <t:     696766>, main.c,  362, The payload is(size: 24):<t:     696769>, main.c,  367,  g_received_file_real_size:241 
+00> <t:     697429>, main.c,  370,  17 <t:     697431>, main.c,  367,  g_received_file_real_size:242 
+00> <t:     698091>, main.c,  370,  3 <t:     698093>, main.c,  367,  g_received_file_real_size:243 
+00> <t:     698753>, main.c,  370,  3 <t:     698755>, main.c,  367,  g_received_file_real_size:244 
+00> <t:     699414>, main.c,  370,  A <t:     699416>, main.c,  367,  g_received_file_real_size:245 
+00> <t:     700075>, main.c,  370,  21 <t:     700077>, main.c,  367,  g_received_file_real_size:246 
+00> <t:     700735>, main.c,  370,  18 <t:     700737>, main.c,  367,  g_received_file_real_size:247 
+00> <t:     701395>, main.c,  370,  73 <t:     701398>, main.c,  367,  g_received_file_real_size:248 
+00> <t:     702056>, main.c,  370,  20 <t:     702058>, main.c,  367,  g_received_file_real_size:249 
+00> <t:     702716>, main.c,  370,  77 <t:     702718>, main.c,  367,  g_received_file_real_size:250 
+00> <t:     703377>, main.c,  370,  69 <t:     703379>, main.c,  367,  g_received_file_real_size:251 
+00> <t:     704037>, main.c,  370,  66 <t:     704039>, main.c,  367,  g_received_file_real_size:252 
+00> <t:     704697>, main.c,  370,  65 <t:     704700>, main.c,  367,  g_received_file_real_size:253 
+00> <t:     705358>, main.c,  370,  D <t:     705360>, main.c,  367,  g_received_file_real_size:254 
+00> <t:     706018>, main.c,  370,  A <t:     706020>, main.c,  367,  g_received_file_real_size:255 
+00> <t:     706679>, main.c,  370,  30 <t:     706681>, main.c,  367,  g_received_file_real_size:256 
+00> <t:     707339>, main.c,  370,  31 <t:     707341>, main.c,  367,  g_received_file_real_size:257 
+00> <t:     707999>, main.c,  370,  3A <t:     708002>, main.c,  367,  g_received_file_real_size:258 
+00> <t:     708660>, main.c,  370,  32 <t:     708662>, main.c,  367,  g_received_file_real_size:259 
+00> <t:     709320>, main.c,  370,  38 <t:     709322>, main.c,  367,  g_received_file_real_size:260 
+00> <t:     709981>, main.c,  370,  D <t:     709983>, main.c,  367,  g_received_file_real_size:261 
+00> <t:     710641>, main.c,  370,  A <t:     710643>, main.c,  367,  g_received_file_real_size:262 
+00> <t:     711301>, main.c,  370,  61 <t:     711304>, main.c,  367,  g_received_file_real_size:263 
+00> <t:     711962>, main.c,  370,  6E <t:     711964>, main.c,  367,  g_received_file_real_size:264 
+00> <t:     712622>, main.c,  370,  64 <t:     713280>, main.c,  373, **********  The received seq is: 21, the address is : 3., g_present_packet_seq: FF  ********
+00> <t:     713286>, advertiser.c,  246, g_if_stop_discovery_count: 37
+00> <t:     713289>, advertiser.c,  250, timerepeat_event: 9
+00> <t:     713292>, advertiser.c,  281, get_if_send_ack!
+00> <t:     713294>, main.c,  108, adv_discovery_disable_bea
+00> <t:     713297>, main.c,  280, Starting to send acks!
+00> <t:     713300>, main.c,  164, ******* Enable adv ******
+00> <t:     713303>, main.c,  108, adv_discovery_disable_bea
+00> <t:     713306>, main.c,  280, Starting to send acks!
+00> <t:     713308>, main.c,  164, ******* Enable adv ******
+00> <t:     713312>, main.c,  108, adv_discovery_disable_bea
+00> <t:     713315>, main.c,  280, Starting to send acks!
+00> <t:     713318>, main.c,  164, ******* Enable adv ******
+00> <t:     713321>, main.c,  108, adv_discovery_disable_bea
+00> <t:     713324>, main.c,  280, Starting to send acks!
+00> <t:     713328>, main.c,  164, ******* Enable adv ******
+00> <t:     719681>, main.c,  313, byte4 : 8!, p_type: 2
+00> <t:     722182>, advertiser.c,  246, g_if_stop_discovery_count: 37
+00> <t:     722185>, advertiser.c,  250, timerepeat_event: 10
+00> <t:     729550>, main.c,  313, byte4 : 8!, p_type: 2
+00> <t:     732123>, advertiser.c,  246, g_if_stop_discovery_count: 37
+00> <t:     732126>, advertiser.c,  250, timerepeat_event: 11
+00> <t:     742236>, advertiser.c,  246, g_if_stop_discovery_count: 37
+00> <t:     742239>, advertiser.c,  250, timerepeat_event: 12
+00> <t:     745364>, main.c,  313, byte4 : 8!, p_type: 2
+00> <t:     745366>, main.c,  359, Receing adv payload, sink node !
+00> <t:     745369>, main.c,  362, The payload is(size: 24):<t:     745372>, main.c,  367,  g_received_file_real_size:265 
+00> <t:     746033>, main.c,  370,  17 <t:     746035>, main.c,  367,  g_received_file_real_size:266 
+00> <t:     746695>, main.c,  370,  3 <t:     746698>, main.c,  367,  g_received_file_real_size:267 
+00> <t:     747356>, main.c,  370,  3 <t:     747358>, main.c,  367,  g_received_file_real_size:268 
+00> <t:     748016>, main.c,  370,  A <t:     748018>, main.c,  367,  g_received_file_real_size:269 
+00> <t:     748676>, main.c,  370,  82 <t:     748679>, main.c,  367,  g_received_file_real_size:270 
+00> <t:     749337>, main.c,  370,  18 <t:     749339>, main.c,  367,  g_received_file_real_size:271 
+00> <t:     749997>, main.c,  370,  6F <t:     750000>, main.c,  367,  g_received_file_real_size:272 
+00> <t:     750658>, main.c,  370,  6E <t:     750660>, main.c,  367,  g_received_file_real_size:273 
+00> <t:     751318>, main.c,  370,  6B <t:     751320>, main.c,  367,  g_received_file_real_size:274 
+00> <t:     751979>, main.c,  370,  65 <t:     751981>, main.c,  367,  g_received_file_real_size:275 
+00> <t:     752639>, main.c,  370,  79 <t:     752641>, main.c,  367,  g_received_file_real_size:276 
+00> <t:     753299>, main.c,  370,  20 <t:     753302>, main.c,  367,  g_received_file_real_size:277 
+00> <t:     753960>, main.c,  370,  4B <t:     753962>, main.c,  367,  g_received_file_real_size:278 
+00> <t:     754620>, main.c,  370,  69 <t:     754622>, main.c,  367,  g_received_file_real_size:279 
+00> <t:     755281>, main.c,  370,  6E <t:     755283>, main.c,  367,  g_received_file_real_size:280 
+00> <t:     755941>, main.c,  370,  67 <t:     755943>, main.c,  367,  g_received_file_real_size:281 
+00> <t:     756601>, main.c,  370,  20 <t:     756604>, main.c,  367,  g_received_file_real_size:282 
+00> <t:     757262>, main.c,  370,  6D <t:     757264>, main.c,  367,  g_received_file_real_size:283 
+00> <t:     757922>, main.c,  370,  61 <t:     757924>, main.c,  367,  g_received_file_real_size:284 
+00> <t:     758583>, main.c,  370,  73 <t:     758585>, main.c,  367,  g_received_file_real_size:285 
+00> <t:     759243>, main.c,  370,  6B <t:     759245>, main.c,  367,  g_received_file_real_size:286 
+00> <t:     759904>, main.c,  370,  20 <t:     759906>, main.c,  367,  g_received_file_real_size:287 
+00> <t:     760564>, main.c,  370,  66 <t:     760566>, main.c,  367,  g_received_file_real_size:288 
+00> <t:     761224>, main.c,  370,  6F <t:     761882>, main.c,  373, **********  The received seq is: 82, the address is : 3., g_present_packet_seq: FF  ********
+00> <t:     761888>, advertiser.c,  246, g_if_stop_discovery_count: 37
+00> <t:     761891>, advertiser.c,  250, timerepeat_event: 13
+00> <t:     761894>, advertiser.c,  281, get_if_send_ack!
+00> <t:     761896>, main.c,  108, adv_discovery_disable_bea
+00> <t:     761899>, main.c,  280, Starting to send acks!
+00> <t:     761902>, main.c,  164, ******* Enable adv ******
+00> <t:     761905>, main.c,  108, adv_discovery_disable_bea
+00> <t:     761908>, main.c,  280, Starting to send acks!
+00> <t:     761911>, main.c,  164, ******* Enable adv ******
+00> <t:     761914>, main.c,  108, adv_discovery_disable_bea
+00> <t:     761917>, main.c,  280, Starting to send acks!
+00> <t:     761920>, main.c,  164, ******* Enable adv ******
+00> <t:     761923>, main.c,  108, adv_discovery_disable_bea
+00> <t:     761927>, main.c,  280, Starting to send acks!
+00> <t:     761931>, main.c,  164, ******* Enable adv ******
+00> <t:     768376>, main.c,  313, byte4 : 8!, p_type: 2
+00> <t:     770614>, advertiser.c,  246, g_if_stop_discovery_count: 37
+00> <t:     770617>, advertiser.c,  250, timerepeat_event: 14
+00> <t:     778371>, main.c,  313, byte4 : 8!, p_type: 2
+00> <t:     780466>, advertiser.c,  246, g_if_stop_discovery_count: 37
+00> <t:     780469>, advertiser.c,  250, timerepeat_event: 15
+00> <t:     790371>, advertiser.c,  246, g_if_stop_discovery_count: 37
+00> <t:     790374>, advertiser.c,  250, timerepeat_event: 16
+00> <t:     794214>, main.c,  313, byte4 : 8!, p_type: 2
+00> <t:     794216>, main.c,  359, Receing adv payload, sink node !
+00> <t:     794219>, main.c,  362, The payload is(size: 24):<t:     794222>, main.c,  367,  g_received_file_real_size:289 
+00> <t:     794882>, main.c,  370,  17 <t:     794884>, main.c,  367,  g_received_file_real_size:290 
+00> <t:     795545>, main.c,  370,  3 <t:     795547>, main.c,  367,  g_received_file_real_size:291 
+00> <t:     796208>, main.c,  370,  3 <t:     796210>, main.c,  367,  g_received_file_real_size:292 
+00> <t:     796868>, main.c,  370,  A <t:     796870>, main.c,  367,  g_received_file_real_size:293 
+00> <t:     797529>, main.c,  370,  7A <t:     797531>, main.c,  367,  g_received_file_real_size:294 
+00> <t:     798189>, main.c,  370,  18 <t:     798191>, main.c,  367,  g_received_file_real_size:295 
+00> <t:     798849>, main.c,  370,  73 <t:     798852>, main.c,  367,  g_received_file_real_size:296 
+00> <t:     799510>, main.c,  370,  6F <t:     799512>, main.c,  367,  g_received_file_real_size:297 
+00> <t:     800170>, main.c,  370,  6E <t:     800172>, main.c,  367,  g_received_file_real_size:298 
+00> <t:     800831>, main.c,  370,  2E <t:     800833>, main.c,  367,  g_received_file_real_size:299 
+00> <t:     801491>, main.c,  370,  D <t:     801493>, main.c,  367,  g_received_file_real_size:300 
+00> <t:     802151>, main.c,  370,  A <t:     802154>, main.c,  367,  g_received_file_real_size:301 
+00> <t:     802812>, main.c,  370,  30 <t:     802814>, main.c,  367,  g_received_file_real_size:302 
+00> <t:     803472>, main.c,  370,  31 <t:     803474>, main.c,  367,  g_received_file_real_size:303 
+00> <t:     804133>, main.c,  370,  3A <t:     804135>, main.c,  367,  g_received_file_real_size:304 
+00> <t:     804793>, main.c,  370,  33 <t:     804795>, main.c,  367,  g_received_file_real_size:305 
+00> <t:     805453>, main.c,  370,  30 <t:     805456>, main.c,  367,  g_received_file_real_size:306 
+00> <t:     806114>, main.c,  370,  D <t:     806116>, main.c,  367,  g_received_file_real_size:307 
+00> <t:     806774>, main.c,  370,  A <t:     806776>, main.c,  367,  g_received_file_real_size:308 
+00> <t:     807435>, main.c,  370,  49 <t:     807437>, main.c,  367,  g_received_file_real_size:309 
+00> <t:     808095>, main.c,  370,  74 <t:     808097>, main.c,  367,  g_received_file_real_size:310 
+00> <t:     808755>, main.c,  370,  27 <t:     808758>, main.c,  367,  g_received_file_real_size:311 
+00> <t:     809416>, main.c,  370,  73 <t:     809418>, main.c,  367,  g_received_file_real_size:312 
+00> <t:     810076>, main.c,  370,  20 <t:     810734>, main.c,  373, **********  The received seq is: 7A, the address is : 3., g_present_packet_seq: FF  ********
+00> <t:     810741>, advertiser.c,  246, g_if_stop_discovery_count: 37
+00> <t:     810744>, advertiser.c,  250, timerepeat_event: 1
+00> <t:     810747>, advertiser.c,  281, get_if_send_ack!
+00> <t:     810749>, main.c,  108, adv_discovery_disable_bea
+00> <t:     810752>, main.c,  280, Starting to send acks!
+00> <t:     810755>, main.c,  164, ******* Enable adv ******
+00> <t:     810758>, main.c,  108, adv_discovery_disable_bea
+00> <t:     810761>, main.c,  280, Starting to send acks!
+00> <t:     810763>, main.c,  164, ******* Enable adv ******
+00> <t:     810766>, main.c,  108, adv_discovery_disable_bea
+00> <t:     810770>, main.c,  280, Starting to send acks!
+00> <t:     810773>, main.c,  164, ******* Enable adv ******
+00> <t:     810776>, main.c,  108, adv_discovery_disable_bea
+00> <t:     810779>, main.c,  280, Starting to send acks!
+00> <t:     810783>, main.c,  164, ******* Enable adv ******
+00> <t:     818634>, advertiser.c,  246, g_if_stop_discovery_count: 37
+00> <t:     818637>, advertiser.c,  250, timerepeat_event: 2
+00> <t:     826857>, main.c,  313, byte4 : 8!, p_type: 2
+00> <t:     828757>, advertiser.c,  246, g_if_stop_discovery_count: 37
+00> <t:     828760>, advertiser.c,  250, timerepeat_event: 3
+00> <t:     838879>, advertiser.c,  246, g_if_stop_discovery_count: 37
+00> <t:     838882>, advertiser.c,  250, timerepeat_event: 4
+00> <t:     842702>, main.c,  313, byte4 : 8!, p_type: 2
+00> <t:     842705>, main.c,  359, Receing adv payload, sink node !
+00> <t:     842708>, main.c,  362, The payload is(size: 24):<t:     842710>, main.c,  367,  g_received_file_real_size:313 
+00> <t:     843373>, main.c,  370,  17 <t:     843375>, main.c,  367,  g_received_file_real_size:314 
+00> <t:     844034>, main.c,  370,  3 <t:     844036>, main.c,  367,  g_received_file_real_size:315 
+00> <t:     844694>, main.c,  370,  3 <t:     844696>, main.c,  367,  g_received_file_real_size:316 
+00> <t:     845354>, main.c,  370,  A <t:     845357>, main.c,  367,  g_received_file_real_size:317 
+00> <t:     846015>, main.c,  370,  5D <t:     846017>, main.c,  367,  g_received_file_real_size:318 
+00> <t:     846675>, main.c,  370,  18 <t:     846677>, main.c,  367,  g_received_file_real_size:319 
+00> <t:     847336>, main.c,  370,  72 <t:     847338>, main.c,  367,  g_received_file_real_size:320 
+00> <t:     847996>, main.c,  370,  65 <t:     847998>, main.c,  367,  g_received_file_real_size:321 
+00> <t:     848656>, main.c,  370,  2E <t:     848659>, main.c,  367,  g_received_file_real_size:322 
+00> <t:     849317>, main.c,  370,  D <t:     849319>, main.c,  367,  g_received_file_real_size:323 
+00> <t:     849977>, main.c,  370,  A <t:     849979>, main.c,  367,  g_received_file_real_size:324 
+00> <t:     850638>, main.c,  370,  30 <t:     850640>, main.c,  367,  g_received_file_real_size:325 
+00> <t:     851298>, main.c,  370,  31 <t:     851300>, main.c,  367,  g_received_file_real_size:326 
+00> <t:     851958>, main.c,  370,  3A <t:     851961>, main.c,  367,  g_received_file_real_size:327 
+00> <t:     852619>, main.c,  370,  33 <t:     852621>, main.c,  367,  g_received_file_real_size:328 
+00> <t:     853279>, main.c,  370,  33 <t:     853281>, main.c,  367,  g_received_file_real_size:329 
+00> <t:     853940>, main.c,  370,  D <t:     853942>, main.c,  367,  g_received_file_real_size:330 
+00> <t:     854600>, main.c,  370,  A <t:     854602>, main.c,  367,  g_received_file_real_size:331 
+00> <t:     855260>, main.c,  370,  44 <t:     855263>, main.c,  367,  g_received_file_real_size:332 
+00> <t:     855921>, main.c,  370,  69 <t:     855923>, main.c,  367,  g_received_file_real_size:333 
+00> <t:     856581>, main.c,  370,  64 <t:     856583>, main.c,  367,  g_received_file_real_size:334 
+00> <t:     857242>, main.c,  370,  20 <t:     857244>, main.c,  367,  g_received_file_real_size:335 
+00> <t:     857902>, main.c,  370,  79 <t:     857904>, main.c,  367,  g_received_file_real_size:336 
+00> <t:     858562>, main.c,  370,  6F <t:     859220>, main.c,  373, **********  The received seq is: 5D, the address is : 3., g_present_packet_seq: FF  ********
+00> <t:     859227>, advertiser.c,  246, g_if_stop_discovery_count: 37
+00> <t:     859229>, advertiser.c,  250, timerepeat_event: 5
+00> <t:     859232>, advertiser.c,  281, get_if_send_ack!
+00> <t:     859234>, main.c,  108, adv_discovery_disable_bea
+00> <t:     859237>, main.c,  280, Starting to send acks!
+00> <t:     859240>, main.c,  164, ******* Enable adv ******
+00> <t:     859243>, main.c,  108, adv_discovery_disable_bea
+00> <t:     859246>, main.c,  280, Starting to send acks!
+00> <t:     859249>, main.c,  164, ******* Enable adv ******
+00> <t:     859252>, main.c,  108, adv_discovery_disable_bea
+00> <t:     859255>, main.c,  280, Starting to send acks!
+00> <t:     859258>, main.c,  164, ******* Enable adv ******
+00> <t:     859262>, main.c,  108, adv_discovery_disable_bea
+00> <t:     859265>, main.c,  280, Starting to send acks!
+00> <t:     859269>, main.c,  164, ******* Enable adv ******
+00> <t:     866803>, main.c,  313, byte4 : 8!, p_type: 2
+00> <t:     867395>, advertiser.c,  246, g_if_stop_discovery_count: 37
+00> <t:     867398>, advertiser.c,  250, timerepeat_event: 6
+00> <t:     876815>, main.c,  313, byte4 : 8!, p_type: 2
+00> <t:     877273>, advertiser.c,  246, g_if_stop_discovery_count: 37
+00> <t:     877276>, advertiser.c,  250, timerepeat_event: 7
+00> <t:     887172>, advertiser.c,  246, g_if_stop_discovery_count: 37
+00> <t:     887175>, advertiser.c,  250, timerepeat_event: 8
+00> <t:     892664>, main.c,  313, byte4 : 8!, p_type: 2
+00> <t:     892667>, main.c,  359, Receing adv payload, sink node !
+00> <t:     892669>, main.c,  362, The payload is(size: 24):<t:     892672>, main.c,  367,  g_received_file_real_size:337 
+00> <t:     893330>, main.c,  370,  17 <t:     893332>, main.c,  367,  g_received_file_real_size:338 
+00> <t:     893993>, main.c,  370,  3 <t:     893995>, main.c,  367,  g_received_file_real_size:339 
+00> <t:     894656>, main.c,  370,  3 <t:     894658>, main.c,  367,  g_received_file_real_size:340 
+00> <t:     895317>, main.c,  370,  A <t:     895319>, main.c,  367,  g_received_file_real_size:341 
+00> <t:     895978>, main.c,  370,  FF <t:     895980>, main.c,  367,  g_received_file_real_size:342 
+00> <t:     896638>, main.c,  370,  18 <t:     896640>, main.c,  367,  g_received_file_real_size:343 
+00> <t:     897298>, main.c,  370,  67 <t:     897301>, main.c,  367,  g_received_file_real_size:344 
+00> <t:     897959>, main.c,  370,  20 <t:     897961>, main.c,  367,  g_received_file_real_size:345 
+00> <t:     898619>, main.c,  370,  6D <t:     898622>, main.c,  367,  g_received_file_real_size:346 
+00> <t:     899280>, main.c,  370,  61 <t:     899282>, main.c,  367,  g_received_file_real_size:347 
+00> <t:     899940>, main.c,  370,  68 <t:     899942>, main.c,  367,  g_received_file_real_size:348 
+00> <t:     900601>, main.c,  370,  6A <t:     900603>, main.c,  367,  g_received_file_real_size:349 
+00> <t:     901261>, main.c,  370,  6F <t:     901263>, main.c,  367,  g_received_file_real_size:350 
+00> <t:     901921>, main.c,  370,  6E <t:     901924>, main.c,  367,  g_received_file_real_size:351 
+00> <t:     902582>, main.c,  370,  67 <t:     902584>, main.c,  367,  g_received_file_real_size:352 
+00> <t:     903242>, main.c,  370,  3F <t:     903244>, main.c,  367,  g_received_file_real_size:353 
+00> <t:     903903>, main.c,  370,  D <t:     903905>, main.c,  367,  g_received_file_real_size:354 
+00> <t:     904563>, main.c,  370,  A <t:     904565>, main.c,  367,  g_received_file_real_size:355 
+00> <t:     905223>, main.c,  370,  30 <t:     905226>, main.c,  367,  g_received_file_real_size:356 
+00> <t:     905884>, main.c,  370,  31 <t:     905886>, main.c,  367,  g_received_file_real_size:357 
+00> <t:     906544>, main.c,  370,  3A <t:     906546>, main.c,  367,  g_received_file_real_size:358 
+00> <t:     907205>, main.c,  370,  33 <t:     907207>, main.c,  367,  g_received_file_real_size:359 
+00> <t:     907865>, main.c,  370,  34 <t:     907867>, main.c,  367,  g_received_file_real_size:360 
+00> <t:     908525>, main.c,  370,  D <t:     909183>, main.c,  373, **********  The received seq is: FF, the address is : 3., g_present_packet_seq: FF  ********
+00> <t:     909189>, advertiser.c,  246, g_if_stop_discovery_count: 37
+00> <t:     909192>, advertiser.c,  250, timerepeat_event: 9
+00> <t:     909195>, advertiser.c,  281, get_if_send_ack!
+00> <t:     909197>, main.c,  108, adv_discovery_disable_bea
+00> <t:     909200>, main.c,  280, Starting to send acks!
+00> <t:     909203>, main.c,  164, ******* Enable adv ******
+00> <t:     909206>, main.c,  108, adv_discovery_disable_bea
+00> <t:     909209>, main.c,  280, Starting to send acks!
+00> <t:     909212>, main.c,  164, ******* Enable adv ******
+00> <t:     909215>, main.c,  108, adv_discovery_disable_bea
+00> <t:     909218>, main.c,  280, Starting to send acks!
+00> <t:     909221>, main.c,  164, ******* Enable adv ******
+00> <t:     909224>, main.c,  108, adv_discovery_disable_bea
+00> <t:     909228>, main.c,  280, Starting to send acks!
+00> <t:     909232>, main.c,  164, ******* Enable adv ******
+00> <t:     915865>, main.c,  313, byte4 : 8!, p_type: 2
+00> <t:     917640>, advertiser.c,  246, g_if_stop_discovery_count: 37
+00> <t:     917643>, advertiser.c,  250, timerepeat_event: 10
+00> <t:     925717>, main.c,  313, byte4 : 8!, p_type: 2
+00> <t:     927754>, advertiser.c,  246, g_if_stop_discovery_count: 37
+00> <t:     927757>, advertiser.c,  250, timerepeat_event: 11
+00> <t:     937879>, advertiser.c,  246, g_if_stop_discovery_count: 37
+00> <t:     937882>, advertiser.c,  250, timerepeat_event: 12
+00> <t:     941531>, main.c,  313, byte4 : 8!, p_type: 2
+00> <t:     941534>, main.c,  359, Receing adv payload, sink node !
+00> <t:     941537>, main.c,  362, The payload is(size: 24):<t:     941539>, main.c,  367,  g_received_file_real_size:361 
+00> <t:     942201>, main.c,  370,  17 <t:     942204>, main.c,  367,  g_received_file_real_size:362 
+00> <t:     942865>, main.c,  370,  3 <t:     942867>, main.c,  367,  g_received_file_real_size:363 
+00> <t:     943526>, main.c,  370,  3 <t:     943528>, main.c,  367,  g_received_file_real_size:364 
+00> <t:     944187>, main.c,  370,  A <t:     944189>, main.c,  367,  g_received_file_real_size:365 
+00> <t:     944847>, main.c,  370,  D4 <t:     944849>, main.c,  367,  g_received_file_real_size:366 
+00> <t:     945507>, main.c,  370,  18 <t:     945510>, main.c,  367,  g_received_file_real_size:367 
+00> <t:     946168>, main.c,  370,  6D <t:     946170>, main.c,  367,  g_received_file_real_size:368 
+00> <t:     946828>, main.c,  370,  61 <t:     946831>, main.c,  367,  g_received_file_real_size:369 
+00> <t:     947489>, main.c,  370,  68 <t:     947491>, main.c,  367,  g_received_file_real_size:370 
+00> <t:     948149>, main.c,  370,  6A <t:     948151>, main.c,  367,  g_received_file_real_size:371 
+00> <t:     948810>, main.c,  370,  6F <t:     948812>, main.c,  367,  g_received_file_real_size:372 
+00> <t:     949470>, main.c,  370,  6E <t:     949472>, main.c,  367,  g_received_file_real_size:373 
+00> <t:     950130>, main.c,  370,  67 <t:     950133>, main.c,  367,  g_received_file_real_size:374 
+00> <t:     950791>, main.c,  370,  3F <t:     950793>, main.c,  367,  g_received_file_real_size:375 
+00> <t:     951451>, main.c,  370,  D <t:     951453>, main.c,  367,  g_received_file_real_size:376 
+00> <t:     952112>, main.c,  370,  A <t:     952114>, main.c,  367,  g_received_file_real_size:377 
+00> <t:     952772>, main.c,  370,  30 <t:     952774>, main.c,  367,  g_received_file_real_size:378 
+00> <t:     953432>, main.c,  370,  31 <t:     953435>, main.c,  367,  g_received_file_real_size:379 
+00> <t:     954093>, main.c,  370,  3A <t:     954095>, main.c,  367,  g_received_file_real_size:380 
+00> <t:     954753>, main.c,  370,  33 <t:     954755>, main.c,  367,  g_received_file_real_size:381 
+00> <t:     955414>, main.c,  370,  36 <t:     955416>, main.c,  367,  g_received_file_real_size:382 
+00> <t:     956074>, main.c,  370,  D <t:     956076>, main.c,  367,  g_received_file_real_size:383 
+00> <t:     956734>, main.c,  370,  A <t:     956737>, main.c,  367,  g_received_file_real_size:384 
+00> <t:     957395>, main.c,  370,  42 <t:     958052>, main.c,  373, **********  The received seq is: D4, the address is : 3., g_present_packet_seq: FF  ********
+00> <t:     958059>, advertiser.c,  246, g_if_stop_discovery_count: 37
+00> <t:     958062>, advertiser.c,  250, timerepeat_event: 13
+00> <t:     958065>, advertiser.c,  281, get_if_send_ack!
+00> <t:     958067>, main.c,  108, adv_discovery_disable_bea
+00> <t:     958070>, main.c,  280, Starting to send acks!
+00> <t:     958073>, main.c,  164, ******* Enable adv ******
+00> <t:     958076>, main.c,  108, adv_discovery_disable_bea
+00> <t:     958079>, main.c,  280, Starting to send acks!
+00> <t:     958081>, main.c,  164, ******* Enable adv ******
+00> <t:     958084>, main.c,  108, adv_discovery_disable_bea
+00> <t:     958088>, main.c,  280, Starting to send acks!
+00> <t:     958091>, main.c,  164, ******* Enable adv ******
+00> <t:     958094>, main.c,  108, adv_discovery_disable_bea
+00> <t:     958097>, main.c,  280, Starting to send acks!
+00> <t:     958101>, main.c,  164, ******* Enable adv ******
+00> <t:     963840>, main.c,  313, byte4 : 8!, p_type: 2
+00> <t:     966947>, advertiser.c,  246, g_if_stop_discovery_count: 37
+00> <t:     966950>, advertiser.c,  250, timerepeat_event: 14
+00> <t:     973830>, main.c,  313, byte4 : 8!, p_type: 2
+00> <t:     977019>, advertiser.c,  246, g_if_stop_discovery_count: 37
+00> <t:     977022>, advertiser.c,  250, timerepeat_event: 15
+00> <t:     987155>, advertiser.c,  246, g_if_stop_discovery_count: 37
+00> <t:     987158>, advertiser.c,  250, timerepeat_event: 16
+00> <t:     989672>, main.c,  313, byte4 : 8!, p_type: 2
+00> <t:     989675>, main.c,  359, Receing adv payload, sink node !
+00> <t:     989678>, main.c,  362, The payload is(size: 24):<t:     989680>, main.c,  367,  g_received_file_real_size:385 
+00> <t:     990342>, main.c,  370,  17 <t:     990344>, main.c,  367,  g_received_file_real_size:386 
+00> <t:     991007>, main.c,  370,  3 <t:     991009>, main.c,  367,  g_received_file_real_size:387 
+00> <t:     991667>, main.c,  370,  3 <t:     991670>, main.c,  367,  g_received_file_real_size:388 
+00> <t:     992333>, main.c,  370,  A <t:     992335>, main.c,  367,  g_received_file_real_size:389 
+00> <t:     992994>, main.c,  370,  51 <t:     992996>, main.c,  367,  g_received_file_real_size:390 
+00> <t:     993654>, main.c,  370,  18 <t:     993656>, main.c,  367,  g_received_file_real_size:391 
+00> <t:     994314>, main.c,  370,  68 <t:     994317>, main.c,  367,  g_received_file_real_size:392 
+00> <t:     994975>, main.c,  370,  65 <t:     994977>, main.c,  367,  g_received_file_real_size:393 
+00> <t:     995635>, main.c,  370,  20 <t:     995637>, main.c,  367,  g_received_file_real_size:394 
+00> <t:     996296>, main.c,  370,  6D <t:     996298>, main.c,  367,  g_received_file_real_size:395 
+00> <t:     996956>, main.c,  370,  61 <t:     996958>, main.c,  367,  g_received_file_real_size:396 
+00> <t:     997616>, main.c,  370,  68 <t:     997619>, main.c,  367,  g_received_file_real_size:397 
+00> <t:     998277>, main.c,  370,  6A <t:     998279>, main.c,  367,  g_received_file_real_size:398 
+00> <t:     998937>, main.c,  370,  6F <t:     998939>, main.c,  367,  g_received_file_real_size:399 
+00> <t:     999598>, main.c,  370,  6E <t:     999600>, main.c,  367,  g_received_file_real_size:400 
+00> <t:    1000258>, main.c,  370,  67 <t:    1000260>, main.c,  367,  g_received_file_real_size:401 
+00> <t:    1000918>, main.c,  370,  20 <t:    1000921>, main.c,  367,  g_received_file_real_size:402 
+00> <t:    1001579>, main.c,  370,  73 <t:    1001581>, main.c,  367,  g_received_file_real_size:403 
+00> <t:    1002239>, main.c,  370,  65 <t:    1002241>, main.c,  367,  g_received_file_real_size:404 
+00> <t:    1002900>, main.c,  370,  74 <t:    1002902>, main.c,  367,  g_received_file_real_size:405 
+00> <t:    1003560>, main.c,  370,  20 <t:    1003562>, main.c,  367,  g_received_file_real_size:406 
+00> <t:    1004220>, main.c,  370,  74 <t:    1004223>, main.c,  367,  g_received_file_real_size:407 
+00> <t:    1004881>, main.c,  370,  68 <t:    1004883>, main.c,  367,  g_received_file_real_size:408 
+00> <t:    1005541>, main.c,  370,  61 <t:    1006199>, main.c,  373, **********  The received seq is: 51, the address is : 3., g_present_packet_seq: FF  ********
+00> <t:    1006206>, advertiser.c,  246, g_if_stop_discovery_count: 37
+00> <t:    1006209>, advertiser.c,  250, timerepeat_event: 1
+00> <t:    1006212>, advertiser.c,  281, get_if_send_ack!
+00> <t:    1006214>, main.c,  108, adv_discovery_disable_bea
+00> <t:    1006217>, main.c,  280, Starting to send acks!
+00> <t:    1006220>, main.c,  164, ******* Enable adv ******
+00> <t:    1006223>, main.c,  108, adv_discovery_disable_bea
+00> <t:    1006226>, main.c,  280, Starting to send acks!
+00> <t:    1006228>, main.c,  164, ******* Enable adv ******
+00> <t:    1006232>, main.c,  108, adv_discovery_disable_bea
+00> <t:    1006235>, main.c,  280, Starting to send acks!
+00> <t:    1006238>, main.c,  164, ******* Enable adv ******
+00> <t:    1006241>, main.c,  108, adv_discovery_disable_bea
+00> <t:    1006244>, main.c,  280, Starting to send acks!
+00> <t:    1006248>, main.c,  164, ******* Enable adv ******
+00> <t:    1011515>, main.c,  313, byte4 : 8!, p_type: 2
+00> <t:    1012864>, advertiser.c,  246, g_if_stop_discovery_count: 37
+00> <t:    1012867>, advertiser.c,  250, timerepeat_event: 2
+00> <t:    1021478>, main.c,  313, byte4 : 8!, p_type: 2
+00> <t:    1022783>, advertiser.c,  246, g_if_stop_discovery_count: 37
+00> <t:    1022786>, advertiser.c,  250, timerepeat_event: 3
+00> <t:    1032872>, advertiser.c,  246, g_if_stop_discovery_count: 37
+00> <t:    1032875>, advertiser.c,  250, timerepeat_event: 4
+00> <t:    1037319>, main.c,  313, byte4 : 8!, p_type: 2
+00> <t:    1037322>, main.c,  359, Receing adv payload, sink node !
+00> <t:    1037325>, main.c,  362, The payload is(size: 24):<t:    1037328>, main.c,  367,  g_received_file_real_size:409 
+00> <t:    1037987>, main.c,  370,  17 <t:    1037989>, main.c,  367,  g_received_file_real_size:410 
+00> <t:    1038649>, main.c,  370,  3 <t:    1038651>, main.c,  367,  g_received_file_real_size:411 
+00> <t:    1039312>, main.c,  370,  3 <t:    1039314>, main.c,  367,  g_received_file_real_size:412 
+00> <t:    1039972>, main.c,  370,  A <t:    1039974>, main.c,  367,  g_received_file_real_size:413 
+00> <t:    1040633>, main.c,  370,  D <t:    1040635>, main.c,  367,  g_received_file_real_size:414 
+00> <t:    1041293>, main.c,  370,  18 <t:    1041295>, main.c,  367,  g_received_file_real_size:415 
+00> <t:    1041953>, main.c,  370,  20 <t:    1041956>, main.c,  367,  g_received_file_real_size:416 
+00> <t:    1042614>, main.c,  370,  6D <t:    1042616>, main.c,  367,  g_received_file_real_size:417 
+00> <t:    1043274>, main.c,  370,  6F <t:    1043276>, main.c,  367,  g_received_file_real_size:418 
+00> <t:    1043935>, main.c,  370,  6D <t:    1043937>, main.c,  367,  g_received_file_real_size:419 
+00> <t:    1044595>, main.c,  370,  20 <t:    1044597>, main.c,  367,  g_received_file_real_size:420 
+00> <t:    1045256>, main.c,  370,  62 <t:    1045258>, main.c,  367,  g_received_file_real_size:421 
+00> <t:    1045916>, main.c,  370,  72 <t:    1045918>, main.c,  367,  g_received_file_real_size:422 
+00> <t:    1046576>, main.c,  370,  6F <t:    1046579>, main.c,  367,  g_received_file_real_size:423 
+00> <t:    1047237>, main.c,  370,  75 <t:    1047239>, main.c,  367,  g_received_file_real_size:424 
+00> <t:    1047897>, main.c,  370,  67 <t:    1047900>, main.c,  367,  g_received_file_real_size:425 
+00> <t:    1048558>, main.c,  370,  68 <t:    1048560>, main.c,  367,  g_received_file_real_size:426 
+00> <t:    1049218>, main.c,  370,  74 <t:    1049220>, main.c,  367,  g_received_file_real_size:427 
+00> <t:    1049879>, main.c,  370,  20 <t:    1049881>, main.c,  367,  g_received_file_real_size:428 
+00> <t:    1050539>, main.c,  370,  6C <t:    1050541>, main.c,  367,  g_received_file_real_size:429 
+00> <t:    1051200>, main.c,  370,  61 <t:    1051202>, main.c,  367,  g_received_file_real_size:430 
+00> <t:    1051860>, main.c,  370,  73 <t:    1051862>, main.c,  367,  g_received_file_real_size:431 
+00> <t:    1052520>, main.c,  370,  74 <t:    1052523>, main.c,  367,  g_received_file_real_size:432 
+00> <t:    1053181>, main.c,  370,  20 <t:    1053839>, main.c,  373, **********  The received seq is: D, the address is : 3., g_present_packet_seq: FF  ********
+00> <t:    1053845>, advertiser.c,  246, g_if_stop_discovery_count: 37
+00> <t:    1053848>, advertiser.c,  250, timerepeat_event: 5
+00> <t:    1053851>, advertiser.c,  281, get_if_send_ack!
+00> <t:    1053853>, main.c,  108, adv_discovery_disable_bea
+00> <t:    1053856>, main.c,  280, Starting to send acks!
+00> <t:    1053859>, main.c,  164, ******* Enable adv ******
+00> <t:    1053862>, main.c,  108, adv_discovery_disable_bea
+00> <t:    1053865>, main.c,  280, Starting to send acks!
+00> <t:    1053867>, main.c,  164, ******* Enable adv ******
+00> <t:    1053871>, main.c,  108, adv_discovery_disable_bea
+00> <t:    1053874>, main.c,  280, Starting to send acks!
+00> <t:    1053877>, main.c,  164, ******* Enable adv ******
+00> <t:    1053880>, main.c,  108, adv_discovery_disable_bea
+00> <t:    1053883>, main.c,  280, Starting to send acks!
+00> <t:    1053887>, main.c,  164, ******* Enable adv ******
+00> <t:    1060066>, main.c,  313, byte4 : 8!, p_type: 2
+00> <t:    1063465>, advertiser.c,  246, g_if_stop_discovery_count: 37
+00> <t:    1063468>, advertiser.c,  250, timerepeat_event: 6
+00> <t:    1070092>, main.c,  313, byte4 : 8!, p_type: 2
+00> <t:    1073394>, advertiser.c,  246, g_if_stop_discovery_count: 37
+00> <t:    1073397>, advertiser.c,  250, timerepeat_event: 7
+00> <t:    1083479>, advertiser.c,  246, g_if_stop_discovery_count: 37
+00> <t:    1083482>, advertiser.c,  250, timerepeat_event: 8
+00> <t:    1085934>, main.c,  313, byte4 : 8!, p_type: 2
+00> <t:    1085937>, main.c,  359, Receing adv payload, sink node !
+00> <t:    1085940>, main.c,  362, The payload is(size: 24):<t:    1085942>, main.c,  367,  g_received_file_real_size:433 
+00> <t:    1086602>, main.c,  370,  17 <t:    1086605>, main.c,  367,  g_received_file_real_size:434 
+00> <t:    1087266>, main.c,  370,  3 <t:    1087269>, main.c,  367,  g_received_file_real_size:435 
+00> <t:    1087927>, main.c,  370,  3 <t:    1087929>, main.c,  367,  g_received_file_real_size:436 
+00> <t:    1088587>, main.c,  370,  A <t:    1088590>, main.c,  367,  g_received_file_real_size:437 
+00> <t:    1089248>, main.c,  370,  95 <t:    1089250>, main.c,  367,  g_received_file_real_size:438 
+00> <t:    1089908>, main.c,  370,  18 <t:    1089910>, main.c,  367,  g_received_file_real_size:439 
+00> <t:    1090569>, main.c,  370,  A <t:    1090571>, main.c,  367,  g_received_file_real_size:440 
+00> <t:    1091229>, main.c,  370,  30 <t:    1091231>, main.c,  367,  g_received_file_real_size:441 
+00> <t:    1091890>, main.c,  370,  31 <t:    1091892>, main.c,  367,  g_received_file_real_size:442 
+00> <t:    1092550>, main.c,  370,  3A <t:    1092552>, main.c,  367,  g_received_file_real_size:443 
+00> <t:    1093210>, main.c,  370,  33 <t:    1093213>, main.c,  367,  g_received_file_real_size:444 
+00> <t:    1093871>, main.c,  370,  38 <t:    1093873>, main.c,  367,  g_received_file_real_size:445 
+00> <t:    1094531>, main.c,  370,  D <t:    1094534>, main.c,  367,  g_received_file_real_size:446 
+00> <t:    1095192>, main.c,  370,  A <t:    1095194>, main.c,  367,  g_received_file_real_size:447 
+00> <t:    1095852>, main.c,  370,  49 <t:    1095854>, main.c,  367,  g_received_file_real_size:448 
+00> <t:    1096513>, main.c,  370,  74 <t:    1096515>, main.c,  367,  g_received_file_real_size:449 
+00> <t:    1097173>, main.c,  370,  27 <t:    1097175>, main.c,  367,  g_received_file_real_size:450 
+00> <t:    1097834>, main.c,  370,  73 <t:    1097836>, main.c,  367,  g_received_file_real_size:451 
+00> <t:    1098494>, main.c,  370,  20 <t:    1098496>, main.c,  367,  g_received_file_real_size:452 
+00> <t:    1099154>, main.c,  370,  6A <t:    1099157>, main.c,  367,  g_received_file_real_size:453 
+00> <t:    1099815>, main.c,  370,  75 <t:    1099817>, main.c,  367,  g_received_file_real_size:454 
+00> <t:    1100475>, main.c,  370,  73 <t:    1100478>, main.c,  367,  g_received_file_real_size:455 
+00> <t:    1101136>, main.c,  370,  74 <t:    1101138>, main.c,  367,  g_received_file_real_size:456 
+00> <t:    1101796>, main.c,  370,  20 <t:    1102454>, main.c,  373, **********  The received seq is: 95, the address is : 3., g_present_packet_seq: FF  ********
+00> <t:    1102460>, advertiser.c,  246, g_if_stop_discovery_count: 37
+00> <t:    1102463>, advertiser.c,  250, timerepeat_event: 9
+00> <t:    1102466>, advertiser.c,  281, get_if_send_ack!
+00> <t:    1102468>, main.c,  108, adv_discovery_disable_bea
+00> <t:    1102471>, main.c,  280, Starting to send acks!
+00> <t:    1102474>, main.c,  164, ******* Enable adv ******
+00> <t:    1102477>, main.c,  108, adv_discovery_disable_bea
+00> <t:    1102480>, main.c,  280, Starting to send acks!
+00> <t:    1102483>, main.c,  164, ******* Enable adv ******
+00> <t:    1102486>, main.c,  108, adv_discovery_disable_bea
+00> <t:    1102489>, main.c,  280, Starting to send acks!
+00> <t:    1102492>, main.c,  164, ******* Enable adv ******
+00> <t:    1102496>, main.c,  108, adv_discovery_disable_bea
+00> <t:    1102499>, main.c,  280, Starting to send acks!
+00> <t:    1102503>, main.c,  164, ******* Enable adv ******
+00> <t:    1108795>, main.c,  313, byte4 : 8!, p_type: 2
+00> <t:    1112167>, advertiser.c,  246, g_if_stop_discovery_count: 37
+00> <t:    1112170>, advertiser.c,  250, timerepeat_event: 10
+00> <t:    1118770>, main.c,  313, byte4 : 8!, p_type: 2
+00> <t:    1122101>, advertiser.c,  246, g_if_stop_discovery_count: 37
+00> <t:    1122104>, advertiser.c,  250, timerepeat_event: 11
+00> <t:    1132031>, advertiser.c,  246, g_if_stop_discovery_count: 37
+00> <t:    1132034>, advertiser.c,  250, timerepeat_event: 12
+00> <t:    1134585>, main.c,  313, byte4 : 8!, p_type: 2
+00> <t:    1134587>, main.c,  359, Receing adv payload, sink node !
+00> <t:    1134590>, main.c,  362, The payload is(size: 24):<t:    1134593>, main.c,  367,  g_received_file_real_size:457 
+00> <t:    1135255>, main.c,  370,  17 <t:    1135257>, main.c,  367,  g_received_file_real_size:458 
+00> <t:    1135916>, main.c,  370,  3 <t:    1135918>, main.c,  367,  g_received_file_real_size:459 
+00> <t:    1136577>, main.c,  370,  3 <t:    1136579>, main.c,  367,  g_received_file_real_size:460 
+00> <t:    1137237>, main.c,  370,  A <t:    1137239>, main.c,  367,  g_received_file_real_size:461 
+00> <t:    1137898>, main.c,  370,  FA <t:    1137900>, main.c,  367,  g_received_file_real_size:462 
+00> <t:    1138558>, main.c,  370,  18 <t:    1138560>, main.c,  367,  g_received_file_real_size:463 
+00> <t:    1139218>, main.c,  370,  6F <t:    1139221>, main.c,  367,  g_received_file_real_size:464 
+00> <t:    1139879>, main.c,  370,  20 <t:    1139881>, main.c,  367,  g_received_file_real_size:465 
+00> <t:    1140539>, main.c,  370,  6F <t:    1140542>, main.c,  367,  g_received_file_real_size:466 
+00> <t:    1141200>, main.c,  370,  66 <t:    1141202>, main.c,  367,  g_received_file_real_size:467 
+00> <t:    1141860>, main.c,  370,  20 <t:    1141862>, main.c,  367,  g_received_file_real_size:468 
+00> <t:    1142521>, main.c,  370,  75 <t:    1142523>, main.c,  367,  g_received_file_real_size:469 
+00> <t:    1143181>, main.c,  370,  73 <t:    1143183>, main.c,  367,  g_received_file_real_size:470 
+00> <t:    1143842>, main.c,  370,  2E <t:    1143844>, main.c,  367,  g_received_file_real_size:471 
+00> <t:    1144502>, main.c,  370,  20 <t:    1144504>, main.c,  367,  g_received_file_real_size:472 
+00> <t:    1145162>, main.c,  370,  48 <t:    1145165>, main.c,  367,  g_received_file_real_size:473 
+00> <t:    1145823>, main.c,  370,  6F <t:    1145825>, main.c,  367,  g_received_file_real_size:474 
+00> <t:    1146483>, main.c,  370,  77 <t:    1146486>, main.c,  367,  g_received_file_real_size:475 
+00> <t:    1147144>, main.c,  370,  20 <t:    1147146>, main.c,  367,  g_received_file_real_size:476 
+00> <t:    1147804>, main.c,  370,  63 <t:    1147806>, main.c,  367,  g_received_file_real_size:477 
+00> <t:    1148465>, main.c,  370,  61 <t:    1148467>, main.c,  367,  g_received_file_real_size:478 
+00> <t:    1149125>, main.c,  370,  6E <t:    1149127>, main.c,  367,  g_received_file_real_size:479 
+00> <t:    1149786>, main.c,  370,  20 <t:    1149788>, main.c,  367,  g_received_file_real_size:480 
+00> <t:    1150446>, main.c,  370,  77 <t:    1151104>, main.c,  373, **********  The received seq is: FA, the address is : 3., g_present_packet_seq: FF  ********
+00> <t:    1151110>, advertiser.c,  246, g_if_stop_discovery_count: 37
+00> <t:    1151113>, advertiser.c,  250, timerepeat_event: 13
+00> <t:    1151116>, advertiser.c,  281, get_if_send_ack!
+00> <t:    1151118>, main.c,  108, adv_discovery_disable_bea
+00> <t:    1151121>, main.c,  280, Starting to send acks!
+00> <t:    1151124>, main.c,  164, ******* Enable adv ******
+00> <t:    1151127>, main.c,  108, adv_discovery_disable_bea
+00> <t:    1151130>, main.c,  280, Starting to send acks!
+00> <t:    1151132>, main.c,  164, ******* Enable adv ******
+00> <t:    1151136>, main.c,  108, adv_discovery_disable_bea
+00> <t:    1151139>, main.c,  280, Starting to send acks!
+00> <t:    1151142>, main.c,  164, ******* Enable adv ******
+00> <t:    1151145>, main.c,  108, adv_discovery_disable_bea
+00> <t:    1151149>, main.c,  280, Starting to send acks!
+00> <t:    1151153>, main.c,  164, ******* Enable adv ******
+00> <t:    1156628>, main.c,  313, byte4 : 8!, p_type: 2
+00> <t:    1159962>, advertiser.c,  246, g_if_stop_discovery_count: 37
+00> <t:    1159965>, advertiser.c,  250, timerepeat_event: 14
+00> <t:    1166641>, main.c,  313, byte4 : 8!, p_type: 2
+00> <t:    1170066>, advertiser.c,  246, g_if_stop_discovery_count: 37
+00> <t:    1170069>, advertiser.c,  250, timerepeat_event: 15
+00> <t:    1179914>, advertiser.c,  246, g_if_stop_discovery_count: 37
+00> <t:    1179917>, advertiser.c,  250, timerepeat_event: 16
+00> <t:    1182484>, main.c,  313, byte4 : 8!, p_type: 2
+00> <t:    1182487>, main.c,  359, Receing adv payload, sink node !
+00> <t:    1182490>, main.c,  362, The payload is(size: 24):<t:    1182492>, main.c,  367,  g_received_file_real_size:481 
+00> <t:    1183152>, main.c,  370,  17 <t:    1183155>, main.c,  367,  g_received_file_real_size:482 
+00> <t:    1183816>, main.c,  370,  3 <t:    1183818>, main.c,  367,  g_received_file_real_size:483 
+00> <t:    1184477>, main.c,  370,  3 <t:    1184479>, main.c,  367,  g_received_file_real_size:484 
+00> <t:    1185137>, main.c,  370,  A <t:    1185139>, main.c,  367,  g_received_file_real_size:485 
+00> <t:    1185798>, main.c,  370,  A <t:    1185800>, main.c,  367,  g_received_file_real_size:486 
+00> <t:    1186458>, main.c,  370,  18 <t:    1186460>, main.c,  367,  g_received_file_real_size:487 
+00> <t:    1187118>, main.c,  370,  3F <t:    1187121>, main.c,  367,  g_received_file_real_size:488 
+00> <t:    1187779>, main.c,  370,  D <t:    1187781>, main.c,  367,  g_received_file_real_size:489 
+00> <t:    1188439>, main.c,  370,  A <t:    1188442>, main.c,  367,  g_received_file_real_size:490 
+00> <t:    1189100>, main.c,  370,  30 <t:    1189102>, main.c,  367,  g_received_file_real_size:491 
+00> <t:    1189760>, main.c,  370,  31 <t:    1189762>, main.c,  367,  g_received_file_real_size:492 
+00> <t:    1190421>, main.c,  370,  3A <t:    1190423>, main.c,  367,  g_received_file_real_size:493 
+00> <t:    1191081>, main.c,  370,  34 <t:    1191083>, main.c,  367,  g_received_file_real_size:494 
+00> <t:    1191742>, main.c,  370,  30 <t:    1191744>, main.c,  367,  g_received_file_real_size:495 
+00> <t:    1192402>, main.c,  370,  D <t:    1192404>, main.c,  367,  g_received_file_real_size:496 
+00> <t:    1193062>, main.c,  370,  A <t:    1193065>, main.c,  367,  g_received_file_real_size:497 
+00> <t:    1193723>, main.c,  370,  44 <t:    1193725>, main.c,  367,  g_received_file_real_size:498 
+00> <t:    1194383>, main.c,  370,  61 <t:    1194386>, main.c,  367,  g_received_file_real_size:499 
+00> <t:    1195044>, main.c,  370,  76 <t:    1195046>, main.c,  367,  g_received_file_real_size:500 
+00> <t:    1195704>, main.c,  370,  69 <t:    1195706>, main.c,  367,  g_received_file_real_size:501 
+00> <t:    1196365>, main.c,  370,  64 <t:    1196367>, main.c,  367,  g_received_file_real_size:502 
+00> <t:    1197025>, main.c,  370,  20 <t:    1197027>, main.c,  367,  g_received_file_real_size:503 
+00> <t:    1197686>, main.c,  370,  61 <t:    1197688>, main.c,  367,  g_received_file_real_size:504 
+00> <t:    1198346>, main.c,  370,  6E <t:    1199004>, main.c,  373, **********  The received seq is: A, the address is : 3., g_present_packet_seq: FF  ********
+00> <t:    1199011>, advertiser.c,  246, g_if_stop_discovery_count: 37
+00> <t:    1199014>, advertiser.c,  250, timerepeat_event: 1
+00> <t:    1199016>, advertiser.c,  281, get_if_send_ack!
+00> <t:    1199019>, main.c,  108, adv_discovery_disable_bea
+00> <t:    1199022>, main.c,  280, Starting to send acks!
+00> <t:    1199024>, main.c,  164, ******* Enable adv ******
+00> <t:    1199027>, main.c,  108, adv_discovery_disable_bea
+00> <t:    1199030>, main.c,  280, Starting to send acks!
+00> <t:    1199033>, main.c,  164, ******* Enable adv ******
+00> <t:    1199036>, main.c,  108, adv_discovery_disable_bea
+00> <t:    1199040>, main.c,  280, Starting to send acks!
+00> <t:    1199043>, main.c,  164, ******* Enable adv ******
+00> <t:    1199046>, main.c,  108, adv_discovery_disable_bea
+00> <t:    1199049>, main.c,  280, Starting to send acks!
+00> <t:    1199053>, main.c,  164, ******* Enable adv ******
+00> <t:    1199061>, main.c,  313, byte4 : 8!, p_type: 2
+00> <t:    1207581>, advertiser.c,  246, g_if_stop_discovery_count: 37
+00> <t:    1207584>, advertiser.c,  250, timerepeat_event: 2
+00> <t:    1213486>, main.c,  313, byte4 : 8!, p_type: 2
+00> <t:    1217459>, advertiser.c,  246, g_if_stop_discovery_count: 37
+00> <t:    1217462>, advertiser.c,  250, timerepeat_event: 3
+00> <t:    1227337>, advertiser.c,  246, g_if_stop_discovery_count: 37
+00> <t:    1227340>, advertiser.c,  250, timerepeat_event: 4
+00> <t:    1229334>, main.c,  313, byte4 : 8!, p_type: 2
+00> <t:    1229337>, main.c,  359, Receing adv payload, sink node !
+00> <t:    1229339>, main.c,  362, The payload is(size: 24):<t:    1229342>, main.c,  367,  g_received_file_real_size:505 
+00> <t:    1230004>, main.c,  370,  17 <t:    1230006>, main.c,  367,  g_received_file_real_size:506 
+00> <t:    1230665>, main.c,  370,  3 <t:    1230667>, main.c,  367,  g_received_file_real_size:507 
+00> <t:    1231325>, main.c,  370,  3 <t:    1231327>, main.c,  367,  g_received_file_real_size:508 
+00> <t:    1231985>, main.c,  370,  A <t:    1231988>, main.c,  367,  g_received_file_real_size:509 
+00> <t:    1232646>, main.c,  370,  11 <t:    1232648>, main.c,  367,  g_received_file_real_size:510 
+00> <t:    1233306>, main.c,  370,  18 <t:    1233308>, main.c,  367,  g_received_file_real_size:511 
+00> <t:    1233967>, main.c,  370,  77 <t:    1233969>, main.c,  367,  g_received_file_real_size:512 
+00> <t:    1234627>, main.c,  370,  69 <t:    1234629>, main.c,  367,  g_received_file_real_size:513 
+00> <t:    1235288>, main.c,  370,  66 <t:    1235290>, main.c,  367,  g_received_file_real_size:514 
+00> <t:    1235948>, main.c,  370,  65 <t:    1235950>, main.c,  367,  g_received_file_real_size:515 
+00> <t:    1236608>, main.c,  370,  D <t:    1236611>, main.c,  367,  g_received_file_real_size:516 
+00> <t:    1237269>, main.c,  370,  A <t:    1237271>, main.c,  367,  g_received_file_real_size:517 
+00> <t:    1237929>, main.c,  370,  30 <t:    1237931>, main.c,  367,  g_received_file_real_size:518 
+00> <t:    1238590>, main.c,  370,  31 <t:    1238592>, main.c,  367,  g_received_file_real_size:519 
+00> <t:    1239250>, main.c,  370,  3A <t:    1239252>, main.c,  367,  g_received_file_real_size:520 
+00> <t:    1239910>, main.c,  370,  34 <t:    1239913>, main.c,  367,  g_received_file_real_size:521 
+00> <t:    1240571>, main.c,  370,  31 <t:    1240573>, main.c,  367,  g_received_file_real_size:522 
+00> <t:    1241231>, main.c,  370,  D <t:    1241234>, main.c,  367,  g_received_file_real_size:523 
+00> <t:    1241892>, main.c,  370,  A <t:    1241894>, main.c,  367,  g_received_file_real_size:524 
+00> <t:    1242552>, main.c,  370,  72 <t:    1242554>, main.c,  367,  g_received_file_real_size:525 
+00> <t:    1243213>, main.c,  370,  65 <t:    1243215>, main.c,  367,  g_received_file_real_size:526 
+00> <t:    1243873>, main.c,  370,  61 <t:    1243875>, main.c,  367,  g_received_file_real_size:527 
+00> <t:    1244533>, main.c,  370,  6C <t:    1244536>, main.c,  367,  g_received_file_real_size:528 
+00> <t:    1245194>, main.c,  370,  6C <t:    1245852>, main.c,  373, **********  The received seq is: 11, the address is : 3., g_present_packet_seq: FF  ********
+00> <t:    1245858>, advertiser.c,  246, g_if_stop_discovery_count: 37
+00> <t:    1245861>, advertiser.c,  250, timerepeat_event: 5
+00> <t:    1245864>, advertiser.c,  281, get_if_send_ack!
+00> <t:    1245866>, main.c,  108, adv_discovery_disable_bea
+00> <t:    1245869>, main.c,  280, Starting to send acks!
+00> <t:    1245872>, main.c,  164, ******* Enable adv ******
+00> <t:    1245875>, main.c,  108, adv_discovery_disable_bea
+00> <t:    1245878>, main.c,  280, Starting to send acks!
+00> <t:    1245880>, main.c,  164, ******* Enable adv ******
+00> <t:    1245884>, main.c,  108, adv_discovery_disable_bea
+00> <t:    1245887>, main.c,  280, Starting to send acks!
+00> <t:    1245890>, main.c,  164, ******* Enable adv ******
+00> <t:    1245893>, main.c,  108, adv_discovery_disable_bea
+00> <t:    1245896>, main.c,  280, Starting to send acks!
+00> <t:    1245900>, main.c,  164, ******* Enable adv ******
+00> <t:    1253598>, advertiser.c,  246, g_if_stop_discovery_count: 37
+00> <t:    1253601>, advertiser.c,  250, timerepeat_event: 6
+00> <t:    1261313>, main.c,  313, byte4 : 8!, p_type: 2
+00> <t:    1263471>, advertiser.c,  246, g_if_stop_discovery_count: 37
+00> <t:    1263474>, advertiser.c,  250, timerepeat_event: 7
+00> <t:    1273437>, advertiser.c,  246, g_if_stop_discovery_count: 37
+00> <t:    1273440>, advertiser.c,  250, timerepeat_event: 8
+00> <t:    1277156>, main.c,  313, byte4 : 8!, p_type: 2
+00> <t:    1277158>, main.c,  359, Receing adv payload, sink node !
+00> <t:    1277161>, main.c,  362, The payload is(size: 24):<t:    1277164>, main.c,  367,  g_received_file_real_size:529 
+00> <t:    1277824>, main.c,  370,  17 <t:    1277826>, main.c,  367,  g_received_file_real_size:530 
+00> <t:    1278486>, main.c,  370,  3 <t:    1278488>, main.c,  367,  g_received_file_real_size:531 
+00> <t:    1279148>, main.c,  370,  3 <t:    1279151>, main.c,  367,  g_received_file_real_size:532 
+00> <t:    1279809>, main.c,  370,  A <t:    1279811>, main.c,  367,  g_received_file_real_size:533 
+00> <t:    1280469>, main.c,  370,  79 <t:    1280471>, main.c,  367,  g_received_file_real_size:534 
+00> <t:    1281130>, main.c,  370,  18 <t:    1281132>, main.c,  367,  g_received_file_real_size:535 
+00> <t:    1281790>, main.c,  370,  20 <t:    1281792>, main.c,  367,  g_received_file_real_size:536 
+00> <t:    1282451>, main.c,  370,  70 <t:    1282453>, main.c,  367,  g_received_file_real_size:537 
+00> <t:    1283111>, main.c,  370,  6C <t:    1283113>, main.c,  367,  g_received_file_real_size:538 
+00> <t:    1283771>, main.c,  370,  61 <t:    1283774>, main.c,  367,  g_received_file_real_size:539 
+00> <t:    1284432>, main.c,  370,  79 <t:    1284434>, main.c,  367,  g_received_file_real_size:540 
+00> <t:    1285092>, main.c,  370,  69 <t:    1285095>, main.c,  367,  g_received_file_real_size:541 
+00> <t:    1285753>, main.c,  370,  6E <t:    1285755>, main.c,  367,  g_received_file_real_size:542 
+00> <t:    1286413>, main.c,  370,  67 <t:    1286416>, main.c,  367,  g_received_file_real_size:543 
+00> <t:    1287074>, main.c,  370,  20 <t:    1287076>, main.c,  367,  g_received_file_real_size:544 
+00> <t:    1287734>, main.c,  370,  43 <t:    1287736>, main.c,  367,  g_received_file_real_size:545 
+00> <t:    1288395>, main.c,  370,  68 <t:    1288397>, main.c,  367,  g_received_file_real_size:546 
+00> <t:    1289055>, main.c,  370,  69 <t:    1289057>, main.c,  367,  g_received_file_real_size:547 
+00> <t:    1289716>, main.c,  370,  6E <t:    1289718>, main.c,  367,  g_received_file_real_size:548 
+00> <t:    1290376>, main.c,  370,  65 <t:    1290378>, main.c,  367,  g_received_file_real_size:549 
+00> <t:    1291036>, main.c,  370,  73 <t:    1291039>, main.c,  367,  g_received_file_real_size:550 
+00> <t:    1291697>, main.c,  370,  65 <t:    1291699>, main.c,  367,  g_received_file_real_size:551 
+00> <t:    1292357>, main.c,  370,  20 <t:    1292360>, main.c,  367,  g_received_file_real_size:552 
+00> <t:    1293018>, main.c,  370,  6D <t:    1293675>, main.c,  373, **********  The received seq is: 79, the address is : 3., g_present_packet_seq: FF  ********
+00> <t:    1293682>, advertiser.c,  246, g_if_stop_discovery_count: 37
+00> <t:    1293685>, advertiser.c,  250, timerepeat_event: 9
+00> <t:    1293687>, advertiser.c,  281, get_if_send_ack!
+00> <t:    1293690>, main.c,  108, adv_discovery_disable_bea
+00> <t:    1293693>, main.c,  280, Starting to send acks!
+00> <t:    1293696>, main.c,  164, ******* Enable adv ******
+00> <t:    1293699>, main.c,  108, adv_discovery_disable_bea
+00> <t:    1293702>, main.c,  280, Starting to send acks!
+00> <t:    1293704>, main.c,  164, ******* Enable adv ******
+00> <t:    1293708>, main.c,  108, adv_discovery_disable_bea
+00> <t:    1293711>, main.c,  280, Starting to send acks!
+00> <t:    1293714>, main.c,  164, ******* Enable adv ******
+00> <t:    1293717>, main.c,  108, adv_discovery_disable_bea
+00> <t:    1293720>, main.c,  280, Starting to send acks!
+00> <t:    1293724>, main.c,  164, ******* Enable adv ******
+00> <t:    1293729>, main.c,  313, byte4 : 8!, p_type: 2
+00> <t:    1298453>, main.c,  313, byte4 : 8!, p_type: 2
+00> <t:    1300528>, advertiser.c,  246, g_if_stop_discovery_count: 37
+00> <t:    1300531>, advertiser.c,  250, timerepeat_event: 10
+00> <t:    1308418>, main.c,  313, byte4 : 8!, p_type: 2
+00> <t:    1310492>, advertiser.c,  246, g_if_stop_discovery_count: 37
+00> <t:    1310495>, advertiser.c,  250, timerepeat_event: 11
+00> <t:    1320593>, advertiser.c,  246, g_if_stop_discovery_count: 37
+00> <t:    1320596>, advertiser.c,  250, timerepeat_event: 12
+00> <t:    1324233>, main.c,  313, byte4 : 8!, p_type: 2
+00> <t:    1324236>, main.c,  359, Receing adv payload, sink node !
+00> <t:    1324238>, main.c,  362, The payload is(size: 24):<t:    1324241>, main.c,  367,  g_received_file_real_size:553 
+00> <t:    1324901>, main.c,  370,  17 <t:    1324904>, main.c,  367,  g_received_file_real_size:554 
+00> <t:    1325564>, main.c,  370,  3 <t:    1325566>, main.c,  367,  g_received_file_real_size:555 
+00> <t:    1326226>, main.c,  370,  3 <t:    1326229>, main.c,  367,  g_received_file_real_size:556 
+00> <t:    1326887>, main.c,  370,  A <t:    1326889>, main.c,  367,  g_received_file_real_size:557 
+00> <t:    1327547>, main.c,  370,  E7 <t:    1327549>, main.c,  367,  g_received_file_real_size:558 
+00> <t:    1328208>, main.c,  370,  18 <t:    1328210>, main.c,  367,  g_received_file_real_size:559 
+00> <t:    1328868>, main.c,  370,  2E <t:    1328870>, main.c,  367,  g_received_file_real_size:560 
+00> <t:    1329529>, main.c,  370,  D <t:    1329531>, main.c,  367,  g_received_file_real_size:561 
+00> <t:    1330189>, main.c,  370,  A <t:    1330191>, main.c,  367,  g_received_file_real_size:562 
+00> <t:    1330849>, main.c,  370,  30 <t:    1330852>, main.c,  367,  g_received_file_real_size:563 
+00> <t:    1331510>, main.c,  370,  31 <t:    1331512>, main.c,  367,  g_received_file_real_size:564 
+00> <t:    1332170>, main.c,  370,  3A <t:    1332173>, main.c,  367,  g_received_file_real_size:565 
+00> <t:    1332831>, main.c,  370,  34 <t:    1332833>, main.c,  367,  g_received_file_real_size:566 
+00> <t:    1333491>, main.c,  370,  33 <t:    1333493>, main.c,  367,  g_received_file_real_size:567 
+00> <t:    1334152>, main.c,  370,  D <t:    1334154>, main.c,  367,  g_received_file_real_size:568 
+00> <t:    1334812>, main.c,  370,  A <t:    1334814>, main.c,  367,  g_received_file_real_size:569 
+00> <t:    1335473>, main.c,  370,  48 <t:    1335475>, main.c,  367,  g_received_file_real_size:570 
+00> <t:    1336133>, main.c,  370,  6F <t:    1336135>, main.c,  367,  g_received_file_real_size:571 
+00> <t:    1336793>, main.c,  370,  77 <t:    1336796>, main.c,  367,  g_received_file_real_size:572 
+00> <t:    1337454>, main.c,  370,  20 <t:    1337456>, main.c,  367,  g_received_file_real_size:573 
+00> <t:    1338114>, main.c,  370,  64 <t:    1338117>, main.c,  367,  g_received_file_real_size:574 
+00> <t:    1338775>, main.c,  370,  6F <t:    1338777>, main.c,  367,  g_received_file_real_size:575 
+00> <t:    1339435>, main.c,  370,  20 <t:    1339437>, main.c,  367,  g_received_file_real_size:576 
+00> <t:    1340096>, main.c,  370,  79 <t:    1340753>, main.c,  373, **********  The received seq is: E7, the address is : 3., g_present_packet_seq: FF  ********
+00> <t:    1340760>, advertiser.c,  246, g_if_stop_discovery_count: 37
+00> <t:    1340763>, advertiser.c,  250, timerepeat_event: 13
+00> <t:    1340765>, advertiser.c,  281, get_if_send_ack!
+00> <t:    1340768>, main.c,  108, adv_discovery_disable_bea
+00> <t:    1340771>, main.c,  280, Starting to send acks!
+00> <t:    1340774>, main.c,  164, ******* Enable adv ******
+00> <t:    1340777>, main.c,  108, adv_discovery_disable_bea
+00> <t:    1340780>, main.c,  280, Starting to send acks!
+00> <t:    1340782>, main.c,  164, ******* Enable adv ******
+00> <t:    1340785>, main.c,  108, adv_discovery_disable_bea
+00> <t:    1340789>, main.c,  280, Starting to send acks!
+00> <t:    1340792>, main.c,  164, ******* Enable adv ******
+00> <t:    1340795>, main.c,  108, adv_discovery_disable_bea
+00> <t:    1340798>, main.c,  280, Starting to send acks!
+00> <t:    1340802>, main.c,  164, ******* Enable adv ******
+00> <t:    1347114>, main.c,  313, byte4 : 8!, p_type: 2
+00> <t:    1349938>, advertiser.c,  246, g_if_stop_discovery_count: 37
+00> <t:    1349941>, advertiser.c,  250, timerepeat_event: 14
+00> <t:    1356970>, main.c,  313, byte4 : 8!, p_type: 2
+00> <t:    1360048>, advertiser.c,  246, g_if_stop_discovery_count: 37
+00> <t:    1360051>, advertiser.c,  250, timerepeat_event: 15
+00> <t:    1369896>, advertiser.c,  246, g_if_stop_discovery_count: 37
+00> <t:    1369899>, advertiser.c,  250, timerepeat_event: 16
+00> <t:    1372813>, main.c,  313, byte4 : 8!, p_type: 2
+00> <t:    1372816>, main.c,  359, Receing adv payload, sink node !
+00> <t:    1372818>, main.c,  362, The payload is(size: 24):<t:    1372821>, main.c,  367,  g_received_file_real_size:577 
+00> <t:    1373480>, main.c,  370,  17 <t:    1373482>, main.c,  367,  g_received_file_real_size:578 
+00> <t:    1374144>, main.c,  370,  3 <t:    1374146>, main.c,  367,  g_received_file_real_size:579 
+00> <t:    1374808>, main.c,  370,  3 <t:    1374810>, main.c,  367,  g_received_file_real_size:580 
+00> <t:    1375468>, main.c,  370,  A <t:    1375471>, main.c,  367,  g_received_file_real_size:581 
+00> <t:    1376129>, main.c,  370,  A3 <t:    1376131>, main.c,  367,  g_received_file_real_size:582 
+00> <t:    1376789>, main.c,  370,  18 <t:    1376791>, main.c,  367,  g_received_file_real_size:583 
+00> <t:    1377450>, main.c,  370,  77 <t:    1377452>, main.c,  367,  g_received_file_real_size:584 
+00> <t:    1378110>, main.c,  370,  3F <t:    1378112>, main.c,  367,  g_received_file_real_size:585 
+00> <t:    1378771>, main.c,  370,  D <t:    1378773>, main.c,  367,  g_received_file_real_size:586 
+00> <t:    1379431>, main.c,  370,  A <t:    1379433>, main.c,  367,  g_received_file_real_size:587 
+00> <t:    1380091>, main.c,  370,  30 <t:    1380094>, main.c,  367,  g_received_file_real_size:588 
+00> <t:    1380752>, main.c,  370,  31 <t:    1380754>, main.c,  367,  g_received_file_real_size:589 
+00> <t:    1381412>, main.c,  370,  3A <t:    1381415>, main.c,  367,  g_received_file_real_size:590 
+00> <t:    1382073>, main.c,  370,  34 <t:    1382075>, main.c,  367,  g_received_file_real_size:591 
+00> <t:    1382733>, main.c,  370,  34 <t:    1382736>, main.c,  367,  g_received_file_real_size:592 
+00> <t:    1383394>, main.c,  370,  D <t:    1383396>, main.c,  367,  g_received_file_real_size:593 
+00> <t:    1384054>, main.c,  370,  A <t:    1384056>, main.c,  367,  g_received_file_real_size:594 
+00> <t:    1384715>, main.c,  370,  57 <t:    1384717>, main.c,  367,  g_received_file_real_size:595 
+00> <t:    1385375>, main.c,  370,  65 <t:    1385377>, main.c,  367,  g_received_file_real_size:596 
+00> <t:    1386036>, main.c,  370,  20 <t:    1386038>, main.c,  367,  g_received_file_real_size:597 
+00> <t:    1386696>, main.c,  370,  67 <t:    1386698>, main.c,  367,  g_received_file_real_size:598 
+00> <t:    1387356>, main.c,  370,  65 <t:    1387359>, main.c,  367,  g_received_file_real_size:599 
+00> <t:    1388017>, main.c,  370,  74 <t:    1388019>, main.c,  367,  g_received_file_real_size:600 
+00> <t:    1388677>, main.c,  370,  20 <t:    1389335>, main.c,  373, **********  The received seq is: A3, the address is : 3., g_present_packet_seq: FF  ********
+00> <t:    1389341>, advertiser.c,  246, g_if_stop_discovery_count: 37
+00> <t:    1389344>, advertiser.c,  250, timerepeat_event: 1
+00> <t:    1389347>, advertiser.c,  281, get_if_send_ack!
+00> <t:    1389349>, main.c,  108, adv_discovery_disable_bea
+00> <t:    1389352>, main.c,  280, Starting to send acks!
+00> <t:    1389355>, main.c,  164, ******* Enable adv ******
+00> <t:    1389358>, main.c,  108, adv_discovery_disable_bea
+00> <t:    1389361>, main.c,  280, Starting to send acks!
+00> <t:    1389363>, main.c,  164, ******* Enable adv ******
+00> <t:    1389367>, main.c,  108, adv_discovery_disable_bea
+00> <t:    1389370>, main.c,  280, Starting to send acks!
+00> <t:    1389373>, main.c,  164, ******* Enable adv ******
+00> <t:    1389376>, main.c,  108, adv_discovery_disable_bea
+00> <t:    1389379>, main.c,  280, Starting to send acks!
+00> <t:    1389383>, main.c,  164, ******* Enable adv ******
+00> <t:    1395066>, main.c,  313, byte4 : 8!, p_type: 2
+00> <t:    1398054>, advertiser.c,  246, g_if_stop_discovery_count: 37
+00> <t:    1398057>, advertiser.c,  250, timerepeat_event: 2
+00> <t:    1405176>, main.c,  313, byte4 : 8!, p_type: 2
+00> <t:    1407998>, advertiser.c,  246, g_if_stop_discovery_count: 37
+00> <t:    1408001>, advertiser.c,  250, timerepeat_event: 3
+00> <t:    1418072>, advertiser.c,  246, g_if_stop_discovery_count: 37
+00> <t:    1418075>, advertiser.c,  250, timerepeat_event: 4
+00> <t:    1421018>, main.c,  313, byte4 : 8!, p_type: 2
+00> <t:    1421020>, main.c,  359, Receing adv payload, sink node !
+00> <t:    1421023>, main.c,  362, The payload is(size: 24):<t:    1421026>, main.c,  367,  g_received_file_real_size:601 
+00> <t:    1421686>, main.c,  370,  17 <t:    1421688>, main.c,  367,  g_received_file_real_size:602 
+00> <t:    1422349>, main.c,  370,  3 <t:    1422351>, main.c,  367,  g_received_file_real_size:603 
+00> <t:    1423010>, main.c,  370,  3 <t:    1423012>, main.c,  367,  g_received_file_real_size:604 
+00> <t:    1423671>, main.c,  370,  A <t:    1423673>, main.c,  367,  g_received_file_real_size:605 
+00> <t:    1424331>, main.c,  370,  EF <t:    1424333>, main.c,  367,  g_received_file_real_size:606 
+00> <t:    1424992>, main.c,  370,  18 <t:    1424994>, main.c,  367,  g_received_file_real_size:607 
+00> <t:    1425652>, main.c,  370,  61 <t:    1425654>, main.c,  367,  g_received_file_real_size:608 
+00> <t:    1426312>, main.c,  370,  6E <t:    1426315>, main.c,  367,  g_received_file_real_size:609 
+00> <t:    1426973>, main.c,  370,  63 <t:    1426975>, main.c,  367,  g_received_file_real_size:610 
+00> <t:    1427633>, main.c,  370,  65 <t:    1427636>, main.c,  367,  g_received_file_real_size:611 
+00> <t:    1428294>, main.c,  370,  D <t:    1428296>, main.c,  367,  g_received_file_real_size:612 
+00> <t:    1428954>, main.c,  370,  A <t:    1428956>, main.c,  367,  g_received_file_real_size:613 
+00> <t:    1429615>, main.c,  370,  30 <t:    1429617>, main.c,  367,  g_received_file_real_size:614 
+00> <t:    1430275>, main.c,  370,  31 <t:    1430277>, main.c,  367,  g_received_file_real_size:615 
+00> <t:    1430936>, main.c,  370,  3A <t:    1430938>, main.c,  367,  g_received_file_real_size:616 
+00> <t:    1431596>, main.c,  370,  34 <t:    1431598>, main.c,  367,  g_received_file_real_size:617 
+00> <t:    1432256>, main.c,  370,  35 <t:    1432259>, main.c,  367,  g_received_file_real_size:618 
+00> <t:    1432917>, main.c,  370,  D <t:    1432919>, main.c,  367,  g_received_file_real_size:619 
+00> <t:    1433577>, main.c,  370,  A <t:    1433580>, main.c,  367,  g_received_file_real_size:620 
+00> <t:    1434238>, main.c,  370,  74 <t:    1434240>, main.c,  367,  g_received_file_real_size:621 
+00> <t:    1434898>, main.c,  370,  6F <t:    1434900>, main.c,  367,  g_received_file_real_size:622 
+00> <t:    1435559>, main.c,  370,  20 <t:    1435561>, main.c,  367,  g_received_file_real_size:623 
+00> <t:    1436219>, main.c,  370,  68 <t:    1436221>, main.c,  367,  g_received_file_real_size:624 
+00> <t:    1436880>, main.c,  370,  61 <t:    1437537>, main.c,  373, **********  The received seq is: EF, the address is : 3., g_present_packet_seq: FF  ********
+00> <t:    1437544>, advertiser.c,  246, g_if_stop_discovery_count: 37
+00> <t:    1437547>, advertiser.c,  250, timerepeat_event: 5
+00> <t:    1437549>, advertiser.c,  281, get_if_send_ack!
+00> <t:    1437552>, main.c,  108, adv_discovery_disable_bea
+00> <t:    1437555>, main.c,  280, Starting to send acks!
+00> <t:    1437557>, main.c,  164, ******* Enable adv ******
+00> <t:    1437560>, main.c,  108, adv_discovery_disable_bea
+00> <t:    1437563>, main.c,  280, Starting to send acks!
+00> <t:    1437566>, main.c,  164, ******* Enable adv ******
+00> <t:    1437569>, main.c,  108, adv_discovery_disable_bea
+00> <t:    1437573>, main.c,  280, Starting to send acks!
+00> <t:    1437576>, main.c,  164, ******* Enable adv ******
+00> <t:    1437579>, main.c,  108, adv_discovery_disable_bea
+00> <t:    1437582>, main.c,  280, Starting to send acks!
+00> <t:    1437586>, main.c,  164, ******* Enable adv ******
+00> <t:    1445008>, advertiser.c,  246, g_if_stop_discovery_count: 37
+00> <t:    1445011>, advertiser.c,  250, timerepeat_event: 6
+00> <t:    1445093>, main.c,  313, byte4 : 8!, p_type: 2
+00> <t:    1454989>, advertiser.c,  246, g_if_stop_discovery_count: 37
+00> <t:    1454992>, advertiser.c,  250, timerepeat_event: 7
+00> <t:    1460948>, main.c,  313, byte4 : 8!, p_type: 2
+00> <t:    1460951>, main.c,  359, Receing adv payload, sink node !
+00> <t:    1460954>, main.c,  362, The payload is(size: 24):<t:    1460956>, main.c,  367,  g_received_file_real_size:625 
+00> <t:    1461615>, main.c,  370,  17 <t:    1461618>, main.c,  367,  g_received_file_real_size:626 
+00> <t:    1462276>, main.c,  370,  3 <t:    1462278>, main.c,  367,  g_received_file_real_size:627 
+00> <t:    1462939>, main.c,  370,  3 <t:    1462942>, main.c,  367,  g_received_file_real_size:628 
+00> <t:    1463600>, main.c,  370,  A <t:    1463603>, main.c,  367,  g_received_file_real_size:629 
+00> <t:    1464262>, main.c,  370,  9F <t:    1464265>, main.c,  367,  g_received_file_real_size:630 
+00> <t:    1464923>, main.c,  370,  18 <t:    1464925>, main.c,  367,  g_received_file_real_size:631 
+00> <t:    1465583>, main.c,  370,  61 <t:    1465586>, main.c,  367,  g_received_file_real_size:632 
+00> <t:    1466244>, main.c,  370,  74 <t:    1466246>, main.c,  367,  g_received_file_real_size:633 
+00> <t:    1466904>, main.c,  370,  69 <t:    1466906>, main.c,  367,  g_received_file_real_size:634 
+00> <t:    1467565>, main.c,  370,  6F <t:    1467567>, main.c,  367,  g_received_file_real_size:635 
+00> <t:    1468225>, main.c,  370,  6E <t:    1468227>, main.c,  367,  g_received_file_real_size:636 
+00> <t:    1468886>, main.c,  370,  20 <t:    1468888>, main.c,  367,  g_received_file_real_size:637 
+00> <t:    1469546>, main.c,  370,  77 <t:    1469548>, main.c,  367,  g_received_file_real_size:638 
+00> <t:    1470206>, main.c,  370,  69 <t:    1470209>, main.c,  367,  g_received_file_real_size:639 
+00> <t:    1470867>, main.c,  370,  74 <t:    1470869>, main.c,  367,  g_received_file_real_size:640 
+00> <t:    1471527>, main.c,  370,  68 <t:    1471530>, main.c,  367,  g_received_file_real_size:641 
+00> <t:    1472188>, main.c,  370,  20 <t:    1472190>, main.c,  367,  g_received_file_real_size:642 
+00> <t:    1472848>, main.c,  370,  79 <t:    1472850>, main.c,  367,  g_received_file_real_size:643 
+00> <t:    1473509>, main.c,  370,  6F <t:    1473511>, main.c,  367,  g_received_file_real_size:644 
+00> <t:    1474169>, main.c,  370,  75 <t:    1474171>, main.c,  367,  g_received_file_real_size:645 
+00> <t:    1474830>, main.c,  370,  72 <t:    1474832>, main.c,  367,  g_received_file_real_size:646 
+00> <t:    1475490>, main.c,  370,  20 <t:    1475492>, main.c,  367,  g_received_file_real_size:647 
+00> <t:    1476150>, main.c,  370,  62 <t:    1476153>, main.c,  367,  g_received_file_real_size:648 
+00> <t:    1476811>, main.c,  370,  6F <t:    1477469>, main.c,  373, **********  The received seq is: 9F, the address is : 3., g_present_packet_seq: FF  ********
+00> <t:    1477475>, advertiser.c,  246, g_if_stop_discovery_count: 37
+00> <t:    1477478>, advertiser.c,  250, timerepeat_event: 8
+00> <t:    1477481>, advertiser.c,  281, get_if_send_ack!
+00> <t:    1477483>, main.c,  108, adv_discovery_disable_bea
+00> <t:    1477486>, main.c,  280, Starting to send acks!
+00> <t:    1477489>, main.c,  164, ******* Enable adv ******
+00> <t:    1477492>, main.c,  108, adv_discovery_disable_bea
+00> <t:    1477495>, main.c,  280, Starting to send acks!
+00> <t:    1477497>, main.c,  164, ******* Enable adv ******
+00> <t:    1477501>, main.c,  108, adv_discovery_disable_bea
+00> <t:    1477504>, main.c,  280, Starting to send acks!
+00> <t:    1477507>, main.c,  164, ******* Enable adv ******
+00> <t:    1477510>, main.c,  108, adv_discovery_disable_bea
+00> <t:    1477513>, main.c,  280, Starting to send acks!
+00> <t:    1477517>, main.c,  164, ******* Enable adv ******
+00> <t:    1477523>, main.c,  313, byte4 : 8!, p_type: 2
+00> <t:    1482976>, main.c,  313, byte4 : 8!, p_type: 2
+00> <t:    1485390>, advertiser.c,  246, g_if_stop_discovery_count: 37
+00> <t:    1485393>, advertiser.c,  250, timerepeat_event: 9
+00> <t:    1492947>, main.c,  313, byte4 : 8!, p_type: 2
+00> <t:    1495226>, advertiser.c,  246, g_if_stop_discovery_count: 37
+00> <t:    1495229>, advertiser.c,  250, timerepeat_event: 10
+00> <t:    1505129>, advertiser.c,  246, g_if_stop_discovery_count: 37
+00> <t:    1505132>, advertiser.c,  250, timerepeat_event: 11
+00> <t:    1508790>, main.c,  313, byte4 : 8!, p_type: 2
+00> <t:    1508793>, main.c,  359, Receing adv payload, sink node !
+00> <t:    1508796>, main.c,  362, The payload is(size: 24):<t:    1508798>, main.c,  367,  g_received_file_real_size:649 
+00> <t:    1509459>, main.c,  370,  17 <t:    1509461>, main.c,  367,  g_received_file_real_size:650 
+00> <t:    1510121>, main.c,  370,  3 <t:    1510124>, main.c,  367,  g_received_file_real_size:651 
+00> <t:    1510782>, main.c,  370,  3 <t:    1510785>, main.c,  367,  g_received_file_real_size:652 
+00> <t:    1511443>, main.c,  370,  A <t:    1511445>, main.c,  367,  g_received_file_real_size:653 
+00> <t:    1512103>, main.c,  370,  54 <t:    1512105>, main.c,  367,  g_received_file_real_size:654 
+00> <t:    1512764>, main.c,  370,  18 <t:    1512766>, main.c,  367,  g_received_file_real_size:655 
+00> <t:    1513424>, main.c,  370,  31 <t:    1513426>, main.c,  367,  g_received_file_real_size:656 
+00> <t:    1514085>, main.c,  370,  3A <t:    1514087>, main.c,  367,  g_received_file_real_size:657 
+00> <t:    1514745>, main.c,  370,  34 <t:    1514747>, main.c,  367,  g_received_file_real_size:658 
+00> <t:    1515405>, main.c,  370,  36 <t:    1515408>, main.c,  367,  g_received_file_real_size:659 
+00> <t:    1516066>, main.c,  370,  D <t:    1516068>, main.c,  367,  g_received_file_real_size:660 
+00> <t:    1516726>, main.c,  370,  A <t:    1516729>, main.c,  367,  g_received_file_real_size:661 
+00> <t:    1517387>, main.c,  370,  57 <t:    1517389>, main.c,  367,  g_received_file_real_size:662 
+00> <t:    1518047>, main.c,  370,  65 <t:    1518049>, main.c,  367,  g_received_file_real_size:663 
+00> <t:    1518708>, main.c,  370,  20 <t:    1518710>, main.c,  367,  g_received_file_real_size:664 
+00> <t:    1519368>, main.c,  370,  63 <t:    1519370>, main.c,  367,  g_received_file_real_size:665 
+00> <t:    1520029>, main.c,  370,  61 <t:    1520031>, main.c,  367,  g_received_file_real_size:666 
+00> <t:    1520689>, main.c,  370,  6E <t:    1520691>, main.c,  367,  g_received_file_real_size:667 
+00> <t:    1521349>, main.c,  370,  27 <t:    1521352>, main.c,  367,  g_received_file_real_size:668 
+00> <t:    1522010>, main.c,  370,  74 <t:    1522012>, main.c,  367,  g_received_file_real_size:669 
+00> <t:    1522670>, main.c,  370,  20 <t:    1522673>, main.c,  367,  g_received_file_real_size:670 
+00> <t:    1523331>, main.c,  370,  6A <t:    1523333>, main.c,  367,  g_received_file_real_size:671 
+00> <t:    1523991>, main.c,  370,  75 <t:    1523993>, main.c,  367,  g_received_file_real_size:672 
+00> <t:    1524652>, main.c,  370,  73 <t:    1525309>, main.c,  373, **********  The received seq is: 54, the address is : 3., g_present_packet_seq: FF  ********
+00> <t:    1525316>, advertiser.c,  246, g_if_stop_discovery_count: 37
+00> <t:    1525319>, advertiser.c,  250, timerepeat_event: 12
+00> <t:    1525321>, advertiser.c,  281, get_if_send_ack!
+00> <t:    1525324>, main.c,  108, adv_discovery_disable_bea
+00> <t:    1525327>, main.c,  280, Starting to send acks!
+00> <t:    1525329>, main.c,  164, ******* Enable adv ******
+00> <t:    1525332>, main.c,  108, adv_discovery_disable_bea
+00> <t:    1525335>, main.c,  280, Starting to send acks!
+00> <t:    1525338>, main.c,  164, ******* Enable adv ******
+00> <t:    1525341>, main.c,  108, adv_discovery_disable_bea
+00> <t:    1525345>, main.c,  280, Starting to send acks!
+00> <t:    1525347>, main.c,  164, ******* Enable adv ******
+00> <t:    1525351>, main.c,  108, adv_discovery_disable_bea
+00> <t:    1525354>, main.c,  280, Starting to send acks!
+00> <t:    1525358>, main.c,  164, ******* Enable adv ******
+00> <t:    1525366>, main.c,  313, byte4 : 8!, p_type: 2
+00> <t:    1530111>, main.c,  313, byte4 : 8!, p_type: 2
+00> <t:    1532406>, advertiser.c,  246, g_if_stop_discovery_count: 37
+00> <t:    1532409>, advertiser.c,  250, timerepeat_event: 13
+00> <t:    1540126>, main.c,  313, byte4 : 8!, p_type: 2
+00> <t:    1542277>, advertiser.c,  246, g_if_stop_discovery_count: 37
+00> <t:    1542280>, advertiser.c,  250, timerepeat_event: 14
+00> <t:    1552124>, advertiser.c,  246, g_if_stop_discovery_count: 37
+00> <t:    1552127>, advertiser.c,  250, timerepeat_event: 15
+00> <t:    1555968>, main.c,  313, byte4 : 8!, p_type: 2
+00> <t:    1555971>, main.c,  359, Receing adv payload, sink node !
+00> <t:    1555973>, main.c,  362, The payload is(size: 24):<t:    1555976>, main.c,  367,  g_received_file_real_size:673 
+00> <t:    1556636>, main.c,  370,  17 <t:    1556639>, main.c,  367,  g_received_file_real_size:674 
+00> <t:    1557298>, main.c,  370,  3 <t:    1557300>, main.c,  367,  g_received_file_real_size:675 
+00> <t:    1557959>, main.c,  370,  3 <t:    1557961>, main.c,  367,  g_received_file_real_size:676 
+00> <t:    1558621>, main.c,  370,  A <t:    1558624>, main.c,  367,  g_received_file_real_size:677 
+00> <t:    1559282>, main.c,  370,  E1 <t:    1559284>, main.c,  367,  g_received_file_real_size:678 
+00> <t:    1559942>, main.c,  370,  18 <t:    1559945>, main.c,  367,  g_received_file_real_size:679 
+00> <t:    1560603>, main.c,  370,  20 <t:    1560605>, main.c,  367,  g_received_file_real_size:680 
+00> <t:    1561263>, main.c,  370,  74 <t:    1561265>, main.c,  367,  g_received_file_real_size:681 
+00> <t:    1561924>, main.c,  370,  68 <t:    1561926>, main.c,  367,  g_received_file_real_size:682 
+00> <t:    1562584>, main.c,  370,  65 <t:    1562586>, main.c,  367,  g_received_file_real_size:683 
+00> <t:    1563245>, main.c,  370,  20 <t:    1563247>, main.c,  367,  g_received_file_real_size:684 
+00> <t:    1563905>, main.c,  370,  77 <t:    1563907>, main.c,  367,  g_received_file_real_size:685 
+00> <t:    1564566>, main.c,  370,  68 <t:    1564568>, main.c,  367,  g_received_file_real_size:686 
+00> <t:    1565226>, main.c,  370,  6F <t:    1565228>, main.c,  367,  g_received_file_real_size:687 
+00> <t:    1565886>, main.c,  370,  6C <t:    1565889>, main.c,  367,  g_received_file_real_size:688 
+00> <t:    1566547>, main.c,  370,  65 <t:    1566549>, main.c,  367,  g_received_file_real_size:689 
+00> <t:    1567207>, main.c,  370,  20 <t:    1567210>, main.c,  367,  g_received_file_real_size:690 
+00> <t:    1567868>, main.c,  370,  74 <t:    1567870>, main.c,  367,  g_received_file_real_size:691 
+00> <t:    1568528>, main.c,  370,  69 <t:    1568530>, main.c,  367,  g_received_file_real_size:692 
+00> <t:    1569189>, main.c,  370,  6D <t:    1569191>, main.c,  367,  g_received_file_real_size:693 
+00> <t:    1569849>, main.c,  370,  65 <t:    1569851>, main.c,  367,  g_received_file_real_size:694 
+00> <t:    1570510>, main.c,  370,  2E <t:    1570512>, main.c,  367,  g_received_file_real_size:695 
+00> <t:    1571170>, main.c,  370,  D <t:    1571172>, main.c,  367,  g_received_file_real_size:696 
+00> <t:    1571830>, main.c,  370,  A <t:    1572488>, main.c,  373, **********  The received seq is: E1, the address is : 3., g_present_packet_seq: FF  ********
+00> <t:    1572495>, advertiser.c,  246, g_if_stop_discovery_count: 37
+00> <t:    1572497>, advertiser.c,  250, timerepeat_event: 16
+00> <t:    1572500>, advertiser.c,  281, get_if_send_ack!
+00> <t:    1572503>, main.c,  108, adv_discovery_disable_bea
+00> <t:    1572505>, main.c,  280, Starting to send acks!
+00> <t:    1572508>, main.c,  164, ******* Enable adv ******
+00> <t:    1572511>, main.c,  108, adv_discovery_disable_bea
+00> <t:    1572514>, main.c,  280, Starting to send acks!
+00> <t:    1572517>, main.c,  164, ******* Enable adv ******
+00> <t:    1572520>, main.c,  108, adv_discovery_disable_bea
+00> <t:    1572524>, main.c,  280, Starting to send acks!
+00> <t:    1572526>, main.c,  164, ******* Enable adv ******
+00> <t:    1572530>, main.c,  108, adv_discovery_disable_bea
+00> <t:    1572533>, main.c,  280, Starting to send acks!
+00> <t:    1572537>, main.c,  164, ******* Enable adv ******
+00> <t:    1579293>, main.c,  313, byte4 : 8!, p_type: 2
+00> <t:    1581029>, advertiser.c,  246, g_if_stop_discovery_count: 37
+00> <t:    1581032>, advertiser.c,  250, timerepeat_event: 1
+00> <t:    1589456>, main.c,  313, byte4 : 8!, p_type: 2
+00> <t:    1590904>, advertiser.c,  246, g_if_stop_discovery_count: 37
+00> <t:    1590907>, advertiser.c,  250, timerepeat_event: 2
+00> <t:    1600847>, advertiser.c,  246, g_if_stop_discovery_count: 37
+00> <t:    1600850>, advertiser.c,  250, timerepeat_event: 3
+00> <t:    1605299>, main.c,  313, byte4 : 8!, p_type: 2
+00> <t:    1605302>, main.c,  359, Receing adv payload, sink node !
+00> <t:    1605305>, main.c,  362, The payload is(size: 24):<t:    1605307>, main.c,  367,  g_received_file_real_size:697 
+00> <t:    1605966>, main.c,  370,  17 <t:    1605968>, main.c,  367,  g_received_file_real_size:698 
+00> <t:    1606628>, main.c,  370,  3 <t:    1606631>, main.c,  367,  g_received_file_real_size:699 
+00> <t:    1607291>, main.c,  370,  3 <t:    1607293>, main.c,  367,  g_received_file_real_size:700 
+00> <t:    1607952>, main.c,  370,  A <t:    1607954>, main.c,  367,  g_received_file_real_size:701 
+00> <t:    1608612>, main.c,  370,  A0 <t:    1608614>, main.c,  367,  g_received_file_real_size:702 
+00> <t:    1609273>, main.c,  370,  18 <t:    1609275>, main.c,  367,  g_received_file_real_size:703 
+00> <t:    1609933>, main.c,  370,  A <t:    1609935>, main.c,  367,  g_received_file_real_size:704 
+00> <t:    1610593>, main.c,  370,  54 <t:    1610596>, main.c,  367,  g_received_file_real_size:705 
+00> <t:    1611254>, main.c,  370,  68 <t:    1611256>, main.c,  367,  g_received_file_real_size:706 
+00> <t:    1611914>, main.c,  370,  65 <t:    1611917>, main.c,  367,  g_received_file_real_size:707 
+00> <t:    1612575>, main.c,  370,  20 <t:    1612577>, main.c,  367,  g_received_file_real_size:708 
+00> <t:    1613235>, main.c,  370,  66 <t:    1613237>, main.c,  367,  g_received_file_real_size:709 
+00> <t:    1613896>, main.c,  370,  6F <t:    1613898>, main.c,  367,  g_received_file_real_size:710 
+00> <t:    1614556>, main.c,  370,  75 <t:    1614558>, main.c,  367,  g_received_file_real_size:711 
+00> <t:    1615217>, main.c,  370,  72 <t:    1615219>, main.c,  367,  g_received_file_real_size:712 
+00> <t:    1615877>, main.c,  370,  20 <t:    1615879>, main.c,  367,  g_received_file_real_size:713 
+00> <t:    1616537>, main.c,  370,  6F <t:    1616540>, main.c,  367,  g_received_file_real_size:714 
+00> <t:    1617198>, main.c,  370,  66 <t:    1617200>, main.c,  367,  g_received_file_real_size:715 
+00> <t:    1617858>, main.c,  370,  20 <t:    1617861>, main.c,  367,  g_received_file_real_size:716 
+00> <t:    1618519>, main.c,  370,  75 <t:    1618521>, main.c,  367,  g_received_file_real_size:717 
+00> <t:    1619179>, main.c,  370,  73 <t:    1619181>, main.c,  367,  g_received_file_real_size:718 
+00> <t:    1619840>, main.c,  370,  20 <t:    1619842>, main.c,  367,  g_received_file_real_size:719 
+00> <t:    1620500>, main.c,  370,  63 <t:    1620502>, main.c,  367,  g_received_file_real_size:720 
+00> <t:    1621161>, main.c,  370,  61 <t:    1621818>, main.c,  373, **********  The received seq is: A0, the address is : 3., g_present_packet_seq: FF  ********
+00> <t:    1621825>, advertiser.c,  246, g_if_stop_discovery_count: 37
+00> <t:    1621828>, advertiser.c,  250, timerepeat_event: 4
+00> <t:    1621830>, advertiser.c,  281, get_if_send_ack!
+00> <t:    1621833>, main.c,  108, adv_discovery_disable_bea
+00> <t:    1621836>, main.c,  280, Starting to send acks!
+00> <t:    1621838>, main.c,  164, ******* Enable adv ******
+00> <t:    1621842>, main.c,  108, adv_discovery_disable_bea
+00> <t:    1621844>, main.c,  280, Starting to send acks!
+00> <t:    1621847>, main.c,  164, ******* Enable adv ******
+00> <t:    1621850>, main.c,  108, adv_discovery_disable_bea
+00> <t:    1621854>, main.c,  280, Starting to send acks!
+00> <t:    1621857>, main.c,  164, ******* Enable adv ******
+00> <t:    1621860>, main.c,  108, adv_discovery_disable_bea
+00> <t:    1621863>, main.c,  280, Starting to send acks!
+00> <t:    1621867>, main.c,  164, ******* Enable adv ******
+00> <t:    1628179>, main.c,  313, byte4 : 8!, p_type: 2
+00> <t:    1629076>, advertiser.c,  246, g_if_stop_discovery_count: 37
+00> <t:    1629079>, advertiser.c,  250, timerepeat_event: 5
+00> <t:    1638209>, main.c,  313, byte4 : 8!, p_type: 2
+00> <t:    1638985>, advertiser.c,  246, g_if_stop_discovery_count: 37
+00> <t:    1638988>, advertiser.c,  250, timerepeat_event: 6
+00> <t:    1648852>, advertiser.c,  246, g_if_stop_discovery_count: 37
+00> <t:    1648855>, advertiser.c,  250, timerepeat_event: 7
+00> <t:    1654066>, main.c,  313, byte4 : 8!, p_type: 2
+00> <t:    1654069>, main.c,  359, Receing adv payload, sink node !
+00> <t:    1654072>, main.c,  362, The payload is(size: 24):<t:    1654074>, main.c,  367,  g_received_file_real_size:721 
+00> <t:    1654734>, main.c,  370,  17 <t:    1654737>, main.c,  367,  g_received_file_real_size:722 
+00> <t:    1655397>, main.c,  370,  3 <t:    1655399>, main.c,  367,  g_received_file_real_size:723 
+00> <t:    1656059>, main.c,  370,  3 <t:    1656061>, main.c,  367,  g_received_file_real_size:724 
+00> <t:    1656719>, main.c,  370,  A <t:    1656721>, main.c,  367,  g_received_file_real_size:725 
+00> <t:    1657380>, main.c,  370,  66 <t:    1657382>, main.c,  367,  g_received_file_real_size:726 
+00> <t:    1658040>, main.c,  370,  18 <t:    1658042>, main.c,  367,  g_received_file_real_size:727 
+00> <t:    1658701>, main.c,  370,  20 <t:    1658703>, main.c,  367,  g_received_file_real_size:728 
+00> <t:    1659361>, main.c,  370,  6D <t:    1659363>, main.c,  367,  g_received_file_real_size:729 
+00> <t:    1660021>, main.c,  370,  61 <t:    1660024>, main.c,  367,  g_received_file_real_size:730 
+00> <t:    1660682>, main.c,  370,  68 <t:    1660684>, main.c,  367,  g_received_file_real_size:731 
+00> <t:    1661342>, main.c,  370,  6A <t:    1661345>, main.c,  367,  g_received_file_real_size:732 
+00> <t:    1662003>, main.c,  370,  6F <t:    1662005>, main.c,  367,  g_received_file_real_size:733 
+00> <t:    1662663>, main.c,  370,  6E <t:    1662665>, main.c,  367,  g_received_file_real_size:734 
+00> <t:    1663324>, main.c,  370,  67 <t:    1663326>, main.c,  367,  g_received_file_real_size:735 
+00> <t:    1663984>, main.c,  370,  D <t:    1663986>, main.c,  367,  g_received_file_real_size:736 
+00> <t:    1664645>, main.c,  370,  A <t:    1664647>, main.c,  367,  g_received_file_real_size:737 
+00> <t:    1665305>, main.c,  370,  30 <t:    1665307>, main.c,  367,  g_received_file_real_size:738 
+00> <t:    1665965>, main.c,  370,  31 <t:    1665968>, main.c,  367,  g_received_file_real_size:739 
+00> <t:    1666626>, main.c,  370,  3A <t:    1666628>, main.c,  367,  g_received_file_real_size:740 
+00> <t:    1667286>, main.c,  370,  34 <t:    1667289>, main.c,  367,  g_received_file_real_size:741 
+00> <t:    1667947>, main.c,  370,  39 <t:    1667949>, main.c,  367,  g_received_file_real_size:742 
+00> <t:    1668607>, main.c,  370,  D <t:    1668609>, main.c,  367,  g_received_file_real_size:743 
+00> <t:    1669268>, main.c,  370,  A <t:    1669270>, main.c,  367,  g_received_file_real_size:744 
+00> <t:    1669928>, main.c,  370,  61 <t:    1670586>, main.c,  373, **********  The received seq is: 66, the address is : 3., g_present_packet_seq: FF  ********
+00> <t:    1670592>, advertiser.c,  246, g_if_stop_discovery_count: 37
+00> <t:    1670595>, advertiser.c,  250, timerepeat_event: 8
+00> <t:    1670598>, advertiser.c,  281, get_if_send_ack!
+00> <t:    1670600>, main.c,  108, adv_discovery_disable_bea
+00> <t:    1670603>, main.c,  280, Starting to send acks!
+00> <t:    1670606>, main.c,  164, ******* Enable adv ******
+00> <t:    1670609>, main.c,  108, adv_discovery_disable_bea
+00> <t:    1670612>, main.c,  280, Starting to send acks!
+00> <t:    1670614>, main.c,  164, ******* Enable adv ******
+00> <t:    1670618>, main.c,  108, adv_discovery_disable_bea
+00> <t:    1670621>, main.c,  280, Starting to send acks!
+00> <t:    1670624>, main.c,  164, ******* Enable adv ******
+00> <t:    1670627>, main.c,  108, adv_discovery_disable_bea
+00> <t:    1670631>, main.c,  280, Starting to send acks!
+00> <t:    1670635>, main.c,  164, ******* Enable adv ******
+00> <t:    1670642>, main.c,  313, byte4 : 8!, p_type: 2
+00> <t:    1675843>, main.c,  313, byte4 : 8!, p_type: 2
+00> <t:    1678680>, advertiser.c,  246, g_if_stop_discovery_count: 37
+00> <t:    1678683>, advertiser.c,  250, timerepeat_event: 9
+00> <t:    1685800>, main.c,  313, byte4 : 8!, p_type: 2
+00> <t:    1688628>, advertiser.c,  246, g_if_stop_discovery_count: 37
+00> <t:    1688631>, advertiser.c,  250, timerepeat_event: 10
+00> <t:    1698694>, advertiser.c,  246, g_if_stop_discovery_count: 37
+00> <t:    1698697>, advertiser.c,  250, timerepeat_event: 11
+00> <t:    1701642>, main.c,  313, byte4 : 8!, p_type: 2
+00> <t:    1701645>, main.c,  359, Receing adv payload, sink node !
+00> <t:    1701648>, main.c,  362, The payload is(size: 24):<t:    1701650>, main.c,  367,  g_received_file_real_size:745 
+00> <t:    1702309>, main.c,  370,  17 <t:    1702312>, main.c,  367,  g_received_file_real_size:746 
+00> <t:    1702970>, main.c,  370,  3 <t:    1702972>, main.c,  367,  g_received_file_real_size:747 
+00> <t:    1703631>, main.c,  370,  3 <t:    1703633>, main.c,  367,  g_received_file_real_size:748 
+00> <t:    1704293>, main.c,  370,  A <t:    1704295>, main.c,  367,  g_received_file_real_size:749 
+00> <t:    1704955>, main.c,  370,  42 <t:    1704957>, main.c,  367,  g_received_file_real_size:750 
+00> <t:    1705615>, main.c,  370,  18 <t:    1705617>, main.c,  367,  g_received_file_real_size:751 
+00> <t:    1706275>, main.c,  370,  65 <t:    1706278>, main.c,  367,  g_received_file_real_size:752 
+00> <t:    1706936>, main.c,  370,  6C <t:    1706938>, main.c,  367,  g_received_file_real_size:753 
+00> <t:    1707596>, main.c,  370,  6F <t:    1707599>, main.c,  367,  g_received_file_real_size:754 
+00> <t:    1708257>, main.c,  370,  70 <t:    1708259>, main.c,  367,  g_received_file_real_size:755 
+00> <t:    1708917>, main.c,  370,  20 <t:    1708920>, main.c,  367,  g_received_file_real_size:756 
+00> <t:    1709578>, main.c,  370,  61 <t:    1709580>, main.c,  367,  g_received_file_real_size:757 
+00> <t:    1710238>, main.c,  370,  20 <t:    1710240>, main.c,  367,  g_received_file_real_size:758 
+00> <t:    1710899>, main.c,  370,  62 <t:    1710901>, main.c,  367,  g_received_file_real_size:759 
+00> <t:    1711559>, main.c,  370,  6F <t:    1711561>, main.c,  367,  g_received_file_real_size:760 
+00> <t:    1712220>, main.c,  370,  6E <t:    1712222>, main.c,  367,  g_received_file_real_size:761 
+00> <t:    1712880>, main.c,  370,  64 <t:    1712882>, main.c,  367,  g_received_file_real_size:762 
+00> <t:    1713540>, main.c,  370,  2E <t:    1713543>, main.c,  367,  g_received_file_real_size:763 
+00> <t:    1714201>, main.c,  370,  D <t:    1714203>, main.c,  367,  g_received_file_real_size:764 
+00> <t:    1714861>, main.c,  370,  A <t:    1714863>, main.c,  367,  g_received_file_real_size:765 
+00> <t:    1715522>, main.c,  370,  30 <t:    1715524>, main.c,  367,  g_received_file_real_size:766 
+00> <t:    1716182>, main.c,  370,  31 <t:    1716184>, main.c,  367,  g_received_file_real_size:767 
+00> <t:    1716843>, main.c,  370,  3A <t:    1716845>, main.c,  367,  g_received_file_real_size:768 
+00> <t:    1717503>, main.c,  370,  35 <t:    1718161>, main.c,  373, **********  The received seq is: 42, the address is : 3., g_present_packet_seq: FF  ********
+00> <t:    1718167>, advertiser.c,  246, g_if_stop_discovery_count: 37
+00> <t:    1718170>, advertiser.c,  250, timerepeat_event: 12
+00> <t:    1718173>, advertiser.c,  281, get_if_send_ack!
+00> <t:    1718175>, main.c,  108, adv_discovery_disable_bea
+00> <t:    1718178>, main.c,  280, Starting to send acks!
+00> <t:    1718181>, main.c,  164, ******* Enable adv ******
+00> <t:    1718184>, main.c,  108, adv_discovery_disable_bea
+00> <t:    1718187>, main.c,  280, Starting to send acks!
+00> <t:    1718189>, main.c,  164, ******* Enable adv ******
+00> <t:    1718192>, main.c,  108, adv_discovery_disable_bea
+00> <t:    1718196>, main.c,  280, Starting to send acks!
+00> <t:    1718199>, main.c,  164, ******* Enable adv ******
+00> <t:    1718202>, main.c,  108, adv_discovery_disable_bea
+00> <t:    1718205>, main.c,  280, Starting to send acks!
+00> <t:    1718209>, main.c,  164, ******* Enable adv ******
+00> <t:    1718215>, main.c,  313, byte4 : 8!, p_type: 2
+00> <t:    1723524>, main.c,  313, byte4 : 8!, p_type: 2
+00> <t:    1726452>, advertiser.c,  246, g_if_stop_discovery_count: 37
+00> <t:    1726455>, advertiser.c,  250, timerepeat_event: 13
+00> <t:    1733617>, main.c,  313, byte4 : 8!, p_type: 2
+00> <t:    1736540>, advertiser.c,  246, g_if_stop_discovery_count: 37
+00> <t:    1736543>, advertiser.c,  250, timerepeat_event: 14
+00> <t:    1746612>, advertiser.c,  246, g_if_stop_discovery_count: 37
+00> <t:    1746615>, advertiser.c,  250, timerepeat_event: 15
+00> <t:    1749460>, main.c,  313, byte4 : 8!, p_type: 2
+00> <t:    1749463>, main.c,  359, Receing adv payload, sink node !
+00> <t:    1749466>, main.c,  362, The payload is(size: 24):<t:    1749468>, main.c,  367,  g_received_file_real_size:769 
+00> <t:    1750128>, main.c,  370,  17 <t:    1750131>, main.c,  367,  g_received_file_real_size:770 
+00> <t:    1750791>, main.c,  370,  3 <t:    1750793>, main.c,  367,  g_received_file_real_size:771 
+00> <t:    1751452>, main.c,  370,  3 <t:    1751454>, main.c,  367,  g_received_file_real_size:772 
+00> <t:    1752113>, main.c,  370,  A <t:    1752115>, main.c,  367,  g_received_file_real_size:773 
+00> <t:    1752773>, main.c,  370,  FC <t:    1752776>, main.c,  367,  g_received_file_real_size:774 
+00> <t:    1753434>, main.c,  370,  18 <t:    1753436>, main.c,  367,  g_received_file_real_size:775 
+00> <t:    1754094>, main.c,  370,  20 <t:    1754096>, main.c,  367,  g_received_file_real_size:776 
+00> <t:    1754755>, main.c,  370,  63 <t:    1754757>, main.c,  367,  g_received_file_real_size:777 
+00> <t:    1755415>, main.c,  370,  6F <t:    1755417>, main.c,  367,  g_received_file_real_size:778 
+00> <t:    1756076>, main.c,  370,  6D <t:    1756078>, main.c,  367,  g_received_file_real_size:779 
+00> <t:    1756736>, main.c,  370,  65 <t:    1756738>, main.c,  367,  g_received_file_real_size:780 
+00> <t:    1757396>, main.c,  370,  20 <t:    1757399>, main.c,  367,  g_received_file_real_size:781 
+00> <t:    1758057>, main.c,  370,  49 <t:    1758059>, main.c,  367,  g_received_file_real_size:782 
+00> <t:    1758717>, main.c,  370,  20 <t:    1758720>, main.c,  367,  g_received_file_real_size:783 
+00> <t:    1759378>, main.c,  370,  68 <t:    1759380>, main.c,  367,  g_received_file_real_size:784 
+00> <t:    1760038>, main.c,  370,  61 <t:    1760040>, main.c,  367,  g_received_file_real_size:785 
+00> <t:    1760699>, main.c,  370,  76 <t:    1760701>, main.c,  367,  g_received_file_real_size:786 
+00> <t:    1761359>, main.c,  370,  65 <t:    1761361>, main.c,  367,  g_received_file_real_size:787 
+00> <t:    1762020>, main.c,  370,  20 <t:    1762022>, main.c,  367,  g_received_file_real_size:788 
+00> <t:    1762680>, main.c,  370,  73 <t:    1762682>, main.c,  367,  g_received_file_real_size:789 
+00> <t:    1763340>, main.c,  370,  75 <t:    1763343>, main.c,  367,  g_received_file_real_size:790 
+00> <t:    1764001>, main.c,  370,  63 <t:    1764003>, main.c,  367,  g_received_file_real_size:791 
+00> <t:    1764661>, main.c,  370,  68 <t:    1764664>, main.c,  367,  g_received_file_real_size:792 
+00> <t:    1765322>, main.c,  370,  20 <t:    1765979>, main.c,  373, **********  The received seq is: FC, the address is : 3., g_present_packet_seq: FF  ********
+00> <t:    1765986>, advertiser.c,  246, g_if_stop_discovery_count: 37
+00> <t:    1765989>, advertiser.c,  250, timerepeat_event: 16
+00> <t:    1765991>, advertiser.c,  281, get_if_send_ack!
+00> <t:    1765994>, main.c,  108, adv_discovery_disable_bea
+00> <t:    1765997>, main.c,  280, Starting to send acks!
+00> <t:    1766000>, main.c,  164, ******* Enable adv ******
+00> <t:    1766003>, main.c,  108, adv_discovery_disable_bea
+00> <t:    1766006>, main.c,  280, Starting to send acks!
+00> <t:    1766008>, main.c,  164, ******* Enable adv ******
+00> <t:    1766011>, main.c,  108, adv_discovery_disable_bea
+00> <t:    1766015>, main.c,  280, Starting to send acks!
+00> <t:    1766018>, main.c,  164, ******* Enable adv ******
+00> <t:    1766021>, main.c,  108, adv_discovery_disable_bea
+00> <t:    1766024>, main.c,  280, Starting to send acks!
+00> <t:    1766028>, main.c,  164, ******* Enable adv ******
+00> <t:    1766035>, main.c,  313, byte4 : 8!, p_type: 2
+00> <t:    1770954>, main.c,  313, byte4 : 8!, p_type: 2
+00> <t:    1774325>, advertiser.c,  246, g_if_stop_discovery_count: 37
+00> <t:    1774328>, advertiser.c,  250, timerepeat_event: 1
+00> <t:    1780876>, main.c,  313, byte4 : 8!, p_type: 2
+00> <t:    1784455>, advertiser.c,  246, g_if_stop_discovery_count: 37
+00> <t:    1784458>, advertiser.c,  250, timerepeat_event: 2
+00> <t:    1794360>, advertiser.c,  246, g_if_stop_discovery_count: 37
+00> <t:    1794363>, advertiser.c,  250, timerepeat_event: 3
+00> <t:    1796718>, main.c,  313, byte4 : 8!, p_type: 2
+00> <t:    1796721>, main.c,  359, Receing adv payload, sink node !
+00> <t:    1796724>, main.c,  362, The payload is(size: 24):<t:    1796726>, main.c,  367,  g_received_file_real_size:793 
+00> <t:    1797386>, main.c,  370,  17 <t:    1797388>, main.c,  367,  g_received_file_real_size:794 
+00> <t:    1798051>, main.c,  370,  3 <t:    1798053>, main.c,  367,  g_received_file_real_size:795 
+00> <t:    1798711>, main.c,  370,  3 <t:    1798713>, main.c,  367,  g_received_file_real_size:796 
+00> <t:    1799373>, main.c,  370,  A <t:    1799375>, main.c,  367,  g_received_file_real_size:797 
+00> <t:    1800033>, main.c,  370,  A0 <t:    1800035>, main.c,  367,  g_received_file_real_size:798 
+00> <t:    1800693>, main.c,  370,  18 <t:    1800696>, main.c,  367,  g_received_file_real_size:799 
+00> <t:    1801354>, main.c,  370,  7A <t:    1801356>, main.c,  367,  g_received_file_real_size:800 
+00> <t:    1802014>, main.c,  370,  69 <t:    1802017>, main.c,  367,  g_received_file_real_size:801 
+00> <t:    1802675>, main.c,  370,  6E <t:    1802677>, main.c,  367,  g_received_file_real_size:802 
+00> <t:    1803335>, main.c,  370,  67 <t:    1803337>, main.c,  367,  g_received_file_real_size:803 
+00> <t:    1803996>, main.c,  370,  20 <t:    1803998>, main.c,  367,  g_received_file_real_size:804 
+00> <t:    1804656>, main.c,  370,  77 <t:    1804658>, main.c,  367,  g_received_file_real_size:805 
+00> <t:    1805317>, main.c,  370,  69 <t:    1805319>, main.c,  367,  g_received_file_real_size:806 
+00> <t:    1805977>, main.c,  370,  66 <t:    1805979>, main.c,  367,  g_received_file_real_size:807 
+00> <t:    1806638>, main.c,  370,  65 <t:    1806640>, main.c,  367,  g_received_file_real_size:808 
+00> <t:    1807298>, main.c,  370,  3F <t:    1807300>, main.c,  367,  g_received_file_real_size:809 
+00> <t:    1807958>, main.c,  370,  D <t:    1807961>, main.c,  367,  g_received_file_real_size:810 
+00> <t:    1808619>, main.c,  370,  A <t:    1808621>, main.c,  367,  g_received_file_real_size:811 
+00> <t:    1809279>, main.c,  370,  30 <t:    1809281>, main.c,  367,  g_received_file_real_size:812 
+00> <t:    1809940>, main.c,  370,  31 <t:    1809942>, main.c,  367,  g_received_file_real_size:813 
+00> <t:    1810600>, main.c,  370,  3A <t:    1810602>, main.c,  367,  g_received_file_real_size:814 
+00> <t:    1811261>, main.c,  370,  35 <t:    1811263>, main.c,  367,  g_received_file_real_size:815 
+00> <t:    1811921>, main.c,  370,  34 <t:    1811923>, main.c,  367,  g_received_file_real_size:816 
+00> <t:    1812582>, main.c,  370,  D <t:    1813239>, main.c,  373, **********  The received seq is: A0, the address is : 3., g_present_packet_seq: FF  ********
+00> <t:    1813246>, advertiser.c,  246, g_if_stop_discovery_count: 37
+00> <t:    1813249>, advertiser.c,  250, timerepeat_event: 4
+00> <t:    1813251>, advertiser.c,  281, get_if_send_ack!
+00> <t:    1813254>, main.c,  108, adv_discovery_disable_bea
+00> <t:    1813257>, main.c,  280, Starting to send acks!
+00> <t:    1813259>, main.c,  164, ******* Enable adv ******
+00> <t:    1813262>, main.c,  108, adv_discovery_disable_bea
+00> <t:    1813265>, main.c,  280, Starting to send acks!
+00> <t:    1813268>, main.c,  164, ******* Enable adv ******
+00> <t:    1813271>, main.c,  108, adv_discovery_disable_bea
+00> <t:    1813275>, main.c,  280, Starting to send acks!
+00> <t:    1813278>, main.c,  164, ******* Enable adv ******
+00> <t:    1813281>, main.c,  108, adv_discovery_disable_bea
+00> <t:    1813284>, main.c,  280, Starting to send acks!
+00> <t:    1813288>, main.c,  164, ******* Enable adv ******
+00> <t:    1819674>, main.c,  313, byte4 : 8!, p_type: 2
+00> <t:    1822765>, advertiser.c,  246, g_if_stop_discovery_count: 37
+00> <t:    1822768>, advertiser.c,  250, timerepeat_event: 5
+00> <t:    1829636>, main.c,  313, byte4 : 8!, p_type: 2
+00> <t:    1832678>, advertiser.c,  246, g_if_stop_discovery_count: 37
+00> <t:    1832681>, advertiser.c,  250, timerepeat_event: 6
+00> <t:    1842649>, advertiser.c,  246, g_if_stop_discovery_count: 37
+00> <t:    1842652>, advertiser.c,  250, timerepeat_event: 7
+00> <t:    1845493>, main.c,  313, byte4 : 8!, p_type: 2
+00> <t:    1845496>, main.c,  359, Receing adv payload, sink node !
+00> <t:    1845498>, main.c,  362, The payload is(size: 24):<t:    1845501>, main.c,  367,  g_received_file_real_size:817 
+00> <t:    1846160>, main.c,  370,  17 <t:    1846163>, main.c,  367,  g_received_file_real_size:818 
+00> <t:    1846822>, main.c,  370,  3 <t:    1846824>, main.c,  367,  g_received_file_real_size:819 
+00> <t:    1847483>, main.c,  370,  3 <t:    1847486>, main.c,  367,  g_received_file_real_size:820 
+00> <t:    1848146>, main.c,  370,  A <t:    1848148>, main.c,  367,  g_received_file_real_size:821 
+00> <t:    1848808>, main.c,  370,  F4 <t:    1848810>, main.c,  367,  g_received_file_real_size:822 
+00> <t:    1849468>, main.c,  370,  18 <t:    1849471>, main.c,  367,  g_received_file_real_size:823 
+00> <t:    1850129>, main.c,  370,  77 <t:    1850131>, main.c,  367,  g_received_file_real_size:824 
+00> <t:    1850789>, main.c,  370,  6F <t:    1850792>, main.c,  367,  g_received_file_real_size:825 
+00> <t:    1851450>, main.c,  370,  75 <t:    1851452>, main.c,  367,  g_received_file_real_size:826 
+00> <t:    1852110>, main.c,  370,  6C <t:    1852113>, main.c,  367,  g_received_file_real_size:827 
+00> <t:    1852771>, main.c,  370,  64 <t:    1852773>, main.c,  367,  g_received_file_real_size:828 
+00> <t:    1853431>, main.c,  370,  20 <t:    1853433>, main.c,  367,  g_received_file_real_size:829 
+00> <t:    1854092>, main.c,  370,  49 <t:    1854094>, main.c,  367,  g_received_file_real_size:830 
+00> <t:    1854752>, main.c,  370,  20 <t:    1854754>, main.c,  367,  g_received_file_real_size:831 
+00> <t:    1855413>, main.c,  370,  64 <t:    1855415>, main.c,  367,  g_received_file_real_size:832 
+00> <t:    1856073>, main.c,  370,  6F <t:    1856075>, main.c,  367,  g_received_file_real_size:833 
+00> <t:    1856733>, main.c,  370,  20 <t:    1856736>, main.c,  367,  g_received_file_real_size:834 
+00> <t:    1857394>, main.c,  370,  77 <t:    1857396>, main.c,  367,  g_received_file_real_size:835 
+00> <t:    1858054>, main.c,  370,  69 <t:    1858057>, main.c,  367,  g_received_file_real_size:836 
+00> <t:    1858715>, main.c,  370,  74 <t:    1858717>, main.c,  367,  g_received_file_real_size:837 
+00> <t:    1859375>, main.c,  370,  68 <t:    1859378>, main.c,  367,  g_received_file_real_size:838 
+00> <t:    1860036>, main.c,  370,  6F <t:    1860038>, main.c,  367,  g_received_file_real_size:839 
+00> <t:    1860696>, main.c,  370,  75 <t:    1860698>, main.c,  367,  g_received_file_real_size:840 
+00> <t:    1861357>, main.c,  370,  74 <t:    1862014>, main.c,  373, **********  The received seq is: F4, the address is : 3., g_present_packet_seq: FF  ********
+00> <t:    1862021>, advertiser.c,  246, g_if_stop_discovery_count: 37
+00> <t:    1862024>, advertiser.c,  250, timerepeat_event: 8
+00> <t:    1862026>, advertiser.c,  281, get_if_send_ack!
+00> <t:    1862029>, main.c,  108, adv_discovery_disable_bea
+00> <t:    1862032>, main.c,  280, Starting to send acks!
+00> <t:    1862035>, main.c,  164, ******* Enable adv ******
+00> <t:    1862038>, main.c,  108, adv_discovery_disable_bea
+00> <t:    1862041>, main.c,  280, Starting to send acks!
+00> <t:    1862043>, main.c,  164, ******* Enable adv ******
+00> <t:    1862046>, main.c,  108, adv_discovery_disable_bea
+00> <t:    1862050>, main.c,  280, Starting to send acks!
+00> <t:    1862053>, main.c,  164, ******* Enable adv ******
+00> <t:    1862056>, main.c,  108, adv_discovery_disable_bea
+00> <t:    1862059>, main.c,  280, Starting to send acks!
+00> <t:    1862063>, main.c,  164, ******* Enable adv ******
+00> <t:    1868668>, advertiser.c,  246, g_if_stop_discovery_count: 37
+00> <t:    1868671>, advertiser.c,  250, timerepeat_event: 9
+00> <t:    1869093>, main.c,  313, byte4 : 8!, p_type: 2
+00> <t:    1878529>, advertiser.c,  246, g_if_stop_discovery_count: 37
+00> <t:    1878532>, advertiser.c,  250, timerepeat_event: 10
+00> <t:    1884935>, main.c,  313, byte4 : 8!, p_type: 2
+00> <t:    1884937>, main.c,  359, Receing adv payload, sink node !
+00> <t:    1884940>, main.c,  362, The payload is(size: 24):<t:    1884943>, main.c,  367,  g_received_file_real_size:841 
+00> <t:    1885603>, main.c,  370,  17 <t:    1885606>, main.c,  367,  g_received_file_real_size:842 
+00> <t:    1886264>, main.c,  370,  3 <t:    1886267>, main.c,  367,  g_received_file_real_size:843 
+00> <t:    1886927>, main.c,  370,  3 <t:    1886929>, main.c,  367,  g_received_file_real_size:844 
+00> <t:    1887588>, main.c,  370,  A <t:    1887590>, main.c,  367,  g_received_file_real_size:845 
+00> <t:    1888249>, main.c,  370,  BC <t:    1888251>, main.c,  367,  g_received_file_real_size:846 
+00> <t:    1888909>, main.c,  370,  18 <t:    1888912>, main.c,  367,  g_received_file_real_size:847 
+00> <t:    1889570>, main.c,  370,  A <t:    1889572>, main.c,  367,  g_received_file_real_size:848 
+00> <t:    1890230>, main.c,  370,  30 <t:    1890233>, main.c,  367,  g_received_file_real_size:849 
+00> <t:    1890891>, main.c,  370,  31 <t:    1890893>, main.c,  367,  g_received_file_real_size:850 
+00> <t:    1891551>, main.c,  370,  3A <t:    1891554>, main.c,  367,  g_received_file_real_size:851 
+00> <t:    1892212>, main.c,  370,  35 <t:    1892214>, main.c,  367,  g_received_file_real_size:852 
+00> <t:    1892872>, main.c,  370,  37 <t:    1892874>, main.c,  367,  g_received_file_real_size:853 
+00> <t:    1893533>, main.c,  370,  D <t:    1893535>, main.c,  367,  g_received_file_real_size:854 
+00> <t:    1894193>, main.c,  370,  A <t:    1894195>, main.c,  367,  g_received_file_real_size:855 
+00> <t:    1894854>, main.c,  370,  49 <t:    1894856>, main.c,  367,  g_received_file_real_size:856 
+00> <t:    1895514>, main.c,  370,  20 <t:    1895516>, main.c,  367,  g_received_file_real_size:857 
+00> <t:    1896174>, main.c,  370,  63 <t:    1896177>, main.c,  367,  g_received_file_real_size:858 
+00> <t:    1896835>, main.c,  370,  61 <t:    1896837>, main.c,  367,  g_received_file_real_size:859 
+00> <t:    1897495>, main.c,  370,  6E <t:    1897498>, main.c,  367,  g_received_file_real_size:860 
+00> <t:    1898156>, main.c,  370,  27 <t:    1898158>, main.c,  367,  g_received_file_real_size:861 
+00> <t:    1898816>, main.c,  370,  74 <t:    1898818>, main.c,  367,  g_received_file_real_size:862 
+00> <t:    1899477>, main.c,  370,  20 <t:    1899479>, main.c,  367,  g_received_file_real_size:863 
+00> <t:    1900137>, main.c,  370,  77 <t:    1900139>, main.c,  367,  g_received_file_real_size:864 
+00> <t:    1900798>, main.c,  370,  61 <t:    1901455>, main.c,  373, **********  The received seq is: BC, the address is : 3., g_present_packet_seq: FF  ********
+00> <t:    1901462>, advertiser.c,  246, g_if_stop_discovery_count: 37
+00> <t:    1901465>, advertiser.c,  250, timerepeat_event: 11
+00> <t:    1901467>, advertiser.c,  281, get_if_send_ack!
+00> <t:    1901470>, main.c,  108, adv_discovery_disable_bea
+00> <t:    1901473>, main.c,  280, Starting to send acks!
+00> <t:    1901476>, main.c,  164, ******* Enable adv ******
+00> <t:    1901479>, main.c,  108, adv_discovery_disable_bea
+00> <t:    1901482>, main.c,  280, Starting to send acks!
+00> <t:    1901484>, main.c,  164, ******* Enable adv ******
+00> <t:    1901487>, main.c,  108, adv_discovery_disable_bea
+00> <t:    1901491>, main.c,  280, Starting to send acks!
+00> <t:    1901494>, main.c,  164, ******* Enable adv ******
+00> <t:    1901497>, main.c,  108, adv_discovery_disable_bea
+00> <t:    1901500>, main.c,  280, Starting to send acks!
+00> <t:    1901504>, main.c,  164, ******* Enable adv ******
+00> <t:    1908526>, main.c,  313, byte4 : 8!, p_type: 2
+00> <t:    1909013>, advertiser.c,  246, g_if_stop_discovery_count: 37
+00> <t:    1909016>, advertiser.c,  250, timerepeat_event: 12
+00> <t:    1918568>, main.c,  313, byte4 : 8!, p_type: 2
+00> <t:    1919031>, advertiser.c,  246, g_if_stop_discovery_count: 37
+00> <t:    1919034>, advertiser.c,  250, timerepeat_event: 13
+00> <t:    1928896>, advertiser.c,  246, g_if_stop_discovery_count: 37
+00> <t:    1928899>, advertiser.c,  250, timerepeat_event: 14
+00> <t:    1934410>, main.c,  313, byte4 : 8!, p_type: 2
+00> <t:    1934413>, main.c,  359, Receing adv payload, sink node !
+00> <t:    1934415>, main.c,  362, The payload is(size: 24):<t:    1934418>, main.c,  367,  g_received_file_real_size:865 
+00> <t:    1935079>, main.c,  370,  17 <t:    1935081>, main.c,  367,  g_received_file_real_size:866 
+00> <t:    1935740>, main.c,  370,  3 <t:    1935742>, main.c,  367,  g_received_file_real_size:867 
+00> <t:    1936402>, main.c,  370,  3 <t:    1936404>, main.c,  367,  g_received_file_real_size:868 
+00> <t:    1937063>, main.c,  370,  A <t:    1937065>, main.c,  367,  g_received_file_real_size:869 
+00> <t:    1937723>, main.c,  370,  D6 <t:    1937725>, main.c,  367,  g_received_file_real_size:870 
+00> <t:    1938384>, main.c,  370,  18 <t:    1938386>, main.c,  367,  g_received_file_real_size:871 
+00> <t:    1939044>, main.c,  370,  20 <t:    1939046>, main.c,  367,  g_received_file_real_size:872 
+00> <t:    1939704>, main.c,  370,  79 <t:    1939707>, main.c,  367,  g_received_file_real_size:873 
+00> <t:    1940365>, main.c,  370,  6F <t:    1940367>, main.c,  367,  g_received_file_real_size:874 
+00> <t:    1941025>, main.c,  370,  75 <t:    1941028>, main.c,  367,  g_received_file_real_size:875 
+00> <t:    1941686>, main.c,  370,  20 <t:    1941688>, main.c,  367,  g_received_file_real_size:876 
+00> <t:    1942346>, main.c,  370,  74 <t:    1942349>, main.c,  367,  g_received_file_real_size:877 
+00> <t:    1943007>, main.c,  370,  6F <t:    1943009>, main.c,  367,  g_received_file_real_size:878 
+00> <t:    1943667>, main.c,  370,  20 <t:    1943669>, main.c,  367,  g_received_file_real_size:879 
+00> <t:    1944328>, main.c,  370,  74 <t:    1944330>, main.c,  367,  g_received_file_real_size:880 
+00> <t:    1944988>, main.c,  370,  68 <t:    1944990>, main.c,  367,  g_received_file_real_size:881 
+00> <t:    1945649>, main.c,  370,  69 <t:    1945651>, main.c,  367,  g_received_file_real_size:882 
+00> <t:    1946309>, main.c,  370,  6E <t:    1946311>, main.c,  367,  g_received_file_real_size:883 
+00> <t:    1946969>, main.c,  370,  6B <t:    1946972>, main.c,  367,  g_received_file_real_size:884 
+00> <t:    1947630>, main.c,  370,  20 <t:    1947632>, main.c,  367,  g_received_file_real_size:885 
+00> <t:    1948290>, main.c,  370,  6F <t:    1948293>, main.c,  367,  g_received_file_real_size:886 
+00> <t:    1948951>, main.c,  370,  66 <t:    1948953>, main.c,  367,  g_received_file_real_size:887 
+00> <t:    1949611>, main.c,  370,  20 <t:    1949614>, main.c,  367,  g_received_file_real_size:888 
+00> <t:    1950272>, main.c,  370,  65 <t:    1950929>, main.c,  373, **********  The received seq is: D6, the address is : 3., g_present_packet_seq: FF  ********
+00> <t:    1950936>, advertiser.c,  246, g_if_stop_discovery_count: 37
+00> <t:    1950939>, advertiser.c,  250, timerepeat_event: 15
+00> <t:    1950941>, advertiser.c,  281, get_if_send_ack!
+00> <t:    1950944>, main.c,  108, adv_discovery_disable_bea
+00> <t:    1950947>, main.c,  280, Starting to send acks!
+00> <t:    1950950>, main.c,  164, ******* Enable adv ******
+00> <t:    1950953>, main.c,  108, adv_discovery_disable_bea
+00> <t:    1950956>, main.c,  280, Starting to send acks!
+00> <t:    1950958>, main.c,  164, ******* Enable adv ******
+00> <t:    1950962>, main.c,  108, adv_discovery_disable_bea
+00> <t:    1950965>, main.c,  280, Starting to send acks!
+00> <t:    1950968>, main.c,  164, ******* Enable adv ******
+00> <t:    1950971>, main.c,  108, adv_discovery_disable_bea
+00> <t:    1950974>, main.c,  280, Starting to send acks!
+00> <t:    1950978>, main.c,  164, ******* Enable adv ******
+00> <t:    1950985>, main.c,  313, byte4 : 8!, p_type: 2
+00> <t:    1956491>, main.c,  313, byte4 : 8!, p_type: 2
+00> <t:    1959346>, advertiser.c,  246, g_if_stop_discovery_count: 37
+00> <t:    1959349>, advertiser.c,  250, timerepeat_event: 16
+00> <t:    1966490>, main.c,  313, byte4 : 8!, p_type: 2
+00> <t:    1969270>, advertiser.c,  246, g_if_stop_discovery_count: 37
+00> <t:    1969273>, advertiser.c,  250, timerepeat_event: 1
+00> <t:    1979376>, advertiser.c,  246, g_if_stop_discovery_count: 37
+00> <t:    1979379>, advertiser.c,  250, timerepeat_event: 2
+00> <t:    1982346>, main.c,  313, byte4 : 8!, p_type: 2
+00> <t:    1982349>, main.c,  359, Receing adv payload, sink node !
+00> <t:    1982351>, main.c,  362, The payload is(size: 24):<t:    1982354>, main.c,  367,  g_received_file_real_size:889 
+00> <t:    1983015>, main.c,  370,  17 <t:    1983017>, main.c,  367,  g_received_file_real_size:890 
+00> <t:    1983677>, main.c,  370,  3 <t:    1983679>, main.c,  367,  g_received_file_real_size:891 
+00> <t:    1984338>, main.c,  370,  3 <t:    1984340>, main.c,  367,  g_received_file_real_size:892 
+00> <t:    1984998>, main.c,  370,  A <t:    1985001>, main.c,  367,  g_received_file_real_size:893 
+00> <t:    1985659>, main.c,  370,  A5 <t:    1985661>, main.c,  367,  g_received_file_real_size:894 
+00> <t:    1986319>, main.c,  370,  18 <t:    1986322>, main.c,  367,  g_received_file_real_size:895 
+00> <t:    1986980>, main.c,  370,  69 <t:    1986982>, main.c,  367,  g_received_file_real_size:896 
+00> <t:    1987640>, main.c,  370,  6E <t:    1987642>, main.c,  367,  g_received_file_real_size:897 
+00> <t:    1988301>, main.c,  370,  67 <t:    1988303>, main.c,  367,  g_received_file_real_size:898 
+00> <t:    1988961>, main.c,  370,  2E <t:    1988963>, main.c,  367,  g_received_file_real_size:899 
+00> <t:    1989622>, main.c,  370,  20 <t:    1989624>, main.c,  367,  g_received_file_real_size:900 
+00> <t:    1990282>, main.c,  370,  47 <t:    1990284>, main.c,  367,  g_received_file_real_size:901 
+00> <t:    1990943>, main.c,  370,  6F <t:    1990945>, main.c,  367,  g_received_file_real_size:902 
+00> <t:    1991603>, main.c,  370,  20 <t:    1991605>, main.c,  367,  g_received_file_real_size:903 
+00> <t:    1992263>, main.c,  370,  67 <t:    1992266>, main.c,  367,  g_received_file_real_size:904 
+00> <t:    1992924>, main.c,  370,  65 <t:    1992926>, main.c,  367,  g_received_file_real_size:905 
+00> <t:    1993584>, main.c,  370,  74 <t:    1993587>, main.c,  367,  g_received_file_real_size:906 
+00> <t:    1994245>, main.c,  370,  20 <t:    1994247>, main.c,  367,  g_received_file_real_size:907 
+00> <t:    1994905>, main.c,  370,  69 <t:    1994907>, main.c,  367,  g_received_file_real_size:908 
+00> <t:    1995566>, main.c,  370,  74 <t:    1995568>, main.c,  367,  g_received_file_real_size:909 
+00> <t:    1996226>, main.c,  370,  2E <t:    1996228>, main.c,  367,  g_received_file_real_size:910 
+00> <t:    1996887>, main.c,  370,  D <t:    1996889>, main.c,  367,  g_received_file_real_size:911 
+00> <t:    1997547>, main.c,  370,  A <t:    1997549>, main.c,  367,  g_received_file_real_size:912 
+00> <t:    1998207>, main.c,  370,  30 <t:    1998865>, main.c,  373, **********  The received seq is: A5, the address is : 3., g_present_packet_seq: FF  ********
+00> <t:    1998872>, advertiser.c,  246, g_if_stop_discovery_count: 37
+00> <t:    1998874>, advertiser.c,  250, timerepeat_event: 3
+00> <t:    1998877>, advertiser.c,  281, get_if_send_ack!
+00> <t:    1998880>, main.c,  108, adv_discovery_disable_bea
+00> <t:    1998882>, main.c,  280, Starting to send acks!
+00> <t:    1998885>, main.c,  164, ******* Enable adv ******
+00> <t:    1998888>, main.c,  108, adv_discovery_disable_bea
+00> <t:    1998891>, main.c,  280, Starting to send acks!
+00> <t:    1998894>, main.c,  164, ******* Enable adv ******
+00> <t:    1998897>, main.c,  108, adv_discovery_disable_bea
+00> <t:    1998901>, main.c,  280, Starting to send acks!
+00> <t:    1998903>, main.c,  164, ******* Enable adv ******
+00> <t:    1998907>, main.c,  108, adv_discovery_disable_bea
+00> <t:    1998910>, main.c,  280, Starting to send acks!
+00> <t:    1998914>, main.c,  164, ******* Enable adv ******
+00> <t:    2006617>, main.c,  313, byte4 : 8!, p_type: 2
+00> <t:    2007581>, advertiser.c,  246, g_if_stop_discovery_count: 37
+00> <t:    2007584>, advertiser.c,  250, timerepeat_event: 4
+00> <t:    2016512>, main.c,  313, byte4 : 8!, p_type: 2
+00> <t:    2017501>, advertiser.c,  246, g_if_stop_discovery_count: 37
+00> <t:    2017504>, advertiser.c,  250, timerepeat_event: 5
+00> <t:    2027509>, advertiser.c,  246, g_if_stop_discovery_count: 37
+00> <t:    2027512>, advertiser.c,  250, timerepeat_event: 6
+00> <t:    2032356>, main.c,  313, byte4 : 8!, p_type: 2
+00> <t:    2032359>, main.c,  359, Receing adv payload, sink node !
+00> <t:    2032362>, main.c,  362, The payload is(size: 24):<t:    2032364>, main.c,  367,  g_received_file_real_size:913 
+00> <t:    2033024>, main.c,  370,  17 <t:    2033026>, main.c,  367,  g_received_file_real_size:914 
+00> <t:    2033688>, main.c,  370,  3 <t:    2033691>, main.c,  367,  g_received_file_real_size:915 
+00> <t:    2034349>, main.c,  370,  3 <t:    2034351>, main.c,  367,  g_received_file_real_size:916 
+00> <t:    2035009>, main.c,  370,  A <t:    2035011>, main.c,  367,  g_received_file_real_size:917 
+00> <t:    2035670>, main.c,  370,  2 <t:    2035672>, main.c,  367,  g_received_file_real_size:918 
+00> <t:    2036330>, main.c,  370,  18 <t:    2036332>, main.c,  367,  g_received_file_real_size:919 
+00> <t:    2036991>, main.c,  370,  49 <t:    2036993>, main.c,  367,  g_received_file_real_size:920 
+00> <t:    2037651>, main.c,  370,  27 <t:    2037653>, main.c,  367,  g_received_file_real_size:921 
+00> <t:    2038311>, main.c,  370,  6C <t:    2038314>, main.c,  367,  g_received_file_real_size:922 
+00> <t:    2038972>, main.c,  370,  6C <t:    2038974>, main.c,  367,  g_received_file_real_size:923 
+00> <t:    2039632>, main.c,  370,  20 <t:    2039635>, main.c,  367,  g_received_file_real_size:924 
+00> <t:    2040293>, main.c,  370,  6A <t:    2040295>, main.c,  367,  g_received_file_real_size:925 
+00> <t:    2040953>, main.c,  370,  75 <t:    2040955>, main.c,  367,  g_received_file_real_size:926 
+00> <t:    2041614>, main.c,  370,  73 <t:    2041616>, main.c,  367,  g_received_file_real_size:927 
+00> <t:    2042274>, main.c,  370,  74 <t:    2042276>, main.c,  367,  g_received_file_real_size:928 
+00> <t:    2042935>, main.c,  370,  20 <t:    2042937>, main.c,  367,  g_received_file_real_size:929 
+00> <t:    2043595>, main.c,  370,  62 <t:    2043597>, main.c,  367,  g_received_file_real_size:930 
+00> <t:    2044256>, main.c,  370,  65 <t:    2044258>, main.c,  367,  g_received_file_real_size:931 
+00> <t:    2044916>, main.c,  370,  20 <t:    2044918>, main.c,  367,  g_received_file_real_size:932 
+00> <t:    2045576>, main.c,  370,  61 <t:    2045579>, main.c,  367,  g_received_file_real_size:933 
+00> <t:    2046237>, main.c,  370,  20 <t:    2046239>, main.c,  367,  g_received_file_real_size:934 
+00> <t:    2046897>, main.c,  370,  73 <t:    2046899>, main.c,  367,  g_received_file_real_size:935 
+00> <t:    2047558>, main.c,  370,  65 <t:    2047560>, main.c,  367,  g_received_file_real_size:936 
+00> <t:    2048218>, main.c,  370,  63 <t:    2048876>, main.c,  373, **********  The received seq is: 2, the address is : 3., g_present_packet_seq: FF  ********
+00> <t:    2048882>, advertiser.c,  246, g_if_stop_discovery_count: 37
+00> <t:    2048885>, advertiser.c,  250, timerepeat_event: 7
+00> <t:    2048888>, advertiser.c,  281, get_if_send_ack!
+00> <t:    2048890>, main.c,  108, adv_discovery_disable_bea
+00> <t:    2048893>, main.c,  280, Starting to send acks!
+00> <t:    2048896>, main.c,  164, ******* Enable adv ******
+00> <t:    2048899>, main.c,  108, adv_discovery_disable_bea
+00> <t:    2048902>, main.c,  280, Starting to send acks!
+00> <t:    2048904>, main.c,  164, ******* Enable adv ******
+00> <t:    2048908>, main.c,  108, adv_discovery_disable_bea
+00> <t:    2048911>, main.c,  280, Starting to send acks!
+00> <t:    2048914>, main.c,  164, ******* Enable adv ******
+00> <t:    2048917>, main.c,  108, adv_discovery_disable_bea
+00> <t:    2048920>, main.c,  280, Starting to send acks!
+00> <t:    2048924>, main.c,  164, ******* Enable adv ******
+00> <t:    2048931>, main.c,  313, byte4 : 8!, p_type: 2
+00> <t:    2053341>, main.c,  313, byte4 : 8!, p_type: 2
+00> <t:    2056030>, advertiser.c,  246, g_if_stop_discovery_count: 37
+00> <t:    2056033>, advertiser.c,  250, timerepeat_event: 8
+00> <t:    2063464>, main.c,  313, byte4 : 8!, p_type: 2
+00> <t:    2065882>, advertiser.c,  246, g_if_stop_discovery_count: 37
+00> <t:    2065885>, advertiser.c,  250, timerepeat_event: 9
+00> <t:    2073513>, main.c,  313, byte4 : 8!, p_type: 2
+00> <t:    2075826>, advertiser.c,  246, g_if_stop_discovery_count: 37
+00> <t:    2075829>, advertiser.c,  250, timerepeat_event: 10
+00> <t:    2085711>, advertiser.c,  246, g_if_stop_discovery_count: 37
+00> <t:    2085714>, advertiser.c,  250, timerepeat_event: 11
+00> <t:    2089357>, main.c,  313, byte4 : 8!, p_type: 2
+00> <t:    2089360>, main.c,  359, Receing adv payload, sink node !
+00> <t:    2089362>, main.c,  362, The payload is(size: 24):<t:    2089365>, main.c,  367,  g_received_file_real_size:937 
+00> <t:    2090024>, main.c,  370,  17 <t:    2090026>, main.c,  367,  g_received_file_real_size:938 
+00> <t:    2090686>, main.c,  370,  3 <t:    2090688>, main.c,  367,  g_received_file_real_size:939 
+00> <t:    2091346>, main.c,  370,  3 <t:    2091348>, main.c,  367,  g_received_file_real_size:940 
+00> <t:    2092007>, main.c,  370,  A <t:    2092009>, main.c,  367,  g_received_file_real_size:941 
+00> <t:    2092670>, main.c,  370,  C2 <t:    2092672>, main.c,  367,  g_received_file_real_size:942 
+00> <t:    2093332>, main.c,  370,  18 <t:    2093334>, main.c,  367,  g_received_file_real_size:943 
+00> <t:    2093992>, main.c,  370,  30 <t:    2093994>, main.c,  367,  g_received_file_real_size:944 
+00> <t:    2094653>, main.c,  370,  32 <t:    2094655>, main.c,  367,  g_received_file_real_size:945 
+00> <t:    2095313>, main.c,  370,  3A <t:    2095315>, main.c,  367,  g_received_file_real_size:946 
+00> <t:    2095974>, main.c,  370,  30 <t:    2095976>, main.c,  367,  g_received_file_real_size:947 
+00> <t:    2096634>, main.c,  370,  30 <t:    2096636>, main.c,  367,  g_received_file_real_size:948 
+00> <t:    2097295>, main.c,  370,  D <t:    2097297>, main.c,  367,  g_received_file_real_size:949 
+00> <t:    2097955>, main.c,  370,  A <t:    2097957>, main.c,  367,  g_received_file_real_size:950 
+00> <t:    2098615>, main.c,  370,  4F <t:    2098618>, main.c,  367,  g_received_file_real_size:951 
+00> <t:    2099276>, main.c,  370,  6B <t:    2099278>, main.c,  367,  g_received_file_real_size:952 
+00> <t:    2099936>, main.c,  370,  61 <t:    2099939>, main.c,  367,  g_received_file_real_size:953 
+00> <t:    2100597>, main.c,  370,  79 <t:    2100599>, main.c,  367,  g_received_file_real_size:954 
+00> <t:    2101257>, main.c,  370,  21 <t:    2101259>, main.c,  367,  g_received_file_real_size:955 
+00> <t:    2101918>, main.c,  370,  D <t:    2101920>, main.c,  367,  g_received_file_real_size:956 
+00> <t:    2102578>, main.c,  370,  A <t:    2102580>, main.c,  367,  g_received_file_real_size:957 
+00> <t:    2103239>, main.c,  370,  30 <t:    2103241>, main.c,  367,  g_received_file_real_size:958 
+00> <t:    2103899>, main.c,  370,  32 <t:    2103901>, main.c,  367,  g_received_file_real_size:959 
+00> <t:    2104559>, main.c,  370,  3A <t:    2104562>, main.c,  367,  g_received_file_real_size:960 
+00> <t:    2105220>, main.c,  370,  30 <t:    2105878>, main.c,  373, **********  The received seq is: C2, the address is : 3., g_present_packet_seq: FF  ********
+00> <t:    2105884>, advertiser.c,  246, g_if_stop_discovery_count: 37
+00> <t:    2105887>, advertiser.c,  250, timerepeat_event: 12
+00> <t:    2105890>, advertiser.c,  281, get_if_send_ack!
+00> <t:    2105892>, main.c,  108, adv_discovery_disable_bea
+00> <t:    2105895>, main.c,  280, Starting to send acks!
+00> <t:    2105898>, main.c,  164, ******* Enable adv ******
+00> <t:    2105901>, main.c,  108, adv_discovery_disable_bea
+00> <t:    2105904>, main.c,  280, Starting to send acks!
+00> <t:    2105906>, main.c,  164, ******* Enable adv ******
+00> <t:    2105910>, main.c,  108, adv_discovery_disable_bea
+00> <t:    2105913>, main.c,  280, Starting to send acks!
+00> <t:    2105916>, main.c,  164, ******* Enable adv ******
+00> <t:    2105919>, main.c,  108, adv_discovery_disable_bea
+00> <t:    2105922>, main.c,  280, Starting to send acks!
+00> <t:    2105926>, main.c,  164, ******* Enable adv ******
+00> <t:    2105931>, main.c,  313, byte4 : 8!, p_type: 2
+00> <t:    2110460>, main.c,  313, byte4 : 8!, p_type: 2
+00> <t:    2113604>, advertiser.c,  246, g_if_stop_discovery_count: 37
+00> <t:    2113607>, advertiser.c,  250, timerepeat_event: 13
+00> <t:    2120603>, main.c,  313, byte4 : 8!, p_type: 2
+00> <t:    2123475>, advertiser.c,  246, g_if_stop_discovery_count: 37
+00> <t:    2123478>, advertiser.c,  250, timerepeat_event: 14
+00> <t:    2132493>, main.c,  313, byte4 : 8!, p_type: 2
+00> <t:    2132495>, main.c,  359, Receing adv payload, sink node !
+00> <t:    2132498>, main.c,  362, The payload is(size: 18):<t:    2132501>, main.c,  367,  g_received_file_real_size:961 
+00> <t:    2133160>, main.c,  370,  17 <t:    2133163>, main.c,  367,  g_received_file_real_size:962 
+00> <t:    2133824>, main.c,  370,  3 <t:    2133826>, main.c,  367,  g_received_file_real_size:963 
+00> <t:    2134485>, main.c,  370,  3 <t:    2134487>, main.c,  367,  g_received_file_real_size:964 
+00> <t:    2135146>, main.c,  370,  A <t:    2135148>, main.c,  367,  g_received_file_real_size:965 
+00> <t:    2135806>, main.c,  370,  80 <t:    2135808>, main.c,  367,  g_received_file_real_size:966 
+00> <t:    2136467>, main.c,  370,  12 <t:    2136469>, main.c,  367,  g_received_file_real_size:967 
+00> <t:    2137127>, main.c,  370,  20 <t:    2137129>, main.c,  367,  g_received_file_real_size:968 
+00> <t:    2137787>, main.c,  370,  69 <t:    2137790>, main.c,  367,  g_received_file_real_size:969 
+00> <t:    2138448>, main.c,  370,  6E <t:    2138450>, main.c,  367,  g_received_file_real_size:970 
+00> <t:    2139108>, main.c,  370,  20 <t:    2139111>, main.c,  367,  g_received_file_real_size:971 
+00> <t:    2139769>, main.c,  370,  74 <t:    2139771>, main.c,  367,  g_received_file_real_size:972 
+00> <t:    2140429>, main.c,  370,  68 <t:    2140432>, main.c,  367,  g_received_file_real_size:973 
+00> <t:    2141090>, main.c,  370,  65 <t:    2141092>, main.c,  367,  g_received_file_real_size:974 
+00> <t:    2141750>, main.c,  370,  20 <t:    2141752>, main.c,  367,  g_received_file_real_size:975 
+00> <t:    2142411>, main.c,  370,  63 <t:    2142413>, main.c,  367,  g_received_file_real_size:976 
+00> <t:    2143071>, main.c,  370,  61 <t:    2143073>, main.c,  367,  g_received_file_real_size:977 
+00> <t:    2143732>, main.c,  370,  72 <t:    2143734>, main.c,  367,  g_received_file_real_size:978 
+00> <t:    2144392>, main.c,  370,  2C <t:    2145050>, main.c,  373, **********  The received seq is: 80, the address is : 3., g_present_packet_seq: FF  ********
+00> <t:    2145056>, advertiser.c,  246, g_if_stop_discovery_count: 37
+00> <t:    2145059>, advertiser.c,  250, timerepeat_event: 15
+00> <t:    2145062>, advertiser.c,  281, get_if_send_ack!
+00> <t:    2145064>, main.c,  108, adv_discovery_disable_bea
+00> <t:    2145067>, main.c,  280, Starting to send acks!
+00> <t:    2145070>, main.c,  164, ******* Enable adv ******
+00> <t:    2145073>, main.c,  108, adv_discovery_disable_bea
+00> <t:    2145076>, main.c,  280, Starting to send acks!
+00> <t:    2145078>, main.c,  164, ******* Enable adv ******
+00> <t:    2145082>, main.c,  108, adv_discovery_disable_bea
+00> <t:    2145085>, main.c,  280, Starting to send acks!
+00> <t:    2145088>, main.c,  164, ******* Enable adv ******
+00> <t:    2145091>, main.c,  108, adv_discovery_disable_bea
+00> <t:    2145095>, main.c,  280, Starting to send acks!
+00> <t:    2145099>, main.c,  164, ******* Enable adv ******
+00> <t:    2149166>, main.c,  313, byte4 : 8!, p_type: 2
+00> <t:    2151929>, advertiser.c,  246, g_if_stop_discovery_count: 37
+00> <t:    2151932>, advertiser.c,  250, timerepeat_event: 16
+00> <t:    2159296>, main.c,  313, byte4 : 8!, p_type: 2
+00> <t:    2161901>, advertiser.c,  246, g_if_stop_discovery_count: 37
+00> <t:    2161904>, advertiser.c,  250, timerepeat_event: 1
+00> <t:    2166546>, main.c,  313, byte4 : 0!, p_type: 0
+00> <t:    2166549>, main.c,  430, Receive the transmission beacons
+00> <t:    2166551>, main.c,  108, adv_discovery_disable_bea
+00> <t:    2166592>, main.c,  438, Hash-sha256 compare successfully! Congratulations!
+00> <t:    2176621>, main.c,  313, byte4 : 0!, p_type: 0
+00> <t:    2176623>, main.c,  430, Receive the transmission beacons
+00> <t:    2176664>, main.c,  438, Hash-sha256 compare successfully! Congratulations!
+
+# Logging stopped @ 17 Sep 2021 17:07:26

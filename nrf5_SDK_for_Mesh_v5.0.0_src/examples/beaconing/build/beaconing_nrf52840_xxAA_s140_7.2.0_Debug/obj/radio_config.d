@@ -1,0 +1,46 @@
+build/beaconing_nrf52840_xxAA_s140_7.2.0_Debug/obj/radio_config.o: \
+ C\:\BLE\Mesh\copy\nrf5_SDK_for_Mesh_v5.0.0_src\mesh\bearer\src\radio_config.c \
+ ../../mesh/bearer/include/radio_config.h \
+ C\:/Users/LT-055650/Downloads/EmbeddedStudio_ARM_Nordic_v550d_win_x64/arm_segger_embedded_studio_v550d_win_x64_nordic/include/stdint.h \
+ C\:/BLE/Mesh/sdk/blecom/nRF5_SDK_17.0.2_d674dde/modules/nrfx/mdk/nrf.h \
+ C\:/BLE/Mesh/sdk/blecom/nRF5_SDK_17.0.2_d674dde/modules/nrfx/mdk/nrf52840.h \
+ C\:/BLE/Mesh/sdk/blecom/nRF5_SDK_17.0.2_d674dde/components/toolchain/cmsis/include/core_cm4.h \
+ C\:/BLE/Mesh/sdk/blecom/nRF5_SDK_17.0.2_d674dde/components/toolchain/cmsis/include/cmsis_version.h \
+ C\:/BLE/Mesh/sdk/blecom/nRF5_SDK_17.0.2_d674dde/components/toolchain/cmsis/include/cmsis_compiler.h \
+ C\:/BLE/Mesh/sdk/blecom/nRF5_SDK_17.0.2_d674dde/components/toolchain/cmsis/include/cmsis_gcc.h \
+ C\:/BLE/Mesh/sdk/blecom/nRF5_SDK_17.0.2_d674dde/components/toolchain/cmsis/include/mpu_armv7.h \
+ C\:/BLE/Mesh/sdk/blecom/nRF5_SDK_17.0.2_d674dde/modules/nrfx/mdk/system_nrf52840.h \
+ C\:/BLE/Mesh/sdk/blecom/nRF5_SDK_17.0.2_d674dde/modules/nrfx/mdk/nrf52840_bitfields.h \
+ C\:/BLE/Mesh/sdk/blecom/nRF5_SDK_17.0.2_d674dde/modules/nrfx/mdk/nrf51_to_nrf52840.h \
+ C\:/BLE/Mesh/sdk/blecom/nRF5_SDK_17.0.2_d674dde/modules/nrfx/mdk/nrf52_to_nrf52840.h \
+ C\:/BLE/Mesh/sdk/blecom/nRF5_SDK_17.0.2_d674dde/modules/nrfx/mdk/compiler_abstraction.h \
+ ../../mesh/core/api/nrf_mesh_assert.h ../../mesh/core/api/nrf_mesh.h \
+ C\:/Users/LT-055650/Downloads/EmbeddedStudio_ARM_Nordic_v550d_win_x64/arm_segger_embedded_studio_v550d_win_x64_nordic/include/stdbool.h \
+ ../../mesh/core/include/timer.h \
+ C\:/BLE/Mesh/sdk/blecom/nRF5_SDK_17.0.2_d674dde/components/softdevice/s140/headers/ble.h \
+ C\:/BLE/Mesh/sdk/blecom/nRF5_SDK_17.0.2_d674dde/components/softdevice/s140/headers/nrf_svc.h \
+ C\:/BLE/Mesh/sdk/blecom/nRF5_SDK_17.0.2_d674dde/components/softdevice/s140/headers/nrf_error.h \
+ C\:/BLE/Mesh/sdk/blecom/nRF5_SDK_17.0.2_d674dde/components/softdevice/s140/headers/ble_err.h \
+ C\:/BLE/Mesh/sdk/blecom/nRF5_SDK_17.0.2_d674dde/components/softdevice/s140/headers/ble_gap.h \
+ C\:/BLE/Mesh/sdk/blecom/nRF5_SDK_17.0.2_d674dde/components/softdevice/s140/headers/ble_hci.h \
+ C\:/BLE/Mesh/sdk/blecom/nRF5_SDK_17.0.2_d674dde/components/softdevice/s140/headers/ble_ranges.h \
+ C\:/BLE/Mesh/sdk/blecom/nRF5_SDK_17.0.2_d674dde/components/softdevice/s140/headers/ble_types.h \
+ C\:/BLE/Mesh/sdk/blecom/nRF5_SDK_17.0.2_d674dde/components/softdevice/s140/headers/ble_l2cap.h \
+ C\:/BLE/Mesh/sdk/blecom/nRF5_SDK_17.0.2_d674dde/components/softdevice/s140/headers/ble_gatt.h \
+ C\:/BLE/Mesh/sdk/blecom/nRF5_SDK_17.0.2_d674dde/components/softdevice/s140/headers/ble_gattc.h \
+ C\:/BLE/Mesh/sdk/blecom/nRF5_SDK_17.0.2_d674dde/components/softdevice/s140/headers/ble_gatts.h \
+ C\:/BLE/Mesh/sdk/blecom/nRF5_SDK_17.0.2_d674dde/components/softdevice/s140/headers/ble_gap.h \
+ ../../mesh/core/api/nrf_mesh_defines.h \
+ ../../mesh/core/api/nrf_mesh_config_core.h \
+ C\:/BLE/Mesh/sdk/blecom/nRF5_SDK_17.0.2_d674dde/components/softdevice/s140/headers/nrf_sdm.h \
+ C\:/BLE/Mesh/sdk/blecom/nRF5_SDK_17.0.2_d674dde/components/softdevice/s140/headers/nrf_error_sdm.h \
+ C\:/BLE/Mesh/sdk/blecom/nRF5_SDK_17.0.2_d674dde/components/softdevice/s140/headers/nrf_soc.h \
+ C\:/BLE/Mesh/sdk/blecom/nRF5_SDK_17.0.2_d674dde/components/softdevice/s140/headers/nrf_error_soc.h \
+ C\:/BLE/Mesh/sdk/blecom/nRF5_SDK_17.0.2_d674dde/components/libraries/util/app_util.h \
+ C\:/Users/LT-055650/Downloads/EmbeddedStudio_ARM_Nordic_v550d_win_x64/arm_segger_embedded_studio_v550d_win_x64_nordic/include/stddef.h \
+ C\:/Users/LT-055650/Downloads/EmbeddedStudio_ARM_Nordic_v550d_win_x64/arm_segger_embedded_studio_v550d_win_x64_nordic/include/__crossworks.h \
+ C\:/BLE/Mesh/sdk/blecom/nRF5_SDK_17.0.2_d674dde/modules/nrfx/mdk/compiler_abstraction.h \
+ C\:/BLE/Mesh/sdk/blecom/nRF5_SDK_17.0.2_d674dde/components/libraries/util/nordic_common.h \
+ C\:/BLE/Mesh/sdk/blecom/nRF5_SDK_17.0.2_d674dde/components/softdevice/s140/headers/nrf52/nrf_mbr.h \
+ C\:/BLE/Mesh/sdk/blecom/nRF5_SDK_17.0.2_d674dde/components/softdevice/s140/headers/nrf_svc.h \
+ ../../mesh/core/api/nrf_mesh_assert_gcc.h
