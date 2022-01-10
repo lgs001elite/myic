@@ -699,7 +699,7 @@ rule C_EXECUTABLE_LINKER__light_switch_server_nrf52840_xxAA_s140_7.2e2.2e0_RelWi
 # Rule for re-running cmake.
 
 rule RERUN_CMAKE
-  command = /usr/local/bin/cmake --regenerate-during-build -S/home/gaosheng/mesh/my_mesh/nrf5_SDK_for_Mesh_v5.0.0_src -B/home/gaosheng/mesh/my_mesh/nrf5_SDK_for_Mesh_v5.0.0_src/build
+  command = /usr/local/bin/cmake --regenerate-during-build -S/home/gaosheng/mesh/myic/myic/nrf5_SDK_for_Mesh_v5.0.0_src -B/home/gaosheng/mesh/myic/myic/nrf5_SDK_for_Mesh_v5.0.0_src/build
   description = Re-running CMake...
   generator = 1
 

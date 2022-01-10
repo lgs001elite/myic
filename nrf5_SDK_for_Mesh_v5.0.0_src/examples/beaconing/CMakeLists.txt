@@ -5,6 +5,7 @@ add_executable(${target}
     "${CMAKE_CURRENT_SOURCE_DIR}/src/spis.c"
     "${CMAKE_CURRENT_SOURCE_DIR}/src/m2s.c"
     "${CMAKE_CURRENT_SOURCE_DIR}/src/s2m.c"
+    "${CMAKE_CURRENT_SOURCE_DIR}/src/crc.c"
     "${CMAKE_CURRENT_SOURCE_DIR}/src/spis_data.c"
     "${CMAKE_SOURCE_DIR}/mesh/stack/src/mesh_stack.c"
     "${CMAKE_SOURCE_DIR}/examples/common/src/mesh_provisionee.c"
@@ -12,14 +13,11 @@ add_executable(${target}
     "${SDK_ROOT}/modules/nrfx/drivers/src/nrfx_gpiote.c"
     "${CMAKE_SOURCE_DIR}/examples/common/src/mesh_app_utils.c"
     # Added by Gaosheng, for checksum
-    #"${SDK_ROOT}/components/libraries/crypto/nrf_crypto_init.c"
-    #"${SDK_ROOT}/components/libraries/crypto/nrf_crypto_hash.c"
-    #"${CMAKE_CURRENT_SOURCE_DIR}/src/hash.c"
     "${SDK_ROOT}/components/boards/boards.c"
     "${SDK_ROOT}/integration/nrfx/legacy/nrf_drv_spis.c"
-    #"${SDK_ROOT}/components/libraries/crypto/backend/oberon/oberon_backend_hash.c"
     "${SDK_ROOT}/modules/nrfx/drivers/src/nrfx_spis.c"
-    #
+    # for IRQ
+    "${SDK_ROOT}/components/libraries/scheduler/app_scheduler.c"
     ${BLE_SOFTDEVICE_SUPPORT_SOURCE_FILES}
     ${ACCESS_SOURCE_FILES}
     ${WEAK_SOURCE_FILES}
@@ -42,10 +40,7 @@ target_include_directories(${target} PUBLIC
     "${SDK_ROOT}/components/libraries/delay"
     "${SDK_ROOT}/components/libraries/timer"
     "${SDK_ROOT}/components/boards"
-    #"${SDK_ROOT}/components/libraries/crypto"
-    #"${SDK_ROOT}/components/libraries/crypto/backend/cc310"
-    #"${SDK_ROOT}/components/libraries/crypto/backend/oberon"
-    #/home/gaosheng/mesh/my_mesh/nRF5_SDK_17.0.2_d674dde/modules/nrfx/drivers/src/nrfx_spis.c
+    "${SDK_ROOT}/components/libraries/scheduler"
     "${SDK_ROOT}/modules/nrfx/drivers/include"
     "${SDK_ROOT}/modules/nrfx/drivers"
     "${SDK_ROOT}/components/boards"

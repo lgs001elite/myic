@@ -24,7 +24,7 @@
 <stringAttribute key="com.ti.ccstudio.debug.debugModel.ATTR_PROJECT.MSP430FR5994.ccxml.TI MSP430 USB1/MSP430" value="msp430fr599x_eusci_spi_standard_master.c"/>
 <booleanAttribute key="com.ti.ccstudio.debug.debugModel.ATTR_SYNC_COMPATIBLE_CPUS" value="false"/>
 <stringAttribute key="com.ti.ccstudio.debug.debugModel.ATTR_TARGET_CONFIG" value="${target_config_active_default:msp430fr599x_eusci_spi_standard_master.c}"/>
-<stringAttribute key="com.ti.ccstudio.debug.debugModel.MRU_PROGRAM.MSP430FR5994.ccxml.TI MSP430 USB1/MSP430" value="/home/gaosheng/mesh/spi_ti/msp430fr599x_eusci_spi_standard_master.c/Debug/msp430fr599x_eusci_spi_standard_master.c.out"/>
+<stringAttribute key="com.ti.ccstudio.debug.debugModel.MRU_PROGRAM.MSP430FR5994.ccxml.TI MSP430 USB1/MSP430" value="/home/gaosheng/mesh/myic/myic/msp430fr599x_eusci_spi_standard_master.c/Debug/msp430fr599x_eusci_spi_standard_master.c.out"/>
 <listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_PATHS">
 <listEntry value="/msp430fr599x_eusci_spi_standard_master.c"/>
 </listAttribute>

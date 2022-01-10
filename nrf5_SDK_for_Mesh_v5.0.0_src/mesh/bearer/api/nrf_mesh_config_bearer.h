@@ -94,22 +94,22 @@
 
 /** Default advertisement interval. */
 #ifndef BEARER_ADV_INT_DEFAULT_MS
-#define BEARER_ADV_INT_DEFAULT_MS 300 /* 20: modefied by Gaosheng Liu*/
+#define BEARER_ADV_INT_DEFAULT_MS  20 /* 20; 300; : modefied by Gaosheng Liu*/
 #endif
 
 /** Default scan interval */
 #ifndef BEARER_SCAN_INT_DEFAULT_MS
-#define BEARER_SCAN_INT_DEFAULT_MS 2000
+#define BEARER_SCAN_INT_DEFAULT_MS  2000 //10  /*2000 */
 #endif
 
 /** Default scan window */
 #ifndef BEARER_SCAN_WINDOW_DEFAULT_MS
-#define BEARER_SCAN_WINDOW_DEFAULT_MS 2000
+#define BEARER_SCAN_WINDOW_DEFAULT_MS 2000 //10 /* 2000; cannot morh than scan interval */
 #endif
 
 /** Default scanner buffer size */
 #ifndef SCANNER_BUFFER_SIZE
-#define SCANNER_BUFFER_SIZE 512
+#define SCANNER_BUFFER_SIZE 512 // 512
 #endif
 
 /** Buffer size for the Instaburst RX module. */

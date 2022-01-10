@@ -12,18 +12,10 @@ typedef struct spi_datagram {
             dst              : 4;
     uint8_t layer            : 3,
             p_len            : 5;     
-    uint8_t df[25];
+    uint8_t df[23];
+    uint8_t crc[2];
 } SPI_DATAGRAM;
 
-volatile extern uint8_t front_check_arr[3];
-volatile extern uint8_t rear_check_arr[3];
-
-#define SPI_DATA_LEN   0x27 /*  39: for SPI transport */
-#define SPI_HEADER_LEN 0x0E /*  14: header + checknum: 8 + 6 */
-
-//#define HEADER_LEN     12 /*  12 = 6 + 6 */
-
-//#define PAYLOAD_LEN    33
-
+#define SPI_DATA_LEN   0x21 /*  33: for SPI transport */
 
 #endif

@@ -1,5 +1,5 @@
 build/beaconing_nrf52840_xxAA_s140_7.2.0_Debug/obj/mesh_app_utils.o: \
- /home/gaosheng/mesh/my_mesh/nrf5_SDK_for_Mesh_v5.0.0_src/examples/common/src/mesh_app_utils.c \
+ /home/gaosheng/mesh/myic/myic/nrf5_SDK_for_Mesh_v5.0.0_src/examples/common/src/mesh_app_utils.c \
  /usr/share/segger_embedded_studio_for_arm_5.62/include/string.h \
  /usr/share/segger_embedded_studio_for_arm_5.62/include/__crossworks.h \
  ../../mesh/core/api/nrf_mesh_defines.h \

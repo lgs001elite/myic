@@ -1,4 +1,4 @@
-# Install script for directory: /home/gaosheng/mesh/my_mesh/nrf5_SDK_for_Mesh_v5.0.0_src/models/foundation
+# Install script for directory: /home/gaosheng/mesh/myic/myic/nrf5_SDK_for_Mesh_v5.0.0_src/models/foundation
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -39,8 +39,8 @@ endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for each subdirectory.
-  include("/home/gaosheng/mesh/my_mesh/nrf5_SDK_for_Mesh_v5.0.0_src/build/models/foundation/config/cmake_install.cmake")
-  include("/home/gaosheng/mesh/my_mesh/nrf5_SDK_for_Mesh_v5.0.0_src/build/models/foundation/health/cmake_install.cmake")
+  include("/home/gaosheng/mesh/myic/myic/nrf5_SDK_for_Mesh_v5.0.0_src/build/models/foundation/config/cmake_install.cmake")
+  include("/home/gaosheng/mesh/myic/myic/nrf5_SDK_for_Mesh_v5.0.0_src/build/models/foundation/health/cmake_install.cmake")
 
 endif()
 

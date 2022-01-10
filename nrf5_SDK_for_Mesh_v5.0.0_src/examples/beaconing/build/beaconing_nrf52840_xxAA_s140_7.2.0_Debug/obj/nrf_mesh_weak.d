@@ -1,5 +1,5 @@
 build/beaconing_nrf52840_xxAA_s140_7.2.0_Debug/obj/nrf_mesh_weak.o: \
- /home/gaosheng/mesh/my_mesh/nrf5_SDK_for_Mesh_v5.0.0_src/examples/common/src/nrf_mesh_weak.c \
+ /home/gaosheng/mesh/myic/myic/nrf5_SDK_for_Mesh_v5.0.0_src/examples/common/src/nrf_mesh_weak.c \
  /usr/share/segger_embedded_studio_for_arm_5.62/include/stdint.h \
  /home/gaosheng/mesh/my_mesh/nRF5_SDK_17.0.2_d674dde/components/softdevice/s140/headers/nrf_error.h \
  ../../mesh/prov/api/nrf_mesh_prov.h \

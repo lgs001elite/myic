@@ -1,5 +1,5 @@
 The target system is: Generic -  - ARM
-The host system is: Linux - 5.4.0-89-generic - x86_64
+The host system is: Linux - 5.4.0-91-generic - x86_64
 Compiling the C compiler identification source file "CMakeCCompilerId.c" succeeded.
 Compiler: /home/gaosheng/gcc-arm-none-eabi-10.3-2021.07/bin/arm-none-eabi-gcc 
 Build flags: --std=gnu99;-Wall;-Wno-attributes;-Wno-format;-ffunction-sections;-fdata-sections;-fno-strict-aliasing;-fno-builtin;--short-enums
@@ -11,7 +11,7 @@ The output was:
 
 Compilation of the C compiler identification source "CMakeCCompilerId.c" produced "CMakeCCompilerId.o"
 
-The C compiler identification is GNU, found in "/home/gaosheng/mesh/my_mesh/nrf5_SDK_for_Mesh_v5.0.0_src/build/CMakeFiles/3.21.3/CompilerIdC/CMakeCCompilerId.o"
+The C compiler identification is GNU, found in "/home/gaosheng/mesh/myic/myic/nrf5_SDK_for_Mesh_v5.0.0_src/build/CMakeFiles/3.21.3/CompilerIdC/CMakeCCompilerId.o"
 
 Checking whether the ASM compiler is GNU using "--version" matched "(GNU assembler)|(GCC)|(Free Software Foundation)":
 arm-none-eabi-gcc (GNU Arm Embedded Toolchain 10.3-2021.07) 10.3.1 20210621 (release)
@@ -20,9 +20,9 @@ This is free software; see the source for copying conditions.  There is NO
 warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 
 Detecting C compiler ABI info compiled with the following output:
-Change Dir: /home/gaosheng/mesh/my_mesh/nrf5_SDK_for_Mesh_v5.0.0_src/build/CMakeFiles/CMakeTmp
+Change Dir: /home/gaosheng/mesh/myic/myic/nrf5_SDK_for_Mesh_v5.0.0_src/build/CMakeFiles/CMakeTmp
 
-Run Build Command(s):/usr/bin/ninja cmTC_27d31 && [1/2] Building C object CMakeFiles/cmTC_27d31.dir/CMakeCCompilerABI.c.obj
+Run Build Command(s):/usr/bin/ninja cmTC_9b012 && [1/2] Building C object CMakeFiles/cmTC_9b012.dir/CMakeCCompilerABI.c.obj
 Using built-in specs.
 COLLECT_GCC=/home/gaosheng/gcc-arm-none-eabi-10.3-2021.07/bin/arm-none-eabi-gcc
 Target: arm-none-eabi
@@ -30,8 +30,8 @@ Configured with: /mnt/workspace/workspace/GCC-10-pipeline/jenkins-GCC-10-pipelin
 Thread model: single
 Supported LTO compression algorithms: zlib
 gcc version 10.3.1 20210621 (release) (GNU Arm Embedded Toolchain 10.3-2021.07) 
-COLLECT_GCC_OPTIONS='-std=gnu99' '-Wall' '-Wno-attributes' '-Wformat=0' '-ffunction-sections' '-fdata-sections' '-fno-strict-aliasing' '-fno-builtin' '-fshort-enums' '-v' '-o' 'CMakeFiles/cmTC_27d31.dir/CMakeCCompilerABI.c.obj' '-c' '-mcpu=arm7tdmi' '-mfloat-abi=soft' '-marm' '-mlibarch=armv4t' '-march=armv4t'
- /home/gaosheng/gcc-arm-none-eabi-10.3-2021.07/bin/../lib/gcc/arm-none-eabi/10.3.1/cc1 -quiet -v -iprefix /home/gaosheng/gcc-arm-none-eabi-10.3-2021.07/bin/../lib/gcc/arm-none-eabi/10.3.1/ -isysroot /home/gaosheng/gcc-arm-none-eabi-10.3-2021.07/bin/../arm-none-eabi -D__USES_INITFINI__ /usr/local/share/cmake-3.21/Modules/CMakeCCompilerABI.c -quiet -dumpbase CMakeCCompilerABI.c -mcpu=arm7tdmi -mfloat-abi=soft -marm -mlibarch=armv4t -march=armv4t -auxbase-strip CMakeFiles/cmTC_27d31.dir/CMakeCCompilerABI.c.obj -Wall -Wno-attributes -Wformat=0 -std=gnu99 -version -ffunction-sections -fdata-sections -fno-strict-aliasing -fno-builtin -fshort-enums -o /tmp/cce8EJM2.s
+COLLECT_GCC_OPTIONS='-std=gnu99' '-Wall' '-Wno-attributes' '-Wformat=0' '-ffunction-sections' '-fdata-sections' '-fno-strict-aliasing' '-fno-builtin' '-fshort-enums' '-v' '-o' 'CMakeFiles/cmTC_9b012.dir/CMakeCCompilerABI.c.obj' '-c' '-mcpu=arm7tdmi' '-mfloat-abi=soft' '-marm' '-mlibarch=armv4t' '-march=armv4t'
+ /home/gaosheng/gcc-arm-none-eabi-10.3-2021.07/bin/../lib/gcc/arm-none-eabi/10.3.1/cc1 -quiet -v -iprefix /home/gaosheng/gcc-arm-none-eabi-10.3-2021.07/bin/../lib/gcc/arm-none-eabi/10.3.1/ -isysroot /home/gaosheng/gcc-arm-none-eabi-10.3-2021.07/bin/../arm-none-eabi -D__USES_INITFINI__ /usr/local/share/cmake-3.21/Modules/CMakeCCompilerABI.c -quiet -dumpbase CMakeCCompilerABI.c -mcpu=arm7tdmi -mfloat-abi=soft -marm -mlibarch=armv4t -march=armv4t -auxbase-strip CMakeFiles/cmTC_9b012.dir/CMakeCCompilerABI.c.obj -Wall -Wno-attributes -Wformat=0 -std=gnu99 -version -ffunction-sections -fdata-sections -fno-strict-aliasing -fno-builtin -fshort-enums -o /tmp/ccnr2rgA.s
 GNU C99 (GNU Arm Embedded Toolchain 10.3-2021.07) version 10.3.1 20210621 (release) (arm-none-eabi)
 	compiled by GNU C version 4.8.4, GMP version 6.1.0, MPFR version 3.1.4, MPC version 1.0.3, isl version isl-0.18-GMP
 
@@ -52,13 +52,13 @@ GNU C99 (GNU Arm Embedded Toolchain 10.3-2021.07) version 10.3.1 20210621 (relea
 
 GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072
 Compiler executable checksum: 0ae10b4fdb68a799c7765007746184f2
-COLLECT_GCC_OPTIONS='-std=gnu99' '-Wall' '-Wno-attributes' '-Wformat=0' '-ffunction-sections' '-fdata-sections' '-fno-strict-aliasing' '-fno-builtin' '-fshort-enums' '-v' '-o' 'CMakeFiles/cmTC_27d31.dir/CMakeCCompilerABI.c.obj' '-c' '-mcpu=arm7tdmi' '-mfloat-abi=soft' '-marm' '-mlibarch=armv4t' '-march=armv4t'
- /home/gaosheng/gcc-arm-none-eabi-10.3-2021.07/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/bin/as -v -march=armv4t -mfloat-abi=soft -meabi=5 -o CMakeFiles/cmTC_27d31.dir/CMakeCCompilerABI.c.obj /tmp/cce8EJM2.s
+COLLECT_GCC_OPTIONS='-std=gnu99' '-Wall' '-Wno-attributes' '-Wformat=0' '-ffunction-sections' '-fdata-sections' '-fno-strict-aliasing' '-fno-builtin' '-fshort-enums' '-v' '-o' 'CMakeFiles/cmTC_9b012.dir/CMakeCCompilerABI.c.obj' '-c' '-mcpu=arm7tdmi' '-mfloat-abi=soft' '-marm' '-mlibarch=armv4t' '-march=armv4t'
+ /home/gaosheng/gcc-arm-none-eabi-10.3-2021.07/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/bin/as -v -march=armv4t -mfloat-abi=soft -meabi=5 -o CMakeFiles/cmTC_9b012.dir/CMakeCCompilerABI.c.obj /tmp/ccnr2rgA.s
 GNU assembler version 2.36.1 (arm-none-eabi) using BFD version (GNU Arm Embedded Toolchain 10.3-2021.07) 2.36.1.20210621
 COMPILER_PATH=/home/gaosheng/gcc-arm-none-eabi-10.3-2021.07/bin/../lib/gcc/arm-none-eabi/10.3.1/:/home/gaosheng/gcc-arm-none-eabi-10.3-2021.07/bin/../lib/gcc/:/home/gaosheng/gcc-arm-none-eabi-10.3-2021.07/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/bin/
 LIBRARY_PATH=/home/gaosheng/gcc-arm-none-eabi-10.3-2021.07/bin/../lib/gcc/arm-none-eabi/10.3.1/:/home/gaosheng/gcc-arm-none-eabi-10.3-2021.07/bin/../lib/gcc/:/home/gaosheng/gcc-arm-none-eabi-10.3-2021.07/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/:/home/gaosheng/gcc-arm-none-eabi-10.3-2021.07/bin/../arm-none-eabi/lib/
-COLLECT_GCC_OPTIONS='-std=gnu99' '-Wall' '-Wno-attributes' '-Wformat=0' '-ffunction-sections' '-fdata-sections' '-fno-strict-aliasing' '-fno-builtin' '-fshort-enums' '-v' '-o' 'CMakeFiles/cmTC_27d31.dir/CMakeCCompilerABI.c.obj' '-c' '-mcpu=arm7tdmi' '-mfloat-abi=soft' '-marm' '-mlibarch=armv4t' '-march=armv4t'
-[2/2] Linking C static library libcmTC_27d31.a
+COLLECT_GCC_OPTIONS='-std=gnu99' '-Wall' '-Wno-attributes' '-Wformat=0' '-ffunction-sections' '-fdata-sections' '-fno-strict-aliasing' '-fno-builtin' '-fshort-enums' '-v' '-o' 'CMakeFiles/cmTC_9b012.dir/CMakeCCompilerABI.c.obj' '-c' '-mcpu=arm7tdmi' '-mfloat-abi=soft' '-marm' '-mlibarch=armv4t' '-march=armv4t'
+[2/2] Linking C static library libcmTC_9b012.a
 
 
 
@@ -77,9 +77,9 @@ Parsed C implicit include dir info from above output: rv=done
 
 Parsed C implicit link information from above output:
   link line regex: [^( *|.*[/\])(arm-none-eabi-ld|CMAKE_LINK_STARTFILE-NOTFOUND|([^/\]+-)?ld|collect2)[^/\]*( |$)]
-  ignore line: [Change Dir: /home/gaosheng/mesh/my_mesh/nrf5_SDK_for_Mesh_v5.0.0_src/build/CMakeFiles/CMakeTmp]
+  ignore line: [Change Dir: /home/gaosheng/mesh/myic/myic/nrf5_SDK_for_Mesh_v5.0.0_src/build/CMakeFiles/CMakeTmp]
   ignore line: []
-  ignore line: [Run Build Command(s):/usr/bin/ninja cmTC_27d31 && [1/2] Building C object CMakeFiles/cmTC_27d31.dir/CMakeCCompilerABI.c.obj]
+  ignore line: [Run Build Command(s):/usr/bin/ninja cmTC_9b012 && [1/2] Building C object CMakeFiles/cmTC_9b012.dir/CMakeCCompilerABI.c.obj]
   ignore line: [Using built-in specs.]
   ignore line: [COLLECT_GCC=/home/gaosheng/gcc-arm-none-eabi-10.3-2021.07/bin/arm-none-eabi-gcc]
   ignore line: [Target: arm-none-eabi]
@@ -87,8 +87,8 @@ Parsed C implicit link information from above output:
   ignore line: [Thread model: single]
   ignore line: [Supported LTO compression algorithms: zlib]
   ignore line: [gcc version 10.3.1 20210621 (release) (GNU Arm Embedded Toolchain 10.3-2021.07) ]
-  ignore line: [COLLECT_GCC_OPTIONS='-std=gnu99' '-Wall' '-Wno-attributes' '-Wformat=0' '-ffunction-sections' '-fdata-sections' '-fno-strict-aliasing' '-fno-builtin' '-fshort-enums' '-v' '-o' 'CMakeFiles/cmTC_27d31.dir/CMakeCCompilerABI.c.obj' '-c' '-mcpu=arm7tdmi' '-mfloat-abi=soft' '-marm' '-mlibarch=armv4t' '-march=armv4t']
-  ignore line: [ /home/gaosheng/gcc-arm-none-eabi-10.3-2021.07/bin/../lib/gcc/arm-none-eabi/10.3.1/cc1 -quiet -v -iprefix /home/gaosheng/gcc-arm-none-eabi-10.3-2021.07/bin/../lib/gcc/arm-none-eabi/10.3.1/ -isysroot /home/gaosheng/gcc-arm-none-eabi-10.3-2021.07/bin/../arm-none-eabi -D__USES_INITFINI__ /usr/local/share/cmake-3.21/Modules/CMakeCCompilerABI.c -quiet -dumpbase CMakeCCompilerABI.c -mcpu=arm7tdmi -mfloat-abi=soft -marm -mlibarch=armv4t -march=armv4t -auxbase-strip CMakeFiles/cmTC_27d31.dir/CMakeCCompilerABI.c.obj -Wall -Wno-attributes -Wformat=0 -std=gnu99 -version -ffunction-sections -fdata-sections -fno-strict-aliasing -fno-builtin -fshort-enums -o /tmp/cce8EJM2.s]
+  ignore line: [COLLECT_GCC_OPTIONS='-std=gnu99' '-Wall' '-Wno-attributes' '-Wformat=0' '-ffunction-sections' '-fdata-sections' '-fno-strict-aliasing' '-fno-builtin' '-fshort-enums' '-v' '-o' 'CMakeFiles/cmTC_9b012.dir/CMakeCCompilerABI.c.obj' '-c' '-mcpu=arm7tdmi' '-mfloat-abi=soft' '-marm' '-mlibarch=armv4t' '-march=armv4t']
+  ignore line: [ /home/gaosheng/gcc-arm-none-eabi-10.3-2021.07/bin/../lib/gcc/arm-none-eabi/10.3.1/cc1 -quiet -v -iprefix /home/gaosheng/gcc-arm-none-eabi-10.3-2021.07/bin/../lib/gcc/arm-none-eabi/10.3.1/ -isysroot /home/gaosheng/gcc-arm-none-eabi-10.3-2021.07/bin/../arm-none-eabi -D__USES_INITFINI__ /usr/local/share/cmake-3.21/Modules/CMakeCCompilerABI.c -quiet -dumpbase CMakeCCompilerABI.c -mcpu=arm7tdmi -mfloat-abi=soft -marm -mlibarch=armv4t -march=armv4t -auxbase-strip CMakeFiles/cmTC_9b012.dir/CMakeCCompilerABI.c.obj -Wall -Wno-attributes -Wformat=0 -std=gnu99 -version -ffunction-sections -fdata-sections -fno-strict-aliasing -fno-builtin -fshort-enums -o /tmp/ccnr2rgA.s]
   ignore line: [GNU C99 (GNU Arm Embedded Toolchain 10.3-2021.07) version 10.3.1 20210621 (release) (arm-none-eabi)]
   ignore line: [	compiled by GNU C version 4.8.4  GMP version 6.1.0  MPFR version 3.1.4  MPC version 1.0.3  isl version isl-0.18-GMP]
   ignore line: []
@@ -109,13 +109,13 @@ Parsed C implicit link information from above output:
   ignore line: []
   ignore line: [GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072]
   ignore line: [Compiler executable checksum: 0ae10b4fdb68a799c7765007746184f2]
-  ignore line: [COLLECT_GCC_OPTIONS='-std=gnu99' '-Wall' '-Wno-attributes' '-Wformat=0' '-ffunction-sections' '-fdata-sections' '-fno-strict-aliasing' '-fno-builtin' '-fshort-enums' '-v' '-o' 'CMakeFiles/cmTC_27d31.dir/CMakeCCompilerABI.c.obj' '-c' '-mcpu=arm7tdmi' '-mfloat-abi=soft' '-marm' '-mlibarch=armv4t' '-march=armv4t']
-  ignore line: [ /home/gaosheng/gcc-arm-none-eabi-10.3-2021.07/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/bin/as -v -march=armv4t -mfloat-abi=soft -meabi=5 -o CMakeFiles/cmTC_27d31.dir/CMakeCCompilerABI.c.obj /tmp/cce8EJM2.s]
+  ignore line: [COLLECT_GCC_OPTIONS='-std=gnu99' '-Wall' '-Wno-attributes' '-Wformat=0' '-ffunction-sections' '-fdata-sections' '-fno-strict-aliasing' '-fno-builtin' '-fshort-enums' '-v' '-o' 'CMakeFiles/cmTC_9b012.dir/CMakeCCompilerABI.c.obj' '-c' '-mcpu=arm7tdmi' '-mfloat-abi=soft' '-marm' '-mlibarch=armv4t' '-march=armv4t']
+  ignore line: [ /home/gaosheng/gcc-arm-none-eabi-10.3-2021.07/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/bin/as -v -march=armv4t -mfloat-abi=soft -meabi=5 -o CMakeFiles/cmTC_9b012.dir/CMakeCCompilerABI.c.obj /tmp/ccnr2rgA.s]
   ignore line: [GNU assembler version 2.36.1 (arm-none-eabi) using BFD version (GNU Arm Embedded Toolchain 10.3-2021.07) 2.36.1.20210621]
   ignore line: [COMPILER_PATH=/home/gaosheng/gcc-arm-none-eabi-10.3-2021.07/bin/../lib/gcc/arm-none-eabi/10.3.1/:/home/gaosheng/gcc-arm-none-eabi-10.3-2021.07/bin/../lib/gcc/:/home/gaosheng/gcc-arm-none-eabi-10.3-2021.07/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/bin/]
   ignore line: [LIBRARY_PATH=/home/gaosheng/gcc-arm-none-eabi-10.3-2021.07/bin/../lib/gcc/arm-none-eabi/10.3.1/:/home/gaosheng/gcc-arm-none-eabi-10.3-2021.07/bin/../lib/gcc/:/home/gaosheng/gcc-arm-none-eabi-10.3-2021.07/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/:/home/gaosheng/gcc-arm-none-eabi-10.3-2021.07/bin/../arm-none-eabi/lib/]
-  ignore line: [COLLECT_GCC_OPTIONS='-std=gnu99' '-Wall' '-Wno-attributes' '-Wformat=0' '-ffunction-sections' '-fdata-sections' '-fno-strict-aliasing' '-fno-builtin' '-fshort-enums' '-v' '-o' 'CMakeFiles/cmTC_27d31.dir/CMakeCCompilerABI.c.obj' '-c' '-mcpu=arm7tdmi' '-mfloat-abi=soft' '-marm' '-mlibarch=armv4t' '-march=armv4t']
-  ignore line: [[2/2] Linking C static library libcmTC_27d31.a]
+  ignore line: [COLLECT_GCC_OPTIONS='-std=gnu99' '-Wall' '-Wno-attributes' '-Wformat=0' '-ffunction-sections' '-fdata-sections' '-fno-strict-aliasing' '-fno-builtin' '-fshort-enums' '-v' '-o' 'CMakeFiles/cmTC_9b012.dir/CMakeCCompilerABI.c.obj' '-c' '-mcpu=arm7tdmi' '-mfloat-abi=soft' '-marm' '-mlibarch=armv4t' '-march=armv4t']
+  ignore line: [[2/2] Linking C static library libcmTC_9b012.a]
   ignore line: []
   ignore line: []
   implicit libs: []

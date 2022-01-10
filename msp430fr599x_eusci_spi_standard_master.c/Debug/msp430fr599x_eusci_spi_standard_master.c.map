@@ -1,7 +1,7 @@
 ******************************************************************************
                   MSP430 Linker Unix v20.2.5                   
 ******************************************************************************
->> Linked Mon Dec 20 18:39:54 2021
+>> Linked Mon Jan 10 19:10:17 2022
 
 OUTPUT FILE NAME:   <msp430fr599x_eusci_spi_standard_master.c.out>
 ENTRY POINT SYMBOL: "_c_int00_noargs_mpu"  address: 000044c0
@@ -17,10 +17,10 @@ MEMORY CONFIGURATION
   INFOC                 00001880   00000080  00000000  00000080  RWIX
   INFOB                 00001900   00000080  00000000  00000080  RWIX
   INFOA                 00001980   00000080  00000000  00000080  RWIX
-  RAM                   00001c00   00001000  0000093a  000006c6  RWIX
+  RAM                   00001c00   00001000  00000b25  000004db  RWIX
   LEARAM                00002c00   00000ec8  00000000  00000ec8  RWIX
   LEASTACK              00003ac8   00000138  00000000  00000138  RWIX
-  FRAM                  00004000   0000bf80  0000091a  0000b666  RWIX
+  FRAM                  00004000   0000bf80  0000090e  0000b672  RWIX
   JTAGSIGNATURE         0000ff80   00000004  00000004  00000000  RWIX  ffff 
   BSLSIGNATURE          0000ff84   00000004  00000004  00000000  RWIX  ffff 
   IPESIGNATURE          0000ff88   00000008  00000008  00000000  RWIX  ffff 
@@ -80,7 +80,7 @@ MEMORY CONFIGURATION
   INT53                 0000fffa   00000002  00000002  00000000  RWIX
   INT54                 0000fffc   00000002  00000002  00000000  RWIX
   RESET                 0000fffe   00000002  00000002  00000000  RWIX
-  FRAM2                 00010000   00033ff8  00001534  00032ac4  RWIX
+  FRAM2                 00010000   00033ff8  00001794  00032864  RWIX
 
 
 SECTION ALLOCATION MAP
@@ -88,29 +88,25 @@ SECTION ALLOCATION MAP
  output                                  attributes/
 section   page    origin      length       input sections
 --------  ----  ----------  ----------   ----------------
-.data      0    00001c00    00000896     UNINITIALIZED
+.data      0    00001c00    0000087c     UNINITIALIZED
                   00001c00    000003d2     routingTx.obj (.data:file_data)
                   00001fd2    000003d2     msp430fr599x_eusci_spi_standard_master.obj (.data:store_received_data)
-                  000023a4    00000027     msp430fr599x_eusci_spi_standard_master.obj (.data:ReceiveBuffer)
-                  000023cb    00000001     --HOLE--
-                  000023cc    00000027     msp430fr599x_eusci_spi_standard_master.obj (.data:SlaveType0)
-                  000023f3    00000001     --HOLE--
-                  000023f4    00000027     msp430fr599x_eusci_spi_standard_master.obj (.data:g_transBuffer)
-                  0000241b    00000001     --HOLE--
-                  0000241c    00000020     msp430fr599x_eusci_spi_standard_master.obj (.data:file_sha256_true)
-                  0000243c    00000020     routingRx.obj (.data:g_sha256_buf)
-                  0000245c    00000019     msp430fr599x_eusci_spi_standard_master.obj (.data)
-                  00002475    00000001     --HOLE--
-                  00002476    00000006     routingRx.obj (.data)
-                  0000247c    00000004     rts430x_lc_rd_eabi.lib : _lock.c.obj (.data:_lock)
-                  00002480    00000004                            : _lock.c.obj (.data:_unlock)
-                  00002484    00000004     random.obj (.data)
-                  00002488    00000004     routingTx.obj (.data)
-                  0000248c    00000003     msp430fr599x_eusci_spi_standard_master.obj (.data:front_check_arr)
-                  0000248f    00000001     --HOLE--
-                  00002490    00000003     msp430fr599x_eusci_spi_standard_master.obj (.data:rear_check_arr)
-                  00002493    00000001     --HOLE--
-                  00002494    00000002     rts430x_lc_rd_eabi.lib : memory.c.obj (.data)
+                  000023a4    00000021     msp430fr599x_eusci_spi_standard_master.obj (.data:ReceiveBuffer)
+                  000023c5    00000001     --HOLE--
+                  000023c6    00000021     msp430fr599x_eusci_spi_standard_master.obj (.data:SlaveType0)
+                  000023e7    00000001     --HOLE--
+                  000023e8    00000021     msp430fr599x_eusci_spi_standard_master.obj (.data:g_transBuffer)
+                  00002409    00000001     --HOLE--
+                  0000240a    00000020     msp430fr599x_eusci_spi_standard_master.obj (.data:file_sha256_true)
+                  0000242a    00000020     routingRx.obj (.data:g_sha256_buf)
+                  0000244a    00000015     msp430fr599x_eusci_spi_standard_master.obj (.data)
+                  0000245f    00000001     --HOLE--
+                  00002460    0000000a     routingRx.obj (.data)
+                  0000246a    00000004     rts430x_lc_rd_eabi.lib : _lock.c.obj (.data:_lock)
+                  0000246e    00000004                            : _lock.c.obj (.data:_unlock)
+                  00002472    00000004     random.obj (.data)
+                  00002476    00000004     routingTx.obj (.data)
+                  0000247a    00000002     rts430x_lc_rd_eabi.lib : memory.c.obj (.data)
 
 .TI.persistent 
 *          0    00004000    00000000     UNINITIALIZED
@@ -134,11 +130,12 @@ section   page    origin      length       input sections
 .ipe:_isr 
 *          0    00004400    00000000     UNINITIALIZED
 
-.cinit     0    000045ec    0000032e     
-                  000045ec    0000030c     (.cinit..data.load) [load image, compression = lzss]
-                  000048f8    0000000c     (__TI_handler_table)
-                  00004904    00000006     (.cinit..bss.load) [load image, compression = zero_init]
-                  0000490a    00000010     (__TI_cinit_table)
+.cinit     0    000045e8    00000326     
+                  000045e8    00000303     (.cinit..data.load) [load image, compression = lzss]
+                  000048eb    00000001     --HOLE-- [fill = 0]
+                  000048ec    0000000c     (__TI_handler_table)
+                  000048f8    00000006     (.cinit..bss.load) [load image, compression = zero_init]
+                  000048fe    00000010     (__TI_cinit_table)
 
 .init_array 
 *          0    00004000    00000000     UNINITIALIZED
@@ -149,8 +146,14 @@ section   page    origin      length       input sections
                   000044c0    00000020     rts430x_lc_rd_eabi.lib : boot.c.obj (.text:_isr:_c_int00_noargs_mpu)
                   000044e0    00000008                            : isr_trap.asm.obj (.text:_isr:__TI_ISR_TRAP)
 
-.bss       0    00002496    00000004     UNINITIALIZED
-                  00002496    00000004     rts430x_lc_rd_eabi.lib : memory.c.obj (.bss)
+.bss       0    0000247c    00000209     UNINITIALIZED
+                  0000247c    00000200     (.common:crcTable)
+                  0000267c    00000004     rts430x_lc_rd_eabi.lib : memory.c.obj (.bss)
+                  00002680    00000001     (.common:g_dest_address)
+                  00002681    00000001     (.common:g_if_relayNode)
+                  00002682    00000001     (.common:g_if_sourceNode)
+                  00002683    00000001     (.common:g_nodeAddress)
+                  00002684    00000001     (.common:g_node_dimension)
 
 .stack     0    00002b60    000000a0     UNINITIALIZED
                   00002b60    00000004     rts430x_lc_rd_eabi.lib : boot.c.obj (.stack)
@@ -291,71 +294,79 @@ SYSNMI     0    0000fffc    00000002
 .reset     0    0000fffe    00000002     
                   0000fffe    00000002     rts430x_lc_rd_eabi.lib : boot.c.obj (.reset)
 
-.const     0    000044e8    00000104     
+.const     0    000044e8    00000100     
                   000044e8    00000100     hash.obj (.const:k)
-                  000045e8    00000004     routingTx.obj (.const)
 
-.text      0    00010000    00001534     
+.text      0    00010000    00001794     
                   00010000    00000412     hash.obj (.text:sha256_transform)
                   00010412    000002a8     hash.obj (.text:sha256_final)
-                  000106ba    00000162     routingTx.obj (.text:spi_transData)
-                  0001081c    00000112     rts430x_lc_rd_eabi.lib : memory.c.obj (.text:aligned_alloc)
-                  0001092e    000000e2                            : memory.c.obj (.text:free)
-                  00010a10    000000c4     routingTx.obj (.text:spi_transHeaderStatus)
-                  00010ad4    000000b6     routingRx.obj (.text:check_completeness)
-                  00010b8a    000000a0     transitionData.obj (.text:data_m2s)
-                  00010c2a    0000007a     routingRx.obj (.text:receiveDataFromNordic)
-                  00010ca4    0000007a     transitionData.obj (.text:status_m2s)
-                  00010d1e    00000078     hash.obj (.text:sha256_init)
-                  00010d96    00000076     rts430x_lc_rd_eabi.lib : copy_decompress_lzss.c.obj (.text:decompress:lzss:__TI_decompress_lzss)
-                  00010e0c    00000076     hash.obj (.text:sha256_update)
-                  00010e82    00000074     rts430x_lc_rd_eabi.lib : memory.c.obj (.text:split)
-                  00010ef6    00000070     msp430fr599x_eusci_spi_standard_master.obj (.text:start_spi_process)
-                  00010f66    0000006c     routingRx.obj (.text:data_is_fin)
-                  00010fd2    00000056     routingRx.obj (.text:data_is_datagram)
-                  00011028    00000054     rts430x_lc_rd_eabi.lib : autoinit.c.obj (.text:__TI_auto_init_nobinit_nopinit_hold_wdt:__TI_auto_init_nobinit_nopinit_hold_wdt)
-                  0001107c    0000003e                            : lsl32.asm.obj (.text:l_lsl_const)
-                  000110ba    0000003e                            : lsr32.asm.obj (.text:l_lsr_const)
-                  000110f8    0000003a                            : lsr64.c.obj (.text:__mspabi_srlll)
-                  00011132    0000003a     routing.obj (.text:start_routing)
-                  0001116c    00000034     routingRx.obj (.text:data_is_ack)
-                  000111a0    00000034     routingRx.obj (.text:file_sha256)
-                  000111d4    00000032     msp430fr599x_eusci_spi_standard_master.obj (.text:SPI_Master_ReadReg)
-                  00011206    00000032     msp430fr599x_eusci_spi_standard_master.obj (.text:SPI_Master_WriteReg)
-                  00011238    0000002c     MSPMPU_INIT_LIB_CCS_msp430_large_code_restricted_data.lib : mpu_init.o (.text:__mpu_init)
-                  00011264    0000002c     rts430x_lc_rd_eabi.lib : memory.c.obj (.text:free_list_insert)
-                  00011290    0000002c     msp430fr599x_eusci_spi_standard_master.obj (.text:initClockTo16MHz)
-                  000112bc    0000002c     rts430x_lc_rd_eabi.lib : div16s.asm.obj (.text)
-                  000112e8    0000002a                            : memory.c.obj (.text:free_list_remove)
-                  00011312    0000002a     random.obj (.text:genRanNumb)
-                  0001133c    00000026     rts430x_lc_rd_eabi.lib : memcmp.c.obj (.text:memcmp)
-                  00011362    00000024                            : copy_zero_init.c.obj (.text:decompress:ZI:__TI_zero_init_nomemset:__TI_zero_init_nomemset)
-                  00011386    00000024     msp430fr599x_eusci_spi_standard_master.obj (.text:initGPIO)
-                  000113aa    00000024     rts430x_lc_rd_eabi.lib : mult32_f5hw.asm.obj (.text)
-                  000113ce    0000001c     msp430fr599x_eusci_spi_standard_master.obj (.text:CopyArray)
-                  000113ea    0000001a     msp430fr599x_eusci_spi_standard_master.obj (.text:main)
-                  00011404    0000001a     routingRx.obj (.text:terminateRoutine)
-                  0001141e    00000016     transitionData.obj (.text:buf_m2s)
-                  00011434    00000016     rts430x_lc_rd_eabi.lib : memory.c.obj (.text:heap_start)
-                  0001144a    00000016     msp430fr599x_eusci_spi_standard_master.obj (.text:initSPI)
-                  00011460    00000016     rts430x_lc_rd_eabi.lib : memset.c.obj (.text:memset)
-                  00011476    00000016                            : div16u.asm.obj (.text)
-                  0001148c    00000016     msp430fr599x_eusci_spi_standard_master.obj (.text:startTrans)
-                  000114a2    00000014     rts430x_lc_rd_eabi.lib : memcpy.c.obj (.text:memcpy)
-                  000114b6    00000012                            : copy_decompress_none.c.obj (.text:decompress:none:__TI_decompress_none)
-                  000114c8    00000012                            : rotl32.asm.obj (.text)
-                  000114da    00000010                            : lsr32.asm.obj (.text:l_lsr)
-                  000114ea    0000000e     msp430fr599x_eusci_spi_standard_master.obj (.text:SendUCB1Data)
-                  000114f8    0000000a     routingRx.obj (.text:data_is_reverseFin)
-                  00011502    0000000a     msp430fr599x_eusci_spi_standard_master.obj (.text:recevedSucess)
-                  0001150c    00000008     rts430x_lc_rd_eabi.lib : memory.c.obj (.text:malloc)
-                  00011514    00000006                            : exit.c.obj (.text:abort)
-                  0001151a    00000006     msp430fr599x_eusci_spi_standard_master.obj (.text:close_spi_process)
-                  00011520    00000006     transitionData.obj (.text:free_datagram)
-                  00011526    00000006     routingTx.obj (.text:free_pointer)
-                  0001152c    00000004     rts430x_lc_rd_eabi.lib : pre_init.c.obj (.text:_system_pre_init)
-                  00011530    00000002                            : _lock.c.obj (.text:_nop)
-                  00011532    00000002                            : startup.c.obj (.text:_system_post_cinit)
+                  000106ba    00000178     routingTx.obj (.text:spi_transData)
+                  00010832    00000112     rts430x_lc_rd_eabi.lib : memory.c.obj (.text:aligned_alloc)
+                  00010944    000000e2                            : memory.c.obj (.text:free)
+                  00010a26    000000de     transitionData.obj (.text:status_m2s)
+                  00010b04    000000d8     transitionData.obj (.text:data_m2s)
+                  00010bdc    000000ca     routingTx.obj (.text:spi_transHeaderStatus)
+                  00010ca6    000000c0     msp430fr599x_eusci_spi_standard_master.obj (.text:start_spi_process)
+                  00010d66    00000096     routingRx.obj (.text:receiveDataFromNordic)
+                  00010dfc    0000007c     routingRx.obj (.text:check_completeness)
+                  00010e78    00000078     hash.obj (.text:sha256_init)
+                  00010ef0    00000076     rts430x_lc_rd_eabi.lib : copy_decompress_lzss.c.obj (.text:decompress:lzss:__TI_decompress_lzss)
+                  00010f66    00000076     hash.obj (.text:sha256_update)
+                  00010fdc    00000074     msp430fr599x_eusci_spi_standard_master.obj (.text:setNode)
+                  00011050    00000074     rts430x_lc_rd_eabi.lib : memory.c.obj (.text:split)
+                  000110c4    00000054                            : autoinit.c.obj (.text:__TI_auto_init_nobinit_nopinit_hold_wdt:__TI_auto_init_nobinit_nopinit_hold_wdt)
+                  00011118    00000054     routingRx.obj (.text:data_is_datagram)
+                  0001116c    0000004c     crc.obj (.text:crcFast)
+                  000111b8    0000003e     rts430x_lc_rd_eabi.lib : lsl32.asm.obj (.text:l_lsl_const)
+                  000111f6    0000003e                            : lsr32.asm.obj (.text:l_lsr_const)
+                  00011234    0000003e     crc.obj (.text:reflect)
+                  00011272    0000003a     rts430x_lc_rd_eabi.lib : lsr64.c.obj (.text:__mspabi_srlll)
+                  000112ac    0000003a     routingRx.obj (.text:data_is_fin)
+                  000112e6    0000003a     msp430fr599x_eusci_spi_standard_master.obj (.text:initClockTo16MHz)
+                  00011320    00000036     crc.obj (.text:crcInit)
+                  00011356    00000036     routing.obj (.text:start_routing)
+                  0001138c    00000034     routingRx.obj (.text:data_is_ack)
+                  000113c0    00000034     routingRx.obj (.text:file_sha256)
+                  000113f4    00000032     msp430fr599x_eusci_spi_standard_master.obj (.text:SPI_Master_ReadReg)
+                  00011426    00000032     msp430fr599x_eusci_spi_standard_master.obj (.text:SPI_Master_WriteReg)
+                  00011458    0000002c     MSPMPU_INIT_LIB_CCS_msp430_large_code_restricted_data.lib : mpu_init.o (.text:__mpu_init)
+                  00011484    0000002c     rts430x_lc_rd_eabi.lib : memory.c.obj (.text:free_list_insert)
+                  000114b0    0000002c                            : div16s.asm.obj (.text)
+                  000114dc    0000002a                            : memory.c.obj (.text:free_list_remove)
+                  00011506    0000002a     random.obj (.text:genRanNumb)
+                  00011530    00000026     rts430x_lc_rd_eabi.lib : memcmp.c.obj (.text:memcmp)
+                  00011556    00000026     routingRx.obj (.text:reInitialize)
+                  0001157c    00000024     rts430x_lc_rd_eabi.lib : copy_zero_init.c.obj (.text:decompress:ZI:__TI_zero_init_nomemset:__TI_zero_init_nomemset)
+                  000115a0    00000024     msp430fr599x_eusci_spi_standard_master.obj (.text:initGPIO)
+                  000115c4    00000024     rts430x_lc_rd_eabi.lib : mult32_f5hw.asm.obj (.text)
+                  000115e8    00000020     msp430fr599x_eusci_spi_standard_master.obj (.text:main)
+                  00011608    0000001e     msp430fr599x_eusci_spi_standard_master.obj (.text:terminateTrans)
+                  00011626    0000001c     msp430fr599x_eusci_spi_standard_master.obj (.text:CopyArray)
+                  00011642    0000001a     msp430fr599x_eusci_spi_standard_master.obj (.text:startTrans)
+                  0001165c    00000016     transitionData.obj (.text:buf_m2s)
+                  00011672    00000016     transitionData.obj (.text:getCRC)
+                  00011688    00000016     rts430x_lc_rd_eabi.lib : memory.c.obj (.text:heap_start)
+                  0001169e    00000016     msp430fr599x_eusci_spi_standard_master.obj (.text:initSPI)
+                  000116b4    00000016     rts430x_lc_rd_eabi.lib : memset.c.obj (.text:memset)
+                  000116ca    00000016                            : div16u.asm.obj (.text)
+                  000116e0    00000014                            : memcpy.c.obj (.text:memcpy)
+                  000116f4    00000012                            : copy_decompress_none.c.obj (.text:decompress:none:__TI_decompress_none)
+                  00011706    00000012                            : rotl32.asm.obj (.text)
+                  00011718    00000010                            : lsr32.asm.obj (.text:l_lsr)
+                  00011728    0000000e     msp430fr599x_eusci_spi_standard_master.obj (.text:SendUCB1Data)
+                  00011736    0000000e     routingRx.obj (.text:data_is_reverseFin)
+                  00011744    0000000a     msp430fr599x_eusci_spi_standard_master.obj (.text:recevedFailure)
+                  0001174e    0000000a     msp430fr599x_eusci_spi_standard_master.obj (.text:recevedSucess)
+                  00011758    0000000a     rts430x_lc_rd_eabi.lib : lsl16.asm.obj (.text)
+                  00011762    0000000a     routingRx.obj (.text:terminateRoutine)
+                  0001176c    00000008     rts430x_lc_rd_eabi.lib : memory.c.obj (.text:malloc)
+                  00011774    00000006                            : exit.c.obj (.text:abort)
+                  0001177a    00000006     msp430fr599x_eusci_spi_standard_master.obj (.text:close_spi_process)
+                  00011780    00000006     transitionData.obj (.text:free_datagram)
+                  00011786    00000006     routingTx.obj (.text:free_pointer)
+                  0001178c    00000004     rts430x_lc_rd_eabi.lib : pre_init.c.obj (.text:_system_pre_init)
+                  00011790    00000002                            : _lock.c.obj (.text:_nop)
+                  00011792    00000002                            : startup.c.obj (.text:_system_post_cinit)
 
 MODULE SUMMARY
 
@@ -363,14 +374,15 @@ MODULE SUMMARY
        ------                                       ----   -------   -------
     ./
        hash.obj                                     1960   256       0      
-       msp430fr599x_eusci_spi_standard_master.obj   612    2         1158   
-       routingTx.obj                                556    4         982    
-       routingRx.obj                                638    0         38     
-       transitionData.obj                           310    0         0      
-       routing.obj                                  58     0         0      
+       msp430fr599x_eusci_spi_standard_master.obj   872    2         1135   
+       routingTx.obj                                584    0         982    
+       crc.obj                                      192    0         512    
+       routingRx.obj                                582    0         42     
+       transitionData.obj                           488    0         0      
+       routing.obj                                  54     0         0      
        random.obj                                   42     0         4      
     +--+--------------------------------------------+------+---------+---------+
-       Total:                                       4176   262       2182   
+       Total:                                       4774   258       2675   
                                                                             
     /opt/ti/ccs1040/ccs/ccs_base/msp430/lib/FR59xx/MSPMPU_INIT_LIB_CCS_msp430_large_code_restricted_data.lib
        mpu_init.o                                   44     0         0      
@@ -395,6 +407,7 @@ MODULE SUMMARY
        copy_decompress_none.c.obj                   18     0         0      
        rotl32.asm.obj                               18     0         0      
        _lock.c.obj                                  2      0         8      
+       lsl16.asm.obj                                10     0         0      
        isr_trap.asm.obj                             8      0         0      
        exit.c.obj                                   6      0         0      
        pre_init.c.obj                               4      0         0      
@@ -436,25 +449,25 @@ MODULE SUMMARY
        int54.asm.obj                                0      2         0      
        startup.c.obj                                2      0         0      
     +--+--------------------------------------------+------+---------+---------+
-       Total:                                       1440   74        14     
+       Total:                                       1450   74        14     
                                                                             
        Heap:                                        0      0         160    
        Stack:                                       0      0         160    
-       Linker Generated:                            0      814       0      
+       Linker Generated:                            0      805       0      
     +--+--------------------------------------------+------+---------+---------+
-       Grand Total:                                 5660   1150      2516   
+       Grand Total:                                 6268   1137      3009   
 
 
 LINKER GENERATED COPY TABLES
 
-__TI_cinit_table @ 0000490a records: 2, size/record: 8, table size: 16
-	.data: load addr=000045ec, load size=0000030c bytes, run addr=00001c00, run size=00000896 bytes, compression=lzss
-	.bss: load addr=00004904, load size=00000006 bytes, run addr=00002496, run size=00000004 bytes, compression=zero_init
+__TI_cinit_table @ 000048fe records: 2, size/record: 8, table size: 16
+	.data: load addr=000045e8, load size=00000303 bytes, run addr=00001c00, run size=0000087c bytes, compression=lzss
+	.bss: load addr=000048f8, load size=00000006 bytes, run addr=0000247c, run size=00000209 bytes, compression=zero_init
 
 
 LINKER GENERATED HANDLER TABLE
 
-__TI_handler_table @ 000048f8 records: 3, size/record: 4, table size: 12
+__TI_handler_table @ 000048ec records: 3, size/record: 4, table size: 12
 	index: 0, handler: __TI_zero_init
 	index: 1, handler: __TI_decompress_lzss
 	index: 2, handler: __TI_decompress_none
@@ -725,7 +738,7 @@ address   name
 000004bc  BIN2BCD                                
 000004bd  BIN2BCD_H                              
 000004bc  BIN2BCD_L                              
-00011514  C$$EXIT                                
+00011774  C$$EXIT                                
 0000043e  CAPTIO0CTL                             
 0000043f  CAPTIO0CTL_H                           
 0000043e  CAPTIO0CTL_L                           
@@ -819,7 +832,7 @@ address   name
 0000016c  CSCTL6                                 
 0000016d  CSCTL6_H                               
 0000016c  CSCTL6_L                               
-000113ce  CopyArray                              
+00011626  CopyArray                              
 00000510  DMA0CTL                                
 00000511  DMA0CTL_H                              
 00000510  DMA0CTL_L                              
@@ -1042,7 +1055,7 @@ address   name
 000004c2  MPYS_L                                 
 000004c1  MPY_H                                  
 000004c0  MPY_L                                  
-0000246e  MasterMode                             
+00002458  MasterMode                             
 000004c8  OP2                                    
 000004e2  OP2H                                   
 000004e3  OP2H_H                                 
@@ -1427,9 +1440,9 @@ address   name
 000004b6  RTCYEAR                                
 000004b7  RTCYEAR_H                              
 000004b6  RTCYEAR_L                              
-00002471  RXByteCtr                              
+0000245b  RXByteCtr                              
 000023a4  ReceiveBuffer                          
-00002472  ReceiveIndex                           
+0000245c  ReceiveIndex                           
 00000100  SFRIE1                                 
 00000101  SFRIE1_H                               
 00000100  SFRIE1_L                               
@@ -1439,8 +1452,8 @@ address   name
 00000104  SFRRPCR                                
 00000105  SFRRPCR_H                              
 00000104  SFRRPCR_L                              
-000111d4  SPI_Master_ReadReg                     
-00011206  SPI_Master_WriteReg                    
+000113f4  SPI_Master_ReadReg                     
+00011426  SPI_Master_WriteReg                    
 000004ce  SUMEXT                                 
 000004cf  SUMEXT_H                               
 000004ce  SUMEXT_L                               
@@ -1471,8 +1484,8 @@ address   name
 0000019a  SYSUNIV                                
 0000019b  SYSUNIV_H                              
 0000019a  SYSUNIV_L                              
-000114ea  SendUCB1Data                           
-000023cc  SlaveType0                             
+00011728  SendUCB1Data                           
+000023c6  SlaveType0                             
 00000352  TA0CCR0                                
 00000353  TA0CCR0_H                              
 00000352  TA0CCR0_L                              
@@ -1665,9 +1678,9 @@ address   name
 000003d0  TB0R                                   
 000003d1  TB0R_H                                 
 000003d0  TB0R_L                                 
-00002473  TXByteCtr                              
-00002474  TransmitIndex                          
-00002470  TransmitRegAddr                        
+0000245d  TXByteCtr                              
+0000245e  TransmitIndex                          
+0000245a  TransmitRegAddr                        
 000005d0  UCA0ABCTL                              
 000005d1  UCA0ABCTL_H                            
 000005d0  UCA0ABCTL_L                            
@@ -2023,14 +2036,14 @@ address   name
 00002c00  __STACK_END                            
 000000a0  __STACK_SIZE                           
 000000a0  __SYSMEM_SIZE                          
-0000490a  __TI_CINIT_Base                        
-0000491a  __TI_CINIT_Limit                       
-000048f8  __TI_Handler_Table_Base                
-00004904  __TI_Handler_Table_Limit               
+000048fe  __TI_CINIT_Base                        
+0000490e  __TI_CINIT_Limit                       
+000048ec  __TI_Handler_Table_Base                
+000048f8  __TI_Handler_Table_Limit               
 000044e0  __TI_ISR_TRAP                          
-00011028  __TI_auto_init_nobinit_nopinit_hold_wdt
-00010d96  __TI_decompress_lzss                   
-000114b6  __TI_decompress_none                   
+000110c4  __TI_auto_init_nobinit_nopinit_hold_wdt
+00010ef0  __TI_decompress_lzss                   
+000116f4  __TI_decompress_none                   
 0000ffb4  __TI_int18                             
 0000ffb6  __TI_int19                             
 0000ffb8  __TI_int20                             
@@ -2071,128 +2084,129 @@ address   name
 ffffffff  __TI_pprof_out_hndl                    
 ffffffff  __TI_prof_data_size                    
 ffffffff  __TI_prof_data_start                   
-00011362  __TI_zero_init_nomemset                
+0001157c  __TI_zero_init_nomemset                
 ffffffff  __c_args__                             
 00000001  __mpu_enable                           
-00011238  __mpu_init                             
-000112bc  __mspabi_divi                          
-00011476  __mspabi_divu                          
-000113aa  __mspabi_mpyl_f5hw                     
-000112bc  __mspabi_remi                          
-00011476  __mspabi_remu                          
-000114c8  __mspabi_rlll                          
-000110b4  __mspabi_slll_1                        
-00011090  __mspabi_slll_10                       
-0001108c  __mspabi_slll_11                       
-00011088  __mspabi_slll_12                       
-00011084  __mspabi_slll_13                       
-00011080  __mspabi_slll_14                       
-0001107c  __mspabi_slll_15                       
-000110b0  __mspabi_slll_2                        
-000110ac  __mspabi_slll_3                        
-000110a8  __mspabi_slll_4                        
-000110a4  __mspabi_slll_5                        
-000110a0  __mspabi_slll_6                        
-0001109c  __mspabi_slll_7                        
-00011098  __mspabi_slll_8                        
-00011094  __mspabi_slll_9                        
-000114da  __mspabi_srll                          
-000110f2  __mspabi_srll_1                        
-000110ce  __mspabi_srll_10                       
-000110ca  __mspabi_srll_11                       
-000110c6  __mspabi_srll_12                       
-000110c2  __mspabi_srll_13                       
-000110be  __mspabi_srll_14                       
-000110ba  __mspabi_srll_15                       
-000110ee  __mspabi_srll_2                        
-000110ea  __mspabi_srll_3                        
-000110e6  __mspabi_srll_4                        
-000110e2  __mspabi_srll_5                        
-000110de  __mspabi_srll_6                        
-000110da  __mspabi_srll_7                        
-000110d6  __mspabi_srll_8                        
-000110d2  __mspabi_srll_9                        
-000110f8  __mspabi_srlll                         
+00011458  __mpu_init                             
+000114b0  __mspabi_divi                          
+000116ca  __mspabi_divu                          
+000115c4  __mspabi_mpyl_f5hw                     
+000114b0  __mspabi_remi                          
+000116ca  __mspabi_remu                          
+00011706  __mspabi_rlll                          
+00011758  __mspabi_slli                          
+000111f0  __mspabi_slll_1                        
+000111cc  __mspabi_slll_10                       
+000111c8  __mspabi_slll_11                       
+000111c4  __mspabi_slll_12                       
+000111c0  __mspabi_slll_13                       
+000111bc  __mspabi_slll_14                       
+000111b8  __mspabi_slll_15                       
+000111ec  __mspabi_slll_2                        
+000111e8  __mspabi_slll_3                        
+000111e4  __mspabi_slll_4                        
+000111e0  __mspabi_slll_5                        
+000111dc  __mspabi_slll_6                        
+000111d8  __mspabi_slll_7                        
+000111d4  __mspabi_slll_8                        
+000111d0  __mspabi_slll_9                        
+00011718  __mspabi_srll                          
+0001122e  __mspabi_srll_1                        
+0001120a  __mspabi_srll_10                       
+00011206  __mspabi_srll_11                       
+00011202  __mspabi_srll_12                       
+000111fe  __mspabi_srll_13                       
+000111fa  __mspabi_srll_14                       
+000111f6  __mspabi_srll_15                       
+0001122a  __mspabi_srll_2                        
+00011226  __mspabi_srll_3                        
+00011222  __mspabi_srll_4                        
+0001121e  __mspabi_srll_5                        
+0001121a  __mspabi_srll_6                        
+00011216  __mspabi_srll_7                        
+00011212  __mspabi_srll_8                        
+0001120e  __mspabi_srll_9                        
+00011272  __mspabi_srlll                         
 000044c0  _c_int00_noargs_mpu                    
-0000247c  _lock                                  
-00011530  _nop                                   
+0000246a  _lock                                  
+00011790  _nop                                   
 0000fffe  _reset_vector                          
 00002b60  _stack                                 
 00004000  _sys_memory                            
-00011532  _system_post_cinit                     
-0001152c  _system_pre_init                       
-00002480  _unlock                                
-00011514  abort                                  
-0001081c  aligned_alloc                          
-0001141e  buf_m2s                                
-00010ad4  check_completeness                     
-0001151a  close_spi_process                      
-0001116c  data_is_ack                            
-00010fd2  data_is_datagram                       
-00010f66  data_is_fin                            
-000114f8  data_is_reverseFin                     
-00010b8a  data_m2s                               
+00011792  _system_post_cinit                     
+0001178c  _system_pre_init                       
+0000246e  _unlock                                
+00011774  abort                                  
+00010832  aligned_alloc                          
+0001165c  buf_m2s                                
+00010dfc  check_completeness                     
+0001177a  close_spi_process                      
+0001116c  crcFast                                
+00011320  crcInit                                
+0000247c  crcTable                               
+00010b04  data_m2s                               
 00001c00  file_data                              
-000111a0  file_sha256                            
-0000241c  file_sha256_true                       
+000113c0  file_sha256                            
+0000240a  file_sha256_true                       
 00004400  fram_ipe_end                           
 00004400  fram_ipe_start                         
 00004000  fram_rw_start                          
 00004400  fram_rx_start                          
-0001092e  free                                   
-00011520  free_datagram                          
-00011526  free_pointer                           
-0000248c  front_check_arr                        
-00002466  g_com_pass                             
-0000245c  g_dest_address                         
-0000246d  g_dstFromSendNode                      
-000045e8  g_file_len                             
-00002465  g_if_end_trans                         
-0000246c  g_if_firstDatagram                     
-0000246b  g_if_firstRecAck                       
-0000247b  g_if_paired                            
-0000245e  g_if_relayNode                         
-00002469  g_if_send_next                         
-0000245f  g_if_sourceNode                        
-00002460  g_if_transDataFromRec                  
-0000245d  g_node_dimension                       
-0000247a  g_pairedNodeAddress                    
-00002468  g_pre_ack_seq                          
-00002467  g_pre_packet_seq                       
-00002464  g_received_address                     
-00002462  g_seq_data                             
-00002463  g_seq_header                           
-0000246a  g_spiTransLen                          
-000023f4  g_transBuffer                          
-00011312  genRanNumb                             
-00011290  initClockTo16MHz                       
-00011386  initGPIO                               
-0001144a  initSPI                                
-000113ea  main                                   
-0001150c  malloc                                 
-0001081c  memalign                               
-0001133c  memcmp                                 
-000114a2  memcpy                                 
-00011460  memset                                 
+00010944  free                                   
+00011780  free_datagram                          
+00011786  free_pointer                           
+00002680  g_dest_address                         
+00002456  g_if_Rxternimate                       
+00002457  g_if_Txternimate                       
+00002453  g_if_end_trans                         
+00002465  g_if_paired                            
+00002681  g_if_relayNode                         
+00002454  g_if_send_next                         
+00002682  g_if_sourceNode                        
+00002683  g_nodeAddress                          
+00002684  g_node_dimension                       
+00002464  g_pairedNodeAddress                    
+00002452  g_received_address                     
+00002450  g_seq_data                             
+00002451  g_seq_header                           
+00002455  g_spiTransLen                          
+000023e8  g_transBuffer                          
+00002476  g_transDataSeq                         
+00011506  genRanNumb                             
+000112e6  initClockTo16MHz                       
+000115a0  initGPIO                               
+0001169e  initSPI                                
+0000244b  l_dest_address                         
+0000244d  l_if_relayNode                         
+0000244e  l_if_sourceNode                        
+0000244a  l_nodeAddress                          
+0000244c  l_node_dimension                       
+000115e8  main                                   
+0001176c  malloc                                 
+00010832  memalign                               
+00011530  memcmp                                 
+000116e0  memcpy                                 
+000116b4  memset                                 
 0000a501  mpu_ctl0_value                         
 00001513  mpu_sam_value                          
 00000440  mpu_segment_border1                    
 00000440  mpu_segment_border2                    
-00002490  rear_check_arr                         
-00010c2a  receiveDataFromNordic                  
-00011502  recevedSucess                          
+00011556  reInitialize                           
+00010d66  receiveDataFromNordic                  
+00011744  recevedFailure                         
+0001174e  recevedSucess                          
+00010fdc  setNode                                
 00010412  sha256_final                           
-00010d1e  sha256_init                            
+00010e78  sha256_init                            
 00010000  sha256_transform                       
-00010e0c  sha256_update                          
+00010f66  sha256_update                          
 000106ba  spi_transData                          
-00010a10  spi_transHeaderStatus                  
-0001148c  startTrans                             
-00011132  start_routing                          
-00010ef6  start_spi_process                      
-00010ca4  status_m2s                             
+00010bdc  spi_transHeaderStatus                  
+00011642  startTrans                             
+00011356  start_routing                          
+00010ca6  start_spi_process                      
+00010a26  status_m2s                             
 00001fd2  store_received_data                    
-00011404  terminateRoutine                       
 
 
 GLOBAL SYMBOLS: SORTED BY Symbol Address 
@@ -3750,38 +3764,39 @@ address   name
 00001c00  file_data                              
 00001fd2  store_received_data                    
 000023a4  ReceiveBuffer                          
-000023cc  SlaveType0                             
-000023f4  g_transBuffer                          
-0000241c  file_sha256_true                       
-0000245c  g_dest_address                         
-0000245d  g_node_dimension                       
-0000245e  g_if_relayNode                         
-0000245f  g_if_sourceNode                        
-00002460  g_if_transDataFromRec                  
-00002462  g_seq_data                             
-00002463  g_seq_header                           
-00002464  g_received_address                     
-00002465  g_if_end_trans                         
-00002466  g_com_pass                             
-00002467  g_pre_packet_seq                       
-00002468  g_pre_ack_seq                          
-00002469  g_if_send_next                         
-0000246a  g_spiTransLen                          
-0000246b  g_if_firstRecAck                       
-0000246c  g_if_firstDatagram                     
-0000246d  g_dstFromSendNode                      
-0000246e  MasterMode                             
-00002470  TransmitRegAddr                        
-00002471  RXByteCtr                              
-00002472  ReceiveIndex                           
-00002473  TXByteCtr                              
-00002474  TransmitIndex                          
-0000247a  g_pairedNodeAddress                    
-0000247b  g_if_paired                            
-0000247c  _lock                                  
-00002480  _unlock                                
-0000248c  front_check_arr                        
-00002490  rear_check_arr                         
+000023c6  SlaveType0                             
+000023e8  g_transBuffer                          
+0000240a  file_sha256_true                       
+0000244a  l_nodeAddress                          
+0000244b  l_dest_address                         
+0000244c  l_node_dimension                       
+0000244d  l_if_relayNode                         
+0000244e  l_if_sourceNode                        
+00002450  g_seq_data                             
+00002451  g_seq_header                           
+00002452  g_received_address                     
+00002453  g_if_end_trans                         
+00002454  g_if_send_next                         
+00002455  g_spiTransLen                          
+00002456  g_if_Rxternimate                       
+00002457  g_if_Txternimate                       
+00002458  MasterMode                             
+0000245a  TransmitRegAddr                        
+0000245b  RXByteCtr                              
+0000245c  ReceiveIndex                           
+0000245d  TXByteCtr                              
+0000245e  TransmitIndex                          
+00002464  g_pairedNodeAddress                    
+00002465  g_if_paired                            
+0000246a  _lock                                  
+0000246e  _unlock                                
+00002476  g_transDataSeq                         
+0000247c  crcTable                               
+00002680  g_dest_address                         
+00002681  g_if_relayNode                         
+00002682  g_if_sourceNode                        
+00002683  g_nodeAddress                          
+00002684  g_node_dimension                       
 00002b60  _stack                                 
 00002c00  __STACK_END                            
 00004000  _sys_memory                            
@@ -3792,11 +3807,10 @@ address   name
 00004400  fram_rx_start                          
 000044c0  _c_int00_noargs_mpu                    
 000044e0  __TI_ISR_TRAP                          
-000045e8  g_file_len                             
-000048f8  __TI_Handler_Table_Base                
-00004904  __TI_Handler_Table_Limit               
-0000490a  __TI_CINIT_Base                        
-0000491a  __TI_CINIT_Limit                       
+000048ec  __TI_Handler_Table_Base                
+000048f8  __TI_Handler_Table_Limit               
+000048fe  __TI_CINIT_Base                        
+0000490e  __TI_CINIT_Limit                       
 0000a501  mpu_ctl0_value                         
 0000ffb4  __TI_int18                             
 0000ffb6  __TI_int19                             
@@ -3839,94 +3853,95 @@ address   name
 00010000  sha256_transform                       
 00010412  sha256_final                           
 000106ba  spi_transData                          
-0001081c  aligned_alloc                          
-0001081c  memalign                               
-0001092e  free                                   
-00010a10  spi_transHeaderStatus                  
-00010ad4  check_completeness                     
-00010b8a  data_m2s                               
-00010c2a  receiveDataFromNordic                  
-00010ca4  status_m2s                             
-00010d1e  sha256_init                            
-00010d96  __TI_decompress_lzss                   
-00010e0c  sha256_update                          
-00010ef6  start_spi_process                      
-00010f66  data_is_fin                            
-00010fd2  data_is_datagram                       
-00011028  __TI_auto_init_nobinit_nopinit_hold_wdt
-0001107c  __mspabi_slll_15                       
-00011080  __mspabi_slll_14                       
-00011084  __mspabi_slll_13                       
-00011088  __mspabi_slll_12                       
-0001108c  __mspabi_slll_11                       
-00011090  __mspabi_slll_10                       
-00011094  __mspabi_slll_9                        
-00011098  __mspabi_slll_8                        
-0001109c  __mspabi_slll_7                        
-000110a0  __mspabi_slll_6                        
-000110a4  __mspabi_slll_5                        
-000110a8  __mspabi_slll_4                        
-000110ac  __mspabi_slll_3                        
-000110b0  __mspabi_slll_2                        
-000110b4  __mspabi_slll_1                        
-000110ba  __mspabi_srll_15                       
-000110be  __mspabi_srll_14                       
-000110c2  __mspabi_srll_13                       
-000110c6  __mspabi_srll_12                       
-000110ca  __mspabi_srll_11                       
-000110ce  __mspabi_srll_10                       
-000110d2  __mspabi_srll_9                        
-000110d6  __mspabi_srll_8                        
-000110da  __mspabi_srll_7                        
-000110de  __mspabi_srll_6                        
-000110e2  __mspabi_srll_5                        
-000110e6  __mspabi_srll_4                        
-000110ea  __mspabi_srll_3                        
-000110ee  __mspabi_srll_2                        
-000110f2  __mspabi_srll_1                        
-000110f8  __mspabi_srlll                         
-00011132  start_routing                          
-0001116c  data_is_ack                            
-000111a0  file_sha256                            
-000111d4  SPI_Master_ReadReg                     
-00011206  SPI_Master_WriteReg                    
-00011238  __mpu_init                             
-00011290  initClockTo16MHz                       
-000112bc  __mspabi_divi                          
-000112bc  __mspabi_remi                          
-00011312  genRanNumb                             
-0001133c  memcmp                                 
-00011362  __TI_zero_init_nomemset                
-00011386  initGPIO                               
-000113aa  __mspabi_mpyl_f5hw                     
-000113ce  CopyArray                              
-000113ea  main                                   
-00011404  terminateRoutine                       
-0001141e  buf_m2s                                
-0001144a  initSPI                                
-00011460  memset                                 
-00011476  __mspabi_divu                          
-00011476  __mspabi_remu                          
-0001148c  startTrans                             
-000114a2  memcpy                                 
-000114b6  __TI_decompress_none                   
-000114c8  __mspabi_rlll                          
-000114da  __mspabi_srll                          
-000114ea  SendUCB1Data                           
-000114f8  data_is_reverseFin                     
-00011502  recevedSucess                          
-0001150c  malloc                                 
-00011514  C$$EXIT                                
-00011514  abort                                  
-0001151a  close_spi_process                      
-00011520  free_datagram                          
-00011526  free_pointer                           
-0001152c  _system_pre_init                       
-00011530  _nop                                   
-00011532  _system_post_cinit                     
+00010832  aligned_alloc                          
+00010832  memalign                               
+00010944  free                                   
+00010a26  status_m2s                             
+00010b04  data_m2s                               
+00010bdc  spi_transHeaderStatus                  
+00010ca6  start_spi_process                      
+00010d66  receiveDataFromNordic                  
+00010dfc  check_completeness                     
+00010e78  sha256_init                            
+00010ef0  __TI_decompress_lzss                   
+00010f66  sha256_update                          
+00010fdc  setNode                                
+000110c4  __TI_auto_init_nobinit_nopinit_hold_wdt
+0001116c  crcFast                                
+000111b8  __mspabi_slll_15                       
+000111bc  __mspabi_slll_14                       
+000111c0  __mspabi_slll_13                       
+000111c4  __mspabi_slll_12                       
+000111c8  __mspabi_slll_11                       
+000111cc  __mspabi_slll_10                       
+000111d0  __mspabi_slll_9                        
+000111d4  __mspabi_slll_8                        
+000111d8  __mspabi_slll_7                        
+000111dc  __mspabi_slll_6                        
+000111e0  __mspabi_slll_5                        
+000111e4  __mspabi_slll_4                        
+000111e8  __mspabi_slll_3                        
+000111ec  __mspabi_slll_2                        
+000111f0  __mspabi_slll_1                        
+000111f6  __mspabi_srll_15                       
+000111fa  __mspabi_srll_14                       
+000111fe  __mspabi_srll_13                       
+00011202  __mspabi_srll_12                       
+00011206  __mspabi_srll_11                       
+0001120a  __mspabi_srll_10                       
+0001120e  __mspabi_srll_9                        
+00011212  __mspabi_srll_8                        
+00011216  __mspabi_srll_7                        
+0001121a  __mspabi_srll_6                        
+0001121e  __mspabi_srll_5                        
+00011222  __mspabi_srll_4                        
+00011226  __mspabi_srll_3                        
+0001122a  __mspabi_srll_2                        
+0001122e  __mspabi_srll_1                        
+00011272  __mspabi_srlll                         
+000112e6  initClockTo16MHz                       
+00011320  crcInit                                
+00011356  start_routing                          
+000113c0  file_sha256                            
+000113f4  SPI_Master_ReadReg                     
+00011426  SPI_Master_WriteReg                    
+00011458  __mpu_init                             
+000114b0  __mspabi_divi                          
+000114b0  __mspabi_remi                          
+00011506  genRanNumb                             
+00011530  memcmp                                 
+00011556  reInitialize                           
+0001157c  __TI_zero_init_nomemset                
+000115a0  initGPIO                               
+000115c4  __mspabi_mpyl_f5hw                     
+000115e8  main                                   
+00011626  CopyArray                              
+00011642  startTrans                             
+0001165c  buf_m2s                                
+0001169e  initSPI                                
+000116b4  memset                                 
+000116ca  __mspabi_divu                          
+000116ca  __mspabi_remu                          
+000116e0  memcpy                                 
+000116f4  __TI_decompress_none                   
+00011706  __mspabi_rlll                          
+00011718  __mspabi_srll                          
+00011728  SendUCB1Data                           
+00011744  recevedFailure                         
+0001174e  recevedSucess                          
+00011758  __mspabi_slli                          
+0001176c  malloc                                 
+00011774  C$$EXIT                                
+00011774  abort                                  
+0001177a  close_spi_process                      
+00011780  free_datagram                          
+00011786  free_pointer                           
+0001178c  _system_pre_init                       
+00011790  _nop                                   
+00011792  _system_post_cinit                     
 ffffffff  __TI_pprof_out_hndl                    
 ffffffff  __TI_prof_data_size                    
 ffffffff  __TI_prof_data_start                   
 ffffffff  __c_args__                             
 
-[1729 symbols]
+[1730 symbols]

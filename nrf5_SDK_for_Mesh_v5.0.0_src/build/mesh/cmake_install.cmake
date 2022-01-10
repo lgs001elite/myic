@@ -1,4 +1,4 @@
-# Install script for directory: /home/gaosheng/mesh/my_mesh/nrf5_SDK_for_Mesh_v5.0.0_src/mesh
+# Install script for directory: /home/gaosheng/mesh/myic/myic/nrf5_SDK_for_Mesh_v5.0.0_src/mesh
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -39,16 +39,16 @@ endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for each subdirectory.
-  include("/home/gaosheng/mesh/my_mesh/nrf5_SDK_for_Mesh_v5.0.0_src/build/mesh/stack/cmake_install.cmake")
-  include("/home/gaosheng/mesh/my_mesh/nrf5_SDK_for_Mesh_v5.0.0_src/build/mesh/access/cmake_install.cmake")
-  include("/home/gaosheng/mesh/my_mesh/nrf5_SDK_for_Mesh_v5.0.0_src/build/mesh/bootloader/cmake_install.cmake")
-  include("/home/gaosheng/mesh/my_mesh/nrf5_SDK_for_Mesh_v5.0.0_src/build/mesh/bearer/cmake_install.cmake")
-  include("/home/gaosheng/mesh/my_mesh/nrf5_SDK_for_Mesh_v5.0.0_src/build/mesh/core/cmake_install.cmake")
-  include("/home/gaosheng/mesh/my_mesh/nrf5_SDK_for_Mesh_v5.0.0_src/build/mesh/dfu/cmake_install.cmake")
-  include("/home/gaosheng/mesh/my_mesh/nrf5_SDK_for_Mesh_v5.0.0_src/build/mesh/prov/cmake_install.cmake")
-  include("/home/gaosheng/mesh/my_mesh/nrf5_SDK_for_Mesh_v5.0.0_src/build/mesh/serial/cmake_install.cmake")
-  include("/home/gaosheng/mesh/my_mesh/nrf5_SDK_for_Mesh_v5.0.0_src/build/mesh/gatt/cmake_install.cmake")
-  include("/home/gaosheng/mesh/my_mesh/nrf5_SDK_for_Mesh_v5.0.0_src/build/mesh/friend/cmake_install.cmake")
+  include("/home/gaosheng/mesh/myic/myic/nrf5_SDK_for_Mesh_v5.0.0_src/build/mesh/stack/cmake_install.cmake")
+  include("/home/gaosheng/mesh/myic/myic/nrf5_SDK_for_Mesh_v5.0.0_src/build/mesh/access/cmake_install.cmake")
+  include("/home/gaosheng/mesh/myic/myic/nrf5_SDK_for_Mesh_v5.0.0_src/build/mesh/bootloader/cmake_install.cmake")
+  include("/home/gaosheng/mesh/myic/myic/nrf5_SDK_for_Mesh_v5.0.0_src/build/mesh/bearer/cmake_install.cmake")
+  include("/home/gaosheng/mesh/myic/myic/nrf5_SDK_for_Mesh_v5.0.0_src/build/mesh/core/cmake_install.cmake")
+  include("/home/gaosheng/mesh/myic/myic/nrf5_SDK_for_Mesh_v5.0.0_src/build/mesh/dfu/cmake_install.cmake")
+  include("/home/gaosheng/mesh/myic/myic/nrf5_SDK_for_Mesh_v5.0.0_src/build/mesh/prov/cmake_install.cmake")
+  include("/home/gaosheng/mesh/myic/myic/nrf5_SDK_for_Mesh_v5.0.0_src/build/mesh/serial/cmake_install.cmake")
+  include("/home/gaosheng/mesh/myic/myic/nrf5_SDK_for_Mesh_v5.0.0_src/build/mesh/gatt/cmake_install.cmake")
+  include("/home/gaosheng/mesh/myic/myic/nrf5_SDK_for_Mesh_v5.0.0_src/build/mesh/friend/cmake_install.cmake")
 
 endif()
 

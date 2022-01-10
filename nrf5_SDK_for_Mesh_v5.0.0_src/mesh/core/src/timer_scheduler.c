@@ -223,7 +223,7 @@ void timer_sch_reschedule(timer_event_t* p_timer_evt, timestamp_t new_timeout)
     p_timer_evt->timestamp = new_timeout;
     add_evt(p_timer_evt);
     setup_timeout(timer_now());
-//    __LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "timer_sch_reschedule\n")
+    __LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "timer_sch_reschedule\n")
 }
 
 bool timer_sch_is_scheduled(const timer_event_t * p_timer_evt)

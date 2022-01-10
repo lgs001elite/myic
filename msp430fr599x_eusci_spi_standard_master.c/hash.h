@@ -4,7 +4,7 @@
 * Copyright:
 * Disclaimer: This code is presented "as is" without any guarantees.
 * Details:    Defines the API for the corresponding SHA1 implementation.
-* Modefied By Gaosheng Liu
+* Modefied by Haosheng Liu, This is just for research!
 *********************************************************************/
 
 #ifndef _HASH_H_

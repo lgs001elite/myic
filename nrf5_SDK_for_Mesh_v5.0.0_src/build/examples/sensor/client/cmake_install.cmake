@@ -1,4 +1,4 @@
-# Install script for directory: /home/gaosheng/mesh/my_mesh/nrf5_SDK_for_Mesh_v5.0.0_src/examples/sensor/client
+# Install script for directory: /home/gaosheng/mesh/myic/myic/nrf5_SDK_for_Mesh_v5.0.0_src/examples/sensor/client
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)

@@ -51,15 +51,12 @@ typedef struct advertiser_t advertiser_t;
 /**
  * Gaosheng Added
  */
-extern advertiser_t m_discovery_advertiser;
+extern   advertiser_t   m_discovery_advertiser;
 #define ADVERTISER_REPAET_discovery 0x10
 bool get_if_terCurrentAdvertiser();
 void set_if_terCurrentAdvertiser(bool nextStatus);
 void advertiser_disableAndFlush();
-//bool get_start_fin();
-//bool get_adv_transmission();
-#define IS_SINK       false
-#define NODE_ADDRESS  0x03
+void adv_packet_discard();
 /**
  * @defgroup ADVERTISER Advertiser
  * @ingroup MESH_API_GROUP_BEARER
@@ -89,6 +86,8 @@ typedef struct
     /** Advertisement packet going on air. */
     packet_t packet __attribute__((aligned(WORD_SIZE)));
 } adv_packet_t;
+
+extern  adv_packet_t * p_broad_packet;
 
 /** Advertiser channel configuration. */
 typedef struct

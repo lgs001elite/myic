@@ -387,7 +387,7 @@ nrfx_err_t nrfx_spis_buffers_set(nrfx_spis_t const * const p_instance,
                                  size_t                    rx_buffer_length)
 {
     NRFX_ASSERT(p_tx_buffer != NULL || tx_buffer_length == 0);
-    NRFX_ASSERT(p_rx_buffer != NULL || rx_buffer_length == 0);
+    NRFX_ASSERT(p_rx_buffer != NULL || rx_buffer_length == 0);;
 
     spis_cb_t * p_cb = &m_cb[p_instance->drv_inst_idx];
     nrfx_err_t err_code;

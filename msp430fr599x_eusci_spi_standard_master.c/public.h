@@ -6,36 +6,36 @@
 #include <stdint.h>
 #include "spi_packet.h"
 
-#define NODE_ADDRESS    0x03
-#define MAXUINT8        255
+#define MAXUINT8        0x7F
 
 #define BLE_GAP_AD_TYPE_PUBLIC_TARGET_ADDRESS               0x17 /**< Public Target Address. */
 
+extern  volatile uint8_t        g_nodeAddress;
 extern  volatile uint8_t        g_seq_data;
 extern  volatile uint8_t        g_seq_header;
 extern  volatile uint8_t        g_dest_address;
-extern           uint8_t        ReceiveBuffer[SPI_DATA_LEN];
-extern           uint8_t        g_transBuffer[SPI_DATA_LEN];
+extern  volatile uint8_t        ReceiveBuffer[SPI_DATA_LEN];
+extern  volatile uint8_t        g_transBuffer[SPI_DATA_LEN];
 extern  volatile uint8_t        g_spiTransLen;
 extern  volatile uint8_t        g_node_dimension;
 extern  volatile bool           g_if_send_next;
 extern  volatile bool           g_if_end_trans;
 extern  volatile bool           g_if_sourceNode;
-extern  volatile uint8_t        g_pre_packet_seq;
-extern  volatile uint8_t        g_pre_ack_seq;
-extern  volatile bool           g_com_pass;
 extern  volatile uint8_t        g_pairedNodeAddress;
-extern  volatile bool           g_if_paired;
-extern  volatile bool           g_if_firstRecAck;
-extern  volatile bool           g_if_firstDatagram;
-extern  volatile bool           g_if_transDataFromRec;
 extern  volatile bool           g_if_relayNode;
-extern  volatile uint8_t        g_dstFromSendNode;
+extern  volatile bool           g_if_Rxternimate;
+extern  volatile bool           g_if_Txternimate;
+extern  volatile uint32_t       g_transDataSeq;
+extern  volatile bool           g_if_paired;
 
 void start_spi_process(void);
 void close_spi_process(void);
 void recevedSucess(void);
+void recevedFailure(void);
 void startTrans(void);
+void reInitialize(void);
+
+
 
 //******************************************************************************
 // General SPI State Machine ***************************************************

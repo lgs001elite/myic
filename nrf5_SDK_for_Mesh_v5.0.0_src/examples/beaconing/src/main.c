@@ -38,7 +38,6 @@
 
 #include <stdio.h>
 #include <stdbool.h>
-#include <memory.h>
 #include <string.h>
 #include "nrf_delay.h"
 #include "nrf_gpio.h"
@@ -47,6 +46,7 @@
 #include "simple_hal.h"
 #include "nrf_mesh.h"
 #include "log.h"
+#include "nrf_log_ctrl.h"
 #include "advertiser.h"
 #include "mesh_app_utils.h"
 #include "mesh_stack.h"
@@ -59,9 +59,11 @@
 #include "ad_type_filter.h"
 #include "define_broadcast_packet.h"
 #include "config_adv_transmition.h"
+#include "app_scheduler.h"
 #include "spis.h"
 #include "spis_data.h"
 #include "m2s.h"
+#include "crc.h"
 #include "public.h"
 
 
@@ -73,16 +75,30 @@
  * Definitions
  *****************************************************************************/
 #define ADVERTISER_BUFFER_SIZE  (64)
+volatile bool            g_ifPickNewValue       = false;
+static bool              g_if_sendNext          = false;
+static bool              g_now_send_adv_packets = false;
+advertiser_t             m_discovery_advertiser = {0};
+static uint8_t           m_adv_buffer_discovery[ADVERTISER_BUFFER_SIZE];
+static uint8_t           g_testing_main_counter = 0;
+static uint8_t           g_prePackSeqNum        = 0x00;
+static uint8_t           g_prePackStatus        = 0xff;
+static bool              g_firstReqPacket       = false;     
+static void              adv_init(void);
+adv_packet_t  *          p_broad_packet         = NULL;
 
-volatile bool     g_if_sendNext = false;
-volatile bool     g_now_send_ack_packets = false;
-volatile bool     g_now_send_adv_packets = false;
-volatile bool     g_now_send_end_packets = false;
+static uint8_t           g_prePackNum           = 0;
 
-advertiser_t        m_discovery_advertiser = {0};
-volatile bool       g_isData               = false;
-static uint8_t       m_adv_buffer_discovery[ADVERTISER_BUFFER_SIZE];
-static void          adv_init(void);
+
+bool get_if_terCurrentAdvertiser()
+{
+    return g_if_sendNext;
+}
+
+void set_if_terCurrentAdvertiser(bool nextStatus)
+{
+    g_if_sendNext = nextStatus;
+}
 
 /**
  * @brief pass datagram to the bearer layer
@@ -92,26 +108,28 @@ static void          adv_init(void);
  */
 static void send2bearer(advertiser_t * p_adv, define_adv_packet * adv_packet)
 {
-    adv_packet_t * p_packet = advertiser_packet_alloc(p_adv, BLE_ADV_PACKET_PAYLOAD_MAX_LENGTH);
-    if (p_packet)
+    p_broad_packet = advertiser_packet_alloc(p_adv, BLE_ADV_PACKET_PAYLOAD_MAX_LENGTH);
+    if (p_broad_packet)
     {
+        //g_if_allocatedPacket = true;
         /* Construct packet contents */
-        memcpy(p_packet->packet.payload, adv_packet, BLE_ADV_PACKET_PAYLOAD_MAX_LENGTH);
+        memcpy(p_broad_packet->packet.payload, adv_packet, BLE_ADV_PACKET_PAYLOAD_MAX_LENGTH);
         /* Repeat forever */
-        p_packet->config.repeats = ADVERTISER_REPEAT_INFINITE;
-
-        advertiser_packet_send(p_adv, p_packet);
+        p_broad_packet->config.repeats = ADVERTISER_REPEAT_INFINITE;
+        advertiser_packet_send(p_adv, p_broad_packet);
     } else {
-        if (g_now_send_ack_packets == true)
+        /**
+         * Protect from infinite loops
+         */
+        if (g_testing_main_counter == 10)
         {
-            advertiser_disableAndFlush();
-            send_ack_start();
-        } else if (g_now_send_adv_packets == true){
-            advertiser_disableAndFlush();
+            __LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "allocation failure!\n");
+            return;
+        }
+        g_testing_main_counter++;
+
+        if (g_now_send_adv_packets == true){
             send_datagram_start();
-        } else if (g_now_send_end_packets == true) {
-            advertiser_disableAndFlush();
-            send_fin_start();
         }
     }
 }
@@ -126,7 +144,6 @@ static void send2bearer(advertiser_t * p_adv, define_adv_packet * adv_packet)
      advPacket = NULL;
  }
 
-
 /**
  * @brief sending datagram
  * 
@@ -134,47 +151,13 @@ static void send2bearer(advertiser_t * p_adv, define_adv_packet * adv_packet)
 void send_datagram_start()
 {
     __LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "********************* Adv --- starting *****************\n");
-    advertiser_enable(&m_discovery_advertiser);     /* Check if adv_instance is enable */
+    nrf_delay_ms(5); /* if last adv is still alive, leave time to finish it. */
     set_if_terCurrentAdvertiser(false); // Don't terminate the current advertiser
-    __LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "Starting to send adv packets\n");
+    advertiser_enable(&m_discovery_advertiser);     /* Check if adv_instance is enable */
     define_adv_packet * recData = getData_sendout();
-    nrf_delay_ms(20); /* For fill the payload completely*/
-
     g_now_send_adv_packets = true;
     send2bearer(&m_discovery_advertiser,recData);
     g_now_send_adv_packets = false;
-    freeAdvpacket(recData);
-}
-
-/**
- * @brief sending fin header
- * 
- */
-void send_fin_start()
-{
-    __LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "Starting to send ending beacons\n");
-    advertiser_enable(&m_discovery_advertiser);
-    set_if_terCurrentAdvertiser(false); // Don't terminate the current advertiser
-    define_adv_packet * recData = getData_sendout();
-    g_now_send_end_packets = true;
-    send2bearer(&m_discovery_advertiser, recData);
-    g_now_send_end_packets = false;
-    freeAdvpacket(recData);
-}
-
-/**
- * @brief sending ack header
- * 
- */
-void send_ack_start()
-{
-    __LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "Starting to send acks!\n");
-    advertiser_enable(&m_discovery_advertiser);
-    set_if_terCurrentAdvertiser(false); // Don't terminate the current advertiser
-    define_adv_packet * recData = getData_sendout();
-    g_now_send_ack_packets = true;
-    send2bearer(&m_discovery_advertiser, recData);
-    g_now_send_ack_packets = false;
     freeAdvpacket(recData);
 }
 
@@ -185,7 +168,6 @@ void send_ack_start()
  */
 static void rx_cb(const nrf_mesh_adv_packet_rx_data_t * p_rx_data)
 {
-    __LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "p_rx_data->p_payload[1]: %d\n",  p_rx_data->p_payload[1]);
     if (p_rx_data->p_payload[1] != BLE_GAP_AD_TYPE_PUBLIC_TARGET_ADDRESS)
     {
         return;
@@ -193,78 +175,90 @@ static void rx_cb(const nrf_mesh_adv_packet_rx_data_t * p_rx_data)
 
     if (p_rx_data->length != BLE_ADV_PACKET_PAYLOAD_MAX_LENGTH)
     {
+        __LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "----- p_rx_data->length:%d  -----\n", p_rx_data->length);
         return;
     }
-    
-    uint8_t data_status = p_rx_data->p_payload[3];
-    uint8_t *spi_data2mster;
-    if ((data_status == 0x04) || (data_status == 0x08) || (data_status == 0x0C))
+
+    // receing and check the packets
+    uint8_t rec_packet[31] = {0};
+    rec_packet[0]          = p_rx_data->p_payload[0];
+    rec_packet[1]          = p_rx_data->p_payload[1];
+    rec_packet[2]          = p_rx_data->p_payload[2];
+    rec_packet[3]          = p_rx_data->p_payload[3];
+    rec_packet[4]          = ((p_rx_data->p_payload[4])  & 0x0F);
+    rec_packet[5]          = ((p_rx_data->p_payload[4])  & 0xF0)>>4;
+    rec_packet[6]          = ((p_rx_data->p_payload[5])  & 0x07);
+    rec_packet[7]          = (((p_rx_data->p_payload[5]) & 0xF8)>>3) & 0x1F;
+    for (uint8_t i = 6; i < 29; i++) // 6: payload starting point, 29: crc starting point
     {
-        spi_data2mster= (uint8_t *) malloc(sizeof(uint8_t) * (BROADCASRLEN - 1));
-        g_isData = true;
-    } else {
-        spi_data2mster= (uint8_t *) malloc(sizeof(uint8_t) * (STATUSLEN));
-        g_isData = false;
+        rec_packet[i + 2] = p_rx_data->p_payload[i];
     }
     
+    // chekcing packet's crc
+    crcInit();
+    uint16_t crc_result = crcFast(rec_packet, 31);
+    uint8_t  res1       = (crc_result & 0xFF00)>>8;
+    uint8_t  res2       = (crc_result & 0x00FF);
+
+    while (res1 > 0x7F)
+    {
+        res1 -= 0x7F;
+    }
+
+    while (res2 > 0x7F)
+    {
+        res2 -= 0x7F;
+    }
+
+    if ((res1 != p_rx_data->p_payload[29]) || (res2 != p_rx_data->p_payload[30]))
+    {
+        __LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "----- res1: %X, res2: %X, p_rx_data->p_payload[29]: %X, p_rx_data->p_payload[30]: %X, check failure ------\n", res1, res2, p_rx_data->p_payload[29], p_rx_data->p_payload[30]);
+        return;
+    }
+
+    uint8_t data_status = p_rx_data->p_payload[3];
+    if (g_prePackStatus != data_status)
+    {
+        g_firstReqPacket = true;
+    }
+
+    // Prevent from repeating malloc operation
+    if (!g_firstReqPacket)
+    {
+        if (g_prePackSeqNum == p_rx_data->p_payload[2])
+        {
+            //g_ifPickNewValue = false;
+            __LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "----- repeated packets  -----\n");
+            return;
+        }
+    } else {
+        g_firstReqPacket = false;
+    }
+
+    g_prePackNum++;
+    __LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "----- pass check: packNum: %d;seqNum: %d  -----\n", 
+        g_prePackNum, p_rx_data->p_payload[2]);
+
+    // Prevent from receiving  repeated packets
+    g_prePackSeqNum = p_rx_data->p_payload[2]; // recording pre seq num
+    g_prePackStatus = p_rx_data->p_payload[3]; // recording pre packet type
+
+    // Recording the received data
+    uint8_t *spi_data2mster = (uint8_t *) malloc(sizeof(uint8_t) * (S_BROADCASRLEN));
     if (! spi_data2mster)
     {
         return;
     }
 
-    if (g_isData)
+    for (uint8_t i = 0; i < 31; i++)
     {
-        memset(spi_data2mster, 0, sizeof(uint8_t) * (BROADCASRLEN - 1));
-    } else {
-        memset(spi_data2mster, 0, sizeof(uint8_t) * STATUSLEN);
+        spi_data2mster[i] = rec_packet[i];
     }
+    spi_data2mster[31] = res1;
+    spi_data2mster[32] = res2;
+    g_ifPickNewValue   = true;
     
-    /**
-     * @brief setting check bytes
-     * 
-     */
-    spi_data2mster[0]  = 0x41;
-    spi_data2mster[1]  = 0x42;
-    spi_data2mster[2]  = 0x43;
-    spi_data2mster[36] = 0x58;
-    spi_data2mster[37] = 0x59;
-    spi_data2mster[38] = 0x5A;
-
-    spi_data2mster[3]  = p_rx_data->p_payload[0];
-    __LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "spi_data2mster[3]: %d\n",  spi_data2mster[3]);
-    spi_data2mster[4]  = p_rx_data->p_payload[1];
-    __LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "spi_data2mster[4]: %d\n",  spi_data2mster[4]);
-    spi_data2mster[5]  = p_rx_data->p_payload[2];
-    __LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "spi_data2mster[5]: %d\n",  spi_data2mster[5]);
-    spi_data2mster[6]  = p_rx_data->p_payload[3];
-    __LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "spi_data2mster[6]: %d\n",  spi_data2mster[6]);
-    spi_data2mster[7]  = ((p_rx_data->p_payload[4]) | 0x0F)>>4;
-    __LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "spi_data2mster[7]: %d\n",  spi_data2mster[7]);
-    spi_data2mster[8]  = ((p_rx_data->p_payload[4]) | 0xF0);
-    __LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "spi_data2mster[8]: %d\n",  spi_data2mster[8]);
-    spi_data2mster[9]  = ((p_rx_data->p_payload[5]) | 0x07);
-    __LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "spi_data2mster[9]: %d\n",  spi_data2mster[9]);
-    spi_data2mster[10] = ((p_rx_data->p_payload[5]) | 0xF8);
-    __LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "spi_data2mster[10]: %d\n", spi_data2mster[10]);
-    
-    if (g_isData)
-    {
-        for (uint8_t i = 6; i < BLE_ADV_PACKET_PAYLOAD_MAX_LENGTH; i++)
-        {
-            uint8_t anchor = i + 5;
-            spi_data2mster[anchor] = p_rx_data->p_payload[i];
-            __LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "spi_data2mster: %d\n", spi_data2mster[anchor]);
-        }
-    }
-
-    if (g_isData)
-    {
-        spis_setfrom_slave(spi_data2mster, BROADCASRLEN - 1);
-    } else {
-        spis_setfrom_slave(spi_data2mster, STATUSLEN);
-    }
-    
-    __LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "Starting normal data transition\n");
+    spis_setfrom_slave(spi_data2mster, S_BROADCASRLEN);
 }
 
 static void adv_init(void)
@@ -292,8 +286,8 @@ static void mesh_init(void)
 {
     mesh_stack_init_params_t init_params =
     {
-        .core.irq_priority = NRF_MESH_IRQ_PRIORITY_LOWEST,
-        .core.lfclksrc     = DEV_BOARD_LF_CLK_CFG,
+        .core.irq_priority       = NRF_MESH_IRQ_PRIORITY_LOWEST,
+        .core.lfclksrc           = DEV_BOARD_LF_CLK_CFG,
         .models.config_server_cb = config_server_evt_cb
     };
 
@@ -322,36 +316,27 @@ static void initialize(void)
 #if defined(NRF51) && defined(NRF_MESH_STACK_DEPTH)
     stack_depth_paint_stack();
 #endif
-
+    
     ERROR_CHECK(app_timer_init());
     hal_leds_init();
-
     __LOG_INIT(LOG_SRC_APP, LOG_LEVEL_INFO, log_callback_rtt);
-    __LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "----- Bluetooth Mesh Beacon Example -----\n");
 
     ble_stack_init();
-
     mesh_init();
-
-    __LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "Initialization complete!\n");
-
+ 
+    __LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "Mesh initialization complete!\n");
 }
 
 static void start(void)
-{   
-    spis_start();
-
+{  
+    /* Let scanner accept Complete Local Name AD Type. */
+    bearer_adtype_add(BLE_GAP_AD_TYPE_PUBLIC_TARGET_ADDRESS);
     ERROR_CHECK(mesh_stack_start());
-    __LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "Bluetooth Mesh Beacon example started!\n");
+    spis_start();
 }
 
 int main(void)
 {
     initialize();
     start();
-
-    for (;;)
-    {
-        (void)sd_app_evt_wait();
-    }
 }

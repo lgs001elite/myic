@@ -8,6 +8,7 @@ GEN_OPTS__FLAG :=
 GEN_CMDS__FLAG := 
 
 ORDERED_OBJS += \
+"./crc.obj" \
 "./hash.obj" \
 "./msp430fr599x_eusci_spi_standard_master.obj" \
 "./random.obj" \
@@ -161,8 +162,8 @@ msp430fr599x_eusci_spi_standard_master.c.hex: $(EXE_OUTPUTS)
 # Other Targets
 clean:
 	-$(RM) $(BIN_OUTPUTS__QUOTED)$(EXE_OUTPUTS__QUOTED)
-	-$(RM) "hash.obj" "msp430fr599x_eusci_spi_standard_master.obj" "random.obj" "routing.obj" "routingRx.obj" "routingTx.obj" "spi_discovery.obj" "transitionData.obj" 
-	-$(RM) "hash.d" "msp430fr599x_eusci_spi_standard_master.d" "random.d" "routing.d" "routingRx.d" "routingTx.d" "spi_discovery.d" "transitionData.d" 
+	-$(RM) "crc.obj" "hash.obj" "msp430fr599x_eusci_spi_standard_master.obj" "random.obj" "routing.obj" "routingRx.obj" "routingTx.obj" "spi_discovery.obj" "transitionData.obj" 
+	-$(RM) "crc.d" "hash.d" "msp430fr599x_eusci_spi_standard_master.d" "random.d" "routing.d" "routingRx.d" "routingTx.d" "spi_discovery.d" "transitionData.d" 
 	-@echo 'Finished clean'
 	-@echo ' '
 

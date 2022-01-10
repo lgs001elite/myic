@@ -4,14 +4,12 @@
 #include "public.h"
 #include "log.h"
 
-static sen_data      m_tx_data                                        = {0};
+static sen_data m_tx_data  = {0};
 
 void spis_setfrom_slave(uint8_t * tx_data_buf, uint32_t  tx_data_len)
 {
     m_tx_data.tx_data_buf = tx_data_buf;
     m_tx_data.tx_data_len = tx_data_len;
-   // __LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "m_tx_data.tx_data_buf: %d\n", m_tx_data.tx_data_buf[0]);
-   // __LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "tx_data_buf: %d, size: %d\n", m_tx_data.tx_data_buf[1], m_tx_data.tx_data_buf[2]);
 }
 
 sen_data spis_getfrom_slave()
@@ -19,6 +17,5 @@ sen_data spis_getfrom_slave()
     sen_data tx_data;
     tx_data.tx_data_buf = m_tx_data.tx_data_buf;
     tx_data.tx_data_len = m_tx_data.tx_data_len;
-    //__LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "m_tx_data.tx_data_buf: %d\n", m_tx_data.tx_data_buf[3]);
     return tx_data;
 }

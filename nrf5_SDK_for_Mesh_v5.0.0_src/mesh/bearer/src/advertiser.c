@@ -49,17 +49,27 @@
 #include "scanner.h"
 #include "config_adv_transmition.h"
 #include "public.h"
+#include "nrf_log_ctrl.h"
 
 #define GAP_ADDR_TYPE_INDEX                 5
 #define GAP_ADDR_TYPE_VALUE_RANDOM_STATIC   0xC0
 
 static const uint8_t m_ble_adv_channels[]   = NRF_MESH_ADV_CHAN_DEFAULT;
-//static uint8_t g_ending_counter             = 0;
+volatile uint8_t g_broadcast_counter        = 0;
 static prng_t m_adv_prng;
 /** Added by Gaosehng **/
-//uint8_t g_discovery_event_counter           = 0;
-//static bool g_is_discovery_disable          = true;
-//static bool g_if_stop_discovery_count       = false;
+
+void adv_packet_discard()
+{
+    // free packets
+    if (!p_broad_packet)
+    {
+        return;
+    }
+    advertiser_packet_discard(&m_discovery_advertiser, p_broad_packet);
+    p_broad_packet = NULL;
+    __LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "free packets!\n");
+}
 
 void advertiser_disableAndFlush(void)
 {
@@ -69,22 +79,6 @@ void advertiser_disableAndFlush(void)
         advertiser_flush(&m_discovery_advertiser);
     }
 }
-
-bool get_if_terCurrentAdvertiser()
-{
-    return g_if_sendNext;
-}
-
-void set_if_terCurrentAdvertiser(bool nextStatus)
-{
-    g_if_sendNext = nextStatus;
-}
-/**
-bool get_start_fin()
-{
-    return g_if_start_ending;
-}
-**/
 
 static inline bool is_active(const advertiser_t * p_adv)
 {
@@ -99,6 +93,7 @@ static inline packet_buffer_packet_t * get_packet_buffer_from_adv_packet(adv_pac
 
 static inline bool is_tx_complete_event_pending(advertiser_t * p_adv)
 {
+    //__LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "anchor5!\n");
     return ((p_adv->tx_complete_callback != NULL) &&
             bearer_event_sequential_pending(&p_adv->tx_complete_event));
 }
@@ -147,7 +142,7 @@ static inline void randomize_channels(advertiser_channels_t * p_channels)
 
 static inline void schedule_first_time(timer_event_t * p_timer_evt, uint32_t max_delay)
 {
-//   __LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "schedule_first_time\n")
+    __LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "schedule_first_time\n")
     NRF_MESH_ASSERT(max_delay >= MS_TO_US(BEARER_ADV_INT_MIN_MS) + ADVERTISER_INTERVAL_RANDOMIZATION_US);
     uint32_t rand_offset = rand_prng_get(&m_adv_prng) % (max_delay - MS_TO_US(BEARER_ADV_INT_MIN_MS));
     timer_sch_reschedule(p_timer_evt, timer_now() + MS_TO_US(BEARER_ADV_INT_MIN_MS) + rand_offset);
@@ -196,22 +191,24 @@ static inline bool should_free_current_packet(advertiser_t * p_adv)
 
 static bool next_packet_fetch(advertiser_t * p_adv)
 {
+    __LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "anchor5!\n");
   //  __LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "p_adv->p_packet: %s\n", p_adv->p_packet );
     while (p_adv->p_packet == NULL || should_free_current_packet(p_adv))
     {
-//        __LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "should_free_current_packet\n");
+        __LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "should_free_current_packet\n");
         /* Free current packet */
         if (p_adv->p_packet != NULL)
         {
- //           __LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "packet_buffer_free\n");
-            packet_buffer_free(&p_adv->buf, get_packet_buffer_from_adv_packet(p_adv->p_packet));
-            p_adv->p_packet = NULL;
+            __LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "packet_buffer_free\n");
+           // packet_buffer_free(&p_adv->buf, get_packet_buffer_from_adv_packet(p_adv->p_packet));
+           // p_adv->p_packet = NULL;
         }
 
         packet_buffer_packet_t * p_packet_buf;
+        __LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "packet_buffer_free\n");
         if (packet_buffer_pop(&p_adv->buf, &p_packet_buf) == NRF_SUCCESS)
         {
-//            __LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "packet_buffer_pop\n");
+            __LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "packet_buffer_pop\n");
             p_adv->p_packet = (adv_packet_t *) p_packet_buf->packet;
             p_adv->broadcast.params.p_packet = &p_adv->p_packet->packet;
         }
@@ -241,10 +238,32 @@ static void schedule_broadcast(advertiser_t * p_adv)
 
 static void timeout_event(timestamp_t timestamp, void * p_context)
 {
+    // Finish current adv for next round
+    if (get_if_terCurrentAdvertiser())
+    {
+        g_broadcast_counter = 0;
+        advertiser_disableAndFlush();
+        adv_packet_discard();
+        __LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "anchor2!\n");
+        return;
+    }
+   
+    if (g_broadcast_counter == 2)
+    {
+       g_broadcast_counter = 0;
+       advertiser_disableAndFlush();
+       adv_packet_discard();
+       __LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "anchor3!\n");
+       return;
+    }
+    g_broadcast_counter++;
+
+
     advertiser_t * p_adv = (advertiser_t *) p_context;
     p_adv->timer.interval = 0;
     if (p_adv->enabled)
     {
+        __LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "p_adv->enabled!\n");
         bool has_packet;
         /* Only attempt to transmit if the broadcast context is inactive, and no TX_COMPLETE event
          * is pending. Skip this event if the broadcast is still waiting to fire from the previous
@@ -258,41 +277,17 @@ static void timeout_event(timestamp_t timestamp, void * p_context)
             has_packet = next_packet_fetch(p_adv);
             if (has_packet)
             {
+                __LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "anchor5!\n");
                 schedule_broadcast(p_adv);
             }
         }
 
         if (has_packet)
         {
+            __LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "anchor4!\n");
             setup_next_timeout(&p_adv->timer, p_adv->config.advertisement_interval_us);
         }
     }
-    
-    /**
-     * @brief Whether sending ack
-     * 
-     */
-    if (get_if_terCurrentAdvertiser())
-    {
-        __LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "get_if_terCurrentAdvertiser!\n");
-        advertiser_disableAndFlush();
-        send_ack_start();
-    }
-    
-    /**
-     * @brief Construct a new if object
-     * Fin sends three times, then finishing
-     */
-    /**
-    if (get_start_fin())
-     {
-         g_ending_counter++;
-         if (g_ending_counter == 3)
-         {
-             advertiser_disableAndFlush();
-         }
-     }
-     **/
 }
 
 static void set_gap_addr_type(ble_gap_addr_t* p_addr)
@@ -391,6 +386,8 @@ void advertiser_enable(advertiser_t * p_adv)
 
 void advertiser_disable(advertiser_t * p_adv)
 {
+    // For re-counting number
+    g_broadcast_counter = 0;
     p_adv->enabled = false;
     timer_sch_abort(&p_adv->timer);
 }
@@ -420,7 +417,7 @@ adv_packet_t * advertiser_packet_alloc(advertiser_t * p_adv, uint32_t adv_payloa
 
 void advertiser_packet_send(advertiser_t * p_adv, adv_packet_t * p_packet)
 {
-//    __LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "sending packets\n");
+    NRF_LOG_FLUSH();
     NRF_MESH_ASSERT(p_packet != NULL && NULL != p_adv);
     NRF_MESH_ASSERT(p_packet->config.repeats > 0);
 
@@ -431,11 +428,8 @@ void advertiser_packet_send(advertiser_t * p_adv, adv_packet_t * p_packet)
     p_packet->packet.header._rfu3 = 0;
 
     packet_buffer_commit(&p_adv->buf, p_buf_packet, p_buf_packet->size);
- //   __LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "sending packets***\n");
- //   __LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "p_adv->enabled: %d, is_active(p_adv): %d\n", p_adv->enabled, is_active(p_adv));
     if (p_adv->enabled && !is_active(p_adv))
     {
-//        __LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "sending packets************, p_adv->config.advertisement_interval_us:%d, p_adv->timer: %X\n", p_adv->config.advertisement_interval_us, p_adv->timer);
         schedule_first_time(&p_adv->timer, p_adv->config.advertisement_interval_us + ADVERTISER_INTERVAL_RANDOMIZATION_US);
     }
 }

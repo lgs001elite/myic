@@ -49,7 +49,7 @@
 #define BEARER_ACCESS_ADDR_NONCONN 0x8E89BED6U
 
 /** Lower boundary on advertisement interval. */
-#define BEARER_ADV_INT_MIN_MS (200) /* 20: Modefied by Gaosheng */
+#define BEARER_ADV_INT_MIN_MS (20) /* 20: Modefied by Gaosheng */
 
 /** Upper boundary on advertisement interval. */
 #define BEARER_ADV_INT_MAX_MS (10240)

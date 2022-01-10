@@ -4,22 +4,12 @@
 #include <stdbool.h>
 #include "spis_data.h"
 
-#define BROADCASRLEN 40 // 39 + 1, one starting point-
-#define STATUSLEN    12
+#define M_BROADCASRLEN 34 // one starting point: 33 + 1
+#define S_BROADCASRLEN 33 // 33
 
-void send_ack_start();
-void send_fin_start();
 void send_datagram_start();
 
-extern volatile bool g_null_status;
-extern volatile bool g_isData;
-//static rec_data      m_rx_data                                        = {0};
-//bool get_if_send_ack();
-//bool get_if_send_data();
-//bool get_if_send_fin();
-//void set_if_send_ack(bool ackStatus);
-//void set_if_send_data(bool sendNext);
-//void set_if_send_fin(bool finishTrans);
-
+extern volatile bool     g_ifPickNewValue;
+extern volatile uint8_t  g_broadcast_counter;
 
 #endif

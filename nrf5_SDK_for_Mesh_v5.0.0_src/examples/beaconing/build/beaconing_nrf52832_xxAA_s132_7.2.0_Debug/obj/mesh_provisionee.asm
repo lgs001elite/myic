@@ -46868,7 +46868,7 @@ m_power_down_evt_handler:
 	.ascii	"MPU_PROTENSET0_PROTREG24_Enabled BPROT_CONFIG0_REGI"
 	.ascii	"ON24_Enabled\000"
 .LASF11267:
-	.ascii	"NODE_ADDRESS 0x03\000"
+	.ascii	"g_nodeAddress 0x03\000"
 .LASF498:
 	.ascii	"PTRDIFF_MIN INT32_MIN\000"
 .LASF3769:

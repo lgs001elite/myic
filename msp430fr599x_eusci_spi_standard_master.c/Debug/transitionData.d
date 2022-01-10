@@ -13,10 +13,15 @@ transitionData.obj: /opt/ti/ccs1040/ccs/tools/compiler/ti-cgt-msp430_20.2.5.LTS/
 transitionData.obj: /opt/ti/ccs1040/ccs/tools/compiler/ti-cgt-msp430_20.2.5.LTS/include/machine/_stdint.h
 transitionData.obj: /opt/ti/ccs1040/ccs/tools/compiler/ti-cgt-msp430_20.2.5.LTS/include/sys/_stdint.h
 transitionData.obj: /opt/ti/ccs1040/ccs/tools/compiler/ti-cgt-msp430_20.2.5.LTS/include/stdbool.h
+transitionData.obj: /opt/ti/ccs1040/ccs/tools/compiler/ti-cgt-msp430_20.2.5.LTS/include/stdio.h
+transitionData.obj: /opt/ti/ccs1040/ccs/tools/compiler/ti-cgt-msp430_20.2.5.LTS/include/stdarg.h
+transitionData.obj: /opt/ti/ccs1040/ccs/tools/compiler/ti-cgt-msp430_20.2.5.LTS/include/string.h
+transitionData.obj: /opt/ti/ccs1040/ccs/tools/compiler/ti-cgt-msp430_20.2.5.LTS/include/xlocale/_string.h
 transitionData.obj: ../public.h
 transitionData.obj: /opt/ti/ccs1040/ccs/tools/compiler/ti-cgt-msp430_20.2.5.LTS/include/stddef.h
 transitionData.obj: /opt/ti/ccs1040/ccs/tools/compiler/ti-cgt-msp430_20.2.5.LTS/include/stdlib.h
 transitionData.obj: ../spi_packet.h
+transitionData.obj: ../crc.h
 
 ../transitionData.c:
 
@@ -44,6 +49,14 @@ transitionData.obj: ../spi_packet.h
 
 /opt/ti/ccs1040/ccs/tools/compiler/ti-cgt-msp430_20.2.5.LTS/include/stdbool.h:
 
+/opt/ti/ccs1040/ccs/tools/compiler/ti-cgt-msp430_20.2.5.LTS/include/stdio.h:
+
+/opt/ti/ccs1040/ccs/tools/compiler/ti-cgt-msp430_20.2.5.LTS/include/stdarg.h:
+
+/opt/ti/ccs1040/ccs/tools/compiler/ti-cgt-msp430_20.2.5.LTS/include/string.h:
+
+/opt/ti/ccs1040/ccs/tools/compiler/ti-cgt-msp430_20.2.5.LTS/include/xlocale/_string.h:
+
 ../public.h:
 
 /opt/ti/ccs1040/ccs/tools/compiler/ti-cgt-msp430_20.2.5.LTS/include/stddef.h:
@@ -51,4 +64,6 @@ transitionData.obj: ../spi_packet.h
 /opt/ti/ccs1040/ccs/tools/compiler/ti-cgt-msp430_20.2.5.LTS/include/stdlib.h:
 
 ../spi_packet.h:
+
+../crc.h:
 

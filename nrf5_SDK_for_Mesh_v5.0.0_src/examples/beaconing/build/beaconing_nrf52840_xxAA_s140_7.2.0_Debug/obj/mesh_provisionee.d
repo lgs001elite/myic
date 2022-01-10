@@ -1,5 +1,5 @@
 build/beaconing_nrf52840_xxAA_s140_7.2.0_Debug/obj/mesh_provisionee.o: \
- /home/gaosheng/mesh/my_mesh/nrf5_SDK_for_Mesh_v5.0.0_src/examples/common/src/mesh_provisionee.c \
+ /home/gaosheng/mesh/myic/myic/nrf5_SDK_for_Mesh_v5.0.0_src/examples/common/src/mesh_provisionee.c \
  ../common/include/mesh_provisionee.h \
  /usr/share/segger_embedded_studio_for_arm_5.62/include/stdint.h \
  /usr/share/segger_embedded_studio_for_arm_5.62/include/stdbool.h \

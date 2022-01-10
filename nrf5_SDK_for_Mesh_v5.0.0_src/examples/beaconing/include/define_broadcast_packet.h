@@ -2,6 +2,7 @@
 #ifndef _DEFINE_BROADCAST_PACKET_H_
 #define _DEFINE_BROADCAST_PACKET_H_
 #include <stdio.h>
+#include <stdint.h>
 /**
  * Define the adv_broadcast_packet format
  * 
@@ -26,10 +27,8 @@ typedef struct adv_packet_t
             dst              : 4;
     uint8_t layer            : 3,
             p_len            : 5;     
-    uint8_t df[25]; 
+    uint8_t df[23];
+    uint8_t crc[2];
 } define_adv_packet;
-
-
-
 
 #endif

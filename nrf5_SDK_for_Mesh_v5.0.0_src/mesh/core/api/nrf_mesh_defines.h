@@ -144,7 +144,7 @@
 #if defined(NRF51)
 #define NRF_MESH_IRQ_PRIORITY_LOWEST              (3)
 #else
-#define NRF_MESH_IRQ_PRIORITY_LOWEST              (6)
+#define NRF_MESH_IRQ_PRIORITY_LOWEST              (7)
 #endif
 
 /** @} end of MESH_DEFINES_API */

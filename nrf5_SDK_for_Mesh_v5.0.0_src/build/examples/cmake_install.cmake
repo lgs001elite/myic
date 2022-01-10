@@ -1,4 +1,4 @@
-# Install script for directory: /home/gaosheng/mesh/my_mesh/nrf5_SDK_for_Mesh_v5.0.0_src/examples
+# Install script for directory: /home/gaosheng/mesh/myic/myic/nrf5_SDK_for_Mesh_v5.0.0_src/examples
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -39,21 +39,21 @@ endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for each subdirectory.
-  include("/home/gaosheng/mesh/my_mesh/nrf5_SDK_for_Mesh_v5.0.0_src/build/examples/common/cmake_install.cmake")
-  include("/home/gaosheng/mesh/my_mesh/nrf5_SDK_for_Mesh_v5.0.0_src/build/examples/beaconing/cmake_install.cmake")
-  include("/home/gaosheng/mesh/my_mesh/nrf5_SDK_for_Mesh_v5.0.0_src/build/examples/pb_remote/cmake_install.cmake")
-  include("/home/gaosheng/mesh/my_mesh/nrf5_SDK_for_Mesh_v5.0.0_src/build/examples/provisioner/cmake_install.cmake")
-  include("/home/gaosheng/mesh/my_mesh/nrf5_SDK_for_Mesh_v5.0.0_src/build/examples/sensor/cmake_install.cmake")
-  include("/home/gaosheng/mesh/my_mesh/nrf5_SDK_for_Mesh_v5.0.0_src/build/examples/scene/cmake_install.cmake")
-  include("/home/gaosheng/mesh/my_mesh/nrf5_SDK_for_Mesh_v5.0.0_src/build/examples/light_lightness/cmake_install.cmake")
-  include("/home/gaosheng/mesh/my_mesh/nrf5_SDK_for_Mesh_v5.0.0_src/build/examples/light_lc/cmake_install.cmake")
-  include("/home/gaosheng/mesh/my_mesh/nrf5_SDK_for_Mesh_v5.0.0_src/build/examples/light_ctl/cmake_install.cmake")
-  include("/home/gaosheng/mesh/my_mesh/nrf5_SDK_for_Mesh_v5.0.0_src/build/examples/enocean_switch/cmake_install.cmake")
-  include("/home/gaosheng/mesh/my_mesh/nrf5_SDK_for_Mesh_v5.0.0_src/build/examples/dimming/cmake_install.cmake")
-  include("/home/gaosheng/mesh/my_mesh/nrf5_SDK_for_Mesh_v5.0.0_src/build/examples/lpn/cmake_install.cmake")
-  include("/home/gaosheng/mesh/my_mesh/nrf5_SDK_for_Mesh_v5.0.0_src/build/examples/dfu/cmake_install.cmake")
-  include("/home/gaosheng/mesh/my_mesh/nrf5_SDK_for_Mesh_v5.0.0_src/build/examples/serial/cmake_install.cmake")
-  include("/home/gaosheng/mesh/my_mesh/nrf5_SDK_for_Mesh_v5.0.0_src/build/examples/light_switch/cmake_install.cmake")
+  include("/home/gaosheng/mesh/myic/myic/nrf5_SDK_for_Mesh_v5.0.0_src/build/examples/common/cmake_install.cmake")
+  include("/home/gaosheng/mesh/myic/myic/nrf5_SDK_for_Mesh_v5.0.0_src/build/examples/beaconing/cmake_install.cmake")
+  include("/home/gaosheng/mesh/myic/myic/nrf5_SDK_for_Mesh_v5.0.0_src/build/examples/pb_remote/cmake_install.cmake")
+  include("/home/gaosheng/mesh/myic/myic/nrf5_SDK_for_Mesh_v5.0.0_src/build/examples/provisioner/cmake_install.cmake")
+  include("/home/gaosheng/mesh/myic/myic/nrf5_SDK_for_Mesh_v5.0.0_src/build/examples/sensor/cmake_install.cmake")
+  include("/home/gaosheng/mesh/myic/myic/nrf5_SDK_for_Mesh_v5.0.0_src/build/examples/scene/cmake_install.cmake")
+  include("/home/gaosheng/mesh/myic/myic/nrf5_SDK_for_Mesh_v5.0.0_src/build/examples/light_lightness/cmake_install.cmake")
+  include("/home/gaosheng/mesh/myic/myic/nrf5_SDK_for_Mesh_v5.0.0_src/build/examples/light_lc/cmake_install.cmake")
+  include("/home/gaosheng/mesh/myic/myic/nrf5_SDK_for_Mesh_v5.0.0_src/build/examples/light_ctl/cmake_install.cmake")
+  include("/home/gaosheng/mesh/myic/myic/nrf5_SDK_for_Mesh_v5.0.0_src/build/examples/enocean_switch/cmake_install.cmake")
+  include("/home/gaosheng/mesh/myic/myic/nrf5_SDK_for_Mesh_v5.0.0_src/build/examples/dimming/cmake_install.cmake")
+  include("/home/gaosheng/mesh/myic/myic/nrf5_SDK_for_Mesh_v5.0.0_src/build/examples/lpn/cmake_install.cmake")
+  include("/home/gaosheng/mesh/myic/myic/nrf5_SDK_for_Mesh_v5.0.0_src/build/examples/dfu/cmake_install.cmake")
+  include("/home/gaosheng/mesh/myic/myic/nrf5_SDK_for_Mesh_v5.0.0_src/build/examples/serial/cmake_install.cmake")
+  include("/home/gaosheng/mesh/myic/myic/nrf5_SDK_for_Mesh_v5.0.0_src/build/examples/light_switch/cmake_install.cmake")
 
 endif()
 

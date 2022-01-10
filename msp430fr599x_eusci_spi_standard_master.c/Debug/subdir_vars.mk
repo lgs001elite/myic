@@ -7,6 +7,7 @@ CMD_SRCS += \
 ../lnk_msp430fr5994.cmd 
 
 C_SRCS += \
+../crc.c \
 ../hash.c \
 ../msp430fr599x_eusci_spi_standard_master.c \
 ../random.c \
@@ -17,6 +18,7 @@ C_SRCS += \
 ../transitionData.c 
 
 C_DEPS += \
+./crc.d \
 ./hash.d \
 ./msp430fr599x_eusci_spi_standard_master.d \
 ./random.d \
@@ -27,6 +29,7 @@ C_DEPS += \
 ./transitionData.d 
 
 OBJS += \
+./crc.obj \
 ./hash.obj \
 ./msp430fr599x_eusci_spi_standard_master.obj \
 ./random.obj \
@@ -37,6 +40,7 @@ OBJS += \
 ./transitionData.obj 
 
 OBJS__QUOTED += \
+"crc.obj" \
 "hash.obj" \
 "msp430fr599x_eusci_spi_standard_master.obj" \
 "random.obj" \
@@ -47,6 +51,7 @@ OBJS__QUOTED += \
 "transitionData.obj" 
 
 C_DEPS__QUOTED += \
+"crc.d" \
 "hash.d" \
 "msp430fr599x_eusci_spi_standard_master.d" \
 "random.d" \
@@ -57,6 +62,7 @@ C_DEPS__QUOTED += \
 "transitionData.d" 
 
 C_SRCS__QUOTED += \
+"../crc.c" \
 "../hash.c" \
 "../msp430fr599x_eusci_spi_standard_master.c" \
 "../random.c" \

@@ -1,0 +1,22 @@
+{
+    "files.associations": {
+        "spis.h": "c",
+        "nrf_mesh.h": "c",
+        "public.h": "c",
+        "stdio.h": "c",
+        "advertiser.h": "c",
+        "access_reliable.h": "c",
+        "utils.h": "c",
+        "functional": "c",
+        "memory": "c",
+        "optional": "c",
+        "sstream": "c",
+        "stdlib.h": "c",
+        "stdbool.h": "c",
+        "transitiondata.h": "c",
+        "sdk_config.h": "c",
+        "nrf_delay.h": "c",
+        "nrf_log_ctrl.h": "c",
+        "stdint.h": "c"
+    }
+}

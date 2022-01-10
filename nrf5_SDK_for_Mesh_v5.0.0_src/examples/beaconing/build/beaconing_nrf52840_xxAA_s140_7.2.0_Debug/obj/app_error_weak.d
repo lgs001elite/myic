@@ -1,5 +1,5 @@
 build/beaconing_nrf52840_xxAA_s140_7.2.0_Debug/obj/app_error_weak.o: \
- /home/gaosheng/mesh/my_mesh/nrf5_SDK_for_Mesh_v5.0.0_src/examples/common/src/app_error_weak.c \
+ /home/gaosheng/mesh/myic/myic/nrf5_SDK_for_Mesh_v5.0.0_src/examples/common/src/app_error_weak.c \
  /home/gaosheng/mesh/my_mesh/nRF5_SDK_17.0.2_d674dde/modules/nrfx/mdk/nrf.h \
  /home/gaosheng/mesh/my_mesh/nRF5_SDK_17.0.2_d674dde/modules/nrfx/mdk/nrf52840.h \
  /home/gaosheng/mesh/my_mesh/nRF5_SDK_17.0.2_d674dde/components/toolchain/cmsis/include/core_cm4.h \

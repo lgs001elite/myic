@@ -70,51 +70,71 @@ uint8_t SlaveType0 [SPI_DATA_LEN] = {0};
  * Configure nodes
  */
 
-/* Specific configuration for the node  
-   Src: NODE_ADDRESS
-   #define NODE_ADDRESS    0x03
+/**
+ *  Specific configuration for the node   
  */
-volatile uint8_t g_dest_address                  = 0xff;
-volatile uint8_t g_node_dimension                = 0x01;
-volatile bool    g_if_relayNode                  = false;
-volatile bool    g_if_sourceNode                 = false;
-volatile bool    g_if_transDataFromRec           = false;
+uint8_t l_nodeAddress                   = 0x01;
+uint8_t l_dest_address                  = 0x03;
+uint8_t l_node_dimension                = 0x03;
+bool    l_if_relayNode                  = false;
+bool    l_if_sourceNode                 = true;
 
-/*
-#define NODE_ADDRESS    0x01
-volatile uint8_t g_dest_address                  = 0x03;
-volatile uint8_t g_node_dimension                = 0x03;
-volatile bool    g_if_relayNode                  = false;
-volatile bool    g_if_sourceNode                 = true;
-volatile bool    g_if_transDataFromRec           = false;
-**/
+volatile uint8_t g_nodeAddress;
+volatile uint8_t g_dest_address;
+volatile uint8_t g_node_dimension;
+volatile bool    g_if_relayNode;
+volatile bool    g_if_sourceNode;
 
-/*
-#define NODE_ADDRESS    0x02
-volatile uint8_t g_dest_address                  = 0x03;
-volatile uint8_t g_node_dimension                = 0x02;
-volatile bool    g_if_relayNode                  = true;
-volatile bool    g_if_sourceNode                 = false;
-volatile bool    g_if_transDataFromRec           = true;
-**/
+void setNode(uint8_t nodeType)
+{
+    switch (nodeType)
+    {
+    case 1:
+        l_nodeAddress                   = 0x01;
+        l_dest_address                  = 0x02;
+        l_node_dimension                = 0x03;
+        l_if_relayNode                  = false;
+        l_if_sourceNode                 = true;
+        break;
+    
+    case 2:
+        l_nodeAddress                   = 0x02;
+        l_dest_address                  = 0x03;
+        l_node_dimension                = 0x02;
+        l_if_relayNode                  = true;
+        l_if_sourceNode                 = false;
+        break;
+
+    case 3:
+        l_nodeAddress                   = 0x03;
+        l_dest_address                  = 0xff;
+        l_node_dimension                = 0x01;
+        l_if_relayNode                  = false;
+        l_if_sourceNode                 = false;
+        break;
+
+    default:
+        break;
+    }
+
+    g_nodeAddress                   = l_nodeAddress;
+    g_dest_address                  = l_dest_address;
+    g_node_dimension                = l_node_dimension;
+    g_if_relayNode                  = l_if_relayNode;
+    g_if_sourceNode                 = l_if_sourceNode;
+}
 
 static   bool    SWITCH2SPI                      = false;
-uint8_t          ReceiveBuffer[SPI_DATA_LEN]     = {0};
-uint8_t          g_transBuffer[SPI_DATA_LEN]     = {0};
-volatile uint8_t front_check_arr[3]              = {0x41, 0x42, 0x43};
-volatile uint8_t rear_check_arr[3]               = {0x58, 0x59, 0x5A};
+volatile uint8_t ReceiveBuffer[SPI_DATA_LEN]     = {0};
+volatile uint8_t g_transBuffer[SPI_DATA_LEN]     = {0};
 volatile uint8_t g_seq_data                      = 0xff;
 volatile uint8_t g_seq_header                    = 0xff;
 volatile uint8_t g_received_address              = 0xff;
 volatile bool    g_if_end_trans                  = false;
-volatile bool    g_com_pass                      = true;
-volatile uint8_t g_pre_packet_seq                = 0xff;
-volatile uint8_t g_pre_ack_seq                   = 0xff;
 volatile bool    g_if_send_next                  = true;
 volatile uint8_t g_spiTransLen                   = 0;
-volatile bool    g_if_firstRecAck                = false;
-volatile bool    g_if_firstDatagram              = false;
-volatile uint8_t g_dstFromSendNode               = 0xff;
+volatile bool    g_if_Rxternimate                = false;
+volatile bool    g_if_Txternimate                = false;
 
 uint8_t          file_sha256_true[32]            =
 {
@@ -137,7 +157,7 @@ uint8_t TransmitRegAddr                          = 0;
  * TransmitBuffer: Buffer used to transmit data in the ISR
  * TXByteCtr: Number of bytes left to transfer
  * TransmitIndex: The index of the next byte to be transmitted in TransmitBuffer
- * */
+ **/
 
 uint8_t RXByteCtr                                = 0;
 uint8_t ReceiveIndex                             = 0;
@@ -169,6 +189,34 @@ uint8_t TransmitIndex                            = 0;
 
 void CopyArray(uint8_t *source, uint8_t *dest, uint8_t count);
 void SendUCB1Data(uint8_t val);
+
+
+void recevedSucess(void)
+{
+    COMMS_LED_OUT ^= COMMS_LED_PIN;
+    COMMS_LED_OUT ^= COMMS_LED_PIN2;
+}
+
+void recevedFailure(void)
+{
+    COMMS_LED_OUT ^= COMMS_LED_PIN3;
+    COMMS_LED_OUT ^= COMMS_LED_PIN4;
+}
+
+void startTrans(void)
+{
+    uint8_t index = 0;
+    for (; index < 3; index++)
+    {
+        COMMS_LED_OUT ^= COMMS_LED_PIN2;
+    }
+    spi_transData();
+}
+
+void close_spi_process(void)
+{
+    SWITCH2SPI = false;
+}
 
 void SendUCB1Data(uint8_t val)
 {
@@ -237,8 +285,8 @@ void initSPI()
      * The inactive state is high, Data is captured on the first UCLK edge and changed on the following edge;
      */
     UCB1CTLW0 |= UCCKPL | UCMSB | UCSYNC
-                | UCMST | UCSSEL__SMCLK
-                | UCMODE0_H | UCSTEM | UC7BIT_0 | UCCKPH; // Added by me
+                | UCMST | UCSSEL__SMCLK_L
+                | UCMODE0 | UCSTEM | UC7BIT_0 | UCCKPH; // Added by me
     UCB1BRW = 0x20;
     //UCB1MCTLW = 0;
     UCB1CTLW0 &= ~UCSWRST;                     // **Initialize USCI state machine**
@@ -262,10 +310,8 @@ void initGPIO()
     // Configure SPI
     P5SEL0 |= BIT0 | BIT1 | BIT2;
 
-
     SLAVE_CS_DIR |= SLAVE_CS_PIN;
     SLAVE_CS_OUT |= SLAVE_CS_PIN;
-
 
     // Disable the GPIO power-on default high-impedance mode to activate
     // previously configured port settings
@@ -289,11 +335,25 @@ void initClockTo16MHz()
     CSCTL1 = DCOFSEL_4 | DCORSEL;           // Set DCO to 16MHz
 
     // Delay by ~10us to let DCO settle. 60 cycles = 20 cycles buffer + (10us / (1/4MHz))
-    //__delay_cycles(60);
+    __delay_cycles(60);
     CSCTL3 = DIVA__1 | DIVS__1 | DIVM__1;   // Set all dividers to 1 for 16MHz operation
     CSCTL0_H = 0;
 }
 
+// termination function
+
+static void terminateTrans()
+{
+    if (g_if_relayNode)
+    {
+        g_if_Rxternimate      = false;
+        g_pairedNodeAddress   = 0xff;  // Reinitializing for the next round transmition
+        g_if_paired           = false; // Re-choose the paring object
+        startTrans();
+    } else {
+        reInitialize();
+    }
+}
 
 //******************************************************************************
 // Main ************************************************************************
@@ -305,74 +365,72 @@ int main(void) {
     initClockTo16MHz();
     initGPIO();
     initSPI();
+    /**
+     * @brief Set the Node objct
+     * 
+     */
+    setNode(2);
 
     /**
-     * Later to do
+     * will to do
      */
-      //spi_discovery_start();
+    //spi_discovery_start();
 
     /**
      *  Starting communication process
      */
     start_routing();
-
-   /**
-    * @brief for testing
-    * 
-   g_transBuffer[0] = 'X';
-   g_transBuffer[1] = 'Y';
-   g_transBuffer[2] = 'Z';
-   g_spiTransLen = 3;
-   start_spi_process();
-   *
-   *
-   **/
 }
 
 void start_spi_process(void)
 {
     SWITCH2SPI = true;
+    uint8_t transRxNum = 0;
+    uint8_t transTxNum = 0;
+    UCB1IE |= UCRXIE;
     while (SWITCH2SPI)
     {
-        UCB1IE |= UCRXIE;
-
-        __delay_cycles(600000);
-        SPI_Master_ReadReg(CMD_TYPE_0_SLAVE, g_spiTransLen);
-        CopyArray(ReceiveBuffer, SlaveType0, g_spiTransLen);
-        __delay_cycles(600000);
+        __delay_cycles(720000); // 120 ms
+        SPI_Master_ReadReg(CMD_TYPE_0_SLAVE, SPI_DATA_LEN);
+        CopyArray(ReceiveBuffer, SlaveType0, SPI_DATA_LEN);
+        __delay_cycles(150000); // 25ms
+        if (transRxNum <= 5)
+        {
+            receiveDataFromNordic();
+        }
+        __delay_cycles(150000); // 25ms
         SPI_Master_WriteReg(CMD_TYPE_0_MASTER, g_spiTransLen);
-        receiveDataFromNordic();
         COMMS_LED_OUT ^= COMMS_LED_PIN;
+        // Judge if terminate transmition from the receiver part
+        if (g_if_Rxternimate)
+        {
+            if (transRxNum == 5) // transmit 10 times
+            {
+                terminateTrans();
+                if (g_if_relayNode)
+                {
+                    transRxNum = 0;
+                }
+            } else if (transRxNum == 10)
+            {
+                close_spi_process();  // Don't have any tasks, finish the spi process.
+                transRxNum = 0;
+            }
+            transRxNum++;
+        }
 
+        //Judge if terminate transmition from the transceiver part
+        if (g_if_Txternimate)
+        {
+            if (transTxNum == 5) // transmit 10 times
+            {
+                close_spi_process();
+            }
+            transRxNum = 0;
+            transTxNum++;
+        }
     }
 }
-
-void recevedSucess(void)
-{
-    COMMS_LED_OUT ^= COMMS_LED_PIN;
-    COMMS_LED_OUT ^= COMMS_LED_PIN2;
-}
-
-void recevedFailure(void)
-{
-    COMMS_LED_OUT ^= COMMS_LED_PIN3;
-    COMMS_LED_OUT ^= COMMS_LED_PIN4;
-}
-
-void startTrans(void)
-{
-    uint8_t index = 0;
-    for (; index < 3; index++)
-    {
-        COMMS_LED_OUT ^= COMMS_LED_PIN2;
-    }
-}
-
-void close_spi_process(void)
-{
-    SWITCH2SPI = false;
-}
-
 
 //******************************************************************************
 // SPI Interrupt ***************************************************************
@@ -402,7 +460,6 @@ void __attribute__ ((interrupt(USCI_B1_VECTOR))) USCI_B1_ISR (void)
                     {
                         MasterMode = RX_DATA_MODE;   // Need to start receiving now
                         //Send Dummy To Start
-                        //__delay_cycles(2000000);
                         SendUCB1Data(DUMMY);
                     }
                     else
@@ -431,7 +488,6 @@ void __attribute__ ((interrupt(USCI_B1_VECTOR))) USCI_B1_ISR (void)
                 case RX_DATA_MODE:
                     if (RXByteCtr)
                     {
-                        //ReceiveBuffer[ReceiveIndex++] = ucb1_rx_val;
                         //Transmit a dummy
                         RXByteCtr--;
                     }
@@ -450,7 +506,6 @@ void __attribute__ ((interrupt(USCI_B1_VECTOR))) USCI_B1_ISR (void)
                     __no_operation();
                     break;
             }
-            //__delay_cycles(1000);
             break;
         case USCI_SPI_UCTXIFG:
             break;

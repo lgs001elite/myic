@@ -23,6 +23,9 @@ routingRx.obj: /opt/ti/ccs1040/ccs/tools/compiler/ti-cgt-msp430_20.2.5.LTS/inclu
 routingRx.obj: ../filedata.h
 routingRx.obj: ../hash.h
 routingRx.obj: ../transitionData.h
+routingRx.obj: /opt/ti/ccs1040/ccs/tools/compiler/ti-cgt-msp430_20.2.5.LTS/include/stdio.h
+routingRx.obj: /opt/ti/ccs1040/ccs/tools/compiler/ti-cgt-msp430_20.2.5.LTS/include/stdarg.h
+routingRx.obj: ../crc.h
 routingRx.obj: ../dst_DB.h
 
 ../routingRx.c:
@@ -70,6 +73,12 @@ routingRx.obj: ../dst_DB.h
 ../hash.h:
 
 ../transitionData.h:
+
+/opt/ti/ccs1040/ccs/tools/compiler/ti-cgt-msp430_20.2.5.LTS/include/stdio.h:
+
+/opt/ti/ccs1040/ccs/tools/compiler/ti-cgt-msp430_20.2.5.LTS/include/stdarg.h:
+
+../crc.h:
 
 ../dst_DB.h:
 

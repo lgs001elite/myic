@@ -23,6 +23,9 @@ routingTx.obj: /opt/ti/ccs1040/ccs/tools/compiler/ti-cgt-msp430_20.2.5.LTS/inclu
 routingTx.obj: /opt/ti/ccs1040/ccs/tools/compiler/ti-cgt-msp430_20.2.5.LTS/include/stdlib.h
 routingTx.obj: ../random.h
 routingTx.obj: ../transitionData.h
+routingTx.obj: /opt/ti/ccs1040/ccs/tools/compiler/ti-cgt-msp430_20.2.5.LTS/include/stdio.h
+routingTx.obj: /opt/ti/ccs1040/ccs/tools/compiler/ti-cgt-msp430_20.2.5.LTS/include/stdarg.h
+routingTx.obj: ../crc.h
 routingTx.obj: ../source_DB.h
 routingTx.obj: ../dst_DB.h
 
@@ -71,6 +74,12 @@ routingTx.obj: ../dst_DB.h
 ../random.h:
 
 ../transitionData.h:
+
+/opt/ti/ccs1040/ccs/tools/compiler/ti-cgt-msp430_20.2.5.LTS/include/stdio.h:
+
+/opt/ti/ccs1040/ccs/tools/compiler/ti-cgt-msp430_20.2.5.LTS/include/stdarg.h:
+
+../crc.h:
 
 ../source_DB.h:
 
