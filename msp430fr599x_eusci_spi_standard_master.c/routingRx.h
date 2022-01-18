@@ -3,6 +3,9 @@
 
 #include <stdint.h>
 
+#define  rtLength  2
+
 void receiveDataFromNordic();
+void updateCRC(uint8_t relayPkt[]);
 
 #endif

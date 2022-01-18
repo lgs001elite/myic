@@ -17,6 +17,7 @@
         "sdk_config.h": "c",
         "nrf_delay.h": "c",
         "nrf_log_ctrl.h": "c",
-        "stdint.h": "c"
+        "stdint.h": "c",
+        "crc.h": "c"
     }
 }

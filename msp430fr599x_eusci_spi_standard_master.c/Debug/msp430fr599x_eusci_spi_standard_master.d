@@ -25,6 +25,7 @@ msp430fr599x_eusci_spi_standard_master.obj: /opt/ti/ccs1040/ccs/tools/compiler/t
 msp430fr599x_eusci_spi_standard_master.obj: /opt/ti/ccs1040/ccs/tools/compiler/ti-cgt-msp430_20.2.5.LTS/include/stdlib.h
 msp430fr599x_eusci_spi_standard_master.obj: ../routing.h
 msp430fr599x_eusci_spi_standard_master.obj: ../routingRx.h
+msp430fr599x_eusci_spi_standard_master.obj: ../routingTx.h
 
 ../msp430fr599x_eusci_spi_standard_master.c:
 
@@ -75,4 +76,6 @@ msp430fr599x_eusci_spi_standard_master.obj: ../routingRx.h
 ../routing.h:
 
 ../routingRx.h:
+
+../routingTx.h:
 

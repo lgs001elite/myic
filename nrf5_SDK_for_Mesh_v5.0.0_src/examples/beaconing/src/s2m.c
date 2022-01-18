@@ -22,6 +22,7 @@ void set_transData(void)
     for (uint32_t i = 0; i < m_tx_length; i++)
     {
         m_tx_buf_spi[i] = tx_data.tx_data_buf[i];
+        //__LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "----- m_tx_buf_spi[%d]: %X  -----\n", i, m_tx_buf_spi[i]);
     }
 
     /**

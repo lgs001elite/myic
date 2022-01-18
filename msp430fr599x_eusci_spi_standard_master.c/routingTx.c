@@ -37,15 +37,6 @@ void spi_transData(void)
     
     g_seq_data = (g_seq_data + 1) % MAXUINT8;
     
-    /**
-     * @brief Setting the first datagram's status
-     * 
-     */
-    if (g_transDataSeq == 0)
-    {
-        spi_status = 0x04;
-    }
-
     s_transdata->hp_len         = 0x1E;
     s_transdata->t_broad_type   = BLE_GAP_AD_TYPE_PUBLIC_TARGET_ADDRESS;
     s_transdata->src            = g_nodeAddress;
@@ -57,12 +48,7 @@ void spi_transData(void)
     uint8_t     packet_i        = 0;  /* 0: the starting point of payload */
     for (; (g_transDataSeq < g_file_len) && (g_if_send_next) && (!g_if_end_trans);)
     {
-        if (g_if_relayNode)
-        {
-            (s_transdata->df)[packet_i] = store_received_data[g_transDataSeq];
-        } else {
-            (s_transdata->df)[packet_i] = file_data[g_transDataSeq];
-        }
+        (s_transdata->df)[packet_i] = file_data[g_transDataSeq];
 
         packet_i++;
         g_transDataSeq++;
@@ -108,7 +94,7 @@ void spi_transHeaderStatus(uint8_t statusValue)
     s_header->hp_len       = 0x1E;
     s_header->t_broad_type = BLE_GAP_AD_TYPE_PUBLIC_TARGET_ADDRESS;
     s_header->src          = g_nodeAddress;
-    s_header->dst          = g_pairedNodeAddress;
+    s_header->dst          = g_receivedNodeAddress;
     s_header->layer        = g_node_dimension;
     s_header->seq          = g_seq_header;
     s_header->status       = statusValue;

@@ -40,13 +40,13 @@ bool check_completeness(uint8_t * receivedData)
     uint8_t  res1       = (crc_result & 0xFF00)>>8;
     uint8_t  res2       = (crc_result & 0x00FF);
 
-    while (res1 > 0x7F)
+    while (res1 >= 0x7F)
     {
         __LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "res1: %X! \n",res1);
         res1 -= 0x7F;
     }
 
-    while (res2 > 0x7F)
+    while (res2 >= 0x7F)
     {
         __LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "res2: %X! \n",res2);
         res2 -= 0x7F;
@@ -115,11 +115,6 @@ void spis_event_handler(nrf_drv_spis_event_t event)
         __LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "receive status: %X\n", statusAction);
         switch (statusAction)
         {
-            /** The first datagram **/
-            case 0x04:
-                receiveData_sendout(m_rx_buf_spi);
-                send_datagram_start();
-                break;
             /** Other datagrams **/
             case 0x42:
                 advertiser_disableAndFlush(); // Finishing the current advertiser 
@@ -158,8 +153,12 @@ static void start_spis_loop()
             free(m_tx_buf_spi);
             m_tx_buf_spi      = NULL;
             g_ifPickNewValue  = false;
-            __LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "----- g_ifPickNewValue  -----\n");
             set_transData();
+            __LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "----- g_ifPickNewValue  -----\n");
+            __LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "----- dst: %X -----\n", m_tx_buf_spi[5]);
+            __LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "----- src: %X  -----\n", m_tx_buf_spi[4]);
+            __LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "----- status: %X  -----\n", m_tx_buf_spi[3]);
+            __LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "----- seq: %X  -----\n", m_tx_buf_spi[2]);
         }
         
         APP_ERROR_CHECK(nrfx_spis_buffers_set(&spis, m_tx_buf_spi, m_tx_length, m_rx_buf_spi, M_BROADCASRLEN));

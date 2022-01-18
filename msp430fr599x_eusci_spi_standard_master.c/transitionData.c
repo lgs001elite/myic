@@ -11,7 +11,7 @@ static uint16_t getCRC(unsigned char const message[])
 {
     crcInit();
     uint16_t crc_result = crcFast(message, 31);
-    return crc_result;
+    return crc_result;  
 }
 
 /**
@@ -73,12 +73,12 @@ void data_m2s(uint8_t * s_transData, SPI_DATAGRAM * m_transData)
     s_transData[31]     =   (crc_result & 0xFF00)>>8;
     s_transData[32]     =   (crc_result & 0x00FF);
 
-    while (s_transData[31] > 0x7F)
+    while (s_transData[31] >= 0x7F)
     {
         s_transData[31] -= 0x7F;
     }
 
-    while (s_transData[32] > 0x7F)
+    while (s_transData[32] >= 0x7F)
     {
         s_transData[32] -= 0x7F;
     }
@@ -119,12 +119,12 @@ void status_m2s(uint8_t * s_transData, SPI_DATAGRAM * m_transData)
     s_transData[31]     = (crc_result & 0xFF00)>>8;
     s_transData[32]     = (crc_result & 0x00FF);
 
-    while (s_transData[31] > 0x7F)
+    while (s_transData[31] >= 0x7F)
     {
         s_transData[31] -= 0x7F;
     }
 
-    while (s_transData[32] > 0x7F)
+    while (s_transData[32] >= 0x7F)
     {
         s_transData[32] -= 0x7F;
     }

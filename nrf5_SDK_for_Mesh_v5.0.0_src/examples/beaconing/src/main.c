@@ -200,12 +200,12 @@ static void rx_cb(const nrf_mesh_adv_packet_rx_data_t * p_rx_data)
     uint8_t  res1       = (crc_result & 0xFF00)>>8;
     uint8_t  res2       = (crc_result & 0x00FF);
 
-    while (res1 > 0x7F)
+    while (res1 >= 0x7F)
     {
         res1 -= 0x7F;
     }
 
-    while (res2 > 0x7F)
+    while (res2 >= 0x7F)
     {
         res2 -= 0x7F;
     }

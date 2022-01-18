@@ -37,6 +37,7 @@
 #include "public.h"
 #include "routing.h"
 #include "routingRx.h"
+#include "routingTx.h"
 
 //******************************************************************************
 // Pin Config ******************************************************************
@@ -79,11 +80,13 @@ uint8_t l_node_dimension                = 0x03;
 bool    l_if_relayNode                  = false;
 bool    l_if_sourceNode                 = true;
 
+volatile uint8_t g_receivedNodeAddress  = 0xff;
+volatile bool    g_if_relayNode         = false;
 volatile uint8_t g_nodeAddress;
 volatile uint8_t g_dest_address;
 volatile uint8_t g_node_dimension;
-volatile bool    g_if_relayNode;
 volatile bool    g_if_sourceNode;
+volatile bool    g_if_relay             = false;
 
 void setNode(uint8_t nodeType)
 {
@@ -199,8 +202,7 @@ void recevedSucess(void)
 
 void recevedFailure(void)
 {
-    COMMS_LED_OUT ^= COMMS_LED_PIN3;
-    COMMS_LED_OUT ^= COMMS_LED_PIN4;
+    COMMS_LED_OUT ^= COMMS_LED_PIN2;
 }
 
 void startTrans(void)
@@ -344,15 +346,7 @@ void initClockTo16MHz()
 
 static void terminateTrans()
 {
-    if (g_if_relayNode)
-    {
-        g_if_Rxternimate      = false;
-        g_pairedNodeAddress   = 0xff;  // Reinitializing for the next round transmition
-        g_if_paired           = false; // Re-choose the paring object
-        startTrans();
-    } else {
-        reInitialize();
-    }
+    reInitialize();
 }
 
 //******************************************************************************
@@ -387,6 +381,7 @@ void start_spi_process(void)
     SWITCH2SPI = true;
     uint8_t transRxNum = 0;
     uint8_t transTxNum = 0;
+    uint8_t transRtNum = 0;
     UCB1IE |= UCRXIE;
     while (SWITCH2SPI)
     {
@@ -404,12 +399,14 @@ void start_spi_process(void)
         // Judge if terminate transmition from the receiver part
         if (g_if_Rxternimate)
         {
-            if (transRxNum == 5) // transmit 10 times
+            if (transRxNum == 5) // transmit 5 times
             {
                 terminateTrans();
                 if (g_if_relayNode)
                 {
-                    transRxNum = 0;
+                    spi_transHeaderStatus(0x40);
+                    g_transBuffer[5] = 0x03;
+                    updateCRC(g_transBuffer);
                 }
             } else if (transRxNum == 10)
             {
@@ -422,12 +419,23 @@ void start_spi_process(void)
         //Judge if terminate transmition from the transceiver part
         if (g_if_Txternimate)
         {
-            if (transTxNum == 5) // transmit 10 times
+            if (transTxNum == 5) // transmit 5 times
             {
                 close_spi_process();
             }
             transRxNum = 0;
             transTxNum++;
+        }
+
+        //Judge if start to send ack to the source node
+        if (g_if_relay)
+        {
+            if (transRtNum != 5)
+            {
+                transRtNum       = 0;
+                g_if_relay       = false;
+            }
+            transRtNum++;
         }
     }
 }
