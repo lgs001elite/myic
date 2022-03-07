@@ -17,6 +17,7 @@ static uint8_t         g_pre_status                 = 0xff;
 static uint8_t         g_pre_seq                    = 0xff;
 static volatile bool   isFirstRec                   = false;
 static bool            g_if_transBroadPackets       = true;
+static volatile bool   g_spiStart                   = true;
 
 /**
  * @brief  SPIS check completeness of data(checksums of packets)
@@ -82,6 +83,7 @@ void spis_event_handler(nrf_drv_spis_event_t event)
         bool checkResult = check_completeness(m_rx_buf_spi);
         if (! checkResult)
         {
+            __LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "pass fail!\n");
             return;
         }
         
@@ -117,7 +119,14 @@ void spis_event_handler(nrf_drv_spis_event_t event)
         {
             /** Other datagrams **/
             case 0x42:
+                g_spiStart = false;
                 advertiser_disableAndFlush(); // Finishing the current advertiser 
+                break;
+            case 0x41:
+                g_spiStart = false;
+                set_if_terCurrentAdvertiser(true);
+                receiveData_sendout(m_rx_buf_spi);
+                send_datagram_start();
                 break;
             default:
                 set_if_terCurrentAdvertiser(true);
@@ -134,7 +143,7 @@ void spis_event_handler(nrf_drv_spis_event_t event)
 
 static void start_spis_loop()
 {
-    while (1)
+    while (g_spiStart)
     {
         // For continuing of the spi process, set initialize values for transfer_buf
         if (g_if_transBroadPackets)

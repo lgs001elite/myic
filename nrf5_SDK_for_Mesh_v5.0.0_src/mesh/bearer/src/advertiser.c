@@ -191,7 +191,7 @@ static inline bool should_free_current_packet(advertiser_t * p_adv)
 
 static bool next_packet_fetch(advertiser_t * p_adv)
 {
-    __LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "anchor5!\n");
+    __LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "anchor0!\n");
   //  __LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "p_adv->p_packet: %s\n", p_adv->p_packet );
     while (p_adv->p_packet == NULL || should_free_current_packet(p_adv))
     {
