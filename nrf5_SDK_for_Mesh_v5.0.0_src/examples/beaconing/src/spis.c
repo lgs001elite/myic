@@ -78,7 +78,9 @@ bool check_completeness(uint8_t * receivedData)
 void spis_event_handler(nrf_drv_spis_event_t event)
 {
     if (event.evt_type == NRF_DRV_SPIS_XFER_DONE)
-    {        
+    {   
+        __LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "receivedData: %X\n", m_rx_buf_spi[0]);
+        __LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "receivedData: %X\n", m_rx_buf_spi[1]);       
         spis_xfer_done = true;
         bool checkResult = check_completeness(m_rx_buf_spi);
         if (! checkResult)

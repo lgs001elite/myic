@@ -81,9 +81,9 @@ static bool              g_now_send_adv_packets = false;
 advertiser_t             m_discovery_advertiser = {0};
 static uint8_t           m_adv_buffer_discovery[ADVERTISER_BUFFER_SIZE];
 static uint8_t           g_testing_main_counter = 0;
-static uint8_t           g_prePackSeqNum        = 0x00;
+static uint8_t           g_prePackSeqNum        = 0xff;
 static uint8_t           g_prePackStatus        = 0xff;
-static bool              g_firstReqPacket       = false;     
+static bool              g_firstReqPacket       = true;     
 static void              adv_init(void);
 adv_packet_t  *          p_broad_packet         = NULL;
 
@@ -151,7 +151,6 @@ static void send2bearer(advertiser_t * p_adv, define_adv_packet * adv_packet)
 void send_datagram_start()
 {
     __LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "********************* Adv --- starting *****************\n");
-    //nrf_delay_ms(5); /* if last adv is still alive, leave time to finish it. */
     set_if_terCurrentAdvertiser(false); // Don't terminate the current advertiser
     advertiser_enable(&m_discovery_advertiser);     /* Check if adv_instance is enable */
     define_adv_packet * recData = getData_sendout();
@@ -236,8 +235,8 @@ static void rx_cb(const nrf_mesh_adv_packet_rx_data_t * p_rx_data)
     }
 
     g_prePackNum++;
-    __LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "----- pass check: Re_packNum: %d;seqNum: %d  -----\n", 
-        g_prePackNum, p_rx_data->p_payload[2]);
+    __LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "----- pass check: pre_packNum: %d;seqNum: %d  -----\n", 
+        g_prePackSeqNum, p_rx_data->p_payload[2]);
 
     // Prevent from receiving  repeated packets
     g_prePackSeqNum = p_rx_data->p_payload[2]; // recording pre seq num
