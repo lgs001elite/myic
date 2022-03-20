@@ -6,18 +6,10 @@
 #define                SPIS_INSTANCE                1 /**< SPIS instance index. */
 
 static   const         nrf_drv_spis_t spis          = NRF_DRV_SPIS_INSTANCE(SPIS_INSTANCE);/**< SPIS instance. */                           /** < RX buffer. */
-static   uint8_t       m_rx_buf_spi[M_BROADCASRLEN] = {0};
-volatile uint8_t       m_rx_buf_pre[M_BROADCASRLEN] = {0};
-uint8_t          *     m_tx_buf_spi;
-volatile uint8_t       m_tx_length                  = 0;
+static   uint8_t       m_rx_buf_spi[S_BROADCASRLEN + 1] = {0};
+uint8_t                m_tx_buf_spi[S_BROADCASRLEN]     = {0};
 
-static volatile bool   spis_xfer_done               = false;  /**< Flag used to indicate that SPIS 
-                                                               instance completed the transfer. */
-static uint8_t         g_pre_status                 = 0xff;
-static uint8_t         g_pre_seq                    = 0xff;
-static volatile bool   isFirstRec                   = false;
-static bool            g_if_transBroadPackets       = true;
-static volatile bool   g_spiStart                   = true;
+static volatile bool   spis_xfer_done               = false;  /**< Flag used to indicate that SPIS instance completed the transfer. */
 
 /**
  * @brief  SPIS check completeness of data(checksums of packets)
@@ -26,7 +18,7 @@ bool check_completeness(uint8_t * receivedData)
 {
     if (receivedData[2] != BLE_GAP_AD_TYPE_PUBLIC_TARGET_ADDRESS)
     {
-        //__LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "receivedData[2]: %X! \n", receivedData[2]);
+        __LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "receivedData[2]: %X! \n", receivedData[1]);
         return false;
     }
 
@@ -34,7 +26,7 @@ bool check_completeness(uint8_t * receivedData)
     for (uint8_t i = 1; i < 32; i++)
     {
         crc_input[i - 1] = receivedData[i];
-        //__LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "receivedData[%d]: %X! \n", i, receivedData[i]);
+        __LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "receivedData[2]: %X! \n", receivedData[i]);
     }
     crcInit();
     uint16_t crc_result = crcFast(crc_input, 31);
@@ -72,15 +64,12 @@ bool check_completeness(uint8_t * receivedData)
 
 /**
  * @brief SPIS user event handler.
- *
  * @param event
  */
 void spis_event_handler(nrf_drv_spis_event_t event)
 {
     if (event.evt_type == NRF_DRV_SPIS_XFER_DONE)
-    {   
-        __LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "receivedData: %X\n", m_rx_buf_spi[0]);
-        __LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "receivedData: %X\n", m_rx_buf_spi[1]);       
+    {         
         spis_xfer_done = true;
         bool checkResult = check_completeness(m_rx_buf_spi);
         if (! checkResult)
@@ -89,92 +78,28 @@ void spis_event_handler(nrf_drv_spis_event_t event)
             return;
         }
         
+        uint8_t statusAction = m_rx_buf_spi[4];
         __LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "pass check\n");
-        // Checking status values to judge if there is a new kind of datagram
-        uint8_t statusAction =  m_rx_buf_spi[4];
-        if (g_pre_status != statusAction)
-        {
-            isFirstRec = true;
-        }
-
-        // If reveive the same datagram, return. Do not handle it!
-        if (!isFirstRec)
-        {
-            if (g_pre_seq == m_rx_buf_spi[3])
-            {
-                __LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "isSamePacket\n");
-               return;
-            }
-        }
-        
-        // free broadcast packets, prevent from memory leakage 
-        
-        // for counting broadcast numbers on bearer layer
-        if (g_broadcast_counter != 0)
-        {
-            __LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "isSamePacket\n");
-            return;
-        }
-
         __LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "receive status: %X\n", statusAction);
         switch (statusAction)
         {
-            /** Other datagrams **/
             case 0x42:
-                g_spiStart = false;
-                advertiser_disableAndFlush(); // Finishing the current advertiser 
-                break;
-            case 0x41:
-                g_spiStart = false;
-                set_if_terCurrentAdvertiser(true);
-                receiveData_sendout(m_rx_buf_spi);
-                send_datagram_start();
                 break;
             default:
-                set_if_terCurrentAdvertiser(true);
                 receiveData_sendout(m_rx_buf_spi);
                 send_datagram_start();
+                nrf_delay_ms(100);
                 break;
         }
-        
-        g_pre_seq    = m_rx_buf_spi[3];
-        g_pre_status = m_rx_buf_spi[4];
-        isFirstRec = false;
     }
 }
 
 static void start_spis_loop()
 {
-    while (g_spiStart)
+    while (1)
     {
-        // For continuing of the spi process, set initialize values for transfer_buf
-        if (g_if_transBroadPackets)
-        {
-            m_tx_buf_spi    = (uint8_t *) malloc(sizeof(uint8_t) * 3);
-            m_tx_buf_spi[0] = 0x05;
-            m_tx_buf_spi[1] = 0x02;
-            m_tx_buf_spi[2] = 0x08;
-            m_tx_length     = 3;
-            g_if_transBroadPackets = false;
-        }
-
-        // Pick data from set opearion "spis_setfrom_slave"
-        if (g_ifPickNewValue)
-        {
-            free(m_tx_buf_spi);
-            m_tx_buf_spi      = NULL;
-            g_ifPickNewValue  = false;
-            set_transData();
-            __LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "----- g_ifPickNewValue  -----\n");
-            __LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "----- dst: %X -----\n", m_tx_buf_spi[5]);
-            __LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "----- src: %X  -----\n", m_tx_buf_spi[4]);
-            __LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "----- status: %X  -----\n", m_tx_buf_spi[3]);
-            __LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "----- seq: %X  -----\n", m_tx_buf_spi[2]);
-        }
-        
-        APP_ERROR_CHECK(nrfx_spis_buffers_set(&spis, m_tx_buf_spi, m_tx_length, m_rx_buf_spi, M_BROADCASRLEN));
-        
-
+        set_transData();
+        APP_ERROR_CHECK(nrfx_spis_buffers_set(&spis, m_tx_buf_spi, S_BROADCASRLEN, m_rx_buf_spi, S_BROADCASRLEN + 1));
         spis_xfer_done = false;
         while (!spis_xfer_done)
         {

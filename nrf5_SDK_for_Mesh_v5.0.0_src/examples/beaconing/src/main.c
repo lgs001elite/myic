@@ -75,34 +75,14 @@
  * Definitions
  *****************************************************************************/
 #define ADVERTISER_BUFFER_SIZE  (64)
-volatile bool            g_ifPickNewValue       = false;
 static bool              g_if_sendNext          = false;
-static bool              g_now_send_adv_packets = false;
 advertiser_t             m_discovery_advertiser = {0};
-static uint8_t           m_adv_buffer_discovery[ADVERTISER_BUFFER_SIZE];
-static uint8_t           g_testing_main_counter = 0;
-static uint8_t           g_prePackSeqNum        = 0xff;
-static uint8_t           g_prePackStatus        = 0xff;
-static bool              g_firstReqPacket       = true;     
+static uint8_t           m_adv_buffer_discovery[ADVERTISER_BUFFER_SIZE]; 
 static void              adv_init(void);
 adv_packet_t  *          p_broad_packet         = NULL;
 
-static uint8_t           g_prePackNum           = 0;
-
-
-bool get_if_terCurrentAdvertiser()
-{
-    return g_if_sendNext;
-}
-
-void set_if_terCurrentAdvertiser(bool nextStatus)
-{
-    g_if_sendNext = nextStatus;
-}
-
 /**
  * @brief pass datagram to the bearer layer
- * 
  * @param p_adv: advertiser entity
  * @param adv_packet: datagram
  */
@@ -111,32 +91,15 @@ static void send2bearer(advertiser_t * p_adv, define_adv_packet * adv_packet)
     p_broad_packet = advertiser_packet_alloc(p_adv, BLE_ADV_PACKET_PAYLOAD_MAX_LENGTH);
     if (p_broad_packet)
     {
-        //g_if_allocatedPacket = true;
-        /* Construct packet contents */
         memcpy(p_broad_packet->packet.payload, adv_packet, BLE_ADV_PACKET_PAYLOAD_MAX_LENGTH);
-        /* Repeat forever */
-        p_broad_packet->config.repeats = ADVERTISER_REPEAT_INFINITE;
+        /* Repeat once */
+        p_broad_packet->config.repeats = 1;
         advertiser_packet_send(p_adv, p_broad_packet);
-    } else {
-        /**
-         * Protect from infinite loops
-         */
-        if (g_testing_main_counter == 10)
-        {
-            __LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "allocation failure!\n");
-            return;
-        }
-        g_testing_main_counter++;
-
-        if (g_now_send_adv_packets == true){
-            send_datagram_start();
-        }
     }
 }
 
 /**
  * @brief free pointer operation
- * 
  */
  void freeAdvpacket(define_adv_packet * advPacket)
  {
@@ -150,19 +113,14 @@ static void send2bearer(advertiser_t * p_adv, define_adv_packet * adv_packet)
  */
 void send_datagram_start()
 {
-    __LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "********************* Adv --- starting *****************\n");
-    set_if_terCurrentAdvertiser(false); // Don't terminate the current advertiser
-    advertiser_enable(&m_discovery_advertiser);     /* Check if adv_instance is enable */
+    __LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "********************* Adv --- starting *****************\n"); 
     define_adv_packet * recData = getData_sendout();
-    g_now_send_adv_packets = true;
     send2bearer(&m_discovery_advertiser,recData);
-    g_now_send_adv_packets = false;
     freeAdvpacket(recData);
 }
 
 /**
  * @brief receiving datagram from the bearer layer
- * 
  * @param p_rx_data: received datagram  
  */
 static void rx_cb(const nrf_mesh_adv_packet_rx_data_t * p_rx_data)
@@ -215,33 +173,6 @@ static void rx_cb(const nrf_mesh_adv_packet_rx_data_t * p_rx_data)
         return;
     }
 
-    uint8_t data_status = p_rx_data->p_payload[3];
-    if (g_prePackStatus != data_status)
-    {
-        g_firstReqPacket = true;
-    }
-
-    // Prevent from repeating malloc operation
-    if (!g_firstReqPacket)
-    {
-        if (g_prePackSeqNum == p_rx_data->p_payload[2])
-        {
-            //g_ifPickNewValue = false;
-            __LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "----- repeated packets  -----\n");
-            return;
-        }
-    } else {
-        g_firstReqPacket = false;
-    }
-
-    g_prePackNum++;
-    __LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "----- pass check: pre_packNum: %d;seqNum: %d  -----\n", 
-        g_prePackSeqNum, p_rx_data->p_payload[2]);
-
-    // Prevent from receiving  repeated packets
-    g_prePackSeqNum = p_rx_data->p_payload[2]; // recording pre seq num
-    g_prePackStatus = p_rx_data->p_payload[3]; // recording pre packet type
-
     // Recording the received data
     uint8_t *spi_data2mster = (uint8_t *) malloc(sizeof(uint8_t) * (S_BROADCASRLEN));
     if (! spi_data2mster)
@@ -255,9 +186,8 @@ static void rx_cb(const nrf_mesh_adv_packet_rx_data_t * p_rx_data)
     }
     spi_data2mster[31] = res1;
     spi_data2mster[32] = res2;
-    g_ifPickNewValue   = true;
-    
     spis_setfrom_slave(spi_data2mster, S_BROADCASRLEN);
+    __LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "----- received successfully  seq: %X-----\n", spi_data2mster[2]);
 }
 
 static void adv_init(void)
@@ -331,6 +261,7 @@ static void start(void)
     /* Let scanner accept Complete Local Name AD Type. */
     bearer_adtype_add(BLE_GAP_AD_TYPE_PUBLIC_TARGET_ADDRESS);
     ERROR_CHECK(mesh_stack_start());
+    advertiser_enable(&m_discovery_advertiser);     /* Check if adv_instance is enable */
     spis_start();
 }
 

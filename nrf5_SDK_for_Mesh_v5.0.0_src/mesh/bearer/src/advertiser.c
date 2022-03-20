@@ -55,30 +55,8 @@
 #define GAP_ADDR_TYPE_VALUE_RANDOM_STATIC   0xC0
 
 static const uint8_t m_ble_adv_channels[]   = NRF_MESH_ADV_CHAN_DEFAULT;
-volatile uint8_t g_broadcast_counter        = 0;
 static prng_t m_adv_prng;
 /** Added by Gaosehng **/
-
-void adv_packet_discard()
-{
-    // free packets
-    if (!p_broad_packet)
-    {
-        return;
-    }
-    advertiser_packet_discard(&m_discovery_advertiser, p_broad_packet);
-    p_broad_packet = NULL;
-    __LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "free packets!\n");
-}
-
-void advertiser_disableAndFlush(void)
-{
-    if (advertiser_is_enabled(&m_discovery_advertiser))
-    {
-        advertiser_disable(&m_discovery_advertiser);
-        advertiser_flush(&m_discovery_advertiser);
-    }
-}
 
 static inline bool is_active(const advertiser_t * p_adv)
 {
@@ -181,7 +159,7 @@ static inline bool should_free_current_packet(advertiser_t * p_adv)
     /* Infinite-repeat packets are replaced when new packets are added. */
     bool should_replace_infinite_packet =
         (p_adv->p_packet->config.repeats == ADVERTISER_REPEAT_INFINITE &&
-         packet_buffer_packets_ready_to_pop(&p_adv->buf));
+        packet_buffer_packets_ready_to_pop(&p_adv->buf));
 
     /* Any packets with 0 repeats should be replaced */
     bool packet_has_no_repeats = (p_adv->p_packet->config.repeats == 0);
@@ -191,19 +169,8 @@ static inline bool should_free_current_packet(advertiser_t * p_adv)
 
 static bool next_packet_fetch(advertiser_t * p_adv)
 {
-    __LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "anchor0!\n");
-  //  __LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "p_adv->p_packet: %s\n", p_adv->p_packet );
     while (p_adv->p_packet == NULL || should_free_current_packet(p_adv))
     {
-        __LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "should_free_current_packet\n");
-        /* Free current packet */
-        if (p_adv->p_packet != NULL)
-        {
-            __LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "packet_buffer_free\n");
-           // packet_buffer_free(&p_adv->buf, get_packet_buffer_from_adv_packet(p_adv->p_packet));
-           // p_adv->p_packet = NULL;
-        }
-
         packet_buffer_packet_t * p_packet_buf;
         __LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "packet_buffer_free\n");
         if (packet_buffer_pop(&p_adv->buf, &p_packet_buf) == NRF_SUCCESS)
@@ -223,7 +190,6 @@ static bool next_packet_fetch(advertiser_t * p_adv)
 
 /**
  * Schedule a single advertisement event.
- *
  * @param[in,out] p_adv Advertiser to schedule for.
  */
 static void schedule_broadcast(advertiser_t * p_adv)
@@ -238,29 +204,7 @@ static void schedule_broadcast(advertiser_t * p_adv)
 
 static void timeout_event(timestamp_t timestamp, void * p_context)
 {
-    // Finish current adv for next round
-    if (get_if_terCurrentAdvertiser())
-    {
-        g_broadcast_counter = 0;
-        advertiser_disableAndFlush();
-        adv_packet_discard();
-        __LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "anchor2!\n");
-        return;
-    }
-   
-    if (g_broadcast_counter == 2)
-    {
-       g_broadcast_counter = 0;
-       advertiser_disableAndFlush();
-       adv_packet_discard();
-       __LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "anchor3!\n");
-       return;
-    }
-    g_broadcast_counter++;
-
-
     advertiser_t * p_adv = (advertiser_t *) p_context;
-    p_adv->timer.interval = 0;
     if (p_adv->enabled)
     {
         __LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "p_adv->enabled!\n");
@@ -277,14 +221,12 @@ static void timeout_event(timestamp_t timestamp, void * p_context)
             has_packet = next_packet_fetch(p_adv);
             if (has_packet)
             {
-                __LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "anchor5!\n");
                 schedule_broadcast(p_adv);
             }
         }
 
         if (has_packet)
         {
-            __LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "anchor4!\n");
             setup_next_timeout(&p_adv->timer, p_adv->config.advertisement_interval_us);
         }
     }
@@ -386,8 +328,6 @@ void advertiser_enable(advertiser_t * p_adv)
 
 void advertiser_disable(advertiser_t * p_adv)
 {
-    // For re-counting number
-    g_broadcast_counter = 0;
     p_adv->enabled = false;
     timer_sch_abort(&p_adv->timer);
 }

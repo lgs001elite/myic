@@ -1,7 +1,7 @@
 #include "m2s.h"
 #include "advertiser.h"
 
-static define_adv_packet  * reBuf                 = NULL;
+static define_adv_packet  * reBuf = NULL;
 
 void receiveData_sendout(uint8_t * s_data)
 {

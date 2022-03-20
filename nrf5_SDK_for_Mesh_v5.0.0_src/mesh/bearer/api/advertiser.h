@@ -52,11 +52,6 @@ typedef struct advertiser_t advertiser_t;
  * Gaosheng Added
  */
 extern   advertiser_t   m_discovery_advertiser;
-#define ADVERTISER_REPAET_discovery 0x10
-bool get_if_terCurrentAdvertiser();
-void set_if_terCurrentAdvertiser(bool nextStatus);
-void advertiser_disableAndFlush();
-void adv_packet_discard();
 /**
  * @defgroup ADVERTISER Advertiser
  * @ingroup MESH_API_GROUP_BEARER

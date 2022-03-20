@@ -18,7 +18,4 @@ typedef struct Sen_data{
 
 void spis_setfrom_slave(uint8_t * tx_data_buf, uint32_t  tx_data_len);
 sen_data spis_getfrom_slave();
-
-extern uint8_t *          m_tx_buf_spi;
-extern volatile uint8_t   m_tx_length;
 #endif
