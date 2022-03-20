@@ -416,3 +416,11 @@
 1	51	1647799476	/home/gaosheng/mesh/myic/myic/nrf5_SDK_for_Mesh_v5.0.0_src/build/examples/beaconing/beaconing_nrf52840_xxAA_s140_7.2.0_merged.hex	9afdab82a0d9c559
 51	14097	0	examples/beaconing/CMakeFiles/flash_beaconing_nrf52840_xxAA_s140_7.2.0	bbe3b333b88122a
 51	14097	0	/home/gaosheng/mesh/myic/myic/nrf5_SDK_for_Mesh_v5.0.0_src/build/examples/beaconing/CMakeFiles/flash_beaconing_nrf52840_xxAA_s140_7.2.0	bbe3b333b88122a
+2	220	1647800326	examples/beaconing/CMakeFiles/beaconing_nrf52840_xxAA_s140_7.2.0.dir/src/spis.c.obj	4a3cf52ccfaa2882
+220	304	1647800326	examples/beaconing/beaconing_nrf52840_xxAA_s140_7.2.0.elf	89490b5145390065
+220	304	1647800326	examples/beaconing/beaconing_nrf52840_xxAA_s140_7.2.0.hex	89490b5145390065
+220	304	1647800326	/home/gaosheng/mesh/myic/myic/nrf5_SDK_for_Mesh_v5.0.0_src/build/examples/beaconing/beaconing_nrf52840_xxAA_s140_7.2.0.hex	89490b5145390065
+2	52	1647800326	examples/beaconing/beaconing_nrf52840_xxAA_s140_7.2.0_merged.hex	9afdab82a0d9c559
+2	52	1647800326	/home/gaosheng/mesh/myic/myic/nrf5_SDK_for_Mesh_v5.0.0_src/build/examples/beaconing/beaconing_nrf52840_xxAA_s140_7.2.0_merged.hex	9afdab82a0d9c559
+52	14623	0	examples/beaconing/CMakeFiles/flash_beaconing_nrf52840_xxAA_s140_7.2.0	bbe3b333b88122a
+52	14623	0	/home/gaosheng/mesh/myic/myic/nrf5_SDK_for_Mesh_v5.0.0_src/build/examples/beaconing/CMakeFiles/flash_beaconing_nrf52840_xxAA_s140_7.2.0	bbe3b333b88122a

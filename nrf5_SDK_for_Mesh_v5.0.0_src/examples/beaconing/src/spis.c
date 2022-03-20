@@ -26,7 +26,7 @@ bool check_completeness(uint8_t * receivedData)
     for (uint8_t i = 1; i < 32; i++)
     {
         crc_input[i - 1] = receivedData[i];
-        __LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "receivedData[2]: %X! \n", receivedData[i]);
+       // __LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "receivedData[2]: %X! \n", receivedData[i]);
     }
     crcInit();
     uint16_t crc_result = crcFast(crc_input, 31);
@@ -88,7 +88,6 @@ void spis_event_handler(nrf_drv_spis_event_t event)
             default:
                 receiveData_sendout(m_rx_buf_spi);
                 send_datagram_start();
-                nrf_delay_ms(100);
                 break;
         }
     }
