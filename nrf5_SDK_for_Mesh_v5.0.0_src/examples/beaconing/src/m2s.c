@@ -1,37 +1,18 @@
 #include "m2s.h"
 #include "advertiser.h"
 
-static define_adv_packet  * reBuf = NULL;
 
 void receiveData_sendout(uint8_t * s_data)
 {
-    define_adv_packet * receivedBuf = (define_adv_packet *) malloc(sizeof(define_adv_packet));
-    if (!receivedBuf)
+    for(uint8_t i = 1; i < 5; i++)
     {
-        return;
+        m_recBuf[i - 1] = s_data[i];
     }
-    memset(receivedBuf, 0, sizeof(define_adv_packet));
-    receivedBuf->hp_len           = s_data[1];
-    receivedBuf->t_broad_type     = s_data[2]; 
-    receivedBuf->seq              = s_data[3];
-    receivedBuf->status           = s_data[4];
-    receivedBuf->src              = s_data[5];
-    receivedBuf->dst              = s_data[6];
-    receivedBuf->layer            = s_data[7];
-    receivedBuf->p_len            = s_data[8];
- 
-    for (uint8_t i = 0; i < 23; i++)
+    m_recBuf[4] = (s_data[5] | ((s_data[6]<<4) & 0XF0));
+    m_recBuf[5] = (s_data[7] | ((s_data[8]<<3) & 0XF8));
+
+    for(uint8_t i = 9; i < 34; i++)
     {
-        receivedBuf->df[i] = s_data[9 + i];
+        m_recBuf[i - 3] = s_data[i];
     }
-
-    receivedBuf->crc[0]           = s_data[32];
-    receivedBuf->crc[1]           = s_data[33];
-
-    reBuf = receivedBuf;
-}
-
-define_adv_packet * getData_sendout()
-{
-    return reBuf;
 }

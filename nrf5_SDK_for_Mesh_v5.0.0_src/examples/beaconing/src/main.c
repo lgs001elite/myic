@@ -75,18 +75,18 @@
  * Definitions
  *****************************************************************************/
 #define ADVERTISER_BUFFER_SIZE  (64)
-static bool              g_if_sendNext          = false;
-advertiser_t             m_discovery_advertiser = {0};
-static uint8_t           m_adv_buffer_discovery[ADVERTISER_BUFFER_SIZE]; 
-static void              adv_init(void);
-adv_packet_t  *          p_broad_packet         = NULL;
+bool              g_if_sendNext          = false;
+advertiser_t      m_discovery_advertiser = {0};
+uint8_t           m_adv_buffer_discovery[ADVERTISER_BUFFER_SIZE]; 
+void              adv_init(void);
+adv_packet_t  *   p_broad_packet         = NULL;
 
 /**
  * @brief pass datagram to the bearer layer
  * @param p_adv: advertiser entity
  * @param adv_packet: datagram
  */
-static void send2bearer(advertiser_t * p_adv, define_adv_packet * adv_packet)
+void send2bearer(advertiser_t * p_adv, define_adv_packet * adv_packet)
 {
     p_broad_packet = advertiser_packet_alloc(p_adv, BLE_ADV_PACKET_PAYLOAD_MAX_LENGTH);
     if (p_broad_packet)
@@ -99,31 +99,20 @@ static void send2bearer(advertiser_t * p_adv, define_adv_packet * adv_packet)
 }
 
 /**
- * @brief free pointer operation
- */
- void freeAdvpacket(define_adv_packet * advPacket)
- {
-     free(advPacket);
-     advPacket = NULL;
- }
-
-/**
  * @brief sending datagram
  * 
  */
 void send_datagram_start()
 {
     __LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "********************* Adv --- starting *****************\n"); 
-    define_adv_packet * recData = getData_sendout();
-    send2bearer(&m_discovery_advertiser,recData);
-    freeAdvpacket(recData);
+    send2bearer(&m_discovery_advertiser, m_recBuf);
 }
 
 /**
  * @brief receiving datagram from the bearer layer
  * @param p_rx_data: received datagram  
  */
-static void rx_cb(const nrf_mesh_adv_packet_rx_data_t * p_rx_data)
+void rx_cb(const nrf_mesh_adv_packet_rx_data_t * p_rx_data)
 {
     if (p_rx_data->p_payload[1] != BLE_GAP_AD_TYPE_PUBLIC_TARGET_ADDRESS)
     {
@@ -169,33 +158,27 @@ static void rx_cb(const nrf_mesh_adv_packet_rx_data_t * p_rx_data)
 
     if ((res1 != p_rx_data->p_payload[29]) || (res2 != p_rx_data->p_payload[30]))
     {
-        __LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "----- res1: %X, res2: %X, p_rx_data->p_payload[29]: %X, p_rx_data->p_payload[30]: %X, check failure ------\n", res1, res2, p_rx_data->p_payload[29], p_rx_data->p_payload[30]);
+        __LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "----- res1: %X, res2: %X, p_rx_data->p_payload[29]: %X,p_rx_data->p_payload[30]: %X, check failure ------\n", res1, res2, p_rx_data->p_payload[29], p_rx_data->p_payload[30]);
         return;
     }
 
-    // Recording the received data
-    uint8_t *spi_data2mster = (uint8_t *) malloc(sizeof(uint8_t) * (S_BROADCASRLEN));
-    if (! spi_data2mster)
-    {
-        return;
-    }
 
     for (uint8_t i = 0; i < 31; i++)
     {
-        spi_data2mster[i] = rec_packet[i];
+        m_tx_buf_spi[i] = rec_packet[i];
     }
-    spi_data2mster[31] = res1;
-    spi_data2mster[32] = res2;
-    spis_setfrom_slave(spi_data2mster, S_BROADCASRLEN);
-    __LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "----- received successfully  seq: %X-----\n", spi_data2mster[2]);
+    m_tx_buf_spi[31] = res1;
+    m_tx_buf_spi[32] = res2;
+    spis_setfrom_slave(m_tx_buf_spi, S_BROADCASRLEN);
+    __LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "----- received successfully  seq: %X-----\n", m_tx_buf_spi[2]);
 }
 
-static void adv_init(void)
+void adv_init(void)
 {
     advertiser_instance_init(&m_discovery_advertiser, NULL, m_adv_buffer_discovery, ADVERTISER_BUFFER_SIZE);
 }
 
-static void node_reset(void)
+void node_reset(void)
 {
     __LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "----- Node reset  -----\n");
     hal_led_blink_ms(HAL_LED_MASK, LED_BLINK_INTERVAL_MS, LED_BLINK_CNT_RESET);
@@ -203,7 +186,7 @@ static void node_reset(void)
     mesh_stack_device_reset();
 }
 
-static void config_server_evt_cb(const config_server_evt_t * p_evt)
+void config_server_evt_cb(const config_server_evt_t * p_evt)
 {
     if (p_evt->type == CONFIG_SERVER_EVT_NODE_RESET)
     {
@@ -211,7 +194,7 @@ static void config_server_evt_cb(const config_server_evt_t * p_evt)
     }
 }
 
-static void mesh_init(void)
+void mesh_init(void)
 {
     mesh_stack_init_params_t init_params =
     {
@@ -240,7 +223,7 @@ static void mesh_init(void)
     adv_init();
 }
 
-static void initialize(void)
+void initialize(void)
 {
 #if defined(NRF51) && defined(NRF_MESH_STACK_DEPTH)
     stack_depth_paint_stack();
@@ -256,7 +239,7 @@ static void initialize(void)
     __LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "Mesh initialization complete!\n");
 }
 
-static void start(void)
+void start(void)
 {  
     /* Let scanner accept Complete Local Name AD Type. */
     bearer_adtype_add(BLE_GAP_AD_TYPE_PUBLIC_TARGET_ADDRESS);

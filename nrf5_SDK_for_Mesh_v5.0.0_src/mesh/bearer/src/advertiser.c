@@ -135,15 +135,6 @@ static inline void setup_next_timeout(timer_event_t * p_timer_evt, uint32_t base
     p_timer_evt->interval = base_interval + rand_offset;
 }
 
-static inline void update_repeat_count(advertiser_t * p_adv, adv_packet_t * p_adv_packet)
-{
-    NRF_MESH_ASSERT(p_adv_packet->config.repeats > 0);
-    if (p_adv_packet->config.repeats != ADVERTISER_REPEAT_INFINITE)
-    {
-        p_adv_packet->config.repeats--;
-    }
-}
-
 /**
  * Check whether the advertiser's current packet should be freed.
  *
@@ -182,10 +173,21 @@ static bool next_packet_fetch(advertiser_t * p_adv)
         else
         {
             /* No more packets left. */
+            __LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "packet_buffer_free\n");
             return false;
         }
     }
     return true;
+}
+
+
+static inline void update_repeat_count(advertiser_t * p_adv, adv_packet_t * p_adv_packet)
+{
+    NRF_MESH_ASSERT(p_adv_packet->config.repeats > 0);
+    if (p_adv_packet->config.repeats != ADVERTISER_REPEAT_INFINITE)
+    {
+        p_adv_packet->config.repeats--;
+    }
 }
 
 /**
@@ -195,19 +197,18 @@ static bool next_packet_fetch(advertiser_t * p_adv)
 static void schedule_broadcast(advertiser_t * p_adv)
 {
     NRF_MESH_ASSERT(p_adv->p_packet != NULL);
-
     randomize_channels(&p_adv->config.channels);
     update_repeat_count(p_adv, p_adv->p_packet);
-
     NRF_MESH_ASSERT(NRF_SUCCESS == broadcast_send(&p_adv->broadcast));
 }
 
 static void timeout_event(timestamp_t timestamp, void * p_context)
 {
     advertiser_t * p_adv = (advertiser_t *) p_context;
+    p_adv->timer.interval = 0; // Interval in us between each fire for periodic timers, or 0 if single-shot
+
     if (p_adv->enabled)
     {
-        __LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "p_adv->enabled!\n");
         bool has_packet;
         /* Only attempt to transmit if the broadcast context is inactive, and no TX_COMPLETE event
          * is pending. Skip this event if the broadcast is still waiting to fire from the previous
@@ -224,6 +225,8 @@ static void timeout_event(timestamp_t timestamp, void * p_context)
                 schedule_broadcast(p_adv);
             }
         }
+        
+        
 
         if (has_packet)
         {
@@ -357,10 +360,9 @@ adv_packet_t * advertiser_packet_alloc(advertiser_t * p_adv, uint32_t adv_payloa
 
 void advertiser_packet_send(advertiser_t * p_adv, adv_packet_t * p_packet)
 {
-    NRF_LOG_FLUSH();
     NRF_MESH_ASSERT(p_packet != NULL && NULL != p_adv);
     NRF_MESH_ASSERT(p_packet->config.repeats > 0);
-
+    
     packet_buffer_packet_t * p_buf_packet = get_packet_buffer_from_adv_packet(p_packet);
     /* Force set fields with mandatory values: */
     p_packet->packet.header._rfu1 = 0;

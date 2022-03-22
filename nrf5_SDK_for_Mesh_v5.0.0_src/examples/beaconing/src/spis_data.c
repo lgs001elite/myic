@@ -4,7 +4,7 @@
 #include "public.h"
 #include "log.h"
 
-static sen_data m_tx_data  = {0};
+sen_data m_tx_data  = {0};
 
 void spis_setfrom_slave(uint8_t * tx_data_buf, uint32_t  tx_data_len)
 {

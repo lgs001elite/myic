@@ -22,8 +22,7 @@
 #define REFLECT_REMAINDER(X)	(X)
 #endif
 
-static unsigned long
-reflect(unsigned long data, unsigned char nBits)
+static unsigned long reflect(unsigned long data, unsigned char nBits)
 {
 	unsigned long  reflection = 0x00000000;
 	unsigned char  bit;

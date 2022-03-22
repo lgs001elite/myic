@@ -16,7 +16,6 @@
 #include "define_broadcast_packet.h"
 #include "public.h"
 #include "m2s.h"
-#include "s2m.h"
 #include "crc.h"
 
 void spis_start(void);

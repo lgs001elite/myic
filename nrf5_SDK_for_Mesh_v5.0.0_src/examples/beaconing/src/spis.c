@@ -5,11 +5,12 @@
 
 #define                SPIS_INSTANCE                1 /**< SPIS instance index. */
 
-static   const         nrf_drv_spis_t spis          = NRF_DRV_SPIS_INSTANCE(SPIS_INSTANCE);/**< SPIS instance. */                           /** < RX buffer. */
-static   uint8_t       m_rx_buf_spi[S_BROADCASRLEN + 1] = {0};
-uint8_t                m_tx_buf_spi[S_BROADCASRLEN]     = {0};
+const  nrf_drv_spis_t spis              = NRF_DRV_SPIS_INSTANCE(SPIS_INSTANCE);/**< SPIS instance. */                           /** < RX buffer. */
+volatile uint8_t  m_rx_buf_spi[S_BROADCASRLEN + 1] = {0};
+volatile uint8_t  m_tx_buf_spi[S_BROADCASRLEN] = {0};
+volatile uint8_t  m_recBuf[31]                 = {0} ;
 
-static volatile bool   spis_xfer_done               = false;  /**< Flag used to indicate that SPIS instance completed the transfer. */
+volatile bool   spis_xfer_done =   false;  /**< Flag used to indicate that SPIS instance completed the transfer. */
 
 /**
  * @brief  SPIS check completeness of data(checksums of packets)
@@ -26,7 +27,6 @@ bool check_completeness(uint8_t * receivedData)
     for (uint8_t i = 1; i < 32; i++)
     {
         crc_input[i - 1] = receivedData[i];
-       // __LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "receivedData[2]: %X! \n", receivedData[i]);
     }
     crcInit();
     uint16_t crc_result = crcFast(crc_input, 31);
@@ -80,7 +80,7 @@ void spis_event_handler(nrf_drv_spis_event_t event)
         
         uint8_t statusAction = m_rx_buf_spi[4];
         __LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "pass check\n");
-        __LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "receive status: %X\n", statusAction);
+        __LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "receive status: %X, SEQ: %x\n", statusAction, m_rx_buf_spi[3]);
         switch (statusAction)
         {
             case 0x42:
@@ -93,11 +93,10 @@ void spis_event_handler(nrf_drv_spis_event_t event)
     }
 }
 
-static void start_spis_loop()
+void start_spis_loop()
 {
     while (1)
     {
-        set_transData();
         APP_ERROR_CHECK(nrfx_spis_buffers_set(&spis, m_tx_buf_spi, S_BROADCASRLEN, m_rx_buf_spi, S_BROADCASRLEN + 1));
         spis_xfer_done = false;
         while (!spis_xfer_done)

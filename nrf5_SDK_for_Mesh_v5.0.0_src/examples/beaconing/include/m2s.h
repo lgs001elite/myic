@@ -8,6 +8,4 @@
 
 void receiveData_sendout(uint8_t * s_data);
 
-define_adv_packet * getData_sendout();
-
 #endif
