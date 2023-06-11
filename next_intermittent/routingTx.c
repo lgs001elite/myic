@@ -11,7 +11,7 @@
 #include "source_DB.h"
 #include "dst_DB.h"
 
-volatile   uint32_t       g_transDataSeq           = 0;
+uint32_t       g_transDataSeq           = 0;
 const      uint32_t       g_file_len               = 978; //978;
 
 /**

@@ -74,70 +74,58 @@ uint8_t SlaveType0 [SPI_DATA_LEN] = {0};
 /**
  *  Specific configuration for the node   
  */
-uint8_t l_nodeAddress                   = 0x01;
-uint8_t l_dest_address                  = 0x03;
-uint8_t l_node_dimension                = 0x03;
-bool    l_if_relayNode                  = false;
-bool    l_if_sourceNode                 = true;
-
-volatile uint8_t g_receivedNodeAddress  = 0xff;
-volatile bool    g_if_relayNode         = false;
-volatile uint8_t g_nodeAddress;
-volatile uint8_t g_dest_address;
-volatile uint8_t g_node_dimension;
-volatile bool    g_if_sourceNode;
-volatile bool    g_if_relay             = false;
+ uint8_t g_receivedNodeAddress  = 0xff;
+ bool    g_if_relayNode         = false;
+ uint8_t g_nodeAddress;
+ uint8_t g_dest_address;
+ uint8_t g_node_dimension;
+ bool    g_if_sourceNode;
+ bool    g_if_relay;
 
 void setNode(uint8_t nodeType)
 {
     switch (nodeType)
     {
     case 1:
-        l_nodeAddress                   = 0x01;
-        l_dest_address                  = 0x03; // 0x02
-        l_node_dimension                = 0x03;
-        l_if_relayNode                  = false;
-        l_if_sourceNode                 = true;
+        g_nodeAddress    = 0x01;
+        g_dest_address   = 0x03;
+        g_node_dimension = 0x03;
+        g_if_relayNode   = false;
+        g_if_sourceNode  = true;
         break;
     
     case 2:
-        l_nodeAddress                   = 0x02;
-        l_dest_address                  = 0x03;
-        l_node_dimension                = 0x02;
-        l_if_relayNode                  = true;
-        l_if_sourceNode                 = false;
+        g_nodeAddress    = 0x02;
+        g_dest_address   = 0x03;
+        g_node_dimension = 0x02;
+        g_if_relayNode   = true;
+        g_if_sourceNode  = false;
         break;
 
     case 3:
-        l_nodeAddress                   = 0x03;
-        l_dest_address                  = 0xff;
-        l_node_dimension                = 0x01;
-        l_if_relayNode                  = false;
-        l_if_sourceNode                 = false;
+        g_nodeAddress                   = 0x03;
+        g_dest_address                  = 0xff;
+        g_node_dimension                = 0x01;
+        g_if_relayNode                  = false;
+        g_if_sourceNode                 = false;
         break;
 
     default:
         break;
     }
-
-    g_nodeAddress                   = l_nodeAddress;
-    g_dest_address                  = l_dest_address;
-    g_node_dimension                = l_node_dimension;
-    g_if_relayNode                  = l_if_relayNode;
-    g_if_sourceNode                 = l_if_sourceNode;
 }
 
 static   bool    SWITCH2SPI                      = false;
-volatile uint8_t ReceiveBuffer[SPI_DATA_LEN]     = {0};
-volatile uint8_t g_transBuffer[SPI_DATA_LEN]     = {0};
-volatile uint8_t g_seq_data                      = 0xff;
-volatile uint8_t g_seq_header                    = 0xff;
-volatile uint8_t g_received_address              = 0xff;
-volatile bool    g_if_end_trans                  = false;
-volatile bool    g_if_send_next                  = true;
-volatile uint8_t g_spiTransLen                   = 0;
-volatile bool    g_if_Rxternimate                = false;
-volatile bool    g_if_Txternimate                = false;
+ uint8_t ReceiveBuffer[SPI_DATA_LEN]     = {0};
+ uint8_t g_transBuffer[SPI_DATA_LEN]     = {0};
+ uint8_t g_seq_data                      = 0xff;
+ uint8_t g_seq_header                    = 0xff;
+ uint8_t g_received_address              = 0xff;
+ bool    g_if_end_trans                  = false;
+ bool    g_if_send_next                  = true;
+ uint8_t g_spiTransLen                   = 0;
+ bool    g_if_Rxternimate                = false;
+ bool    g_if_Txternimate                = false;
 
 uint8_t          file_sha256_true[32]            =
 {
@@ -355,13 +343,12 @@ static void terminateTrans()
 //******************************************************************************
 int main(void) {
     WDTCTL = WDTPW | WDTHOLD;   // Stop watchdog timer
-
     initClockTo16MHz();
     initGPIO();
     initSPI();
-
     ctpl_enterLpm45(CTPL_ENABLE_RESTORE_ON_RESET);
-
+    // SENDER REALYER RECEIVER
+    setNode(REALYER);
     start_routing();
 }
 

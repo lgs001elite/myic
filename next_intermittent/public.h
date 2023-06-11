@@ -6,27 +6,30 @@
 #include <stdint.h>
 #include "spi_packet.h"
 
-#define MAXUINT8        0x7E
+#define MAXUINT8   0x7E
+#define SENDER     1
+#define REALYER    2
+#define RECEIVER   3
 
 #define BLE_GAP_AD_TYPE_PUBLIC_TARGET_ADDRESS               0x17 /**< Public Target Address. */
 
-extern  volatile uint8_t        g_nodeAddress;
-extern  volatile uint8_t        g_seq_data;
-extern  volatile uint8_t        g_seq_header;
-extern  volatile uint8_t        g_dest_address;
-extern  volatile uint8_t        ReceiveBuffer[SPI_DATA_LEN];
-extern  volatile uint8_t        g_transBuffer[SPI_DATA_LEN];
-extern  volatile uint8_t        g_spiTransLen;
-extern  volatile uint8_t        g_node_dimension;
-extern  volatile bool           g_if_send_next;
-extern  volatile bool           g_if_end_trans;
-extern  volatile bool           g_if_sourceNode;
-extern  volatile bool           g_if_relayNode;
-extern  volatile bool           g_if_relay;
-extern  volatile bool           g_if_Rxternimate;
-extern  volatile bool           g_if_Txternimate;
-extern  volatile uint32_t       g_transDataSeq;
-extern  volatile uint8_t        g_receivedNodeAddress;
+extern  uint8_t        g_nodeAddress;
+extern  uint8_t        g_seq_data;
+extern  uint8_t        g_seq_header;
+extern  uint8_t        g_dest_address;
+extern  uint8_t        ReceiveBuffer[SPI_DATA_LEN];
+extern  uint8_t        g_transBuffer[SPI_DATA_LEN];
+extern  uint8_t        g_spiTransLen;
+extern  uint8_t        g_node_dimension;
+extern  bool           g_if_send_next;
+extern  bool           g_if_end_trans;
+extern  bool           g_if_sourceNode;
+extern  bool           g_if_relayNode;
+extern  bool           g_if_relay;
+extern  bool           g_if_Rxternimate;
+extern  bool           g_if_Txternimate;
+extern  uint32_t       g_transDataSeq;
+extern  uint8_t        g_receivedNodeAddress;
 
 void start_spi_process(void);
 void close_spi_process(void);

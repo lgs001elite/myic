@@ -17,7 +17,7 @@ static   uint8_t      g_pre_packet_seq                             = 0xff;
 static   uint8_t      g_pre_fin_seq                                = 0xff;
 static   bool         g_if_nonFirstAck                             = false;
 static   bool         g_non_firstDatagram                          = false;
-static   uint8_t      routingTable[rtLength]                       = {0x01, 0x03};
+//static   uint8_t      routingTable[rtLength]                       = {0x01, 0x03};
 
 void updateCRC(uint8_t relayPkt[])
 {
