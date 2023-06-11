@@ -1,4 +1,0 @@
-#ifndef _CONFIG_ADV_TRANSMITION_H_
-#define _CONFIG_ADV_TRANSMITION_H_
-
-#endif
