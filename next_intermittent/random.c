@@ -33,7 +33,7 @@
 // The pool of entropy that has been collected.
 //
 //*****************************************************************************
-static uint32_t g_pui32RandomEntropy[16];
+uint32_t g_pui32RandomEntropy[16];
 
 //*****************************************************************************
 //
@@ -49,7 +49,7 @@ static uint32_t g_pui32RandomEntropy[16];
 // by RandomSeed().
 //
 //*****************************************************************************
-static uint32_t g_ui32RandomSeed = 0;
+uint32_t g_ui32RandomSeed = 0;
 
 //*****************************************************************************
 //
@@ -159,16 +159,7 @@ void RandomSeed(void)
 //*****************************************************************************
 uint32_t genRanNumb(void)
 {
-    //
-    // Generate a new pseudo-random number with a linear congruence random
-    // number generator.  This new random number becomes the seed for the next
-    // random number.
-    //
     g_ui32RandomSeed = (g_ui32RandomSeed * 1664525) + 1013904223;
-
-    //
-    // Return the new random number.
-    //
     return(g_ui32RandomSeed);
 }
 

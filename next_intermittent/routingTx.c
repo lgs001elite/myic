@@ -3,16 +3,11 @@
 #include <stdbool.h>
 #include <string.h>
 #include "routingTx.h"
-#include "spi_packet.h"
-#include "filedata.h"
 #include "public.h"
 #include "random.h"
 #include "transitionData.h"
 #include "source_DB.h"
-#include "dst_DB.h"
-
-uint32_t       g_transDataSeq           = 0;
-const      uint32_t       g_file_len               = 978; //978;
+const      uint32_t       g_file_len               = 2300;
 
 /**
  * @brief free pointer
@@ -24,92 +19,78 @@ void free_pointer(uint8_t * pointer)
     pointer = NULL;
 }
 
-//#pragma CODE_SECTION(spi_transData,".run_from_ram")
-void spi_transData(void)
+//#pragma CODE_SECTION(produceData,".run_from_ram")
+void produceData(void)
 {
-    uint8_t         spi_status  = 0x08;
-    SPI_DATAGRAM  * s_transdata = (SPI_DATAGRAM *) malloc (sizeof(SPI_DATAGRAM));
-    if (! s_transdata)
+    uint32_t i = 0;
+    for (; i < MAXQUELEN; i++)
     {
-        return;
-    }
-    memset(s_transdata, 0, sizeof(SPI_DATAGRAM));
-    
-    g_seq_data = (g_seq_data + 1) % MAXUINT8;
-    
-    s_transdata->hp_len         = 0x1E;
-    s_transdata->t_broad_type   = BLE_GAP_AD_TYPE_PUBLIC_TARGET_ADDRESS;
-    s_transdata->src            = g_nodeAddress;
-    s_transdata->dst            = g_dest_address;
-    s_transdata->layer          = g_node_dimension;
-    s_transdata->status         = spi_status; /* The packet type is adv */
-    s_transdata->seq            = g_seq_data;
-
-    uint8_t     packet_i        = 0;  /* 0: the starting point of payload */
-    for (; (g_transDataSeq < g_file_len) && (g_if_send_next) && (!g_if_end_trans);)
-    {
-        (s_transdata->df)[packet_i] = file_data[g_transDataSeq];
-
-        packet_i++;
-        g_transDataSeq++;
-        if (packet_i == 0x17) /* 0x17: the length of data frame */
+        g_packetQueue[g_queueLen].hp_len = 0x1E;
+        g_packetQueue[g_queueLen].t_broad_type = BLE_GAP_AD_TYPE;
+        g_packetQueue[g_queueLen].src = g_nodeAddress;
+        g_packetQueue[g_queueLen].dst = g_dest_address;
+        g_packetQueue[g_queueLen].layer = g_node_dimension;
+        g_packetQueue[g_queueLen].status = PACKAGE_PACKET;
+        g_packetQueue[g_queueLen].seq = (g_seq_data + 1) % MAXUINT8;
+        g_packetQueue[g_queueLen].round = g_rounds;
+        g_seq_data = g_seq_data + 1;
+        uint8_t j = 0;
+        for (; j < PACKET_DATA_LEN; j++)
         {
-            s_transdata->p_len = packet_i; /* Adv actual payload len */
-            packet_i = 0;
-            g_if_send_next = false;
+            (g_packetQueue[g_queueLen].df)[j] = file_data[g_transDataSeq];
+            g_transDataSeq++;
         }
-
         if (g_transDataSeq == g_file_len)
         {
-            s_transdata->p_len = packet_i; /* Adv actual payload len */
-            g_if_end_trans = true;
-            g_transDataSeq = 0;
+            g_rounds = g_rounds + 1;
+            if (g_rounds != MAXROUND)
+            {
+                g_transDataSeq = 0;
+                g_seq_data = (uint8_t)genRanNumb();
+            }
         }
+        g_queueLen = g_queueLen + 1;
+        // waiting to collect data
+        __delay_cycles(100000);
     }
-
-    uint8_t * transmitBuffer = (uint8_t *) malloc (sizeof(uint8_t) * SPI_DATA_LEN);
-    if(!transmitBuffer)
-    {
-        return;
-    }
-    memset(transmitBuffer, 0, SPI_DATA_LEN);
-    data_m2s(transmitBuffer, s_transdata);
-    buf_m2s(transmitBuffer, (uint8_t)SPI_DATA_LEN);
-    g_spiTransLen = SPI_DATA_LEN; /** For final spi transmition */
-    
-    free_pointer(transmitBuffer);
 }
 
-//#pragma CODE_SECTION(spi_transHeaderStatus,".run_from_ram")
-void spi_transHeaderStatus(uint8_t statusValue)
+void produceNonPacketData(void)
 {
-    SPI_DATAGRAM  * s_header = (SPI_DATAGRAM *) malloc (sizeof(SPI_DATAGRAM));
-    if (! s_header)
+    g_transBuffer[0]= 0x1E;
+    g_transBuffer[1] = BLE_GAP_AD_TYPE;
+    g_transBuffer[2] = 0;
+    g_transBuffer[3] = DUBBY;
+    g_transBuffer[4] = g_nodeAddress;
+    g_transBuffer[5] = g_dest_address;
+    g_transBuffer[6] = g_node_dimension;
+    g_transBuffer[7] = 0;
+    g_transBuffer[8] = 0;
+    
+    uint8_t j = 0;
+    for (; j < PACKET_DATA_LEN; j++)
     {
-        return;
+        g_transBuffer[j] = 0x00;
     }
-    memset(s_header, 0, sizeof(SPI_DATAGRAM));
-
-    g_seq_header = (g_seq_header + 1) % MAXUINT8;
-    s_header->hp_len       = 0x1E;
-    s_header->t_broad_type = BLE_GAP_AD_TYPE_PUBLIC_TARGET_ADDRESS;
-    s_header->src          = g_nodeAddress;
-    s_header->dst          = g_receivedNodeAddress;
-    s_header->layer        = g_node_dimension;
-    s_header->seq          = g_seq_header;
-    s_header->status       = statusValue;
-    s_header->p_len        = 0;
-
-    uint8_t * transmitBuffer = (uint8_t *) malloc (sizeof(uint8_t) * SPI_DATA_LEN);
-    if(!transmitBuffer)
+    uint8_t crc_input[SPI_NONCRC_LEN];
+    uint8_t i = 0;
+    for (; i < SPI_NONCRC_LEN; i++)
     {
-        return;
+        crc_input[i] = g_transBuffer[i];
     }
-    memset(transmitBuffer, 0, SPI_DATA_LEN);
 
-    status_m2s(transmitBuffer, s_header);
-    buf_m2s(transmitBuffer, (uint8_t)SPI_DATA_LEN);
-    g_spiTransLen  = SPI_DATA_LEN;
+    uint16_t crc_result = getCRC(crc_input);
+    g_transBuffer[32] = (crc_result & 0xFF00) >> 8;
+    g_transBuffer[33] = (crc_result & 0x00FF);
 
-    free_pointer(transmitBuffer);
+    while (g_transBuffer[32] >= 0x7F)
+    {
+        g_transBuffer[32] -= 0x7F;
+    }
+
+    while (g_transBuffer[33] >= 0x7F)
+    {
+        g_transBuffer[33] -= 0x7F;
+    }
 }
+

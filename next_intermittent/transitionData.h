@@ -5,11 +5,10 @@
 #include <stdio.h>
 #include <string.h>
 #include "public.h"
-#include "spi_packet.h"
 #include "crc.h"
 
-void    data_m2s(uint8_t * s_transData, SPI_DATAGRAM * m_transData);
+void    s2m(SPI_DATAGRAM *m_transData, uint8_t s_transData[]);
 void    buf_m2s(uint8_t *buf_data, uint8_t arrLen);
-void    status_m2s(uint8_t * s_transData, SPI_DATAGRAM * m_transData);
+void    m2s(uint8_t * s_transData, SPI_DATAGRAM * m_transData);
 
 #endif

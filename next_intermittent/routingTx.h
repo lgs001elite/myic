@@ -3,7 +3,6 @@
 
 #include <stdint.h>
 
-void spi_transData(void);
-void spi_transHeaderStatus(uint8_t statusValue);
+void produceData(void);
 
 #endif

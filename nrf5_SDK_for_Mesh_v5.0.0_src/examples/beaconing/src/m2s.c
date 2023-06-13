@@ -1,0 +1,19 @@
+#include "m2s.h"
+#include "advertiser.h"
+
+
+void receiveData_sendout(uint8_t * s_data)
+{
+    for(uint8_t i = 1; i < 4; i++)
+    {
+        m_recBuf[i - 1] = s_data[i];
+    }
+    m_recBuf[4] = (s_data[5] | ((s_data[6]<<4)  & 0XF0));
+    m_recBuf[5] = (s_data[7] | ((s_data[8]<<4)  & 0XF0));
+    m_recBuf[6] = (s_data[9] | ((s_data[10]<<3) & 0XF8));
+
+    for(uint8_t i = 11; i < 36; i++)
+    {
+        m_recBuf[i - 5] = s_data[i];
+    }
+}
