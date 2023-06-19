@@ -1,13 +1,14 @@
 build/beaconing_nrf52840_xxAA_s140_7.2.0_Debug/obj/access_publish_retransmission.o: \
- C\:\Users\glu250\Downloads\Next\myic\nrf5_SDK_for_Mesh_v5.0.0_src\mesh\access\src\access_publish_retransmission.c \
+ C:\Users\glu250\Downloads\Next\myic\nrf5_SDK_for_Mesh_v5.0.0_src\mesh\access\src\access_publish_retransmission.c \
  ../../mesh/access/include/access_publish_retransmission.h \
  ../../mesh/access/api/access.h \
- C\:/Users/glu250/AppData/Local/SEGGER/SEGGER\ Embedded\ Studio/v3/packages/libraries/libcxx/include/stdint.h \
- C\:/Users/glu250/AppData/Local/SEGGER/SEGGER\ Embedded\ Studio/v3/packages/libraries/libcxx/include/__config \
- C\:/Program\ Files/SEGGER/SEGGER\ Embedded\ Studio\ for\ ARM\ 5.42/include/stdint.h \
+ C:/Program\ Files/SEGGER/SEGGER\ Embedded\ Studio\ for\ ARM\ 7.22/include/stdint.h \
+ C:/Program\ Files/SEGGER/SEGGER\ Embedded\ Studio\ for\ ARM\ 7.22/include/__SEGGER_RTL.h \
+ C:/Program\ Files/SEGGER/SEGGER\ Embedded\ Studio\ for\ ARM\ 7.22/include/__SEGGER_RTL_ConfDefaults.h \
+ C:/Program\ Files/SEGGER/SEGGER\ Embedded\ Studio\ for\ ARM\ 7.22/include/__SEGGER_RTL_Conf.h \
+ C:/Program\ Files/SEGGER/SEGGER\ Embedded\ Studio\ for\ ARM\ 7.22/include/__SEGGER_RTL_Arm_Conf.h \
  ../../mesh/access/api/device_state_manager.h \
- C\:/Users/glu250/AppData/Local/SEGGER/SEGGER\ Embedded\ Studio/v3/packages/libraries/libcxx/include/stdbool.h \
- C\:/Program\ Files/SEGGER/SEGGER\ Embedded\ Studio\ for\ ARM\ 5.42/include/stdbool.h \
+ C:/Program\ Files/SEGGER/SEGGER\ Embedded\ Studio\ for\ ARM\ 7.22/include/stdbool.h \
  ../../mesh/core/api/nrf_mesh.h ../../mesh/core/include/timer.h \
  ../../../nRF5_SDK_17.0.2_d674dde/components/softdevice/s140/headers/ble.h \
  ../../../nRF5_SDK_17.0.2_d674dde/components/softdevice/s140/headers/nrf_svc.h \
@@ -43,9 +44,7 @@ build/beaconing_nrf52840_xxAA_s140_7.2.0_Debug/obj/access_publish_retransmission
  include/nrf_mesh_config_app.h ../../mesh/core/include/toolchain.h \
  ../../mesh/access/include/access_internal.h \
  ../../mesh/core/include/bitfield.h \
- C\:/Users/glu250/AppData/Local/SEGGER/SEGGER\ Embedded\ Studio/v3/packages/libraries/libcxx/include/string.h \
- C\:/Program\ Files/SEGGER/SEGGER\ Embedded\ Studio\ for\ ARM\ 5.42/include/string.h \
- C\:/Program\ Files/SEGGER/SEGGER\ Embedded\ Studio\ for\ ARM\ 5.42/include/__crossworks.h \
+ C:/Program\ Files/SEGGER/SEGGER\ Embedded\ Studio\ for\ ARM\ 7.22/include/string.h \
  ../../mesh/core/include/toolchain.h \
  ../../mesh/access/api/device_state_manager.h \
  ../../mesh/access/include/access_publish.h \
@@ -53,8 +52,7 @@ build/beaconing_nrf52840_xxAA_s140_7.2.0_Debug/obj/access_publish_retransmission
  ../../../nRF5_SDK_17.0.2_d674dde/components/softdevice/s140/headers/nrf52/nrf_mbr.h \
  ../../../nRF5_SDK_17.0.2_d674dde/components/softdevice/s140/headers/nrf_svc.h \
  ../../../nRF5_SDK_17.0.2_d674dde/components/libraries/util/app_util.h \
- C\:/Users/glu250/AppData/Local/SEGGER/SEGGER\ Embedded\ Studio/v3/packages/libraries/libcxx/include/stddef.h \
- C\:/Program\ Files/SEGGER/SEGGER\ Embedded\ Studio\ for\ ARM\ 5.42/include/stddef.h \
+ C:/Program\ Files/SEGGER/SEGGER\ Embedded\ Studio\ for\ ARM\ 7.22/include/stddef.h \
  ../../../nRF5_SDK_17.0.2_d674dde/modules/nrfx/mdk/compiler_abstraction.h \
  ../../../nRF5_SDK_17.0.2_d674dde/components/libraries/util/nordic_common.h \
  ../../mesh/core/include/timer_scheduler.h \

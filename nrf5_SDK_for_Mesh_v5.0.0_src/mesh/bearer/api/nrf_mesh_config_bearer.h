@@ -94,7 +94,7 @@
 
 /** Default advertisement interval. */
 #ifndef BEARER_ADV_INT_DEFAULT_MS
-#define BEARER_ADV_INT_DEFAULT_MS  20 /* 20; 300; : modefied by Gaosheng Liu*/
+#define BEARER_ADV_INT_DEFAULT_MS  100 /* 20; 300; : modefied by Gaosheng Liu*/
 #endif
 
 /** Default scan interval */

@@ -1,0 +1,11 @@
+"./crc.obj"
+"./hash.obj"
+"./main.obj"
+"./random.obj"
+"./routingRx.obj"
+"./routingTx.obj"
+"./transitionData.obj"
+"../lnk_msp430fr5994.cmd"
+-llibmpu_init.a
+-llibmath.a
+-llibc.a

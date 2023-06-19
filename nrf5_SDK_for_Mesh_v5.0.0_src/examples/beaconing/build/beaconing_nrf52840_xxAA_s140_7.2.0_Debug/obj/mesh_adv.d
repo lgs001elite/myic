@@ -1,9 +1,11 @@
 build/beaconing_nrf52840_xxAA_s140_7.2.0_Debug/obj/mesh_adv.o: \
- C\:\Users\glu250\Downloads\Next\myic\nrf5_SDK_for_Mesh_v5.0.0_src\examples\common\src\mesh_adv.c \
+ C:\Users\glu250\Downloads\Next\myic\nrf5_SDK_for_Mesh_v5.0.0_src\examples\common\src\mesh_adv.c \
  ../../mesh/gatt/api/mesh_adv.h \
- C\:/Users/glu250/AppData/Local/SEGGER/SEGGER\ Embedded\ Studio/v3/packages/libraries/libcxx/include/stdint.h \
- C\:/Users/glu250/AppData/Local/SEGGER/SEGGER\ Embedded\ Studio/v3/packages/libraries/libcxx/include/__config \
- C\:/Program\ Files/SEGGER/SEGGER\ Embedded\ Studio\ for\ ARM\ 5.42/include/stdint.h \
+ C:/Program\ Files/SEGGER/SEGGER\ Embedded\ Studio\ for\ ARM\ 7.22/include/stdint.h \
+ C:/Program\ Files/SEGGER/SEGGER\ Embedded\ Studio\ for\ ARM\ 7.22/include/__SEGGER_RTL.h \
+ C:/Program\ Files/SEGGER/SEGGER\ Embedded\ Studio\ for\ ARM\ 7.22/include/__SEGGER_RTL_ConfDefaults.h \
+ C:/Program\ Files/SEGGER/SEGGER\ Embedded\ Studio\ for\ ARM\ 7.22/include/__SEGGER_RTL_Conf.h \
+ C:/Program\ Files/SEGGER/SEGGER\ Embedded\ Studio\ for\ ARM\ 7.22/include/__SEGGER_RTL_Arm_Conf.h \
  ../../../nRF5_SDK_17.0.2_d674dde/components/softdevice/s140/headers/ble_gap.h \
  ../../../nRF5_SDK_17.0.2_d674dde/components/softdevice/s140/headers/nrf_svc.h \
  ../../../nRF5_SDK_17.0.2_d674dde/components/softdevice/s140/headers/nrf_error.h \
@@ -12,11 +14,8 @@ build/beaconing_nrf52840_xxAA_s140_7.2.0_Debug/obj/mesh_adv.o: \
  ../../../nRF5_SDK_17.0.2_d674dde/components/softdevice/s140/headers/ble_types.h \
  ../../../nRF5_SDK_17.0.2_d674dde/components/softdevice/s140/headers/ble_err.h \
  ../../../nRF5_SDK_17.0.2_d674dde/components/libraries/util/app_util.h \
- C\:/Users/glu250/AppData/Local/SEGGER/SEGGER\ Embedded\ Studio/v3/packages/libraries/libcxx/include/stdbool.h \
- C\:/Program\ Files/SEGGER/SEGGER\ Embedded\ Studio\ for\ ARM\ 5.42/include/stdbool.h \
- C\:/Users/glu250/AppData/Local/SEGGER/SEGGER\ Embedded\ Studio/v3/packages/libraries/libcxx/include/stddef.h \
- C\:/Program\ Files/SEGGER/SEGGER\ Embedded\ Studio\ for\ ARM\ 5.42/include/stddef.h \
- C\:/Program\ Files/SEGGER/SEGGER\ Embedded\ Studio\ for\ ARM\ 5.42/include/__crossworks.h \
+ C:/Program\ Files/SEGGER/SEGGER\ Embedded\ Studio\ for\ ARM\ 7.22/include/stdbool.h \
+ C:/Program\ Files/SEGGER/SEGGER\ Embedded\ Studio\ for\ ARM\ 7.22/include/stddef.h \
  ../../../nRF5_SDK_17.0.2_d674dde/modules/nrfx/mdk/compiler_abstraction.h \
  ../../../nRF5_SDK_17.0.2_d674dde/components/libraries/util/nordic_common.h \
  ../../../nRF5_SDK_17.0.2_d674dde/modules/nrfx/mdk/nrf.h \
@@ -34,8 +33,7 @@ build/beaconing_nrf52840_xxAA_s140_7.2.0_Debug/obj/mesh_adv.o: \
  ../../../nRF5_SDK_17.0.2_d674dde/components/softdevice/s140/headers/nrf52/nrf_mbr.h \
  ../../../nRF5_SDK_17.0.2_d674dde/components/softdevice/s140/headers/nrf_svc.h \
  ../../../nRF5_SDK_17.0.2_d674dde/components/ble/common/ble_advdata.h \
- C\:/Users/glu250/AppData/Local/SEGGER/SEGGER\ Embedded\ Studio/v3/packages/libraries/libcxx/include/string.h \
- C\:/Program\ Files/SEGGER/SEGGER\ Embedded\ Studio\ for\ ARM\ 5.42/include/string.h \
+ C:/Program\ Files/SEGGER/SEGGER\ Embedded\ Studio\ for\ ARM\ 7.22/include/string.h \
  ../../../nRF5_SDK_17.0.2_d674dde/components/softdevice/s140/headers/ble.h \
  ../../../nRF5_SDK_17.0.2_d674dde/components/softdevice/s140/headers/ble_gap.h \
  ../../../nRF5_SDK_17.0.2_d674dde/components/softdevice/s140/headers/ble_l2cap.h \
@@ -52,8 +50,7 @@ build/beaconing_nrf52840_xxAA_s140_7.2.0_Debug/obj/mesh_adv.o: \
  ../../../nRF5_SDK_17.0.2_d674dde/components/libraries/util/nrf_assert.h \
  ../../../nRF5_SDK_17.0.2_d674dde/components/softdevice/s140/headers/ble_types.h \
  ../../../nRF5_SDK_17.0.2_d674dde/components/libraries/util/app_error.h \
- C\:/Users/glu250/AppData/Local/SEGGER/SEGGER\ Embedded\ Studio/v3/packages/libraries/libcxx/include/stdio.h \
- C\:/Program\ Files/SEGGER/SEGGER\ Embedded\ Studio\ for\ ARM\ 5.42/include/stdio.h \
+ C:/Program\ Files/SEGGER/SEGGER\ Embedded\ Studio\ for\ ARM\ 7.22/include/stdio.h \
  ../../../nRF5_SDK_17.0.2_d674dde/components/libraries/util/app_error_weak.h \
  ../../mesh/core/include/timeslot.h \
  ../../mesh/core/include/timeslot_timer.h ../../mesh/core/include/timer.h \

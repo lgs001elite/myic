@@ -1,8 +1,12 @@
 build/beaconing_nrf52840_xxAA_s140_7.2.0_Release/obj/mesh_provisionee.o: \
- /home/gaosheng/mesh/my_mesh/nrf5_SDK_for_Mesh_v5.0.0_src/examples/common/src/mesh_provisionee.c \
+ C:\Users\glu250\Downloads\Next\myic\nrf5_SDK_for_Mesh_v5.0.0_src\examples\common\src\mesh_provisionee.c \
  ../common/include/mesh_provisionee.h \
- /usr/share/segger_embedded_studio_for_arm_5.62/include/stdint.h \
- /usr/share/segger_embedded_studio_for_arm_5.62/include/stdbool.h \
+ C:/Program\ Files/SEGGER/SEGGER\ Embedded\ Studio\ for\ ARM\ 7.22/include/stdint.h \
+ C:/Program\ Files/SEGGER/SEGGER\ Embedded\ Studio\ for\ ARM\ 7.22/include/__SEGGER_RTL.h \
+ C:/Program\ Files/SEGGER/SEGGER\ Embedded\ Studio\ for\ ARM\ 7.22/include/__SEGGER_RTL_ConfDefaults.h \
+ C:/Program\ Files/SEGGER/SEGGER\ Embedded\ Studio\ for\ ARM\ 7.22/include/__SEGGER_RTL_Conf.h \
+ C:/Program\ Files/SEGGER/SEGGER\ Embedded\ Studio\ for\ ARM\ 7.22/include/__SEGGER_RTL_Arm_Conf.h \
+ C:/Program\ Files/SEGGER/SEGGER\ Embedded\ Studio\ for\ ARM\ 7.22/include/stdbool.h \
  ../../mesh/prov/api/nrf_mesh_prov.h \
  ../../../nRF5_SDK_17.0.2_d674dde/components/softdevice/s140/headers/ble.h \
  ../../../nRF5_SDK_17.0.2_d674dde/components/softdevice/s140/headers/nrf_svc.h \
@@ -34,8 +38,7 @@ build/beaconing_nrf52840_xxAA_s140_7.2.0_Release/obj/mesh_provisionee.o: \
  ../../mesh/prov/api/nrf_mesh_prov_events.h \
  ../../mesh/prov/api/nrf_mesh_prov_bearer.h \
  ../../mesh/core/include/list.h \
- /usr/share/segger_embedded_studio_for_arm_5.62/include/stddef.h \
- /usr/share/segger_embedded_studio_for_arm_5.62/include/__crossworks.h \
+ C:/Program\ Files/SEGGER/SEGGER\ Embedded\ Studio\ for\ ARM\ 7.22/include/stddef.h \
  ../../../nRF5_SDK_17.0.2_d674dde/components/softdevice/s140/headers/nrf_error.h \
  ../../mesh/core/api/nrf_mesh_assert.h ../../mesh/core/api/nrf_mesh.h \
  ../../mesh/core/include/timer.h \
@@ -53,7 +56,7 @@ build/beaconing_nrf52840_xxAA_s140_7.2.0_Release/obj/mesh_provisionee.o: \
  ../../../nRF5_SDK_17.0.2_d674dde/components/softdevice/s140/headers/nrf_svc.h \
  ../../mesh/core/api/nrf_mesh_assert_gcc.h \
  ../../mesh/core/include/bitfield.h \
- /usr/share/segger_embedded_studio_for_arm_5.62/include/string.h \
+ C:/Program\ Files/SEGGER/SEGGER\ Embedded\ Studio\ for\ ARM\ 7.22/include/string.h \
  ../../mesh/core/include/toolchain.h \
  ../../mesh/access/api/device_state_manager.h \
  ../../mesh/core/api/nrf_mesh.h include/nrf_mesh_config_app.h \
@@ -64,7 +67,7 @@ build/beaconing_nrf52840_xxAA_s140_7.2.0_Release/obj/mesh_provisionee.o: \
  ../../mesh/core/include/heartbeat.h ../../mesh/core/include/packet.h \
  ../../mesh/core/include/utils.h ../../mesh/core/include/hal.h \
  ../../mesh/core/include/log.h \
- /usr/share/segger_embedded_studio_for_arm_5.62/include/stdarg.h \
+ C:/Program\ Files/SEGGER/SEGGER\ Embedded\ Studio\ for\ ARM\ 7.22/include/stdarg.h \
  ../../mesh/core/api/nrf_mesh_config_core.h \
  ../../../nRF5_SDK_17.0.2_d674dde/components/libraries/util/nordic_common.h \
  ../../mesh/core/include/timer.h ../../mesh/core/include/transport.h \
@@ -81,7 +84,7 @@ build/beaconing_nrf52840_xxAA_s140_7.2.0_Release/obj/mesh_provisionee.o: \
  ../../mesh/prov/include/prov_bearer_adv.h \
  ../../mesh/prov/include/prov_pdu.h \
  ../../mesh/prov/api/nrf_mesh_prov_types.h \
- /usr/share/segger_embedded_studio_for_arm_5.62/include/stdio.h \
+ C:/Program\ Files/SEGGER/SEGGER\ Embedded\ Studio\ for\ ARM\ 7.22/include/stdio.h \
  ../../mesh/bearer/api/advertiser.h ../../mesh/bearer/include/broadcast.h \
  ../../mesh/bearer/include/radio_config.h \
  ../../mesh/bearer/include/bearer_handler.h \
@@ -107,7 +110,7 @@ build/beaconing_nrf52840_xxAA_s140_7.2.0_Release/obj/mesh_provisionee.o: \
  ../../mesh/core/api/nrf_mesh_section.h \
  ../../../nRF5_SDK_17.0.2_d674dde/components/libraries/experimental_section_vars/nrf_section.h \
  ../../mesh/core/include/mesh_config_backend_file.h \
- /usr/share/segger_embedded_studio_for_arm_5.62/include/stdlib.h \
+ C:/Program\ Files/SEGGER/SEGGER\ Embedded\ Studio\ for\ ARM\ 7.22/include/stdlib.h \
  ../../mesh/core/include/mesh_config_flashman_glue.h \
  ../../mesh/core/api/flash_manager.h \
  ../../mesh/bearer/include/radio_config.h \

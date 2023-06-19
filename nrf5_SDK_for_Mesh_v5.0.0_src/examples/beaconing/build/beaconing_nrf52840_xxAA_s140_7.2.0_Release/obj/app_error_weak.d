@@ -1,9 +1,13 @@
 build/beaconing_nrf52840_xxAA_s140_7.2.0_Release/obj/app_error_weak.o: \
- /home/gaosheng/mesh/my_mesh/nrf5_SDK_for_Mesh_v5.0.0_src/examples/common/src/app_error_weak.c \
+ C:\Users\glu250\Downloads\Next\myic\nrf5_SDK_for_Mesh_v5.0.0_src\examples\common\src\app_error_weak.c \
  ../../../nRF5_SDK_17.0.2_d674dde/modules/nrfx/mdk/nrf.h \
  ../../../nRF5_SDK_17.0.2_d674dde/modules/nrfx/mdk/nrf52840.h \
  ../../../nRF5_SDK_17.0.2_d674dde/components/toolchain/cmsis/include/core_cm4.h \
- /usr/share/segger_embedded_studio_for_arm_5.62/include/stdint.h \
+ C:/Program\ Files/SEGGER/SEGGER\ Embedded\ Studio\ for\ ARM\ 7.22/include/stdint.h \
+ C:/Program\ Files/SEGGER/SEGGER\ Embedded\ Studio\ for\ ARM\ 7.22/include/__SEGGER_RTL.h \
+ C:/Program\ Files/SEGGER/SEGGER\ Embedded\ Studio\ for\ ARM\ 7.22/include/__SEGGER_RTL_ConfDefaults.h \
+ C:/Program\ Files/SEGGER/SEGGER\ Embedded\ Studio\ for\ ARM\ 7.22/include/__SEGGER_RTL_Conf.h \
+ C:/Program\ Files/SEGGER/SEGGER\ Embedded\ Studio\ for\ ARM\ 7.22/include/__SEGGER_RTL_Arm_Conf.h \
  ../../../nRF5_SDK_17.0.2_d674dde/components/toolchain/cmsis/include/cmsis_version.h \
  ../../../nRF5_SDK_17.0.2_d674dde/components/toolchain/cmsis/include/cmsis_compiler.h \
  ../../../nRF5_SDK_17.0.2_d674dde/components/toolchain/cmsis/include/cmsis_gcc.h \
@@ -14,21 +18,20 @@ build/beaconing_nrf52840_xxAA_s140_7.2.0_Release/obj/app_error_weak.o: \
  ../../../nRF5_SDK_17.0.2_d674dde/modules/nrfx/mdk/nrf52_to_nrf52840.h \
  ../../../nRF5_SDK_17.0.2_d674dde/modules/nrfx/mdk/compiler_abstraction.h \
  ../../../nRF5_SDK_17.0.2_d674dde/components/libraries/util/app_error.h \
- /usr/share/segger_embedded_studio_for_arm_5.62/include/stdio.h \
- /usr/share/segger_embedded_studio_for_arm_5.62/include/__crossworks.h \
- /usr/share/segger_embedded_studio_for_arm_5.62/include/stdbool.h \
+ C:/Program\ Files/SEGGER/SEGGER\ Embedded\ Studio\ for\ ARM\ 7.22/include/stdio.h \
+ C:/Program\ Files/SEGGER/SEGGER\ Embedded\ Studio\ for\ ARM\ 7.22/include/stdbool.h \
  ../../../nRF5_SDK_17.0.2_d674dde/components/libraries/util/sdk_errors.h \
  ../../../nRF5_SDK_17.0.2_d674dde/components/softdevice/s140/headers/nrf_error.h \
  ../../../nRF5_SDK_17.0.2_d674dde/components/libraries/util/nordic_common.h \
  ../../../nRF5_SDK_17.0.2_d674dde/components/libraries/util/app_error_weak.h \
  ../../mesh/core/include/log.h \
- /usr/share/segger_embedded_studio_for_arm_5.62/include/stdarg.h \
- /usr/share/segger_embedded_studio_for_arm_5.62/include/stddef.h \
+ C:/Program\ Files/SEGGER/SEGGER\ Embedded\ Studio\ for\ ARM\ 7.22/include/stdarg.h \
+ C:/Program\ Files/SEGGER/SEGGER\ Embedded\ Studio\ for\ ARM\ 7.22/include/stddef.h \
  ../../mesh/core/api/nrf_mesh_defines.h \
  ../../mesh/core/api/nrf_mesh_config_core.h \
  ../../mesh/core/api/nrf_mesh_defines.h \
  ../../../nRF5_SDK_17.0.2_d674dde/components/libraries/util/nordic_common.h \
- /usr/share/segger_embedded_studio_for_arm_5.62/include/string.h \
+ C:/Program\ Files/SEGGER/SEGGER\ Embedded\ Studio\ for\ ARM\ 7.22/include/string.h \
  ../common/include/mesh_app_utils.h ../../mesh/core/include/toolchain.h \
  ../../../nRF5_SDK_17.0.2_d674dde/components/softdevice/s140/headers/nrf_nvic.h \
  ../../../nRF5_SDK_17.0.2_d674dde/components/softdevice/s140/headers/nrf_svc.h \

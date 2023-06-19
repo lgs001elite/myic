@@ -150,8 +150,8 @@ void data_is_fin(uint8_t receivedData[])
     bool      g_com_pass = true;
     uint8_t file_sha256_true[32] =
         {
-            0X31,0XAC,0X80,0X58,0X77,0XA3,0XD8,0X17,0X31,0X29,0X4E,0X56,0X3D,0XA4,0XAF,0X0,0XA0,0X2F,0XDD,
-            0XBB,0XFD,0X1A,0X28,0X46,0X71,0X67,0XEA,0X61,0XAD,0X90,0X74,0XA6
+            0X3D, 0XC2, 0X90, 0XB1, 0X1, 0XDB, 0XEA, 0XF6, 0X8E, 0X1C, 0XAC, 0X4F, 0X3D, 0X56, 0X1C, 0X7F,
+            0X66, 0X5D, 0XCB, 0XE7, 0XFD, 0X4F, 0X21, 0XB5, 0X44, 0X7C, 0X25, 0X9, 0XCC, 0X4, 0XE1, 0X7
         };
     g_com_pass           = (memcmp(file_sha256_true, gen_sha256, SHA256_BLOCK_SIZE) == 0);
     if (g_com_pass)
@@ -163,7 +163,6 @@ void data_is_fin(uint8_t receivedData[])
     }
     if (g_rounds == 0)
     {
-        // spi_transHeaderStatus(PACKAGE_RFINISH); // Sending fin by the dst node.
         g_systemStatus = DONE;
     }
 }
@@ -212,12 +211,10 @@ void data_is_ack(uint8_t *receivedData)
             return;
         }
     }
-
     if ((packetSeq == g_pre_ack_seq) && g_if_nonFirstAck)
     {
         return;
     }
-
     g_pre_ack_seq = packetSeq; // update the pre-seu number
     g_if_nonFirstAck  = true;
     g_queueLen = g_queueLen - 1;
@@ -227,14 +224,14 @@ void data_is_ack(uint8_t *receivedData)
         {
             g_rounds = g_rounds - 1;
         }
+        if (g_rounds == 0)
+        {
+            g_finishSend = true;
+            produceNonPacketData();
+            g_transBuffer[3] = PACKAGE_FINISH;
+            g_transBuffer[5] = senderID;
+        }
     }
-    if (g_rounds == 0)
-    {
-        g_finishSend = true;
-        produceNonPacketData();
-        g_transBuffer[3] = PACKAGE_FINISH;
-    }
-
 }
 
 

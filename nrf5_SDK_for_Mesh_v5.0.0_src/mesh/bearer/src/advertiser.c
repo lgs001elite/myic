@@ -371,7 +371,7 @@ void advertiser_packet_send(advertiser_t * p_adv, adv_packet_t * p_packet)
     packet_buffer_commit(&p_adv->buf, p_buf_packet, p_buf_packet->size);
     if (p_adv->enabled && !is_active(p_adv))
     {
-        schedule_first_time(&p_adv->timer, p_adv->config.advertisement_interval_us + ADVERTISER_INTERVAL_RANDOMIZATION_US);
+        schedule_first_time(&p_adv->timer, p_adv->config.advertisement_interval_us); // + ADVERTISER_INTERVAL_RANDOMIZATION_US
     }
 }
 

@@ -19,19 +19,29 @@ bool check_completeness(uint8_t * receivedData)
 {
     if (receivedData[2] != BLE_GAP_AD_TYPE_PUBLIC_TARGET_ADDRESS)
     {
-        __LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "receivedData[2]: %X! \n", receivedData[1]);
+        __LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "ACTUALDATAUNITS: %X! \n",ACTUALDATAUNITS);
+        for (uint8_t i = 0; i < 35; i++)
+        {
+            __LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "receivedData: %X \n", receivedData[i]);
+        }
+        //__LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "receivedData[2]: %X! \n", receivedData[1]);
         return false;
     }
 
-    uint8_t crc_input[31];
-    for (uint8_t i = 1; i < 32; i++)
+    uint8_t crc_input[32];
+    for (uint8_t i = 1; i < 33; i++)
     {
         crc_input[i - 1] = receivedData[i];
     }
     crcInit();
-    uint16_t crc_result = crcFast(crc_input, 31);
+    uint16_t crc_result = crcFast(crc_input, 32);
     uint8_t  res1       = (crc_result & 0xFF00)>>8;
     uint8_t  res2       = (crc_result & 0x00FF);
+
+    for (uint8_t i = 0; i < 35; i++)
+    {
+        __LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "receivedData%d: %X \n", i, receivedData[i]);
+    }
 
     while (res1 >= 0x7F)
     {
@@ -45,17 +55,17 @@ bool check_completeness(uint8_t * receivedData)
         res2 -= 0x7F;
     }
     
-    if (res1 != receivedData[32])
+    if (res1 != receivedData[33])
     {
         __LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "failed! res1: %X\
-            , receivedData[32]: %X! \n", res1, receivedData[32]);
+            , receivedData[33]: %X! \n", res1, receivedData[33]);
         return false;
     }
 
-    if (res2 != receivedData[33])
+    if (res2 != receivedData[34])
     {
         __LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "failed! res2: %X, \
-            receivedData[33]: %X! \n", res2, receivedData[33]);
+            receivedData[34]: %X! \n", res2, receivedData[34]);
         return false;
     }
 
@@ -83,12 +93,12 @@ void spis_event_handler(nrf_drv_spis_event_t event)
         __LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "receive status: %X, SEQ: %x\n", statusAction, m_rx_buf_spi[3]);
         switch (statusAction)
         {
-        case DUBBY:
-            break;
-        default:
-            receiveData_sendout(m_rx_buf_spi);
-            send_datagram_start();
-            break;
+            case DUBBY:
+              break;
+            default:
+              receiveData_sendout(m_rx_buf_spi);
+              send_datagram_start();
+              break;
         }
     }
 }

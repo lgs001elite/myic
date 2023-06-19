@@ -1,12 +1,5 @@
 #include "transitionData.h"
 
-
-
-/**
- * @brief calculate crc value
- * 
- */
-
 uint16_t getCRC(unsigned char const message[])
 {
     crcInit();
@@ -15,10 +8,6 @@ uint16_t getCRC(unsigned char const message[])
 }
 
 
-/**
- * Setting m2s_buf
- * buf_data: *pointer format, str[]: array format
- */
 void buf_m2s(uint8_t *buf_data, uint8_t arrLen)
 {
     uint8_t start_point = 0;
@@ -28,11 +17,7 @@ void buf_m2s(uint8_t *buf_data, uint8_t arrLen)
     }
 }
 
-/**
- * Transferring data from nordic to msp430
- * s_transData: pointer "s_transData" points malloced data bytes
- * m_transData:  trans data format, both nordic and msp430 follow this rule.
- */
+
 void s2m(SPI_DATAGRAM *m_transData, uint8_t s_transData[])
 {
     m_transData->hp_len = s_transData[0];
@@ -52,13 +37,10 @@ void s2m(SPI_DATAGRAM *m_transData, uint8_t s_transData[])
         uint8_t j      = i - anchor;
         m_transData->df[j] = s_transData[i];
     }
+    free_pointer(m_transData);
 }
 
-/**
- * Transferring status data from msp430 to nordic
- * s_transData: pointer "s_transData" points malloced data bytes
- * m_transData:  trans data format, both nordic and msp430 follow this rule.
- */
+
 void m2s(uint8_t * s_transData, SPI_DATAGRAM * m_transData)
 {
     s_transData[0]  = m_transData->hp_len;

@@ -10,28 +10,8 @@
 #include "random.h"
 #include "transitionData.h"
 
-//******************************************************************************
-// Pin Config ******************************************************************
-//******************************************************************************
 
-#define SLAVE_CS_OUT P5OUT
-#define SLAVE_CS_DIR P5DIR
-#define SLAVE_CS_PIN BIT3
 
-#define COMMS_LED_OUT P1OUT
-#define COMMS_LED_DIR P1DIR
-#define COMMS_LED_PIN BIT0
-#define COMMS_LED_PIN2 BIT1
-/** Adding by me **/
-#define COMMS_LED_PIN3 BIT2
-#define COMMS_LED_PIN4 BIT3
-
-//******************************************************************************
-// Example Commands ************************************************************
-//******************************************************************************
-#define DUMMY 0xFF
-#define CMD_TYPE_0_SLAVE 0xAA
-#define CMD_TYPE_0_MASTER 0x01
 uint8_t SlaveType0[SPI_DATA_LEN] = {0};
 void setNode(uint8_t nodeType)
 {
@@ -39,13 +19,11 @@ void setNode(uint8_t nodeType)
     {
     case ICNODE:
         g_nodeAddress = 0x01;
-        g_dest_address = 0x03;
         g_node_dimension = 0xff;
         g_if_sourceNode = true;
         break;
     case SINK:
         g_nodeAddress = 0x03;
-        g_dest_address = 0xff;
         g_node_dimension = 0x01;
         g_if_sourceNode = false;
         break;
@@ -78,16 +56,6 @@ void recevedSucess(void)
 void recevedFailure(void)
 {
     COMMS_LED_OUT ^= COMMS_LED_PIN2;
-}
-
-void startTrans(void)
-{
-    uint8_t index = 0;
-    for (; index < 3; index++)
-    {
-        COMMS_LED_OUT ^= COMMS_LED_PIN2;
-    }
-    produceData();
 }
 
 void close_spi_process(void)
@@ -147,10 +115,6 @@ SPI_Mode SPI_Master_ReadReg(uint8_t reg_addr, uint8_t count)
     SLAVE_CS_OUT |= SLAVE_CS_PIN;
     return MasterMode;
 }
-
-//******************************************************************************
-// Device Initialization *******************************************************
-//******************************************************************************
 
 void initSPI()
 {
@@ -214,45 +178,45 @@ void initClockTo16MHz()
     CSCTL0_H = 0;
 }
 
-//******************************************************************************
-// Main ************************************************************************
-// Send and receive three messages containing the example commands *************
-//******************************************************************************
 int main(void)
 {
-    WDTCTL = WDTPW | WDTHOLD; // Stop watchdog timer
+    // Stop watchdog timer
+    WDTCTL = WDTPW | WDTHOLD;
     initClockTo16MHz();
     initGPIO();
     initSPI();
-    ctpl_enterLpm45(CTPL_ENABLE_RESTORE_ON_RESET);
-    // SENDER REALYER RECEIVER
-    setNode(SINK);
-    g_sendAck = false;
-    g_finishSend = false;
-    g_waitToFind = 0;
+    setNode(ICNODE);
+    g_sendAck       = false;
+    g_finishSend    = false;
+    g_waitToFind    = 0xff;
     g_findThreshold = MAXFIND;
     g_waitThreshold = MAXWAIT;
-    g_queueLen = 0;
-    g_rounds = 0;
-    g_transDataSeq = 0;
-    g_if_end_trans = false;
+    g_queueLen      = 0;
+    g_preQueLen     = 0;
+    g_rounds        = 0;
+    g_transDataSeq  = 0;
+    g_if_end_trans  = false;
     g_received_file_real_size = 0;
-    g_pre_packet_seq = 0xff;
-    g_pre_fin_seq = 0xff;
-    g_pre_ack_seq = 0xff;
-    g_non_firstDatagram = false;
-    g_systemStatus = NONLAYER;
-    g_seq_data = (uint8_t)genRanNumb();
-    g_seq_header = (uint8_t)genRanNumb();
-    g_if_send_next = true;
-    g_spiTransLen = SPI_DATA_LEN;
+    g_pre_packet_seq      = 0xff;
+    g_pre_fin_seq         = 0xff;
+    g_pre_ack_seq         = 0xff;
+    g_non_firstDatagram   = false;
+    g_systemStatus        = NONLAYER;
+    g_seq_data            = (uint8_t)genRanNumb();
+    g_seq_header          = (uint8_t)genRanNumb();
+    g_if_send_next        = true;
+    g_spiTransLen         = SPI_DATA_LEN;
     g_receivedNodeAddress = 0xff;
-    g_if_nonFirstAck = false;
+    g_if_nonFirstAck      = false;
     g_currentPairedNodeID = 0xff;
-    g_nextNodeID = 0xff;
-    g_waitReceiveCounter = 0;
-    g_packetQueue = (SPI_DATAGRAM *)malloc(sizeof(SPI_DATAGRAM) * MAXQUELEN);
-    produceData();
+    g_nextNodeID          = 0xff;
+    g_waitReceiveCounter  = 0;
+    g_waitSendCounter     = 0;
+    g_packetQueue         = (SPI_DATAGRAM *)malloc(sizeof(SPI_DATAGRAM) * MAXQUELEN);
+    if (g_node_dimension != 0x01)
+    {
+        produceData();
+    }
     start_spi_process();
 }
 
@@ -262,6 +226,8 @@ void start_spi_process(void)
     UCB1IE |= UCRXIE;
     while (SWITCH2SPI)
     {
+        COMMS_LED_OUT ^= COMMS_LED_PIN;
+        COMMS_LED_OUT ^= COMMS_LED_PIN2;
         // SPI-Sending
         if (g_systemStatus == NONLAYER)
         {
@@ -273,38 +239,54 @@ void start_spi_process(void)
             if ((g_node_dimension != 0xff) && (g_waitToFind == 0))
             {
                 g_findThreshold = g_findThreshold - 1;
-                if (g_findThreshold == 0)
-                {
-                    g_systemStatus = TRANSMIT;
-                }
+                g_systemStatus = TRANSMIT;
                 g_transBuffer[2] = g_findThreshold;
                 g_transBuffer[3] = PACKAGE_FIND;
             }
         }
         else if (g_systemStatus == TRANSMIT)
         {
-
+            if (g_waitReceiveCounter != 0)
+            {
+                g_waitReceiveCounter = 0;
+            }
+            if ((g_finishSend == true) && (g_queueLen == 0))
+            {
+                if (g_node_dimension != 0x01)
+                {
+                    produceData();
+                }
+            }
             if (g_queueLen == 0)
             {
                 g_systemStatus = RECEIVE;
                 continue;
             }
-            if (g_finishSend == true)
+            if (g_waitSendCounter > MAXWAIT)
             {
+                g_systemStatus = RECEIVE;
                 continue;
             }
-            uint8_t *transmitBuffer = (uint8_t *)malloc(sizeof(uint8_t) * SPI_DATA_LEN);
+            if (g_preQueLen == g_queueLen)
+            {
+                g_waitSendCounter = g_waitSendCounter + 1;
+            }
+            uint8_t *transmitBuffer = (uint8_t *) malloc (sizeof(uint8_t) * SPI_DATA_LEN);
             if (!transmitBuffer)
             {
                 return;
             }
             memset(transmitBuffer, 0, SPI_DATA_LEN);
-
             m2s(transmitBuffer, &g_packetQueue[g_queueLen]);
             buf_m2s(transmitBuffer, SPI_DATA_LEN);
+            g_preQueLen = g_queueLen;
         }
         else if (g_systemStatus == RECEIVE)
         {
+            if (g_waitSendCounter != 0)
+            {
+                g_waitSendCounter = 0;
+            }
             if (g_queueLen >= MAXQUELEN)
             {
                 g_systemStatus = TRANSMIT;
@@ -315,7 +297,7 @@ void start_spi_process(void)
                 g_systemStatus = TRANSMIT;
                 continue;
             }
-            produceNonPacketData();
+
             if (g_queueLen != 0)
             {
                 g_waitReceiveCounter = g_waitReceiveCounter + 1;
@@ -325,6 +307,7 @@ void start_spi_process(void)
             {
                 produceNonPacketData();
                 g_transBuffer[3] = PACKAGE_ACK;
+                g_transBuffer[5] = g_currentPairedNodeID;
                 g_sendAck = false;
             }
         }
@@ -335,20 +318,17 @@ void start_spi_process(void)
             close_spi_process();
         }
         // SPI-Receiving
-        __delay_cycles(720000); // 120 ms
+        __delay_cycles(720000);
         SPI_Master_ReadReg(CMD_TYPE_0_SLAVE, SPI_DATA_LEN);
         CopyArray(g_receiveBuffer, SlaveType0, SPI_DATA_LEN);
-        __delay_cycles(150000); // 25ms
+        __delay_cycles(150000);
         receiveDataFromNordic();
-        __delay_cycles(150000); // 25ms
+        __delay_cycles(150000);
         SPI_Master_WriteReg(CMD_TYPE_0_MASTER, g_spiTransLen);
-        COMMS_LED_OUT ^= COMMS_LED_PIN;
+        // COMMS_LED_OUT ^= COMMS_LED_PIN;
     }
 }
 
-//******************************************************************************
-// SPI Interrupt ***************************************************************
-//******************************************************************************
 
 #if defined(__TI_COMPILER_VERSION__) || defined(__IAR_SYSTEMS_ICC__)
 #pragma vector = USCI_B1_VECTOR
