@@ -30,6 +30,7 @@
 #define TRANSMIT  1
 #define RECEIVE   2
 #define DONE      3
+#define SINKWAIT  4
 
 #define MAXQUELEN 6
 #define MAXROUND  10

@@ -247,10 +247,12 @@ void start_spi_process(void)
     {
         SPI_Master_ReadReg(CMD_TYPE_0_SLAVE, SPI_DATA_LEN);
         CopyArray(g_receiveBuffer, SlaveType0, SPI_DATA_LEN);
+//        __delay_cycles(750000);
         receiveDataFromNordic();
         COMMS_LED_OUT ^= COMMS_LED_PIN;
         COMMS_LED_OUT ^= COMMS_LED_PIN2;
         // SPI-Sending
+
         if (g_systemStatus == NONLAYER)
         {
             if (g_waitToFind > 0)
@@ -259,6 +261,11 @@ void start_spi_process(void)
                 produceNonPacketData();
                 g_transBuffer[3] = PACKAGE_FIND;
                 update_crc();
+                SPI_Master_WriteReg(CMD_TYPE_0_MASTER, SPI_DATA_LEN);
+            }
+            if((g_waitToFind == 0) && (g_if_sourceNode == false))
+            {
+                g_systemStatus = SINKWAIT;
             }
             if ((g_node_dimension != 0x6f) && (g_if_sourceNode == true) && (g_waitToFind == 0))
             {
@@ -301,6 +308,7 @@ void start_spi_process(void)
             m2s(transmitBuffer, &g_packetQueue[g_queueLen]);
             buf_m2s(transmitBuffer, SPI_DATA_LEN);
             g_preQueLen = g_queueLen;
+            SPI_Master_WriteReg(CMD_TYPE_0_MASTER, SPI_DATA_LEN);
         }
         else if (g_systemStatus == RECEIVE)
         {
@@ -330,6 +338,7 @@ void start_spi_process(void)
                 g_transBuffer[3] = PACKAGE_ACK;
                 g_transBuffer[5] = g_currentPairedNodeID;
                 update_crc();
+                SPI_Master_WriteReg(CMD_TYPE_0_MASTER, SPI_DATA_LEN);
                 g_sendAck = false;
             }
         }
@@ -339,8 +348,12 @@ void start_spi_process(void)
             g_transBuffer[3] = PACKAGE_FINISH;
             update_crc();
             close_spi_process();
+            SPI_Master_WriteReg(CMD_TYPE_0_MASTER, SPI_DATA_LEN);
         }
-        SPI_Master_WriteReg(CMD_TYPE_0_MASTER, SPI_DATA_LEN);
+        else if (g_systemStatus == SINKWAIT)
+        {
+            // DO nothing
+        }
     }
 }
 
