@@ -1,5 +1,6 @@
 #ifndef _PUBLIC_H_
 #define _PUBLIC_H_
+#include <msp430.h>
 #include <stdbool.h>
 #include <stddef.h>
 #include "stdlib.h"
@@ -29,10 +30,10 @@
 #define NONLAYER  0
 #define TRANSMIT  1
 #define RECEIVE   2
-#define DONE      3
+// #define DONE      3
 #define SINKWAIT  4
 
-#define MAXQUELEN 6
+#define MAXQUELEN 12
 #define MAXROUND  10
 #define MAXFIND   10
 #define MAXWAIT   10
@@ -40,7 +41,7 @@
 #define PACKAGE_FIND     0x00
 #define PACKAGE_PACKET   0x01
 #define PACKAGE_FINISH   0x02
-#define PACKAGE_RFINISH  0x03
+// #define PACKAGE_RFINISH  0x03
 #define PACKAGE_ACK      0x04
 #define DUBBY            0x05
 
@@ -69,7 +70,6 @@ uint16_t g_waitSendCounter;
 uint8_t  g_currentPairedNodeID;
 uint8_t  g_nextNodeID;
 bool g_sendAck;
-bool g_finishSend;
 uint16_t       g_waitToFind;
 uint8_t        g_rounds;
 uint8_t        g_queueLen;
@@ -85,25 +85,19 @@ bool           g_if_send_next;
 bool           g_if_end_trans;
 bool           g_if_sourceNode;
 uint32_t       g_transDataSeq;
-uint8_t        g_receivedNodeAddress;
 uint32_t       g_received_file_real_size;
 uint8_t        g_sha256_buf[SHA256_BLOCK_SIZE];
 uint8_t        g_pre_ack_seq;
 uint8_t        g_pre_packet_seq;
 uint8_t        g_pre_fin_seq;
-bool           g_if_nonFirstAck;
-bool           g_non_firstDatagram;
 SPI_DATAGRAM   *g_packetQueue;
 
 void update_crc(void);
 void start_spi_process(void);
 void close_spi_process(void);
-void recevedSucess(void);
-void recevedFailure(void);
 void startTrans(void);
 uint16_t getCRC(unsigned char const message[]);
 bool SWITCH2SPI;
-uint8_t store_received_data[MAXBYTE];
 typedef enum SPI_ModeEnum{
     IDLE_MODE,
     TX_REG_ADDRESS_MODE,

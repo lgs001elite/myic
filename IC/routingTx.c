@@ -17,7 +17,7 @@ void free_pointer(uint8_t * pointer)
 void produceData(void)
 {
     uint32_t i = 0;
-    for (; i < MAXQUELEN; i++)
+    for (; i < (MAXQUELEN/2); i++)
     {
         g_packetQueue[g_queueLen].hp_len = 0x1E;
         g_packetQueue[g_queueLen].t_broad_type = BLE_GAP_AD_TYPE;
@@ -36,9 +36,8 @@ void produceData(void)
         }
         if (g_transDataSeq == MAXBYTE)
         {
-            g_rounds = g_rounds + 1;
             g_transDataSeq = 0;
-            if (g_rounds != MAXROUND)
+            if (g_rounds != 0)
             {
                 g_seq_data = (uint8_t)genRanNumb();
             }

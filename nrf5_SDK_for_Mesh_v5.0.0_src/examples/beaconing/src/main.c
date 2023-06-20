@@ -82,7 +82,7 @@ void rx_cb(const nrf_mesh_adv_packet_rx_data_t * p_rx_data)
 
     if (p_rx_data->length != BLE_ADV_PACKET_PAYLOAD_MAX_LENGTH)
     {
-        __LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "----- p_rx_data->length:%d  -----\n", p_rx_data->length);
+        //__LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "----- p_rx_data->length:%d  -----\n", p_rx_data->length);
         return;
     }
 
@@ -91,46 +91,46 @@ void rx_cb(const nrf_mesh_adv_packet_rx_data_t * p_rx_data)
     rec_packet[0]          = p_rx_data->p_payload[0];
     rec_packet[1]          = p_rx_data->p_payload[1];
     rec_packet[2]          = p_rx_data->p_payload[2];
-    rec_packet[3]          = ((p_rx_data->p_payload[3])  & 0x0F);
+    rec_packet[3]          = ((p_rx_data->p_payload[3])& 0x0f);
     rec_packet[4]          = ((p_rx_data->p_payload[3])  & 0xF0)>>4;
-    rec_packet[5]          = ((p_rx_data->p_payload[4])  & 0x0F);
+    rec_packet[5]          = ((p_rx_data->p_payload[4]) & 0x0f);
     rec_packet[6]          = ((p_rx_data->p_payload[4])  & 0xF0)>>4;
-    rec_packet[7]          = ((p_rx_data->p_payload[5])  & 0x07);
-    rec_packet[8]          = (((p_rx_data->p_payload[5]) & 0xF8)>>3) & 0x1F;
+    rec_packet[7]          = ((p_rx_data->p_payload[5]) & 0x07);
+    rec_packet[8] = (((p_rx_data->p_payload[5]) & 0xF8) >> 3) & 0x1F;
     for (uint8_t i = 6; i < 29; i++) // 6: payload starting point, 29: crc starting point
     {
         rec_packet[i + 3] = p_rx_data->p_payload[i];
     }
     
     // chekcing packet's crc
-    crcInit();
-    uint16_t crc_result = crcFast(rec_packet, 32);
-    uint8_t  res1       = (crc_result & 0xFF00)>>8;
-    uint8_t  res2       = (crc_result & 0x00FF);
+    //crcInit();
+    //uint16_t crc_result = crcFast(rec_packet, 32);
+    //uint8_t  res1       = (crc_result & 0xFF00)>>8;
+    //uint8_t  res2       = (crc_result & 0x00FF);
 
-    while (res1 >= 0x7F)
-    {
-        res1 -= 0x7F;
-    }
+    //while (res1 >= 0x7F)
+    //{
+    //    res1 -= 0x7F;
+    //}
 
-    while (res2 >= 0x7F)
-    {
-        res2 -= 0x7F;
-    }
+    //while (res2 >= 0x7F)
+    //{
+    //    res2 -= 0x7F;
+    //}
 
-    if ((res1 != p_rx_data->p_payload[29]) || (res2 != p_rx_data->p_payload[30]))
-    {
-        __LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "----- res1: %X, res2: %X, p_rx_data->p_payload[29]: %X,p_rx_data->p_payload[30]: %X, check failure ------\n", res1, res2, p_rx_data->p_payload[29], p_rx_data->p_payload[30]);
-        return;
-    }
+    //if ((res1 != p_rx_data->p_payload[29]) || (res2 != p_rx_data->p_payload[30]))
+    //{
+    //    __LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "----- res1: %X, res2: %X, p_rx_data->p_payload[29]: %X,p_rx_data->p_payload[30]: %X, check failure ------\n", res1, res2, p_rx_data->p_payload[29], p_rx_data->p_payload[30]);
+    //    //return;
+    //}
 
 
     for (uint8_t i = 0; i < 32; i++)
     {
         m_tx_buf_spi[i] = rec_packet[i];
     }
-    m_tx_buf_spi[32] = res1;
-    m_tx_buf_spi[33] = res2;
+    m_tx_buf_spi[32] = p_rx_data->p_payload[29];
+    m_tx_buf_spi[33] = p_rx_data->p_payload[30];
     spis_setfrom_slave(m_tx_buf_spi, ACTUALDATAUNITS);
     __LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "----- received successfully  seq: %X-----\n", m_tx_buf_spi[2]);
 }

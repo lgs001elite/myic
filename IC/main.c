@@ -1,4 +1,3 @@
-#include <msp430.h>
 #include <stdint.h>
 #include <stdbool.h>
 #include "public.h"
@@ -16,7 +15,7 @@ void setNode(uint8_t nodeType)
     {
     case ICNODE:
         g_nodeAddress = 0x01;
-        g_node_dimension = 0x6f;
+        g_node_dimension = 0x7e;
         g_if_sourceNode = true;
         g_waitToFind = 0;
         break;
@@ -45,17 +44,6 @@ uint8_t TransmitIndex = 0;
 
 void CopyArray(uint8_t *source, uint8_t *dest, uint8_t count);
 void SendUCB1Data(uint8_t val);
-
-void recevedSucess(void)
-{
-    COMMS_LED_OUT ^= COMMS_LED_PIN;
-    COMMS_LED_OUT ^= COMMS_LED_PIN2;
-}
-
-void recevedFailure(void)
-{
-    COMMS_LED_OUT ^= COMMS_LED_PIN2;
-}
 
 void close_spi_process(void)
 {
@@ -186,28 +174,36 @@ int main(void)
     initSPI();
     setNode(SINK);
     g_sendAck = false;
-    g_finishSend = false;
     g_queueLen = 0;
     g_preQueLen = 0;
-    g_rounds = 0;
     g_transDataSeq = 0;
     g_if_end_trans = false;
     g_received_file_real_size = 0;
     g_pre_packet_seq = 0x7e;
     g_pre_fin_seq = 0x7e;
     g_pre_ack_seq = 0x7e;
-    g_non_firstDatagram = false;
     g_systemStatus = NONLAYER;
-    g_seq_data = (uint8_t)genRanNumb();
-    g_seq_header = (uint8_t)genRanNumb();
+    g_seq_data = (uint8_t) genRanNumb();
+    g_seq_header = (uint8_t) genRanNumb();
     g_if_send_next = true;
-    g_receivedNodeAddress = 0x7e;
-    g_if_nonFirstAck = false;
     g_currentPairedNodeID = 0x7e;
-    g_nextNodeID = 0x6f;
+    g_nextNodeID = 0x7e;
     g_waitReceiveCounter = 0;
     g_waitSendCounter = 0;
-    g_packetQueue = (SPI_DATAGRAM *)malloc(sizeof(SPI_DATAGRAM) * MAXQUELEN);
+    if (g_if_sourceNode)
+    {
+        g_rounds = MAXROUND;
+        g_packetQueue = (SPI_DATAGRAM *)malloc(sizeof(SPI_DATAGRAM) * MAXQUELEN);
+        if (!g_packetQueue)
+        {
+            free(g_packetQueue);
+            return;
+        }
+    }
+    else
+    {
+        g_rounds = 0;
+    }
     if (g_node_dimension != 0x01)
     {
         produceData();
@@ -247,43 +243,45 @@ void start_spi_process(void)
     {
         SPI_Master_ReadReg(CMD_TYPE_0_SLAVE, SPI_DATA_LEN);
         CopyArray(g_receiveBuffer, SlaveType0, SPI_DATA_LEN);
-//        __delay_cycles(750000);
+        // __delay_cycles(750000);
         receiveDataFromNordic();
-        COMMS_LED_OUT ^= COMMS_LED_PIN;
-        COMMS_LED_OUT ^= COMMS_LED_PIN2;
-        // SPI-Sending
-
+        if ((g_rounds == 0) && (g_queueLen == 0))
+        {
+            COMMS_LED_OUT ^= COMMS_LED_PIN;
+            COMMS_LED_OUT ^= COMMS_LED_PIN2;
+        }
+        else
+        {
+            COMMS_LED_OUT ^= COMMS_LED_PIN;
+        }
+        if (g_sendAck == true)
+        {
+            produceNonPacketData();
+            g_transBuffer[2] = g_pre_packet_seq;
+            g_transBuffer[3] = PACKAGE_ACK;
+            g_transBuffer[5] = g_currentPairedNodeID;
+            update_crc();
+            SPI_Master_WriteReg(CMD_TYPE_0_MASTER, SPI_DATA_LEN);
+            g_sendAck = false;
+            continue;
+        }
         if (g_systemStatus == NONLAYER)
         {
-            if (g_waitToFind > 0)
-            {
-                g_waitToFind = g_waitToFind - 1;
-                produceNonPacketData();
-                g_transBuffer[3] = PACKAGE_FIND;
-                update_crc();
-                SPI_Master_WriteReg(CMD_TYPE_0_MASTER, SPI_DATA_LEN);
-            }
-            if((g_waitToFind == 0) && (g_if_sourceNode == false))
-            {
-                g_systemStatus = SINKWAIT;
-            }
-            if ((g_node_dimension != 0x6f) && (g_if_sourceNode == true) && (g_waitToFind == 0))
-            {
-                g_systemStatus = TRANSMIT;
-            }
+            g_waitToFind = g_waitToFind - 1;
+            produceNonPacketData();
+            g_transBuffer[3] = PACKAGE_FIND;
+            update_crc();
+            SPI_Master_WriteReg(CMD_TYPE_0_MASTER, SPI_DATA_LEN);
         }
         else if (g_systemStatus == TRANSMIT)
         {
+            if (g_currentPairedNodeID != 0x7e)
+            {
+                g_currentPairedNodeID = 0x7e;
+            }
             if (g_waitReceiveCounter != 0)
             {
                 g_waitReceiveCounter = 0;
-            }
-            if ((g_finishSend == true) && (g_queueLen == 0))
-            {
-                if (g_node_dimension != 0x01)
-                {
-                    produceData();
-                }
             }
             if (g_queueLen == 0)
             {
@@ -293,21 +291,32 @@ void start_spi_process(void)
             if (g_waitSendCounter > MAXWAIT)
             {
                 g_systemStatus = RECEIVE;
+                g_nextNodeID = 0x7e;
                 continue;
             }
             if (g_preQueLen == g_queueLen)
             {
                 g_waitSendCounter = g_waitSendCounter + 1;
             }
-            uint8_t *transmitBuffer = (uint8_t *)malloc(sizeof(uint8_t) * SPI_DATA_LEN);
+            else
+            {
+                g_waitSendCounter = 0;
+            }
+            uint8_t *transmitBuffer = (uint8_t *) malloc (sizeof(uint8_t) * SPI_DATA_LEN);
             if (!transmitBuffer)
             {
+                free(transmitBuffer);
                 return;
             }
             memset(transmitBuffer, 0, SPI_DATA_LEN);
             m2s(transmitBuffer, &g_packetQueue[g_queueLen]);
             buf_m2s(transmitBuffer, SPI_DATA_LEN);
             g_preQueLen = g_queueLen;
+            if (g_queueLen == 1)
+            {
+                g_transBuffer[3] = PACKAGE_FINISH;
+                update_crc();
+            }
             SPI_Master_WriteReg(CMD_TYPE_0_MASTER, SPI_DATA_LEN);
         }
         else if (g_systemStatus == RECEIVE)
@@ -332,27 +341,10 @@ void start_spi_process(void)
                 g_waitReceiveCounter = g_waitReceiveCounter + 1;
             }
 
-            if (g_sendAck == true)
-            {
-                produceNonPacketData();
-                g_transBuffer[3] = PACKAGE_ACK;
-                g_transBuffer[5] = g_currentPairedNodeID;
-                update_crc();
-                SPI_Master_WriteReg(CMD_TYPE_0_MASTER, SPI_DATA_LEN);
-                g_sendAck = false;
-            }
-        }
-        else if (g_systemStatus == DONE)
-        {
-            produceNonPacketData();
-            g_transBuffer[3] = PACKAGE_FINISH;
-            update_crc();
-            close_spi_process();
-            SPI_Master_WriteReg(CMD_TYPE_0_MASTER, SPI_DATA_LEN);
         }
         else if (g_systemStatus == SINKWAIT)
         {
-            // DO nothing
+            // DO nothing, Just keeping listning 
         }
     }
 }
@@ -392,7 +384,6 @@ void __attribute__((interrupt(USCI_B1_VECTOR))) USCI_B1_ISR(void)
                 TXByteCtr--;
             }
             break;
-
         case TX_DATA_MODE:
             if (TXByteCtr)
             {
@@ -406,7 +397,6 @@ void __attribute__((interrupt(USCI_B1_VECTOR))) USCI_B1_ISR(void)
                 __bic_SR_register_on_exit(CPUOFF); // Exit LPM0
             }
             break;
-
         case RX_DATA_MODE:
             if (RXByteCtr)
             {
@@ -423,7 +413,6 @@ void __attribute__((interrupt(USCI_B1_VECTOR))) USCI_B1_ISR(void)
                 SendUCB1Data(DUMMY);
             }
             break;
-
         default:
             __no_operation();
             break;

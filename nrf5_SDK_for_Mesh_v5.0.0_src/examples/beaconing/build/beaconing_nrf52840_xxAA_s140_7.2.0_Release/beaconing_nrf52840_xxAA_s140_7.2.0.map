@@ -618,7 +618,7 @@ Discarded input sections
  .text.access_reliable_model_is_free
                 0x0000000000000000       0x2c build/beaconing_nrf52840_xxAA_s140_7.2.0_Release/obj/access_reliable.o
  .text.access_model_reliable_publish
-                0x0000000000000000      0x1d0 build/beaconing_nrf52840_xxAA_s140_7.2.0_Release/obj/access_reliable.o
+                0x0000000000000000      0x1d4 build/beaconing_nrf52840_xxAA_s140_7.2.0_Release/obj/access_reliable.o
  .text          0x0000000000000000        0x0 build/beaconing_nrf52840_xxAA_s140_7.2.0_Release/obj/device_state_manager.o
  .data          0x0000000000000000        0x0 build/beaconing_nrf52840_xxAA_s140_7.2.0_Release/obj/device_state_manager.o
  .bss           0x0000000000000000        0x0 build/beaconing_nrf52840_xxAA_s140_7.2.0_Release/obj/device_state_manager.o
@@ -4968,286 +4968,287 @@ Linker script and memory map
  .text.remove_and_reschedule
                 0x0000000000031b84       0xb8 build/beaconing_nrf52840_xxAA_s140_7.2.0_Release/obj/access_reliable.o
  .text.reliable_timer_cb
-                0x0000000000031c3c      0x178 build/beaconing_nrf52840_xxAA_s140_7.2.0_Release/obj/access_reliable.o
+                0x0000000000031c3c      0x17c build/beaconing_nrf52840_xxAA_s140_7.2.0_Release/obj/access_reliable.o
  .text.access_reliable_message_rx_cb
-                0x0000000000031db4       0x5c build/beaconing_nrf52840_xxAA_s140_7.2.0_Release/obj/access_reliable.o
-                0x0000000000031db4                access_reliable_message_rx_cb
+                0x0000000000031db8       0x5c build/beaconing_nrf52840_xxAA_s140_7.2.0_Release/obj/access_reliable.o
+                0x0000000000031db8                access_reliable_message_rx_cb
  .text.access_reliable_init
-                0x0000000000031e10       0x28 build/beaconing_nrf52840_xxAA_s140_7.2.0_Release/obj/access_reliable.o
-                0x0000000000031e10                access_reliable_init
+                0x0000000000031e14       0x28 build/beaconing_nrf52840_xxAA_s140_7.2.0_Release/obj/access_reliable.o
+                0x0000000000031e14                access_reliable_init
  .text.access_reliable_cancel_all
-                0x0000000000031e38       0x68 build/beaconing_nrf52840_xxAA_s140_7.2.0_Release/obj/access_reliable.o
-                0x0000000000031e38                access_reliable_cancel_all
+                0x0000000000031e3c       0x68 build/beaconing_nrf52840_xxAA_s140_7.2.0_Release/obj/access_reliable.o
+                0x0000000000031e3c                access_reliable_cancel_all
  .text.access_model_reliable_cancel
-                0x0000000000031ea0       0x5c build/beaconing_nrf52840_xxAA_s140_7.2.0_Release/obj/access_reliable.o
-                0x0000000000031ea0                access_model_reliable_cancel
+                0x0000000000031ea4       0x5c build/beaconing_nrf52840_xxAA_s140_7.2.0_Release/obj/access_reliable.o
+                0x0000000000031ea4                access_model_reliable_cancel
  .text.bitfield_get
-                0x0000000000031efc       0x18 build/beaconing_nrf52840_xxAA_s140_7.2.0_Release/obj/device_state_manager.o
+                0x0000000000031f00       0x18 build/beaconing_nrf52840_xxAA_s140_7.2.0_Release/obj/device_state_manager.o
  .text.bitfield_set
-                0x0000000000031f14       0x18 build/beaconing_nrf52840_xxAA_s140_7.2.0_Release/obj/device_state_manager.o
+                0x0000000000031f18       0x18 build/beaconing_nrf52840_xxAA_s140_7.2.0_Release/obj/device_state_manager.o
  .text.address_handle_nonvirtual_valid
-                0x0000000000031f2c       0x14 build/beaconing_nrf52840_xxAA_s140_7.2.0_Release/obj/device_state_manager.o
+                0x0000000000031f30       0x14 build/beaconing_nrf52840_xxAA_s140_7.2.0_Release/obj/device_state_manager.o
  .text.address_handle_virtual_valid
-                0x0000000000031f40       0x18 build/beaconing_nrf52840_xxAA_s140_7.2.0_Release/obj/device_state_manager.o
+                0x0000000000031f44       0x18 build/beaconing_nrf52840_xxAA_s140_7.2.0_Release/obj/device_state_manager.o
  .text.address_handle_valid
-                0x0000000000031f58       0x1a build/beaconing_nrf52840_xxAA_s140_7.2.0_Release/obj/device_state_manager.o
- *fill*         0x0000000000031f72        0x2 
+                0x0000000000031f5c       0x1a build/beaconing_nrf52840_xxAA_s140_7.2.0_Release/obj/device_state_manager.o
+ *fill*         0x0000000000031f76        0x2 
  .text.net_key_handle_get
-                0x0000000000031f74       0x54 build/beaconing_nrf52840_xxAA_s140_7.2.0_Release/obj/device_state_manager.o
+                0x0000000000031f78       0x54 build/beaconing_nrf52840_xxAA_s140_7.2.0_Release/obj/device_state_manager.o
  .text.app_key_handle_get
-                0x0000000000031fc8       0x54 build/beaconing_nrf52840_xxAA_s140_7.2.0_Release/obj/device_state_manager.o
+                0x0000000000031fcc       0x54 build/beaconing_nrf52840_xxAA_s140_7.2.0_Release/obj/device_state_manager.o
  .text.dsm_nonvirtual_addr_setter
-                0x000000000003201c       0x44 build/beaconing_nrf52840_xxAA_s140_7.2.0_Release/obj/device_state_manager.o
+                0x0000000000032020       0x44 build/beaconing_nrf52840_xxAA_s140_7.2.0_Release/obj/device_state_manager.o
  .text.dsm_metadata_getter
-                0x0000000000032060       0x26 build/beaconing_nrf52840_xxAA_s140_7.2.0_Release/obj/device_state_manager.o
- *fill*         0x0000000000032086        0x2 
+                0x0000000000032064       0x26 build/beaconing_nrf52840_xxAA_s140_7.2.0_Release/obj/device_state_manager.o
+ *fill*         0x000000000003208a        0x2 
  .text.dsm_metadata_setter
-                0x0000000000032088       0x48 build/beaconing_nrf52840_xxAA_s140_7.2.0_Release/obj/device_state_manager.o
+                0x000000000003208c       0x48 build/beaconing_nrf52840_xxAA_s140_7.2.0_Release/obj/device_state_manager.o
  .text.dsm_unicast_addr_getter
-                0x00000000000320d0       0x30 build/beaconing_nrf52840_xxAA_s140_7.2.0_Release/obj/device_state_manager.o
+                0x00000000000320d4       0x30 build/beaconing_nrf52840_xxAA_s140_7.2.0_Release/obj/device_state_manager.o
  .text.dsm_nonvirtual_addr_getter
-                0x0000000000032100       0x3c build/beaconing_nrf52840_xxAA_s140_7.2.0_Release/obj/device_state_manager.o
+                0x0000000000032104       0x3c build/beaconing_nrf52840_xxAA_s140_7.2.0_Release/obj/device_state_manager.o
  .text.get_subnet_handle
-                0x000000000003213c       0x3c build/beaconing_nrf52840_xxAA_s140_7.2.0_Release/obj/device_state_manager.o
+                0x0000000000032140       0x3c build/beaconing_nrf52840_xxAA_s140_7.2.0_Release/obj/device_state_manager.o
  .text.dsm_unicast_addr_setter
-                0x0000000000032178       0x44 build/beaconing_nrf52840_xxAA_s140_7.2.0_Release/obj/device_state_manager.o
+                0x000000000003217c       0x44 build/beaconing_nrf52840_xxAA_s140_7.2.0_Release/obj/device_state_manager.o
  .text.dsm_virtual_addr_getter
-                0x00000000000321bc       0x50 build/beaconing_nrf52840_xxAA_s140_7.2.0_Release/obj/device_state_manager.o
+                0x00000000000321c0       0x50 build/beaconing_nrf52840_xxAA_s140_7.2.0_Release/obj/device_state_manager.o
  .text.dsm_devkey_getter
-                0x000000000003220c       0x60 build/beaconing_nrf52840_xxAA_s140_7.2.0_Release/obj/device_state_manager.o
+                0x0000000000032210       0x60 build/beaconing_nrf52840_xxAA_s140_7.2.0_Release/obj/device_state_manager.o
  .text.virtual_address_set
-                0x000000000003226c       0x44 build/beaconing_nrf52840_xxAA_s140_7.2.0_Release/obj/device_state_manager.o
+                0x0000000000032270       0x44 build/beaconing_nrf52840_xxAA_s140_7.2.0_Release/obj/device_state_manager.o
  .text.dsm_virtual_addr_setter
-                0x00000000000322b0       0x34 build/beaconing_nrf52840_xxAA_s140_7.2.0_Release/obj/device_state_manager.o
+                0x00000000000322b4       0x34 build/beaconing_nrf52840_xxAA_s140_7.2.0_Release/obj/device_state_manager.o
  .text.dsm_subnet_getter
-                0x00000000000322e4       0x8c build/beaconing_nrf52840_xxAA_s140_7.2.0_Release/obj/device_state_manager.o
+                0x00000000000322e8       0x8c build/beaconing_nrf52840_xxAA_s140_7.2.0_Release/obj/device_state_manager.o
  .text.dsm_appkey_getter
-                0x0000000000032370       0x88 build/beaconing_nrf52840_xxAA_s140_7.2.0_Release/obj/device_state_manager.o
+                0x0000000000032374       0x88 build/beaconing_nrf52840_xxAA_s140_7.2.0_Release/obj/device_state_manager.o
  .text.subnet_set
-                0x00000000000323f8       0x94 build/beaconing_nrf52840_xxAA_s140_7.2.0_Release/obj/device_state_manager.o
+                0x00000000000323fc       0x94 build/beaconing_nrf52840_xxAA_s140_7.2.0_Release/obj/device_state_manager.o
  .text.dsm_subnet_setter
-                0x000000000003248c       0x74 build/beaconing_nrf52840_xxAA_s140_7.2.0_Release/obj/device_state_manager.o
+                0x0000000000032490       0x74 build/beaconing_nrf52840_xxAA_s140_7.2.0_Release/obj/device_state_manager.o
  .text.dsm_legacy_subnet_setter
-                0x0000000000032500       0x40 build/beaconing_nrf52840_xxAA_s140_7.2.0_Release/obj/device_state_manager.o
+                0x0000000000032504       0x40 build/beaconing_nrf52840_xxAA_s140_7.2.0_Release/obj/device_state_manager.o
  .text.appkey_set
-                0x0000000000032540       0x70 build/beaconing_nrf52840_xxAA_s140_7.2.0_Release/obj/device_state_manager.o
+                0x0000000000032544       0x70 build/beaconing_nrf52840_xxAA_s140_7.2.0_Release/obj/device_state_manager.o
  .text.dsm_appkey_setter
-                0x00000000000325b0       0x7c build/beaconing_nrf52840_xxAA_s140_7.2.0_Release/obj/device_state_manager.o
+                0x00000000000325b4       0x7c build/beaconing_nrf52840_xxAA_s140_7.2.0_Release/obj/device_state_manager.o
  .text.dsm_legacy_appkey_setter
-                0x000000000003262c       0x8c build/beaconing_nrf52840_xxAA_s140_7.2.0_Release/obj/device_state_manager.o
+                0x0000000000032630       0x8c build/beaconing_nrf52840_xxAA_s140_7.2.0_Release/obj/device_state_manager.o
  .text.dsm_entry_invalidate
-                0x00000000000326b8       0x4a build/beaconing_nrf52840_xxAA_s140_7.2.0_Release/obj/device_state_manager.o
- *fill*         0x0000000000032702        0x2 
+                0x00000000000326bc       0x4a build/beaconing_nrf52840_xxAA_s140_7.2.0_Release/obj/device_state_manager.o
+ *fill*         0x0000000000032706        0x2 
  .text.address_delete_if_unused
-                0x0000000000032704       0x70 build/beaconing_nrf52840_xxAA_s140_7.2.0_Release/obj/device_state_manager.o
+                0x0000000000032708       0x70 build/beaconing_nrf52840_xxAA_s140_7.2.0_Release/obj/device_state_manager.o
  .text.virtual_address_uuid_index_get
-                0x0000000000032774       0x58 build/beaconing_nrf52840_xxAA_s140_7.2.0_Release/obj/device_state_manager.o
+                0x0000000000032778       0x58 build/beaconing_nrf52840_xxAA_s140_7.2.0_Release/obj/device_state_manager.o
  .text.get_subnet_handle_by_beacon_info
-                0x00000000000327cc       0x30 build/beaconing_nrf52840_xxAA_s140_7.2.0_Release/obj/device_state_manager.o
+                0x00000000000327d0       0x30 build/beaconing_nrf52840_xxAA_s140_7.2.0_Release/obj/device_state_manager.o
  .text.get_app_handle
-                0x00000000000327fc       0x5c build/beaconing_nrf52840_xxAA_s140_7.2.0_Release/obj/device_state_manager.o
+                0x0000000000032800       0x5c build/beaconing_nrf52840_xxAA_s140_7.2.0_Release/obj/device_state_manager.o
  .text.dsm_entry_store
-                0x0000000000032858       0x3a build/beaconing_nrf52840_xxAA_s140_7.2.0_Release/obj/device_state_manager.o
- *fill*         0x0000000000032892        0x2 
+                0x000000000003285c       0x3a build/beaconing_nrf52840_xxAA_s140_7.2.0_Release/obj/device_state_manager.o
+ *fill*         0x0000000000032896        0x2 
  .text.add_address_virtual
-                0x0000000000032894       0x78 build/beaconing_nrf52840_xxAA_s140_7.2.0_Release/obj/device_state_manager.o
+                0x0000000000032898       0x78 build/beaconing_nrf52840_xxAA_s140_7.2.0_Release/obj/device_state_manager.o
  .text.dsm_devkey_setter
-                0x000000000003290c       0x50 build/beaconing_nrf52840_xxAA_s140_7.2.0_Release/obj/device_state_manager.o
+                0x0000000000032910       0x50 build/beaconing_nrf52840_xxAA_s140_7.2.0_Release/obj/device_state_manager.o
  .text.add_address
-                0x000000000003295c      0x118 build/beaconing_nrf52840_xxAA_s140_7.2.0_Release/obj/device_state_manager.o
+                0x0000000000032960      0x118 build/beaconing_nrf52840_xxAA_s140_7.2.0_Release/obj/device_state_manager.o
  .text.dsm_legacy_pretreatment_do
-                0x0000000000032a74       0x2e build/beaconing_nrf52840_xxAA_s140_7.2.0_Release/obj/device_state_manager.o
-                0x0000000000032a74                dsm_legacy_pretreatment_do
- *fill*         0x0000000000032aa2        0x2 
+                0x0000000000032a78       0x2e build/beaconing_nrf52840_xxAA_s140_7.2.0_Release/obj/device_state_manager.o
+                0x0000000000032a78                dsm_legacy_pretreatment_do
+ *fill*         0x0000000000032aa6        0x2 
  .text.dsm_load_config_apply
-                0x0000000000032aa4       0xbc build/beaconing_nrf52840_xxAA_s140_7.2.0_Release/obj/device_state_manager.o
-                0x0000000000032aa4                dsm_load_config_apply
+                0x0000000000032aa8       0xbc build/beaconing_nrf52840_xxAA_s140_7.2.0_Release/obj/device_state_manager.o
+                0x0000000000032aa8                dsm_load_config_apply
  .text.dsm_clear
-                0x0000000000032b60       0x88 build/beaconing_nrf52840_xxAA_s140_7.2.0_Release/obj/device_state_manager.o
-                0x0000000000032b60                dsm_clear
+                0x0000000000032b64       0x88 build/beaconing_nrf52840_xxAA_s140_7.2.0_Release/obj/device_state_manager.o
+                0x0000000000032b64                dsm_clear
  .text.dsm_init
-                0x0000000000032be8       0x24 build/beaconing_nrf52840_xxAA_s140_7.2.0_Release/obj/device_state_manager.o
-                0x0000000000032be8                dsm_init
+                0x0000000000032bec       0x24 build/beaconing_nrf52840_xxAA_s140_7.2.0_Release/obj/device_state_manager.o
+                0x0000000000032bec                dsm_init
  .text.dsm_local_unicast_addresses_get
-                0x0000000000032c0c       0x18 build/beaconing_nrf52840_xxAA_s140_7.2.0_Release/obj/device_state_manager.o
-                0x0000000000032c0c                dsm_local_unicast_addresses_get
+                0x0000000000032c10       0x18 build/beaconing_nrf52840_xxAA_s140_7.2.0_Release/obj/device_state_manager.o
+                0x0000000000032c10                dsm_local_unicast_addresses_get
  .text.dsm_address_publish_add
-                0x0000000000032c24        0x6 build/beaconing_nrf52840_xxAA_s140_7.2.0_Release/obj/device_state_manager.o
-                0x0000000000032c24                dsm_address_publish_add
- *fill*         0x0000000000032c2a        0x2 
+                0x0000000000032c28        0x6 build/beaconing_nrf52840_xxAA_s140_7.2.0_Release/obj/device_state_manager.o
+                0x0000000000032c28                dsm_address_publish_add
+ *fill*         0x0000000000032c2e        0x2 
  .text.dsm_address_publish_add_handle
-                0x0000000000032c2c       0x38 build/beaconing_nrf52840_xxAA_s140_7.2.0_Release/obj/device_state_manager.o
-                0x0000000000032c2c                dsm_address_publish_add_handle
+                0x0000000000032c30       0x38 build/beaconing_nrf52840_xxAA_s140_7.2.0_Release/obj/device_state_manager.o
+                0x0000000000032c30                dsm_address_publish_add_handle
  .text.dsm_address_publish_virtual_add
-                0x0000000000032c64        0x6 build/beaconing_nrf52840_xxAA_s140_7.2.0_Release/obj/device_state_manager.o
-                0x0000000000032c64                dsm_address_publish_virtual_add
- *fill*         0x0000000000032c6a        0x2 
+                0x0000000000032c68        0x6 build/beaconing_nrf52840_xxAA_s140_7.2.0_Release/obj/device_state_manager.o
+                0x0000000000032c68                dsm_address_publish_virtual_add
+ *fill*         0x0000000000032c6e        0x2 
  .text.dsm_address_publish_remove
-                0x0000000000032c6c       0x44 build/beaconing_nrf52840_xxAA_s140_7.2.0_Release/obj/device_state_manager.o
-                0x0000000000032c6c                dsm_address_publish_remove
+                0x0000000000032c70       0x44 build/beaconing_nrf52840_xxAA_s140_7.2.0_Release/obj/device_state_manager.o
+                0x0000000000032c70                dsm_address_publish_remove
  .text.dsm_address_subscription_add
-                0x0000000000032cb0        0x6 build/beaconing_nrf52840_xxAA_s140_7.2.0_Release/obj/device_state_manager.o
-                0x0000000000032cb0                dsm_address_subscription_add
+                0x0000000000032cb4        0x6 build/beaconing_nrf52840_xxAA_s140_7.2.0_Release/obj/device_state_manager.o
+                0x0000000000032cb4                dsm_address_subscription_add
  .text.dsm_address_subscription_virtual_add
-                0x0000000000032cb6        0x6 build/beaconing_nrf52840_xxAA_s140_7.2.0_Release/obj/device_state_manager.o
-                0x0000000000032cb6                dsm_address_subscription_virtual_add
+                0x0000000000032cba        0x6 build/beaconing_nrf52840_xxAA_s140_7.2.0_Release/obj/device_state_manager.o
+                0x0000000000032cba                dsm_address_subscription_virtual_add
  .text.dsm_address_subscription_add_handle
-                0x0000000000032cbc       0x38 build/beaconing_nrf52840_xxAA_s140_7.2.0_Release/obj/device_state_manager.o
-                0x0000000000032cbc                dsm_address_subscription_add_handle
+                0x0000000000032cc0       0x38 build/beaconing_nrf52840_xxAA_s140_7.2.0_Release/obj/device_state_manager.o
+                0x0000000000032cc0                dsm_address_subscription_add_handle
  .text.dsm_address_get
-                0x0000000000032cf4       0x54 build/beaconing_nrf52840_xxAA_s140_7.2.0_Release/obj/device_state_manager.o
-                0x0000000000032cf4                dsm_address_get
+                0x0000000000032cf8       0x54 build/beaconing_nrf52840_xxAA_s140_7.2.0_Release/obj/device_state_manager.o
+                0x0000000000032cf8                dsm_address_get
  .text.dsm_address_subscription_remove
-                0x0000000000032d48       0x60 build/beaconing_nrf52840_xxAA_s140_7.2.0_Release/obj/device_state_manager.o
-                0x0000000000032d48                dsm_address_subscription_remove
+                0x0000000000032d4c       0x60 build/beaconing_nrf52840_xxAA_s140_7.2.0_Release/obj/device_state_manager.o
+                0x0000000000032d4c                dsm_address_subscription_remove
  .text.dsm_address_handle_get
-                0x0000000000032da8       0x94 build/beaconing_nrf52840_xxAA_s140_7.2.0_Release/obj/device_state_manager.o
-                0x0000000000032da8                dsm_address_handle_get
+                0x0000000000032dac       0x94 build/beaconing_nrf52840_xxAA_s140_7.2.0_Release/obj/device_state_manager.o
+                0x0000000000032dac                dsm_address_handle_get
  .text.dsm_net_key_index_to_subnet_handle
-                0x0000000000032e3c       0x1c build/beaconing_nrf52840_xxAA_s140_7.2.0_Release/obj/device_state_manager.o
-                0x0000000000032e3c                dsm_net_key_index_to_subnet_handle
+                0x0000000000032e40       0x1c build/beaconing_nrf52840_xxAA_s140_7.2.0_Release/obj/device_state_manager.o
+                0x0000000000032e40                dsm_net_key_index_to_subnet_handle
  .text.dsm_subnet_handle_get
-                0x0000000000032e58        0xc build/beaconing_nrf52840_xxAA_s140_7.2.0_Release/obj/device_state_manager.o
-                0x0000000000032e58                dsm_subnet_handle_get
+                0x0000000000032e5c        0xc build/beaconing_nrf52840_xxAA_s140_7.2.0_Release/obj/device_state_manager.o
+                0x0000000000032e5c                dsm_subnet_handle_get
  .text.dsm_appkey_index_to_appkey_handle
-                0x0000000000032e64       0x1c build/beaconing_nrf52840_xxAA_s140_7.2.0_Release/obj/device_state_manager.o
-                0x0000000000032e64                dsm_appkey_index_to_appkey_handle
+                0x0000000000032e68       0x1c build/beaconing_nrf52840_xxAA_s140_7.2.0_Release/obj/device_state_manager.o
+                0x0000000000032e68                dsm_appkey_index_to_appkey_handle
  .text.dsm_appkey_handle_get
-                0x0000000000032e80        0xc build/beaconing_nrf52840_xxAA_s140_7.2.0_Release/obj/device_state_manager.o
-                0x0000000000032e80                dsm_appkey_handle_get
+                0x0000000000032e84        0xc build/beaconing_nrf52840_xxAA_s140_7.2.0_Release/obj/device_state_manager.o
+                0x0000000000032e84                dsm_appkey_handle_get
  .text.dsm_appkey_handle_to_appkey_index
-                0x0000000000032e8c       0x34 build/beaconing_nrf52840_xxAA_s140_7.2.0_Release/obj/device_state_manager.o
-                0x0000000000032e8c                dsm_appkey_handle_to_appkey_index
+                0x0000000000032e90       0x34 build/beaconing_nrf52840_xxAA_s140_7.2.0_Release/obj/device_state_manager.o
+                0x0000000000032e90                dsm_appkey_handle_to_appkey_index
  .text.dsm_appkey_handle_to_subnet_handle
-                0x0000000000032ec0       0x9c build/beaconing_nrf52840_xxAA_s140_7.2.0_Release/obj/device_state_manager.o
-                0x0000000000032ec0                dsm_appkey_handle_to_subnet_handle
+                0x0000000000032ec4       0x9c build/beaconing_nrf52840_xxAA_s140_7.2.0_Release/obj/device_state_manager.o
+                0x0000000000032ec4                dsm_appkey_handle_to_subnet_handle
  .text.dsm_subnet_add
-                0x0000000000032f5c      0x100 build/beaconing_nrf52840_xxAA_s140_7.2.0_Release/obj/device_state_manager.o
-                0x0000000000032f5c                dsm_subnet_add
+                0x0000000000032f60      0x100 build/beaconing_nrf52840_xxAA_s140_7.2.0_Release/obj/device_state_manager.o
+                0x0000000000032f60                dsm_subnet_add
  .text.dsm_subnet_kr_phase_get
-                0x000000000003305c       0x34 build/beaconing_nrf52840_xxAA_s140_7.2.0_Release/obj/device_state_manager.o
-                0x000000000003305c                dsm_subnet_kr_phase_get
+                0x0000000000033060       0x34 build/beaconing_nrf52840_xxAA_s140_7.2.0_Release/obj/device_state_manager.o
+                0x0000000000033060                dsm_subnet_kr_phase_get
  .text.dsm_subnet_update
-                0x0000000000033090       0xc8 build/beaconing_nrf52840_xxAA_s140_7.2.0_Release/obj/device_state_manager.o
-                0x0000000000033090                dsm_subnet_update
+                0x0000000000033094       0xc8 build/beaconing_nrf52840_xxAA_s140_7.2.0_Release/obj/device_state_manager.o
+                0x0000000000033094                dsm_subnet_update
  .text.dsm_subnet_update_swap_keys
-                0x0000000000033158       0x54 build/beaconing_nrf52840_xxAA_s140_7.2.0_Release/obj/device_state_manager.o
-                0x0000000000033158                dsm_subnet_update_swap_keys
+                0x000000000003315c       0x54 build/beaconing_nrf52840_xxAA_s140_7.2.0_Release/obj/device_state_manager.o
+                0x000000000003315c                dsm_subnet_update_swap_keys
  .text.dsm_subnet_update_commit
-                0x00000000000331ac      0x10c build/beaconing_nrf52840_xxAA_s140_7.2.0_Release/obj/device_state_manager.o
-                0x00000000000331ac                dsm_subnet_update_commit
+                0x00000000000331b0      0x10c build/beaconing_nrf52840_xxAA_s140_7.2.0_Release/obj/device_state_manager.o
+                0x00000000000331b0                dsm_subnet_update_commit
  .text.mesh_evt_handler
-                0x00000000000332b8       0x68 build/beaconing_nrf52840_xxAA_s140_7.2.0_Release/obj/device_state_manager.o
+                0x00000000000332bc       0x68 build/beaconing_nrf52840_xxAA_s140_7.2.0_Release/obj/device_state_manager.o
  .text.dsm_subnet_get_all
-                0x0000000000033320       0x5c build/beaconing_nrf52840_xxAA_s140_7.2.0_Release/obj/device_state_manager.o
-                0x0000000000033320                dsm_subnet_get_all
+                0x0000000000033324       0x5c build/beaconing_nrf52840_xxAA_s140_7.2.0_Release/obj/device_state_manager.o
+                0x0000000000033324                dsm_subnet_get_all
  .text.dsm_appkey_add
-                0x000000000003337c      0x104 build/beaconing_nrf52840_xxAA_s140_7.2.0_Release/obj/device_state_manager.o
-                0x000000000003337c                dsm_appkey_add
+                0x0000000000033380      0x104 build/beaconing_nrf52840_xxAA_s140_7.2.0_Release/obj/device_state_manager.o
+                0x0000000000033380                dsm_appkey_add
  .text.dsm_appkey_update
-                0x0000000000033480       0xac build/beaconing_nrf52840_xxAA_s140_7.2.0_Release/obj/device_state_manager.o
-                0x0000000000033480                dsm_appkey_update
+                0x0000000000033484       0xac build/beaconing_nrf52840_xxAA_s140_7.2.0_Release/obj/device_state_manager.o
+                0x0000000000033484                dsm_appkey_update
  .text.dsm_appkey_delete
-                0x000000000003352c       0x2c build/beaconing_nrf52840_xxAA_s140_7.2.0_Release/obj/device_state_manager.o
-                0x000000000003352c                dsm_appkey_delete
+                0x0000000000033530       0x2c build/beaconing_nrf52840_xxAA_s140_7.2.0_Release/obj/device_state_manager.o
+                0x0000000000033530                dsm_appkey_delete
  .text.dsm_subnet_delete
-                0x0000000000033558       0xb8 build/beaconing_nrf52840_xxAA_s140_7.2.0_Release/obj/device_state_manager.o
-                0x0000000000033558                dsm_subnet_delete
+                0x000000000003355c       0xb8 build/beaconing_nrf52840_xxAA_s140_7.2.0_Release/obj/device_state_manager.o
+                0x000000000003355c                dsm_subnet_delete
  .text.dsm_appkey_get_all
-                0x0000000000033610       0x74 build/beaconing_nrf52840_xxAA_s140_7.2.0_Release/obj/device_state_manager.o
-                0x0000000000033610                dsm_appkey_get_all
+                0x0000000000033614       0x74 build/beaconing_nrf52840_xxAA_s140_7.2.0_Release/obj/device_state_manager.o
+                0x0000000000033614                dsm_appkey_get_all
  .text.dsm_tx_secmat_get
-                0x0000000000033684       0xc4 build/beaconing_nrf52840_xxAA_s140_7.2.0_Release/obj/device_state_manager.o
-                0x0000000000033684                dsm_tx_secmat_get
+                0x0000000000033688       0xc4 build/beaconing_nrf52840_xxAA_s140_7.2.0_Release/obj/device_state_manager.o
+                0x0000000000033688                dsm_tx_secmat_get
  .text.dsm_net_secmat_from_keyindex_get
-                0x0000000000033748       0x38 build/beaconing_nrf52840_xxAA_s140_7.2.0_Release/obj/device_state_manager.o
-                0x0000000000033748                dsm_net_secmat_from_keyindex_get
+                0x000000000003374c       0x38 build/beaconing_nrf52840_xxAA_s140_7.2.0_Release/obj/device_state_manager.o
+                0x000000000003374c                dsm_net_secmat_from_keyindex_get
  .text.nrf_mesh_net_secmat_next_get
-                0x0000000000033780       0xa0 build/beaconing_nrf52840_xxAA_s140_7.2.0_Release/obj/device_state_manager.o
-                0x0000000000033780                nrf_mesh_net_secmat_next_get
+                0x0000000000033784       0xa0 build/beaconing_nrf52840_xxAA_s140_7.2.0_Release/obj/device_state_manager.o
+                0x0000000000033784                nrf_mesh_net_secmat_next_get
  .text.nrf_mesh_app_secmat_next_get
-                0x0000000000033820       0xec build/beaconing_nrf52840_xxAA_s140_7.2.0_Release/obj/device_state_manager.o
-                0x0000000000033820                nrf_mesh_app_secmat_next_get
+                0x0000000000033824       0xec build/beaconing_nrf52840_xxAA_s140_7.2.0_Release/obj/device_state_manager.o
+                0x0000000000033824                nrf_mesh_app_secmat_next_get
  .text.nrf_mesh_devkey_secmat_get
-                0x000000000003390c       0x28 build/beaconing_nrf52840_xxAA_s140_7.2.0_Release/obj/device_state_manager.o
-                0x000000000003390c                nrf_mesh_devkey_secmat_get
+                0x0000000000033910       0x28 build/beaconing_nrf52840_xxAA_s140_7.2.0_Release/obj/device_state_manager.o
+                0x0000000000033910                nrf_mesh_devkey_secmat_get
  .text.nrf_mesh_beacon_info_next_get
-                0x0000000000033934       0xcc build/beaconing_nrf52840_xxAA_s140_7.2.0_Release/obj/device_state_manager.o
-                0x0000000000033934                nrf_mesh_beacon_info_next_get
+                0x0000000000033938       0xcc build/beaconing_nrf52840_xxAA_s140_7.2.0_Release/obj/device_state_manager.o
+                0x0000000000033938                nrf_mesh_beacon_info_next_get
  .text.nrf_mesh_rx_address_get
-                0x0000000000033a00      0x13c build/beaconing_nrf52840_xxAA_s140_7.2.0_Release/obj/device_state_manager.o
-                0x0000000000033a00                nrf_mesh_rx_address_get
+                0x0000000000033a04      0x13c build/beaconing_nrf52840_xxAA_s140_7.2.0_Release/obj/device_state_manager.o
+                0x0000000000033a04                nrf_mesh_rx_address_get
  .text.nrf_mesh_unicast_address_get
-                0x0000000000033b3c       0x20 build/beaconing_nrf52840_xxAA_s140_7.2.0_Release/obj/device_state_manager.o
-                0x0000000000033b3c                nrf_mesh_unicast_address_get
+                0x0000000000033b40       0x20 build/beaconing_nrf52840_xxAA_s140_7.2.0_Release/obj/device_state_manager.o
+                0x0000000000033b40                nrf_mesh_unicast_address_get
  .text.nrf_mesh_is_address_rx
-                0x0000000000033b5c       0x48 build/beaconing_nrf52840_xxAA_s140_7.2.0_Release/obj/device_state_manager.o
-                0x0000000000033b5c                nrf_mesh_is_address_rx
+                0x0000000000033b60       0x48 build/beaconing_nrf52840_xxAA_s140_7.2.0_Release/obj/device_state_manager.o
+                0x0000000000033b60                nrf_mesh_is_address_rx
  .text.nrf_mesh_is_device_provisioned
-                0x0000000000033ba4       0x14 build/beaconing_nrf52840_xxAA_s140_7.2.0_Release/obj/device_state_manager.o
-                0x0000000000033ba4                nrf_mesh_is_device_provisioned
+                0x0000000000033ba8       0x14 build/beaconing_nrf52840_xxAA_s140_7.2.0_Release/obj/device_state_manager.o
+                0x0000000000033ba8                nrf_mesh_is_device_provisioned
  .text.ad_listener_init
-                0x0000000000033bb8       0x54 build/beaconing_nrf52840_xxAA_s140_7.2.0_Release/obj/ad_listener.o
-                0x0000000000033bb8                ad_listener_init
+                0x0000000000033bbc       0x54 build/beaconing_nrf52840_xxAA_s140_7.2.0_Release/obj/ad_listener.o
+                0x0000000000033bbc                ad_listener_init
  .text.ad_listener_process
-                0x0000000000033c0c       0x5c build/beaconing_nrf52840_xxAA_s140_7.2.0_Release/obj/ad_listener.o
-                0x0000000000033c0c                ad_listener_process
+                0x0000000000033c10       0x5c build/beaconing_nrf52840_xxAA_s140_7.2.0_Release/obj/ad_listener.o
+                0x0000000000033c10                ad_listener_process
  .text.adtype_filter_handle
-                0x0000000000033c68       0x64 build/beaconing_nrf52840_xxAA_s140_7.2.0_Release/obj/ad_type_filter.o
+                0x0000000000033c6c       0x64 build/beaconing_nrf52840_xxAA_s140_7.2.0_Release/obj/ad_type_filter.o
  .text.bearer_adtype_filtering_set
-                0x0000000000033ccc       0x20 build/beaconing_nrf52840_xxAA_s140_7.2.0_Release/obj/ad_type_filter.o
-                0x0000000000033ccc                bearer_adtype_filtering_set
+                0x0000000000033cd0       0x20 build/beaconing_nrf52840_xxAA_s140_7.2.0_Release/obj/ad_type_filter.o
+                0x0000000000033cd0                bearer_adtype_filtering_set
  .text.bearer_adtype_add
-                0x0000000000033cec       0x20 build/beaconing_nrf52840_xxAA_s140_7.2.0_Release/obj/ad_type_filter.o
-                0x0000000000033cec                bearer_adtype_add
+                0x0000000000033cf0       0x20 build/beaconing_nrf52840_xxAA_s140_7.2.0_Release/obj/ad_type_filter.o
+                0x0000000000033cf0                bearer_adtype_add
  .text.bearer_adtype_mode_set
-                0x0000000000033d0c       0x18 build/beaconing_nrf52840_xxAA_s140_7.2.0_Release/obj/ad_type_filter.o
-                0x0000000000033d0c                bearer_adtype_mode_set
+                0x0000000000033d10       0x18 build/beaconing_nrf52840_xxAA_s140_7.2.0_Release/obj/ad_type_filter.o
+                0x0000000000033d10                bearer_adtype_mode_set
  .text.tx_complete_event_callback
-                0x0000000000033d24       0x24 build/beaconing_nrf52840_xxAA_s140_7.2.0_Release/obj/advertiser.o
+                0x0000000000033d28       0x24 build/beaconing_nrf52840_xxAA_s140_7.2.0_Release/obj/advertiser.o
  .text.broadcast_complete_cb
-                0x0000000000033d48       0x46 build/beaconing_nrf52840_xxAA_s140_7.2.0_Release/obj/advertiser.o
- *fill*         0x0000000000033d8e        0x2 
+                0x0000000000033d4c       0x46 build/beaconing_nrf52840_xxAA_s140_7.2.0_Release/obj/advertiser.o
+ *fill*         0x0000000000033d92        0x2 
  .text.schedule_first_time
-                0x0000000000033d90       0x7c build/beaconing_nrf52840_xxAA_s140_7.2.0_Release/obj/advertiser.o
+                0x0000000000033d94       0x7c build/beaconing_nrf52840_xxAA_s140_7.2.0_Release/obj/advertiser.o
  .text.set_gap_addr_type
-                0x0000000000033e0c       0x2e build/beaconing_nrf52840_xxAA_s140_7.2.0_Release/obj/advertiser.o
- *fill*         0x0000000000033e3a        0x2 
+                0x0000000000033e10       0x2e build/beaconing_nrf52840_xxAA_s140_7.2.0_Release/obj/advertiser.o
+ *fill*         0x0000000000033e3e        0x2 
  .text.timeout_event
-                0x0000000000033e3c      0x190 build/beaconing_nrf52840_xxAA_s140_7.2.0_Release/obj/advertiser.o
+                0x0000000000033e40      0x190 build/beaconing_nrf52840_xxAA_s140_7.2.0_Release/obj/advertiser.o
  .text.advertiser_init
-                0x0000000000033fcc        0xc build/beaconing_nrf52840_xxAA_s140_7.2.0_Release/obj/advertiser.o
-                0x0000000000033fcc                advertiser_init
+                0x0000000000033fd0        0xc build/beaconing_nrf52840_xxAA_s140_7.2.0_Release/obj/advertiser.o
+                0x0000000000033fd0                advertiser_init
  .text.advertiser_enable
-                0x0000000000033fd8       0x30 build/beaconing_nrf52840_xxAA_s140_7.2.0_Release/obj/advertiser.o
-                0x0000000000033fd8                advertiser_enable
+                0x0000000000033fdc       0x30 build/beaconing_nrf52840_xxAA_s140_7.2.0_Release/obj/advertiser.o
+                0x0000000000033fdc                advertiser_enable
  .text.advertiser_disable
-                0x0000000000034008        0xa build/beaconing_nrf52840_xxAA_s140_7.2.0_Release/obj/advertiser.o
-                0x0000000000034008                advertiser_disable
+                0x000000000003400c        0xa build/beaconing_nrf52840_xxAA_s140_7.2.0_Release/obj/advertiser.o
+                0x000000000003400c                advertiser_disable
  .text.advertiser_packet_alloc
-                0x0000000000034012       0x70 build/beaconing_nrf52840_xxAA_s140_7.2.0_Release/obj/advertiser.o
-                0x0000000000034012                advertiser_packet_alloc
+                0x0000000000034016       0x70 build/beaconing_nrf52840_xxAA_s140_7.2.0_Release/obj/advertiser.o
+                0x0000000000034016                advertiser_packet_alloc
  .text.advertiser_packet_send
-                0x0000000000034082       0x54 build/beaconing_nrf52840_xxAA_s140_7.2.0_Release/obj/advertiser.o
-                0x0000000000034082                advertiser_packet_send
+                0x0000000000034086       0x4e build/beaconing_nrf52840_xxAA_s140_7.2.0_Release/obj/advertiser.o
+                0x0000000000034086                advertiser_packet_send
  .text.advertiser_packet_discard
-                0x00000000000340d6       0x1e build/beaconing_nrf52840_xxAA_s140_7.2.0_Release/obj/advertiser.o
-                0x00000000000340d6                advertiser_packet_discard
+                0x00000000000340d4       0x1e build/beaconing_nrf52840_xxAA_s140_7.2.0_Release/obj/advertiser.o
+                0x00000000000340d4                advertiser_packet_discard
  .text.advertiser_address_set
-                0x00000000000340f4       0x46 build/beaconing_nrf52840_xxAA_s140_7.2.0_Release/obj/advertiser.o
-                0x00000000000340f4                advertiser_address_set
+                0x00000000000340f2       0x46 build/beaconing_nrf52840_xxAA_s140_7.2.0_Release/obj/advertiser.o
+                0x00000000000340f2                advertiser_address_set
  .text.advertiser_interval_set
-                0x000000000003413a       0x48 build/beaconing_nrf52840_xxAA_s140_7.2.0_Release/obj/advertiser.o
-                0x000000000003413a                advertiser_interval_set
+                0x0000000000034138       0x48 build/beaconing_nrf52840_xxAA_s140_7.2.0_Release/obj/advertiser.o
+                0x0000000000034138                advertiser_interval_set
  .text.advertiser_tx_power_set
-                0x0000000000034182       0x14 build/beaconing_nrf52840_xxAA_s140_7.2.0_Release/obj/advertiser.o
-                0x0000000000034182                advertiser_tx_power_set
+                0x0000000000034180       0x14 build/beaconing_nrf52840_xxAA_s140_7.2.0_Release/obj/advertiser.o
+                0x0000000000034180                advertiser_tx_power_set
  .text.advertiser_flush
-                0x0000000000034196       0x1e build/beaconing_nrf52840_xxAA_s140_7.2.0_Release/obj/advertiser.o
-                0x0000000000034196                advertiser_flush
+                0x0000000000034194       0x1e build/beaconing_nrf52840_xxAA_s140_7.2.0_Release/obj/advertiser.o
+                0x0000000000034194                advertiser_flush
  .text.advertiser_address_default_get
-                0x00000000000341b4       0x30 build/beaconing_nrf52840_xxAA_s140_7.2.0_Release/obj/advertiser.o
-                0x00000000000341b4                advertiser_address_default_get
+                0x00000000000341b2       0x30 build/beaconing_nrf52840_xxAA_s140_7.2.0_Release/obj/advertiser.o
+                0x00000000000341b2                advertiser_address_default_get
+ *fill*         0x00000000000341e2        0x2 
  .text.advertiser_instance_init
                 0x00000000000341e4       0x98 build/beaconing_nrf52840_xxAA_s140_7.2.0_Release/obj/advertiser.o
                 0x00000000000341e4                advertiser_instance_init
