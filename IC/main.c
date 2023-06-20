@@ -172,7 +172,7 @@ int main(void)
     initClockTo16MHz();
     initGPIO();
     initSPI();
-    setNode(SINK);
+    setNode(ICNODE);
     g_sendAck = false;
     g_queueLen = 0;
     g_preQueLen = 0;
@@ -193,11 +193,11 @@ int main(void)
     if (g_if_sourceNode)
     {
         g_rounds = MAXROUND;
-        g_packetQueue = (SPI_DATAGRAM *)malloc(sizeof(SPI_DATAGRAM) * MAXQUELEN);
+        g_packetQueue = (SPI_DATAGRAM *) malloc (sizeof(SPI_DATAGRAM) * MAXQUELEN);
         if (!g_packetQueue)
         {
             free(g_packetQueue);
-            return;
+            return 0;
         }
     }
     else
