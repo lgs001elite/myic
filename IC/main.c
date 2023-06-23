@@ -262,6 +262,7 @@ void start_spi_process(void)
             g_transBuffer[5] = g_currentPairedNodeID;
             update_crc();
             SPI_Master_WriteReg(CMD_TYPE_0_MASTER, SPI_DATA_LEN);
+            __delay_cycles(1000000);
             g_sendAck = false;
             continue;
         }
@@ -335,6 +336,7 @@ void start_spi_process(void)
                 update_crc();
             }
             SPI_Master_WriteReg(CMD_TYPE_0_MASTER, SPI_DATA_LEN);
+            __delay_cycles(1000000);
         }
         else if (g_systemStatus == RECEIVE)
         {
