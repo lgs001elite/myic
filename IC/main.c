@@ -306,7 +306,7 @@ void start_spi_process(void)
             if (!transmitBuffer)
             {
                 free(transmitBuffer);
-                return;
+                return 0;
             }
             memset(transmitBuffer, 0, SPI_DATA_LEN);
             m2s(transmitBuffer, &g_packetQueue[g_queueLen]);
