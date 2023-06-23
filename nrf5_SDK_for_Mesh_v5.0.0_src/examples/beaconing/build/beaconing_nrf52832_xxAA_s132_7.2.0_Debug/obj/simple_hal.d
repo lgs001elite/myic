@@ -1,8 +1,8 @@
 build/beaconing_nrf52832_xxAA_s132_7.2.0_Debug/obj/simple_hal.o: \
- /home/gaosheng/mesh/my_mesh/nrf5_SDK_for_Mesh_v5.0.0_src/examples/common/src/simple_hal.c \
+ C\:\Users\glu250\Downloads\myic\nrf5_SDK_for_Mesh_v5.0.0_src\examples\common\src\simple_hal.c \
  ../common/include/simple_hal.h \
- /usr/share/segger_embedded_studio_for_arm_5.62/include/stdint.h \
- /usr/share/segger_embedded_studio_for_arm_5.62/include/stdbool.h \
+ C\:/Program\ Files/SEGGER/SEGGER\ Embedded\ Studio\ for\ ARM\ 5.42/include/stdint.h \
+ C\:/Program\ Files/SEGGER/SEGGER\ Embedded\ Studio\ for\ ARM\ 5.42/include/stdbool.h \
  ../../mesh/core/include/hal.h \
  ../../../nRF5_SDK_17.0.2_d674dde/modules/nrfx/mdk/nrf.h \
  ../../../nRF5_SDK_17.0.2_d674dde/modules/nrfx/mdk/nrf52.h \
@@ -24,8 +24,8 @@ build/beaconing_nrf52832_xxAA_s132_7.2.0_Debug/obj/simple_hal.o: \
  ../../../nRF5_SDK_17.0.2_d674dde/integration/nrfx/nrfx_config.h \
  include/sdk_config.h include/app_config.h \
  ../../../nRF5_SDK_17.0.2_d674dde/modules/nrfx/drivers/nrfx_common.h \
- /usr/share/segger_embedded_studio_for_arm_5.62/include/stddef.h \
- /usr/share/segger_embedded_studio_for_arm_5.62/include/__crossworks.h \
+ C\:/Program\ Files/SEGGER/SEGGER\ Embedded\ Studio\ for\ ARM\ 5.42/include/stddef.h \
+ C\:/Program\ Files/SEGGER/SEGGER\ Embedded\ Studio\ for\ ARM\ 5.42/include/__crossworks.h \
  ../../../nRF5_SDK_17.0.2_d674dde/modules/nrfx/mdk/nrf_peripherals.h \
  ../../../nRF5_SDK_17.0.2_d674dde/modules/nrfx/mdk/nrf52832_peripherals.h \
  ../../../nRF5_SDK_17.0.2_d674dde/integration/nrfx/nrfx_glue.h \
@@ -45,7 +45,7 @@ build/beaconing_nrf52832_xxAA_s132_7.2.0_Debug/obj/simple_hal.o: \
  ../../../nRF5_SDK_17.0.2_d674dde/components/softdevice/s132/headers/nrf_nvic.h \
  ../../../nRF5_SDK_17.0.2_d674dde/components/libraries/util/nrf_assert.h \
  ../../../nRF5_SDK_17.0.2_d674dde/components/libraries/util/app_error.h \
- /usr/share/segger_embedded_studio_for_arm_5.62/include/stdio.h \
+ C\:/Program\ Files/SEGGER/SEGGER\ Embedded\ Studio\ for\ ARM\ 5.42/include/stdio.h \
  ../../../nRF5_SDK_17.0.2_d674dde/components/libraries/util/sdk_errors.h \
  ../../../nRF5_SDK_17.0.2_d674dde/components/softdevice/s132/headers/nrf_error.h \
  ../../../nRF5_SDK_17.0.2_d674dde/components/libraries/util/app_error_weak.h \
@@ -58,7 +58,7 @@ build/beaconing_nrf52832_xxAA_s132_7.2.0_Debug/obj/simple_hal.o: \
  ../../../nRF5_SDK_17.0.2_d674dde/modules/nrfx/drivers/nrfx_errors.h \
  ../../../nRF5_SDK_17.0.2_d674dde/components/boards/pca10040.h \
  ../../mesh/core/include/utils.h \
- /usr/share/segger_embedded_studio_for_arm_5.62/include/string.h \
+ C\:/Program\ Files/SEGGER/SEGGER\ Embedded\ Studio\ for\ ARM\ 5.42/include/string.h \
  ../../mesh/core/include/hal.h \
  ../common/include/nrf_mesh_config_examples.h \
  include/nrf_mesh_config_app.h \

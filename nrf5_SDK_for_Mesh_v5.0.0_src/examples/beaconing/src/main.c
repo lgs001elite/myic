@@ -20,7 +20,7 @@
 #include "nrf_mesh_configure.h"
 #include "ad_type_filter.h"
 #include "define_broadcast_packet.h"
-#include "app_scheduler.h"
+//#include "app_scheduler.h"
 #include "spis.h"
 #include "spis_data.h"
 #include "m2s.h"

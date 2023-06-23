@@ -6,7 +6,7 @@
 
 #include "sdk_config.h" /* For external interface */
 #include "nrfx_spis.h"
-#include "nrf_drv_spis.h"
+//#include "nrf_drv_spis.h"
 #include "nrf_gpio.h"
 #include "nrf_delay.h"
 #include "boards.h"

@@ -1,10 +1,10 @@
 build/beaconing_nrf52832_xxAA_s132_7.2.0_Debug/obj/assertion_handler_weak.o: \
- /home/gaosheng/mesh/my_mesh/nrf5_SDK_for_Mesh_v5.0.0_src/examples/common/src/assertion_handler_weak.c \
+ C\:\Users\glu250\Downloads\myic\nrf5_SDK_for_Mesh_v5.0.0_src\examples\common\src\assertion_handler_weak.c \
  ../../../nRF5_SDK_17.0.2_d674dde/components/libraries/util/app_error.h \
- /usr/share/segger_embedded_studio_for_arm_5.62/include/stdint.h \
- /usr/share/segger_embedded_studio_for_arm_5.62/include/stdio.h \
- /usr/share/segger_embedded_studio_for_arm_5.62/include/__crossworks.h \
- /usr/share/segger_embedded_studio_for_arm_5.62/include/stdbool.h \
+ C\:/Program\ Files/SEGGER/SEGGER\ Embedded\ Studio\ for\ ARM\ 5.42/include/stdint.h \
+ C\:/Program\ Files/SEGGER/SEGGER\ Embedded\ Studio\ for\ ARM\ 5.42/include/stdio.h \
+ C\:/Program\ Files/SEGGER/SEGGER\ Embedded\ Studio\ for\ ARM\ 5.42/include/__crossworks.h \
+ C\:/Program\ Files/SEGGER/SEGGER\ Embedded\ Studio\ for\ ARM\ 5.42/include/stdbool.h \
  ../../../nRF5_SDK_17.0.2_d674dde/modules/nrfx/mdk/nrf.h \
  ../../../nRF5_SDK_17.0.2_d674dde/modules/nrfx/mdk/nrf52.h \
  ../../../nRF5_SDK_17.0.2_d674dde/components/toolchain/cmsis/include/core_cm4.h \

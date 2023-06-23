@@ -103,7 +103,7 @@ bx r14
 mesh_adv_data_set:
 .LVL6:
 .LFB285:
-	.file 2 "/home/gaosheng/mesh/my_mesh/nrf5_SDK_for_Mesh_v5.0.0_src/examples/common/src/mesh_adv.c"
+	.file 2 "C:\\Users\\glu250\\Downloads\\myic\\nrf5_SDK_for_Mesh_v5.0.0_src\\examples\\common\\src\\mesh_adv.c"
 	.loc 2 101 1 is_stmt 1 view -0
 	@ args = 0, pretend = 0, frame = 136
 	@ frame_needed = 0, uses_anonymous_args = 0
@@ -648,7 +648,7 @@ m_adv_params:
 .LEFDE12:
 	.text
 .Letext0:
-	.file 3 "/usr/share/segger_embedded_studio_for_arm_5.62/include/stdint.h"
+	.file 3 "C:/Program Files/SEGGER/SEGGER Embedded Studio for ARM 5.42/include/stdint.h"
 	.file 4 "../../../nRF5_SDK_17.0.2_d674dde/components/softdevice/s132/headers/ble_types.h"
 	.file 5 "../../../nRF5_SDK_17.0.2_d674dde/components/libraries/util/app_util.h"
 	.file 6 "../../../nRF5_SDK_17.0.2_d674dde/components/ble/common/ble_advdata.h"
@@ -3296,21 +3296,21 @@ m_adv_params:
 	.byte	0x5
 	.uleb128 0x32
 	.4byte	.LASF923
-	.file 16 "/usr/share/segger_embedded_studio_for_arm_5.62/include/stdbool.h"
+	.file 16 "C:/Program Files/SEGGER/SEGGER Embedded Studio for ARM 5.42/include/stdbool.h"
 	.byte	0x3
 	.uleb128 0x35
 	.uleb128 0x10
 	.byte	0x7
 	.4byte	.Ldebug_macro11
 	.byte	0x4
-	.file 17 "/usr/share/segger_embedded_studio_for_arm_5.62/include/stddef.h"
+	.file 17 "C:/Program Files/SEGGER/SEGGER Embedded Studio for ARM 5.42/include/stddef.h"
 	.byte	0x3
 	.uleb128 0x36
 	.uleb128 0x11
 	.byte	0x5
 	.uleb128 0x27
 	.4byte	.LASF929
-	.file 18 "/usr/share/segger_embedded_studio_for_arm_5.62/include/__crossworks.h"
+	.file 18 "C:/Program Files/SEGGER/SEGGER Embedded Studio for ARM 5.42/include/__crossworks.h"
 	.byte	0x3
 	.uleb128 0x29
 	.uleb128 0x12
@@ -3455,7 +3455,7 @@ m_adv_params:
 	.byte	0x5
 	.uleb128 0x32
 	.4byte	.LASF10356
-	.file 33 "/usr/share/segger_embedded_studio_for_arm_5.62/include/string.h"
+	.file 33 "C:/Program Files/SEGGER/SEGGER Embedded Studio for ARM 5.42/include/string.h"
 	.byte	0x3
 	.uleb128 0x36
 	.uleb128 0x21
@@ -3585,7 +3585,7 @@ m_adv_params:
 	.byte	0x5
 	.uleb128 0x32
 	.4byte	.LASF11832
-	.file 46 "/usr/share/segger_embedded_studio_for_arm_5.62/include/stdio.h"
+	.file 46 "C:/Program Files/SEGGER/SEGGER Embedded Studio for ARM 5.42/include/stdio.h"
 	.byte	0x3
 	.uleb128 0x36
 	.uleb128 0x2e
@@ -3706,7 +3706,7 @@ m_adv_params:
 	.4byte	.LASF12093
 	.byte	0x4
 	.byte	0
-	.section	.debug_macro,"G",%progbits,wm4.0.d723341ad18b402949b21ba4e6635086,comdat
+	.section	.debug_macro,"G",%progbits,wm4.0.018ef30b684abc62103048952bf95f25,comdat
 .Ldebug_macro2:
 	.2byte	0x4
 	.byte	0
@@ -35396,7 +35396,7 @@ m_adv_params:
 	.uleb128 0x33
 	.4byte	.LASF10516
 	.byte	0
-	.section	.debug_macro,"G",%progbits,wm4.sdk_config.h.55.91efb04fdfd74983fe7a4bfc01c711a6,comdat
+	.section	.debug_macro,"G",%progbits,wm4.sdk_config.h.55.abeb6da8856a28e240ed6260a5831193,comdat
 .Ldebug_macro37:
 	.2byte	0x4
 	.byte	0
@@ -39499,7 +39499,7 @@ m_adv_params:
 	.uleb128 0x3f
 	.4byte	.LASF11873
 	.byte	0
-	.section	.debug_macro,"G",%progbits,wm4.nrf_mesh_defines.h.39.4957bdd0b959c1b84ef14cfed5609184,comdat
+	.section	.debug_macro,"G",%progbits,wm4.nrf_mesh_defines.h.39.22055b4a62f221a48dec09e43d926d00,comdat
 .Ldebug_macro47:
 	.2byte	0x4
 	.byte	0
@@ -41179,8 +41179,8 @@ m_adv_params:
 	.ascii	"RTC_EVTENSET_OVRFLW_Pos (1UL)\000"
 .LASF2861:
 	.ascii	"EGU_INTENSET_TRIGGERED0_Set (1UL)\000"
-.LASF1177:
-	.ascii	"SCB_SCR_SLEEPONEXIT_Pos 1U\000"
+.LASF5027:
+	.ascii	"GPIO_OUTCLR_PIN23_Low (0UL)\000"
 .LASF4663:
 	.ascii	"NVMC_READY_READY_Msk (0x1UL << NVMC_READY_READY_Pos"
 	.ascii	")\000"
@@ -41331,8 +41331,8 @@ m_adv_params:
 	.ascii	"PPI_CHEN_CH24_Disabled (0UL)\000"
 .LASF5590:
 	.ascii	"GPIO_DIRCLR_PIN26_Clear (1UL)\000"
-.LASF1745:
-	.ascii	"NRF_WDT_BASE 0x40010000UL\000"
+.LASF9163:
+	.ascii	"UARTE_PSEL_RTS_CONNECT_Connected (0UL)\000"
 .LASF6154:
 	.ascii	"PPI_CHEN_CH29_Msk (0x1UL << PPI_CHEN_CH29_Pos)\000"
 .LASF7695:
@@ -41581,8 +41581,9 @@ m_adv_params:
 .LASF9450:
 	.ascii	"MPU_PROTENSET1_PROTREG52_Msk BPROT_CONFIG1_REGION52"
 	.ascii	"_Msk\000"
-.LASF9190:
-	.ascii	"UARTE_BAUDRATE_BAUDRATE_Baud9600 (0x00275000UL)\000"
+.LASF12262:
+	.ascii	"C:\\Users\\glu250\\Downloads\\myic\\nrf5_SDK_for_Me"
+	.ascii	"sh_v5.0.0_src\\examples\\beaconing\000"
 .LASF4514:
 	.ascii	"NFCT_INTENCLR_TXFRAMESTART_Msk (0x1UL << NFCT_INTEN"
 	.ascii	"CLR_TXFRAMESTART_Pos)\000"
@@ -42792,6 +42793,8 @@ m_adv_params:
 	.ascii	"NRF_SDH_ENABLED 1\000"
 .LASF10547:
 	.ascii	"ANT_BPWR_PAGE_16_INFO_COLOR 0\000"
+.LASF10446:
+	.ascii	"BLE_GATT_CPF_FORMAT_SINT64 0x12\000"
 .LASF5710:
 	.ascii	"GPIO_DIRCLR_PIN2_Clear (1UL)\000"
 .LASF10618:
@@ -42800,9 +42803,8 @@ m_adv_params:
 	.ascii	"BPROT_CONFIG1_REGION63_Disabled (0UL)\000"
 .LASF9322:
 	.ascii	"WDT_RREN_RR0_Msk (0x1UL << WDT_RREN_RR0_Pos)\000"
-.LASF12262:
-	.ascii	"/home/gaosheng/mesh/my_mesh/nrf5_SDK_for_Mesh_v5.0."
-	.ascii	"0_src/examples/beaconing\000"
+.LASF3754:
+	.ascii	"MWU_NMIENCLR_REGION0WA_Clear (1UL)\000"
 .LASF11487:
 	.ascii	"USBD_CONFIG_LOG_ENABLED 0\000"
 .LASF8840:
@@ -43679,8 +43681,8 @@ m_adv_params:
 .LASF7884:
 	.ascii	"SAADC_CH_PSELP_PSELP_Msk (0x1FUL << SAADC_CH_PSELP_"
 	.ascii	"PSELP_Pos)\000"
-.LASF6724:
-	.ascii	"PPI_CHG_CH0_Included (1UL)\000"
+.LASF9248:
+	.ascii	"WDT_INTENSET_TIMEOUT_Enabled (1UL)\000"
 .LASF1870:
 	.ascii	"AAR_INTENCLR_END_Msk (0x1UL << AAR_INTENCLR_END_Pos"
 	.ascii	")\000"
@@ -43751,6 +43753,8 @@ m_adv_params:
 	.ascii	"_Pos)\000"
 .LASF241:
 	.ascii	"__SFRACT_MIN__ (-0.5HR-0.5HR)\000"
+.LASF5910:
+	.ascii	"PDM_INTENCLR_END_Disabled (0UL)\000"
 .LASF3451:
 	.ascii	"MWU_INTEN_REGION1RA_Pos (3UL)\000"
 .LASF5410:
@@ -44549,8 +44553,8 @@ m_adv_params:
 	.ascii	"PTR_Pos)\000"
 .LASF10469:
 	.ascii	"BLE_GATTS_SRVC_TYPE_PRIMARY 0x01\000"
-.LASF9986:
-	.ascii	"PPI_CHG3_CH13_Included PPI_CHG_CH13_Included\000"
+.LASF8:
+	.ascii	"__VERSION__ \"10.2.1 20201103 (release)\"\000"
 .LASF5375:
 	.ascii	"GPIO_DIR_PIN6_Input (0UL)\000"
 .LASF5993:
@@ -46278,8 +46282,6 @@ m_adv_params:
 	.ascii	"ALER_PRESCALER_Pos)\000"
 .LASF10539:
 	.ascii	"ANT_BPWR_PAGE_TORQUE_LOG_ENABLED 0\000"
-.LASF9248:
-	.ascii	"WDT_INTENSET_TIMEOUT_Enabled (1UL)\000"
 .LASF2233:
 	.ascii	"BPROT_CONFIG2_REGION74_Msk (0x1UL << BPROT_CONFIG2_"
 	.ascii	"REGION74_Pos)\000"
@@ -46312,8 +46314,8 @@ m_adv_params:
 	.ascii	"SAADC_INTENSET_CH2LIMITH_Disabled (0UL)\000"
 .LASF3910:
 	.ascii	"MWU_PERREGION_SUBSTATRA_SR25_Access (1UL)\000"
-.LASF11835:
-	.ascii	"__PRINTF_TAG_PTR_DEFINED \000"
+.LASF11140:
+	.ascii	"SPIS_DEFAULT_CONFIG_IRQ_PRIORITY 7\000"
 .LASF5670:
 	.ascii	"GPIO_DIRCLR_PIN10_Clear (1UL)\000"
 .LASF1808:
@@ -46718,6 +46720,8 @@ m_adv_params:
 	.ascii	"BPROT_CONFIG2_REGION89_Pos (25UL)\000"
 .LASF7619:
 	.ascii	"SAADC_INTEN_CH1LIMITH_Pos (8UL)\000"
+.LASF2534:
+	.ascii	"CLOCK_LFCLKSRCCOPY_SRC_Xtal (1UL)\000"
 .LASF5778:
 	.ascii	"GPIO_LATCH_PIN17_Msk (0x1UL << GPIO_LATCH_PIN17_Pos"
 	.ascii	")\000"
@@ -46918,8 +46922,6 @@ m_adv_params:
 	.ascii	"PM_MAX_REGISTRANTS 3\000"
 .LASF6099:
 	.ascii	"POWER_RAMONB_ONRAM2_RAM2Off (0UL)\000"
-.LASF10526:
-	.ascii	"ANTFS_CONFIG_CUSTOM_TRANSMIT_POWER 0\000"
 .LASF580:
 	.ascii	"BLE_GAP_SVC_LAST 0x9A\000"
 .LASF12091:
@@ -47306,8 +47308,8 @@ m_adv_params:
 	.ascii	"_Pos)\000"
 .LASF5779:
 	.ascii	"GPIO_LATCH_PIN17_NotLatched (0UL)\000"
-.LASF5550:
-	.ascii	"GPIO_DIRSET_PIN2_Set (1UL)\000"
+.LASF5643:
+	.ascii	"GPIO_DIRCLR_PIN15_Input (0UL)\000"
 .LASF11189:
 	.ascii	"UART_ENABLED 0\000"
 .LASF1935:
@@ -47492,8 +47494,8 @@ m_adv_params:
 	.ascii	"MWU_NMIENSET_PREGION1WA_Set (1UL)\000"
 .LASF5534:
 	.ascii	"GPIO_DIRSET_PIN5_Output (1UL)\000"
-.LASF5910:
-	.ascii	"PDM_INTENCLR_END_Disabled (0UL)\000"
+.LASF5807:
+	.ascii	"GPIO_LATCH_PIN10_NotLatched (0UL)\000"
 .LASF10764:
 	.ascii	"NRF_CRYPTO_BACKEND_OPTIGA_ECC_SECP256R1_ENABLED 1\000"
 .LASF9947:
@@ -48143,8 +48145,6 @@ m_adv_params:
 	.ascii	"GPIOTE_INTENCLR_IN0_Pos (0UL)\000"
 .LASF1900:
 	.ascii	"BPROT_CONFIG0_REGION28_Pos (28UL)\000"
-.LASF8:
-	.ascii	"__VERSION__ \"10.3.1 20210621 (release)\"\000"
 .LASF9839:
 	.ascii	"PPI_CHG0_CH1_Pos PPI_CHG_CH1_Pos\000"
 .LASF289:
@@ -48282,8 +48282,8 @@ m_adv_params:
 	.ascii	"WDT_RREN_RR6_Enabled (1UL)\000"
 .LASF6731:
 	.ascii	"PWM_SHORTS_LOOPSDONE_SEQSTART1_Pos (3UL)\000"
-.LASF3754:
-	.ascii	"MWU_NMIENCLR_REGION0WA_Clear (1UL)\000"
+.LASF11547:
+	.ascii	"NRF_BLOCK_DEV_RAM_CONFIG_LOG_INIT_FILTER_LEVEL 3\000"
 .LASF9606:
 	.ascii	"MPU_PROTENSET0_PROTREG21_Disabled BPROT_CONFIG0_REG"
 	.ascii	"ION21_Disabled\000"
@@ -49613,6 +49613,8 @@ m_adv_params:
 	.ascii	"TWIM_INTEN_RXSTARTED_Pos (19UL)\000"
 .LASF7614:
 	.ascii	"SAADC_INTEN_CH2LIMITH_Enabled (1UL)\000"
+.LASF9986:
+	.ascii	"PPI_CHG3_CH13_Included PPI_CHG_CH13_Included\000"
 .LASF5143:
 	.ascii	"GPIO_OUTCLR_PIN0_High (1UL)\000"
 .LASF5085:
@@ -49869,8 +49871,8 @@ m_adv_params:
 .LASF3856:
 	.ascii	"MWU_PERREGION_SUBSTATWA_SR6_Msk (0x1UL << MWU_PERRE"
 	.ascii	"GION_SUBSTATWA_SR6_Pos)\000"
-.LASF5218:
-	.ascii	"GPIO_IN_PIN13_Msk (0x1UL << GPIO_IN_PIN13_Pos)\000"
+.LASF1108:
+	.ascii	"xPSR_Q_Msk (1UL << xPSR_Q_Pos)\000"
 .LASF6287:
 	.ascii	"PPI_CHENSET_CH29_Set (1UL)\000"
 .LASF5662:
@@ -49935,6 +49937,8 @@ m_adv_params:
 	.ascii	"GPIO_DIRSET_PIN7_Set (1UL)\000"
 .LASF3385:
 	.ascii	"LPCOMP_PSEL_PSEL_AnalogInput5 (5UL)\000"
+.LASF445:
+	.ascii	"__SES_VERSION 54200\000"
 .LASF11593:
 	.ascii	"NRF_SDH_SOC_INFO_COLOR 0\000"
 .LASF4993:
@@ -50230,9 +50234,8 @@ m_adv_params:
 	.ascii	"BPROT_CONFIG3_REGION118_Disabled (0UL)\000"
 .LASF6405:
 	.ascii	"PPI_CHENSET_CH5_Disabled (0UL)\000"
-.LASF9521:
-	.ascii	"MPU_PROTENSET1_PROTREG38_Disabled BPROT_CONFIG1_REG"
-	.ascii	"ION38_Disabled\000"
+.LASF9190:
+	.ascii	"UARTE_BAUDRATE_BAUDRATE_Baud9600 (0x00275000UL)\000"
 .LASF8593:
 	.ascii	"TWIM_INTENSET_RXSTARTED_Disabled (0UL)\000"
 .LASF5275:
@@ -50254,9 +50257,8 @@ m_adv_params:
 	.ascii	"MWU_NMIENSET_REGION0RA_Enabled (1UL)\000"
 .LASF4788:
 	.ascii	"GPIO_OUT_PIN9_High (1UL)\000"
-.LASF12261:
-	.ascii	"/home/gaosheng/mesh/my_mesh/nrf5_SDK_for_Mesh_v5.0."
-	.ascii	"0_src/examples/common/src/mesh_adv.c\000"
+.LASF10526:
+	.ascii	"ANTFS_CONFIG_CUSTOM_TRANSMIT_POWER 0\000"
 .LASF1853:
 	.ascii	"AAR_INTENSET_RESOLVED_Set (1UL)\000"
 .LASF10152:
@@ -51320,8 +51322,9 @@ m_adv_params:
 .LASF4594:
 	.ascii	"NFCT_TXD_AMOUNT_TXDATABITS_Msk (0x7UL << NFCT_TXD_A"
 	.ascii	"MOUNT_TXDATABITS_Pos)\000"
-.LASF3294:
-	.ascii	"I2S_PSEL_LRCK_CONNECT_Connected (0UL)\000"
+.LASF8326:
+	.ascii	"TIMER_SHORTS_COMPARE5_CLEAR_Msk (0x1UL << TIMER_SHO"
+	.ascii	"RTS_COMPARE5_CLEAR_Pos)\000"
 .LASF8370:
 	.ascii	"TIMER_INTENSET_COMPARE1_Msk (0x1UL << TIMER_INTENSE"
 	.ascii	"T_COMPARE1_Pos)\000"
@@ -52867,8 +52870,6 @@ m_adv_params:
 	.ascii	"NFCT_FRAMESTATUS_RX_CRCERROR_CRCCorrect (0UL)\000"
 .LASF8598:
 	.ascii	"TWIM_INTENSET_SUSPENDED_Disabled (0UL)\000"
-.LASF5027:
-	.ascii	"GPIO_OUTCLR_PIN23_Low (0UL)\000"
 .LASF105:
 	.ascii	"__INT_LEAST8_MAX__ 0x7f\000"
 .LASF3693:
@@ -53853,8 +53854,8 @@ m_adv_params:
 	.ascii	"NRF_MESH_ADDR_TYPE_BITS_OFFSET (14)\000"
 .LASF409:
 	.ascii	"__ARMEL__ 1\000"
-.LASF445:
-	.ascii	"__SES_VERSION 56200\000"
+.LASF1745:
+	.ascii	"NRF_WDT_BASE 0x40010000UL\000"
 .LASF307:
 	.ascii	"__ULACCUM_MAX__ 0XFFFFFFFFFFFFFFFFP-32ULK\000"
 .LASF4206:
@@ -54710,9 +54711,6 @@ m_adv_params:
 	.ascii	"_6 (macro, __VA_ARGS__, )\000"
 .LASF8521:
 	.ascii	"TWI_FREQUENCY_FREQUENCY_Pos (0UL)\000"
-.LASF8326:
-	.ascii	"TIMER_SHORTS_COMPARE5_CLEAR_Msk (0x1UL << TIMER_SHO"
-	.ascii	"RTS_COMPARE5_CLEAR_Pos)\000"
 .LASF76:
 	.ascii	"__WINT_MAX__ 0xffffffffU\000"
 .LASF7611:
@@ -54724,6 +54722,8 @@ m_adv_params:
 	.ascii	"PPI_CHG_CH0_Excluded (0UL)\000"
 .LASF4305:
 	.ascii	"MWU_PREGION_SUBS_SR2_Exclude (0UL)\000"
+.LASF10975:
+	.ascii	"NRFX_SPI_CONFIG_DEBUG_COLOR 0\000"
 .LASF1905:
 	.ascii	"BPROT_CONFIG0_REGION27_Msk (0x1UL << BPROT_CONFIG0_"
 	.ascii	"REGION27_Pos)\000"
@@ -54794,8 +54794,6 @@ m_adv_params:
 .LASF11245:
 	.ascii	"APP_USBD_STRINGS_PRODUCT APP_USBD_STRING_DESC(\"nRF"
 	.ascii	"52 USB Product\")\000"
-.LASF5643:
-	.ascii	"GPIO_DIRCLR_PIN15_Input (0UL)\000"
 .LASF8489:
 	.ascii	"TWI_INTENCLR_STOPPED_Disabled (0UL)\000"
 .LASF5886:
@@ -55911,8 +55909,8 @@ m_adv_params:
 	.ascii	"_Pos)\000"
 .LASF10462:
 	.ascii	"BLE_GATTC_WRITE_CMD_TX_QUEUE_SIZE_DEFAULT 1\000"
-.LASF11140:
-	.ascii	"SPIS_DEFAULT_CONFIG_IRQ_PRIORITY 6\000"
+.LASF11926:
+	.ascii	"HEARTBEAT_TRIGGER_TYPE_PROXY 0x0002\000"
 .LASF3631:
 	.ascii	"MWU_NMIEN_REGION0WA_Pos (0UL)\000"
 .LASF9679:
@@ -56988,8 +56986,8 @@ m_adv_params:
 	.ascii	"ANT_BSC_PAGE_0_LOG_LEVEL 3\000"
 .LASF5277:
 	.ascii	"GPIO_DIR_PIN30_Pos (30UL)\000"
-.LASF5807:
-	.ascii	"GPIO_LATCH_PIN10_NotLatched (0UL)\000"
+.LASF6956:
+	.ascii	"QDEC_INTENCLR_DBLRDY_Clear (1UL)\000"
 .LASF9154:
 	.ascii	"UARTE_ERRORSRC_OVERRUN_Msk (0x1UL << UARTE_ERRORSRC"
 	.ascii	"_OVERRUN_Pos)\000"
@@ -57675,8 +57673,6 @@ m_adv_params:
 	.ascii	"SAADC_INTENSET_CH5LIMITH_Enabled (1UL)\000"
 .LASF11832:
 	.ascii	"APP_ERROR_H__ \000"
-.LASF11547:
-	.ascii	"NRF_BLOCK_DEV_RAM_CONFIG_LOG_INIT_FILTER_LEVEL 3\000"
 .LASF9406:
 	.ascii	"MPU_PROTENSET1_PROTREG61_Disabled BPROT_CONFIG1_REG"
 	.ascii	"ION61_Disabled\000"
@@ -58375,8 +58371,13 @@ m_adv_params:
 	.ascii	"COMP_INTENSET_CROSS_Set (1UL)\000"
 .LASF11498:
 	.ascii	"APP_BUTTON_CONFIG_INFO_COLOR 0\000"
-.LASF2534:
-	.ascii	"CLOCK_LFCLKSRCCOPY_SRC_Xtal (1UL)\000"
+.LASF12260:
+	.ascii	"GNU C99 10.2.1 20201103 (release) -fmessage-length="
+	.ascii	"0 -mcpu=cortex-m4 -mlittle-endian -mfloat-abi=hard "
+	.ascii	"-mfpu=fpv4-sp-d16 -mthumb -mtp=soft -munaligned-acc"
+	.ascii	"ess -std=gnu99 -g3 -gpubnames -Og -fno-dwarf2-cfi-a"
+	.ascii	"sm -ffunction-sections -fdata-sections -fshort-enum"
+	.ascii	"s -fno-common\000"
 .LASF11155:
 	.ascii	"SPI1_USE_EASY_DMA 1\000"
 .LASF1506:
@@ -59935,6 +59936,8 @@ m_adv_params:
 	.ascii	"I2S_INTENSET_STOPPED_Pos (2UL)\000"
 .LASF5413:
 	.ascii	"GPIO_DIRSET_PIN29_Input (0UL)\000"
+.LASF1177:
+	.ascii	"SCB_SCR_SLEEPONEXIT_Pos 1U\000"
 .LASF1996:
 	.ascii	"BPROT_CONFIG0_REGION4_Pos (4UL)\000"
 .LASF10277:
@@ -60214,10 +60217,10 @@ m_adv_params:
 .LASF9636:
 	.ascii	"MPU_PROTENSET0_PROTREG15_Enabled BPROT_CONFIG0_REGI"
 	.ascii	"ON15_Enabled\000"
-.LASF10446:
-	.ascii	"BLE_GATT_CPF_FORMAT_SINT64 0x12\000"
 .LASF6:
-	.ascii	"__GNUC_MINOR__ 3\000"
+	.ascii	"__GNUC_MINOR__ 2\000"
+.LASF5218:
+	.ascii	"GPIO_IN_PIN13_Msk (0x1UL << GPIO_IN_PIN13_Pos)\000"
 .LASF9900:
 	.ascii	"PPI_CHG1_CH2_Msk PPI_CHG_CH2_Msk\000"
 .LASF8260:
@@ -60363,6 +60366,9 @@ m_adv_params:
 .LASF3721:
 	.ascii	"MWU_NMIENCLR_REGION3WA_Msk (0x1UL << MWU_NMIENCLR_R"
 	.ascii	"EGION3WA_Pos)\000"
+.LASF9521:
+	.ascii	"MPU_PROTENSET1_PROTREG38_Disabled BPROT_CONFIG1_REG"
+	.ascii	"ION38_Disabled\000"
 .LASF10329:
 	.ascii	"MACRO_REPEAT_FOR_10(n_list,macro,...) macro(GET_VA_"
 	.ascii	"ARG_1(BRACKET_EXTRACT(n_list)), __VA_ARGS__) MACRO_"
@@ -60474,6 +60480,8 @@ m_adv_params:
 	.ascii	"GPIO_DIR_PIN10_Pos (10UL)\000"
 .LASF11179:
 	.ascii	"TWI_ENABLED 0\000"
+.LASF11835:
+	.ascii	"__PRINTF_TAG_PTR_DEFINED \000"
 .LASF2617:
 	.ascii	"COMP_INTENSET_READY_Set (1UL)\000"
 .LASF10824:
@@ -61932,8 +61940,8 @@ m_adv_params:
 	.ascii	"_REGION114_Pos)\000"
 .LASF1715:
 	.ascii	"NRF_BPROT_BASE 0x40000000UL\000"
-.LASF1108:
-	.ascii	"xPSR_Q_Msk (1UL << xPSR_Q_Pos)\000"
+.LASF3294:
+	.ascii	"I2S_PSEL_LRCK_CONNECT_Connected (0UL)\000"
 .LASF9244:
 	.ascii	"UICR_NFCPINS_PROTECT_NFC (1UL)\000"
 .LASF3264:
@@ -63428,8 +63436,6 @@ m_adv_params:
 	.ascii	"PPI_CHENSET_CH10_Pos (10UL)\000"
 .LASF4749:
 	.ascii	"GPIO_OUT_PIN18_Pos (18UL)\000"
-.LASF9163:
-	.ascii	"UARTE_PSEL_RTS_CONNECT_Connected (0UL)\000"
 .LASF8735:
 	.ascii	"TWIS_INTENSET_READ_Disabled (0UL)\000"
 .LASF9416:
@@ -65251,8 +65257,6 @@ m_adv_params:
 	.ascii	"BLE_GAP_ADV_SET_COUNT_DEFAULT (1)\000"
 .LASF5371:
 	.ascii	"GPIO_DIR_PIN7_Input (0UL)\000"
-.LASF11926:
-	.ascii	"HEARTBEAT_TRIGGER_TYPE_PROXY 0x0002\000"
 .LASF1276:
 	.ascii	"SCB_DFSR_BKPT_Msk (1UL << SCB_DFSR_BKPT_Pos)\000"
 .LASF4242:
@@ -65869,6 +65873,8 @@ m_adv_params:
 	.ascii	"xPSR_Z_Pos 30U\000"
 .LASF10396:
 	.ascii	"BLE_GATT_STATUS_SUCCESS 0x0000\000"
+.LASF11901:
+	.ascii	"NRF_MESH_IRQ_PRIORITY_LOWEST (7)\000"
 .LASF2420:
 	.ascii	"CCM_INTENSET_ENDKSGEN_Disabled (0UL)\000"
 .LASF5079:
@@ -65921,8 +65927,8 @@ m_adv_params:
 	.ascii	"GPIO_LATCH_PIN27_NotLatched (0UL)\000"
 .LASF4381:
 	.ascii	"NFCT_INTEN_READY_Disabled (0UL)\000"
-.LASF10975:
-	.ascii	"NRFX_SPI_CONFIG_DEBUG_COLOR 0\000"
+.LASF5550:
+	.ascii	"GPIO_DIRSET_PIN2_Set (1UL)\000"
 .LASF7818:
 	.ascii	"SAADC_INTENCLR_CH2LIMITL_Enabled (1UL)\000"
 .LASF4826:
@@ -66237,13 +66243,8 @@ m_adv_params:
 	.ascii	"PPI_CHG2_CH14_Pos PPI_CHG_CH14_Pos\000"
 .LASF10616:
 	.ascii	"ANT_SDM_LOG_ENABLED 0\000"
-.LASF12260:
-	.ascii	"GNU C99 10.3.1 20210621 (release) -fmessage-length="
-	.ascii	"0 -std=gnu99 -mcpu=cortex-m4 -mlittle-endian -mfloa"
-	.ascii	"t-abi=hard -mfpu=fpv4-sp-d16 -mthumb -mtp=soft -mun"
-	.ascii	"aligned-access -g3 -gpubnames -Og -fno-dwarf2-cfi-a"
-	.ascii	"sm -ffunction-sections -fdata-sections -fshort-enum"
-	.ascii	"s -fno-common\000"
+.LASF6724:
+	.ascii	"PPI_CHG_CH0_Included (1UL)\000"
 .LASF9864:
 	.ascii	"PPI_CHG1_CH11_Msk PPI_CHG_CH11_Msk\000"
 .LASF10524:
@@ -66566,8 +66567,6 @@ m_adv_params:
 	.ascii	"TS_TIMER_H__ \000"
 .LASF9908:
 	.ascii	"PPI_CHG1_CH0_Msk PPI_CHG_CH0_Msk\000"
-.LASF6956:
-	.ascii	"QDEC_INTENCLR_DBLRDY_Clear (1UL)\000"
 .LASF259:
 	.ascii	"__LFRACT_FBIT__ 31\000"
 .LASF6107:
@@ -66648,8 +66647,6 @@ m_adv_params:
 	.ascii	" BF_CX_BOFF(bf_cx))\000"
 .LASF8462:
 	.ascii	"TWI_INTENCLR_SUSPENDED_Pos (18UL)\000"
-.LASF11901:
-	.ascii	"NRF_MESH_IRQ_PRIORITY_LOWEST (6)\000"
 .LASF5352:
 	.ascii	"GPIO_DIR_PIN12_Output (1UL)\000"
 .LASF337:
@@ -66761,6 +66758,9 @@ m_adv_params:
 	.ascii	"ONNECT_Pos)\000"
 .LASF5464:
 	.ascii	"GPIO_DIRSET_PIN19_Output (1UL)\000"
+.LASF12261:
+	.ascii	"C:\\Users\\glu250\\Downloads\\myic\\nrf5_SDK_for_Me"
+	.ascii	"sh_v5.0.0_src\\examples\\common\\src\\mesh_adv.c\000"
 .LASF8776:
 	.ascii	"TWIS_INTENCLR_TXSTARTED_Enabled (1UL)\000"
 .LASF1651:
@@ -67559,4 +67559,4 @@ m_adv_params:
 .LASF4846:
 	.ascii	"GPIO_OUTSET_PIN27_Msk (0x1UL << GPIO_OUTSET_PIN27_P"
 	.ascii	"os)\000"
-	.ident	"GCC: (based on arm-10.3-2021.07 GCC) 10.3.1 20210621 (release)"
+	.ident	"GCC: (GNU) 10.2.1 20201103 (release)"

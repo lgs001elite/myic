@@ -1,9 +1,9 @@
 build/beaconing_nrf52832_xxAA_s132_7.2.0_Debug/obj/nrf_mesh_configure.o: \
- /home/gaosheng/mesh/my_mesh/nrf5_SDK_for_Mesh_v5.0.0_src/mesh/core/src/nrf_mesh_configure.c \
- /usr/share/segger_embedded_studio_for_arm_5.62/include/string.h \
- /usr/share/segger_embedded_studio_for_arm_5.62/include/__crossworks.h \
+ C\:\Users\glu250\Downloads\myic\nrf5_SDK_for_Mesh_v5.0.0_src\mesh\core\src\nrf_mesh_configure.c \
+ C\:/Program\ Files/SEGGER/SEGGER\ Embedded\ Studio\ for\ ARM\ 5.42/include/string.h \
+ C\:/Program\ Files/SEGGER/SEGGER\ Embedded\ Studio\ for\ ARM\ 5.42/include/__crossworks.h \
  ../../mesh/core/api/nrf_mesh_configure.h \
- /usr/share/segger_embedded_studio_for_arm_5.62/include/stdint.h \
+ C\:/Program\ Files/SEGGER/SEGGER\ Embedded\ Studio\ for\ ARM\ 5.42/include/stdint.h \
  ../../mesh/core/api/nrf_mesh_defines.h \
  ../../../nRF5_SDK_17.0.2_d674dde/modules/nrfx/mdk/nrf.h \
  ../../../nRF5_SDK_17.0.2_d674dde/modules/nrfx/mdk/nrf52.h \
