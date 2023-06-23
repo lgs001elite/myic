@@ -47,7 +47,7 @@ adv_packet_t  *   p_broad_packet         = NULL;
  * @param p_adv: advertiser entity
  * @param adv_packet: datagram
  */
-void send2bearer(advertiser_t * p_adv, define_adv_packet * adv_packet)
+void send2bearer(advertiser_t * p_adv, uint8_t * adv_packet)
 {
     if (p_broad_packet)
     {
@@ -65,7 +65,7 @@ void send2bearer(advertiser_t * p_adv, define_adv_packet * adv_packet)
 
 void send_datagram_start()
 {
-    __LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "********************* Adv --- starting *****************\n"); 
+    // __LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "********************* Adv --- starting *****************\n"); 
     send2bearer(&m_discovery_advertiser, m_recBuf);
 }
 

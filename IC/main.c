@@ -267,11 +267,30 @@ void start_spi_process(void)
         }
         if (g_systemStatus == NONLAYER)
         {
-            g_waitToFind = g_waitToFind - 1;
+            // Produce a finding packet
             produceNonPacketData();
+            if (g_if_sourceNode)
+            {
+                if (g_node_dimension == 0x7e)
+                {
+                    SPI_Master_WriteReg(CMD_TYPE_0_MASTER, SPI_DATA_LEN);
+                    __delay_cycles(1000000);
+                    continue;
+                }
+                if (g_waitToFind == 0)
+                {
+                    g_systemStatus = TRANSMIT;
+                }
+            }
+            if (g_waitToFind == 0)
+            {
+                g_systemStatus = SINKWAIT;
+            }
             g_transBuffer[3] = PACKAGE_FIND;
             update_crc();
             SPI_Master_WriteReg(CMD_TYPE_0_MASTER, SPI_DATA_LEN);
+            g_waitToFind = g_waitToFind - 1;
+            __delay_cycles(1000000);
         }
         else if (g_systemStatus == TRANSMIT)
         {
@@ -306,7 +325,7 @@ void start_spi_process(void)
             if (!transmitBuffer)
             {
                 free(transmitBuffer);
-                return 0;
+                return;
             }
             memset(transmitBuffer, 0, SPI_DATA_LEN);
             m2s(transmitBuffer, &g_packetQueue[g_queueLen]);
@@ -345,6 +364,7 @@ void start_spi_process(void)
         else if (g_systemStatus == SINKWAIT)
         {
             // DO nothing, Just keeping listning 
+                                                                                  printf("this is a test");
         }
     }
 }

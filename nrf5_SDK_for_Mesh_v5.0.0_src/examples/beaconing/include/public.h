@@ -10,6 +10,10 @@
 #define DUBBY 0x05
 
 void send_datagram_start();
-extern volatile uint8_t  m_tx_buf_spi[ACTUALDATAUNITS];
-extern volatile uint8_t m_recBuf[BROADCASTLEN];
+extern  uint8_t  m_tx_buf_spi[ACTUALDATAUNITS];
+extern  uint8_t m_recBuf[BROADCASTLEN];
+
+// For test
+// uint8_t sendNum = 0;
+
 #endif

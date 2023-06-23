@@ -6,11 +6,13 @@
 #define    SPIS_INSTANCE    1 /**< SPIS instance index. */
 
 const  nrf_drv_spis_t spis              = NRF_DRV_SPIS_INSTANCE(SPIS_INSTANCE);/**< SPIS instance. */                           /** < RX buffer. */
-volatile uint8_t  m_rx_buf_spi[ACTUALDATAUNITS + 1] = {0};
-volatile uint8_t  m_tx_buf_spi[ACTUALDATAUNITS] = {0};
-volatile uint8_t  m_recBuf[31]                 = {0} ;
+uint8_t  m_rx_buf_spi[ACTUALDATAUNITS + 1] = {0};
+uint8_t  m_tx_buf_spi[ACTUALDATAUNITS] = {0};
+uint8_t  m_recBuf[31]                 = {0} ;
+// For testing
+uint8_t sendNum = 0;
 
-volatile bool   spis_xfer_done =   false;  /**< Flag used to indicate that SPIS instance completed the transfer. */
+bool   spis_xfer_done =   false;  /**< Flag used to indicate that SPIS instance completed the transfer. */
 
 /**
  * @brief  SPIS check completeness of data(checksums of packets)
@@ -19,11 +21,11 @@ bool check_completeness(uint8_t * receivedData)
 {
     if (receivedData[2] != BLE_GAP_AD_TYPE_PUBLIC_TARGET_ADDRESS)
     {
-        __LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "ACTUALDATAUNITS: %X! \n",ACTUALDATAUNITS);
-        for (uint8_t i = 0; i < 35; i++)
-        {
-            __LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "receivedData: %X \n", receivedData[i]);
-        }
+        // __LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "ACTUALDATAUNITS: %X! \n",ACTUALDATAUNITS);
+        //for (uint8_t i = 0; i < 35; i++)
+        //{
+        //    __LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "receivedData: %X \n", receivedData[i]);
+        //}
         //__LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "receivedData[2]: %X! \n", receivedData[1]);
         return false;
     }
@@ -38,34 +40,34 @@ bool check_completeness(uint8_t * receivedData)
     uint8_t  res1       = (crc_result & 0xFF00)>>8;
     uint8_t  res2       = (crc_result & 0x00FF);
 
-    for (uint8_t i = 0; i < 35; i++)
-    {
-        __LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "receivedData%d: %X \n", i, receivedData[i]);
-    }
+    //for (uint8_t i = 0; i < 35; i++)
+    //{
+    //    __LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "receivedData%d: %X \n", i, receivedData[i]);
+    //}
 
     while (res1 >= 0x7F)
     {
-        __LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "res1: %X! \n",res1);
+        // __LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "res1: %X! \n",res1);
         res1 -= 0x7F;
     }
 
     while (res2 >= 0x7F)
     {
-        __LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "res2: %X! \n",res2);
+        // __LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "res2: %X! \n",res2);
         res2 -= 0x7F;
     }
     
     if (res1 != receivedData[33])
     {
-        __LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "failed! res1: %X\
+        // __LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "failed! res1: %X\
             , receivedData[33]: %X! \n", res1, receivedData[33]);
         return false;
     }
 
     if (res2 != receivedData[34])
     {
-        __LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "failed! res2: %X, \
-            receivedData[34]: %X! \n", res2, receivedData[34]);
+        // __LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "failed! res2: %X, \
+        //     receivedData[34]: %X! \n", res2, receivedData[34]);
         return false;
     }
 
@@ -84,18 +86,26 @@ void spis_event_handler(nrf_drv_spis_event_t event)
         bool checkResult = check_completeness(m_rx_buf_spi);
         if (! checkResult)
         {
-            __LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "pass fail!\n");
+            // __LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "pass fail!\n");
             return;
         }
-        
+        // test start
+        uint8_t receivedFindNum = m_rx_buf_spi[3];
+        if (receivedFindNum == 0)
+        {
+            // __LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "888888\n");
+        }
+         __LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "*************************%d******************************\n", receivedFindNum);
+        // test end
         uint8_t statusAction = m_rx_buf_spi[4];
-        __LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "pass check\n");
-        __LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "receive status: %X, SEQ: %x\n", statusAction, m_rx_buf_spi[3]);
+        // __LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "pass check\n");
+        // __LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "receive status: %X, SEQ: %x\n", statusAction, m_rx_buf_spi[3]);
         switch (statusAction)
         {
             case DUBBY:
               break;
             default:
+              sendNum = sendNum + 1;
               receiveData_sendout(m_rx_buf_spi);
               send_datagram_start();
               break;

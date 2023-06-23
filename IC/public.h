@@ -109,5 +109,4 @@ typedef enum SPI_ModeEnum{
 SPI_Mode SPI_Master_ReadReg(uint8_t reg_addr, uint8_t count);
 SPI_Mode SPI_Master_WriteReg(uint8_t reg_addr, uint8_t count);
 
-
 #endif

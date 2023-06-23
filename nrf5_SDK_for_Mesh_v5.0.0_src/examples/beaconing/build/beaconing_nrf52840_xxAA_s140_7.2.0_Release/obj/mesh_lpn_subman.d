@@ -1,15 +1,16 @@
 build/beaconing_nrf52840_xxAA_s140_7.2.0_Release/obj/mesh_lpn_subman.o: \
- C:\Users\glu250\Downloads\Next\myic\nrf5_SDK_for_Mesh_v5.0.0_src\mesh\core\src\mesh_lpn_subman.c \
+ C\:\Users\glu250\Downloads\Next\myic\nrf5_SDK_for_Mesh_v5.0.0_src\mesh\core\src\mesh_lpn_subman.c \
  ../../mesh/core/include/mesh_lpn_internal.h \
- C:/Program\ Files/SEGGER/SEGGER\ Embedded\ Studio\ for\ ARM\ 7.22/include/stdint.h \
- C:/Program\ Files/SEGGER/SEGGER\ Embedded\ Studio\ for\ ARM\ 7.22/include/__SEGGER_RTL.h \
- C:/Program\ Files/SEGGER/SEGGER\ Embedded\ Studio\ for\ ARM\ 7.22/include/__SEGGER_RTL_ConfDefaults.h \
- C:/Program\ Files/SEGGER/SEGGER\ Embedded\ Studio\ for\ ARM\ 7.22/include/__SEGGER_RTL_Conf.h \
- C:/Program\ Files/SEGGER/SEGGER\ Embedded\ Studio\ for\ ARM\ 7.22/include/__SEGGER_RTL_Arm_Conf.h \
+ C\:/Users/glu250/AppData/Local/SEGGER/SEGGER\ Embedded\ Studio/v3/packages/libraries/libcxx/include/stdint.h \
+ C\:/Users/glu250/AppData/Local/SEGGER/SEGGER\ Embedded\ Studio/v3/packages/libraries/libcxx/include/__config \
+ C\:/Program\ Files/SEGGER/SEGGER\ Embedded\ Studio\ for\ ARM\ 5.42/include/stdint.h \
  ../../mesh/core/include/transport.h \
- C:/Program\ Files/SEGGER/SEGGER\ Embedded\ Studio\ for\ ARM\ 7.22/include/stdbool.h \
+ C\:/Users/glu250/AppData/Local/SEGGER/SEGGER\ Embedded\ Studio/v3/packages/libraries/libcxx/include/stdbool.h \
+ C\:/Program\ Files/SEGGER/SEGGER\ Embedded\ Studio\ for\ ARM\ 5.42/include/stdbool.h \
  ../../mesh/core/include/packet.h \
- C:/Program\ Files/SEGGER/SEGGER\ Embedded\ Studio\ for\ ARM\ 7.22/include/string.h \
+ C\:/Users/glu250/AppData/Local/SEGGER/SEGGER\ Embedded\ Studio/v3/packages/libraries/libcxx/include/string.h \
+ C\:/Program\ Files/SEGGER/SEGGER\ Embedded\ Studio\ for\ ARM\ 5.42/include/string.h \
+ C\:/Program\ Files/SEGGER/SEGGER\ Embedded\ Studio\ for\ ARM\ 5.42/include/__crossworks.h \
  ../../../nRF5_SDK_17.0.2_d674dde/components/softdevice/s140/headers/nrf_error.h \
  ../../../nRF5_SDK_17.0.2_d674dde/components/softdevice/s140/headers/ble_gap.h \
  ../../../nRF5_SDK_17.0.2_d674dde/components/softdevice/s140/headers/nrf_svc.h \
@@ -35,11 +36,12 @@ build/beaconing_nrf52840_xxAA_s140_7.2.0_Release/obj/mesh_lpn_subman.o: \
  ../../../nRF5_SDK_17.0.2_d674dde/components/softdevice/s140/headers/nrf52/nrf_mbr.h \
  ../../../nRF5_SDK_17.0.2_d674dde/components/softdevice/s140/headers/nrf_svc.h \
  ../../../nRF5_SDK_17.0.2_d674dde/components/libraries/util/app_util.h \
- C:/Program\ Files/SEGGER/SEGGER\ Embedded\ Studio\ for\ ARM\ 7.22/include/stddef.h \
+ C\:/Users/glu250/AppData/Local/SEGGER/SEGGER\ Embedded\ Studio/v3/packages/libraries/libcxx/include/stddef.h \
+ C\:/Program\ Files/SEGGER/SEGGER\ Embedded\ Studio\ for\ ARM\ 5.42/include/stddef.h \
  ../../../nRF5_SDK_17.0.2_d674dde/modules/nrfx/mdk/compiler_abstraction.h \
  ../../../nRF5_SDK_17.0.2_d674dde/components/libraries/util/nordic_common.h \
  ../../mesh/core/include/log.h \
- C:/Program\ Files/SEGGER/SEGGER\ Embedded\ Studio\ for\ ARM\ 7.22/include/stdarg.h \
+ C\:/Program\ Files/SEGGER/SEGGER\ Embedded\ Studio\ for\ ARM\ 5.42/include/stdarg.h \
  ../../mesh/core/api/nrf_mesh_config_core.h \
  ../../mesh/core/api/nrf_mesh_defines.h \
  ../../../nRF5_SDK_17.0.2_d674dde/components/libraries/util/nordic_common.h \
@@ -62,7 +64,8 @@ build/beaconing_nrf52840_xxAA_s140_7.2.0_Release/obj/mesh_lpn_subman.o: \
  ../../mesh/core/include/packet_mesh.h ../../mesh/core/include/list.h \
  ../../mesh/core/api/nrf_mesh_assert.h ../../mesh/core/api/nrf_mesh.h \
  ../../mesh/core/api/nrf_mesh_assert_gcc.h \
- C:/Program\ Files/SEGGER/SEGGER\ Embedded\ Studio\ for\ ARM\ 7.22/include/stdlib.h \
+ C\:/Users/glu250/AppData/Local/SEGGER/SEGGER\ Embedded\ Studio/v3/packages/libraries/libcxx/include/stdlib.h \
+ C\:/Program\ Files/SEGGER/SEGGER\ Embedded\ Studio\ for\ ARM\ 5.42/include/stdlib.h \
  include/nrf_mesh_config_app.h ../../mesh/core/include/packet_mesh.h \
  ../../mesh/core/include/event.h ../../mesh/core/api/nrf_mesh_events.h \
  ../../mesh/dfu/api/nrf_mesh_dfu_types.h ../../mesh/core/include/list.h \

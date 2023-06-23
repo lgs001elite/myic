@@ -165,14 +165,14 @@ static bool next_packet_fetch(advertiser_t * p_adv)
         __LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "packet_buffer_free\n");
         if (packet_buffer_pop(&p_adv->buf, &p_packet_buf) == NRF_SUCCESS)
         {
-            __LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "packet_buffer_pop\n");
+            // __LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "packet_buffer_pop\n");
             p_adv->p_packet = (adv_packet_t *) p_packet_buf->packet;
             p_adv->broadcast.params.p_packet = &p_adv->p_packet->packet;
         }
         else
         {
             /* No more packets left. */
-            __LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "packet_buffer_free\n");
+            // __LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "packet_buffer_free\n");
             return false;
         }
     }
