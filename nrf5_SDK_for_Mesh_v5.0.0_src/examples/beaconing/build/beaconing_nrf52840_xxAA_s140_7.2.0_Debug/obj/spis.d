@@ -66,7 +66,6 @@ build/beaconing_nrf52840_xxAA_s140_7.2.0_Debug/obj/spis.o: \
  ../../../nRF5_SDK_17.0.2_d674dde/modules/nrfx/drivers/nrfx_errors.h \
  ../../../nRF5_SDK_17.0.2_d674dde/modules/nrfx/hal/nrf_spis.h \
  ../../../nRF5_SDK_17.0.2_d674dde/modules/nrfx/hal/nrf_gpio.h \
- ../../../nRF5_SDK_17.0.2_d674dde/integration/nrfx/legacy/nrf_drv_spis.h \
  ../../../nRF5_SDK_17.0.2_d674dde/modules/nrfx/hal/nrf_gpio.h \
  ../../../nRF5_SDK_17.0.2_d674dde/components/libraries/delay/nrf_delay.h \
  ../../../nRF5_SDK_17.0.2_d674dde/components/boards/boards.h \

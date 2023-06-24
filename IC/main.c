@@ -38,7 +38,6 @@ SPI_Mode MasterMode = IDLE_MODE;
 uint8_t TransmitRegAddr = 0;
 
 uint8_t RXByteCtr = 0;
-uint8_t ReceiveIndex = 0;
 uint8_t TXByteCtr = 0;
 uint8_t TransmitIndex = 0;
 
@@ -160,9 +159,9 @@ void initClockTo16MHz()
     CSCTL1 = DCOFSEL_4 | DCORSEL;         // Set DCO to 16MHz
 
     // Delay by ~10us to let DCO settle. 60 cycles = 20 cycles buffer + (10us / (1/4MHz))
-    __delay_cycles(60);
-    CSCTL3 = DIVA__1 | DIVS__1 | DIVM__1; // Set all dividers to 1 for 16MHz operation
-    CSCTL0_H = 0;
+    //    __delay_cycles(60);
+    //   CSCTL3 = DIVA__1 | DIVS__1 | DIVM__1; // Set all dividers to 1 for 16MHz operation
+    //    CSCTL0_H = 0;
 }
 
 int main(void)
@@ -172,9 +171,10 @@ int main(void)
     initClockTo16MHz();
     initGPIO();
     initSPI();
-    setNode(ICNODE);
+    setNode(SINK);
     g_sendAck = false;
     g_queueLen = 0;
+    ReceiveIndex = 0;
     g_preQueLen = 0;
     g_transDataSeq = 0;
     g_if_end_trans = false;
@@ -245,15 +245,6 @@ void start_spi_process(void)
         CopyArray(g_receiveBuffer, SlaveType0, SPI_DATA_LEN);
         // __delay_cycles(750000);
         receiveDataFromNordic();
-        if ((g_rounds == 0) && (g_queueLen == 0))
-        {
-            COMMS_LED_OUT ^= COMMS_LED_PIN;
-            COMMS_LED_OUT ^= COMMS_LED_PIN2;
-        }
-        else
-        {
-            COMMS_LED_OUT ^= COMMS_LED_PIN;
-        }
         if (g_sendAck == true)
         {
             produceNonPacketData();
@@ -263,6 +254,7 @@ void start_spi_process(void)
             update_crc();
             SPI_Master_WriteReg(CMD_TYPE_0_MASTER, SPI_DATA_LEN);
             __delay_cycles(1000000);
+            COMMS_LED_OUT ^= COMMS_LED_PIN;
             g_sendAck = false;
             continue;
         }
@@ -270,6 +262,7 @@ void start_spi_process(void)
         {
             if (g_if_sourceNode)
             {
+                COMMS_LED_OUT ^= COMMS_LED_PIN;
                 if (g_node_dimension == 0x7e)
                 {
                     continue;
@@ -277,11 +270,19 @@ void start_spi_process(void)
                 if (g_waitToFind == 0)
                 {
                     g_systemStatus = TRANSMIT;
+                    COMMS_LED_OUT ^= COMMS_LED_PIN;
                 }
             }
+            else
+            {
+                COMMS_LED_OUT ^= COMMS_LED_PIN;
+                COMMS_LED_OUT ^= COMMS_LED_PIN2;
             if (g_waitToFind == 0)
             {
                 g_systemStatus = SINKWAIT;
+                    COMMS_LED_OUT ^= COMMS_LED_PIN;
+                    COMMS_LED_OUT ^= COMMS_LED_PIN2;
+                }
             }
             // Produce a finding packet
             produceNonPacketData();
@@ -293,6 +294,7 @@ void start_spi_process(void)
         }
         else if (g_systemStatus == TRANSMIT)
         {
+            COMMS_LED_OUT ^= COMMS_LED_PIN;
             if (g_currentPairedNodeID != 0x7e)
             {
                 g_currentPairedNodeID = 0x7e;
@@ -340,6 +342,7 @@ void start_spi_process(void)
         }
         else if (g_systemStatus == RECEIVE)
         {
+            COMMS_LED_OUT ^= COMMS_LED_PIN2;
             if (g_waitSendCounter != 0)
             {
                 g_waitSendCounter = 0;
@@ -364,7 +367,6 @@ void start_spi_process(void)
         else if (g_systemStatus == SINKWAIT)
         {
             // DO nothing, Just keeping listning 
-                                                                                  printf("this is a test");
         }
     }
 }

@@ -52,7 +52,7 @@ void produceNonPacketData(void)
 {
     g_transBuffer[0] = 0x1E;
     g_transBuffer[1] = BLE_GAP_AD_TYPE;
-    g_transBuffer[2] = 0x7e;
+    g_transBuffer[2] = g_waitToFind;
     g_transBuffer[3] = DUBBY;
     g_transBuffer[4] = g_nodeAddress;
     g_transBuffer[5] = g_nextNodeID;

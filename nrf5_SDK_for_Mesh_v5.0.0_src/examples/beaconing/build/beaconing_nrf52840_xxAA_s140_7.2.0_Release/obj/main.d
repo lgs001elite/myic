@@ -137,7 +137,6 @@ build/beaconing_nrf52840_xxAA_s140_7.2.0_Release/obj/main.o: \
  ../common/include/example_common.h ../../mesh/core/include/uri.h \
  ../../mesh/core/api/nrf_mesh_configure.h \
  ../../mesh/bearer/api/ad_type_filter.h include/define_broadcast_packet.h \
- ../../../nRF5_SDK_17.0.2_d674dde/components/libraries/scheduler/app_scheduler.h \
  include/spis.h \
  C\:/Users/glu250/AppData/Local/SEGGER/SEGGER\ Embedded\ Studio/v3/packages/libraries/libcxx/include/stdlib.h \
  C\:/Program\ Files/SEGGER/SEGGER\ Embedded\ Studio\ for\ ARM\ 5.42/include/stdlib.h \
@@ -145,7 +144,6 @@ build/beaconing_nrf52840_xxAA_s140_7.2.0_Release/obj/main.o: \
  ../../../nRF5_SDK_17.0.2_d674dde/modules/nrfx/drivers/include/nrfx_spis.h \
  ../../../nRF5_SDK_17.0.2_d674dde/modules/nrfx/hal/nrf_spis.h \
  ../../../nRF5_SDK_17.0.2_d674dde/modules/nrfx/hal/nrf_gpio.h \
- ../../../nRF5_SDK_17.0.2_d674dde/integration/nrfx/legacy/nrf_drv_spis.h \
  include/spis_data.h include/define_broadcast_packet.h include/public.h \
  include/m2s.h include/crc.h include/spis_data.h include/m2s.h \
  include/crc.h include/public.h

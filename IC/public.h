@@ -38,7 +38,7 @@
 #define MAXFIND   10
 #define MAXWAIT   10
 
-#define PACKAGE_FIND     0x00
+#define PACKAGE_FIND     0x03
 #define PACKAGE_PACKET   0x01
 #define PACKAGE_FINISH   0x02
 // #define PACKAGE_RFINISH  0x03
@@ -70,6 +70,7 @@ uint16_t g_waitSendCounter;
 uint8_t  g_currentPairedNodeID;
 uint8_t  g_nextNodeID;
 bool g_sendAck;
+uint8_t        ReceiveIndex;
 uint16_t       g_waitToFind;
 uint8_t        g_rounds;
 uint8_t        g_queueLen;

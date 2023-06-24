@@ -101,28 +101,6 @@ void rx_cb(const nrf_mesh_adv_packet_rx_data_t * p_rx_data)
     {
         rec_packet[i + 3] = p_rx_data->p_payload[i];
     }
-    
-    // chekcing packet's crc
-    //crcInit();
-    //uint16_t crc_result = crcFast(rec_packet, 32);
-    //uint8_t  res1       = (crc_result & 0xFF00)>>8;
-    //uint8_t  res2       = (crc_result & 0x00FF);
-
-    //while (res1 >= 0x7F)
-    //{
-    //    res1 -= 0x7F;
-    //}
-
-    //while (res2 >= 0x7F)
-    //{
-    //    res2 -= 0x7F;
-    //}
-
-    //if ((res1 != p_rx_data->p_payload[29]) || (res2 != p_rx_data->p_payload[30]))
-    //{
-    //    __LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "----- res1: %X, res2: %X, p_rx_data->p_payload[29]: %X,p_rx_data->p_payload[30]: %X, check failure ------\n", res1, res2, p_rx_data->p_payload[29], p_rx_data->p_payload[30]);
-    //    //return;
-    //}
 
 
     for (uint8_t i = 0; i < 32; i++)

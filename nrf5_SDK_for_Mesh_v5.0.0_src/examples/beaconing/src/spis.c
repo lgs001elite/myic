@@ -2,6 +2,7 @@
 #include "nrf_delay.h"
 #include "advertiser.h"
 #include "nrf_log_ctrl.h"
+#include "nrf_drv_spis.h"
 
 #define    SPIS_INSTANCE    1 /**< SPIS instance index. */
 
@@ -14,7 +15,7 @@ uint8_t sendNum = 0;
 
 bool   spis_xfer_done =   false;  /**< Flag used to indicate that SPIS instance completed the transfer. */
 
-/**
+/**git 
  * @brief  SPIS check completeness of data(checksums of packets)
  */
 bool check_completeness(uint8_t * receivedData)

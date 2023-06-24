@@ -169,17 +169,21 @@ void data_is_ack(uint8_t *receivedData)
     }
 }
 
-void receiveDataFromNordic()
+bool receiveDataFromNordic()
 {
+    if (ReceiveIndex == 0)
+    {
+        return false;
+    }
     bool checkResult = check_completeness(g_receiveBuffer);
     if (!checkResult)
     {
-        return;
+        return false;
     }
     uint8_t dstNodeAddress = g_receiveBuffer[5];
     if (dstNodeAddress != g_nodeAddress)
     {
-        return;
+        return false;
     }
     uint8_t dataType = g_receiveBuffer[3];
     COMMS_LED_OUT ^= COMMS_LED_PIN2;
@@ -204,4 +208,5 @@ void receiveDataFromNordic()
     default:
         break;
     }
+    return true;
 }
