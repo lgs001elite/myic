@@ -7,9 +7,9 @@
 #define    SPIS_INSTANCE    1 /**< SPIS instance index. */
 
 const  nrf_drv_spis_t spis              = NRF_DRV_SPIS_INSTANCE(SPIS_INSTANCE);/**< SPIS instance. */                           /** < RX buffer. */
-uint8_t  m_rx_buf_spi[ACTUALDATAUNITS + 2] = {0};
+uint8_t  m_rx_buf_spi[ACTUALDATAUNITS + 1] = {0};
 uint8_t  m_tx_buf_spi[ACTUALDATAUNITS] = {0};
-uint8_t  m_recBuf[31]                 = {0} ;
+uint8_t  m_recBuf[32]                 = {0} ;
 // For testing
 uint8_t sendNum = 0;
 
@@ -66,10 +66,10 @@ void spis_event_handler(nrf_drv_spis_event_t event)
     {         
         spis_xfer_done = true;
          //__LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "*************************%d******************************\n", m_rx_buf_spi[3]);
-    //      for (uint8_t i = 0; i < 35; i++)
-    //{
-    //    __LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "%d: %X\n", i, m_rx_buf_spi[i]);
-    //}
+          for (uint8_t i = 0; i < 35; i++)
+    {
+        __LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "%d: %X\n", i, m_rx_buf_spi[i]);
+    }
         bool checkResult = check_completeness(m_rx_buf_spi);
         if (! checkResult)
         {

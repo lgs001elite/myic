@@ -5,7 +5,7 @@
 #include "spis_data.h"
 
 #define ACTUALDATAUNITS 33
-#define BROADCASTLEN    31
+#define BROADCASTLEN    32
 
 #define DUBBY 0x05
 
