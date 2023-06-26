@@ -12,8 +12,8 @@ void receiveData_sendout(uint8_t * s_data)
     m_recBuf[4] = (s_data[6] | ((s_data[7]<<4)  & 0XF0));
     // m_recBuf[5] = (s_data[8] | ((s_data[9]<<3) & 0XF8));
 
-    for(uint8_t i = 10; i < 34; i++)
+    for(uint8_t i = 8; i < 34; i++)
     {
-        m_recBuf[i - 5] = s_data[i];
+        m_recBuf[i - 3] = s_data[i];
     }
 }

@@ -43,11 +43,6 @@ bool check_completeness(uint8_t * receivedData)
     {
         res2 -= 0x7F;
     }
-
-    // for (uint8_t i = 0; i < 34; i++)
-    // {
-    //     __LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "*************************%d******************************\n", receivedData[i + 1]);
-    // }
     if (res1 != receivedData[33])
     {
         return false;

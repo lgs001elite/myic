@@ -4,7 +4,7 @@
 #include <stdbool.h>
 #include "spis_data.h"
 
-#define ACTUALDATAUNITS 34
+#define ACTUALDATAUNITS 33
 #define BROADCASTLEN    31
 
 #define DUBBY 0x05
