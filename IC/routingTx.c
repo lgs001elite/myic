@@ -59,11 +59,29 @@ void produceNonPacketData(void)
     g_transBuffer[6] = g_node_dimension;
     g_transBuffer[7] = 0;
     g_transBuffer[8] = 0;
-    
-    uint8_t j = 0;
-    for (; j < PACKET_DATA_LEN; j++)
+    uint8_t i = 9;
+    const uint8_t anchor = 9;
+    for (; i < 32; i++)
     {
-        g_transBuffer[j + 9] = 0x00;
+        uint8_t j = i - anchor;
+        g_transBuffer[i] = 0;
+    }
+    uint8_t crc_input[32];
+    i = 0;
+    for (; i < 32; i++)
+    {
+        crc_input[i] = g_transBuffer[i];
+    }
+    uint16_t crc_result = getCRC(crc_input);
+    g_transBuffer[32] = (crc_result & 0xFF00) >> 8;
+    g_transBuffer[33] = (crc_result & 0x00FF);
+    while (g_transBuffer[32] >= 0x7F)
+    {
+        g_transBuffer[32] -= 0x7F;
+    }
+    while (g_transBuffer[33] >= 0x7F)
+    {
+        g_transBuffer[33] -= 0x7F;
     }
 }
 

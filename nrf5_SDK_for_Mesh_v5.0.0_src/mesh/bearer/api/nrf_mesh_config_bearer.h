@@ -94,17 +94,17 @@
 
 /** Default advertisement interval. */
 #ifndef BEARER_ADV_INT_DEFAULT_MS
-#define BEARER_ADV_INT_DEFAULT_MS  30 /* 20; 300; : modefied by Gaosheng Liu*/
+#define BEARER_ADV_INT_DEFAULT_MS  30 //  The minimum value is 20ms.
 #endif
 
 /** Default scan interval */
 #ifndef BEARER_SCAN_INT_DEFAULT_MS
-#define BEARER_SCAN_INT_DEFAULT_MS  15 //10  /*2000 */
+#define BEARER_SCAN_INT_DEFAULT_MS  2000 // 2000
 #endif
 
 /** Default scan window */
 #ifndef BEARER_SCAN_WINDOW_DEFAULT_MS
-#define BEARER_SCAN_WINDOW_DEFAULT_MS 10 //10 /* 2000; cannot morh than scan interval */
+#define BEARER_SCAN_WINDOW_DEFAULT_MS 2000  // 2000
 #endif
 
 /** Default scanner buffer size */

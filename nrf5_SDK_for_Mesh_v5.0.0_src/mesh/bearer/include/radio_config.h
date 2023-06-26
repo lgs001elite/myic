@@ -101,8 +101,8 @@ typedef enum
     RADIO_MODE_NRF_1MBIT,   /*!< Proprietary 1Mbit/s mode*/
     RADIO_MODE_NRF_2MBIT,   /*!< High data rate */
     RADIO_MODE_NRF_250KBIT, /*!< Deprecated */
-    RADIO_MODE_BLE_1MBIT,   /*!< BLE 1Mbit/s mode*/
 #ifdef NRF52_SERIES
+    RADIO_MODE_BLE_1MBIT,   /*!< BLE 1Mbit/s mode*/
     RADIO_MODE_BLE_2MBIT,   /*!< BLE high data rate */
     RADIO_MODE_NRF_62K5BIT, /*!< Long range */
 #endif

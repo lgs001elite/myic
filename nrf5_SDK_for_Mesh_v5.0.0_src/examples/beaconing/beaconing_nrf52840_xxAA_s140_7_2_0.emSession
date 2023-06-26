@@ -2,7 +2,6 @@
 <session>
  <Bookmarks/>
  <Breakpoints groups="Breakpoints" active_group="Breakpoints">
-  <BreakpointListItem trigger="" line="33" counter="0" hardwareBreakpoint="" isFunctionBreakpoint="false" action="" expression="" group="Breakpoints" type="Breakpoint" state="4" filename="src/spis.c" useHWbreakpoint="false"/>
   <Exceptions set="MemManage;UsageFault_Coprocessor;UsageFault_CheckingError;UsageFault_StateError;BusFault;ExceptionEntryReturnFault;HardFault"/>
  </Breakpoints>
  <ExecutionProfileWindow/>
@@ -68,8 +67,8 @@
   <Watches active="0" update="Never"/>
  </Watch4>
  <Files>
-  <SessionOpenFile windowGroup="DockEditLeft" x="63" y="40" useTextEdit="1" path="src/main.c" left="0" top="107" codecName="Default"/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="33" y="36" useTextEdit="1" path="src/spis.c" left="0" selected="1" top="10" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="17" y="196" useTextEdit="1" path="src/main.c" left="0" selected="1" top="63" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="16" useTextEdit="1" path="src/spis.c" left="0" top="12" codecName="Default"/>
  </Files>
  <EMStudioWindow activeProject="beaconing_nrf52840_xxAA_s140_7.2.0" fileDialogDefaultFilter="*.c" autoConnectTarget="J-Link" buildConfiguration="Release" sessionSettings="" debugSearchFileMap="" fileDialogInitialDirectory="" debugSearchPath="" autoConnectCapabilities="3711"/>
 </session>

@@ -118,4 +118,5 @@ build/beaconing_nrf52840_xxAA_s140_7.2.0_Debug/obj/spis.o: \
  ../../../nRF5_SDK_17.0.2_d674dde/components/libraries/util/app_util.h \
  ../../../nRF5_SDK_17.0.2_d674dde/components/libraries/util/sdk_macros.h \
  ../../../nRF5_SDK_17.0.2_d674dde/components/libraries/log/nrf_log_backend_interface.h \
- ../../../nRF5_SDK_17.0.2_d674dde/components/libraries/experimental_section_vars/nrf_section.h
+ ../../../nRF5_SDK_17.0.2_d674dde/components/libraries/experimental_section_vars/nrf_section.h \
+ ../../../nRF5_SDK_17.0.2_d674dde/integration/nrfx/legacy/nrf_drv_spis.h

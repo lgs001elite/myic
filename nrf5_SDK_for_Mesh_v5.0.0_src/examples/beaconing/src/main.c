@@ -35,7 +35,7 @@
 /*****************************************************************************
  * Definitions
  *****************************************************************************/
-#define ADVERTISER_BUFFER_SIZE  (64)
+#define ADVERTISER_BUFFER_SIZE  (128)
 bool              g_if_sendNext          = false;
 advertiser_t      m_discovery_advertiser = {0};
 uint8_t           m_adv_buffer_discovery[ADVERTISER_BUFFER_SIZE]; 
@@ -75,6 +75,13 @@ void send_datagram_start()
  */
 void rx_cb(const nrf_mesh_adv_packet_rx_data_t * p_rx_data)
 {
+    //for (uint8_t i = 0; i < 29; i++) 
+    //{
+    //    __LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "p_payloa:%X  -----\n", p_rx_data->p_payload[i]);
+    //}
+
+    //__LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "p_payload:%X  -----\n", p_rx_data->p_payload[1]);
+
     if (p_rx_data->p_payload[1] != BLE_GAP_AD_TYPE_PUBLIC_TARGET_ADDRESS)
     {
         return;
@@ -182,7 +189,7 @@ void initialize(void)
 void start(void)
 {  
     /* Let scanner accept Complete Local Name AD Type. */
-    bearer_adtype_add(BLE_GAP_AD_TYPE_PUBLIC_TARGET_ADDRESS);
+    bearer_adtype_add(BLE_GAP_AD_TYPE_LE_BLUETOOTH_DEVICE_ADDRESS); // BLE_GAP_AD_TYPE_COMPLETE_LOCAL_NAME  BLE_GAP_AD_TYPE_LE_BLUETOOTH_DEVICE_ADDRESS BLE_GAP_AD_TYPE_PUBLIC_TARGET_ADDRESS
     ERROR_CHECK(mesh_stack_start());
     (void)sd_app_evt_wait();
     advertiser_enable(&m_discovery_advertiser);     /* Check if adv_instance is enable */

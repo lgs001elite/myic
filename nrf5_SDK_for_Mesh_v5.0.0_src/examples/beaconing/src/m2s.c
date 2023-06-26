@@ -16,5 +16,4 @@ void receiveData_sendout(uint8_t * s_data)
     {
         m_recBuf[i - 4] = s_data[i];
     }
-    //  __LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "dwekhwkjthrwet!\n");
 }
