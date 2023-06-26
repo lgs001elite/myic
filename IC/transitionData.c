@@ -3,7 +3,7 @@
 uint16_t getCRC(unsigned char const message[])
 {
     crcInit();
-    uint16_t crc_result = crcFast(message, 32);
+    uint16_t crc_result = crcFast(message, 31);
     return crc_result;  
 }
 

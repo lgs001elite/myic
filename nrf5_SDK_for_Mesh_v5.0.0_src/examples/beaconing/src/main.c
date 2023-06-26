@@ -110,7 +110,7 @@ void rx_cb(const nrf_mesh_adv_packet_rx_data_t * p_rx_data)
     }
 
 
-    for (uint8_t i = 0; i < 30; i++)
+    for (uint8_t i = 0; i < 31; i++)
     {
         m_tx_buf_spi[i] = rec_packet[i];
     }

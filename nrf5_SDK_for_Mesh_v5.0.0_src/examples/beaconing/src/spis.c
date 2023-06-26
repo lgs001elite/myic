@@ -7,7 +7,7 @@
 #define    SPIS_INSTANCE    1 /**< SPIS instance index. */
 
 const  nrf_drv_spis_t spis              = NRF_DRV_SPIS_INSTANCE(SPIS_INSTANCE);/**< SPIS instance. */                           /** < RX buffer. */
-uint8_t  m_rx_buf_spi[ACTUALDATAUNITS + 1] = {0};
+uint8_t  m_rx_buf_spi[ACTUALDATAUNITS + 2] = {0};
 uint8_t  m_tx_buf_spi[ACTUALDATAUNITS] = {0};
 uint8_t  m_recBuf[31]                 = {0} ;
 // For testing
@@ -24,13 +24,13 @@ bool check_completeness(uint8_t * receivedData)
     {
         return false;
     }
-    uint8_t crc_input[32];
-    for (uint8_t i = 1; i < 33; i++)
+    uint8_t crc_input[31];
+    for (uint8_t i = 1; i < 32; i++)
     {
         crc_input[i - 1] = receivedData[i];
     }
     crcInit();
-    uint16_t crc_result = crcFast(crc_input, 32);
+    uint16_t crc_result = crcFast(crc_input, 31);
     uint8_t  res1       = (crc_result & 0xFF00)>>8;
     uint8_t  res2       = (crc_result & 0x00FF);
 
@@ -43,12 +43,12 @@ bool check_completeness(uint8_t * receivedData)
     {
         res2 -= 0x7F;
     }
-    if (res1 != receivedData[33])
+    if (res1 != receivedData[32])
     {
         return false;
     }
 
-    if (res2 != receivedData[34])
+    if (res2 != receivedData[33])
     {
         return false;
     }

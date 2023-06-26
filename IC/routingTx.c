@@ -54,33 +54,33 @@ void produceNonPacketData(void)
     g_transBuffer[1] = BLE_GAP_AD_TYPE;
     g_transBuffer[2] = g_waitToFind;
     g_transBuffer[3] = DUBBY;
-    g_transBuffer[4] = g_nodeAddress;
-    g_transBuffer[5] = g_nextNodeID;
-    g_transBuffer[6] = g_node_dimension;
-    g_transBuffer[7] = 0;
+    g_transBuffer[4] = 0;
+    g_transBuffer[5] = 0;
+    g_transBuffer[6] = 0;
+    g_transBuffer[7] = g_node_dimension;
     uint8_t i = 8;
     const uint8_t anchor = 8;
-    for (; i < 32; i++)
+    for (; i < 31; i++)
     {
         uint8_t j = i - anchor;
         g_transBuffer[i] = 0;
     }
-    uint8_t crc_input[32];
+    uint8_t crc_input[31];
     i = 0;
-    for (; i < 32; i++)
+    for (; i < 31; i++)
     {
         crc_input[i] = g_transBuffer[i];
     }
     uint16_t crc_result = getCRC(crc_input);
-    g_transBuffer[32] = (crc_result & 0xFF00) >> 8;
-    g_transBuffer[33] = (crc_result & 0x00FF);
+    g_transBuffer[31] = (crc_result & 0xFF00) >> 8;
+    g_transBuffer[32] = (crc_result & 0x00FF);
+    while (g_transBuffer[31] >= 0x7F)
+    {
+        g_transBuffer[31] -= 0x7F;
+    }
     while (g_transBuffer[32] >= 0x7F)
     {
         g_transBuffer[32] -= 0x7F;
-    }
-    while (g_transBuffer[33] >= 0x7F)
-    {
-        g_transBuffer[33] -= 0x7F;
     }
 }
 
