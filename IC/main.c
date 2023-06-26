@@ -213,9 +213,9 @@ int main(void)
 
 void update_crc(void)
 {
-    uint8_t crc_input[SPI_NONCRC_LEN];
+    uint8_t crc_input[32];
     uint8_t i = 0;
-    for (; i < SPI_NONCRC_LEN; i++)
+    for (; i < 32; i++)
     {
         crc_input[i] = g_transBuffer[i];
     }
@@ -288,7 +288,7 @@ void start_spi_process(void)
             produceNonPacketData();
             g_transBuffer[3] = PACKAGE_FIND;
             update_crc();
-            SPI_Master_WriteReg(CMD_TYPE_0_MASTER, SPI_DATA_LEN);
+            SPI_Master_WriteReg(CMD_TYPE_0_MASTER, 34);
             g_waitToFind = g_waitToFind - 1;
             __delay_cycles(1000000);
         }

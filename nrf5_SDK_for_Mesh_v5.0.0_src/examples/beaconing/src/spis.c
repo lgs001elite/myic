@@ -22,15 +22,8 @@ bool check_completeness(uint8_t * receivedData)
 {
     if (receivedData[2] != BLE_GAP_AD_TYPE_PUBLIC_TARGET_ADDRESS)
     {
-        // __LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "ACTUALDATAUNITS: %X! \n",ACTUALDATAUNITS);
-        //for (uint8_t i = 0; i < 35; i++)
-        //{
-        //    __LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "receivedData: %X \n", receivedData[i]);
-        //}
-        //__LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "receivedData[2]: %X! \n", receivedData[1]);
         return false;
     }
-
     uint8_t crc_input[32];
     for (uint8_t i = 1; i < 33; i++)
     {
@@ -41,34 +34,27 @@ bool check_completeness(uint8_t * receivedData)
     uint8_t  res1       = (crc_result & 0xFF00)>>8;
     uint8_t  res2       = (crc_result & 0x00FF);
 
-    //for (uint8_t i = 0; i < 35; i++)
-    //{
-    //    __LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "receivedData%d: %X \n", i, receivedData[i]);
-    //}
-
     while (res1 >= 0x7F)
     {
-        // __LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "res1: %X! \n",res1);
         res1 -= 0x7F;
     }
 
     while (res2 >= 0x7F)
     {
-        // __LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "res2: %X! \n",res2);
         res2 -= 0x7F;
     }
-    
+
+    // for (uint8_t i = 0; i < 34; i++)
+    // {
+    //     __LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "*************************%d******************************\n", receivedData[i + 1]);
+    // }
     if (res1 != receivedData[33])
     {
-        // __LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "failed! res1: %X\
-            , receivedData[33]: %X! \n", res1, receivedData[33]);
         return false;
     }
 
     if (res2 != receivedData[34])
     {
-        // __LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "failed! res2: %X, \
-        //     receivedData[34]: %X! \n", res2, receivedData[34]);
         return false;
     }
 
@@ -84,23 +70,22 @@ void spis_event_handler(nrf_drv_spis_event_t event)
     if (event.evt_type == NRF_DRV_SPIS_XFER_DONE)
     {         
         spis_xfer_done = true;
+         //__LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "*************************%d******************************\n", m_rx_buf_spi[3]);
+    //      for (uint8_t i = 0; i < 35; i++)
+    //{
+    //    __LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "%d: %X\n", i, m_rx_buf_spi[i]);
+    //}
         bool checkResult = check_completeness(m_rx_buf_spi);
         if (! checkResult)
         {
-            // __LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "pass fail!\n");
+    //        for (uint8_t i = 0; i < 34; i++)
+    //{
+    //    __LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "*************************%d: %X******************************\n", i, m_rx_buf_spi[i]);
+    //}
             return;
         }
-        // test start
-        uint8_t receivedFindNum = m_rx_buf_spi[3];
-        if (receivedFindNum == 0)
-        {
-            // __LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "888888\n");
-        }
-         __LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "*************************%d******************************\n", receivedFindNum);
-        // test end
+        __LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "*************************%d******************************\n", m_rx_buf_spi[3]);
         uint8_t statusAction = m_rx_buf_spi[4];
-        // __LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "pass check\n");
-        // __LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "receive status: %X, SEQ: %x\n", statusAction, m_rx_buf_spi[3]);
         switch (statusAction)
         {
             case DUBBY:

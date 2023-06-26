@@ -102,20 +102,20 @@ void rx_cb(const nrf_mesh_adv_packet_rx_data_t * p_rx_data)
     rec_packet[4]          = ((p_rx_data->p_payload[3])  & 0xF0)>>4;
     rec_packet[5]          = ((p_rx_data->p_payload[4]) & 0x0f);
     rec_packet[6]          = ((p_rx_data->p_payload[4])  & 0xF0)>>4;
-    rec_packet[7]          = ((p_rx_data->p_payload[5]) & 0x07);
-    rec_packet[8] = (((p_rx_data->p_payload[5]) & 0xF8) >> 3) & 0x1F;
-    for (uint8_t i = 6; i < 29; i++) // 6: payload starting point, 29: crc starting point
+    // rec_packet[7]          = ((p_rx_data->p_payload[5]) & 0x07);
+    // rec_packet[8] = (((p_rx_data->p_payload[5]) & 0xF8) >> 3) & 0x1F;
+    for (uint8_t i = 5; i < 29; i++) // 6: payload starting point, 29: crc starting point
     {
-        rec_packet[i + 3] = p_rx_data->p_payload[i];
+        rec_packet[i + 2] = p_rx_data->p_payload[i];
     }
 
 
-    for (uint8_t i = 0; i < 32; i++)
+    for (uint8_t i = 0; i < 30; i++)
     {
         m_tx_buf_spi[i] = rec_packet[i];
     }
-    m_tx_buf_spi[32] = p_rx_data->p_payload[29];
-    m_tx_buf_spi[33] = p_rx_data->p_payload[30];
+    m_tx_buf_spi[30] = p_rx_data->p_payload[29];
+    m_tx_buf_spi[31] = p_rx_data->p_payload[30];
     spis_setfrom_slave(m_tx_buf_spi, ACTUALDATAUNITS);
     __LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "----- received successfully  seq: %X-----\n", m_tx_buf_spi[2]);
 }

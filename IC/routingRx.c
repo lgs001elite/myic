@@ -171,10 +171,10 @@ void data_is_ack(uint8_t *receivedData)
 
 bool receiveDataFromNordic()
 {
-    if (ReceiveIndex == 0)
-    {
-        return false;
-    }
+    // if (ReceiveIndex == 0)
+    // {
+    //     return false;
+    // }
     bool checkResult = check_completeness(g_receiveBuffer);
     if (!checkResult)
     {

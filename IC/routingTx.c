@@ -58,9 +58,8 @@ void produceNonPacketData(void)
     g_transBuffer[5] = g_nextNodeID;
     g_transBuffer[6] = g_node_dimension;
     g_transBuffer[7] = 0;
-    g_transBuffer[8] = 0;
-    uint8_t i = 9;
-    const uint8_t anchor = 9;
+    uint8_t i = 8;
+    const uint8_t anchor = 8;
     for (; i < 32; i++)
     {
         uint8_t j = i - anchor;

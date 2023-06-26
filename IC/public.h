@@ -47,8 +47,8 @@
 
 #define BLE_GAP_AD_TYPE  0x17
 #define PACKET_DATA_LEN  0x17
-#define SPI_NONCRC_LEN   0x20
-#define SPI_DATA_LEN     0x22
+#define SPI_NONCRC_LEN   0x1F
+#define SPI_DATA_LEN     0x21
 
 typedef struct spi_datagram
 {
@@ -59,8 +59,7 @@ typedef struct spi_datagram
         round : 4;
     uint8_t src : 4,
         dst : 4;
-    uint8_t layer : 3,
-        p_len : 5;
+    uint8_t layer;
     uint8_t df[23];
     uint8_t crc[2];
 } SPI_DATAGRAM;
@@ -79,8 +78,8 @@ uint8_t        g_systemStatus;
 uint8_t        g_nodeAddress;
 uint8_t        g_seq_data;
 uint8_t        g_seq_header;
-uint8_t        g_receiveBuffer[SPI_DATA_LEN];
-uint8_t        g_transBuffer[SPI_DATA_LEN];
+uint8_t        g_receiveBuffer[SPI_DATA_LEN + 1];
+uint8_t        g_transBuffer[SPI_DATA_LEN + 1];
 uint8_t        g_node_dimension;
 bool           g_if_send_next;
 bool           g_if_end_trans;
