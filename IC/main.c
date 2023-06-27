@@ -245,6 +245,7 @@ void start_spi_process(void)
         CopyArray(g_receiveBuffer, SlaveType0, SPI_DATA_LEN);
         // __delay_cycles(750000);
         receiveDataFromNordic();
+        __delay_cycles(1);
         if (g_sendAck == true)
         {
             produceNonPacketData();
@@ -353,11 +354,12 @@ void start_spi_process(void)
             {
                 g_waitReceiveCounter = g_waitReceiveCounter + 1;
             }
-
+            __delay_cycles(1000000);
         }
         else if (g_systemStatus == SINKWAIT)
         {
             // DO nothing, Just keeping listning 
+            __delay_cycles(1000000);
         }
     }
 }

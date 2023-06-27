@@ -179,6 +179,7 @@ bool receiveDataFromNordic()
     uint8_t dataType = g_receiveBuffer[3];
     switch (dataType)
     {
+    __delay_cycles(1);
     case PACKAGE_FIND:
         data_is_find(g_receiveBuffer);
         COMMS_LED_OUT ^= COMMS_LED_PIN;
