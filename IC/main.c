@@ -73,7 +73,7 @@ SPI_Mode SPI_Master_WriteReg(uint8_t reg_addr, uint8_t count)
     TXByteCtr = count;
     RXByteCtr = 0;
     TransmitIndex = 0;
-
+    ReceiveIndex = 0;
     SLAVE_CS_OUT &= ~(SLAVE_CS_PIN);
     SendUCB1Data(TransmitRegAddr);
 
@@ -90,7 +90,7 @@ SPI_Mode SPI_Master_ReadReg(uint8_t reg_addr, uint8_t count)
     RXByteCtr = count;
     TXByteCtr = 0;
     ReceiveIndex = 0;
-
+    TransmitIndex = 0;
     SLAVE_CS_OUT &= ~(SLAVE_CS_PIN);
     SendUCB1Data(TransmitRegAddr);
 
