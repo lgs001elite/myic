@@ -254,7 +254,6 @@ void start_spi_process(void)
             update_crc();
             SPI_Master_WriteReg(CMD_TYPE_0_MASTER, SPI_DATA_LEN);
             __delay_cycles(1000000);
-            COMMS_LED_OUT ^= COMMS_LED_PIN;
             g_sendAck = false;
             continue;
         }
@@ -262,7 +261,6 @@ void start_spi_process(void)
         {
             if (g_if_sourceNode)
             {
-                COMMS_LED_OUT ^= COMMS_LED_PIN;
                 if (g_node_dimension == 0x7e)
                 {
                     continue;
@@ -270,18 +268,13 @@ void start_spi_process(void)
                 if (g_waitToFind == 0)
                 {
                     g_systemStatus = TRANSMIT;
-                    COMMS_LED_OUT ^= COMMS_LED_PIN;
                 }
             }
             else
             {
-                COMMS_LED_OUT ^= COMMS_LED_PIN;
-                COMMS_LED_OUT ^= COMMS_LED_PIN2;
             if (g_waitToFind == 0)
             {
                 g_systemStatus = SINKWAIT;
-                    COMMS_LED_OUT ^= COMMS_LED_PIN;
-                    COMMS_LED_OUT ^= COMMS_LED_PIN2;
                 }
             }
             // Produce a finding packet
@@ -294,7 +287,6 @@ void start_spi_process(void)
         }
         else if (g_systemStatus == TRANSMIT)
         {
-            COMMS_LED_OUT ^= COMMS_LED_PIN;
             if (g_currentPairedNodeID != 0x7e)
             {
                 g_currentPairedNodeID = 0x7e;
@@ -342,7 +334,6 @@ void start_spi_process(void)
         }
         else if (g_systemStatus == RECEIVE)
         {
-            COMMS_LED_OUT ^= COMMS_LED_PIN2;
             if (g_waitSendCounter != 0)
             {
                 g_waitSendCounter = 0;
