@@ -215,23 +215,23 @@ void update_crc(void)
 {
     uint8_t crc_input[32];
     uint8_t i = 0;
-    for (; i < 32; i++)
+    for (; i < 31; i++)
     {
         crc_input[i] = g_transBuffer[i];
     }
 
     uint16_t crc_result = getCRC(crc_input);
-    g_transBuffer[32] = (crc_result & 0xFF00) >> 8;
-    g_transBuffer[33] = (crc_result & 0x00FF);
+    g_transBuffer[31] = (crc_result & 0xFF00) >> 8;
+    g_transBuffer[32] = (crc_result & 0x00FF);
+
+    while (g_transBuffer[31] >= 0x7F)
+    {
+        g_transBuffer[31] -= 0x7F;
+    }
 
     while (g_transBuffer[32] >= 0x7F)
     {
         g_transBuffer[32] -= 0x7F;
-    }
-
-    while (g_transBuffer[33] >= 0x7F)
-    {
-        g_transBuffer[33] -= 0x7F;
     }
 }
 
@@ -288,7 +288,7 @@ void start_spi_process(void)
             produceNonPacketData();
             g_transBuffer[3] = PACKAGE_FIND;
             update_crc();
-            SPI_Master_WriteReg(CMD_TYPE_0_MASTER, 34);
+            SPI_Master_WriteReg(CMD_TYPE_0_MASTER, 33);
             g_waitToFind = g_waitToFind - 1;
             __delay_cycles(1000000);
         }
