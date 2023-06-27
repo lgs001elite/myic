@@ -65,7 +65,6 @@ void send2bearer(advertiser_t * p_adv, uint8_t * adv_packet)
 
 void send_datagram_start()
 {
-    // __LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "********************* Adv --- starting *****************\n"); 
     send2bearer(&m_discovery_advertiser, m_recBuf);
 }
 
@@ -75,13 +74,6 @@ void send_datagram_start()
  */
 void rx_cb(const nrf_mesh_adv_packet_rx_data_t * p_rx_data)
 {
-    //for (uint8_t i = 0; i < 29; i++) 
-    //{
-    //    __LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "p_payloa:%X  -----\n", p_rx_data->p_payload[i]);
-    //}
-
-    //__LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "p_payload:%X  -----\n", p_rx_data->p_payload[1]);
-
     if (p_rx_data->p_payload[1] != BLE_GAP_AD_TYPE_PUBLIC_TARGET_ADDRESS)
     {
         return;
@@ -89,11 +81,8 @@ void rx_cb(const nrf_mesh_adv_packet_rx_data_t * p_rx_data)
 
     if (p_rx_data->length != BLE_ADV_PACKET_PAYLOAD_MAX_LENGTH)
     {
-        //__LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "----- p_rx_data->length:%d  -----\n", p_rx_data->length);
         return;
     }
-
-    // receing and check the packets
     uint8_t rec_packet[32] = {0};
     rec_packet[0]          = p_rx_data->p_payload[0];
     rec_packet[1]          = p_rx_data->p_payload[1];
@@ -102,8 +91,6 @@ void rx_cb(const nrf_mesh_adv_packet_rx_data_t * p_rx_data)
     rec_packet[4]          = ((p_rx_data->p_payload[3])  & 0xF0)>>4;
     rec_packet[5]          = ((p_rx_data->p_payload[4]) & 0x0f);
     rec_packet[6]          = ((p_rx_data->p_payload[4])  & 0xF0)>>4;
-    // rec_packet[7]          = ((p_rx_data->p_payload[5]) & 0x07);
-    // rec_packet[8] = (((p_rx_data->p_payload[5]) & 0xF8) >> 3) & 0x1F;
     for (uint8_t i = 5; i < 29; i++) // 6: payload starting point, 29: crc starting point
     {
         rec_packet[i + 2] = p_rx_data->p_payload[i];

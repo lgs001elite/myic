@@ -86,8 +86,8 @@ bool check_completeness(uint8_t *receivedData)
 void data_is_datagram(uint8_t *receivedData)
 {
     // For datapackets, need to judge the relative layers between nodes.
-    uint8_t layerSendNode = receivedData[6];
-    uint8_t senderID = receivedData[4];
+    uint8_t layerSendNode = receivedData[7];
+    uint8_t senderID = receivedData[5];
     uint8_t packetSeq = receivedData[2];
     if (layerSendNode <= g_node_dimension)
     {
@@ -125,18 +125,18 @@ void data_is_datagram(uint8_t *receivedData)
 
 void data_is_find(uint8_t *receivedData)
 {
-    uint8_t receivedLayerNum = receivedData[6];
-    if (g_node_dimension > receivedLayerNum)
+    uint8_t receivedLayerNum = receivedData[7];
+    if (g_node_dimension > (receivedLayerNum + 1))
     {
-        g_node_dimension = receivedLayerNum;
+        g_node_dimension = receivedLayerNum + 1;
         g_waitToFind = receivedData[2] + 0x7e;
     }
 }
 
 void data_is_ack(uint8_t *receivedData)
 {
-    uint8_t aimID = receivedData[5];
-    uint8_t senderID = receivedData[4];
+    uint8_t aimID = receivedData[6];
+    uint8_t senderID = receivedData[5];
     uint8_t packetSeq = receivedData[2];
     if (aimID != g_nodeAddress)
     {

@@ -17,7 +17,7 @@ void free_pointer(uint8_t * pointer)
 void produceData(void)
 {
     uint32_t i = 0;
-    for (; i < (MAXQUELEN/2); i++)
+    for (; i < (MAXQUELEN); i++)
     {
         g_packetQueue[g_queueLen].hp_len = 0x1E;
         g_packetQueue[g_queueLen].t_broad_type = BLE_GAP_AD_TYPE;

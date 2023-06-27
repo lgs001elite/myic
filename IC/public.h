@@ -25,7 +25,7 @@
 #define MAXUINT8 0x5f
 #define ICNODE     1
 #define SINK       2
-#define MAXBYTE    120
+#define MAXBYTE    0x17
 
 #define NONLAYER  0
 #define TRANSMIT  1

@@ -250,7 +250,7 @@ void start_spi_process(void)
             produceNonPacketData();
             g_transBuffer[2] = g_pre_packet_seq;
             g_transBuffer[3] = PACKAGE_ACK;
-            g_transBuffer[5] = g_currentPairedNodeID;
+            g_transBuffer[6] = g_currentPairedNodeID;
             update_crc();
             SPI_Master_WriteReg(CMD_TYPE_0_MASTER, SPI_DATA_LEN);
             __delay_cycles(1000000);

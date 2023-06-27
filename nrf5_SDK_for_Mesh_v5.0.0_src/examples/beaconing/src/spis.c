@@ -70,7 +70,6 @@ void spis_event_handler(nrf_drv_spis_event_t event)
         {
             return;
         }
-        __LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "*************************%d******************************\n", m_rx_buf_spi[3]);
         uint8_t statusAction = m_rx_buf_spi[4];
         switch (statusAction)
         {
