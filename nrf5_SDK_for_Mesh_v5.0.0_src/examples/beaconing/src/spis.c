@@ -15,9 +15,6 @@ uint8_t sendNum = 0;
 
 bool   spis_xfer_done =   false;  /**< Flag used to indicate that SPIS instance completed the transfer. */
 
-/**git 
- * @brief  SPIS check completeness of data(checksums of packets)
- */
 bool check_completeness(uint8_t * receivedData)
 {
     if (receivedData[2] != BLE_GAP_AD_TYPE_PUBLIC_TARGET_ADDRESS)
@@ -56,10 +53,6 @@ bool check_completeness(uint8_t * receivedData)
     return true;
 }
 
-/**
- * @brief SPIS user event handler.
- * @param event
- */
 void spis_event_handler(nrf_drv_spis_event_t event)
 {
     if (event.evt_type == NRF_DRV_SPIS_XFER_DONE)
