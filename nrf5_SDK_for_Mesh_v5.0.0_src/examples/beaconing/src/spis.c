@@ -66,7 +66,7 @@ void spis_event_handler(nrf_drv_spis_event_t event)
     {         
         spis_xfer_done = true;
          //__LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "*************************%d******************************\n", m_rx_buf_spi[3]);
-          for (uint8_t i = 0; i < 35; i++)
+          for (uint8_t i = 0; i < 34; i++)
     {
         __LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "%d: %X\n", i, m_rx_buf_spi[i]);
     }

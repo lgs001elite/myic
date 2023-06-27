@@ -19156,13 +19156,12 @@ Linker script and memory map
  .bss.p_broad_packet
                 0x0000000020002f80        0x4 build/beaconing_nrf52840_xxAA_s140_7.2.0_Debug/obj/main.o
                 0x0000000020002f80                p_broad_packet
- .bss.m_recBuf  0x0000000020002f84       0x1f build/beaconing_nrf52840_xxAA_s140_7.2.0_Debug/obj/spis.o
+ .bss.m_recBuf  0x0000000020002f84       0x20 build/beaconing_nrf52840_xxAA_s140_7.2.0_Debug/obj/spis.o
                 0x0000000020002f84                m_recBuf
- *fill*         0x0000000020002fa3        0x1 
  .bss.m_rx_buf_spi
-                0x0000000020002fa4       0x23 build/beaconing_nrf52840_xxAA_s140_7.2.0_Debug/obj/spis.o
+                0x0000000020002fa4       0x22 build/beaconing_nrf52840_xxAA_s140_7.2.0_Debug/obj/spis.o
                 0x0000000020002fa4                m_rx_buf_spi
- *fill*         0x0000000020002fc7        0x1 
+ *fill*         0x0000000020002fc6        0x2 
  .bss.m_tx_buf_spi
                 0x0000000020002fc8       0x21 build/beaconing_nrf52840_xxAA_s140_7.2.0_Debug/obj/spis.o
                 0x0000000020002fc8                m_tx_buf_spi
@@ -19955,102 +19954,102 @@ LOAD linker stubs
  .debug_frame   0x000000000000ad64      0x3a0 build/beaconing_nrf52840_xxAA_s140_7.2.0_Debug/obj/app_timer_mesh.o
  .debug_frame   0x000000000000b104       0x3c build/beaconing_nrf52840_xxAA_s140_7.2.0_Debug/obj/app_timer_workaround.o
 
-.debug_info     0x0000000000000000    0x7baae
+.debug_info     0x0000000000000000    0x7babe
  .debug_info    0x0000000000000000     0x212b build/beaconing_nrf52840_xxAA_s140_7.2.0_Debug/obj/main.o
- .debug_info    0x000000000000212b      0xfe1 build/beaconing_nrf52840_xxAA_s140_7.2.0_Debug/obj/spis.o
- .debug_info    0x000000000000310c      0x109 build/beaconing_nrf52840_xxAA_s140_7.2.0_Debug/obj/m2s.o
- .debug_info    0x0000000000003215      0x20d build/beaconing_nrf52840_xxAA_s140_7.2.0_Debug/obj/crc.o
- .debug_info    0x0000000000003422      0x134 build/beaconing_nrf52840_xxAA_s140_7.2.0_Debug/obj/spis_data.o
- .debug_info    0x0000000000003556      0xc55 build/beaconing_nrf52840_xxAA_s140_7.2.0_Debug/obj/simple_hal.o
- .debug_info    0x00000000000041ab      0xa8e build/beaconing_nrf52840_xxAA_s140_7.2.0_Debug/obj/ble_softdevice_support.o
- .debug_info    0x0000000000004c39       0xb8 build/beaconing_nrf52840_xxAA_s140_7.2.0_Debug/obj/nrf_mesh_weak.o
- .debug_info    0x0000000000004cf1      0x6b8 build/beaconing_nrf52840_xxAA_s140_7.2.0_Debug/obj/app_error_weak.o
- .debug_info    0x00000000000053a9      0x126 build/beaconing_nrf52840_xxAA_s140_7.2.0_Debug/obj/assertion_handler_weak.o
- .debug_info    0x00000000000054cf      0x56f build/beaconing_nrf52840_xxAA_s140_7.2.0_Debug/obj/nrf_mesh_configure.o
- .debug_info    0x0000000000005a3e      0x20f build/beaconing_nrf52840_xxAA_s140_7.2.0_Debug/obj/msg_cache.o
- .debug_info    0x0000000000005c4d     0x53dc build/beaconing_nrf52840_xxAA_s140_7.2.0_Debug/obj/transport.o
- .debug_info    0x000000000000b029     0x1600 build/beaconing_nrf52840_xxAA_s140_7.2.0_Debug/obj/event.o
- .debug_info    0x000000000000c629     0x1717 build/beaconing_nrf52840_xxAA_s140_7.2.0_Debug/obj/packet_buffer.o
- .debug_info    0x000000000000dd40     0x2143 build/beaconing_nrf52840_xxAA_s140_7.2.0_Debug/obj/flash_manager_defrag.o
- .debug_info    0x000000000000fe83      0x4f6 build/beaconing_nrf52840_xxAA_s140_7.2.0_Debug/obj/fifo.o
- .debug_info    0x0000000000010379      0x37c build/beaconing_nrf52840_xxAA_s140_7.2.0_Debug/obj/nrf_flash.o
- .debug_info    0x00000000000106f5     0x2b47 build/beaconing_nrf52840_xxAA_s140_7.2.0_Debug/obj/net_state.o
- .debug_info    0x000000000001323c     0x131f build/beaconing_nrf52840_xxAA_s140_7.2.0_Debug/obj/mesh_flash.o
- .debug_info    0x000000000001455b      0x236 build/beaconing_nrf52840_xxAA_s140_7.2.0_Debug/obj/nrf_mesh_utils.o
- .debug_info    0x0000000000014791     0x2411 build/beaconing_nrf52840_xxAA_s140_7.2.0_Debug/obj/nrf_mesh.o
- .debug_info    0x0000000000016ba2      0x50d build/beaconing_nrf52840_xxAA_s140_7.2.0_Debug/obj/queue.o
- .debug_info    0x00000000000170af      0x786 build/beaconing_nrf52840_xxAA_s140_7.2.0_Debug/obj/hal.o
- .debug_info    0x0000000000017835      0x798 build/beaconing_nrf52840_xxAA_s140_7.2.0_Debug/obj/aes_cmac.o
- .debug_info    0x0000000000017fcd      0xacd build/beaconing_nrf52840_xxAA_s140_7.2.0_Debug/obj/timer_scheduler.o
- .debug_info    0x0000000000018a9a      0x5e5 build/beaconing_nrf52840_xxAA_s140_7.2.0_Debug/obj/timer.o
- .debug_info    0x000000000001907f      0x419 build/beaconing_nrf52840_xxAA_s140_7.2.0_Debug/obj/rand.o
- .debug_info    0x0000000000019498      0x5d4 build/beaconing_nrf52840_xxAA_s140_7.2.0_Debug/obj/mesh_opt.o
- .debug_info    0x0000000000019a6c     0x1320 build/beaconing_nrf52840_xxAA_s140_7.2.0_Debug/obj/timeslot.o
- .debug_info    0x000000000001ad8c      0xd17 build/beaconing_nrf52840_xxAA_s140_7.2.0_Debug/obj/timeslot_timer.o
- .debug_info    0x000000000001baa3     0x183d build/beaconing_nrf52840_xxAA_s140_7.2.0_Debug/obj/bearer_event.o
- .debug_info    0x000000000001d2e0      0xf3f build/beaconing_nrf52840_xxAA_s140_7.2.0_Debug/obj/enc.o
- .debug_info    0x000000000001e21f     0x1d62 build/beaconing_nrf52840_xxAA_s140_7.2.0_Debug/obj/network.o
- .debug_info    0x000000000001ff81     0x15d6 build/beaconing_nrf52840_xxAA_s140_7.2.0_Debug/obj/net_packet.o
- .debug_info    0x0000000000021557      0x5b7 build/beaconing_nrf52840_xxAA_s140_7.2.0_Debug/obj/msqueue.o
- .debug_info    0x0000000000021b0e      0x602 build/beaconing_nrf52840_xxAA_s140_7.2.0_Debug/obj/nrf_mesh_keygen.o
- .debug_info    0x0000000000022110      0x5f6 build/beaconing_nrf52840_xxAA_s140_7.2.0_Debug/obj/list.o
- .debug_info    0x0000000000022706      0x524 build/beaconing_nrf52840_xxAA_s140_7.2.0_Debug/obj/log.o
- .debug_info    0x0000000000022c2a     0x40d4 build/beaconing_nrf52840_xxAA_s140_7.2.0_Debug/obj/flash_manager.o
- .debug_info    0x0000000000026cfe      0xb82 build/beaconing_nrf52840_xxAA_s140_7.2.0_Debug/obj/ccm_soft.o
- .debug_info    0x0000000000027880     0x2bf8 build/beaconing_nrf52840_xxAA_s140_7.2.0_Debug/obj/replay_cache.o
- .debug_info    0x000000000002a478     0x10a5 build/beaconing_nrf52840_xxAA_s140_7.2.0_Debug/obj/beacon.o
- .debug_info    0x000000000002b51d      0x33f build/beaconing_nrf52840_xxAA_s140_7.2.0_Debug/obj/flash_manager_internal.o
- .debug_info    0x000000000002b85c      0xb74 build/beaconing_nrf52840_xxAA_s140_7.2.0_Debug/obj/core_tx.o
- .debug_info    0x000000000002c3d0     0x25c6 build/beaconing_nrf52840_xxAA_s140_7.2.0_Debug/obj/heartbeat.o
- .debug_info    0x000000000002e996     0x2c25 build/beaconing_nrf52840_xxAA_s140_7.2.0_Debug/obj/net_beacon.o
- .debug_info    0x00000000000315bb     0x2b56 build/beaconing_nrf52840_xxAA_s140_7.2.0_Debug/obj/mesh_config.o
- .debug_info    0x0000000000034111      0xf6d build/beaconing_nrf52840_xxAA_s140_7.2.0_Debug/obj/mesh_config_backend.o
- .debug_info    0x000000000003507e     0x27dc build/beaconing_nrf52840_xxAA_s140_7.2.0_Debug/obj/mesh_config_flashman_glue.o
- .debug_info    0x000000000003785a      0xbe1 build/beaconing_nrf52840_xxAA_s140_7.2.0_Debug/obj/core_tx_local.o
- .debug_info    0x000000000003843b      0x8dd build/beaconing_nrf52840_xxAA_s140_7.2.0_Debug/obj/emergency_cache.o
- .debug_info    0x0000000000038d18     0x1f07 build/beaconing_nrf52840_xxAA_s140_7.2.0_Debug/obj/core_tx_adv.o
- .debug_info    0x000000000003ac1f      0x17d build/beaconing_nrf52840_xxAA_s140_7.2.0_Debug/obj/mesh_mem_stdlib.o
- .debug_info    0x000000000003ad9c     0x2ab4 build/beaconing_nrf52840_xxAA_s140_7.2.0_Debug/obj/mesh_stack.o
- .debug_info    0x000000000003d850       0x22 build/beaconing_nrf52840_xxAA_s140_7.2.0_Debug/obj/thumb_crt0.o
- .debug_info    0x000000000003d872      0xa04 build/beaconing_nrf52840_xxAA_s140_7.2.0_Debug/obj/access_publish.o
- .debug_info    0x000000000003e276      0x960 build/beaconing_nrf52840_xxAA_s140_7.2.0_Debug/obj/access_publish_retransmission.o
- .debug_info    0x000000000003ebd6     0x5606 build/beaconing_nrf52840_xxAA_s140_7.2.0_Debug/obj/access.o
- .debug_info    0x00000000000441dc     0x148a build/beaconing_nrf52840_xxAA_s140_7.2.0_Debug/obj/access_reliable.o
- .debug_info    0x0000000000045666     0x7860 build/beaconing_nrf52840_xxAA_s140_7.2.0_Debug/obj/device_state_manager.o
- .debug_info    0x000000000004cec6      0x730 build/beaconing_nrf52840_xxAA_s140_7.2.0_Debug/obj/ad_listener.o
- .debug_info    0x000000000004d5f6      0x7c9 build/beaconing_nrf52840_xxAA_s140_7.2.0_Debug/obj/ad_type_filter.o
- .debug_info    0x000000000004ddbf     0x262b build/beaconing_nrf52840_xxAA_s140_7.2.0_Debug/obj/advertiser.o
- .debug_info    0x00000000000503ea     0x1e24 build/beaconing_nrf52840_xxAA_s140_7.2.0_Debug/obj/bearer_handler.o
- .debug_info    0x000000000005220e     0x145b build/beaconing_nrf52840_xxAA_s140_7.2.0_Debug/obj/broadcast.o
- .debug_info    0x0000000000053669      0x62e build/beaconing_nrf52840_xxAA_s140_7.2.0_Debug/obj/filter_engine.o
- .debug_info    0x0000000000053c97      0xad6 build/beaconing_nrf52840_xxAA_s140_7.2.0_Debug/obj/radio_config.o
- .debug_info    0x000000000005476d     0x250a build/beaconing_nrf52840_xxAA_s140_7.2.0_Debug/obj/scanner.o
- .debug_info    0x0000000000056c77     0x1118 build/beaconing_nrf52840_xxAA_s140_7.2.0_Debug/obj/mesh_pa_lna.o
- .debug_info    0x0000000000057d8f     0x16ca build/beaconing_nrf52840_xxAA_s140_7.2.0_Debug/obj/SEGGER_RTT.o
- .debug_info    0x0000000000059459      0x69c build/beaconing_nrf52840_xxAA_s140_7.2.0_Debug/obj/SEGGER_RTT_printf.o
- .debug_info    0x0000000000059af5     0x3772 build/beaconing_nrf52840_xxAA_s140_7.2.0_Debug/obj/nrfx_gpiote.o
- .debug_info    0x000000000005d267      0xca2 build/beaconing_nrf52840_xxAA_s140_7.2.0_Debug/obj/boards.o
- .debug_info    0x000000000005df09      0x832 build/beaconing_nrf52840_xxAA_s140_7.2.0_Debug/obj/nrf_drv_spis.o
- .debug_info    0x000000000005e73b     0x242c build/beaconing_nrf52840_xxAA_s140_7.2.0_Debug/obj/nrfx_spis.o
- .debug_info    0x0000000000060b67      0xa2b build/beaconing_nrf52840_xxAA_s140_7.2.0_Debug/obj/app_util_platform.o
- .debug_info    0x0000000000061592      0x192 build/beaconing_nrf52840_xxAA_s140_7.2.0_Debug/obj/nrf_section_iter.o
- .debug_info    0x0000000000061724      0x53c build/beaconing_nrf52840_xxAA_s140_7.2.0_Debug/obj/nrf_sdh_soc.o
- .debug_info    0x0000000000061c60     0x2492 build/beaconing_nrf52840_xxAA_s140_7.2.0_Debug/obj/nrf_sdh_ble.o
- .debug_info    0x00000000000640f2     0x1170 build/beaconing_nrf52840_xxAA_s140_7.2.0_Debug/obj/nrf_sdh.o
- .debug_info    0x0000000000065262     0x1610 build/beaconing_nrf52840_xxAA_s140_7.2.0_Debug/obj/system_nrf52840.o
- .debug_info    0x0000000000066872      0x29e build/beaconing_nrf52840_xxAA_s140_7.2.0_Debug/obj/app_error.o
- .debug_info    0x0000000000066b10       0xf5 build/beaconing_nrf52840_xxAA_s140_7.2.0_Debug/obj/app_error_handler_gcc.o
- .debug_info    0x0000000000066c05       0x23 build/beaconing_nrf52840_xxAA_s140_7.2.0_Debug/obj/ses_startup_nrf52840.o
- .debug_info    0x0000000000066c28       0x23 build/beaconing_nrf52840_xxAA_s140_7.2.0_Debug/obj/ses_startup_nrf_common.o
- .debug_info    0x0000000000066c4b     0x12cd build/beaconing_nrf52840_xxAA_s140_7.2.0_Debug/obj/prov_beacon.o
- .debug_info    0x0000000000067f18     0x1e5b build/beaconing_nrf52840_xxAA_s140_7.2.0_Debug/obj/prov_utils.o
- .debug_info    0x0000000000069d73     0x3630 build/beaconing_nrf52840_xxAA_s140_7.2.0_Debug/obj/prov_bearer_adv.o
- .debug_info    0x000000000006d3a3      0x60f build/beaconing_nrf52840_xxAA_s140_7.2.0_Debug/obj/composition_data.o
- .debug_info    0x000000000006d9b2     0x9eff build/beaconing_nrf52840_xxAA_s140_7.2.0_Debug/obj/config_server.o
- .debug_info    0x00000000000778b1      0x10a build/beaconing_nrf52840_xxAA_s140_7.2.0_Debug/obj/packed_index_list.o
- .debug_info    0x00000000000779bb     0x2352 build/beaconing_nrf52840_xxAA_s140_7.2.0_Debug/obj/health_server.o
- .debug_info    0x0000000000079d0d     0x1b6a build/beaconing_nrf52840_xxAA_s140_7.2.0_Debug/obj/app_timer_mesh.o
- .debug_info    0x000000000007b877      0x237 build/beaconing_nrf52840_xxAA_s140_7.2.0_Debug/obj/app_timer_workaround.o
+ .debug_info    0x000000000000212b      0xff1 build/beaconing_nrf52840_xxAA_s140_7.2.0_Debug/obj/spis.o
+ .debug_info    0x000000000000311c      0x109 build/beaconing_nrf52840_xxAA_s140_7.2.0_Debug/obj/m2s.o
+ .debug_info    0x0000000000003225      0x20d build/beaconing_nrf52840_xxAA_s140_7.2.0_Debug/obj/crc.o
+ .debug_info    0x0000000000003432      0x134 build/beaconing_nrf52840_xxAA_s140_7.2.0_Debug/obj/spis_data.o
+ .debug_info    0x0000000000003566      0xc55 build/beaconing_nrf52840_xxAA_s140_7.2.0_Debug/obj/simple_hal.o
+ .debug_info    0x00000000000041bb      0xa8e build/beaconing_nrf52840_xxAA_s140_7.2.0_Debug/obj/ble_softdevice_support.o
+ .debug_info    0x0000000000004c49       0xb8 build/beaconing_nrf52840_xxAA_s140_7.2.0_Debug/obj/nrf_mesh_weak.o
+ .debug_info    0x0000000000004d01      0x6b8 build/beaconing_nrf52840_xxAA_s140_7.2.0_Debug/obj/app_error_weak.o
+ .debug_info    0x00000000000053b9      0x126 build/beaconing_nrf52840_xxAA_s140_7.2.0_Debug/obj/assertion_handler_weak.o
+ .debug_info    0x00000000000054df      0x56f build/beaconing_nrf52840_xxAA_s140_7.2.0_Debug/obj/nrf_mesh_configure.o
+ .debug_info    0x0000000000005a4e      0x20f build/beaconing_nrf52840_xxAA_s140_7.2.0_Debug/obj/msg_cache.o
+ .debug_info    0x0000000000005c5d     0x53dc build/beaconing_nrf52840_xxAA_s140_7.2.0_Debug/obj/transport.o
+ .debug_info    0x000000000000b039     0x1600 build/beaconing_nrf52840_xxAA_s140_7.2.0_Debug/obj/event.o
+ .debug_info    0x000000000000c639     0x1717 build/beaconing_nrf52840_xxAA_s140_7.2.0_Debug/obj/packet_buffer.o
+ .debug_info    0x000000000000dd50     0x2143 build/beaconing_nrf52840_xxAA_s140_7.2.0_Debug/obj/flash_manager_defrag.o
+ .debug_info    0x000000000000fe93      0x4f6 build/beaconing_nrf52840_xxAA_s140_7.2.0_Debug/obj/fifo.o
+ .debug_info    0x0000000000010389      0x37c build/beaconing_nrf52840_xxAA_s140_7.2.0_Debug/obj/nrf_flash.o
+ .debug_info    0x0000000000010705     0x2b47 build/beaconing_nrf52840_xxAA_s140_7.2.0_Debug/obj/net_state.o
+ .debug_info    0x000000000001324c     0x131f build/beaconing_nrf52840_xxAA_s140_7.2.0_Debug/obj/mesh_flash.o
+ .debug_info    0x000000000001456b      0x236 build/beaconing_nrf52840_xxAA_s140_7.2.0_Debug/obj/nrf_mesh_utils.o
+ .debug_info    0x00000000000147a1     0x2411 build/beaconing_nrf52840_xxAA_s140_7.2.0_Debug/obj/nrf_mesh.o
+ .debug_info    0x0000000000016bb2      0x50d build/beaconing_nrf52840_xxAA_s140_7.2.0_Debug/obj/queue.o
+ .debug_info    0x00000000000170bf      0x786 build/beaconing_nrf52840_xxAA_s140_7.2.0_Debug/obj/hal.o
+ .debug_info    0x0000000000017845      0x798 build/beaconing_nrf52840_xxAA_s140_7.2.0_Debug/obj/aes_cmac.o
+ .debug_info    0x0000000000017fdd      0xacd build/beaconing_nrf52840_xxAA_s140_7.2.0_Debug/obj/timer_scheduler.o
+ .debug_info    0x0000000000018aaa      0x5e5 build/beaconing_nrf52840_xxAA_s140_7.2.0_Debug/obj/timer.o
+ .debug_info    0x000000000001908f      0x419 build/beaconing_nrf52840_xxAA_s140_7.2.0_Debug/obj/rand.o
+ .debug_info    0x00000000000194a8      0x5d4 build/beaconing_nrf52840_xxAA_s140_7.2.0_Debug/obj/mesh_opt.o
+ .debug_info    0x0000000000019a7c     0x1320 build/beaconing_nrf52840_xxAA_s140_7.2.0_Debug/obj/timeslot.o
+ .debug_info    0x000000000001ad9c      0xd17 build/beaconing_nrf52840_xxAA_s140_7.2.0_Debug/obj/timeslot_timer.o
+ .debug_info    0x000000000001bab3     0x183d build/beaconing_nrf52840_xxAA_s140_7.2.0_Debug/obj/bearer_event.o
+ .debug_info    0x000000000001d2f0      0xf3f build/beaconing_nrf52840_xxAA_s140_7.2.0_Debug/obj/enc.o
+ .debug_info    0x000000000001e22f     0x1d62 build/beaconing_nrf52840_xxAA_s140_7.2.0_Debug/obj/network.o
+ .debug_info    0x000000000001ff91     0x15d6 build/beaconing_nrf52840_xxAA_s140_7.2.0_Debug/obj/net_packet.o
+ .debug_info    0x0000000000021567      0x5b7 build/beaconing_nrf52840_xxAA_s140_7.2.0_Debug/obj/msqueue.o
+ .debug_info    0x0000000000021b1e      0x602 build/beaconing_nrf52840_xxAA_s140_7.2.0_Debug/obj/nrf_mesh_keygen.o
+ .debug_info    0x0000000000022120      0x5f6 build/beaconing_nrf52840_xxAA_s140_7.2.0_Debug/obj/list.o
+ .debug_info    0x0000000000022716      0x524 build/beaconing_nrf52840_xxAA_s140_7.2.0_Debug/obj/log.o
+ .debug_info    0x0000000000022c3a     0x40d4 build/beaconing_nrf52840_xxAA_s140_7.2.0_Debug/obj/flash_manager.o
+ .debug_info    0x0000000000026d0e      0xb82 build/beaconing_nrf52840_xxAA_s140_7.2.0_Debug/obj/ccm_soft.o
+ .debug_info    0x0000000000027890     0x2bf8 build/beaconing_nrf52840_xxAA_s140_7.2.0_Debug/obj/replay_cache.o
+ .debug_info    0x000000000002a488     0x10a5 build/beaconing_nrf52840_xxAA_s140_7.2.0_Debug/obj/beacon.o
+ .debug_info    0x000000000002b52d      0x33f build/beaconing_nrf52840_xxAA_s140_7.2.0_Debug/obj/flash_manager_internal.o
+ .debug_info    0x000000000002b86c      0xb74 build/beaconing_nrf52840_xxAA_s140_7.2.0_Debug/obj/core_tx.o
+ .debug_info    0x000000000002c3e0     0x25c6 build/beaconing_nrf52840_xxAA_s140_7.2.0_Debug/obj/heartbeat.o
+ .debug_info    0x000000000002e9a6     0x2c25 build/beaconing_nrf52840_xxAA_s140_7.2.0_Debug/obj/net_beacon.o
+ .debug_info    0x00000000000315cb     0x2b56 build/beaconing_nrf52840_xxAA_s140_7.2.0_Debug/obj/mesh_config.o
+ .debug_info    0x0000000000034121      0xf6d build/beaconing_nrf52840_xxAA_s140_7.2.0_Debug/obj/mesh_config_backend.o
+ .debug_info    0x000000000003508e     0x27dc build/beaconing_nrf52840_xxAA_s140_7.2.0_Debug/obj/mesh_config_flashman_glue.o
+ .debug_info    0x000000000003786a      0xbe1 build/beaconing_nrf52840_xxAA_s140_7.2.0_Debug/obj/core_tx_local.o
+ .debug_info    0x000000000003844b      0x8dd build/beaconing_nrf52840_xxAA_s140_7.2.0_Debug/obj/emergency_cache.o
+ .debug_info    0x0000000000038d28     0x1f07 build/beaconing_nrf52840_xxAA_s140_7.2.0_Debug/obj/core_tx_adv.o
+ .debug_info    0x000000000003ac2f      0x17d build/beaconing_nrf52840_xxAA_s140_7.2.0_Debug/obj/mesh_mem_stdlib.o
+ .debug_info    0x000000000003adac     0x2ab4 build/beaconing_nrf52840_xxAA_s140_7.2.0_Debug/obj/mesh_stack.o
+ .debug_info    0x000000000003d860       0x22 build/beaconing_nrf52840_xxAA_s140_7.2.0_Debug/obj/thumb_crt0.o
+ .debug_info    0x000000000003d882      0xa04 build/beaconing_nrf52840_xxAA_s140_7.2.0_Debug/obj/access_publish.o
+ .debug_info    0x000000000003e286      0x960 build/beaconing_nrf52840_xxAA_s140_7.2.0_Debug/obj/access_publish_retransmission.o
+ .debug_info    0x000000000003ebe6     0x5606 build/beaconing_nrf52840_xxAA_s140_7.2.0_Debug/obj/access.o
+ .debug_info    0x00000000000441ec     0x148a build/beaconing_nrf52840_xxAA_s140_7.2.0_Debug/obj/access_reliable.o
+ .debug_info    0x0000000000045676     0x7860 build/beaconing_nrf52840_xxAA_s140_7.2.0_Debug/obj/device_state_manager.o
+ .debug_info    0x000000000004ced6      0x730 build/beaconing_nrf52840_xxAA_s140_7.2.0_Debug/obj/ad_listener.o
+ .debug_info    0x000000000004d606      0x7c9 build/beaconing_nrf52840_xxAA_s140_7.2.0_Debug/obj/ad_type_filter.o
+ .debug_info    0x000000000004ddcf     0x262b build/beaconing_nrf52840_xxAA_s140_7.2.0_Debug/obj/advertiser.o
+ .debug_info    0x00000000000503fa     0x1e24 build/beaconing_nrf52840_xxAA_s140_7.2.0_Debug/obj/bearer_handler.o
+ .debug_info    0x000000000005221e     0x145b build/beaconing_nrf52840_xxAA_s140_7.2.0_Debug/obj/broadcast.o
+ .debug_info    0x0000000000053679      0x62e build/beaconing_nrf52840_xxAA_s140_7.2.0_Debug/obj/filter_engine.o
+ .debug_info    0x0000000000053ca7      0xad6 build/beaconing_nrf52840_xxAA_s140_7.2.0_Debug/obj/radio_config.o
+ .debug_info    0x000000000005477d     0x250a build/beaconing_nrf52840_xxAA_s140_7.2.0_Debug/obj/scanner.o
+ .debug_info    0x0000000000056c87     0x1118 build/beaconing_nrf52840_xxAA_s140_7.2.0_Debug/obj/mesh_pa_lna.o
+ .debug_info    0x0000000000057d9f     0x16ca build/beaconing_nrf52840_xxAA_s140_7.2.0_Debug/obj/SEGGER_RTT.o
+ .debug_info    0x0000000000059469      0x69c build/beaconing_nrf52840_xxAA_s140_7.2.0_Debug/obj/SEGGER_RTT_printf.o
+ .debug_info    0x0000000000059b05     0x3772 build/beaconing_nrf52840_xxAA_s140_7.2.0_Debug/obj/nrfx_gpiote.o
+ .debug_info    0x000000000005d277      0xca2 build/beaconing_nrf52840_xxAA_s140_7.2.0_Debug/obj/boards.o
+ .debug_info    0x000000000005df19      0x832 build/beaconing_nrf52840_xxAA_s140_7.2.0_Debug/obj/nrf_drv_spis.o
+ .debug_info    0x000000000005e74b     0x242c build/beaconing_nrf52840_xxAA_s140_7.2.0_Debug/obj/nrfx_spis.o
+ .debug_info    0x0000000000060b77      0xa2b build/beaconing_nrf52840_xxAA_s140_7.2.0_Debug/obj/app_util_platform.o
+ .debug_info    0x00000000000615a2      0x192 build/beaconing_nrf52840_xxAA_s140_7.2.0_Debug/obj/nrf_section_iter.o
+ .debug_info    0x0000000000061734      0x53c build/beaconing_nrf52840_xxAA_s140_7.2.0_Debug/obj/nrf_sdh_soc.o
+ .debug_info    0x0000000000061c70     0x2492 build/beaconing_nrf52840_xxAA_s140_7.2.0_Debug/obj/nrf_sdh_ble.o
+ .debug_info    0x0000000000064102     0x1170 build/beaconing_nrf52840_xxAA_s140_7.2.0_Debug/obj/nrf_sdh.o
+ .debug_info    0x0000000000065272     0x1610 build/beaconing_nrf52840_xxAA_s140_7.2.0_Debug/obj/system_nrf52840.o
+ .debug_info    0x0000000000066882      0x29e build/beaconing_nrf52840_xxAA_s140_7.2.0_Debug/obj/app_error.o
+ .debug_info    0x0000000000066b20       0xf5 build/beaconing_nrf52840_xxAA_s140_7.2.0_Debug/obj/app_error_handler_gcc.o
+ .debug_info    0x0000000000066c15       0x23 build/beaconing_nrf52840_xxAA_s140_7.2.0_Debug/obj/ses_startup_nrf52840.o
+ .debug_info    0x0000000000066c38       0x23 build/beaconing_nrf52840_xxAA_s140_7.2.0_Debug/obj/ses_startup_nrf_common.o
+ .debug_info    0x0000000000066c5b     0x12cd build/beaconing_nrf52840_xxAA_s140_7.2.0_Debug/obj/prov_beacon.o
+ .debug_info    0x0000000000067f28     0x1e5b build/beaconing_nrf52840_xxAA_s140_7.2.0_Debug/obj/prov_utils.o
+ .debug_info    0x0000000000069d83     0x3630 build/beaconing_nrf52840_xxAA_s140_7.2.0_Debug/obj/prov_bearer_adv.o
+ .debug_info    0x000000000006d3b3      0x60f build/beaconing_nrf52840_xxAA_s140_7.2.0_Debug/obj/composition_data.o
+ .debug_info    0x000000000006d9c2     0x9eff build/beaconing_nrf52840_xxAA_s140_7.2.0_Debug/obj/config_server.o
+ .debug_info    0x00000000000778c1      0x10a build/beaconing_nrf52840_xxAA_s140_7.2.0_Debug/obj/packed_index_list.o
+ .debug_info    0x00000000000779cb     0x2352 build/beaconing_nrf52840_xxAA_s140_7.2.0_Debug/obj/health_server.o
+ .debug_info    0x0000000000079d1d     0x1b6a build/beaconing_nrf52840_xxAA_s140_7.2.0_Debug/obj/app_timer_mesh.o
+ .debug_info    0x000000000007b887      0x237 build/beaconing_nrf52840_xxAA_s140_7.2.0_Debug/obj/app_timer_workaround.o
 
 .debug_abbrev   0x0000000000000000    0x10ea3
  .debug_abbrev  0x0000000000000000      0x3ac build/beaconing_nrf52840_xxAA_s140_7.2.0_Debug/obj/main.o
