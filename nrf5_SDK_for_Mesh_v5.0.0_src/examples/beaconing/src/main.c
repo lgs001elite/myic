@@ -74,11 +74,13 @@ void send_datagram_start()
  */
 void rx_cb(const nrf_mesh_adv_packet_rx_data_t * p_rx_data)
 {
+       //__LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "----- received successfully  seq: %X-----\n", p_rx_data->p_payload[0]);
+       //__LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "----- received successfully  seq: %X-----\n",p_rx_data->p_payload[1]);
+
     if (p_rx_data->p_payload[1] != BLE_GAP_AD_TYPE_PUBLIC_TARGET_ADDRESS)
     {
         return;
     }
-
     if (p_rx_data->length != BLE_ADV_PACKET_PAYLOAD_MAX_LENGTH)
     {
         return;

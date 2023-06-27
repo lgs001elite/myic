@@ -9,9 +9,7 @@
 const  nrf_drv_spis_t spis              = NRF_DRV_SPIS_INSTANCE(SPIS_INSTANCE);/**< SPIS instance. */                           /** < RX buffer. */
 uint8_t  m_rx_buf_spi[ACTUALDATAUNITS + 1] = {0};
 uint8_t  m_tx_buf_spi[ACTUALDATAUNITS] = {0};
-uint8_t  m_recBuf[32]                 = {0} ;
-// For testing
-//uint8_t sendNum = 0;
+uint8_t  m_recBuf[32]                  = {0} ;
 
 bool   spis_xfer_done =   false;  /**< Flag used to indicate that SPIS instance completed the transfer. */
 
@@ -75,9 +73,8 @@ void spis_event_handler(nrf_drv_spis_event_t event)
             case DUBBY:
               break;
             default:
-              //sendNum = sendNum + 1;
-              //receiveData_sendout(m_rx_buf_spi);
-             send_datagram_start();
+              receiveData_sendout(m_rx_buf_spi);
+              send_datagram_start();
               break;
         }
     }
