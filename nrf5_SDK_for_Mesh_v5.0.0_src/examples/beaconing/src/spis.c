@@ -11,7 +11,7 @@ uint8_t  m_rx_buf_spi[ACTUALDATAUNITS + 1] = {0};
 uint8_t  m_tx_buf_spi[ACTUALDATAUNITS] = {0};
 uint8_t  m_recBuf[32]                 = {0} ;
 // For testing
-uint8_t sendNum = 0;
+//uint8_t sendNum = 0;
 
 bool   spis_xfer_done =   false;  /**< Flag used to indicate that SPIS instance completed the transfer. */
 
@@ -56,22 +56,28 @@ bool check_completeness(uint8_t * receivedData)
 void spis_event_handler(nrf_drv_spis_event_t event)
 {
     if (event.evt_type == NRF_DRV_SPIS_XFER_DONE)
-    {         
+    {
+        if ((m_rx_buf_spi[0] == 0) && (m_rx_buf_spi[1] == 0))
+        {
+           return;
+        }
         spis_xfer_done = true;
         bool checkResult = check_completeness(m_rx_buf_spi);
         if (! checkResult)
         {
             return;
         }
+
+        __LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "----- received successfully  seq: %X-----\n", m_rx_buf_spi[4]);
         uint8_t statusAction = m_rx_buf_spi[4];
         switch (statusAction)
         {
             case DUBBY:
               break;
             default:
-              sendNum = sendNum + 1;
-              receiveData_sendout(m_rx_buf_spi);
-              send_datagram_start();
+              //sendNum = sendNum + 1;
+              //receiveData_sendout(m_rx_buf_spi);
+             send_datagram_start();
               break;
         }
     }

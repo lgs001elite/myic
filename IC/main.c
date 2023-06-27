@@ -72,7 +72,6 @@ SPI_Mode SPI_Master_WriteReg(uint8_t reg_addr, uint8_t count)
 
     TXByteCtr = count;
     RXByteCtr = 0;
-    ReceiveIndex = 0;
     TransmitIndex = 0;
 
     SLAVE_CS_OUT &= ~(SLAVE_CS_PIN);
@@ -91,7 +90,6 @@ SPI_Mode SPI_Master_ReadReg(uint8_t reg_addr, uint8_t count)
     RXByteCtr = count;
     TXByteCtr = 0;
     ReceiveIndex = 0;
-    TransmitIndex = 0;
 
     SLAVE_CS_OUT &= ~(SLAVE_CS_PIN);
     SendUCB1Data(TransmitRegAddr);
@@ -322,7 +320,7 @@ void start_spi_process(void)
                 return;
             }
             memset(transmitBuffer, 0, SPI_DATA_LEN);
-            m2s(transmitBuffer, &g_packetQueue[g_queueLen]);
+            m2s(transmitBuffer, &g_packetQueue[g_queueLen - 1]);
             buf_m2s(transmitBuffer, SPI_DATA_LEN);
             g_preQueLen = g_queueLen;
             if (g_queueLen == 1)
