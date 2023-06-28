@@ -217,7 +217,7 @@ void start_spi_process(void)
         uint8_t   i = 0;
         for (; i < SPI_DATA_LEN; i++)
         {
-            g_transBuffer[i ] = i;
+            g_transBuffer[i ] = i + 0x20;
         }
         if (g_sendAck == true)
         {

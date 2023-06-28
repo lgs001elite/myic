@@ -110,7 +110,7 @@ void spis_start(void)
         {
             for (uint8_t i = 0; i < ACTUALDATAUNITS; i++)
             {
-                m_tx_buf_spi[i] = i;
+                m_tx_buf_spi[i] = i + 0x20;
             }
             APP_ERROR_CHECK(nrfx_spis_buffers_set(&spis, m_tx_buf_spi, ACTUALDATAUNITS, m_rx_buf_spi, ACTUALDATAUNITS + 1));
         }
