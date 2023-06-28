@@ -211,7 +211,6 @@ void start_spi_process(void)
     UCB1IE |= UCRXIE;
     while (SWITCH2SPI)
     {
-        __delay_cycles(100000);
         SPI_Master_ReadReg(CMD_TYPE_0_SLAVE, SPI_DATA_LEN );
         CopyArray(g_receiveBuffer, SlaveType0, SPI_DATA_LEN);
         receiveDataFromNordic();
