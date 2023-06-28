@@ -20,7 +20,6 @@
 #include "nrf_mesh_configure.h"
 #include "ad_type_filter.h"
 #include "define_broadcast_packet.h"
-//#include "app_scheduler.h"
 #include "spis.h"
 #include "spis_data.h"
 #include "m2s.h"
@@ -74,9 +73,6 @@ void send_datagram_start()
  */
 void rx_cb(const nrf_mesh_adv_packet_rx_data_t * p_rx_data)
 {
-       //__LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "----- received successfully  seq: %X-----\n", p_rx_data->p_payload[0]);
-       //__LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "----- received successfully  seq: %X-----\n",p_rx_data->p_payload[1]);
-
     if (p_rx_data->p_payload[1] != BLE_GAP_AD_TYPE_PUBLIC_TARGET_ADDRESS)
     {
         return;
@@ -93,12 +89,10 @@ void rx_cb(const nrf_mesh_adv_packet_rx_data_t * p_rx_data)
     rec_packet[4]          = ((p_rx_data->p_payload[3])  & 0xF0)>>4;
     rec_packet[5]          = ((p_rx_data->p_payload[4]) & 0x0f);
     rec_packet[6]          = ((p_rx_data->p_payload[4])  & 0xF0)>>4;
-    for (uint8_t i = 5; i < 29; i++) // 6: payload starting point, 29: crc starting point
+    for (uint8_t i = 5; i < 29; i++)
     {
         rec_packet[i + 2] = p_rx_data->p_payload[i];
     }
-
-
     for (uint8_t i = 0; i < 31; i++)
     {
         m_tx_buf_spi[i] = rec_packet[i];
@@ -118,7 +112,6 @@ void node_reset(void)
 {
     __LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "----- Node reset  -----\n");
     hal_led_blink_ms(HAL_LED_MASK, LED_BLINK_INTERVAL_MS, LED_BLINK_CNT_RESET);
-    /* This function may return if there are ongoing flash operations. */
     mesh_stack_device_reset();
 }
 
@@ -151,10 +144,8 @@ void mesh_init(void)
         default:
             ERROR_CHECK(status);
     }
-
     /* Start listening for incoming packets */
     nrf_mesh_rx_cb_set(rx_cb);
-
     /* Initialize the advertiser */
     adv_init();
 }
