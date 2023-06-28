@@ -66,7 +66,7 @@ void spis_event_handler(nrf_drv_spis_event_t event)
             return;
         }
 
-        __LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "----- received successfully  seq: %X-----\n", m_rx_buf_spi[4]);
+        __LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "----- received successfully  seq: %X-----\n", m_rx_buf_spi[3]);
         uint8_t statusAction = m_rx_buf_spi[4];
         switch (statusAction)
         {
@@ -103,7 +103,6 @@ void spis_start(void)
      << GPIO_PIN_CNF_INPUT_Pos) | (GPIO_PIN_CNF_DIR_Output << GPIO_PIN_CNF_DIR_Pos);
      (void)sd_app_evt_wait();
     
-    //start_spis_loop();
     while (1)
     {
         APP_ERROR_CHECK(nrfx_spis_buffers_set(&spis, m_tx_buf_spi, ACTUALDATAUNITS, m_rx_buf_spi, ACTUALDATAUNITS + 1));

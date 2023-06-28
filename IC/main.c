@@ -71,7 +71,7 @@ SPI_Mode SPI_Master_WriteReg(uint8_t reg_addr, uint8_t count)
     TransmitRegAddr = reg_addr;
 
     TXByteCtr = count;
-    RXByteCtr = 0;
+//    RXByteCtr = 0;
     TransmitIndex = 0;
     ReceiveIndex = 0;
     SLAVE_CS_OUT &= ~(SLAVE_CS_PIN);
@@ -90,7 +90,7 @@ SPI_Mode SPI_Master_ReadReg(uint8_t reg_addr, uint8_t count)
     RXByteCtr = count;
     TXByteCtr = 0;
     ReceiveIndex = 0;
-    TransmitIndex = 0;
+//    TransmitIndex = 0;
     SLAVE_CS_OUT &= ~(SLAVE_CS_PIN);
     SendUCB1Data(TransmitRegAddr);
 
@@ -243,7 +243,6 @@ void start_spi_process(void)
         CopyArray(g_receiveBuffer, SlaveType0, SPI_DATA_LEN);
         // __delay_cycles(750000);
         receiveDataFromNordic();
-        __delay_cycles(1);
         if (g_sendAck == true)
         {
             produceNonPacketData();
@@ -252,7 +251,6 @@ void start_spi_process(void)
             g_transBuffer[6] = g_currentPairedNodeID;
             update_crc();
             SPI_Master_WriteReg(CMD_TYPE_0_MASTER, SPI_DATA_LEN);
-            __delay_cycles(1000000);
             g_sendAck = false;
             continue;
         }
@@ -282,7 +280,6 @@ void start_spi_process(void)
             update_crc();
             SPI_Master_WriteReg(CMD_TYPE_0_MASTER, 33);
             g_waitToFind = g_waitToFind - 1;
-            __delay_cycles(1000000);
         }
         else if (g_systemStatus == TRANSMIT)
         {
@@ -329,7 +326,6 @@ void start_spi_process(void)
                 update_crc();
             }
             SPI_Master_WriteReg(CMD_TYPE_0_MASTER, SPI_DATA_LEN);
-            __delay_cycles(1000000);
         }
         else if (g_systemStatus == RECEIVE)
         {
@@ -352,12 +348,10 @@ void start_spi_process(void)
             {
                 g_waitReceiveCounter = g_waitReceiveCounter + 1;
             }
-            __delay_cycles(1000000);
         }
         else if (g_systemStatus == SINKWAIT)
         {
             // DO nothing, Just keeping listning 
-            __delay_cycles(1000000);
         }
     }
 }
