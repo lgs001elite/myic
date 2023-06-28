@@ -12,7 +12,7 @@ build/beaconing_nrf52840_xxAA_s140_7.2.0_Debug/obj/m2s.o: \
  include/define_broadcast_packet.h \
  C\:/Users/glu250/AppData/Local/SEGGER/SEGGER\ Embedded\ Studio/v3/packages/libraries/libcxx/include/stdint.h \
  C\:/Program\ Files/SEGGER/SEGGER\ Embedded\ Studio\ for\ ARM\ 5.42/include/stdint.h \
- include/public.h include/spis_data.h ../../mesh/bearer/api/advertiser.h \
+ include/public.h ../../mesh/bearer/api/advertiser.h \
  ../../mesh/bearer/include/broadcast.h \
  ../../mesh/bearer/include/radio_config.h \
  ../../mesh/bearer/include/bearer_handler.h \

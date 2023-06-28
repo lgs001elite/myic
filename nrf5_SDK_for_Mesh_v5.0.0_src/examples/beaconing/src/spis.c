@@ -8,8 +8,8 @@
 
 const  nrf_drv_spis_t spis              = NRF_DRV_SPIS_INSTANCE(SPIS_INSTANCE);/**< SPIS instance. */                           /** < RX buffer. */
 uint8_t  m_rx_buf_spi[ACTUALDATAUNITS + 1] = {0};
-uint8_t  m_tx_buf_spi[ACTUALDATAUNITS] = {0};
-uint8_t  m_recBuf[32]                  = {0} ;
+uint8_t  m_tx_buf_spi[ACTUALDATAUNITS]     = {0};
+uint8_t  m_recBuf[32]                      = {0};
 
 bool   spis_xfer_done =   false;  /**< Flag used to indicate that SPIS instance completed the transfer. */
 
@@ -105,12 +105,23 @@ void spis_start(void)
     
     while (1)
     {
-        APP_ERROR_CHECK(nrfx_spis_buffers_set(&spis, m_tx_buf_spi, ACTUALDATAUNITS, m_rx_buf_spi, ACTUALDATAUNITS + 1));
+        if ((m_tx_buf_spi[0] != 0x1e) || (m_tx_buf_spi[1] != 0x17))
+        {
+            for (uint8_t i = 0; i < ACTUALDATAUNITS; i++)
+            {
+                m_tx_buf_spi[i] = i;
+            }
+            APP_ERROR_CHECK(nrfx_spis_buffers_set(&spis, m_tx_buf_spi, ACTUALDATAUNITS, m_rx_buf_spi, ACTUALDATAUNITS + 1));
+        }
+        else
+        {
+            APP_ERROR_CHECK(nrfx_spis_buffers_set(&spis, m_tx_buf_spi, ACTUALDATAUNITS, m_rx_buf_spi, ACTUALDATAUNITS + 1));
+        }
         spis_xfer_done = false;
         while (!spis_xfer_done)
         {
             (void) sd_app_evt_wait();
         }
-        bsp_board_led_invert(BSP_BOARD_LED_1);
+        // bsp_board_led_invert(BSP_BOARD_LED_1);
     }
 }

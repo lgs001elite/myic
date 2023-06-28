@@ -5,7 +5,6 @@ add_executable(${target}
     "${CMAKE_CURRENT_SOURCE_DIR}/src/spis.c"
     "${CMAKE_CURRENT_SOURCE_DIR}/src/m2s.c"
     "${CMAKE_CURRENT_SOURCE_DIR}/src/crc.c"
-    "${CMAKE_CURRENT_SOURCE_DIR}/src/spis_data.c"
     "${CMAKE_SOURCE_DIR}/mesh/stack/src/mesh_stack.c"
     "${CMAKE_SOURCE_DIR}/examples/common/src/mesh_provisionee.c"
     "${CMAKE_SOURCE_DIR}/examples/common/src/simple_hal.c"

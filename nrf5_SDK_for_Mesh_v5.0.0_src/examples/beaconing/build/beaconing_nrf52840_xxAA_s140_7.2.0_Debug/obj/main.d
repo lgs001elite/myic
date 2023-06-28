@@ -144,6 +144,5 @@ build/beaconing_nrf52840_xxAA_s140_7.2.0_Debug/obj/main.o: \
  ../../../nRF5_SDK_17.0.2_d674dde/modules/nrfx/drivers/include/nrfx_spis.h \
  ../../../nRF5_SDK_17.0.2_d674dde/modules/nrfx/hal/nrf_spis.h \
  ../../../nRF5_SDK_17.0.2_d674dde/modules/nrfx/hal/nrf_gpio.h \
- include/spis_data.h include/define_broadcast_packet.h include/public.h \
- include/m2s.h include/crc.h include/spis_data.h include/m2s.h \
- include/crc.h include/public.h
+ include/define_broadcast_packet.h include/public.h include/m2s.h \
+ include/crc.h include/m2s.h include/crc.h include/public.h

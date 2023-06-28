@@ -21,7 +21,6 @@
 #include "ad_type_filter.h"
 #include "define_broadcast_packet.h"
 #include "spis.h"
-#include "spis_data.h"
 #include "m2s.h"
 #include "crc.h"
 #include "public.h"
@@ -82,7 +81,6 @@ void rx_cb(const nrf_mesh_adv_packet_rx_data_t * p_rx_data)
     }
     m_tx_buf_spi[31] = p_rx_data->p_payload[29];
     m_tx_buf_spi[32] = p_rx_data->p_payload[30];
-    spis_setfrom_slave(m_tx_buf_spi, ACTUALDATAUNITS);
     __LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "----- received successfully  seq: %X-----\n", m_tx_buf_spi[2]);
 }
 

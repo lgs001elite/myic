@@ -211,9 +211,16 @@ void start_spi_process(void)
     UCB1IE |= UCRXIE;
     while (SWITCH2SPI)
     {
+        __delay_cycles(100000);
         SPI_Master_ReadReg(CMD_TYPE_0_SLAVE, SPI_DATA_LEN );
         CopyArray(g_receiveBuffer, SlaveType0, SPI_DATA_LEN);
         receiveDataFromNordic();
+        __delay_cycles(1000000);
+        uint8_t   i = 0;
+        for (; i < SPI_DATA_LEN; i++)
+        {
+            g_transBuffer[i ] = i;
+        }
         if (g_sendAck == true)
         {
             produceNonPacketData();
@@ -231,6 +238,7 @@ void start_spi_process(void)
             {
                 if (g_node_dimension == 0x7e)
                 {
+                    SPI_Master_WriteReg(CMD_TYPE_0_MASTER, SPI_DATA_LEN);
                     continue;
                 }
                 if (g_waitToFind == 0)
@@ -248,7 +256,7 @@ void start_spi_process(void)
             produceNonPacketData();
             g_transBuffer[3] = PACKAGE_FIND;
             update_crc();
-            SPI_Master_WriteReg(CMD_TYPE_0_MASTER, 33);
+            SPI_Master_WriteReg(CMD_TYPE_0_MASTER, SPI_DATA_LEN);
             g_waitToFind = g_waitToFind - 1;
         }
         else if (g_systemStatus == TRANSMIT)
@@ -264,12 +272,14 @@ void start_spi_process(void)
             if (g_queueLen == 0)
             {
                 g_systemStatus = RECEIVE;
+                SPI_Master_WriteReg(CMD_TYPE_0_MASTER, SPI_DATA_LEN);
                 continue;
             }
             if (g_waitSendCounter > MAXWAIT)
             {
                 g_systemStatus = RECEIVE;
                 g_nextNodeID = 0x7e;
+                SPI_Master_WriteReg(CMD_TYPE_0_MASTER, SPI_DATA_LEN);
                 continue;
             }
             if (g_preQueLen == g_queueLen)
@@ -306,11 +316,13 @@ void start_spi_process(void)
             if (g_queueLen >= MAXQUELEN)
             {
                 g_systemStatus = TRANSMIT;
+                SPI_Master_WriteReg(CMD_TYPE_0_MASTER, SPI_DATA_LEN);
                 continue;
             }
             if (g_waitReceiveCounter > MAXWAIT)
             {
                 g_systemStatus = TRANSMIT;
+                SPI_Master_WriteReg(CMD_TYPE_0_MASTER, SPI_DATA_LEN);
                 continue;
             }
 
@@ -321,7 +333,7 @@ void start_spi_process(void)
         }
         else if (g_systemStatus == SINKWAIT)
         {
-            // To do ben
+            SPI_Master_WriteReg(CMD_TYPE_0_MASTER, SPI_DATA_LEN);
         }
     }
 }

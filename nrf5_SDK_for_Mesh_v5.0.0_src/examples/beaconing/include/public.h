@@ -2,7 +2,6 @@
 #define _PUBLIC_H_
 #include <stdio.h>
 #include <stdbool.h>
-#include "spis_data.h"
 
 #define ACTUALDATAUNITS 33
 #define BROADCASTLEN    32

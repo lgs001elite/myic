@@ -12,7 +12,6 @@
 #include "boards.h"
 #include "app_error.h"
 #include "log.h"
-#include "spis_data.h"
 #include "define_broadcast_packet.h"
 #include "public.h"
 #include "m2s.h"
