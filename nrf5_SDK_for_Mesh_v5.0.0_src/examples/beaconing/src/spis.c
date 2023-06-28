@@ -55,11 +55,11 @@ void spis_event_handler(nrf_drv_spis_event_t event)
 {
     if (event.evt_type == NRF_DRV_SPIS_XFER_DONE)
     {
-        if ((m_rx_buf_spi[0] == 0) && (m_rx_buf_spi[1] == 0))
+        spis_xfer_done = true;
+        if ((m_rx_buf_spi[1] != 0x1e) || (m_rx_buf_spi[2] != 0x17))
         {
            return;
         }
-        spis_xfer_done = true;
         bool checkResult = check_completeness(m_rx_buf_spi);
         if (! checkResult)
         {
