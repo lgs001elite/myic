@@ -11,5 +11,6 @@
 void send_datagram_start();
 extern  uint8_t  m_tx_buf_spi[ACTUALDATAUNITS];
 extern  uint8_t m_recBuf[BROADCASTLEN];
+extern bool spis_xfer_done;
 
 #endif

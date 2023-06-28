@@ -123,6 +123,5 @@ void spis_start(void)
         {
             (void) sd_app_evt_wait();
         }
-        // bsp_board_led_invert(BSP_BOARD_LED_1);
     }
 }

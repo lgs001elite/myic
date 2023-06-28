@@ -27,16 +27,17 @@ void s2m(SPI_DATAGRAM *m_transData, uint8_t s_transData[])
     m_transData->src = s_transData[4];
     m_transData->dst = s_transData[5];
     m_transData->layer = s_transData[6];
-    m_transData->round = s_transData[8];
+    m_transData->round = s_transData[7];
 
-    uint8_t i = 9;
-    const uint8_t anchor      = 9;
-    for (; i < 32; i++)
+    uint8_t i = 8;
+    const uint8_t anchor      = 8;
+    for (; i < 31; i++)
     {
         uint8_t j      = i - anchor;
         m_transData->df[j] = s_transData[i];
     }
-    free_pointer(m_transData);
+    m_transData->crc[0] =  s_transData[31];
+    m_transData->crc[1]  =  s_transData[32];
 }
 
 

@@ -79,23 +79,23 @@ bool check_completeness(uint8_t *receivedData)
     return true;
 }
 
-void data_is_datagram(uint8_t *receivedData)
+bool data_is_datagram(uint8_t *receivedData)
 {
     uint8_t layerSendNode = receivedData[7];
     uint8_t senderID = receivedData[5];
     uint8_t packetSeq = receivedData[2];
     if (layerSendNode <= g_node_dimension)
     {
-        return;
+        return false;
     }
     g_currentPairedNodeID = senderID;
     if (g_pre_packet_seq == packetSeq)
     {
         g_sendAck = true;
-        return;
+        return false;
     }
     g_pre_packet_seq = packetSeq;
-    if (g_if_sourceNode)
+    if ((g_if_sourceNode) && (g_queueLen < MAXQUELEN))
     {
         receivedData[5] = g_nodeAddress;
         updateCRC(receivedData);
@@ -103,6 +103,7 @@ void data_is_datagram(uint8_t *receivedData)
         g_queueLen = g_queueLen + 1;
     }
     g_sendAck = true;
+    return true;
 }
 
 void data_is_find(uint8_t *receivedData)

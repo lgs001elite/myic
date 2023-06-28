@@ -67,7 +67,6 @@ uint8_t ReceiveIndex;
 uint16_t       g_waitToFind;
 uint8_t        g_rounds;
 uint8_t        g_queueLen;
-uint8_t        g_preQueLen;
 uint8_t        g_systemStatus;
 uint8_t        g_nodeAddress;
 uint8_t        g_seq_data;

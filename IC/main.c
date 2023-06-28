@@ -145,7 +145,6 @@ int main(void)
     g_sendAck = false;
     g_queueLen = 0;
     ReceiveIndex = 0;
-    g_preQueLen = 0;
     g_transDataSeq = 0;
     g_if_end_trans = false;
     g_received_file_real_size = 0;
@@ -266,12 +265,13 @@ void start_spi_process(void)
             if (!transmitBuffer)
             {
                 free(transmitBuffer);
-                return;
+                continue;
             }
             memset(transmitBuffer, 0, SPI_DATA_LEN);
             m2s(transmitBuffer, &g_packetQueue[g_queueLen - 1]);
             buf_m2s(transmitBuffer, SPI_DATA_LEN);
-            g_preQueLen = g_queueLen;
+            free(transmitBuffer);
+            transmitBuffer = NULL;
             SPI_Master_WriteReg(CMD_TYPE_0_MASTER, SPI_DATA_LEN);
         }
         else if (g_systemStatus == SINKWAIT)
