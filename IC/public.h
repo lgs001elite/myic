@@ -60,12 +60,10 @@ typedef struct spi_datagram
     uint8_t crc[2];
 } SPI_DATAGRAM;
 
-uint16_t g_waitReceiveCounter;
-uint16_t g_waitSendCounter;
-uint8_t  g_currentPairedNodeID;
 uint8_t  g_nextNodeID;
 bool g_sendAck;
-uint8_t        ReceiveIndex;
+uint8_t g_currentPairedNodeID;
+uint8_t ReceiveIndex;
 uint16_t       g_waitToFind;
 uint8_t        g_rounds;
 uint8_t        g_queueLen;

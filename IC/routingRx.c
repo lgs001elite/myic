@@ -88,18 +88,7 @@ void data_is_datagram(uint8_t *receivedData)
     {
         return;
     }
-    if (g_currentPairedNodeID != 0x7e)
-    {
-        if (g_currentPairedNodeID != senderID)
-        {
-            return;
-        }
-    }
-    else
-    {
-        g_currentPairedNodeID = senderID;
-    }
-
+    g_currentPairedNodeID = senderID;
     if (g_pre_packet_seq == packetSeq)
     {
         g_sendAck = true;
@@ -108,7 +97,6 @@ void data_is_datagram(uint8_t *receivedData)
     g_pre_packet_seq = packetSeq;
     if (g_if_sourceNode)
     {
-        g_waitReceiveCounter = 0;
         receivedData[5] = g_nodeAddress;
         updateCRC(receivedData);
         s2m(&g_packetQueue[g_queueLen], receivedData);
@@ -160,6 +148,11 @@ void data_is_ack(uint8_t *receivedData)
             g_rounds = g_rounds - 1;
             produceData();
         }
+        else
+        {
+            COMMS_LED_OUT ^= COMMS_LED_PIN;
+            COMMS_LED_OUT ^= COMMS_LED_PIN2;
+        }
     }
 }
 
@@ -185,18 +178,9 @@ bool receiveDataFromNordic()
         data_is_datagram(g_receiveBuffer);
         COMMS_LED_OUT ^= COMMS_LED_PIN2;
         break;
-    case PACKAGE_FINISH:
-        if (g_if_sourceNode)
-        {
-            g_systemStatus = TRANSMIT;
-        }
-        data_is_datagram(g_receiveBuffer);
-        COMMS_LED_OUT ^= COMMS_LED_PIN;
-        break;
     case PACKAGE_ACK:
         data_is_ack(g_receiveBuffer);
         COMMS_LED_OUT ^= COMMS_LED_PIN;
-        COMMS_LED_OUT ^= COMMS_LED_PIN2;
         break;
     default:
         break;

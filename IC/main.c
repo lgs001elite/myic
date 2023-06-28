@@ -156,9 +156,8 @@ int main(void)
     g_seq_data = (uint8_t)genRanNumb();
     g_seq_header = (uint8_t)genRanNumb();
     g_if_send_next = true;
-    g_currentPairedNodeID = 0x7e;
+    g_currentPairedNodeID = 0;
     g_nextNodeID = 0x7e;
-    g_waitReceiveCounter = 0;
     if (g_if_sourceNode)
     {
         g_rounds = MAXROUND;
@@ -213,7 +212,6 @@ void start_spi_process(void)
         SPI_Master_ReadReg(CMD_TYPE_0_SLAVE, SPI_DATA_LEN );
         CopyArray(g_receiveBuffer, SlaveType0, SPI_DATA_LEN);
         receiveDataFromNordic();
-        __delay_cycles(1000000);
         uint8_t   i = 0;
         for (; i < SPI_DATA_LEN; i++)
         {
@@ -259,31 +257,10 @@ void start_spi_process(void)
         }
         else if (g_systemStatus == TRANSMIT)
         {
-            if (g_currentPairedNodeID != 0x7e)
-            {
-                g_currentPairedNodeID = 0x7e;
-            }
-            if (g_waitReceiveCounter != 0)
-            {
-                g_waitReceiveCounter = 0;
-            }
             if (g_queueLen == 0)
             {
                 SPI_Master_WriteReg(CMD_TYPE_0_MASTER, SPI_DATA_LEN);
                 continue;
-            }
-            if (g_waitSendCounter > MAXWAIT)
-            {
-                g_nextNodeID = 0x7e;
-                SPI_Master_WriteReg(CMD_TYPE_0_MASTER, SPI_DATA_LEN);
-            }
-            if (g_preQueLen == g_queueLen)
-            {
-                g_waitSendCounter = g_waitSendCounter + 1;
-            }
-            else
-            {
-                g_waitSendCounter = 0;
             }
             uint8_t *transmitBuffer = (uint8_t *)malloc(sizeof(uint8_t) * SPI_DATA_LEN);
             if (!transmitBuffer)
@@ -295,11 +272,6 @@ void start_spi_process(void)
             m2s(transmitBuffer, &g_packetQueue[g_queueLen - 1]);
             buf_m2s(transmitBuffer, SPI_DATA_LEN);
             g_preQueLen = g_queueLen;
-            if (g_queueLen == 1)
-            {
-                g_transBuffer[3] = PACKAGE_FINISH;
-                update_crc();
-            }
             SPI_Master_WriteReg(CMD_TYPE_0_MASTER, SPI_DATA_LEN);
         }
         else if (g_systemStatus == SINKWAIT)
