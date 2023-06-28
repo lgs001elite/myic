@@ -22,15 +22,8 @@ static unsigned long reflect(unsigned long data, unsigned char nBits)
 {
     unsigned long  reflection = 0x00000000;
     unsigned char  bit;
-
-    /*
-     * Reflect the data about the center bit.
-     */
     for (bit = 0; bit < nBits; ++bit)
     {
-        /*
-         * If the LSB bit is set, set the reflection of it.
-         */
         if (data & 0x01)
         {
             reflection |= (1 << ((nBits - 1) - bit));
@@ -41,7 +34,7 @@ static unsigned long reflect(unsigned long data, unsigned char nBits)
 
     return (reflection);
 
-}    /* reflect() */
+}
 
 
 
@@ -51,11 +44,6 @@ void crcInit(void)
     crc    remainder;
     int    dividend;
     unsigned char  bit;
-
-
-    /*
-     * Compute the remainder of each possible dividend.
-     */
     for (dividend = 0; dividend < 256; ++dividend)
     {
         /*
@@ -83,7 +71,7 @@ void crcInit(void)
         crcTable[dividend] = remainder;
     }
 
-}   /* crcInit() */
+} 
 
 crc crcFast(unsigned char const message[], int nBytes)
 {

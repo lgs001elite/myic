@@ -31,9 +31,6 @@
 #include "stack_depth.h"
 #endif
 
-/*****************************************************************************
- * Definitions
- *****************************************************************************/
 #define ADVERTISER_BUFFER_SIZE  (128)
 bool              g_if_sendNext          = false;
 advertiser_t      m_discovery_advertiser = {0};
@@ -41,36 +38,22 @@ uint8_t           m_adv_buffer_discovery[ADVERTISER_BUFFER_SIZE];
 void              adv_init(void);
 adv_packet_t  *   p_broad_packet         = NULL;
 
-/**
- * @brief pass datagram to the bearer layer
- * @param p_adv: advertiser entity
- * @param adv_packet: datagram
- */
 void send2bearer(advertiser_t * p_adv, uint8_t * adv_packet)
 {
     if (p_broad_packet)
     {
         memcpy(p_broad_packet->packet.payload, adv_packet, BLE_ADV_PACKET_PAYLOAD_MAX_LENGTH);
-        /* Repeat once */
         p_broad_packet->config.repeats = 1;
         advertiser_packet_send(p_adv, p_broad_packet);
     }
     p_broad_packet = advertiser_packet_alloc(p_adv, BLE_ADV_PACKET_PAYLOAD_MAX_LENGTH);
 }
-/**
- * @brief sending datagram
- * 
- */
 
 void send_datagram_start()
 {
     send2bearer(&m_discovery_advertiser, m_recBuf);
 }
 
-/**
- * @brief receiving datagram from the bearer layer
- * @param p_rx_data: received datagram  
- */
 void rx_cb(const nrf_mesh_adv_packet_rx_data_t * p_rx_data)
 {
     if (p_rx_data->p_payload[1] != BLE_GAP_AD_TYPE_PUBLIC_TARGET_ADDRESS)
@@ -168,15 +151,13 @@ void initialize(void)
 
 void start(void)
 {  
-    /* Let scanner accept Complete Local Name AD Type. */
-    bearer_adtype_add(BLE_GAP_AD_TYPE_LE_BLUETOOTH_DEVICE_ADDRESS); // BLE_GAP_AD_TYPE_COMPLETE_LOCAL_NAME  BLE_GAP_AD_TYPE_LE_BLUETOOTH_DEVICE_ADDRESS BLE_GAP_AD_TYPE_PUBLIC_TARGET_ADDRESS
+    bearer_adtype_add(BLE_GAP_AD_TYPE_LE_BLUETOOTH_DEVICE_ADDRESS);
     ERROR_CHECK(mesh_stack_start());
     (void)sd_app_evt_wait();
-    advertiser_enable(&m_discovery_advertiser);     /* Check if adv_instance is enable */
+    advertiser_enable(&m_discovery_advertiser);
     (void)sd_app_evt_wait();
     spis_start();
     (void)sd_app_evt_wait();
-
 }
 
 int main(void)

@@ -69,16 +69,13 @@ SPI_Mode SPI_Master_WriteReg(uint8_t reg_addr, uint8_t count)
 {
     MasterMode = TX_REG_ADDRESS_MODE;
     TransmitRegAddr = reg_addr;
-
     TXByteCtr = count;
 //    RXByteCtr = 0;
     TransmitIndex = 0;
     ReceiveIndex = 0;
     SLAVE_CS_OUT &= ~(SLAVE_CS_PIN);
     SendUCB1Data(TransmitRegAddr);
-
     __bis_SR_register(CPUOFF + GIE); // Enter LPM0 w/ interrupts
-
     SLAVE_CS_OUT |= SLAVE_CS_PIN;
     return MasterMode;
 }
@@ -93,7 +90,6 @@ SPI_Mode SPI_Master_ReadReg(uint8_t reg_addr, uint8_t count)
 //    TransmitIndex = 0;
     SLAVE_CS_OUT &= ~(SLAVE_CS_PIN);
     SendUCB1Data(TransmitRegAddr);
-
     __bis_SR_register(CPUOFF + GIE); // Enter LPM0 w/ interrupts
 
     SLAVE_CS_OUT |= SLAVE_CS_PIN;
@@ -105,15 +101,10 @@ void initSPI()
     // Clock Polarity: The inactive state is high
     // MSB First, 8-bit, Master, 4-pin mode, Synchronous
     UCB1CTLW0 = UCSWRST; // **Put state machine in reset**
-
-    /**
-     * The inactive state is high, Data is captured on the first UCLK edge and changed on the following edge;
-     */
     UCB1CTLW0 |= UCCKPL | UCMSB | UCSYNC | UCMST | UCSSEL__SMCLK_L | UCMODE0 | UCSTEM | UC7BIT_0 | UCCKPH; // Added by me
     UCB1BRW = 0x20;
     // UCB1MCTLW = 0;
-    UCB1CTLW0 &= ~UCSWRST; // **Initialize USCI state machine**
-                           // UCB1IE |= UCRXIE;                          // Enable USCI0 RX interrupt
+    UCB1CTLW0 &= ~UCSWRST;
 }
 
 void initGPIO()
@@ -121,47 +112,28 @@ void initGPIO()
     // LEDs
     COMMS_LED_OUT &= ~COMMS_LED_PIN;
     COMMS_LED_DIR |= COMMS_LED_PIN;
-
-    // Final result indication
     COMMS_LED_OUT &= ~COMMS_LED_PIN2;
     COMMS_LED_DIR |= COMMS_LED_PIN2;
-
-    // BUTTON_LED_DIR |= BUTTON_LED_PIN;
-    // BUTTON_LED_OUT &= ~BUTTON_LED_PIN;
-
     // Configure SPI
     P5SEL0 |= BIT0 | BIT1 | BIT2;
-
     SLAVE_CS_DIR |= SLAVE_CS_PIN;
     SLAVE_CS_OUT |= SLAVE_CS_PIN;
-
-    // Disable the GPIO power-on default high-impedance mode to activate
-    // previously configured port settings
     PM5CTL0 &= ~LOCKLPM5;
 }
 
 void initClockTo16MHz()
 {
     FRCTL0 = FRCTLPW | NWAITS_1;
-
     // Clock System Setup
     CSCTL0_H = CSKEY_H; // Unlock CS registers
     CSCTL1 = DCOFSEL_0; // Set DCO to 1MHz
 
     // Set SMCLK = MCLK = DCO, ACLK = VLOCLK
     CSCTL2 = SELA__VLOCLK | SELS__DCOCLK | SELM__DCOCLK;
-
-    // Per Device Errata set divider to 4 before changing frequency to
-    // prevent out of spec operation from overshoot transient
     CSCTL3 = DIVA__4 | DIVS__4 | DIVM__4; // Set all corresponding clk sources to divide by 4 for errata
     CSCTL1 = DCOFSEL_4 | DCORSEL;         // Set DCO to 16MHz
 
-    // Delay by ~10us to let DCO settle. 60 cycles = 20 cycles buffer + (10us / (1/4MHz))
-    //    __delay_cycles(60);
-    //   CSCTL3 = DIVA__1 | DIVS__1 | DIVM__1; // Set all dividers to 1 for 16MHz operation
-    //    CSCTL0_H = 0;
 }
-
 int main(void)
 {
     // Stop watchdog timer
@@ -169,7 +141,7 @@ int main(void)
     initClockTo16MHz();
     initGPIO();
     initSPI();
-    setNode(SINK);
+    setNode(ICNODE);
     g_sendAck = false;
     g_queueLen = 0;
     ReceiveIndex = 0;
@@ -181,8 +153,8 @@ int main(void)
     g_pre_fin_seq = 0x7e;
     g_pre_ack_seq = 0x7e;
     g_systemStatus = NONLAYER;
-    g_seq_data = (uint8_t) genRanNumb();
-    g_seq_header = (uint8_t) genRanNumb();
+    g_seq_data = (uint8_t)genRanNumb();
+    g_seq_header = (uint8_t)genRanNumb();
     g_if_send_next = true;
     g_currentPairedNodeID = 0x7e;
     g_nextNodeID = 0x7e;
@@ -191,7 +163,7 @@ int main(void)
     if (g_if_sourceNode)
     {
         g_rounds = MAXROUND;
-        g_packetQueue = (SPI_DATAGRAM *) malloc (sizeof(SPI_DATAGRAM) * MAXQUELEN);
+        g_packetQueue = (SPI_DATAGRAM *)malloc(sizeof(SPI_DATAGRAM) * MAXQUELEN);
         if (!g_packetQueue)
         {
             free(g_packetQueue);
@@ -239,9 +211,8 @@ void start_spi_process(void)
     UCB1IE |= UCRXIE;
     while (SWITCH2SPI)
     {
-        SPI_Master_ReadReg(CMD_TYPE_0_SLAVE, SPI_DATA_LEN);
+        SPI_Master_ReadReg(CMD_TYPE_0_SLAVE, SPI_DATA_LEN );
         CopyArray(g_receiveBuffer, SlaveType0, SPI_DATA_LEN);
-        // __delay_cycles(750000);
         receiveDataFromNordic();
         if (g_sendAck == true)
         {
@@ -269,12 +240,11 @@ void start_spi_process(void)
             }
             else
             {
-            if (g_waitToFind == 0)
-            {
-                g_systemStatus = SINKWAIT;
+                if (g_waitToFind == 0)
+                {
+                    g_systemStatus = SINKWAIT;
                 }
             }
-            // Produce a finding packet
             produceNonPacketData();
             g_transBuffer[3] = PACKAGE_FIND;
             update_crc();
@@ -310,7 +280,7 @@ void start_spi_process(void)
             {
                 g_waitSendCounter = 0;
             }
-            uint8_t *transmitBuffer = (uint8_t *) malloc (sizeof(uint8_t) * SPI_DATA_LEN);
+            uint8_t *transmitBuffer = (uint8_t *)malloc(sizeof(uint8_t) * SPI_DATA_LEN);
             if (!transmitBuffer)
             {
                 free(transmitBuffer);
@@ -351,7 +321,7 @@ void start_spi_process(void)
         }
         else if (g_systemStatus == SINKWAIT)
         {
-            // DO nothing, Just keeping listning 
+            // To do ben
         }
     }
 }
@@ -407,7 +377,6 @@ void __attribute__((interrupt(USCI_B1_VECTOR))) USCI_B1_ISR(void)
         case RX_DATA_MODE:
             if (RXByteCtr)
             {
-                // Transmit a dummy
                 RXByteCtr--;
             }
             if (RXByteCtr == 0)

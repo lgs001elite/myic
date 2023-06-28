@@ -42,10 +42,6 @@ uint8_t *file_sha256(uint8_t *file, uint32_t file_size)
     return &g_sha256_buf[0];
 }
 
-/**
- * @brief  SPIS check completeness of data
-
- */
 bool check_completeness(uint8_t *receivedData)
 {
     uint8_t rec_result[SPI_NONCRC_LEN];
@@ -85,7 +81,6 @@ bool check_completeness(uint8_t *receivedData)
 
 void data_is_datagram(uint8_t *receivedData)
 {
-    // For datapackets, need to judge the relative layers between nodes.
     uint8_t layerSendNode = receivedData[7];
     uint8_t senderID = receivedData[5];
     uint8_t packetSeq = receivedData[2];
@@ -111,7 +106,6 @@ void data_is_datagram(uint8_t *receivedData)
         return;
     }
     g_pre_packet_seq = packetSeq;
-    // If received node, set waiting counter zero.
     if (g_if_sourceNode)
     {
         g_waitReceiveCounter = 0;
@@ -157,7 +151,7 @@ void data_is_ack(uint8_t *receivedData)
     {
         return;
     }
-    g_pre_ack_seq = packetSeq; // update the pre-seu number
+    g_pre_ack_seq = packetSeq;
     g_queueLen = g_queueLen - 1;
     if (g_queueLen == 0)
     {
@@ -179,7 +173,6 @@ bool receiveDataFromNordic()
     uint8_t dataType = g_receiveBuffer[3];
     switch (dataType)
     {
-    __delay_cycles(1);
     case PACKAGE_FIND:
         data_is_find(g_receiveBuffer);
         COMMS_LED_OUT ^= COMMS_LED_PIN;

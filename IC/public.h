@@ -15,8 +15,6 @@
 #define COMMS_LED_DIR P1DIR
 #define COMMS_LED_PIN BIT0
 #define COMMS_LED_PIN2 BIT1
-// #define COMMS_LED_PIN3 BIT2
-// #define COMMS_LED_PIN4 BIT3
 
 #define DUMMY 0x7e
 #define CMD_TYPE_0_SLAVE 0xAA
@@ -30,7 +28,6 @@
 #define NONLAYER  0
 #define TRANSMIT  1
 #define RECEIVE   2
-// #define DONE      3
 #define SINKWAIT  4
 
 #define MAXQUELEN 12
@@ -41,7 +38,6 @@
 #define PACKAGE_FIND     0x03
 #define PACKAGE_PACKET   0x01
 #define PACKAGE_FINISH   0x02
-// #define PACKAGE_RFINISH  0x03
 #define PACKAGE_ACK      0x04
 #define DUBBY            0x05
 
@@ -52,7 +48,7 @@
 
 typedef struct spi_datagram
 {
-    uint8_t hp_len;
+    uint8_t hp_len; 
     uint8_t t_broad_type;
     uint8_t seq;
     uint8_t status : 4,
@@ -108,5 +104,6 @@ typedef enum SPI_ModeEnum{
 
 SPI_Mode SPI_Master_ReadReg(uint8_t reg_addr, uint8_t count);
 SPI_Mode SPI_Master_WriteReg(uint8_t reg_addr, uint8_t count);
+
 
 #endif

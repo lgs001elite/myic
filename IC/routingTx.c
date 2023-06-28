@@ -43,7 +43,6 @@ void produceData(void)
             }
         }
         g_queueLen = g_queueLen + 1;
-        // waiting to collect data
         __delay_cycles(100000);
     }
 }
@@ -71,13 +70,16 @@ void produceNonPacketData(void)
     {
         crc_input[i] = g_transBuffer[i];
     }
+
     uint16_t crc_result = getCRC(crc_input);
     g_transBuffer[31] = (crc_result & 0xFF00) >> 8;
     g_transBuffer[32] = (crc_result & 0x00FF);
+
     while (g_transBuffer[31] >= 0x7F)
     {
         g_transBuffer[31] -= 0x7F;
     }
+
     while (g_transBuffer[32] >= 0x7F)
     {
         g_transBuffer[32] -= 0x7F;
