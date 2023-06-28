@@ -159,7 +159,6 @@ int main(void)
     g_currentPairedNodeID = 0x7e;
     g_nextNodeID = 0x7e;
     g_waitReceiveCounter = 0;
-    g_waitSendCounter = 0;
     if (g_if_sourceNode)
     {
         g_rounds = MAXROUND;
@@ -270,16 +269,13 @@ void start_spi_process(void)
             }
             if (g_queueLen == 0)
             {
-                g_systemStatus = RECEIVE;
                 SPI_Master_WriteReg(CMD_TYPE_0_MASTER, SPI_DATA_LEN);
                 continue;
             }
             if (g_waitSendCounter > MAXWAIT)
             {
-                g_systemStatus = RECEIVE;
                 g_nextNodeID = 0x7e;
                 SPI_Master_WriteReg(CMD_TYPE_0_MASTER, SPI_DATA_LEN);
-                continue;
             }
             if (g_preQueLen == g_queueLen)
             {
@@ -305,30 +301,6 @@ void start_spi_process(void)
                 update_crc();
             }
             SPI_Master_WriteReg(CMD_TYPE_0_MASTER, SPI_DATA_LEN);
-        }
-        else if (g_systemStatus == RECEIVE)
-        {
-            if (g_waitSendCounter != 0)
-            {
-                g_waitSendCounter = 0;
-            }
-            if (g_queueLen >= MAXQUELEN)
-            {
-                g_systemStatus = TRANSMIT;
-                SPI_Master_WriteReg(CMD_TYPE_0_MASTER, SPI_DATA_LEN);
-                continue;
-            }
-            if (g_waitReceiveCounter > MAXWAIT)
-            {
-                g_systemStatus = TRANSMIT;
-                SPI_Master_WriteReg(CMD_TYPE_0_MASTER, SPI_DATA_LEN);
-                continue;
-            }
-
-            if (g_queueLen != 0)
-            {
-                g_waitReceiveCounter = g_waitReceiveCounter + 1;
-            }
         }
         else if (g_systemStatus == SINKWAIT)
         {
