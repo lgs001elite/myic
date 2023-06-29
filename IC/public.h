@@ -20,20 +20,16 @@
 #define CMD_TYPE_0_SLAVE 0xAA
 #define CMD_TYPE_0_MASTER 0x01
 
-#define MAXUINT8 0x5f
 #define ICNODE     1
 #define SINK       2
 #define MAXBYTE    0x17
 
 #define NONLAYER  0
 #define TRANSMIT  1
-#define RECEIVE   2
 #define SINKWAIT  4
 
 #define MAXQUELEN 12
 #define MAXROUND  10
-#define MAXFIND   10
-#define MAXWAIT   10
 
 #define PACKAGE_FIND     0x03
 #define PACKAGE_PACKET   0x01
@@ -65,6 +61,7 @@ bool g_sendAck;
 uint8_t g_currentPairedNodeID;
 uint8_t ReceiveIndex;
 uint16_t       g_waitToFind;
+uint16_t       g_ICWaitCycles;
 uint8_t        g_rounds;
 uint8_t        g_queueLen;
 uint8_t        g_systemStatus;
@@ -73,21 +70,16 @@ uint8_t        g_seq_data;
 uint8_t        g_receiveBuffer[SPI_DATA_LEN];
 uint8_t        g_transBuffer[SPI_DATA_LEN ];
 uint8_t        g_node_dimension;
-bool           g_if_send_next;
-bool           g_if_end_trans;
 bool           g_if_sourceNode;
 uint32_t       g_transDataSeq;
-uint32_t       g_received_file_real_size;
 uint8_t        g_sha256_buf[SHA256_BLOCK_SIZE];
 uint8_t        g_pre_ack_seq;
 uint8_t        g_pre_packet_seq;
-uint8_t        g_pre_fin_seq;
 SPI_DATAGRAM   *g_packetQueue;
 
 void update_crc(void);
 void start_spi_process(void);
 void close_spi_process(void);
-void startTrans(void);
 uint16_t getCRC(unsigned char const message[]);
 bool SWITCH2SPI;
 typedef enum SPI_ModeEnum{

@@ -112,7 +112,8 @@ void data_is_find(uint8_t *receivedData)
     if (g_node_dimension > (receivedLayerNum + 1))
     {
         g_node_dimension = receivedLayerNum + 1;
-        g_waitToFind = receivedData[2] + 0x7e;
+        g_ICWaitCycles   = receivedData[2];
+        g_waitToFind     = 0x7e;
     }
 }
 
@@ -180,10 +181,6 @@ bool receiveDataFromNordic()
         COMMS_LED_OUT ^= COMMS_LED_PIN2;
         break;
     case PACKAGE_ACK:
-        if ((g_receiveBuffer[31] == 0x63) && (g_receiveBuffer[32] == 0x3b))
-        {
-            __delay_cycles(10);
-        }
         data_is_ack(g_receiveBuffer);
         COMMS_LED_OUT ^= COMMS_LED_PIN;
         break;

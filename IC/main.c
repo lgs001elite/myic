@@ -146,16 +146,13 @@ int main(void)
     g_queueLen = 0;
     ReceiveIndex = 0;
     g_transDataSeq = 0;
-    g_if_end_trans = false;
-    g_received_file_real_size = 0;
     g_pre_packet_seq = 0x7e;
-    g_pre_fin_seq = 0x7e;
     g_pre_ack_seq = 0x7e;
     g_systemStatus = NONLAYER;
     g_seq_data = 0;
-    g_if_send_next = true;
     g_currentPairedNodeID = 0;
-    g_nextNodeID = 0x7e;
+    g_nextNodeID   = 0x7e;
+    g_ICWaitCycles = 0;
     if (g_if_sourceNode)
     {
         g_rounds = MAXROUND;
@@ -210,11 +207,6 @@ void start_spi_process(void)
         SPI_Master_ReadReg(CMD_TYPE_0_SLAVE, SPI_DATA_LEN );
         CopyArray(g_receiveBuffer, SlaveType0, SPI_DATA_LEN);
         receiveDataFromNordic();
-        uint8_t   i = 0;
-        for (; i < SPI_DATA_LEN; i++)
-        {
-            g_transBuffer[i ] = i + 0x20;
-        }
         if (g_sendAck == true)
         {
             produceNonPacketData();
@@ -230,8 +222,19 @@ void start_spi_process(void)
         {
             if (g_if_sourceNode)
             {
+                uint8_t i = 0;
+                for (; i < SPI_DATA_LEN; i++)
+                {
+                    g_transBuffer[i] = i + 0x20;
+                }
                 if (g_node_dimension == 0x7e)
                 {
+                    SPI_Master_WriteReg(CMD_TYPE_0_MASTER, SPI_DATA_LEN);
+                    continue;
+                }
+                if (g_ICWaitCycles > 0)
+                {
+                    g_ICWaitCycles = g_ICWaitCycles - 1;
                     SPI_Master_WriteReg(CMD_TYPE_0_MASTER, SPI_DATA_LEN);
                     continue;
                 }
