@@ -143,6 +143,8 @@ void data_is_ack(uint8_t *receivedData)
     }
     g_pre_ack_seq = packetSeq;
     g_queueLen = g_queueLen - 1;
+    g_if_measure = true;
+    GPIO_MONINOR_OUT6 ^= GPIO_MONITOR_PIN2;
     if (g_queueLen == 0)
     {
         if (g_rounds > 0)

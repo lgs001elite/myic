@@ -114,6 +114,11 @@ void initGPIO()
     COMMS_LED_DIR |= COMMS_LED_PIN;
     COMMS_LED_OUT &= ~COMMS_LED_PIN2;
     COMMS_LED_DIR |= COMMS_LED_PIN2;
+
+    // Monitors
+    GPIO_MONITOR_DIR6 |= GPIO_MONITOR_PIN2;
+    GPIO_MONINOR_OUT6 |= GPIO_MONITOR_PIN2;
+
     // Configure SPI
     P5SEL0 |= BIT0 | BIT1 | BIT2;
     SLAVE_CS_DIR |= SLAVE_CS_PIN;
@@ -141,7 +146,7 @@ int main(void)
     initClockTo16MHz();
     initGPIO();
     initSPI();
-    setNode(ICNODE);
+    setNode(SINK);
     g_sendAck = false;
     g_queueLen = 0;
     ReceiveIndex = 0;
@@ -153,6 +158,7 @@ int main(void)
     g_currentPairedNodeID = 0;
     g_nextNodeID   = 0x7e;
     g_ICWaitCycles = 0;
+    g_if_measure   = true;
     if (g_if_sourceNode)
     {
         g_rounds = MAXROUND;
@@ -275,6 +281,11 @@ void start_spi_process(void)
             free(transmitBuffer);
             transmitBuffer = NULL;
             SPI_Master_WriteReg(CMD_TYPE_0_MASTER, SPI_DATA_LEN);
+            if (g_if_measure)
+            {
+                g_if_measure = false;
+                GPIO_MONINOR_OUT6 ^= GPIO_MONITOR_PIN2;
+            }
         }
         else if (g_systemStatus == SINKWAIT)
         {

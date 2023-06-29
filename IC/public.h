@@ -16,6 +16,10 @@
 #define COMMS_LED_PIN BIT0
 #define COMMS_LED_PIN2 BIT1
 
+#define GPIO_MONINOR_OUT6 P6OUT
+#define GPIO_MONITOR_DIR6 P6DIR
+#define GPIO_MONITOR_PIN2 BIT2
+
 #define DUMMY 0x7e
 #define CMD_TYPE_0_SLAVE 0xAA
 #define CMD_TYPE_0_MASTER 0x01
@@ -71,6 +75,7 @@ uint8_t        g_receiveBuffer[SPI_DATA_LEN];
 uint8_t        g_transBuffer[SPI_DATA_LEN ];
 uint8_t        g_node_dimension;
 bool           g_if_sourceNode;
+bool           g_if_measure;
 uint32_t       g_transDataSeq;
 uint8_t        g_sha256_buf[SHA256_BLOCK_SIZE];
 uint8_t        g_pre_ack_seq;
