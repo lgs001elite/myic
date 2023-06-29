@@ -25,9 +25,13 @@ void produceData(void)
         g_packetQueue[g_queueLen].dst = g_nextNodeID;
         g_packetQueue[g_queueLen].layer = g_node_dimension;
         g_packetQueue[g_queueLen].status = PACKAGE_PACKET;
-        g_packetQueue[g_queueLen].seq = (g_seq_data + 1) % MAXUINT8;
+        g_packetQueue[g_queueLen].seq = (g_seq_data + 1) % MAXQUELEN;
         g_packetQueue[g_queueLen].round = g_rounds;
         g_seq_data = g_seq_data + 1;
+        if (g_seq_data == MAXQUELEN)
+        {
+            g_seq_data = 0;
+        }
         uint8_t j = 0;
         for (; j < PACKET_DATA_LEN; j++)
         {
@@ -37,10 +41,6 @@ void produceData(void)
         if (g_transDataSeq == MAXBYTE)
         {
             g_transDataSeq = 0;
-            if (g_rounds != 0)
-            {
-                g_seq_data = (uint8_t)genRanNumb();
-            }
         }
         g_queueLen = g_queueLen + 1;
         __delay_cycles(100000);

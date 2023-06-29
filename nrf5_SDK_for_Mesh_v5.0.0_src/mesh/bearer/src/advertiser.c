@@ -257,7 +257,7 @@ static inline void set_default_advertiser_configuration(advertiser_config_t * p_
         p_config->channels.channel_map[channel_count] = m_ble_adv_channels[channel_count];
     }
     p_config->channels.count = channel_count;
-    p_config->channels.randomize_order = false;
+    p_config->channels.randomize_order = true;
 }
 
 static inline void set_default_broadcast_configuration(broadcast_t * p_broadcast)

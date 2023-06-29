@@ -152,8 +152,7 @@ int main(void)
     g_pre_fin_seq = 0x7e;
     g_pre_ack_seq = 0x7e;
     g_systemStatus = NONLAYER;
-    g_seq_data = (uint8_t)genRanNumb();
-    g_seq_header = (uint8_t)genRanNumb();
+    g_seq_data = 0;
     g_if_send_next = true;
     g_currentPairedNodeID = 0;
     g_nextNodeID = 0x7e;

@@ -180,6 +180,10 @@ bool receiveDataFromNordic()
         COMMS_LED_OUT ^= COMMS_LED_PIN2;
         break;
     case PACKAGE_ACK:
+        if ((g_receiveBuffer[31] == 0x63) && (g_receiveBuffer[32] == 0x3b))
+        {
+            __delay_cycles(10);
+        }
         data_is_ack(g_receiveBuffer);
         COMMS_LED_OUT ^= COMMS_LED_PIN;
         break;

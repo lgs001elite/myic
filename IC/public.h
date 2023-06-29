@@ -70,7 +70,6 @@ uint8_t        g_queueLen;
 uint8_t        g_systemStatus;
 uint8_t        g_nodeAddress;
 uint8_t        g_seq_data;
-uint8_t        g_seq_header;
 uint8_t        g_receiveBuffer[SPI_DATA_LEN];
 uint8_t        g_transBuffer[SPI_DATA_LEN ];
 uint8_t        g_node_dimension;
