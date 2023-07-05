@@ -34,6 +34,7 @@
 
 #define MAXQUELEN 12
 #define MAXROUND  10
+#define MAXSPIWAIT 1000
 
 #define PACKAGE_FIND     0x03
 #define PACKAGE_PACKET   0x01
@@ -45,6 +46,19 @@
 #define PACKET_DATA_LEN  0x17
 #define SPI_NONCRC_LEN   0x1F
 #define SPI_DATA_LEN     0x21
+
+#define WRITE_SIZE 128
+
+#if defined(__TI_COMPILER_VERSION__)
+#pragma PERSISTENT(FRAM_write)
+char FRAM_write[WRITE_SIZE];
+#elif defined(__IAR_SYSTEMS_ICC__)
+__persistent char FRAM_write[WRITE_SIZE];
+#elif defined(__GNUC__)
+char __attribute__((persistent)) FRAM_write[WRITE_SIZE];
+#else
+#error Compiler not supported!
+#endif
 
 typedef struct spi_datagram
 {
@@ -76,12 +90,15 @@ uint8_t        g_transBuffer[SPI_DATA_LEN ];
 uint8_t        g_node_dimension;
 bool           g_if_sourceNode;
 bool           g_if_measure;
-uint32_t       g_transDataSeq;
+bool           g_spi_ack;
+uint32_t       g_ack_waiter;
+uint8_t        g_transDataSeq;
 uint8_t        g_sha256_buf[SHA256_BLOCK_SIZE];
 uint8_t        g_pre_ack_seq;
 uint8_t        g_pre_packet_seq;
 SPI_DATAGRAM   *g_packetQueue;
 
+void FRAMWrite(void);
 void update_crc(void);
 void start_spi_process(void);
 void close_spi_process(void);

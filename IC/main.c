@@ -8,6 +8,11 @@
 #include "random.h"
 #include "transitionData.h"
 
+void FRAMWrite(void)
+{
+
+}
+
 uint8_t SlaveType0[SPI_DATA_LEN] = {0};
 void setNode(uint8_t nodeType)
 {
@@ -70,12 +75,11 @@ SPI_Mode SPI_Master_WriteReg(uint8_t reg_addr, uint8_t count)
     MasterMode = TX_REG_ADDRESS_MODE;
     TransmitRegAddr = reg_addr;
     TXByteCtr = count;
-//    RXByteCtr = 0;
     TransmitIndex = 0;
     ReceiveIndex = 0;
     SLAVE_CS_OUT &= ~(SLAVE_CS_PIN);
     SendUCB1Data(TransmitRegAddr);
-    __bis_SR_register(CPUOFF + GIE); // Enter LPM0 w/ interrupts
+    __bis_SR_register(CPUOFF | GIE); // Enter LPM0 w/ interrupts
     SLAVE_CS_OUT |= SLAVE_CS_PIN;
     return MasterMode;
 }
@@ -87,10 +91,9 @@ SPI_Mode SPI_Master_ReadReg(uint8_t reg_addr, uint8_t count)
     RXByteCtr = count;
     TXByteCtr = 0;
     ReceiveIndex = 0;
-//    TransmitIndex = 0;
     SLAVE_CS_OUT &= ~(SLAVE_CS_PIN);
     SendUCB1Data(TransmitRegAddr);
-    __bis_SR_register(CPUOFF + GIE); // Enter LPM0 w/ interrupts
+    __bis_SR_register(CPUOFF | GIE); // Enter LPM0 w/ interrupts
 
     SLAVE_CS_OUT |= SLAVE_CS_PIN;
     return MasterMode;
@@ -103,7 +106,6 @@ void initSPI()
     UCB1CTLW0 = UCSWRST; // **Put state machine in reset**
     UCB1CTLW0 |= UCCKPL | UCMSB | UCSYNC | UCMST | UCSSEL__SMCLK_L | UCMODE0 | UCSTEM | UC7BIT_0 | UCCKPH; // Added by me
     UCB1BRW = 0x20;
-    // UCB1MCTLW = 0;
     UCB1CTLW0 &= ~UCSWRST;
 }
 
@@ -139,6 +141,31 @@ void initClockTo16MHz()
     CSCTL1 = DCOFSEL_4 | DCORSEL;         // Set DCO to 16MHz
 
 }
+
+void initWAIT()
+{
+    TA0CCTL0 = CCIE; // TACCR0 interrupt enabled
+    TA0CCR0 = 50000;
+    TA0CTL = TASSEL__SMCLK | MC__CONTINOUS; // SMCLK, continuous mode
+    __bis_SR_register(CPUOFF | GIE);        // Enter LPM0 w/ interrupt
+}
+
+// Timer0_A0 interrupt service routine
+#if defined(__TI_COMPILER_VERSION__) || defined(__IAR_SYSTEMS_ICC__)
+#pragma vector = TIMER0_A0_VECTOR
+__interrupt void Timer0_A0_ISR(void)
+#elif defined(__GNUC__)
+void __attribute__((interrupt(TIMER0_A0_VECTOR))) Timer0_A0_ISR(void)
+#else
+#error Compiler not supported!
+#endif
+{
+    P1OUT ^= BIT0;
+    TA0CCR0 += 50000; // Add Offset to TA0CCR0
+    __delay_cycles(100);
+    g_ack_waiter = g_ack_waiter + 1;
+}
+
 int main(void)
 {
     // Stop watchdog timer
@@ -146,11 +173,13 @@ int main(void)
     initClockTo16MHz();
     initGPIO();
     initSPI();
-    setNode(SINK);
+    initWAIT();
+    setNode(ICNODE);
     g_sendAck = false;
     g_queueLen = 0;
     ReceiveIndex = 0;
     g_transDataSeq = 0;
+    g_ack_waiter = 0;
     g_pre_packet_seq = 0x7e;
     g_pre_ack_seq = 0x7e;
     g_systemStatus = NONLAYER;
@@ -159,10 +188,11 @@ int main(void)
     g_nextNodeID   = 0x7e;
     g_ICWaitCycles = 0;
     g_if_measure   = true;
+    g_spi_ack = false;
     if (g_if_sourceNode)
     {
         g_rounds = MAXROUND;
-        g_packetQueue = (SPI_DATAGRAM *)malloc(sizeof(SPI_DATAGRAM) * MAXQUELEN);
+        g_packetQueue = (SPI_DATAGRAM *) malloc (sizeof(SPI_DATAGRAM) * MAXQUELEN);
         if (!g_packetQueue)
         {
             free(g_packetQueue);
@@ -210,7 +240,16 @@ void start_spi_process(void)
     UCB1IE |= UCRXIE;
     while (SWITCH2SPI)
     {
-        SPI_Master_ReadReg(CMD_TYPE_0_SLAVE, SPI_DATA_LEN );
+        if (g_spi_ack == true)
+        {
+            __delay_cycles(1);
+            if (g_ack_waiter > MAXSPIWAIT)
+            {
+                g_spi_ack = false;
+            }
+            continue;
+        }
+        SPI_Master_ReadReg(CMD_TYPE_0_SLAVE, SPI_DATA_LEN);
         CopyArray(g_receiveBuffer, SlaveType0, SPI_DATA_LEN);
         receiveDataFromNordic();
         if (g_sendAck == true)
@@ -222,6 +261,7 @@ void start_spi_process(void)
             update_crc();
             SPI_Master_WriteReg(CMD_TYPE_0_MASTER, SPI_DATA_LEN);
             g_sendAck = false;
+            g_spi_ack = true;
             continue;
         }
         if (g_systemStatus == NONLAYER)
@@ -233,6 +273,8 @@ void start_spi_process(void)
                 {
                     g_transBuffer[i] = i + 0x20;
                 }
+                g_spi_ack = true;
+                g_ack_waiter = 0;
                 if (g_node_dimension == 0x7e)
                 {
                     SPI_Master_WriteReg(CMD_TYPE_0_MASTER, SPI_DATA_LEN);
@@ -261,6 +303,8 @@ void start_spi_process(void)
             update_crc();
             SPI_Master_WriteReg(CMD_TYPE_0_MASTER, SPI_DATA_LEN);
             g_waitToFind = g_waitToFind - 1;
+            g_spi_ack    = true;
+            g_ack_waiter = 0;
         }
         else if (g_systemStatus == TRANSMIT)
         {
@@ -281,6 +325,8 @@ void start_spi_process(void)
             free(transmitBuffer);
             transmitBuffer = NULL;
             SPI_Master_WriteReg(CMD_TYPE_0_MASTER, SPI_DATA_LEN);
+            g_spi_ack = true;
+            g_ack_waiter = 0;
             if (g_if_measure)
             {
                 g_if_measure = false;
