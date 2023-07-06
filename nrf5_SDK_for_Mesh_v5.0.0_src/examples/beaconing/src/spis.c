@@ -65,7 +65,13 @@ void spis_event_handler(nrf_drv_spis_event_t event)
         {
             return;
         }
-
+        for (uint8_t i = 0; i < ACTUALDATAUNITS; i++)
+        {
+            m_tx_buf_spi[i] = i + 0x20;
+        }
+        m_tx_buf_spi[3] = 0x33;
+        m_tx_buf_spi[4] = 0x44;
+        m_tx_buf_spi[5] = 0x55;
         __LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "----- received successfully  seq: %X-----\n", m_rx_buf_spi[3]);
         __LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "----- received successfully  type: %X-----\n", m_rx_buf_spi[4]);
         uint8_t statusAction = m_rx_buf_spi[4];

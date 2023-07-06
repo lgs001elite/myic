@@ -162,7 +162,7 @@ void data_is_ack(uint8_t *receivedData)
 
 bool receiveDataFromNordic()
 {
-    if ((m_tx_buf_spi[3] == 0x33) && (m_tx_buf_spi[3] == 0x44) && (m_tx_buf_spi[3] == 0x55))
+    if ((g_receiveBuffer[3] == 0x33) && (g_receiveBuffer[4] == 0x44) && (g_receiveBuffer[5] == 0x55))
     {
         g_spi_ack = false;
     }
