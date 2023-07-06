@@ -10,7 +10,6 @@
 
 void FRAMWrite(void)
 {
-
 }
 
 uint8_t SlaveType0[SPI_DATA_LEN] = {0};
@@ -102,7 +101,7 @@ void initSPI()
 {
     // Clock Polarity: The inactive state is high
     // MSB First, 8-bit, Master, 4-pin mode, Synchronous
-    UCB1CTLW0 = UCSWRST; // **Put state machine in reset**
+    UCB1CTLW0 = UCSWRST;                                                                                   // **Put state machine in reset**
     UCB1CTLW0 |= UCCKPL | UCMSB | UCSYNC | UCMST | UCSSEL__SMCLK_L | UCMODE0 | UCSTEM | UC7BIT_0 | UCCKPH; // Added by me
     UCB1BRW = 0x20;
     UCB1CTLW0 &= ~UCSWRST;
@@ -138,7 +137,6 @@ void initClockTo16MHz()
     CSCTL2 = SELA__VLOCLK | SELS__DCOCLK | SELM__DCOCLK;
     CSCTL3 = DIVA__4 | DIVS__4 | DIVM__4; // Set all corresponding clk sources to divide by 4 for errata
     CSCTL1 = DCOFSEL_4 | DCORSEL;         // Set DCO to 16MHz
-
 }
 
 void initWAIT()
@@ -170,7 +168,7 @@ void __attribute__((interrupt(TIMER0_A0_VECTOR))) Timer0_A0_ISR(void)
     }
     P1OUT ^= BIT0;
     TA0CCR0 += 50000;
-    __delay_cycles(1000);
+    __delay_cycles(1);
     g_ack_waiter = g_ack_waiter + 1;
 }
 
@@ -192,14 +190,14 @@ int main(void)
     g_systemStatus = NONLAYER;
     g_seq_data = 0;
     g_currentPairedNodeID = 0;
-    g_nextNodeID   = 0x7e;
+    g_nextNodeID = 0x7e;
     g_ICWaitCycles = 0;
-    g_if_measure   = true;
+    g_if_measure = true;
     g_spi_ack = false;
     if (g_if_sourceNode)
     {
         g_rounds = MAXROUND;
-        g_packetQueue = (SPI_DATAGRAM *) malloc (sizeof(SPI_DATAGRAM) * MAXQUELEN);
+        g_packetQueue = (SPI_DATAGRAM *)malloc(sizeof(SPI_DATAGRAM) * MAXQUELEN);
         if (!g_packetQueue)
         {
             free(g_packetQueue);
@@ -248,7 +246,6 @@ void start_spi_process(void)
     UCB1IE |= UCRXIE;
     while (SWITCH2SPI)
     {
-        __no_operation();
         if (g_spi_ack == true)
         {
             __delay_cycles(1);
@@ -312,7 +309,11 @@ void start_spi_process(void)
             update_crc();
             SPI_Master_WriteReg(CMD_TYPE_0_MASTER, SPI_DATA_LEN);
             g_waitToFind = g_waitToFind - 1;
-            g_spi_ack    = true;
+            if (g_waitToFind == 0)
+            {
+                __no_operation();
+            }
+            g_spi_ack = true;
             g_ack_waiter = 0;
             initWAIT();
         }
@@ -346,6 +347,11 @@ void start_spi_process(void)
         }
         else if (g_systemStatus == SINKWAIT)
         {
+            uint8_t i = 0;
+            for (; i < SPI_DATA_LEN; i++)
+            {
+                g_transBuffer[i] = i + 0x20;
+            }
             SPI_Master_WriteReg(CMD_TYPE_0_MASTER, SPI_DATA_LEN);
         }
     }

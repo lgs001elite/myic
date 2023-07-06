@@ -34,7 +34,7 @@
 
 #define MAXQUELEN 12
 #define MAXROUND  10
-#define MAXSPIWAIT 1000
+#define MAXSPIWAIT 10
 
 #define PACKAGE_FIND     0x03
 #define PACKAGE_PACKET   0x01
