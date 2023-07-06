@@ -94,7 +94,6 @@ SPI_Mode SPI_Master_ReadReg(uint8_t reg_addr, uint8_t count)
     SLAVE_CS_OUT &= ~(SLAVE_CS_PIN);
     SendUCB1Data(TransmitRegAddr);
     __bis_SR_register(CPUOFF | GIE); // Enter LPM0 w/ interrupts
-
     SLAVE_CS_OUT |= SLAVE_CS_PIN;
     return MasterMode;
 }
@@ -160,9 +159,18 @@ void __attribute__((interrupt(TIMER0_A0_VECTOR))) Timer0_A0_ISR(void)
 #error Compiler not supported!
 #endif
 {
+    SPI_Master_ReadReg(CMD_TYPE_0_SLAVE, SPI_DATA_LEN);
+    CopyArray(g_receiveBuffer, SlaveType0, SPI_DATA_LEN);
+    receiveDataFromNordic();
+    if (g_ack_waiter > MAXSPIWAIT)
+    {
+        g_spi_ack = false;
+        g_ack_waiter = 0;
+        __bic_SR_register_on_exit(CPUOFF | GIE);
+    }
     P1OUT ^= BIT0;
-    TA0CCR0 += 50000; // Add Offset to TA0CCR0
-    __delay_cycles(100);
+    TA0CCR0 += 50000;
+    __delay_cycles(1000);
     g_ack_waiter = g_ack_waiter + 1;
 }
 
@@ -173,8 +181,7 @@ int main(void)
     initClockTo16MHz();
     initGPIO();
     initSPI();
-    initWAIT();
-    setNode(ICNODE);
+    setNode(SINK);
     g_sendAck = false;
     g_queueLen = 0;
     ReceiveIndex = 0;
@@ -208,6 +215,7 @@ int main(void)
         produceData();
     }
     start_spi_process();
+    __no_operation();
 }
 
 void update_crc(void)
@@ -240,13 +248,10 @@ void start_spi_process(void)
     UCB1IE |= UCRXIE;
     while (SWITCH2SPI)
     {
+        __no_operation();
         if (g_spi_ack == true)
         {
             __delay_cycles(1);
-            if (g_ack_waiter > MAXSPIWAIT)
-            {
-                g_spi_ack = false;
-            }
             continue;
         }
         SPI_Master_ReadReg(CMD_TYPE_0_SLAVE, SPI_DATA_LEN);
@@ -262,6 +267,8 @@ void start_spi_process(void)
             SPI_Master_WriteReg(CMD_TYPE_0_MASTER, SPI_DATA_LEN);
             g_sendAck = false;
             g_spi_ack = true;
+            g_ack_waiter = 0;
+            initWAIT();
             continue;
         }
         if (g_systemStatus == NONLAYER)
@@ -278,12 +285,14 @@ void start_spi_process(void)
                 if (g_node_dimension == 0x7e)
                 {
                     SPI_Master_WriteReg(CMD_TYPE_0_MASTER, SPI_DATA_LEN);
+                    initWAIT();
                     continue;
                 }
                 if (g_ICWaitCycles > 0)
                 {
                     g_ICWaitCycles = g_ICWaitCycles - 1;
                     SPI_Master_WriteReg(CMD_TYPE_0_MASTER, SPI_DATA_LEN);
+                    initWAIT();
                     continue;
                 }
                 if (g_waitToFind == 0)
@@ -305,6 +314,7 @@ void start_spi_process(void)
             g_waitToFind = g_waitToFind - 1;
             g_spi_ack    = true;
             g_ack_waiter = 0;
+            initWAIT();
         }
         else if (g_systemStatus == TRANSMIT)
         {
@@ -327,6 +337,7 @@ void start_spi_process(void)
             SPI_Master_WriteReg(CMD_TYPE_0_MASTER, SPI_DATA_LEN);
             g_spi_ack = true;
             g_ack_waiter = 0;
+            initWAIT();
             if (g_if_measure)
             {
                 g_if_measure = false;
