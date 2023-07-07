@@ -19,6 +19,7 @@ void produceData(void)
     uint32_t i = 0;
     for (; i < (MAXQUELEN); i++)
     {
+        GPIO_MONINOR_OUT8 ^= GPIO_MONITOR_PIN1;
         g_packetQueue[g_queueLen].hp_len = 0x1E;
         g_packetQueue[g_queueLen].t_broad_type = BLE_GAP_AD_TYPE;
         g_packetQueue[g_queueLen].src = g_nodeAddress;

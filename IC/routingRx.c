@@ -119,9 +119,9 @@ void data_is_find(uint8_t *receivedData)
 
 void data_is_ack(uint8_t *receivedData)
 {
-    uint8_t aimID = receivedData[6];
-    uint8_t senderID = receivedData[5];
-    uint8_t packetSeq = receivedData[2];
+    uint8_t aimID      = receivedData[6];
+    uint8_t senderID   = receivedData[5];
+    uint8_t packetSeq  = receivedData[2];
     if (aimID != g_nodeAddress)
     {
         return;
@@ -142,8 +142,8 @@ void data_is_ack(uint8_t *receivedData)
         return;
     }
     g_pre_ack_seq = packetSeq;
-    g_queueLen = g_queueLen - 1;
-    g_if_measure = true;
+    g_queueLen    = g_queueLen - 1;
+    g_if_measure  = true;
     GPIO_MONINOR_OUT6 ^= GPIO_MONITOR_PIN2;
     if (g_queueLen == 0)
     {
@@ -175,6 +175,7 @@ bool receiveDataFromNordic()
     {
         return false;
     }
+    GPIO_MONINOR_OUT6 ^= GPIO_MONITOR_PIN3;
     uint8_t dataType = g_receiveBuffer[3];
     switch (dataType)
     {

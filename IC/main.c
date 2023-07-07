@@ -118,9 +118,15 @@ void initGPIO()
     // Monitors
     GPIO_MONITOR_DIR6 |= GPIO_MONITOR_PIN2;
     GPIO_MONINOR_OUT6 |= GPIO_MONITOR_PIN2;
+    GPIO_MONITOR_DIR6 |= GPIO_MONITOR_PIN3;
+    GPIO_MONINOR_OUT6 |= GPIO_MONITOR_PIN3;
+    GPIO_MONITOR_DIR8 |= GPIO_MONITOR_PIN1;
+    GPIO_MONINOR_OUT8 |= GPIO_MONITOR_PIN1;
+    // GPIO_MONITOR_DIR4 |= GPIO_MONITOR_PIN1;
+    // GPIO_MONINOR_OUT4 |= GPIO_MONITOR_PIN1
 
-    // Configure SPI
-    P5SEL0 |= BIT0 | BIT1 | BIT2;
+        // Configure SPI
+        P5SEL0 |= BIT0 | BIT1 | BIT2;
     SLAVE_CS_DIR |= SLAVE_CS_PIN;
     SLAVE_CS_OUT |= SLAVE_CS_PIN;
     PM5CTL0 &= ~LOCKLPM5;
@@ -141,10 +147,10 @@ void initClockTo16MHz()
 
 void initWAIT()
 {
-    TA0CCTL0 = CCIE; // TACCR0 interrupt enabled
+    TA0CCTL0 = CCIE;    // TACCR0 interrupt enabled
     TA0CCR0 = 50000;
-    TA0CTL = TASSEL__SMCLK | MC__CONTINOUS; // SMCLK, continuous mode
-    __bis_SR_register(CPUOFF | GIE);        // Enter LPM0 w/ interrupt
+    TA0CTL = TASSEL__SMCLK | MC__CONTINOUS;    // SMCLK, continuous mode
+    __bis_SR_register(GIE);    // Enter interrupt
 }
 
 // Timer0_A0 interrupt service routine
@@ -174,7 +180,6 @@ void __attribute__((interrupt(TIMER0_A0_VECTOR))) Timer0_A0_ISR(void)
 
 int main(void)
 {
-    // Stop watchdog timer
     WDTCTL = WDTPW | WDTHOLD;
     initClockTo16MHz();
     initGPIO();
@@ -190,14 +195,14 @@ int main(void)
     g_systemStatus = NONLAYER;
     g_seq_data = 0;
     g_currentPairedNodeID = 0;
-    g_nextNodeID = 0x7e;
+    g_nextNodeID   = 0x7e;
     g_ICWaitCycles = 0;
-    g_if_measure = true;
-    g_spi_ack = false;
+    g_if_measure   = true;
+    g_spi_ack      = false;
     if (g_if_sourceNode)
     {
         g_rounds = MAXROUND;
-        g_packetQueue = (SPI_DATAGRAM *)malloc(sizeof(SPI_DATAGRAM) * MAXQUELEN);
+        g_packetQueue = (SPI_DATAGRAM *) malloc (sizeof(SPI_DATAGRAM) * MAXQUELEN);
         if (!g_packetQueue)
         {
             free(g_packetQueue);
@@ -213,7 +218,6 @@ int main(void)
         produceData();
     }
     start_spi_process();
-    __no_operation();
 }
 
 void update_crc(void)
@@ -262,6 +266,8 @@ void start_spi_process(void)
             g_transBuffer[6] = g_currentPairedNodeID;
             update_crc();
             SPI_Master_WriteReg(CMD_TYPE_0_MASTER, SPI_DATA_LEN);
+            GPIO_MONINOR_OUT6 ^= GPIO_MONITOR_PIN3;
+            // GPIO_MONINOR_OUT4 ^= GPIO_MONITOR_PIN1;
             g_sendAck = false;
             g_spi_ack = true;
             g_ack_waiter = 0;
@@ -282,6 +288,7 @@ void start_spi_process(void)
                 if (g_node_dimension == 0x7e)
                 {
                     SPI_Master_WriteReg(CMD_TYPE_0_MASTER, SPI_DATA_LEN);
+                    // GPIO_MONINOR_OUT4 ^= GPIO_MONITOR_PIN1;
                     initWAIT();
                     continue;
                 }
@@ -289,6 +296,7 @@ void start_spi_process(void)
                 {
                     g_ICWaitCycles = g_ICWaitCycles - 1;
                     SPI_Master_WriteReg(CMD_TYPE_0_MASTER, SPI_DATA_LEN);
+                    // GPIO_MONINOR_OUT4 ^= GPIO_MONITOR_PIN1;
                     initWAIT();
                     continue;
                 }
@@ -308,11 +316,9 @@ void start_spi_process(void)
             g_transBuffer[3] = PACKAGE_FIND;
             update_crc();
             SPI_Master_WriteReg(CMD_TYPE_0_MASTER, SPI_DATA_LEN);
+            GPIO_MONINOR_OUT6 ^= GPIO_MONITOR_PIN3;
+            // GPIO_MONINOR_OUT4 ^= GPIO_MONITOR_PIN1;
             g_waitToFind = g_waitToFind - 1;
-            if (g_waitToFind == 0)
-            {
-                __no_operation();
-            }
             g_spi_ack = true;
             g_ack_waiter = 0;
             initWAIT();
@@ -322,6 +328,7 @@ void start_spi_process(void)
             if (g_queueLen == 0)
             {
                 SPI_Master_WriteReg(CMD_TYPE_0_MASTER, SPI_DATA_LEN);
+                // GPIO_MONINOR_OUT4 ^= GPIO_MONITOR_PIN1;
                 continue;
             }
             uint8_t *transmitBuffer = (uint8_t *)malloc(sizeof(uint8_t) * SPI_DATA_LEN);
@@ -336,14 +343,16 @@ void start_spi_process(void)
             free(transmitBuffer);
             transmitBuffer = NULL;
             SPI_Master_WriteReg(CMD_TYPE_0_MASTER, SPI_DATA_LEN);
-            g_spi_ack = true;
-            g_ack_waiter = 0;
-            initWAIT();
+            // GPIO_MONINOR_OUT4 ^= GPIO_MONITOR_PIN1;
             if (g_if_measure)
             {
                 g_if_measure = false;
                 GPIO_MONINOR_OUT6 ^= GPIO_MONITOR_PIN2;
+                GPIO_MONINOR_OUT6 ^= GPIO_MONITOR_PIN3;
             }
+            g_spi_ack = true;
+            g_ack_waiter = 0;
+            initWAIT();
         }
         else if (g_systemStatus == SINKWAIT)
         {
@@ -353,6 +362,7 @@ void start_spi_process(void)
                 g_transBuffer[i] = i + 0x20;
             }
             SPI_Master_WriteReg(CMD_TYPE_0_MASTER, SPI_DATA_LEN);
+            // GPIO_MONINOR_OUT4 ^= GPIO_MONITOR_PIN1;
         }
     }
 }
@@ -380,14 +390,12 @@ void __attribute__((interrupt(USCI_B1_VECTOR))) USCI_B1_ISR(void)
         case TX_REG_ADDRESS_MODE:
             if (RXByteCtr)
             {
-                MasterMode = RX_DATA_MODE; // Need to start receiving now
-                // Send Dummy To Start
+                MasterMode = RX_DATA_MODE;
                 SendUCB1Data(DUMMY);
             }
             else
             {
-                MasterMode = TX_DATA_MODE; // Continue to transmision with the data in Transmit Buffer
-                // Send First
+                MasterMode = TX_DATA_MODE;
                 SendUCB1Data(g_transBuffer[TransmitIndex++]);
                 TXByteCtr--;
             }
@@ -400,7 +408,6 @@ void __attribute__((interrupt(USCI_B1_VECTOR))) USCI_B1_ISR(void)
             }
             else
             {
-                // Done with transmission
                 MasterMode = IDLE_MODE;
                 __bic_SR_register_on_exit(CPUOFF); // Exit LPM0
             }
@@ -421,7 +428,6 @@ void __attribute__((interrupt(USCI_B1_VECTOR))) USCI_B1_ISR(void)
             }
             break;
         default:
-            __no_operation();
             break;
         }
         break;

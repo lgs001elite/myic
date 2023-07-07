@@ -16,9 +16,17 @@
 #define COMMS_LED_PIN BIT0
 #define COMMS_LED_PIN2 BIT1
 
+// For measuring the time intervals of transmission
 #define GPIO_MONINOR_OUT6 P6OUT
 #define GPIO_MONITOR_DIR6 P6DIR
-#define GPIO_MONITOR_PIN2 BIT2
+// #define GPIO_MONINOR_OUT6 P4OUT
+// #define GPIO_MONITOR_DIR6 P4DIR
+#define GPIO_MONITOR_PIN2 BIT2 // Packet around
+#define GPIO_MONITOR_PIN3 BIT3 // Single path
+// For measuring data produce time
+#define GPIO_MONINOR_OUT8 P8OUT
+#define GPIO_MONITOR_DIR8 P8DIR
+#define GPIO_MONITOR_PIN1 BIT1
 
 #define DUMMY 0x7e
 #define CMD_TYPE_0_SLAVE 0xAA
