@@ -144,7 +144,6 @@ void data_is_ack(uint8_t *receivedData)
     g_pre_ack_seq = packetSeq;
     g_queueLen    = g_queueLen - 1;
     g_if_measure  = true;
-    GPIO_MONINOR_OUT6 ^= GPIO_MONITOR_PIN2;
     if (g_queueLen == 0)
     {
         if (g_rounds > 0)
@@ -162,9 +161,10 @@ void data_is_ack(uint8_t *receivedData)
 
 bool receiveDataFromNordic()
 {
+    GPIO_MONINOR_OUT8 ^= GPIO_MONITOR_PIN1;
     if ((g_receiveBuffer[3] == 0x33) && (g_receiveBuffer[4] == 0x44) && (g_receiveBuffer[5] == 0x55))
     {
-        g_spi_ack = false;
+        g_spi_waitThreshold = false;
     }
     if ((g_receiveBuffer[0] != 0x1e) || (g_receiveBuffer[1] != 0x17))
     {
@@ -175,7 +175,6 @@ bool receiveDataFromNordic()
     {
         return false;
     }
-    GPIO_MONINOR_OUT6 ^= GPIO_MONITOR_PIN3;
     uint8_t dataType = g_receiveBuffer[3];
     switch (dataType)
     {

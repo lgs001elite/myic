@@ -44,7 +44,7 @@ void produceData(void)
             g_transDataSeq = 0;
         }
         g_queueLen = g_queueLen + 1;
-        __delay_cycles(100000);
+        __delay_cycles(10000);
     }
 }
 

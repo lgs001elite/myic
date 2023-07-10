@@ -19,8 +19,8 @@
 // For measuring the time intervals of transmission
 #define GPIO_MONINOR_OUT6 P6OUT
 #define GPIO_MONITOR_DIR6 P6DIR
-// #define GPIO_MONINOR_OUT6 P4OUT
-// #define GPIO_MONITOR_DIR6 P4DIR
+#define GPIO_MONINOR_OUT4 P4OUT
+#define GPIO_MONITOR_DIR4 P4DIR
 #define GPIO_MONITOR_PIN2 BIT2 // Packet around
 #define GPIO_MONITOR_PIN3 BIT3 // Single path
 // For measuring data produce time
@@ -56,6 +56,7 @@
 #define SPI_DATA_LEN     0x21
 
 #define WRITE_SIZE 128
+#define TACCR   0x22
 
 #if defined(__TI_COMPILER_VERSION__)
 #pragma PERSISTENT(FRAM_write)
@@ -98,7 +99,7 @@ uint8_t        g_transBuffer[SPI_DATA_LEN ];
 uint8_t        g_node_dimension;
 bool           g_if_sourceNode;
 bool           g_if_measure;
-bool           g_spi_ack;
+bool           g_spi_waitThreshold;
 uint32_t       g_ack_waiter;
 uint8_t        g_transDataSeq;
 uint8_t        g_sha256_buf[SHA256_BLOCK_SIZE];
@@ -106,6 +107,7 @@ uint8_t        g_pre_ack_seq;
 uint8_t        g_pre_packet_seq;
 SPI_DATAGRAM   *g_packetQueue;
 
+void dummyWait();
 void FRAMWrite(void);
 void update_crc(void);
 void start_spi_process(void);

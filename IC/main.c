@@ -56,7 +56,7 @@ void close_spi_process(void)
 void SendUCB1Data(uint8_t val)
 {
     while (!(UCB1IFG & UCTXIFG))
-        ; // USCI_B1 TX buffer ready?
+        ;
     UCB1TXBUF = val;
 }
 
@@ -78,7 +78,7 @@ SPI_Mode SPI_Master_WriteReg(uint8_t reg_addr, uint8_t count)
     ReceiveIndex = 0;
     SLAVE_CS_OUT &= ~(SLAVE_CS_PIN);
     SendUCB1Data(TransmitRegAddr);
-    __bis_SR_register(CPUOFF | GIE); // Enter LPM0 w/ interrupts
+    __bis_SR_register(LPM0_bits | GIE);
     SLAVE_CS_OUT |= SLAVE_CS_PIN;
     return MasterMode;
 }
@@ -92,9 +92,23 @@ SPI_Mode SPI_Master_ReadReg(uint8_t reg_addr, uint8_t count)
     ReceiveIndex = 0;
     SLAVE_CS_OUT &= ~(SLAVE_CS_PIN);
     SendUCB1Data(TransmitRegAddr);
-    __bis_SR_register(CPUOFF | GIE); // Enter LPM0 w/ interrupts
+    __bis_SR_register(LPM0_bits | GIE);
     SLAVE_CS_OUT |= SLAVE_CS_PIN;
     return MasterMode;
+}
+
+void dummyWait()
+{
+    uint8_t i = 0;
+    for (; i < SPI_DATA_LEN; i++)
+    {
+        g_transBuffer[i] = i + 0x20;
+    }
+    g_spi_waitThreshold = true;
+    g_ack_waiter = 0;
+    SPI_Master_WriteReg(CMD_TYPE_0_MASTER, SPI_DATA_LEN);
+    GPIO_MONINOR_OUT6 ^= GPIO_MONITOR_PIN3;
+    initWAIT();
 }
 
 void initSPI()
@@ -122,11 +136,11 @@ void initGPIO()
     GPIO_MONINOR_OUT6 |= GPIO_MONITOR_PIN3;
     GPIO_MONITOR_DIR8 |= GPIO_MONITOR_PIN1;
     GPIO_MONINOR_OUT8 |= GPIO_MONITOR_PIN1;
-    // GPIO_MONITOR_DIR4 |= GPIO_MONITOR_PIN1;
-    // GPIO_MONINOR_OUT4 |= GPIO_MONITOR_PIN1
+    GPIO_MONITOR_DIR4 |= GPIO_MONITOR_PIN1;
+    GPIO_MONINOR_OUT4 |= GPIO_MONITOR_PIN1;
 
-        // Configure SPI
-        P5SEL0 |= BIT0 | BIT1 | BIT2;
+    // Configure SPI
+    P5SEL0 |= BIT0 | BIT1 | BIT2;
     SLAVE_CS_DIR |= SLAVE_CS_PIN;
     SLAVE_CS_OUT |= SLAVE_CS_PIN;
     PM5CTL0 &= ~LOCKLPM5;
@@ -148,8 +162,8 @@ void initClockTo16MHz()
 void initWAIT()
 {
     TA0CCTL0 = CCIE;    // TACCR0 interrupt enabled
-    TA0CCR0 = 50000;
-    TA0CTL = TASSEL__SMCLK | MC__CONTINOUS;    // SMCLK, continuous mode
+    TA0CCR0 = TACCR;
+    TA0CTL = TASSEL__SMCLK | MC__UPDOWN;
     __bis_SR_register(GIE);    // Enter interrupt
 }
 
@@ -163,18 +177,16 @@ void __attribute__((interrupt(TIMER0_A0_VECTOR))) Timer0_A0_ISR(void)
 #error Compiler not supported!
 #endif
 {
-    SPI_Master_ReadReg(CMD_TYPE_0_SLAVE, SPI_DATA_LEN);
-    CopyArray(g_receiveBuffer, SlaveType0, SPI_DATA_LEN);
-    receiveDataFromNordic();
-    if (g_ack_waiter > MAXSPIWAIT)
+    GPIO_MONINOR_OUT4 ^= GPIO_MONITOR_PIN1;
+    if (g_ack_waiter == MAXSPIWAIT)
     {
-        g_spi_ack = false;
+        g_spi_waitThreshold = false;
         g_ack_waiter = 0;
-        __bic_SR_register_on_exit(CPUOFF | GIE);
+        g_if_measure = true;
+        TA0CCTL0 = CCIE_0;
     }
     P1OUT ^= BIT0;
-    TA0CCR0 += 50000;
-    __delay_cycles(1);
+    TA0CCR0 += TACCR;
     g_ack_waiter = g_ack_waiter + 1;
 }
 
@@ -198,7 +210,7 @@ int main(void)
     g_nextNodeID   = 0x7e;
     g_ICWaitCycles = 0;
     g_if_measure   = true;
-    g_spi_ack      = false;
+    g_spi_waitThreshold      = false;
     if (g_if_sourceNode)
     {
         g_rounds = MAXROUND;
@@ -250,13 +262,14 @@ void start_spi_process(void)
     UCB1IE |= UCRXIE;
     while (SWITCH2SPI)
     {
-        if (g_spi_ack == true)
+        if (g_spi_waitThreshold == true)
         {
-            __delay_cycles(1);
             continue;
         }
+        __delay_cycles(10000); // SPI waiting time for reading and writing
         SPI_Master_ReadReg(CMD_TYPE_0_SLAVE, SPI_DATA_LEN);
         CopyArray(g_receiveBuffer, SlaveType0, SPI_DATA_LEN);
+        __delay_cycles(10000); // SPI waiting time for reading and writing
         receiveDataFromNordic();
         if (g_sendAck == true)
         {
@@ -267,9 +280,8 @@ void start_spi_process(void)
             update_crc();
             SPI_Master_WriteReg(CMD_TYPE_0_MASTER, SPI_DATA_LEN);
             GPIO_MONINOR_OUT6 ^= GPIO_MONITOR_PIN3;
-            // GPIO_MONINOR_OUT4 ^= GPIO_MONITOR_PIN1;
             g_sendAck = false;
-            g_spi_ack = true;
+            g_spi_waitThreshold = true;
             g_ack_waiter = 0;
             initWAIT();
             continue;
@@ -278,31 +290,21 @@ void start_spi_process(void)
         {
             if (g_if_sourceNode)
             {
-                uint8_t i = 0;
-                for (; i < SPI_DATA_LEN; i++)
-                {
-                    g_transBuffer[i] = i + 0x20;
-                }
-                g_spi_ack = true;
-                g_ack_waiter = 0;
                 if (g_node_dimension == 0x7e)
                 {
-                    SPI_Master_WriteReg(CMD_TYPE_0_MASTER, SPI_DATA_LEN);
-                    // GPIO_MONINOR_OUT4 ^= GPIO_MONITOR_PIN1;
-                    initWAIT();
+                    dummyWait();
                     continue;
                 }
                 if (g_ICWaitCycles > 0)
                 {
                     g_ICWaitCycles = g_ICWaitCycles - 1;
-                    SPI_Master_WriteReg(CMD_TYPE_0_MASTER, SPI_DATA_LEN);
-                    // GPIO_MONINOR_OUT4 ^= GPIO_MONITOR_PIN1;
-                    initWAIT();
+                    dummyWait();
                     continue;
                 }
                 if (g_waitToFind == 0)
                 {
                     g_systemStatus = TRANSMIT;
+                    dummyWait();
                 }
             }
             else
@@ -317,9 +319,8 @@ void start_spi_process(void)
             update_crc();
             SPI_Master_WriteReg(CMD_TYPE_0_MASTER, SPI_DATA_LEN);
             GPIO_MONINOR_OUT6 ^= GPIO_MONITOR_PIN3;
-            // GPIO_MONINOR_OUT4 ^= GPIO_MONITOR_PIN1;
             g_waitToFind = g_waitToFind - 1;
-            g_spi_ack = true;
+            g_spi_waitThreshold = true;
             g_ack_waiter = 0;
             initWAIT();
         }
@@ -327,14 +328,14 @@ void start_spi_process(void)
         {
             if (g_queueLen == 0)
             {
-                SPI_Master_WriteReg(CMD_TYPE_0_MASTER, SPI_DATA_LEN);
-                // GPIO_MONINOR_OUT4 ^= GPIO_MONITOR_PIN1;
+                dummyWait();
                 continue;
             }
-            uint8_t *transmitBuffer = (uint8_t *)malloc(sizeof(uint8_t) * SPI_DATA_LEN);
+            uint8_t *transmitBuffer = (uint8_t *) malloc (sizeof(uint8_t) * SPI_DATA_LEN);
             if (!transmitBuffer)
             {
                 free(transmitBuffer);
+                dummyWait();
                 continue;
             }
             memset(transmitBuffer, 0, SPI_DATA_LEN);
@@ -343,26 +344,19 @@ void start_spi_process(void)
             free(transmitBuffer);
             transmitBuffer = NULL;
             SPI_Master_WriteReg(CMD_TYPE_0_MASTER, SPI_DATA_LEN);
-            // GPIO_MONINOR_OUT4 ^= GPIO_MONITOR_PIN1;
+            GPIO_MONINOR_OUT6 ^= GPIO_MONITOR_PIN3;
             if (g_if_measure)
             {
                 g_if_measure = false;
                 GPIO_MONINOR_OUT6 ^= GPIO_MONITOR_PIN2;
-                GPIO_MONINOR_OUT6 ^= GPIO_MONITOR_PIN3;
             }
-            g_spi_ack = true;
+            g_spi_waitThreshold = true;
             g_ack_waiter = 0;
             initWAIT();
         }
         else if (g_systemStatus == SINKWAIT)
         {
-            uint8_t i = 0;
-            for (; i < SPI_DATA_LEN; i++)
-            {
-                g_transBuffer[i] = i + 0x20;
-            }
-            SPI_Master_WriteReg(CMD_TYPE_0_MASTER, SPI_DATA_LEN);
-            // GPIO_MONINOR_OUT4 ^= GPIO_MONITOR_PIN1;
+            dummyWait();
         }
     }
 }
@@ -409,7 +403,7 @@ void __attribute__((interrupt(USCI_B1_VECTOR))) USCI_B1_ISR(void)
             else
             {
                 MasterMode = IDLE_MODE;
-                __bic_SR_register_on_exit(CPUOFF); // Exit LPM0
+                __bic_SR_register_on_exit(CPUOFF);
             }
             break;
         case RX_DATA_MODE:
@@ -420,7 +414,7 @@ void __attribute__((interrupt(USCI_B1_VECTOR))) USCI_B1_ISR(void)
             if (RXByteCtr == 0)
             {
                 MasterMode = IDLE_MODE;
-                __bic_SR_register_on_exit(CPUOFF); // Exit LPM0
+                __bic_SR_register_on_exit(CPUOFF);
             }
             else
             {
