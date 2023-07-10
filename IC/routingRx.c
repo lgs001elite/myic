@@ -149,7 +149,9 @@ void data_is_ack(uint8_t *receivedData)
         if (g_rounds > 0)
         {
             g_rounds = g_rounds - 1;
+            GPIO_MONINOR_OUT8 ^= GPIO_MONITOR_PIN1;
             produceData();
+            GPIO_MONINOR_OUT8 ^= GPIO_MONITOR_PIN1;
         }
         else
         {
@@ -161,7 +163,6 @@ void data_is_ack(uint8_t *receivedData)
 
 bool receiveDataFromNordic()
 {
-    GPIO_MONINOR_OUT8 ^= GPIO_MONITOR_PIN1;
     if ((g_receiveBuffer[3] == 0x33) && (g_receiveBuffer[4] == 0x44) && (g_receiveBuffer[5] == 0x55))
     {
         g_spi_waitThreshold = false;

@@ -108,7 +108,9 @@ void dummyWait()
     g_ack_waiter = 0;
     SPI_Master_WriteReg(CMD_TYPE_0_MASTER, SPI_DATA_LEN);
     GPIO_MONINOR_OUT6 ^= GPIO_MONITOR_PIN3;
+    GPIO_MONINOR_OUT6 ^= GPIO_MONITOR_PIN2;
     initWAIT();
+    GPIO_MONINOR_OUT6 ^= GPIO_MONITOR_PIN2;
 }
 
 void initSPI()
@@ -227,7 +229,9 @@ int main(void)
     }
     if (g_node_dimension != 0x01)
     {
+        GPIO_MONINOR_OUT8 ^= GPIO_MONITOR_PIN1;
         produceData();
+        GPIO_MONINOR_OUT8 ^= GPIO_MONITOR_PIN1;
     }
     start_spi_process();
 }
@@ -283,7 +287,9 @@ void start_spi_process(void)
             g_sendAck = false;
             g_spi_waitThreshold = true;
             g_ack_waiter = 0;
+            GPIO_MONINOR_OUT6 ^= GPIO_MONITOR_PIN2;
             initWAIT();
+            GPIO_MONINOR_OUT6 ^= GPIO_MONITOR_PIN2;
             continue;
         }
         if (g_systemStatus == NONLAYER)
@@ -322,7 +328,9 @@ void start_spi_process(void)
             g_waitToFind = g_waitToFind - 1;
             g_spi_waitThreshold = true;
             g_ack_waiter = 0;
+            GPIO_MONINOR_OUT6 ^= GPIO_MONITOR_PIN2;
             initWAIT();
+            GPIO_MONINOR_OUT6 ^= GPIO_MONITOR_PIN2;
         }
         else if (g_systemStatus == TRANSMIT)
         {
@@ -348,11 +356,12 @@ void start_spi_process(void)
             if (g_if_measure)
             {
                 g_if_measure = false;
-                GPIO_MONINOR_OUT6 ^= GPIO_MONITOR_PIN2;
             }
             g_spi_waitThreshold = true;
             g_ack_waiter = 0;
+            GPIO_MONINOR_OUT6 ^= GPIO_MONITOR_PIN2;
             initWAIT();
+            GPIO_MONINOR_OUT6 ^= GPIO_MONITOR_PIN2;
         }
         else if (g_systemStatus == SINKWAIT)
         {

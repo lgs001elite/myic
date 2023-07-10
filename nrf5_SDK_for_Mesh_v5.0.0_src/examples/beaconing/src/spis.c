@@ -102,7 +102,6 @@ void spis_start(void)
     NRF_P0->PIN_CNF[APP_SPIS_MISO_PIN] =
         (GPIO_PIN_CNF_DRIVE_H0H1 << GPIO_PIN_CNF_DRIVE_Pos) | (GPIO_PIN_CNF_INPUT_Connect << GPIO_PIN_CNF_INPUT_Pos) | (GPIO_PIN_CNF_DIR_Output << GPIO_PIN_CNF_DIR_Pos);
     (void)sd_app_evt_wait();
-
     while (1)
     {
         if ((m_tx_buf_spi[0] != 0x1e) || (m_tx_buf_spi[1] != 0x17))
