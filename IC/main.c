@@ -107,9 +107,6 @@ void dummyWait()
     g_spi_waitThreshold = true;
     g_ack_waiter = 0;
     SPI_Master_WriteReg(CMD_TYPE_0_MASTER, SPI_DATA_LEN);
-    GPIO_MONINOR_OUT6 ^= GPIO_MONITOR_PIN3;
-    GPIO_MONINOR_OUT6 ^= GPIO_MONITOR_PIN2;
-    initWAIT();
     GPIO_MONINOR_OUT6 ^= GPIO_MONITOR_PIN2;
 }
 
@@ -179,13 +176,13 @@ void __attribute__((interrupt(TIMER0_A0_VECTOR))) Timer0_A0_ISR(void)
 #error Compiler not supported!
 #endif
 {
-    GPIO_MONINOR_OUT4 ^= GPIO_MONITOR_PIN1;
     if (g_ack_waiter == MAXSPIWAIT)
     {
         g_spi_waitThreshold = false;
         g_ack_waiter = 0;
         g_if_measure = true;
         TA0CCTL0 = CCIE_0;
+        GPIO_MONINOR_OUT4 ^= GPIO_MONITOR_PIN1;
     }
     P1OUT ^= BIT0;
     TA0CCR0 += TACCR;
@@ -233,6 +230,7 @@ int main(void)
         produceData();
         GPIO_MONINOR_OUT8 ^= GPIO_MONITOR_PIN1;
     }
+    initWAIT();
     start_spi_process();
 }
 
@@ -288,7 +286,6 @@ void start_spi_process(void)
             g_spi_waitThreshold = true;
             g_ack_waiter = 0;
             GPIO_MONINOR_OUT6 ^= GPIO_MONITOR_PIN2;
-            initWAIT();
             GPIO_MONINOR_OUT6 ^= GPIO_MONITOR_PIN2;
             continue;
         }
@@ -329,7 +326,6 @@ void start_spi_process(void)
             g_spi_waitThreshold = true;
             g_ack_waiter = 0;
             GPIO_MONINOR_OUT6 ^= GPIO_MONITOR_PIN2;
-            initWAIT();
             GPIO_MONINOR_OUT6 ^= GPIO_MONITOR_PIN2;
         }
         else if (g_systemStatus == TRANSMIT)
@@ -360,7 +356,6 @@ void start_spi_process(void)
             g_spi_waitThreshold = true;
             g_ack_waiter = 0;
             GPIO_MONINOR_OUT6 ^= GPIO_MONITOR_PIN2;
-            initWAIT();
             GPIO_MONINOR_OUT6 ^= GPIO_MONITOR_PIN2;
         }
         else if (g_systemStatus == SINKWAIT)
