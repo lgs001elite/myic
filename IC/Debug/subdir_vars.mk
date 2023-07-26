@@ -9,6 +9,7 @@ CMD_SRCS += \
 ../lnk_msp430fr5994.cmd 
 
 C_SRCS += \
+../chargingSimulator.c \
 ../crc.c \
 ../hash.c \
 ../main.c \
@@ -18,6 +19,7 @@ C_SRCS += \
 ../transitionData.c 
 
 C_DEPS += \
+./chargingSimulator.d \
 ./crc.d \
 ./hash.d \
 ./main.d \
@@ -27,6 +29,7 @@ C_DEPS += \
 ./transitionData.d 
 
 OBJS += \
+./chargingSimulator.obj \
 ./crc.obj \
 ./hash.obj \
 ./main.obj \
@@ -36,6 +39,7 @@ OBJS += \
 ./transitionData.obj 
 
 OBJS__QUOTED += \
+"chargingSimulator.obj" \
 "crc.obj" \
 "hash.obj" \
 "main.obj" \
@@ -45,6 +49,7 @@ OBJS__QUOTED += \
 "transitionData.obj" 
 
 C_DEPS__QUOTED += \
+"chargingSimulator.d" \
 "crc.d" \
 "hash.d" \
 "main.d" \
@@ -54,6 +59,7 @@ C_DEPS__QUOTED += \
 "transitionData.d" 
 
 C_SRCS__QUOTED += \
+"../chargingSimulator.c" \
 "../crc.c" \
 "../hash.c" \
 "../main.c" \

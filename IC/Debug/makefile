@@ -10,6 +10,7 @@ GEN_OPTS__FLAG :=
 GEN_CMDS__FLAG := 
 
 ORDERED_OBJS += \
+"./chargingSimulator.obj" \
 "./crc.obj" \
 "./hash.obj" \
 "./main.obj" \
@@ -149,8 +150,8 @@ IC.out: $(OBJS) $(CMD_SRCS) $(GEN_CMDS)
 # Other Targets
 clean:
 	-$(RM) $(EXE_OUTPUTS__QUOTED)
-	-$(RM) "crc.obj" "hash.obj" "main.obj" "random.obj" "routingRx.obj" "routingTx.obj" "transitionData.obj" 
-	-$(RM) "crc.d" "hash.d" "main.d" "random.d" "routingRx.d" "routingTx.d" "transitionData.d" 
+	-$(RM) "chargingSimulator.obj" "crc.obj" "hash.obj" "main.obj" "random.obj" "routingRx.obj" "routingTx.obj" "transitionData.obj" 
+	-$(RM) "chargingSimulator.d" "crc.d" "hash.d" "main.d" "random.d" "routingRx.d" "routingTx.d" "transitionData.d" 
 	-@echo 'Finished clean'
 	-@echo ' '
 

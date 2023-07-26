@@ -57,6 +57,13 @@
 
 #define WRITE_SIZE 128
 #define TACCR   0x22
+#define DELAYUNIT 50000
+
+unsigned char g_RXData;
+unsigned char g_TXData;
+uint8_t g_switchUart;
+uint8_t g_delayCycles;
+uint8_t g_nchorCycles;
 
 #if defined(__TI_COMPILER_VERSION__)
 #pragma PERSISTENT(FRAM_write)
