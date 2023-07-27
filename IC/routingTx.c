@@ -6,44 +6,28 @@
 #include "public.h"
 #include "random.h"
 #include "transitionData.h"
-#include "source_DB.h"
 
-void free_pointer(uint8_t * pointer)
-{
-    free(pointer);
-    pointer = NULL;
-}
 
-void produceData(void)
+void produceData(uint8_t packetNum)
 {
-    uint32_t i = 0;
-    for (; i < (MAXQUELEN); i++)
+    g_packetQueue.hp_len = 0x1E;
+    g_packetQueue.t_broad_type = BLE_GAP_AD_TYPE;
+    g_packetQueue.src = g_nodeAddress;
+    g_packetQueue.dst = g_nextNodeID;
+    g_packetQueue.layer = g_node_dimension;
+    g_packetQueue.status = PACKAGE_PACKET;
+    g_packetQueue.seq = packetNum;
+    g_packetQueue.round = g_rounds;
+    g_seq_data = g_seq_data + 1;
+    if (g_seq_data == MAXQUELEN)
     {
-        g_packetQueue[g_queueLen].hp_len = 0x1E;
-        g_packetQueue[g_queueLen].t_broad_type = BLE_GAP_AD_TYPE;
-        g_packetQueue[g_queueLen].src = g_nodeAddress;
-        g_packetQueue[g_queueLen].dst = g_nextNodeID;
-        g_packetQueue[g_queueLen].layer = g_node_dimension;
-        g_packetQueue[g_queueLen].status = PACKAGE_PACKET;
-        g_packetQueue[g_queueLen].seq = (g_seq_data + 1) % MAXQUELEN;
-        g_packetQueue[g_queueLen].round = g_rounds;
-        g_seq_data = g_seq_data + 1;
-        if (g_seq_data == MAXQUELEN)
-        {
-            g_seq_data = 0;
-        }
-        uint8_t j = 0;
-        for (; j < PACKET_DATA_LEN; j++)
-        {
-            (g_packetQueue[g_queueLen].df)[j] = file_data[g_transDataSeq];
-            g_transDataSeq++;
-        }
-        if (g_transDataSeq == MAXBYTE)
-        {
-            g_transDataSeq = 0;
-        }
-        g_queueLen = g_queueLen + 1;
-        __delay_cycles(10000);
+        g_seq_data = 0;
+    }
+    uint8_t j = 0;
+    for (; j < PACKET_DATA_LEN; j++)
+    {
+        (g_packetQueue.df)[j] = 0x11;
+        g_transDataSeq++;
     }
 }
 
@@ -58,10 +42,10 @@ void produceNonPacketData(void)
     g_transBuffer[6] = 0;
     g_transBuffer[7] = g_node_dimension;
     uint8_t i = 8;
-    const uint8_t anchor = 8;
+    // const uint8_t anchor = 8;
     for (; i < 31; i++)
     {
-        uint8_t j = i - anchor;
+        // uint8_t j = i - anchor;
         g_transBuffer[i] = 0;
     }
     uint8_t crc_input[31];
@@ -85,4 +69,3 @@ void produceNonPacketData(void)
         g_transBuffer[32] -= 0x7F;
     }
 }
-

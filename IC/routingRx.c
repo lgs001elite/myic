@@ -89,18 +89,19 @@ bool data_is_datagram(uint8_t *receivedData)
         return false;
     }
     g_currentPairedNodeID = senderID;
+    FRAM_write[1] = g_currentPairedNodeID;
     if (g_pre_packet_seq == packetSeq)
     {
         g_sendAck = true;
         return false;
     }
+    g_lastChargeCycles = receivedData[8];
+    FRAM_write[10] = g_lastChargeCycles;
     g_pre_packet_seq = packetSeq;
     if ((g_if_sourceNode) && (g_queueLen < MAXQUELEN))
     {
-        receivedData[5] = g_nodeAddress;
-        updateCRC(receivedData);
-        s2m(&g_packetQueue[g_queueLen], receivedData);
         g_queueLen = g_queueLen + 1;
+        FRAM_write[5] = g_queueLen;
     }
     g_sendAck = true;
     return true;
@@ -113,7 +114,9 @@ void data_is_find(uint8_t *receivedData)
     {
         g_node_dimension = receivedLayerNum + 1;
         g_ICWaitCycles   = receivedData[2];
+        FRAM_write[7] = g_ICWaitCycles;
         g_waitToFind     = 0x7e;
+        FRAM_write[6] = g_waitToFind;
     }
 }
 
@@ -129,6 +132,7 @@ void data_is_ack(uint8_t *receivedData)
     if (g_nextNodeID == 0x7e)
     {
         g_nextNodeID = senderID;
+        FRAM_write[0] = g_nextNodeID;
     }
     else
     {
@@ -141,16 +145,20 @@ void data_is_ack(uint8_t *receivedData)
     {
         return;
     }
+    g_nextChargeCycles = receivedData[8];
+    FRAM_write[9] = g_nextChargeCycles;
     g_pre_ack_seq = packetSeq;
     g_queueLen    = g_queueLen - 1;
-    g_if_measure  = true;
+    FRAM_write[5] = g_queueLen;
     if (g_queueLen == 0)
     {
         if (g_rounds > 0)
         {
             g_rounds = g_rounds - 1;
+            FRAM_write[4] = g_rounds;
             GPIO_MONINOR_OUT8 ^= GPIO_MONITOR_PIN1;
-            produceData();
+            g_queueLen = MAXQUELEN;
+            FRAM_write[5] = g_queueLen;
             GPIO_MONINOR_OUT8 ^= GPIO_MONITOR_PIN1;
         }
         else

@@ -55,7 +55,7 @@
 #define SPI_NONCRC_LEN   0x1F
 #define SPI_DATA_LEN     0x21
 
-#define WRITE_SIZE 128
+#define WRITE_SIZE 11
 #define TACCR   0x22
 #define DELAYUNIT 50000
 
@@ -63,18 +63,8 @@ unsigned char g_RXData;
 unsigned char g_TXData;
 uint8_t g_switchUart;
 uint8_t g_delayCycles;
-uint8_t g_nchorCycles;
+uint8_t g_anchorCycles;
 
-#if defined(__TI_COMPILER_VERSION__)
-#pragma PERSISTENT(FRAM_write)
-char FRAM_write[WRITE_SIZE];
-#elif defined(__IAR_SYSTEMS_ICC__)
-__persistent char FRAM_write[WRITE_SIZE];
-#elif defined(__GNUC__)
-char __attribute__((persistent)) FRAM_write[WRITE_SIZE];
-#else
-#error Compiler not supported!
-#endif
 
 typedef struct spi_datagram
 {
@@ -90,32 +80,36 @@ typedef struct spi_datagram
     uint8_t crc[2];
 } SPI_DATAGRAM;
 
-uint8_t  g_nextNodeID;
-bool g_sendAck;
+void recoveryStates();
+uint8_t g_nextNodeID;
 uint8_t g_currentPairedNodeID;
-uint8_t ReceiveIndex;
-uint16_t       g_waitToFind;
-uint16_t       g_ICWaitCycles;
-uint8_t        g_rounds;
-uint8_t        g_queueLen;
-uint8_t        g_systemStatus;
+uint8_t g_receiveIndex;
+uint8_t g_systemStatus;
+uint8_t g_rounds;
+uint8_t g_queueLen;
+uint16_t g_waitToFind;
+uint16_t g_ICWaitCycles;
+uint16_t g_chargeCycles;
+uint16_t g_nextChargeCycles;
+uint16_t g_lastChargeCycles;
+
 uint8_t        g_nodeAddress;
 uint8_t        g_seq_data;
 uint8_t        g_receiveBuffer[SPI_DATA_LEN];
 uint8_t        g_transBuffer[SPI_DATA_LEN ];
 uint8_t        g_node_dimension;
 bool           g_if_sourceNode;
-bool           g_if_measure;
 bool           g_spi_waitThreshold;
+bool           g_sendAck;
 uint32_t       g_ack_waiter;
 uint8_t        g_transDataSeq;
 uint8_t        g_sha256_buf[SHA256_BLOCK_SIZE];
 uint8_t        g_pre_ack_seq;
 uint8_t        g_pre_packet_seq;
-SPI_DATAGRAM   *g_packetQueue;
+SPI_DATAGRAM   g_packetQueue;
+uint8_t SlaveType0[SPI_DATA_LEN];
 
 void dummyWait();
-void FRAMWrite(void);
 void update_crc(void);
 void start_spi_process(void);
 void close_spi_process(void);
@@ -132,5 +126,15 @@ typedef enum SPI_ModeEnum{
 SPI_Mode SPI_Master_ReadReg(uint8_t reg_addr, uint8_t count);
 SPI_Mode SPI_Master_WriteReg(uint8_t reg_addr, uint8_t count);
 
+#if defined(__TI_COMPILER_VERSION__)
+#pragma PERSISTENT(FRAM_write)
+unsigned long FRAM_write[WRITE_SIZE];
+#elif defined(__IAR_SYSTEMS_ICC__)
+__persistent unsigned long FRAM_write[WRITE_SIZE];
+#elif defined(__GNUC__)
+unsigned long __attribute__((persistent)) FRAM_write[WRITE_SIZE];
+#else
+#error Compiler not supported!
+#endif
 
 #endif

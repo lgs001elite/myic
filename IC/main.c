@@ -8,8 +8,6 @@
 #include "random.h"
 #include "transitionData.h"
 
-
-
 #if defined(__TI_COMPILER_VERSION__) || defined(__IAR_SYSTEMS_ICC__)
 #pragma vector = EUSCI_A3_VECTOR // eUSCI ISR
 __interrupt void USCI_A3_ISR(void)
@@ -26,6 +24,7 @@ void __attribute__((interrupt(EUSCI_A3_VECTOR))) USCI_A3_ISR(void)
     case USCI_UART_UCRXIFG:
         g_RXData = UCA3RXBUF;
         g_switchUart = 0;
+        __bic_SR_register_on_exit(GIE);
         break;
     case USCI_UART_UCTXIFG:
         break;
@@ -38,23 +37,8 @@ void __attribute__((interrupt(EUSCI_A3_VECTOR))) USCI_A3_ISR(void)
     }
 }
 
-#define WRITE_SIZE 128
-unsigned char count = 0;
-unsigned long data;
-unsigned long backup;++
-#if defined(__TI_COMPILER_VERSION__)
-#pragma PERSISTENT(FRAM_write)
-unsigned long FRAM_write[WRITE_SIZE] = {0};
-#elif defined(__IAR_SYSTEMS_ICC__)
-__persistent unsigned long FRAM_write[WRITE_SIZE] = {0};
-#elif defined(__GNUC__)
-unsigned long __attribute__((persistent)) FRAM_write[WRITE_SIZE] = {0};
-#else
-#error Compiler not supported!
-#endif
 
 
-uint8_t SlaveType0[SPI_DATA_LEN] = {0};
 void setNode(uint8_t nodeType)
 {
     switch (nodeType)
@@ -117,7 +101,7 @@ SPI_Mode SPI_Master_WriteReg(uint8_t reg_addr, uint8_t count)
     TransmitRegAddr = reg_addr;
     TXByteCtr = count;
     TransmitIndex = 0;
-    ReceiveIndex = 0;
+    g_receiveIndex = 0;
     SLAVE_CS_OUT &= ~(SLAVE_CS_PIN);
     SendUCB1Data(TransmitRegAddr);
     __bis_SR_register(LPM0_bits | GIE);
@@ -131,7 +115,7 @@ SPI_Mode SPI_Master_ReadReg(uint8_t reg_addr, uint8_t count)
     TransmitRegAddr = reg_addr;
     RXByteCtr = count;
     TXByteCtr = 0;
-    ReceiveIndex = 0;
+    g_receiveIndex = 0;
     SLAVE_CS_OUT &= ~(SLAVE_CS_PIN);
     SendUCB1Data(TransmitRegAddr);
     __bis_SR_register(LPM0_bits | GIE);
@@ -184,6 +168,10 @@ void initGPIO()
     P5SEL0 |= BIT0 | BIT1 | BIT2;
     SLAVE_CS_DIR |= SLAVE_CS_PIN;
     SLAVE_CS_OUT |= SLAVE_CS_PIN;
+
+    P6SEL1 &= ~(BIT0 | BIT1);
+    P6SEL0 |= (BIT0 | BIT1); // USCI_A3 UART operation
+    PJSEL0 |= BIT4 | BIT5;   // Configure XT1 pins
     PM5CTL0 &= ~LOCKLPM5;
 }
 
@@ -202,10 +190,10 @@ void initClockTo16MHz()
 
 void initWAIT()
 {
-    TA0CCTL0 = CCIE;    // TACCR0 interrupt enabled
+    TA0CCTL0 = CCIE; // TACCR0 interrupt enabled
     TA0CCR0 = TACCR;
     TA0CTL = TASSEL__SMCLK | MC__UPDOWN;
-    __bis_SR_register(GIE);    // Enter interrupt
+    __bis_SR_register(GIE); // Enter interrupt
 }
 
 // Timer0_A0 interrupt service routine
@@ -222,7 +210,6 @@ void __attribute__((interrupt(TIMER0_A0_VECTOR))) Timer0_A0_ISR(void)
     {
         g_spi_waitThreshold = false;
         g_ack_waiter = 0;
-        g_if_measure = true;
         TA0CCTL0 = CCIE_0;
         GPIO_MONINOR_OUT4 ^= GPIO_MONITOR_PIN1;
     }
@@ -231,12 +218,27 @@ void __attribute__((interrupt(TIMER0_A0_VECTOR))) Timer0_A0_ISR(void)
     g_ack_waiter = g_ack_waiter + 1;
 }
 
+void recoveryStates()
+{
+    g_nextNodeID = FRAM_write[0];
+    g_currentPairedNodeID = FRAM_write[1];
+    g_receiveIndex = FRAM_write[2];
+    g_systemStatus = FRAM_write[3];
+    g_rounds = FRAM_write[4];
+    g_queueLen = FRAM_write[5];
+    g_waitToFind = FRAM_write[6];
+    g_ICWaitCycles = FRAM_write[7];
+    g_chargeCycles = FRAM_write[8];
+    g_nextChargeCycles = FRAM_write[9];
+    g_lastChargeCycles = FRAM_write[10];
+}
+
 int main(void)
 {
     WDTCTL = WDTPW | WDTHOLD;
     g_sendAck = false;
     g_queueLen = 0;
-    ReceiveIndex = 0;
+    g_receiveIndex = 0;
     g_transDataSeq = 0;
     g_ack_waiter = 0;
     g_pre_packet_seq = 0x7e;
@@ -246,20 +248,18 @@ int main(void)
     g_currentPairedNodeID = 0;
     g_nextNodeID   = 0x7e;
     g_ICWaitCycles = 0;
-    g_if_measure   = true;
     g_spi_waitThreshold  = false;
     g_RXData = 0;
     g_TXData = 0;
     g_switchUart = 1;
     g_delayCycles = 0;
     g_anchorCycles = 10;
+    g_chargeCycles = 10;
+    FRAM_write[8] = g_chargeCycles;
     /** do some pre-processing*/
 
     // Configure GPIO
-    P6SEL1 &= ~(BIT0 | BIT1);
-    P6SEL0 |= (BIT0 | BIT1); // USCI_A3 UART operation
-    PJSEL0 |= BIT4 | BIT5;   // Configure XT1 pins
-    PM5CTL0 &= ~LOCKLPM5;
+    initGPIO();
     //***************************************
     //    TA0CCTL0 = CCIE; // TACCR0 interrupt enabled
     //    TA0CCR0 = DELAYUNIT;
@@ -297,18 +297,12 @@ int main(void)
     /*do some pre-processing*/
 
     initClockTo16MHz();
-    initGPIO();
     initSPI();
     setNode(SINK);
+
     if (g_if_sourceNode)
     {
         g_rounds = MAXROUND;
-        g_packetQueue = (SPI_DATAGRAM *) malloc (sizeof(SPI_DATAGRAM) * MAXQUELEN);
-        if (!g_packetQueue)
-        {
-            free(g_packetQueue);
-            return 0;
-        }
     }
     else
     {
@@ -317,9 +311,11 @@ int main(void)
     if (g_node_dimension != 0x01)
     {
         GPIO_MONINOR_OUT8 ^= GPIO_MONITOR_PIN1;
-        produceData();
+        g_queueLen = MAXQUELEN;
         GPIO_MONINOR_OUT8 ^= GPIO_MONITOR_PIN1;
     }
+    /* Checking  system states from FRAM_write*/
+    recoveryStates();
     start_spi_process();
 }
 
@@ -389,12 +385,14 @@ void start_spi_process(void)
                 if (g_ICWaitCycles > 0)
                 {
                     g_ICWaitCycles = g_ICWaitCycles - 1;
+                    FRAM_write[7] = g_ICWaitCycles;
                     dummyWait();
                     continue;
                 }
                 if (g_waitToFind == 0)
                 {
                     g_systemStatus = TRANSMIT;
+                    FRAM_write[3] = g_systemStatus;
                     dummyWait();
                 }
             }
@@ -403,6 +401,7 @@ void start_spi_process(void)
                 if (g_waitToFind == 0)
                 {
                     g_systemStatus = SINKWAIT;
+                    FRAM_write[3] = g_systemStatus;
                 }
             }
             produceNonPacketData();
@@ -411,6 +410,7 @@ void start_spi_process(void)
             SPI_Master_WriteReg(CMD_TYPE_0_MASTER, SPI_DATA_LEN);
             GPIO_MONINOR_OUT6 ^= GPIO_MONITOR_PIN3;
             g_waitToFind = g_waitToFind - 1;
+            FRAM_write[6] = g_waitToFind;
             g_spi_waitThreshold = true;
         }
         else if (g_systemStatus == TRANSMIT)
@@ -428,16 +428,13 @@ void start_spi_process(void)
                 continue;
             }
             memset(transmitBuffer, 0, SPI_DATA_LEN);
-            m2s(transmitBuffer, &g_packetQueue[g_queueLen - 1]);
+            produceData(g_queueLen);
+            m2s(transmitBuffer, &g_packetQueue);
             buf_m2s(transmitBuffer, SPI_DATA_LEN);
             free(transmitBuffer);
             transmitBuffer = NULL;
             SPI_Master_WriteReg(CMD_TYPE_0_MASTER, SPI_DATA_LEN);
             GPIO_MONINOR_OUT6 ^= GPIO_MONITOR_PIN3;
-            if (g_if_measure)
-            {
-                g_if_measure = false;
-            }
             g_spi_waitThreshold = true;
             g_ack_waiter = 0;
         }
@@ -464,7 +461,8 @@ void __attribute__((interrupt(USCI_B1_VECTOR))) USCI_B1_ISR(void)
         break;
     case USCI_SPI_UCRXIFG:
         ucb1_rx_val = UCB1RXBUF;
-        g_receiveBuffer[ReceiveIndex++] = ucb1_rx_val;
+        g_receiveBuffer[g_receiveIndex++] = ucb1_rx_val;
+        FRAM_write[2] = g_receiveIndex;
         UCB1IFG &= ~UCRXIFG;
         switch (MasterMode)
         {

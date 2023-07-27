@@ -3,8 +3,7 @@
 
 #include <stdint.h>
 
-void produceData(void);
-void free_pointer(uint8_t *pointer);
+void produceData(uint8_t packetNum);
 void produceNonPacketData(void);
 
 #endif

@@ -31,7 +31,6 @@ routingTx.obj: ../transitionData.h
 routingTx.obj: C:/ti/ccs1230/ccs/tools/compiler/ti-cgt-msp430_21.6.1.LTS/include/stdio.h
 routingTx.obj: C:/ti/ccs1230/ccs/tools/compiler/ti-cgt-msp430_21.6.1.LTS/include/stdarg.h
 routingTx.obj: ../crc.h
-routingTx.obj: ../source_DB.h
 
 ../routingTx.c:
 
@@ -94,6 +93,4 @@ C:/ti/ccs1230/ccs/tools/compiler/ti-cgt-msp430_21.6.1.LTS/include/stdio.h:
 C:/ti/ccs1230/ccs/tools/compiler/ti-cgt-msp430_21.6.1.LTS/include/stdarg.h:
 
 ../crc.h:
-
-../source_DB.h:
 
