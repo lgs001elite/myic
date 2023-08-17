@@ -7,6 +7,7 @@
 #include "transitionData.h"
 #include "crc.h"
 
+
 void updateCRC(uint8_t relayPkt[])
 {
     uint8_t crc_input[31] = {0};
@@ -50,7 +51,6 @@ bool check_completeness(uint8_t *receivedData)
     {
         rec_result[i] = receivedData[i];
     }
-
     crcInit();
     uint16_t crc_result = crcFast(rec_result, SPI_NONCRC_LEN);
     uint8_t res1 = (crc_result & 0xFF00) >> 8;
@@ -89,35 +89,30 @@ bool data_is_datagram(uint8_t *receivedData)
         return false;
     }
     g_currentPairedNodeID = senderID;
-    FRAM_write[1] = g_currentPairedNodeID;
     if (g_pre_packet_seq == packetSeq)
     {
         g_sendAck = true;
         return false;
     }
     g_lastChargeCycles = receivedData[8];
-    FRAM_write[10] = g_lastChargeCycles;
+    if (g_nextChargeCycles > g_chargeCycles)
+    {
+        g_basicChargeCycles = g_lastChargeCycles;
+    }
+    else
+    {
+        g_basicChargeCycles = g_chargeCycles;
+    }
+    g_MaxChargeCycles = g_basicChargeCycles * 3;
+    g_attConn = 0;
+    g_disConnNum = 0;
     g_pre_packet_seq = packetSeq;
-    if ((g_if_sourceNode) && (g_queueLen < MAXQUELEN))
+    if (g_queueLen < MAXQUELEN)
     {
         g_queueLen = g_queueLen + 1;
-        FRAM_write[5] = g_queueLen;
     }
     g_sendAck = true;
     return true;
-}
-
-void data_is_find(uint8_t *receivedData)
-{
-    uint8_t receivedLayerNum = receivedData[7];
-    if (g_node_dimension > (receivedLayerNum + 1))
-    {
-        g_node_dimension = receivedLayerNum + 1;
-        g_ICWaitCycles   = receivedData[2];
-        FRAM_write[7] = g_ICWaitCycles;
-        g_waitToFind     = 0x7e;
-        FRAM_write[6] = g_waitToFind;
-    }
 }
 
 void data_is_ack(uint8_t *receivedData)
@@ -125,14 +120,13 @@ void data_is_ack(uint8_t *receivedData)
     uint8_t aimID      = receivedData[6];
     uint8_t senderID   = receivedData[5];
     uint8_t packetSeq  = receivedData[2];
-    if (aimID != g_nodeAddress)
+    if ((aimID != g_nodeAddress) || (packetSeq != g_queueLen))
     {
         return;
     }
     if (g_nextNodeID == 0x7e)
     {
         g_nextNodeID = senderID;
-        FRAM_write[0] = g_nextNodeID;
     }
     else
     {
@@ -141,66 +135,97 @@ void data_is_ack(uint8_t *receivedData)
             return;
         }
     }
-    if (packetSeq == g_pre_ack_seq)
-    {
-        return;
-    }
     g_nextChargeCycles = receivedData[8];
-    FRAM_write[9] = g_nextChargeCycles;
-    g_pre_ack_seq = packetSeq;
-    g_queueLen    = g_queueLen - 1;
-    FRAM_write[5] = g_queueLen;
+    if (g_nextChargeCycles > g_chargeCycles)
+    {
+        g_basicChargeCycles = g_nextChargeCycles;
+    }
+    else
+    {
+        g_basicChargeCycles = g_chargeCycles;
+    }
+    g_MaxChargeCycles = g_basicChargeCycles * 3;
+    g_attConn = 0;
+    g_queueLen = g_queueLen - 1;
+    g_disConnNum = 0;
     if (g_queueLen == 0)
     {
         if (g_rounds > 0)
         {
             g_rounds = g_rounds - 1;
-            FRAM_write[4] = g_rounds;
-            GPIO_MONINOR_OUT8 ^= GPIO_MONITOR_PIN1;
             g_queueLen = MAXQUELEN;
-            FRAM_write[5] = g_queueLen;
-            GPIO_MONINOR_OUT8 ^= GPIO_MONITOR_PIN1;
         }
         else
         {
             COMMS_LED_OUT ^= COMMS_LED_PIN;
             COMMS_LED_OUT ^= COMMS_LED_PIN2;
+            //g_systemStatus == SINKWAIT;
         }
     }
 }
 
-bool receiveDataFromNordic()
+void receiveDataFromNordic()
 {
+    // For testing find
+    if (g_receiveBuffer[3] == 0x12)
+    {
+        g_findTesting = false;
+        g_TXData = 0x50;
+        COMMS_LED_OUT ^= COMMS_LED_PIN;
+        COMMS_LED_OUT ^= COMMS_LED_PIN2;
+        return;
+    }
+    // For testing find
+    uint8_t i = 9;
+    uint8_t sinkEcho = 0;
+    for (; i < 33; i++)
+    {
+        if (g_receiveBuffer[i] != 0x01)
+        {
+            sinkEcho = 1;
+        }
+    }
+    if (sinkEcho == 0)
+    {
+        uint8_t packetSeq = g_receiveBuffer[2];
+        if ((g_receiveBuffer[8] != g_nodeAddress) || (packetSeq != g_queueLen))
+        {
+            return;
+        }
+        g_queueLen = g_queueLen - 1;
+        GPIO_MONINOR_OUT4 ^= GPIO_MONITOR_PIN1;
+        return;
+    }
     if ((g_receiveBuffer[3] == 0x33) && (g_receiveBuffer[4] == 0x44) && (g_receiveBuffer[5] == 0x55))
     {
         g_spi_waitThreshold = false;
     }
     if ((g_receiveBuffer[0] != 0x1e) || (g_receiveBuffer[1] != 0x17))
     {
-        return false;
+        return;
     }
     bool checkResult = check_completeness(g_receiveBuffer);
     if (!checkResult)
     {
-        return false;
+        return;
     }
     uint8_t dataType = g_receiveBuffer[3];
     switch (dataType)
     {
-    case PACKAGE_FIND:
-        data_is_find(g_receiveBuffer);
-        COMMS_LED_OUT ^= COMMS_LED_PIN;
-        break;
-    case PACKAGE_PACKET:
-        data_is_datagram(g_receiveBuffer);
-        COMMS_LED_OUT ^= COMMS_LED_PIN2;
-        break;
-    case PACKAGE_ACK:
-        data_is_ack(g_receiveBuffer);
-        COMMS_LED_OUT ^= COMMS_LED_PIN;
-        break;
-    default:
-        break;
+        case PACKAGE_PACKET:
+            if (g_systemStatus == TRANSMIT)
+            {
+                break;
+            }
+            data_is_datagram(g_receiveBuffer);
+            COMMS_LED_OUT ^= COMMS_LED_PIN2;
+            break;
+        case PACKAGE_ACK:
+            data_is_ack(g_receiveBuffer);
+            GPIO_MONINOR_OUT4 ^= GPIO_MONITOR_PIN1;
+            COMMS_LED_OUT ^= COMMS_LED_PIN;
+            break;
+        default:
+            break;
     }
-    return true;
 }

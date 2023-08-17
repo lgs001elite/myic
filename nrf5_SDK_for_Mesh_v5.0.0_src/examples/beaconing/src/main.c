@@ -55,6 +55,9 @@ void send_datagram_start()
 
 void rx_cb(const nrf_mesh_adv_packet_rx_data_t * p_rx_data)
 {
+    __LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "----- received successfully  seq: %X-----\n", m_tx_buf_spi[0]);
+    __LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "----- received successfully  seq: %X-----\n", m_tx_buf_spi[1]);
+    __LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "----- received successfully  seq: %X-----\n", m_tx_buf_spi[2]);
     if (p_rx_data->p_payload[1] != BLE_GAP_AD_TYPE_PUBLIC_TARGET_ADDRESS)
     {
         return;
@@ -63,6 +66,10 @@ void rx_cb(const nrf_mesh_adv_packet_rx_data_t * p_rx_data)
     {
         return;
     }
+                for (int i = 0; i < 4; i++)
+              {
+                  bsp_board_led_invert(i);
+              }
     uint8_t rec_packet[32] = {0};
     rec_packet[0]          = p_rx_data->p_payload[0];
     rec_packet[1]          = p_rx_data->p_payload[1];
@@ -81,8 +88,8 @@ void rx_cb(const nrf_mesh_adv_packet_rx_data_t * p_rx_data)
     }
     m_tx_buf_spi[31] = p_rx_data->p_payload[29];
     m_tx_buf_spi[32] = p_rx_data->p_payload[30];
-    __LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "----- received successfully  seq: %X-----\n", m_tx_buf_spi[2]);
-    spis_xfer_done = true;
+    //__LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "----- received successfully  seq: %X-----\n", m_tx_buf_spi[32]);
+    //spis_xfer_done = true;
 }
 
 void adv_init(void)

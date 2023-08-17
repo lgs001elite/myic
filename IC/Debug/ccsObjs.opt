@@ -7,6 +7,6 @@
 "./routingTx.obj"
 "./transitionData.obj"
 "../lnk_msp430fr5994.cmd"
--llibmpu_init.a
 -llibmath.a
+-llibmpu_init.a
 -llibc.a

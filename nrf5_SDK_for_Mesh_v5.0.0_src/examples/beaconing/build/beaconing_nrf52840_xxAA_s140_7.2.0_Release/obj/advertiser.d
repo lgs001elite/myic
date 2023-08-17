@@ -99,7 +99,7 @@ build/beaconing_nrf52840_xxAA_s140_7.2.0_Release/obj/advertiser.o: \
  ../../../nRF5_SDK_17.0.2_d674dde/components/libraries/util/sdk_resources.h \
  ../../../nRF5_SDK_17.0.2_d674dde/components/softdevice/s140/headers/nrf_sd_def.h \
  ../../../nRF5_SDK_17.0.2_d674dde/modules/nrfx/drivers/nrfx_errors.h \
- ../../mesh/bearer/api/scanner.h include/public.h include/spis_data.h \
+ ../../mesh/bearer/api/scanner.h include/public.h \
  ../../../nRF5_SDK_17.0.2_d674dde/components/libraries/log/nrf_log_ctrl.h \
  ../../../nRF5_SDK_17.0.2_d674dde/components/libraries/log/nrf_log_types.h \
  ../../../nRF5_SDK_17.0.2_d674dde/components/libraries/log/src/nrf_log_ctrl_internal.h \

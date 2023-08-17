@@ -1,5 +1,8 @@
 #include <stdint.h>
 #include <stdbool.h>
+#include <math.h>
+#include <time.h>
+#include <stdlib.h>
 #include "public.h"
 #include "routingRx.h"
 #include "routingTx.h"
@@ -7,59 +10,30 @@
 #include "crc.h"
 #include "random.h"
 #include "transitionData.h"
+// Fram write and read
+ #pragma PERSISTENT(g_queueLen)
+uint8_t g_queueLen = MAXQUELEN;
 
-#if defined(__TI_COMPILER_VERSION__) || defined(__IAR_SYSTEMS_ICC__)
-#pragma vector = EUSCI_A3_VECTOR // eUSCI ISR
-__interrupt void USCI_A3_ISR(void)
-#elif defined(__GNUC__)
-void __attribute__((interrupt(EUSCI_A3_VECTOR))) USCI_A3_ISR(void)
-#else
-#error Compiler not supported!
-#endif
-{
-    switch (__even_in_range(UCA3IV, USCI_UART_UCTXCPTIFG))
-    {
-    case USCI_NONE:
-        break;
-    case USCI_UART_UCRXIFG:
-        g_RXData = UCA3RXBUF;
-        g_switchUart = 0;
-        __bic_SR_register_on_exit(GIE);
-        break;
-    case USCI_UART_UCTXIFG:
-        break;
-    case USCI_UART_UCSTTIFG:
-        break;
-    case USCI_UART_UCTXCPTIFG:
-        break;
-    default:
-        break;
-    }
-}
+ #pragma PERSISTENT(g_rounds)
+uint8_t g_rounds = MAXROUND;
 
+ #pragma PERSISTENT(g_systemStatus)
+uint8_t g_systemStatus = TRANSMIT;
 
+ #pragma PERSISTENT(g_attConn)
+int8_t  g_attConn = -1;
 
-void setNode(uint8_t nodeType)
-{
-    switch (nodeType)
-    {
-    case ICNODE:
-        g_nodeAddress = 0x01;
-        g_node_dimension = 0x7e;
-        g_if_sourceNode = true;
-        g_waitToFind = 0;
-        break;
-    case SINK:
-        g_nodeAddress = 0x03;
-        g_node_dimension = 0x01;
-        g_waitToFind = 0x7e;
-        g_if_sourceNode = false;
-        break;
+ #pragma PERSISTENT(g_accuCharge)
+uint8_t g_accuCharge = 0;
 
-    default:
-        break;
-    }
-}
+ #pragma PERSISTENT(g_MaxChargeCycles)
+uint16_t g_MaxChargeCycles = 0;
+
+ #pragma PERSISTENT(g_disConnNum)
+uint8_t g_disConnNum = 0;
+
+#pragma PERSISTENT(g_TXData)
+unsigned char g_TXData = 0x56;
 
 /* Used to track the state of the software state machine*/
 SPI_Mode MasterMode = IDLE_MODE;
@@ -73,12 +47,6 @@ uint8_t TransmitIndex = 0;
 
 void CopyArray(uint8_t *source, uint8_t *dest, uint8_t count);
 void SendUCB1Data(uint8_t val);
-
-void close_spi_process(void)
-{
-    SWITCH2SPI = false;
-}
-
 void SendUCB1Data(uint8_t val)
 {
     while (!(UCB1IFG & UCTXIFG))
@@ -133,7 +101,6 @@ void dummyWait()
     g_spi_waitThreshold = true;
     g_ack_waiter = 0;
     SPI_Master_WriteReg(CMD_TYPE_0_MASTER, SPI_DATA_LEN);
-    GPIO_MONINOR_OUT6 ^= GPIO_MONITOR_PIN2;
 }
 
 void initSPI()
@@ -153,6 +120,16 @@ void initGPIO()
     COMMS_LED_DIR |= COMMS_LED_PIN;
     COMMS_LED_OUT &= ~COMMS_LED_PIN2;
     COMMS_LED_DIR |= COMMS_LED_PIN2;
+
+    // Comp
+    // Configure Comp_E C12
+    P3SEL1 |= BIT0;
+    P3SEL0 |= BIT0; // Select C12 function on P3.0
+
+    // Configure Comp_E COUT
+    P1SEL1 |= BIT2;
+    P1SEL0 &= ~(BIT2);
+    P1DIR |= BIT2; // Select COUT function on P1.2
 
     // Monitors
     GPIO_MONITOR_DIR6 |= GPIO_MONITOR_PIN2;
@@ -175,17 +152,19 @@ void initGPIO()
     PM5CTL0 &= ~LOCKLPM5;
 }
 
-void initClockTo16MHz()
+void uartTimer()
 {
-    FRCTL0 = FRCTLPW | NWAITS_1;
-    // Clock System Setup
-    CSCTL0_H = CSKEY_H; // Unlock CS registers
-    CSCTL1 = DCOFSEL_0; // Set DCO to 1MHz
-
-    // Set SMCLK = MCLK = DCO, ACLK = VLOCLK
-    CSCTL2 = SELA__VLOCLK | SELS__DCOCLK | SELM__DCOCLK;
-    CSCTL3 = DIVA__4 | DIVS__4 | DIVM__4; // Set all corresponding clk sources to divide by 4 for errata
-    CSCTL1 = DCOFSEL_4 | DCORSEL;         // Set DCO to 16MHz
+    CSCTL0_H = CSKEY_H;                     // Unlock CS registers
+    CSCTL1 = DCOFSEL_0;                     // Set DCO to 1MHz
+    CSCTL2 = SELA__LFXTCLK | SELS__DCOCLK | SELM__DCOCLK;
+    CSCTL3 = DIVA__1 | DIVS__1 | DIVM__1;   // Set all dividers
+    CSCTL4 &= ~LFXTOFF;                     // Enable LFXT1
+    do
+    {
+        CSCTL5  &= ~LFXTOFFG;                // Clear XT1 fault flag
+        SFRIFG1 &= ~OFIFG;
+    } while (SFRIFG1 & OFIFG);              // Test oscillator fault flag
+    CSCTL0_H = 0;                           // Lock CS registers       // Set DCO to 16MHz
 }
 
 void initWAIT()
@@ -211,112 +190,132 @@ void __attribute__((interrupt(TIMER0_A0_VECTOR))) Timer0_A0_ISR(void)
         g_spi_waitThreshold = false;
         g_ack_waiter = 0;
         TA0CCTL0 = CCIE_0;
-        GPIO_MONINOR_OUT4 ^= GPIO_MONITOR_PIN1;
     }
-    P1OUT ^= BIT0;
+   // P1OUT ^= BIT0;
     TA0CCR0 += TACCR;
     g_ack_waiter = g_ack_waiter + 1;
 }
-
-void recoveryStates()
+void uartTransmission()
 {
-    g_nextNodeID = FRAM_write[0];
-    g_currentPairedNodeID = FRAM_write[1];
-    g_receiveIndex = FRAM_write[2];
-    g_systemStatus = FRAM_write[3];
-    g_rounds = FRAM_write[4];
-    g_queueLen = FRAM_write[5];
-    g_waitToFind = FRAM_write[6];
-    g_ICWaitCycles = FRAM_write[7];
-    g_chargeCycles = FRAM_write[8];
-    g_nextChargeCycles = FRAM_write[9];
-    g_lastChargeCycles = FRAM_write[10];
+     while (g_switchUart)
+     {
+//         while (!(UCA3IFG & UCTXIFG))
+//             ;
+//         UCA3TXBUF = 0x56;
+//         COMMS_LED_OUT ^= COMMS_LED_PIN;
+         __bis_SR_register(GIE);
+//         g_switchUart = 0;
+     }
+    __bis_SR_register(GIE);
+}
+
+void uartConfig()
+{
+    UCA3CTLW0 |= UCSWRST;
+    UCA3CTLW0 |= UCSSEL__ACLK;                // Set ACLK = 32768 as UCBRCLK
+    UCA3BRW = 3;                            // 9600 baud
+    UCA3MCTLW |= 0x5300;                    // 32768/9600 - INT(32768/9600)=0.41
+                                              // UCBRSx value = 0x53 (See UG)
+    UCA3CTLW0 &= ~UCSWRST;                   // release from reset
+    UCA3IE |= UCRXIE;                       // Enable USCI_A3 RX interrupt
+
+   // __bis_SR_register(LPM4_bits); // Enter LPM4
+}
+
+void initClockTo16MHz()
+{
+    FRCTL0 = FRCTLPW | NWAITS_1;
+     // Clock System Setup
+     CSCTL0_H = CSKEY_H; // Unlock CS registers
+     CSCTL1 = DCOFSEL_0; // Set DCO to 1MHz
+     // Set SMCLK = MCLK = DCO, ACLK = VLOCLK
+     CSCTL2 = SELA__VLOCLK | SELS__DCOCLK | SELM__DCOCLK;
+     CSCTL3 = DIVA__4 | DIVS__4 | DIVM__4; // Set all corresponding clk sources to divide by 4 for errata
+     CSCTL1 = DCOFSEL_4 | DCORSEL;         // Set DCO to 16MHz
+}
+
+void accuDelay()
+{
+    if (g_chargeCycles > g_basicChargeCycles)
+    {
+        int times = g_chargeCycles / g_basicChargeCycles;
+        int remainder = g_chargeCycles % g_basicChargeCycles;
+        if (remainder > 0)
+        {
+            remainder = 1;
+        }
+        g_delayCycles = g_basicChargeCycles * (times + remainder) - g_chargeCycles;
+    }
+    else
+    {
+        g_delayCycles = g_basicChargeCycles - g_chargeCycles;
+    }
+    g_accuCharge = g_delayCycles + g_chargeCycles + g_accuCharge;
+}
+void compSet()
+{
+    CECTL0 = CEIPEN | CEIPSEL_12;           // Enable V+, input channel CE12
+    CECTL1 = CEPWRMD_1;                     // normal power mode
+    CECTL2 = CEREFL_2 | CERS_3 | CERSEL;    // VREF is applied to -terminal
+                                         // R-ladder off; bandgap ref voltage
+                                         // supplied to ref amplifier to get Vcref=2.0V
+    CECTL3 = BITC;                       // Input Buffer Disable @P9.5/CE12
+    CECTL1 |= CEON;                      // Turn On Comparator_E
+
+    __delay_cycles(75);
+
+//    __bis_SR_register(LPM4_bits);
 }
 
 int main(void)
 {
     WDTCTL = WDTPW | WDTHOLD;
     g_sendAck = false;
-    g_queueLen = 0;
+    g_receveuartNum = 0;
     g_receiveIndex = 0;
     g_transDataSeq = 0;
     g_ack_waiter = 0;
     g_pre_packet_seq = 0x7e;
-    g_pre_ack_seq = 0x7e;
-    g_systemStatus = NONLAYER;
     g_seq_data = 0;
     g_currentPairedNodeID = 0;
-    g_nextNodeID   = 0x7e;
+    g_nextNodeID = 0x7e;
     g_ICWaitCycles = 0;
-    g_spi_waitThreshold  = false;
+    g_spi_waitThreshold = false;
     g_RXData = 0;
-    g_TXData = 0;
     g_switchUart = 1;
     g_delayCycles = 0;
     g_anchorCycles = 10;
     g_chargeCycles = 10;
-    FRAM_write[8] = g_chargeCycles;
-    /** do some pre-processing*/
-
+    g_stayBackCycles = 0;
+    g_stayForwardCycles = 0;
+    g_basicChargeCycles = 0;
+    g_MaxChargeCycles = 0;
+    g_nextChargeCycles = 0;
+    g_lastChargeCycles = 0;
+    g_nodeAddress = 0x02;    // 0x02 0x01
+    g_node_dimension = 0x03; // 0x03 0x02
+    g_waitToFind = 0;
+    g_MatchNextHop = false;
+    g_attConn = -1;
+    g_accuCharge = 0;
+    g_findTesting = true;
+    g_uartSwitch = true;
     // Configure GPIO
     initGPIO();
-    //***************************************
-    //    TA0CCTL0 = CCIE; // TACCR0 interrupt enabled
-    //    TA0CCR0 = DELAYUNIT;
-    //    TA0CTL = TASSEL__SMCLK | MC__CONTINOUS; // SMCLK, continuous mode
-    //    __bis_SR_register(GIE);                 // interrupt
-    //***************************************
-    // XT1 Setup
-    CSCTL0_H = CSKEY_H; // Unlock CS registers
-    CSCTL1 = DCOFSEL_0; // Set DCO to 1MHz
-    CSCTL2 = SELA__LFXTCLK | SELS__DCOCLK | SELM__DCOCLK;
-    CSCTL3 = DIVA__1 | DIVS__1 | DIVM__1; // Set all dividers
-    CSCTL4 &= ~LFXTOFF;                   // Enable LFXT1
-    do
+    uartTimer();
+    uartConfig();
+    //compSet();
+    while (g_uartSwitch)
     {
-        CSCTL5 &= ~LFXTOFFG; // Clear XT1 fault flag
-        SFRIFG1 &= ~OFIFG;
-    } while (SFRIFG1 & OFIFG); // Test oscillator fault flag
-    CSCTL0_H = 0;              // Lock CS registers
-    // Configure USCI_A3 for UART mode
-    UCA3CTLW0 |= UCSWRST;
-    UCA3CTLW0 |= UCSSEL__ACLK; // Set ACLK = 32768 as UCBRCLK
-    UCA3BRW = 3;               // 9600 baud
-    UCA3MCTLW |= 0x5300;       // 32768/9600 - INT(32768/9600)=0.41
-                               // UCBRSx value = 0x53 (See UG)
-    UCA3CTLW0 &= ~UCSWRST;     // release from reset
-    UCA3IE |= UCRXIE;          // Enable USCI_A3 RX interrupt
-    while (g_switchUart)
-    {
-        while (!(UCA3IFG & UCTXIFG))
-            ;
-        UCA3TXBUF = g_TXData;
-        __bis_SR_register(GIE); // Enter LPM0, interrupts enabled LPM0_bits |
+        __bis_SR_register(GIE);
+        //__bis_SR_register(LPM4_bits); // Enter LPM4
+        COMMS_LED_OUT ^= COMMS_LED_PIN2;
     }
-    __no_operation();
-    /*do some pre-processing*/
-
+   // __bic_SR_register_on_exit(LPM0_bits);
     initClockTo16MHz();
     initSPI();
-    setNode(SINK);
-
-    if (g_if_sourceNode)
-    {
-        g_rounds = MAXROUND;
-    }
-    else
-    {
-        g_rounds = 0;
-    }
-    if (g_node_dimension != 0x01)
-    {
-        GPIO_MONINOR_OUT8 ^= GPIO_MONITOR_PIN1;
-        g_queueLen = MAXQUELEN;
-        GPIO_MONINOR_OUT8 ^= GPIO_MONITOR_PIN1;
-    }
-    /* Checking  system states from FRAM_write*/
-    recoveryStates();
     start_spi_process();
+    return 0;
 }
 
 void update_crc(void)
@@ -347,101 +346,170 @@ void start_spi_process(void)
 {
     SWITCH2SPI = true;
     UCB1IE |= UCRXIE;
+   // g_disConnNum = g_disConnNum + 1;
+    if (g_disConnNum > 20)
+    {
+        // if (g_systemStatus == TRANSMIT)
+        // {
+        //     g_systemStatus = SINKWAIT;
+        // }
+        // else
+        // {
+        //     g_systemStatus = TRANSMIT;
+        // }
+    }
     while (SWITCH2SPI)
     {
-        initWAIT();
-        if (g_spi_waitThreshold == true)
-        {
-            continue;
-        }
+        COMMS_LED_OUT ^= COMMS_LED_PIN;
+        // initWAIT();
+        // if (g_spi_waitThreshold == true)
+        // {
+        //     continue;
+        // }
         __delay_cycles(10000); // SPI waiting time for reading and writing
         SPI_Master_ReadReg(CMD_TYPE_0_SLAVE, SPI_DATA_LEN);
         CopyArray(g_receiveBuffer, SlaveType0, SPI_DATA_LEN);
         __delay_cycles(10000); // SPI waiting time for reading and writing
         receiveDataFromNordic();
-        if (g_sendAck == true)
+        produceNonPacketData();
+        SPI_Master_WriteReg(CMD_TYPE_0_MASTER, SPI_DATA_LEN);
+        // if (g_sendAck == true)
+        // {
+        //     produceNonPacketData();
+        //     g_transBuffer[2] = g_pre_packet_seq;
+        //     g_transBuffer[3] = PACKAGE_ACK;
+        //     g_transBuffer[6] = g_currentPairedNodeID;
+        //     update_crc();
+        //     SPI_Master_WriteReg(CMD_TYPE_0_MASTER, SPI_DATA_LEN);
+        //     g_sendAck = false;
+        //     g_spi_waitThreshold = true;
+        //     g_ack_waiter = 0;
+        //     continue;
+        // }
+        // if (g_systemStatus == TRANSMIT)
+        // {
+        //     if (g_queueLen == 0)
+        //     {
+        //         if (g_rounds > 0)
+        //         {
+        //             g_rounds = g_rounds - 1;
+        //             g_queueLen = MAXQUELEN;
+        //         }
+        //         else
+        //         {
+        //             COMMS_LED_OUT ^= COMMS_LED_PIN;
+        //             COMMS_LED_OUT ^= COMMS_LED_PIN2;
+        //         }
+        //     }
+        //     if (g_queueLen == 0)
+        //     {
+        //         dummyWait();
+        //         continue;
+        //     }
+        //     uint8_t *transmitBuffer = (uint8_t *)malloc(sizeof(uint8_t) * SPI_DATA_LEN);
+        //     if (!transmitBuffer)
+        //     {
+        //         free(transmitBuffer);
+        //         dummyWait();
+        //         continue;
+        //     }
+        //     memset(transmitBuffer, 0, SPI_DATA_LEN);
+        //     produceData(g_queueLen);
+        //     transmitBuffer[8] = g_chargeCycles;
+        //     m2s(transmitBuffer, &g_packetQueue);
+        //     buf_m2s(transmitBuffer, SPI_DATA_LEN);
+        //     free(transmitBuffer);
+        //     transmitBuffer = NULL;
+        //     SPI_Master_WriteReg(CMD_TYPE_0_MASTER, SPI_DATA_LEN);
+        //     // GPIO_MONINOR_OUT8 ^= GPIO_MONITOR_PIN1;
+        //     g_spi_waitThreshold = true;
+        //     g_ack_waiter = 0;
+        // }
+        // else if (g_systemStatus == SINKWAIT)
+        // {
+        //     dummyWait();
+        // }
+    }
+}
+
+// UART
+#if defined(__TI_COMPILER_VERSION__) || defined(__IAR_SYSTEMS_ICC__)
+#pragma vector = EUSCI_A3_VECTOR // eUSCI ISR
+__interrupt void
+USCI_A3_ISR(void)
+#elif defined(__GNUC__)
+void __attribute__((interrupt(EUSCI_A3_VECTOR))) USCI_A3_ISR(void)
+#else
+#error Compiler not supported!
+#endif
+{
+    switch (__even_in_range(UCA3IV, USCI_UART_UCTXCPTIFG))
+    {
+    case USCI_NONE:
+        break;
+    case USCI_UART_UCRXIFG:
+        g_RXData = UCA3RXBUF;
+        while (!(UCA3IFG & UCTXIFG))
+            ;
+        UCA3TXBUF     = g_TXData;
+        if (g_receveuartNum == 10)
         {
-            produceNonPacketData();
-            g_transBuffer[2] = g_pre_packet_seq;
-            g_transBuffer[3] = PACKAGE_ACK;
-            g_transBuffer[6] = g_currentPairedNodeID;
-            update_crc();
-            SPI_Master_WriteReg(CMD_TYPE_0_MASTER, SPI_DATA_LEN);
-            GPIO_MONINOR_OUT6 ^= GPIO_MONITOR_PIN3;
-            g_sendAck = false;
-            g_spi_waitThreshold = true;
-            g_ack_waiter = 0;
-            continue;
+            g_uartSwitch  = false;
         }
-        if (g_systemStatus == NONLAYER)
-        {
-            if (g_if_sourceNode)
-            {
-                if (g_node_dimension == 0x7e)
-                {
-                    dummyWait();
-                    continue;
-                }
-                if (g_ICWaitCycles > 0)
-                {
-                    g_ICWaitCycles = g_ICWaitCycles - 1;
-                    FRAM_write[7] = g_ICWaitCycles;
-                    dummyWait();
-                    continue;
-                }
-                if (g_waitToFind == 0)
-                {
-                    g_systemStatus = TRANSMIT;
-                    FRAM_write[3] = g_systemStatus;
-                    dummyWait();
-                }
-            }
-            else
-            {
-                if (g_waitToFind == 0)
-                {
-                    g_systemStatus = SINKWAIT;
-                    FRAM_write[3] = g_systemStatus;
-                }
-            }
-            produceNonPacketData();
-            g_transBuffer[3] = PACKAGE_FIND;
-            update_crc();
-            SPI_Master_WriteReg(CMD_TYPE_0_MASTER, SPI_DATA_LEN);
-            GPIO_MONINOR_OUT6 ^= GPIO_MONITOR_PIN3;
-            g_waitToFind = g_waitToFind - 1;
-            FRAM_write[6] = g_waitToFind;
-            g_spi_waitThreshold = true;
-        }
-        else if (g_systemStatus == TRANSMIT)
-        {
-            if (g_queueLen == 0)
-            {
-                dummyWait();
-                continue;
-            }
-            uint8_t *transmitBuffer = (uint8_t *) malloc (sizeof(uint8_t) * SPI_DATA_LEN);
-            if (!transmitBuffer)
-            {
-                free(transmitBuffer);
-                dummyWait();
-                continue;
-            }
-            memset(transmitBuffer, 0, SPI_DATA_LEN);
-            produceData(g_queueLen);
-            m2s(transmitBuffer, &g_packetQueue);
-            buf_m2s(transmitBuffer, SPI_DATA_LEN);
-            free(transmitBuffer);
-            transmitBuffer = NULL;
-            SPI_Master_WriteReg(CMD_TYPE_0_MASTER, SPI_DATA_LEN);
-            GPIO_MONINOR_OUT6 ^= GPIO_MONITOR_PIN3;
-            g_spi_waitThreshold = true;
-            g_ack_waiter = 0;
-        }
-        else if (g_systemStatus == SINKWAIT)
-        {
-            dummyWait();
-        }
+        g_receveuartNum = g_receveuartNum + 1;
+        // g_delayCycles = 0;
+//        if (g_RXData == 0x01)
+//        {
+//            g_switchUart = 0;
+//            COMMS_LED_OUT ^= COMMS_LED_PIN;
+//            COMMS_LED_OUT ^= COMMS_LED_PIN2;
+//        }
+        //        if (g_RXData == 0)
+        //        {
+        //            g_switchUart = 0;
+        //        }
+        //        else
+        //        {
+        //            g_chargeCycles = g_RXData;
+        //            if (g_attConn != -1)
+        //            {
+        //                g_attConn = g_attConn + 1;
+        //            }
+        //            if (g_attConn == 1)
+        //            {
+        //                accuDelay();
+        //            }
+        //            else if (g_attConn == 2)
+        //            {
+        //                accuDelay();
+        //                int times = g_accuCharge / g_basicChargeCycles;
+        //                if (times == 2)
+        //                {
+        //                    g_delayCycles = g_delayCycles + g_basicChargeCycles;
+        //                    g_accuCharge = g_accuCharge + g_basicChargeCycles;
+        //                }
+        //            }
+        //            else if (g_attConn == 3)
+        //            {
+        //                accuDelay();
+        //                g_delayCycles = 3 * g_MaxChargeCycles - g_accuCharge + g_delayCycles;
+        //            }
+        //            else
+        //            {
+        //                accuDelay();
+        //                g_delayCycles = g_MaxChargeCycles - g_chargeCycles;
+        //            }
+        //        }
+        //__bic_SR_register_on_exit(GIE);
+        break;
+    case USCI_UART_UCTXIFG:
+        break;
+    case USCI_UART_UCSTTIFG:
+        break;
+    case USCI_UART_UCTXCPTIFG:
+        break;
+    default:
+        break;
     }
 }
 
@@ -462,7 +530,6 @@ void __attribute__((interrupt(USCI_B1_VECTOR))) USCI_B1_ISR(void)
     case USCI_SPI_UCRXIFG:
         ucb1_rx_val = UCB1RXBUF;
         g_receiveBuffer[g_receiveIndex++] = ucb1_rx_val;
-        FRAM_write[2] = g_receiveIndex;
         UCB1IFG &= ~UCRXIFG;
         switch (MasterMode)
         {

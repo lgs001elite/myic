@@ -36,7 +36,7 @@
 #define SINK       2
 #define MAXBYTE    0x17
 
-#define NONLAYER  0
+// #define NONLAYER  0
 #define TRANSMIT  1
 #define SINKWAIT  4
 
@@ -60,11 +60,12 @@
 #define DELAYUNIT 50000
 
 unsigned char g_RXData;
-unsigned char g_TXData;
 uint8_t g_switchUart;
 uint8_t g_delayCycles;
 uint8_t g_anchorCycles;
-
+void uartConfig();
+void uartTimer();
+void compSet();
 
 typedef struct spi_datagram
 {
@@ -84,35 +85,46 @@ void recoveryStates();
 uint8_t g_nextNodeID;
 uint8_t g_currentPairedNodeID;
 uint8_t g_receiveIndex;
-uint8_t g_systemStatus;
-uint8_t g_rounds;
-uint8_t g_queueLen;
+extern uint8_t g_systemStatus;
+extern uint8_t g_rounds;
+extern uint8_t g_queueLen;
+extern int8_t g_attConn;
+extern uint8_t g_accuCharge;
+extern uint8_t g_disConnNum;
+extern unsigned char g_TXData;
 uint16_t g_waitToFind;
 uint16_t g_ICWaitCycles;
 uint16_t g_chargeCycles;
+uint16_t g_basicChargeCycles;
+extern uint16_t g_MaxChargeCycles;
 uint16_t g_nextChargeCycles;
 uint16_t g_lastChargeCycles;
+uint16_t g_stayBackCycles;
+uint16_t g_stayForwardCycles;
+bool g_MatchNextHop;
+bool g_findTesting;
 
-uint8_t        g_nodeAddress;
+uint8_t g_receveuartNum;
+uint8_t g_nodeAddress;
 uint8_t        g_seq_data;
 uint8_t        g_receiveBuffer[SPI_DATA_LEN];
 uint8_t        g_transBuffer[SPI_DATA_LEN ];
-uint8_t        g_node_dimension;
-bool           g_if_sourceNode;
+uint8_t g_node_dimension;
 bool           g_spi_waitThreshold;
 bool           g_sendAck;
+bool           g_uartSwitch;
 uint32_t       g_ack_waiter;
 uint8_t        g_transDataSeq;
-uint8_t        g_sha256_buf[SHA256_BLOCK_SIZE];
-uint8_t        g_pre_ack_seq;
+uint8_t g_sha256_buf[SHA256_BLOCK_SIZE];
 uint8_t        g_pre_packet_seq;
 SPI_DATAGRAM   g_packetQueue;
 uint8_t SlaveType0[SPI_DATA_LEN];
 
 void dummyWait();
+void uartTransmission();
+void accuDelay();
 void update_crc(void);
 void start_spi_process(void);
-void close_spi_process(void);
 uint16_t getCRC(unsigned char const message[]);
 bool SWITCH2SPI;
 typedef enum SPI_ModeEnum{
@@ -125,16 +137,5 @@ typedef enum SPI_ModeEnum{
 
 SPI_Mode SPI_Master_ReadReg(uint8_t reg_addr, uint8_t count);
 SPI_Mode SPI_Master_WriteReg(uint8_t reg_addr, uint8_t count);
-
-#if defined(__TI_COMPILER_VERSION__)
-#pragma PERSISTENT(FRAM_write)
-unsigned long FRAM_write[WRITE_SIZE];
-#elif defined(__IAR_SYSTEMS_ICC__)
-__persistent unsigned long FRAM_write[WRITE_SIZE];
-#elif defined(__GNUC__)
-unsigned long __attribute__((persistent)) FRAM_write[WRITE_SIZE];
-#else
-#error Compiler not supported!
-#endif
 
 #endif

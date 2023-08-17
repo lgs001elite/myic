@@ -71,10 +71,9 @@ build/beaconing_nrf52840_xxAA_s140_7.2.0_Release/obj/spis.o: \
  C:/Program\ Files/SEGGER/SEGGER\ Embedded\ Studio\ for\ ARM\ 7.22/include/stdarg.h \
  ../../mesh/core/api/nrf_mesh_defines.h \
  ../../mesh/core/api/nrf_mesh_config_core.h \
- ../../mesh/core/api/nrf_mesh_defines.h include/spis_data.h \
- include/define_broadcast_packet.h include/public.h include/m2s.h \
- include/crc.h ../../mesh/bearer/api/advertiser.h \
- ../../mesh/bearer/include/broadcast.h \
+ ../../mesh/core/api/nrf_mesh_defines.h include/define_broadcast_packet.h \
+ include/public.h include/m2s.h include/crc.h \
+ ../../mesh/bearer/api/advertiser.h ../../mesh/bearer/include/broadcast.h \
  ../../mesh/bearer/include/radio_config.h \
  ../../mesh/bearer/include/bearer_handler.h \
  ../../mesh/core/include/timeslot_timer.h ../../mesh/core/include/timer.h \

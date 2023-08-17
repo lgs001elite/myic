@@ -56,20 +56,32 @@ void spis_event_handler(nrf_drv_spis_event_t event)
 {
     if (event.evt_type == NRF_DRV_SPIS_XFER_DONE)
     {
+        //       __LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "----- received successfully  seq: %X-----\n", m_rx_buf_spi[0]);
+        //__LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "----- received successfully  type: %X-----\n", m_rx_buf_spi[1]);
+        //        __LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "----- received successfully  seq: %X-----\n", m_rx_buf_spi[2]);
+        //__LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "----- received successfully  type: %X-----\n", m_rx_buf_spi[3]);
         spis_xfer_done = true;
+                            for (int i = 0; i < 2; i++)
+              {
+                  bsp_board_led_invert(i);
+              }
         if ((m_rx_buf_spi[1] != 0x1e) || (m_rx_buf_spi[2] != 0x17))
         {
             return;
         }
+                            for (int i = 0; i < 3; i++)
+              {
+                  bsp_board_led_invert(i);
+              }
         bool checkResult = check_completeness(m_rx_buf_spi);
         if (!checkResult)
         {
             return;
         }
         spi_ack_switch = true;
-        __LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "----- received successfully  seq: %X-----\n", m_rx_buf_spi[3]);
-        __LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "----- received successfully  type: %X-----\n", m_rx_buf_spi[4]);
         uint8_t statusAction = m_rx_buf_spi[4];
+         __LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "----- received successfully  seq: %X-----\n", m_rx_buf_spi[3]);
+        __LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "----- received successfully  type: %X-----\n", m_rx_buf_spi[4]);
         switch (statusAction)
         {
         case DUBBY:
@@ -77,6 +89,11 @@ void spis_event_handler(nrf_drv_spis_event_t event)
         default:
             receiveData_sendout(m_rx_buf_spi);
             send_datagram_start();
+            // for testing find process
+            //for (int i = 0; i < 4; i++)
+            //  {
+            //      bsp_board_led_invert(i);
+            //  }
             break;
         }
     }
@@ -128,6 +145,12 @@ void spis_start(void)
         while (!spis_xfer_done)
         {
             (void)sd_app_evt_wait();
+             // for testing find process
+            for (int i = 0; i < 1; i++)
+              {
+                  bsp_board_led_invert(i);
+              }
         }
+ 
     }
 }

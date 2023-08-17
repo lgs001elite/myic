@@ -2,7 +2,6 @@
 "build/beaconing_nrf52840_xxAA_s140_7.2.0_Release/obj/spis.o"
 "build/beaconing_nrf52840_xxAA_s140_7.2.0_Release/obj/m2s.o"
 "build/beaconing_nrf52840_xxAA_s140_7.2.0_Release/obj/crc.o"
-"build/beaconing_nrf52840_xxAA_s140_7.2.0_Release/obj/spis_data.o"
 "build/beaconing_nrf52840_xxAA_s140_7.2.0_Release/obj/mesh_provisionee.o"
 "build/beaconing_nrf52840_xxAA_s140_7.2.0_Release/obj/simple_hal.o"
 "build/beaconing_nrf52840_xxAA_s140_7.2.0_Release/obj/mesh_app_utils.o"

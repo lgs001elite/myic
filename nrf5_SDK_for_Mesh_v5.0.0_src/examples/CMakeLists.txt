@@ -7,6 +7,7 @@ add_subdirectory("common")
 add_subdirectory("beaconing")
 add_subdirectory("pb_remote")
 add_subdirectory("provisioner")
+add_subdirectory("Asink")
 
 if ((NOT PLATFORM MATCHES "nrf52810") AND (NOT PLATFORM MATCHES "nrf52820"))
     add_subdirectory("sensor")
