@@ -63,9 +63,14 @@ unsigned char g_RXData;
 uint8_t g_switchUart;
 uint8_t g_delayCycles;
 uint8_t g_anchorCycles;
+uint8_t g_driftTime;
+uint8_t g_ICRole;
+bool matchedNext;
+uint8_t g_receivedDriftTime;
+int8_t  g_adjstUnits;
+bool   g_ifAdjustDrift;
 void uartConfig();
 void uartTimer();
-void compSet();
 
 typedef struct spi_datagram
 {
@@ -90,7 +95,6 @@ extern uint8_t g_rounds;
 extern uint8_t g_queueLen;
 extern int8_t g_attConn;
 extern uint8_t g_accuCharge;
-extern uint8_t g_disConnNum;
 extern unsigned char g_TXData;
 uint16_t g_waitToFind;
 uint16_t g_ICWaitCycles;
@@ -110,7 +114,6 @@ uint8_t        g_seq_data;
 uint8_t        g_receiveBuffer[SPI_DATA_LEN];
 uint8_t        g_transBuffer[SPI_DATA_LEN ];
 uint8_t g_node_dimension;
-bool           g_spi_waitThreshold;
 bool           g_sendAck;
 bool           g_uartSwitch;
 uint32_t       g_ack_waiter;
@@ -121,7 +124,6 @@ SPI_DATAGRAM   g_packetQueue;
 uint8_t SlaveType0[SPI_DATA_LEN];
 
 void dummyWait();
-void uartTransmission();
 void accuDelay();
 void update_crc(void);
 void start_spi_process(void);

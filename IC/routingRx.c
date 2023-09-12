@@ -88,7 +88,18 @@ bool data_is_datagram(uint8_t *receivedData)
     {
         return false;
     }
+    g_receivedDriftTime = receivedData[6];
+    if (g_ifAdjustDrift == false)
+    {
+        g_adjstUnits = g_receivedDriftTime - g_driftTime;
+        if (g_adjstUnits < 0)
+        {
+            g_adjstUnits = g_adjstUnits * -1;
+        }
+        g_ifAdjustDrift = true;
+    }
     g_currentPairedNodeID = senderID;
+    matchedNext = true;
     if (g_pre_packet_seq == packetSeq)
     {
         g_sendAck = true;
@@ -105,7 +116,6 @@ bool data_is_datagram(uint8_t *receivedData)
     }
     g_MaxChargeCycles = g_basicChargeCycles * 3;
     g_attConn = 0;
-    g_disConnNum = 0;
     g_pre_packet_seq = packetSeq;
     if (g_queueLen < MAXQUELEN)
     {
@@ -147,7 +157,6 @@ void data_is_ack(uint8_t *receivedData)
     g_MaxChargeCycles = g_basicChargeCycles * 3;
     g_attConn = 0;
     g_queueLen = g_queueLen - 1;
-    g_disConnNum = 0;
     if (g_queueLen == 0)
     {
         if (g_rounds > 0)
@@ -195,10 +204,6 @@ void receiveDataFromNordic()
         g_queueLen = g_queueLen - 1;
         GPIO_MONINOR_OUT4 ^= GPIO_MONITOR_PIN1;
         return;
-    }
-    if ((g_receiveBuffer[3] == 0x33) && (g_receiveBuffer[4] == 0x44) && (g_receiveBuffer[5] == 0x55))
-    {
-        g_spi_waitThreshold = false;
     }
     if ((g_receiveBuffer[0] != 0x1e) || (g_receiveBuffer[1] != 0x17))
     {

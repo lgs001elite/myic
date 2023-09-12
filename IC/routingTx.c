@@ -38,7 +38,7 @@ void produceNonPacketData(void)
     g_transBuffer[3] = 0x12; // DUBBY;
     g_transBuffer[4] = 0;
     g_transBuffer[5] = 0;
-    g_transBuffer[6] = 0;
+    g_transBuffer[6] = g_driftTime;
     g_transBuffer[7] = g_node_dimension;
     uint8_t i = 8;
     // const uint8_t anchor = 8;
