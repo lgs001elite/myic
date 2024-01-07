@@ -80,8 +80,9 @@
   <Watches active="0" update="Never"/>
  </Watch4>
  <Files>
-  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="162" useTextEdit="1" path="src/main.c" left="0" top="141" codecName="Default"/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="39" y="91" useTextEdit="1" path="src/spis.c" left="0" selected="1" top="60" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="162" useTextEdit="1" path="src/main.c" left="0" selected="1" top="105" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="25" y="76" useTextEdit="1" path="src/spis.c" left="0" top="60" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="26" y="44" useTextEdit="1" path="../common/src/mesh_provisionee.c" left="0" top="21" codecName="Default"/>
  </Files>
- <EMStudioWindow activeProject="beaconing_nrf52840_xxAA_s140_7.2.0" fileDialogDefaultFilter="*.c" autoConnectTarget="J-Link" buildConfiguration="Release" sessionSettings="" debugSearchFileMap="" fileDialogInitialDirectory="" debugSearchPath="" autoConnectCapabilities="3711"/>
+ <EMStudioWindow activeProject="beaconing_nrf52840_xxAA_s140_7.2.0" fileDialogDefaultFilter="*.c" autoConnectTarget="J-Link" buildConfiguration="Release" sessionSettings="" debugSearchFileMap="" fileDialogInitialDirectory="" debugSearchPath="" autoConnectCapabilities="3199"/>
 </session>

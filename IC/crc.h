@@ -1,11 +1,18 @@
-#ifndef _crc_h
-#define _crc_h
+/*
+ * crc.h
+ *
+ *  Created on: Dec 20, 2023
+ *      Author: glu250
+ */
+
+#ifndef crc_h
+#define crc_h
 #include <stdint.h>
 
 #define FALSE    0
 #define TRUE    !FALSE
 #define CRC16
-typedef uint16_t  crc;
+typedef int16_t  crc;
 
 #define CRC_NAME            "CRC-16"
 #define POLYNOMIAL            0x8005
@@ -15,6 +22,15 @@ typedef uint16_t  crc;
 #define REFLECT_REMAINDER    TRUE
 #define CHECK_VALUE            0xBB3D
 
+
+
+
+// in crc
+void update_crc( char  buff[]);
+
+// in crc, tx
+int16_t getCRC( char const message[]);
+
 void  crcInit(void);
-crc   crcFast(unsigned char const message[], int nBytes);
-#endif /* _crc_h */
+crc   crcFast( char const message[], int nBytes);
+#endif /* crc_h */

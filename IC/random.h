@@ -1,7 +1,15 @@
-#ifndef _RANDOM_H_
-#define _RANDOM_H_
+/*
+ * random.h
+ *
+ *  Created on: Dec 20, 2023
+ *      Author: glu250
+ */
+
+
+#ifndef RANDOM_H_
+#define RANDOM_H_
 #include <stdint.h>
 
-uint32_t genRanNumb(void);
+int32_t genRanNumb(void);
 
-#endif
+#endif /* RANDOM_H_ */
