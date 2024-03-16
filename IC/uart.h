@@ -24,16 +24,26 @@
 #define ACLK_9600 2
 #define UART_MODE SMCLK_115200
 
-#define AMPLIFIER 15
-#define FIND 0
-#define COFIND 1
+#define AMPLIFIER 30
+#define UARTTIME 5
+
+#define Find 0
+#define NeutronStar 1
+#define CYCLE 2
+#define NeutronStarNoAli 3
+#define Greedy 4
+#define NeutronStarPlus 5
+
 char g_synStrategy;
 char g_receveuartNum;
-char g_uartArr[6];
+char g_uartArr[2];
 bool g_uartSwitch;
 
 void initGPIO();
 void initClockTo16MHzUART();
 void initUART();
+void uartAction();
+
+int uniformInt(int min, int max);
 
 #endif /* UART_H_ */

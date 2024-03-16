@@ -89,16 +89,14 @@ void data_is_datagramCoor(char *receivedData)
 {
     if (g_nodeType == ICNODE)
     {
-        if (g_ifAdjustDrift == false)
+        int8_t receivedDriftTime = receivedData[10];
+        if ((g_ifAdjustDrift == false) && (g_currentNodeLoc != 1))
         {
-            int8_t receivedDriftTime = receivedData[10];
-            g_adjusUnits = receivedDriftTime - g_driftTime;
-            if (g_adjusUnits < 0)
-            {
-                g_adjusUnits = AMPLIFIER - g_driftTime + receivedDriftTime;
-            }
+            g_adjusUnits = g_driftTime  - receivedDriftTime;
             g_ifAdjustDrift = true;
+            //g_driftTime = 0;
         }
+       // GPIO_MONINOR_OUT4 ^= GPIO_MONITOR_PIN2;
         g_sendAck    = true;
         g_nextNodeID = receivedData[5];
     }
@@ -122,8 +120,11 @@ void data_is_ackCoor(char *receivedData)
         if (g_nodeType == ICNODE)
         {
             g_distributedLoc = receivedData[8];
-            g_currentLoc = receivedData[9];
+            g_currentNodeLoc = receivedData[9];
             g_gotoLoc = true;
+            //GPIO_MONINOR_OUT4 ^= GPIO_MONITOR_PIN1;
+            // COMMS_LED_OUT ^= COMMS_LED_PIN;
+            // COMMS_LED_OUT ^= COMMS_LED_PIN2;
         }
         else
         {
@@ -139,6 +140,7 @@ void data_is_datagramIC(char *receivedData)
     char packetSeq = receivedData[2];
     char senderID = receivedData[5];
     int8_t receivedDriftTime = receivedData[10];
+    int8_t senderLoc = receivedData[9];
     if (g_nodeType == ICNODE)
     {
         // if (g_currentPairedNodeID != -1)
@@ -149,18 +151,19 @@ void data_is_datagramIC(char *receivedData)
         //         return;
         //     }
         // }
-        if (g_ifAdjustDrift == false)
+        if ((g_ifAdjustDrift == false) && (g_currentNodeLoc == 1) && (senderLoc == 1))
         {
-            g_adjusUnits = receivedDriftTime - g_driftTime;
-            if (g_adjusUnits < 0)
-            {
-                g_adjusUnits = AMPLIFIER - g_driftTime + receivedDriftTime;
-            }
+            g_adjusUnits = g_driftTime  - receivedDriftTime;
             g_ifAdjustDrift = true;
+            // g_driftTime = 0;
+            // GPIO_MONINOR_OUT4 ^= GPIO_MONITOR_PIN1;
+            // GPIO_MONINOR_OUT4 ^= GPIO_MONITOR_PIN2;
         }
         // g_sendAck = true;
         if (g_pre_packet_seq != packetSeq)
         {
+            // COMMS_LED_OUT ^= COMMS_LED_PIN;
+            // COMMS_LED_OUT ^= COMMS_LED_PIN2;
             char locInCoordinator = receivedData[8];
             char desLoc = receivedData[9];
             char tempArr[4];
@@ -172,6 +175,7 @@ void data_is_datagramIC(char *receivedData)
             g_pre_packet_seq = packetSeq;
             g_nextNodeID = senderID;
             g_receCounter = g_receCounter + 1;
+            GPIO_MONINOR_OUT4 ^= GPIO_MONITOR_PIN1;
         }
     }
     else
@@ -219,7 +223,10 @@ void data_is_ackIC(char *receivedData)
             else
             {
                 g_sendAck = true;
+                // GPIO_MONINOR_OUT4 ^= GPIO_MONITOR_PIN2;
+                // COMMS_LED_OUT ^= COMMS_LED_PIN;
                 g_nextNodeID = senderID;
+                // COMMS_LED_OUT ^= COMMS_LED_PIN2;
                 // g_currentNodeLoc = g_currentNodeLoc + 1;
                 /**  IN the phase, we do not need the record the node loc */
                 // if (hashmap_find(&map, senderID) == -1)
@@ -250,15 +257,20 @@ void receiveDataFromNordic()
         __no_operation();
         return;
     }
-    COMMS_LED_OUT ^= COMMS_LED_PIN;
-    COMMS_LED_OUT ^= COMMS_LED_PIN2;
-    char sender_dataType = g_receiveBuffer[3];
+    if ((g_nodeType == ICNODE) && (g_ICListen == true))
+    {
+        return;
+        // GPIO_MONINOR_OUT4 ^= GPIO_MONITOR_PIN2;
+    }
+        char sender_dataType = g_receiveBuffer[3];
     char sender_nodeType = g_receiveBuffer[4];
     if (sender_nodeType == COORDINATOR)
     {
         if (g_nodeType == ICNODE)
         {
             g_ifFindCoordinator = true;
+            // COMMS_LED_OUT ^= COMMS_LED_PIN;
+            // COMMS_LED_OUT ^= COMMS_LED_PIN2;
         }
         switch (sender_dataType)
         {

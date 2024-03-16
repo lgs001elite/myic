@@ -15,8 +15,6 @@
 #include "global_func.h"
 #include "global_vars.h"
 
-
-
 /* The Register Address/Command to use*/
 char TransmitRegAddr;
 char RXByteCtr;

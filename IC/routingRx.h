@@ -24,8 +24,7 @@ int32_t g_basicChargeCycles;
 int32_t g_pairedChargeCycles;
 int32_t g_lastChargeCycles;
 bool g_sendAck;
-extern int8_t g_adjusUnits;
-extern bool g_ifAdjustDrift;
+
 // in rx
 char g_sha256_buf[SHA256_BLOCK_SIZE];
 char g_pre_packet_seq;

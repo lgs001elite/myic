@@ -9,25 +9,20 @@
 #include "global_func.h"
 #include "global_vars.h"
 #include "pins.h"
+#include "uart.h"
 
-
-int coFindDelay(int c)
+int16_t coFindDelay(int16_t c)
 {
-    int bias = (c + 1) % COORDINATOR_CYCLES;
-    int delay = 0;
-    if(g_ifFindCoordinator == true)
+    int16_t bias = (c + 1) % COORDINATOR_CYCLES;
+    int16_t delay = COORDINATOR_CYCLES - bias;
+    if(g_ifFindCoordinator == false)
     {
-        delay = COORDINATOR_CYCLES - bias + 1;
-        COMMS_LED_OUT ^= COMMS_LED_PIN;
-        __no_operation();
+        delay = delay + 1;
+        delay = delay * AMPLIFIER + 10;
     }
     else
     {
-        COMMS_LED_OUT ^= COMMS_LED_PIN2;
-        delay = COORDINATOR_CYCLES - bias + 1 + 1;
-        g_aliaslots = g_aliaslots + 1;
-        g_aliaslots = g_aliaslots % COORDINATOR_CYCLES;
-        __no_operation();
+        delay = delay * AMPLIFIER + 2;
     }
     return delay;
 }

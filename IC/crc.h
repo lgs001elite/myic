@@ -26,7 +26,7 @@ typedef int16_t  crc;
 
 
 // in crc
-void update_crc( char  buff[]);
+void update_crc();
 
 // in crc, tx
 int16_t getCRC( char const message[]);

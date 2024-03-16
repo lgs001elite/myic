@@ -15,6 +15,8 @@
 #include "crc.h"
 
 
+bool testSwitch = true;
+
 void initClockTo16MHzSPI()
 {
     FRCTL0 = FRCTLPW | NWAITS_1;
@@ -45,6 +47,8 @@ void start_spi_process(void)
     UCB1IE |= UCRXIE;
     while (1)
     {
+        // COMMS_LED_OUT ^= COMMS_LED_PIN;
+        // COMMS_LED_OUT ^= COMMS_LED_PIN2;
         __delay_cycles(10000); // SPI waiting time for reading and writing
         SPI_Master_ReadReg(CMD_TYPE_0_SLAVE, SPI_DATA_LEN);
         CopyArray(g_receiveBuffer, SlaveType0, SPI_DATA_LEN);
@@ -53,19 +57,27 @@ void start_spi_process(void)
         produceNonPacketData();
         if (g_nodeType == ICNODE)
         {
+            g_transBuffer[4] = ICNODE;
             if(g_sendAck == true)
             {
-                g_transBuffer[4]  = ICNODE;
-                g_transBuffer[3]  = PACKAGE_ACK;
+                // COMMS_LED_OUT ^= COMMS_LED_PIN2;
+                // COMMS_LED_OUT ^= COMMS_LED_PIN;
+               // GPIO_MONINOR_OUT4 ^= GPIO_MONITOR_PIN1;
+                g_transBuffer[3] = PACKAGE_ACK;
             }
             else
             {
                 g_transBuffer[3] = PACKAGE_PACKET;
-                if (g_distributedLoc != 0)
-                {
-                    g_transBuffer[4] = ICNODE;
-                }
             }
+            // if (g_ifFindCoordinator == false)
+            // {
+            //     g_transBuffer[3] = DUBBY;
+            //     GPIO_MONINOR_OUT6 ^= GPIO_MONITOR_PIN2;
+            // }
+            // else
+            // {
+            //     GPIO_MONINOR_OUT6 ^= GPIO_MONITOR_PIN3;
+            // }
         }
         else
         {
@@ -74,12 +86,16 @@ void start_spi_process(void)
             g_transBuffer[3] = PACKAGE_PACKET;
             if (g_sendAck == true)
             {
+                // COMMS_LED_OUT ^= COMMS_LED_PIN2;
                 g_transBuffer[3] = PACKAGE_ACK;
+                // GPIO_MONINOR_OUT4 ^= GPIO_MONITOR_PIN1;
             }
         }
-        update_crc(g_transBuffer);
+        update_crc();
+        //__delay_cycles(10);
         SPI_Master_WriteReg(CMD_TYPE_0_MASTER, SPI_DATA_LEN);
         __no_operation();
+        
     }
 }
 
