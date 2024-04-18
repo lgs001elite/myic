@@ -1,0 +1,21 @@
+Output/Release/Obj/wireless_uart_secure_first_pca10056/system_nrf52840.o: \
+ /home/gaosheng/mesh/my_mesh/nRF5_SDK_17.0.2_d674dde/modules/nrfx/mdk/system_nrf52840.c \
+ /usr/share/segger_embedded_studio_for_arm_5.62/include/stdint.h \
+ /usr/share/segger_embedded_studio_for_arm_5.62/include/stdbool.h \
+ /home/gaosheng/mesh/my_mesh/nRF5_SDK_17.0.2_d674dde/modules/nrfx/mdk/nrf.h \
+ /home/gaosheng/mesh/my_mesh/nRF5_SDK_17.0.2_d674dde/modules/nrfx/mdk/nrf52840.h \
+ ../../../../../../../../components/toolchain/cmsis/include/core_cm4.h \
+ ../../../../../../../../components/toolchain/cmsis/include/cmsis_version.h \
+ ../../../../../../../../components/toolchain/cmsis/include/cmsis_compiler.h \
+ ../../../../../../../../components/toolchain/cmsis/include/cmsis_gcc.h \
+ ../../../../../../../../components/toolchain/cmsis/include/mpu_armv7.h \
+ /home/gaosheng/mesh/my_mesh/nRF5_SDK_17.0.2_d674dde/modules/nrfx/mdk/system_nrf52840.h \
+ /home/gaosheng/mesh/my_mesh/nRF5_SDK_17.0.2_d674dde/modules/nrfx/mdk/nrf52840_bitfields.h \
+ /home/gaosheng/mesh/my_mesh/nRF5_SDK_17.0.2_d674dde/modules/nrfx/mdk/nrf51_to_nrf52840.h \
+ /home/gaosheng/mesh/my_mesh/nRF5_SDK_17.0.2_d674dde/modules/nrfx/mdk/nrf52_to_nrf52840.h \
+ /home/gaosheng/mesh/my_mesh/nRF5_SDK_17.0.2_d674dde/modules/nrfx/mdk/compiler_abstraction.h \
+ /home/gaosheng/mesh/my_mesh/nRF5_SDK_17.0.2_d674dde/modules/nrfx/mdk/nrf_erratas.h \
+ /home/gaosheng/mesh/my_mesh/nRF5_SDK_17.0.2_d674dde/modules/nrfx/mdk/nrf51_erratas.h \
+ /home/gaosheng/mesh/my_mesh/nRF5_SDK_17.0.2_d674dde/modules/nrfx/mdk/nrf52_erratas.h \
+ /home/gaosheng/mesh/my_mesh/nRF5_SDK_17.0.2_d674dde/modules/nrfx/mdk/nrf53_erratas.h \
+ /home/gaosheng/mesh/my_mesh/nRF5_SDK_17.0.2_d674dde/modules/nrfx/mdk/nrf91_erratas.h
