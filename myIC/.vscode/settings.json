@@ -1,0 +1,8 @@
+{
+    "files.associations": {
+        "stddef.h": "c",
+        "coordinatorfind.h": "c",
+        "global_vars.h": "c",
+        "stdlib.h": "c"
+    }
+}
