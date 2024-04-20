@@ -1,10 +1,10 @@
 ******************************************************************************
                   MSP430 Linker PC v21.6.1                     
 ******************************************************************************
->> Linked Thu Apr 18 21:17:09 2024
+>> Linked Sat Apr 20 22:00:02 2024
 
 OUTPUT FILE NAME:   <myIC.out>
-ENTRY POINT SYMBOL: "_c_int00_noargs_mpu"  address: 00004a02
+ENTRY POINT SYMBOL: "_c_int00_noargs_mpu"  address: 000048ca
 
 
 MEMORY CONFIGURATION
@@ -17,8 +17,8 @@ MEMORY CONFIGURATION
   INFOC                 00001880   00000080  00000000  00000080  RWIX
   INFOB                 00001900   00000080  00000000  00000080  RWIX
   INFOA                 00001980   00000080  00000000  00000080  RWIX
-  RAM                   00001c00   00002000  0000042e  00001bd2  RWIX
-  FRAM                  00004000   0000bf80  00000b54  0000b42c  RWIX
+  RAM                   00001c00   00002000  00000430  00001bd0  RWIX
+  FRAM                  00004000   0000bf80  00000a1a  0000b566  RWIX
   JTAGSIGNATURE         0000ff80   00000004  00000004  00000000  RWIX  ffff 
   BSLSIGNATURE          0000ff84   00000004  00000004  00000000  RWIX  ffff 
   IPESIGNATURE          0000ff88   00000008  00000008  00000000  RWIX  ffff 
@@ -78,7 +78,7 @@ MEMORY CONFIGURATION
   INT53                 0000fffa   00000002  00000002  00000000  RWIX
   INT54                 0000fffc   00000002  00000002  00000000  RWIX
   RESET                 0000fffe   00000002  00000002  00000000  RWIX
-  FRAM2                 00010000   00033ff8  000028fe  000316fa  RWIX
+  FRAM2                 00010000   00033ff8  00002a50  000315a8  RWIX
 
 
 SECTION ALLOCATION MAP
@@ -110,24 +110,24 @@ section   page    origin      length       input sections
 .ipe:_isr 
 *          0    00004800    00000000     UNINITIALIZED
 
-.cinit     0    00004a38    0000011c     
-                  00004a38    000000fa     (.cinit..data.load) [load image]
-                  00004b32    0000000c     (__TI_handler_table)
-                  00004b3e    00000006     (.cinit..bss.load) [load image, compression = zero_init]
-                  00004b44    00000010     (__TI_cinit_table)
+.cinit     0    00004900    0000011a     
+                  00004900    000000f8     (.cinit..data.load) [load image]
+                  000049f8    0000000c     (__TI_handler_table)
+                  00004a04    00000006     (.cinit..bss.load) [load image, compression = zero_init]
+                  00004a0a    00000010     (__TI_cinit_table)
 
 .init_array 
 *          0    00004000    00000000     UNINITIALIZED
 
 .text:_isr 
-*          0    00004800    00000238     
-                  00004800    0000019c     uart.obj (.text:_isr:USCI_A3_ISR)
-                  0000499c    00000066     spi.obj (.text:_isr:USCI_B1_ISR)
-                  00004a02    00000020     rts430x_lc_rd_eabi.lib : boot.c.obj (.text:_isr:_c_int00_noargs_mpu)
-                  00004a22    0000000e     main.obj (.text:_isr:Timer0_A0_ISR)
-                  00004a30    00000008     rts430x_lc_rd_eabi.lib : isr_trap.asm.obj (.text:_isr:__TI_ISR_TRAP)
+*          0    00004800    00000100     
+                  00004800    00000066     spi.obj (.text:_isr:USCI_B1_ISR)
+                  00004866    00000064     uart.obj (.text:_isr:USCI_A3_ISR)
+                  000048ca    00000020     rts430x_lc_rd_eabi.lib : boot.c.obj (.text:_isr:_c_int00_noargs_mpu)
+                  000048ea    0000000e     main.obj (.text:_isr:Timer0_A0_ISR)
+                  000048f8    00000008     rts430x_lc_rd_eabi.lib : isr_trap.asm.obj (.text:_isr:__TI_ISR_TRAP)
 
-.bss       0    00001c00    0000029a     UNINITIALIZED
+.bss       0    00001c00    0000029e     UNINITIALIZED
                   00001c00    00000200     (.common:crcTable)
                   00001e00    00000028     (.common:map)
                   00001e28    00000020     (.common:g_receiveBuffer)
@@ -136,39 +136,40 @@ section   page    origin      length       input sections
                   00001e70    00000004     (.common:g_basicChargeCycles)
                   00001e74    00000004     (.common:g_lastChargeCycles)
                   00001e78    00000004     (.common:g_pairedChargeCycles)
-                  00001e7c    00000004     (.common:g_uartArr)
-                  00001e80    00000002     (.common:MasterMode)
-                  00001e82    00000002     (.common:g_chTimeSlots)
-                  00001e84    00000002     (.common:g_driftTime)
-                  00001e86    00000002     (.common:g_lastData)
-                  00001e88    00000002     (.common:g_receveuartNum)
-                  00001e8a    00000001     (.common:g_ICListen)
-                  00001e8b    00000001     (.common:g_MatchNextHop)
-                  00001e8c    00000001     (.common:g_currentPairedNodeID)
-                  00001e8d    00000001     (.common:g_nextNodeID)
-                  00001e8e    00000001     (.common:g_nodeAddress)
-                  00001e8f    00000001     (.common:g_nodeType)
-                  00001e90    00000001     (.common:g_node_dimension)
-                  00001e91    00000001     (.common:g_preDriftTime)
-                  00001e92    00000001     (.common:g_receiveIndex)
-                  00001e93    00000001     (.common:g_sendAck)
-                  00001e94    00000001     (.common:g_seq_data)
-                  00001e95    00000001     (.common:g_switchUart)
-                  00001e96    00000001     (.common:g_synStrategy)
-                  00001e97    00000001     (.common:g_transDataSeq)
-                  00001e98    00000001     (.common:g_transmitIndex)
-                  00001e99    00000001     (.common:g_uartSwitch)
+                  00001e7c    00000004     (.common:g_uartRecvBuff)
+                  00001e80    00000004     (.common:g_uartTrasBuff)
+                  00001e84    00000002     (.common:MasterMode)
+                  00001e86    00000002     (.common:g_chTimeSlots)
+                  00001e88    00000002     (.common:g_driftTime)
+                  00001e8a    00000002     (.common:g_lastData)
+                  00001e8c    00000002     (.common:g_receveuartNum)
+                  00001e8e    00000001     (.common:g_ICListen)
+                  00001e8f    00000001     (.common:g_MatchNextHop)
+                  00001e90    00000001     (.common:g_currentPairedNodeID)
+                  00001e91    00000001     (.common:g_nextNodeID)
+                  00001e92    00000001     (.common:g_nodeAddress)
+                  00001e93    00000001     (.common:g_nodeType)
+                  00001e94    00000001     (.common:g_node_dimension)
+                  00001e95    00000001     (.common:g_preDriftTime)
+                  00001e96    00000001     (.common:g_receiveIndex)
+                  00001e97    00000001     (.common:g_sendAck)
+                  00001e98    00000001     (.common:g_seq_data)
+                  00001e99    00000001     (.common:g_switchUart)
+                  00001e9a    00000001     (.common:g_synStrategy)
+                  00001e9b    00000001     (.common:g_transDataSeq)
+                  00001e9c    00000001     (.common:g_transmitIndex)
+                  00001e9d    00000001     (.common:g_uartSwitch)
 
-.data      0    00001e9a    000000f4     UNINITIALIZED
-                  00001e9a    000000b0     find.obj (.data:paraRange)
-                  00001f4a    0000002c     find.obj (.data:chargingRange)
-                  00001f76    00000007     uart.obj (.data)
-                  00001f7d    00000001     --HOLE--
-                  00001f7e    00000004     rts430x_lc_rd_eabi.lib : _lock.c.obj (.data:_lock)
-                  00001f82    00000004                            : _lock.c.obj (.data:_unlock)
-                  00001f86    00000004                            : rand.c.obj (.data)
-                  00001f8a    00000002                            : errno.c.obj (.data)
-                  00001f8c    00000002     spi.obj (.data)
+.data      0    00001e9e    000000f2     UNINITIALIZED
+                  00001e9e    000000b0     find.obj (.data:paraRange)
+                  00001f4e    0000002c     find.obj (.data:chargingRange)
+                  00001f7a    00000005     uart.obj (.data)
+                  00001f7f    00000001     --HOLE--
+                  00001f80    00000004     rts430x_lc_rd_eabi.lib : _lock.c.obj (.data:_lock)
+                  00001f84    00000004                            : _lock.c.obj (.data:_unlock)
+                  00001f88    00000004                            : rand.c.obj (.data)
+                  00001f8c    00000002                            : errno.c.obj (.data)
+                  00001f8e    00000002     spi.obj (.data)
 
 .stack     0    00003b60    000000a0     UNINITIALIZED
                   00003b60    00000004     rts430x_lc_rd_eabi.lib : boot.c.obj (.stack)
@@ -309,101 +310,103 @@ SYSNMI     0    0000fffc    00000002
 .reset     0    0000fffe    00000002     
                   0000fffe    00000002     rts430x_lc_rd_eabi.lib : boot.c.obj (.reset)
 
-.text      0    00010000    000028fe     
+.text      0    00010000    00002a50     
                   00010000    0000072a     rts430x_lc_rd_eabi.lib : addd.c.obj (.text:__mspabi_addd)
                   0001072a    00000628                            : e_log.c.obj (.text:log)
                   00010d52    00000468                            : frcdivd.c.obj (.text:__TI_frcdivd)
                   000111ba    00000292                            : mpyd.c.obj (.text:__mspabi_mpyd)
                   0001144c    0000021c                            : divd.c.obj (.text:__mspabi_divd)
                   00011668    000001c6                            : s_ceil.c.obj (.text:ceil)
-                  0001182e    00000164                            : frcmpyd.c.obj (.text:__TI_frcmpyd)
-                  00011992    000000e2     routingTx.obj (.text:produceNonPacketData)
-                  00011a74    000000d8     rts430x_lc_rd_eabi.lib : cmpd.c.obj (.text:__mspabi_cmpd)
-                  00011b4c    000000ba     routingRx.obj (.text:receiveDataFromNordic)
-                  00011c06    000000a8     find.obj (.text:findDelay)
-                  00011cae    000000a4     uartHex.obj (.text:transUartBytes)
-                  00011d52    0000009e     rts430x_lc_rd_eabi.lib : fltlid.c.obj (.text:__mspabi_fltlid)
-                  00011df0    0000009e     spi.obj (.text:start_spi_process)
-                  00011e8e    00000086     uart.obj (.text:initGPIO)
-                  00011f14    00000078     routingRx.obj (.text:check_completeness)
-                  00011f8c    00000078     main.obj (.text:var_initialization)
-                  00012004    00000076     rts430x_lc_rd_eabi.lib : copy_decompress_lzss.c.obj (.text:decompress:lzss:__TI_decompress_lzss)
-                  0001207a    00000068                            : fixdul.c.obj (.text:__mspabi_fixdul)
-                  000120e2    0000005c                            : mult64_f5hw.asm.obj (.text:__mpyll)
-                  0001213e    0000005a     crc.obj (.text:update_crc)
-                  00012198    00000056     rts430x_lc_rd_eabi.lib : hosttime.c.obj (.text:HOSTtime)
-                  000121ee    00000054                            : autoinit.c.obj (.text:__TI_auto_init_nobinit_nopinit_hold_wdt:__TI_auto_init_nobinit_nopinit_hold_wdt)
-                  00012242    00000052     crc.obj (.text:crcFast)
-                  00012294    00000040     rts430x_lc_rd_eabi.lib : asr64.c.obj (.text:__mspabi_srall)
-                  000122d4    00000040                            : rand.c.obj (.text:rand)
-                  00012314    0000003e                            : asr32.asm.obj (.text:l_asr_const)
-                  00012352    0000003e                            : lsl32.asm.obj (.text:l_lsl_const)
-                  00012390    0000003e                            : lsr32.asm.obj (.text:l_lsr_const)
-                  000123ce    0000003e     crc.obj (.text:reflect)
-                  0001240c    0000003a     rts430x_lc_rd_eabi.lib : lsl64.c.obj (.text:__mspabi_sllll)
-                  00012446    0000003a                            : lsr64.c.obj (.text:__mspabi_srlll)
-                  00012480    0000003a     main.obj (.text:main)
-                  000124ba    0000003a     uart.obj (.text:setTimer)
-                  000124f4    00000038     crc.obj (.text:crcInit)
-                  0001252c    00000036     rts430x_lc_rd_eabi.lib : trgmsg.c.obj (.text:__TI_writemsg)
-                  00012562    00000036     routingRx.obj (.text:data_is_datagramCoor)
-                  00012598    00000032     rts430x_lc_rd_eabi.lib : trgmsg.c.obj (.text:__TI_readmsg)
-                  000125ca    00000032                            : subd.c.obj (.text:__mspabi_subd)
-                  000125fc    0000002c     MSPMPU_INIT_LIB_CCS_msp430_large_code_restricted_data.lib : mpu_init.o (.text:__mpu_init)
-                  00012628    0000002c     rts430x_lc_rd_eabi.lib : mult3264_f5hw.asm.obj (.text:__mpyull)
-                  00012654    0000002c                            : div16s.asm.obj (.text)
-                  00012680    0000002a     swift.obj (.text:swift_role1)
-                  000126aa    00000024     rts430x_lc_rd_eabi.lib : copy_zero_init.c.obj (.text:decompress:ZI:__TI_zero_init_nomemset:__TI_zero_init_nomemset)
-                  000126ce    00000024                            : mult32_f5hw.asm.obj (.text)
-                  000126f2    00000022     routingRx.obj (.text:data_is_ackCoor)
-                  00012714    00000022     coordinatorList.obj (.text:init_hashmap)
-                  00012736    00000020     uart.obj (.text:initUART)
-                  00012756    0000001e     routingRx.obj (.text:data_is_datagramIC)
-                  00012774    0000001a     coordinatorFind.obj (.text:coFindDelay)
-                  0001278e    0000001a     routingRx.obj (.text:data_is_ackIC)
-                  000127a8    0000001a     spi.obj (.text:initSPI)
-                  000127c2    0000001a     uart.obj (.text:uart_entry)
-                  000127dc    00000018     rts430x_lc_rd_eabi.lib : time.c.obj (.text:__time32)
-                  000127f4    00000018                            : mult16_f5hw.asm.obj (.text)
-                  0001280c    00000016                            : div16u.asm.obj (.text)
-                  00012822    00000016                            : rand.c.obj (.text:srand)
-                  00012838    00000014                            : memcpy.c.obj (.text:memcpy)
-                  0001284c    00000012                            : fixdu.c.obj (.text:__mspabi_fixdu)
-                  0001285e    00000012                            : copy_decompress_none.c.obj (.text:decompress:none:__TI_decompress_none)
-                  00012870    00000012     main.obj (.text:timer_counter)
-                  00012882    00000010     rts430x_lc_rd_eabi.lib : asr32.asm.obj (.text:l_asr)
-                  00012892    00000010                            : lsr32.asm.obj (.text:l_lsr)
-                  000128a2    0000000e     uartHex.obj (.text:combineBytes2)
-                  000128b0    0000000c     rts430x_lc_rd_eabi.lib : fltid.c.obj (.text:__mspabi_fltid)
-                  000128bc    0000000a     crc.obj (.text:getCRC)
-                  000128c6    0000000a     rts430x_lc_rd_eabi.lib : asr16.asm.obj (.text)
-                  000128d0    0000000a                            : lsl16.asm.obj (.text)
-                  000128da    0000000a                            : lsr16.asm.obj (.text)
-                  000128e4    00000008     crc.obj (.text:getUartCRC)
-                  000128ec    00000006     rts430x_lc_rd_eabi.lib : exit.c.obj (.text:abort)
-                  000128f2    00000004                            : pre_init.c.obj (.text:_system_pre_init)
-                  000128f6    00000004     swift.obj (.text:swift_role2)
-                  000128fa    00000002     rts430x_lc_rd_eabi.lib : _lock.c.obj (.text:_nop)
-                  000128fc    00000002                            : startup.c.obj (.text:_system_post_cinit)
+                  0001182e    00000176     uart.obj (.text:uartAction)
+                  000119a4    00000164     rts430x_lc_rd_eabi.lib : frcmpyd.c.obj (.text:__TI_frcmpyd)
+                  00011b08    000000e2     routingTx.obj (.text:produceNonPacketData)
+                  00011bea    000000d8     rts430x_lc_rd_eabi.lib : cmpd.c.obj (.text:__mspabi_cmpd)
+                  00011cc2    000000ba     routingRx.obj (.text:receiveDataFromNordic)
+                  00011d7c    000000a8     find.obj (.text:findDelay)
+                  00011e24    0000009e     rts430x_lc_rd_eabi.lib : fltlid.c.obj (.text:__mspabi_fltlid)
+                  00011ec2    0000009e     spi.obj (.text:start_spi_process)
+                  00011f60    00000086     uart.obj (.text:initGPIO)
+                  00011fe6    0000007a     main.obj (.text:var_initialization)
+                  00012060    00000078     routingRx.obj (.text:check_completeness)
+                  000120d8    00000076     rts430x_lc_rd_eabi.lib : copy_decompress_lzss.c.obj (.text:decompress:lzss:__TI_decompress_lzss)
+                  0001214e    00000068                            : fixdul.c.obj (.text:__mspabi_fixdul)
+                  000121b6    0000005c                            : mult64_f5hw.asm.obj (.text:__mpyll)
+                  00012212    0000005a     crc.obj (.text:update_crc)
+                  0001226c    00000056     rts430x_lc_rd_eabi.lib : hosttime.c.obj (.text:HOSTtime)
+                  000122c2    00000056     uart.obj (.text:uartTrasmit)
+                  00012318    00000054     rts430x_lc_rd_eabi.lib : autoinit.c.obj (.text:__TI_auto_init_nobinit_nopinit_hold_wdt:__TI_auto_init_nobinit_nopinit_hold_wdt)
+                  0001236c    00000052     crc.obj (.text:crcFast)
+                  000123be    00000040     rts430x_lc_rd_eabi.lib : asr64.c.obj (.text:__mspabi_srall)
+                  000123fe    00000040     main.obj (.text:main)
+                  0001243e    00000040     rts430x_lc_rd_eabi.lib : rand.c.obj (.text:rand)
+                  0001247e    0000003e                            : asr32.asm.obj (.text:l_asr_const)
+                  000124bc    0000003e                            : lsl32.asm.obj (.text:l_lsl_const)
+                  000124fa    0000003e                            : lsr32.asm.obj (.text:l_lsr_const)
+                  00012538    0000003e     crc.obj (.text:reflect)
+                  00012576    0000003a     rts430x_lc_rd_eabi.lib : lsl64.c.obj (.text:__mspabi_sllll)
+                  000125b0    0000003a                            : lsr64.c.obj (.text:__mspabi_srlll)
+                  000125ea    0000003a     uart.obj (.text:setTimer)
+                  00012624    00000038     crc.obj (.text:crcInit)
+                  0001265c    00000036     rts430x_lc_rd_eabi.lib : trgmsg.c.obj (.text:__TI_writemsg)
+                  00012692    00000036     routingRx.obj (.text:data_is_datagramCoor)
+                  000126c8    00000032     rts430x_lc_rd_eabi.lib : trgmsg.c.obj (.text:__TI_readmsg)
+                  000126fa    00000032                            : subd.c.obj (.text:__mspabi_subd)
+                  0001272c    0000002c     MSPMPU_INIT_LIB_CCS_msp430_large_code_restricted_data.lib : mpu_init.o (.text:__mpu_init)
+                  00012758    0000002c     rts430x_lc_rd_eabi.lib : mult3264_f5hw.asm.obj (.text:__mpyull)
+                  00012784    0000002c                            : div16s.asm.obj (.text)
+                  000127b0    0000002a     swift.obj (.text:swift_role1)
+                  000127da    00000028     uart.obj (.text:uart_entry)
+                  00012802    00000024     rts430x_lc_rd_eabi.lib : copy_zero_init.c.obj (.text:decompress:ZI:__TI_zero_init_nomemset:__TI_zero_init_nomemset)
+                  00012826    00000024                            : mult32_f5hw.asm.obj (.text)
+                  0001284a    00000022     routingRx.obj (.text:data_is_ackCoor)
+                  0001286c    00000022     coordinatorList.obj (.text:init_hashmap)
+                  0001288e    0000001e     routingRx.obj (.text:data_is_datagramIC)
+                  000128ac    0000001c     uart.obj (.text:initUART)
+                  000128c8    0000001a     coordinatorFind.obj (.text:coFindDelay)
+                  000128e2    0000001a     routingRx.obj (.text:data_is_ackIC)
+                  000128fc    0000001a     spi.obj (.text:initSPI)
+                  00012916    00000018     rts430x_lc_rd_eabi.lib : time.c.obj (.text:__time32)
+                  0001292e    00000018                            : mult16_f5hw.asm.obj (.text)
+                  00012946    00000018     uart.obj (.text:uartReceive)
+                  0001295e    00000016     rts430x_lc_rd_eabi.lib : div16u.asm.obj (.text)
+                  00012974    00000016                            : rand.c.obj (.text:srand)
+                  0001298a    00000014                            : memcpy.c.obj (.text:memcpy)
+                  0001299e    00000012                            : fixdu.c.obj (.text:__mspabi_fixdu)
+                  000129b0    00000012                            : copy_decompress_none.c.obj (.text:decompress:none:__TI_decompress_none)
+                  000129c2    00000012     main.obj (.text:timer_counter)
+                  000129d4    00000010     rts430x_lc_rd_eabi.lib : asr32.asm.obj (.text:l_asr)
+                  000129e4    00000010                            : lsr32.asm.obj (.text:l_lsr)
+                  000129f4    0000000e     uartHex.obj (.text:combineBytes2)
+                  00012a02    0000000c     rts430x_lc_rd_eabi.lib : fltid.c.obj (.text:__mspabi_fltid)
+                  00012a0e    0000000a     crc.obj (.text:getCRC)
+                  00012a18    0000000a     rts430x_lc_rd_eabi.lib : asr16.asm.obj (.text)
+                  00012a22    0000000a                            : lsl16.asm.obj (.text)
+                  00012a2c    0000000a                            : lsr16.asm.obj (.text)
+                  00012a36    00000008     crc.obj (.text:getUartCRC)
+                  00012a3e    00000006     rts430x_lc_rd_eabi.lib : exit.c.obj (.text:abort)
+                  00012a44    00000004                            : pre_init.c.obj (.text:_system_pre_init)
+                  00012a48    00000004     swift.obj (.text:swift_role2)
+                  00012a4c    00000002     rts430x_lc_rd_eabi.lib : _lock.c.obj (.text:_nop)
+                  00012a4e    00000002                            : startup.c.obj (.text:_system_post_cinit)
 
 MODULE SUMMARY
 
        Module                       code    ro data   rw data
        ------                       ----    -------   -------
     .\
+       uart.obj                     844     2         5      
        crc.obj                      308     0         512    
-       uart.obj                     662     2         7      
        routingRx.obj                450     0         0      
        find.obj                     168     0         220    
        spi.obj                      286     2         2      
-       main.obj                     210     2         55     
+       main.obj                     218     2         55     
        routingTx.obj                226     0         0      
-       uartHex.obj                  178     0         0      
-       coordinatorFind.obj          26      0         126    
+       coordinatorFind.obj          26      0         130    
        swift.obj                    46      0         0      
        coordinatorList.obj          34      0         0      
+       uartHex.obj                  14      0         0      
     +--+----------------------------+-------+---------+---------+
-       Total:                       2594    6         922    
+       Total:                       2620    6         924    
                                                              
     C:\ti\ccs1240\ccs\ccs_base\msp430\lib\FR59xx\MSPMPU_INIT_LIB_CCS_msp430_large_code_restricted_data.lib
        mpu_init.o                   44      0         0      
@@ -495,21 +498,21 @@ MODULE SUMMARY
                                                              
        Heap:                        0       0         1280   
        Stack:                       0       0         160    
-       Linker Generated:            0       284       0      
+       Linker Generated:            0       282       0      
     +--+----------------------------+-------+---------+---------+
-       Grand Total:                 11062   360       2672   
+       Grand Total:                 11088   358       2674   
 
 
 LINKER GENERATED COPY TABLES
 
-__TI_cinit_table @ 00004b44 records: 2, size/record: 8, table size: 16
-	.data: load addr=00004a38, load size=000000fa bytes, run addr=00001e9a, run size=000000f4 bytes, compression=copy
-	.bss: load addr=00004b3e, load size=00000006 bytes, run addr=00001c00, run size=0000029a bytes, compression=zero_init
+__TI_cinit_table @ 00004a0a records: 2, size/record: 8, table size: 16
+	.data: load addr=00004900, load size=000000f8 bytes, run addr=00001e9e, run size=000000f2 bytes, compression=copy
+	.bss: load addr=00004a04, load size=00000006 bytes, run addr=00001c00, run size=0000029e bytes, compression=zero_init
 
 
 LINKER GENERATED HANDLER TABLE
 
-__TI_handler_table @ 00004b32 records: 3, size/record: 4, table size: 12
+__TI_handler_table @ 000049f8 records: 3, size/record: 4, table size: 12
 	index: 0, handler: __TI_zero_init
 	index: 1, handler: __TI_decompress_lzss
 	index: 2, handler: __TI_decompress_none
@@ -780,8 +783,8 @@ address   name
 000004bc  BIN2BCD                                
 000004bd  BIN2BCD_H                              
 000004bc  BIN2BCD_L                              
-000128ec  C$$EXIT                                
-0001255e  C$$IO$$                                
+00012a3e  C$$EXIT                                
+0001268e  C$$IO$$                                
 0000043e  CAPTIO0CTL                             
 0000043f  CAPTIO0CTL_H                           
 0000043e  CAPTIO0CTL_L                           
@@ -971,7 +974,7 @@ address   name
 00000146  GCCTL1                                 
 00000147  GCCTL1_H                               
 00000146  GCCTL1_L                               
-00012198  HOSTtime                               
+0001226c  HOSTtime                               
 00000a80  LEACAP                                 
 00000a82  LEACAPH                                
 00000a80  LEACAPL                                
@@ -1098,7 +1101,7 @@ address   name
 000004c2  MPYS_L                                 
 000004c1  MPY_H                                  
 000004c0  MPY_L                                  
-00001e80  MasterMode                             
+00001e84  MasterMode                             
 000004c8  OP2                                    
 000004e2  OP2H                                   
 000004e3  OP2H_H                                 
@@ -1714,7 +1717,7 @@ address   name
 000003d0  TB0R                                   
 000003d1  TB0R_H                                 
 000003d0  TB0R_L                                 
-00004a22  Timer0_A0_ISR                          
+000048ea  Timer0_A0_ISR                          
 000005d0  UCA0ABCTL                              
 000005d1  UCA0ABCTL_H                            
 000005d0  UCA0ABCTL_L                            
@@ -2063,8 +2066,8 @@ address   name
 0000070e  UCB3TXBUF                              
 0000070f  UCB3TXBUF_H                            
 0000070e  UCB3TXBUF_L                            
-00004800  USCI_A3_ISR                            
-0000499c  USCI_B1_ISR                            
+00004866  USCI_A3_ISR                            
+00004800  USCI_B1_ISR                            
 0000015c  WDTCTL                                 
 0000015d  WDTCTL_H                               
 0000015c  WDTCTL_L                               
@@ -2072,17 +2075,17 @@ address   name
 00003c00  __STACK_END                            
 000000a0  __STACK_SIZE                           
 00000500  __SYSMEM_SIZE                          
-00004b44  __TI_CINIT_Base                        
-00004b54  __TI_CINIT_Limit                       
-00004b54  __TI_CINIT_Warm                        
-00004b32  __TI_Handler_Table_Base                
-00004b3e  __TI_Handler_Table_Limit               
-00004a30  __TI_ISR_TRAP                          
-000121ee  __TI_auto_init_nobinit_nopinit_hold_wdt
-00012004  __TI_decompress_lzss                   
-0001285e  __TI_decompress_none                   
+00004a0a  __TI_CINIT_Base                        
+00004a1a  __TI_CINIT_Limit                       
+00004a1a  __TI_CINIT_Warm                        
+000049f8  __TI_Handler_Table_Base                
+00004a04  __TI_Handler_Table_Limit               
+000048f8  __TI_ISR_TRAP                          
+00012318  __TI_auto_init_nobinit_nopinit_hold_wdt
+000120d8  __TI_decompress_lzss                   
+000129b0  __TI_decompress_none                   
 00010d52  __TI_frcdivd                           
-0001182e  __TI_frcmpyd                           
+000119a4  __TI_frcmpyd                           
 0000ffb4  __TI_int18                             
 0000ffb6  __TI_int19                             
 0000ffb8  __TI_int20                             
@@ -2123,114 +2126,114 @@ address   name
 ffffffff  __TI_pprof_out_hndl                    
 ffffffff  __TI_prof_data_size                    
 ffffffff  __TI_prof_data_start                   
-00012598  __TI_readmsg                           
-0001252c  __TI_writemsg                          
-000126aa  __TI_zero_init_nomemset                
+000126c8  __TI_readmsg                           
+0001265c  __TI_writemsg                          
+00012802  __TI_zero_init_nomemset                
 ffffffff  __c_args__                             
 00000001  __mpu_enable                           
-000125fc  __mpu_init                             
+0001272c  __mpu_init                             
 00010000  __mspabi_addd                          
-00011a74  __mspabi_cmpd                          
+00011bea  __mspabi_cmpd                          
 0001144c  __mspabi_divd                          
-00012654  __mspabi_divi                          
-0001280c  __mspabi_divu                          
-0001284c  __mspabi_fixdu                         
-0001207a  __mspabi_fixdul                        
-000128b0  __mspabi_fltid                         
-00011d52  __mspabi_fltlid                        
+00012784  __mspabi_divi                          
+0001295e  __mspabi_divu                          
+0001299e  __mspabi_fixdu                         
+0001214e  __mspabi_fixdul                        
+00012a02  __mspabi_fltid                         
+00011e24  __mspabi_fltlid                        
 000111ba  __mspabi_mpyd                          
-000127f4  __mspabi_mpyi_f5hw                     
-000126ce  __mspabi_mpyl_f5hw                     
-000120e2  __mspabi_mpyll_f5hw                    
-00012628  __mspabi_mpyull_f5hw                   
-00012654  __mspabi_remi                          
-0001280c  __mspabi_remu                          
-000128d0  __mspabi_slli                          
-0001238a  __mspabi_slll_1                        
-00012366  __mspabi_slll_10                       
-00012362  __mspabi_slll_11                       
-0001235e  __mspabi_slll_12                       
-0001235a  __mspabi_slll_13                       
-00012356  __mspabi_slll_14                       
-00012352  __mspabi_slll_15                       
-00012386  __mspabi_slll_2                        
-00012382  __mspabi_slll_3                        
-0001237e  __mspabi_slll_4                        
-0001237a  __mspabi_slll_5                        
-00012376  __mspabi_slll_6                        
-00012372  __mspabi_slll_7                        
-0001236e  __mspabi_slll_8                        
-0001236a  __mspabi_slll_9                        
-0001240c  __mspabi_sllll                         
-000128c6  __mspabi_srai                          
-00012882  __mspabi_sral                          
-0001234c  __mspabi_sral_1                        
-00012328  __mspabi_sral_10                       
-00012324  __mspabi_sral_11                       
-00012320  __mspabi_sral_12                       
-0001231c  __mspabi_sral_13                       
-00012318  __mspabi_sral_14                       
-00012314  __mspabi_sral_15                       
-00012348  __mspabi_sral_2                        
-00012344  __mspabi_sral_3                        
-00012340  __mspabi_sral_4                        
-0001233c  __mspabi_sral_5                        
-00012338  __mspabi_sral_6                        
-00012334  __mspabi_sral_7                        
-00012330  __mspabi_sral_8                        
-0001232c  __mspabi_sral_9                        
-00012294  __mspabi_srall                         
-000128da  __mspabi_srli                          
-00012892  __mspabi_srll                          
-000123c8  __mspabi_srll_1                        
-000123a4  __mspabi_srll_10                       
-000123a0  __mspabi_srll_11                       
-0001239c  __mspabi_srll_12                       
-00012398  __mspabi_srll_13                       
-00012394  __mspabi_srll_14                       
-00012390  __mspabi_srll_15                       
-000123c4  __mspabi_srll_2                        
-000123c0  __mspabi_srll_3                        
-000123bc  __mspabi_srll_4                        
-000123b8  __mspabi_srll_5                        
-000123b4  __mspabi_srll_6                        
-000123b0  __mspabi_srll_7                        
-000123ac  __mspabi_srll_8                        
-000123a8  __mspabi_srll_9                        
-00012446  __mspabi_srlll                         
-000125ca  __mspabi_subd                          
-000127dc  __time32                               
-00004a02  _c_int00_noargs_mpu                    
-00001f7e  _lock                                  
-000128fa  _nop                                   
+0001292e  __mspabi_mpyi_f5hw                     
+00012826  __mspabi_mpyl_f5hw                     
+000121b6  __mspabi_mpyll_f5hw                    
+00012758  __mspabi_mpyull_f5hw                   
+00012784  __mspabi_remi                          
+0001295e  __mspabi_remu                          
+00012a22  __mspabi_slli                          
+000124f4  __mspabi_slll_1                        
+000124d0  __mspabi_slll_10                       
+000124cc  __mspabi_slll_11                       
+000124c8  __mspabi_slll_12                       
+000124c4  __mspabi_slll_13                       
+000124c0  __mspabi_slll_14                       
+000124bc  __mspabi_slll_15                       
+000124f0  __mspabi_slll_2                        
+000124ec  __mspabi_slll_3                        
+000124e8  __mspabi_slll_4                        
+000124e4  __mspabi_slll_5                        
+000124e0  __mspabi_slll_6                        
+000124dc  __mspabi_slll_7                        
+000124d8  __mspabi_slll_8                        
+000124d4  __mspabi_slll_9                        
+00012576  __mspabi_sllll                         
+00012a18  __mspabi_srai                          
+000129d4  __mspabi_sral                          
+000124b6  __mspabi_sral_1                        
+00012492  __mspabi_sral_10                       
+0001248e  __mspabi_sral_11                       
+0001248a  __mspabi_sral_12                       
+00012486  __mspabi_sral_13                       
+00012482  __mspabi_sral_14                       
+0001247e  __mspabi_sral_15                       
+000124b2  __mspabi_sral_2                        
+000124ae  __mspabi_sral_3                        
+000124aa  __mspabi_sral_4                        
+000124a6  __mspabi_sral_5                        
+000124a2  __mspabi_sral_6                        
+0001249e  __mspabi_sral_7                        
+0001249a  __mspabi_sral_8                        
+00012496  __mspabi_sral_9                        
+000123be  __mspabi_srall                         
+00012a2c  __mspabi_srli                          
+000129e4  __mspabi_srll                          
+00012532  __mspabi_srll_1                        
+0001250e  __mspabi_srll_10                       
+0001250a  __mspabi_srll_11                       
+00012506  __mspabi_srll_12                       
+00012502  __mspabi_srll_13                       
+000124fe  __mspabi_srll_14                       
+000124fa  __mspabi_srll_15                       
+0001252e  __mspabi_srll_2                        
+0001252a  __mspabi_srll_3                        
+00012526  __mspabi_srll_4                        
+00012522  __mspabi_srll_5                        
+0001251e  __mspabi_srll_6                        
+0001251a  __mspabi_srll_7                        
+00012516  __mspabi_srll_8                        
+00012512  __mspabi_srll_9                        
+000125b0  __mspabi_srlll                         
+000126fa  __mspabi_subd                          
+00012916  __time32                               
+000048ca  _c_int00_noargs_mpu                    
+00001f80  _lock                                  
+00012a4c  _nop                                   
 0000fffe  _reset_vector                          
 00003b60  _stack                                 
 00004144  _sys_memory                            
-000128fc  _system_post_cinit                     
-000128f2  _system_pre_init                       
-00001f82  _unlock                                
-000128ec  abort                                  
+00012a4e  _system_post_cinit                     
+00012a44  _system_pre_init                       
+00001f84  _unlock                                
+00012a3e  abort                                  
 00011668  ceil                                   
 00011668  ceill                                  
-00001f4a  chargingRange                          
-00011f14  check_completeness                     
-00012774  coFindDelay                            
-000128a2  combineBytes2                          
-00012242  crcFast                                
-000124f4  crcInit                                
+00001f4e  chargingRange                          
+00012060  check_completeness                     
+000128c8  coFindDelay                            
+000129f4  combineBytes2                          
+0001236c  crcFast                                
+00012624  crcInit                                
 00001c00  crcTable                               
-000126f2  data_is_ackCoor                        
-0001278e  data_is_ackIC                          
-00012562  data_is_datagramCoor                   
-00012756  data_is_datagramIC                     
-00001f8a  errno                                  
-00011c06  findDelay                              
+0001284a  data_is_ackCoor                        
+000128e2  data_is_ackIC                          
+00012692  data_is_datagramCoor                   
+0001288e  data_is_datagramIC                     
+00001f8c  errno                                  
+00011d7c  findDelay                              
 00004800  fram_ipe_end                           
 00004800  fram_ipe_start                         
 00004000  fram_rw_start                          
 00004800  fram_rx_start                          
-00001e8a  g_ICListen                             
-00001e8b  g_MatchNextHop                         
+00001e8e  g_ICListen                             
+00001e8f  g_MatchNextHop                         
 00004010  g_MaxChargeCycles                      
 0000400f  g_TXData                               
 00004005  g_accuCharge                           
@@ -2238,78 +2241,78 @@ ffffffff  __c_args__
 00004004  g_arrLoc                               
 00004012  g_attConn                              
 00001e70  g_basicChargeCycles                    
-00001e82  g_chTimeSlots                          
+00001e86  g_chTimeSlots                          
 0000400a  g_connectionLen                        
 0000400c  g_connectionNum                        
 0000400e  g_currentNodeLoc                       
-00001e8c  g_currentPairedNodeID                  
+00001e90  g_currentPairedNodeID                  
 00004016  g_distributedLoc                       
-00001e84  g_driftTime                            
+00001e88  g_driftTime                            
 0000401c  g_gotoLoc                              
 00004001  g_ifAdjustDrift                        
 00004000  g_ifFindCoordinator                    
 00001e74  g_lastChargeCycles                     
-00001e86  g_lastData                             
+00001e8a  g_lastData                             
 00004020  g_locNum                               
-00001e8d  g_nextNodeID                           
-00001e8e  g_nodeAddress                          
-00001e8f  g_nodeType                             
-00001e90  g_node_dimension                       
+00001e91  g_nextNodeID                           
+00001e92  g_nodeAddress                          
+00001e93  g_nodeType                             
+00001e94  g_node_dimension                       
 00004022  g_packet_id                            
 00001e78  g_pairedChargeCycles                   
-00001e91  g_preDriftTime                         
+00001e95  g_preDriftTime                         
 00004021  g_pre_packet_seq                       
 00004013  g_queueLen                             
 0000401e  g_receCounter                          
 00001e28  g_receiveBuffer                        
-00001e92  g_receiveIndex                         
-00001e88  g_receveuartNum                        
+00001e96  g_receiveIndex                         
+00001e8c  g_receveuartNum                        
 00004014  g_rounds                               
-00001e93  g_sendAck                              
-00001e94  g_seq_data                             
-00001e95  g_switchUart                           
-00001e96  g_synStrategy                          
+00001e97  g_sendAck                              
+00001e98  g_seq_data                             
+00001e99  g_switchUart                           
+00001e9a  g_synStrategy                          
 00004015  g_systemStatus                         
 00004006  g_systimeCounter                       
 00001e48  g_transBuffer                          
-00001e97  g_transDataSeq                         
-00001e98  g_transmitIndex                        
-00001e7c  g_uartArr                              
-00001e99  g_uartSwitch                           
-000128bc  getCRC                                 
-000128e4  getUartCRC                             
-00011e8e  initGPIO                               
-000127a8  initSPI                                
-00012736  initUART                               
-00012714  init_hashmap                           
+00001e9b  g_transDataSeq                         
+00001e9c  g_transmitIndex                        
+00001e7c  g_uartRecvBuff                         
+00001e9d  g_uartSwitch                           
+00001e80  g_uartTrasBuff                         
+00012a0e  getCRC                                 
+00012a36  getUartCRC                             
+00011f60  initGPIO                               
+000128fc  initSPI                                
+000128ac  initUART                               
+0001286c  init_hashmap                           
 0001072a  log                                    
 0001072a  logl                                   
-00012480  main                                   
+000123fe  main                                   
 00001e00  map                                    
-00012838  memcpy                                 
+0001298a  memcpy                                 
 0000a501  mpu_ctl0_value                         
 00001513  mpu_sam_value                          
 00000480  mpu_segment_border1                    
 00000480  mpu_segment_border2                    
-00001e9a  paraRange                              
+00001e9e  paraRange                              
 00001e68  parmbuf                                
-00011992  produceNonPacketData                   
-000122d4  rand                                   
-00011b4c  receiveDataFromNordic                  
-000124ba  setTimer                               
-00012822  srand                                  
-00011df0  start_spi_process                      
+00011b08  produceNonPacketData                   
+0001243e  rand                                   
+00011cc2  receiveDataFromNordic                  
+000125ea  setTimer                               
+00012974  srand                                  
+00011ec2  start_spi_process                      
 00004018  swift_attempt                          
 0000401a  swift_inc                              
-00012680  swift_role1                            
-000128f6  swift_role2                            
-00001f8c  testSwitch                             
-000127dc  time                                   
-00012870  timer_counter                          
-00011cae  transUartBytes                         
-000127c2  uart_entry                             
-0001213e  update_crc                             
-00011f8c  var_initialization                     
+000127b0  swift_role1                            
+00012a48  swift_role2                            
+00001f8e  testSwitch                             
+00012916  time                                   
+000129c2  timer_counter                          
+000127da  uart_entry                             
+00012212  update_crc                             
+00011fe6  var_initialization                     
 
 
 GLOBAL SYMBOLS: SORTED BY Symbol Address 
@@ -3872,34 +3875,35 @@ address   name
 00001e70  g_basicChargeCycles                    
 00001e74  g_lastChargeCycles                     
 00001e78  g_pairedChargeCycles                   
-00001e7c  g_uartArr                              
-00001e80  MasterMode                             
-00001e82  g_chTimeSlots                          
-00001e84  g_driftTime                            
-00001e86  g_lastData                             
-00001e88  g_receveuartNum                        
-00001e8a  g_ICListen                             
-00001e8b  g_MatchNextHop                         
-00001e8c  g_currentPairedNodeID                  
-00001e8d  g_nextNodeID                           
-00001e8e  g_nodeAddress                          
-00001e8f  g_nodeType                             
-00001e90  g_node_dimension                       
-00001e91  g_preDriftTime                         
-00001e92  g_receiveIndex                         
-00001e93  g_sendAck                              
-00001e94  g_seq_data                             
-00001e95  g_switchUart                           
-00001e96  g_synStrategy                          
-00001e97  g_transDataSeq                         
-00001e98  g_transmitIndex                        
-00001e99  g_uartSwitch                           
-00001e9a  paraRange                              
-00001f4a  chargingRange                          
-00001f7e  _lock                                  
-00001f82  _unlock                                
-00001f8a  errno                                  
-00001f8c  testSwitch                             
+00001e7c  g_uartRecvBuff                         
+00001e80  g_uartTrasBuff                         
+00001e84  MasterMode                             
+00001e86  g_chTimeSlots                          
+00001e88  g_driftTime                            
+00001e8a  g_lastData                             
+00001e8c  g_receveuartNum                        
+00001e8e  g_ICListen                             
+00001e8f  g_MatchNextHop                         
+00001e90  g_currentPairedNodeID                  
+00001e91  g_nextNodeID                           
+00001e92  g_nodeAddress                          
+00001e93  g_nodeType                             
+00001e94  g_node_dimension                       
+00001e95  g_preDriftTime                         
+00001e96  g_receiveIndex                         
+00001e97  g_sendAck                              
+00001e98  g_seq_data                             
+00001e99  g_switchUart                           
+00001e9a  g_synStrategy                          
+00001e9b  g_transDataSeq                         
+00001e9c  g_transmitIndex                        
+00001e9d  g_uartSwitch                           
+00001e9e  paraRange                              
+00001f4e  chargingRange                          
+00001f80  _lock                                  
+00001f84  _unlock                                
+00001f8c  errno                                  
+00001f8e  testSwitch                             
 00003b60  _stack                                 
 00003c00  __STACK_END                            
 00004000  fram_rw_start                          
@@ -3928,19 +3932,19 @@ address   name
 00004022  g_packet_id                            
 00004024  _CIOBUF_                               
 00004144  _sys_memory                            
-00004800  USCI_A3_ISR                            
+00004800  USCI_B1_ISR                            
 00004800  fram_ipe_end                           
 00004800  fram_ipe_start                         
 00004800  fram_rx_start                          
-0000499c  USCI_B1_ISR                            
-00004a02  _c_int00_noargs_mpu                    
-00004a22  Timer0_A0_ISR                          
-00004a30  __TI_ISR_TRAP                          
-00004b32  __TI_Handler_Table_Base                
-00004b3e  __TI_Handler_Table_Limit               
-00004b44  __TI_CINIT_Base                        
-00004b54  __TI_CINIT_Limit                       
-00004b54  __TI_CINIT_Warm                        
+00004866  USCI_A3_ISR                            
+000048ca  _c_int00_noargs_mpu                    
+000048ea  Timer0_A0_ISR                          
+000048f8  __TI_ISR_TRAP                          
+000049f8  __TI_Handler_Table_Base                
+00004a04  __TI_Handler_Table_Limit               
+00004a0a  __TI_CINIT_Base                        
+00004a1a  __TI_CINIT_Limit                       
+00004a1a  __TI_CINIT_Warm                        
 0000a501  mpu_ctl0_value                         
 0000ffb4  __TI_int18                             
 0000ffb6  __TI_int19                             
@@ -3988,121 +3992,120 @@ address   name
 0001144c  __mspabi_divd                          
 00011668  ceil                                   
 00011668  ceill                                  
-0001182e  __TI_frcmpyd                           
-00011992  produceNonPacketData                   
-00011a74  __mspabi_cmpd                          
-00011b4c  receiveDataFromNordic                  
-00011c06  findDelay                              
-00011cae  transUartBytes                         
-00011d52  __mspabi_fltlid                        
-00011df0  start_spi_process                      
-00011e8e  initGPIO                               
-00011f14  check_completeness                     
-00011f8c  var_initialization                     
-00012004  __TI_decompress_lzss                   
-0001207a  __mspabi_fixdul                        
-000120e2  __mspabi_mpyll_f5hw                    
-0001213e  update_crc                             
-00012198  HOSTtime                               
-000121ee  __TI_auto_init_nobinit_nopinit_hold_wdt
-00012242  crcFast                                
-00012294  __mspabi_srall                         
-000122d4  rand                                   
-00012314  __mspabi_sral_15                       
-00012318  __mspabi_sral_14                       
-0001231c  __mspabi_sral_13                       
-00012320  __mspabi_sral_12                       
-00012324  __mspabi_sral_11                       
-00012328  __mspabi_sral_10                       
-0001232c  __mspabi_sral_9                        
-00012330  __mspabi_sral_8                        
-00012334  __mspabi_sral_7                        
-00012338  __mspabi_sral_6                        
-0001233c  __mspabi_sral_5                        
-00012340  __mspabi_sral_4                        
-00012344  __mspabi_sral_3                        
-00012348  __mspabi_sral_2                        
-0001234c  __mspabi_sral_1                        
-00012352  __mspabi_slll_15                       
-00012356  __mspabi_slll_14                       
-0001235a  __mspabi_slll_13                       
-0001235e  __mspabi_slll_12                       
-00012362  __mspabi_slll_11                       
-00012366  __mspabi_slll_10                       
-0001236a  __mspabi_slll_9                        
-0001236e  __mspabi_slll_8                        
-00012372  __mspabi_slll_7                        
-00012376  __mspabi_slll_6                        
-0001237a  __mspabi_slll_5                        
-0001237e  __mspabi_slll_4                        
-00012382  __mspabi_slll_3                        
-00012386  __mspabi_slll_2                        
-0001238a  __mspabi_slll_1                        
-00012390  __mspabi_srll_15                       
-00012394  __mspabi_srll_14                       
-00012398  __mspabi_srll_13                       
-0001239c  __mspabi_srll_12                       
-000123a0  __mspabi_srll_11                       
-000123a4  __mspabi_srll_10                       
-000123a8  __mspabi_srll_9                        
-000123ac  __mspabi_srll_8                        
-000123b0  __mspabi_srll_7                        
-000123b4  __mspabi_srll_6                        
-000123b8  __mspabi_srll_5                        
-000123bc  __mspabi_srll_4                        
-000123c0  __mspabi_srll_3                        
-000123c4  __mspabi_srll_2                        
-000123c8  __mspabi_srll_1                        
-0001240c  __mspabi_sllll                         
-00012446  __mspabi_srlll                         
-00012480  main                                   
-000124ba  setTimer                               
-000124f4  crcInit                                
-0001252c  __TI_writemsg                          
-0001255e  C$$IO$$                                
-00012562  data_is_datagramCoor                   
-00012598  __TI_readmsg                           
-000125ca  __mspabi_subd                          
-000125fc  __mpu_init                             
-00012628  __mspabi_mpyull_f5hw                   
-00012654  __mspabi_divi                          
-00012654  __mspabi_remi                          
-00012680  swift_role1                            
-000126aa  __TI_zero_init_nomemset                
-000126ce  __mspabi_mpyl_f5hw                     
-000126f2  data_is_ackCoor                        
-00012714  init_hashmap                           
-00012736  initUART                               
-00012756  data_is_datagramIC                     
-00012774  coFindDelay                            
-0001278e  data_is_ackIC                          
-000127a8  initSPI                                
-000127c2  uart_entry                             
-000127dc  __time32                               
-000127dc  time                                   
-000127f4  __mspabi_mpyi_f5hw                     
-0001280c  __mspabi_divu                          
-0001280c  __mspabi_remu                          
-00012822  srand                                  
-00012838  memcpy                                 
-0001284c  __mspabi_fixdu                         
-0001285e  __TI_decompress_none                   
-00012870  timer_counter                          
-00012882  __mspabi_sral                          
-00012892  __mspabi_srll                          
-000128a2  combineBytes2                          
-000128b0  __mspabi_fltid                         
-000128bc  getCRC                                 
-000128c6  __mspabi_srai                          
-000128d0  __mspabi_slli                          
-000128da  __mspabi_srli                          
-000128e4  getUartCRC                             
-000128ec  C$$EXIT                                
-000128ec  abort                                  
-000128f2  _system_pre_init                       
-000128f6  swift_role2                            
-000128fa  _nop                                   
-000128fc  _system_post_cinit                     
+000119a4  __TI_frcmpyd                           
+00011b08  produceNonPacketData                   
+00011bea  __mspabi_cmpd                          
+00011cc2  receiveDataFromNordic                  
+00011d7c  findDelay                              
+00011e24  __mspabi_fltlid                        
+00011ec2  start_spi_process                      
+00011f60  initGPIO                               
+00011fe6  var_initialization                     
+00012060  check_completeness                     
+000120d8  __TI_decompress_lzss                   
+0001214e  __mspabi_fixdul                        
+000121b6  __mspabi_mpyll_f5hw                    
+00012212  update_crc                             
+0001226c  HOSTtime                               
+00012318  __TI_auto_init_nobinit_nopinit_hold_wdt
+0001236c  crcFast                                
+000123be  __mspabi_srall                         
+000123fe  main                                   
+0001243e  rand                                   
+0001247e  __mspabi_sral_15                       
+00012482  __mspabi_sral_14                       
+00012486  __mspabi_sral_13                       
+0001248a  __mspabi_sral_12                       
+0001248e  __mspabi_sral_11                       
+00012492  __mspabi_sral_10                       
+00012496  __mspabi_sral_9                        
+0001249a  __mspabi_sral_8                        
+0001249e  __mspabi_sral_7                        
+000124a2  __mspabi_sral_6                        
+000124a6  __mspabi_sral_5                        
+000124aa  __mspabi_sral_4                        
+000124ae  __mspabi_sral_3                        
+000124b2  __mspabi_sral_2                        
+000124b6  __mspabi_sral_1                        
+000124bc  __mspabi_slll_15                       
+000124c0  __mspabi_slll_14                       
+000124c4  __mspabi_slll_13                       
+000124c8  __mspabi_slll_12                       
+000124cc  __mspabi_slll_11                       
+000124d0  __mspabi_slll_10                       
+000124d4  __mspabi_slll_9                        
+000124d8  __mspabi_slll_8                        
+000124dc  __mspabi_slll_7                        
+000124e0  __mspabi_slll_6                        
+000124e4  __mspabi_slll_5                        
+000124e8  __mspabi_slll_4                        
+000124ec  __mspabi_slll_3                        
+000124f0  __mspabi_slll_2                        
+000124f4  __mspabi_slll_1                        
+000124fa  __mspabi_srll_15                       
+000124fe  __mspabi_srll_14                       
+00012502  __mspabi_srll_13                       
+00012506  __mspabi_srll_12                       
+0001250a  __mspabi_srll_11                       
+0001250e  __mspabi_srll_10                       
+00012512  __mspabi_srll_9                        
+00012516  __mspabi_srll_8                        
+0001251a  __mspabi_srll_7                        
+0001251e  __mspabi_srll_6                        
+00012522  __mspabi_srll_5                        
+00012526  __mspabi_srll_4                        
+0001252a  __mspabi_srll_3                        
+0001252e  __mspabi_srll_2                        
+00012532  __mspabi_srll_1                        
+00012576  __mspabi_sllll                         
+000125b0  __mspabi_srlll                         
+000125ea  setTimer                               
+00012624  crcInit                                
+0001265c  __TI_writemsg                          
+0001268e  C$$IO$$                                
+00012692  data_is_datagramCoor                   
+000126c8  __TI_readmsg                           
+000126fa  __mspabi_subd                          
+0001272c  __mpu_init                             
+00012758  __mspabi_mpyull_f5hw                   
+00012784  __mspabi_divi                          
+00012784  __mspabi_remi                          
+000127b0  swift_role1                            
+000127da  uart_entry                             
+00012802  __TI_zero_init_nomemset                
+00012826  __mspabi_mpyl_f5hw                     
+0001284a  data_is_ackCoor                        
+0001286c  init_hashmap                           
+0001288e  data_is_datagramIC                     
+000128ac  initUART                               
+000128c8  coFindDelay                            
+000128e2  data_is_ackIC                          
+000128fc  initSPI                                
+00012916  __time32                               
+00012916  time                                   
+0001292e  __mspabi_mpyi_f5hw                     
+0001295e  __mspabi_divu                          
+0001295e  __mspabi_remu                          
+00012974  srand                                  
+0001298a  memcpy                                 
+0001299e  __mspabi_fixdu                         
+000129b0  __TI_decompress_none                   
+000129c2  timer_counter                          
+000129d4  __mspabi_sral                          
+000129e4  __mspabi_srll                          
+000129f4  combineBytes2                          
+00012a02  __mspabi_fltid                         
+00012a0e  getCRC                                 
+00012a18  __mspabi_srai                          
+00012a22  __mspabi_slli                          
+00012a2c  __mspabi_srli                          
+00012a36  getUartCRC                             
+00012a3e  C$$EXIT                                
+00012a3e  abort                                  
+00012a44  _system_pre_init                       
+00012a48  swift_role2                            
+00012a4c  _nop                                   
+00012a4e  _system_post_cinit                     
 ffffffff  __TI_pprof_out_hndl                    
 ffffffff  __TI_prof_data_size                    
 ffffffff  __TI_prof_data_start                   

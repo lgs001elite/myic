@@ -99,7 +99,6 @@ void initUART()
     UCA3MCTLW |= 0x5300;          // 32768/9600 - INT(32768/9600)=0.41
                                   // UCBRSx value = 0x53 (See UG)
     UCA3CTLW0 &= ~UCSWRST;        // release from reset
-    UCA3IE |= UCRXIE;             // Enable USCI_A3 RX interrupt
 }
 
 // Included [min, max]
@@ -107,18 +106,51 @@ int uniformInt(int min, int max)
 {
     return (rand() % (max - min + 1)) + min;
 }
-
-void uart_entry()
+static void uartAction();
+void static uartReceive()
 {
-    __bis_SR_register(GIE);
-    while (g_uartSwitch && (g_nodeType == ICNODE))
+    while(g_receveuartNum != 4)
     {
         __no_operation();
     }
+    g_receveuartNum = 0;
+    uartAction();
+}
+
+void static uartTrasmit(uint16_t num)
+{
+    int index = 0;
+    int var = 1;
+    for (; var >= 0; var--)
+    {
+        g_uartTrasBuff[index] = (num >> (var * 8)) & 0xff;
+        index = index + 1;
+    }
+    int16_t crc_temp = getUartCRC(g_uartTrasBuff);
+    var = 1;
+    for (; var >= 0; var--)
+    {
+        g_uartTrasBuff[index] = (crc_temp >> (var * 8)) & 0xff;
+        index = index + 1;
+    }
+    UCA3IE |= UCTXIE; // Enable USCI_A3 TX interrupt
+    __bis_SR_register(GIE);
+}
+
+void uart_entry()
+{
+    while (g_uartSwitch && (g_nodeType == ICNODE))
+    {
+        UCA3IE |= UCRXIE;
+        __bis_SR_register(GIE);
+        uartReceive();
+        __no_operation();
+    }
+    __bis_SR_register(GIE); // re-enbale interrupt
     __no_operation();
 }
 
-static inline void uartAction()
+static void uartAction()
 {
     GPIO_MONINOR_OUT4 ^= GPIO_MONITOR_PIN3;
     GPIO_MONINOR_OUT4 ^= GPIO_MONITOR_PIN4;
@@ -131,9 +163,10 @@ static inline void uartAction()
         return;
     }
     char reDataUart[2];
-    reDataUart[0] = g_uartArr[0];
-    reDataUart[1] = g_uartArr[1];
+    reDataUart[0] = g_uartRecvBuff[0];
+    reDataUart[1] = g_uartRecvBuff[1];
     receivedUart = combineBytes2(reDataUart);
+    __no_operation();
     char transBuff[2];
     int index = 0;
     int var = 1;
@@ -143,37 +176,32 @@ static inline void uartAction()
         index = index + 1;
     }
     crcCode = getUartCRC(transBuff);
-    reDataUart[0] = g_uartArr[2];
-    reDataUart[1] = g_uartArr[3];
+    reDataUart[0] = g_uartRecvBuff[2];
+    reDataUart[1] = g_uartRecvBuff[3];
     uint16_t crcReceived = combineBytes2(reDataUart);
     if (crcReceived != crcCode)
     {
         return;
     }
-    // COMMS_LED_OUT ^= COMMS_LED_PIN;
     if (g_lastData == receivedUart)
     {
         __no_operation();
         return;
     }
-    // COMMS_LED_OUT ^= COMMS_LED_PIN2;
     g_lastData = receivedUart;
-    // GPIO_MONINOR_OUT4 ^= GPIO_MONITOR_PIN1;
 
     // Judge if exit
     if (receivedUart == 0xffff)
     {
-        // COMMS_LED_OUT ^= COMMS_LED_PIN;
-        // COMMS_LED_OUT ^= COMMS_LED_PIN2;
         __no_operation();
         g_uartSwitch = false;
         return;
     }
-    // Transfer syn counter
+    //Transfer syn counter
     uint16_t t_synCounter = g_receCounter + 0xafff;
-    //transUartBytes(t_synCounter);
-    GPIO_MONINOR_OUT4 ^= GPIO_MONITOR_PIN3;
-    // Transfer delay time
+    uartTrasmit(t_synCounter);
+    __bis_SR_register(GIE); // re-open interrupt
+    //Transfer delay time
     uint16_t delayTime = 0;
     if (g_synStrategy == Find)
     {
@@ -210,11 +238,8 @@ static inline void uartAction()
             delayTime = delayTime + g_distributedLoc;
         }
     }
-    // if (delayTime > 500)
-    // {
-    //     GPIO_MONINOR_OUT4 ^= GPIO_MONITOR_PIN4;
-    // }
-    transUartBytes(delayTime);
+    __delay_cycles(100000);
+    uartTrasmit(delayTime);
     if (delayTime == 0)
     {
         GPIO_MONINOR_OUT4 ^= GPIO_MONITOR_PIN3;
@@ -239,26 +264,27 @@ void __attribute__((interrupt(USCI_A3_VECTOR))) USCI_A3_ISR(void)
     case USCI_NONE:
         break;
     case USCI_UART_UCRXIFG:
-        if (g_receveuartNum == 4)
+        if (g_receveuartNum < 4)
         {
-            int8_t tempChar = UCA3RXBUF; // handle extra messages
-        }
-        if ((g_receveuartNum < 4) && (reEntrance == true))
-        {
-            g_uartArr[g_receveuartNum] = UCA3RXBUF;
+            g_uartRecvBuff[g_receveuartNum] = UCA3RXBUF;
             g_receveuartNum += 1;
         }
         if (g_receveuartNum == 4)
         {
-            // GPIO_MONINOR_OUT4 ^= GPIO_MONITOR_PIN2;
-            g_receveuartNum += 1;
-            reEntrance = false;
-            uartAction();
-            reEntrance = true;
-            g_receveuartNum = 0;
+            UCA3IE &= ~UCRXIE;
+            __bic_SR_register_on_exit(GIE);
         }
         break;
     case USCI_UART_UCTXIFG:
+        __no_operation();
+        uint8_t var = 0;
+        for (; var < 4; var++)
+        {
+            UCA3TXBUF = g_uartTrasBuff[var];
+            __delay_cycles(100);
+        }
+        UCA3IE &= ~UCTXIE;
+        __bic_SR_register_on_exit(GIE);
         break;
     case USCI_UART_UCSTTIFG:
         break;

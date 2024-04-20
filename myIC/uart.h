@@ -38,7 +38,8 @@
 
 char g_synStrategy;
 unsigned int g_receveuartNum;
-char g_uartArr[4];
+char g_uartRecvBuff[4];
+char g_uartTrasBuff[4];
 bool g_uartSwitch;
 extern uint16_t g_adjustUnits;
 

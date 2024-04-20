@@ -7,39 +7,40 @@
 
 void transUartBytes(uint16_t num)
 {
-    char transBuff[4]; 
-    int index = 0;
-    int var = 1;
-    for (; var >= 0; var--)
-    {
-        transBuff[index] = (num >> (var * 8)) & 0xff;
-        index = index + 1;
-    }
-    int16_t crc_temp = getUartCRC(transBuff);
-    var = 1;
-    for (; var >= 0; var--)
-    {
-        transBuff[index] = (crc_temp >> (var * 8)) & 0xff;
-        index = index + 1;
-    }
-    // Start to transmit
-    int re_trans = 0;
-   // GPIO_MONINOR_OUT4 ^= GPIO_MONITOR_PIN2;
-    while (re_trans < 1)
-    {
-        re_trans++;
-        var = 0;
-        for (; var < 4; var++)
-        {
-            while (!(UCA3IFG & UCTXIFG));
-            UCA3TXBUF = transBuff[var];
-           // GPIO_MONINOR_OUT4 ^= GPIO_MONITOR_PIN1;
-            __delay_cycles(100);
-        }
-        __no_operation();
-    }
-    //GPIO_MONINOR_OUT4 ^= GPIO_MONITOR_PIN2;
-    __no_operation();
+//     char transBuff[4]; 
+//     int index = 0;
+//     int var = 1;
+//     for (; var >= 0; var--)
+//     {
+//         transBuff[index] = (num >> (var * 8)) & 0xff;
+//         index = index + 1;
+//     }
+//     int16_t crc_temp = getUartCRC(transBuff);
+//     var = 1;
+//     for (; var >= 0; var--)
+//     {
+//         transBuff[index] = (crc_temp >> (var * 8)) & 0xff;
+//         index = index + 1;
+//     }
+//     // Start to transmit
+//     int re_trans = 0;
+//    // GPIO_MONINOR_OUT4 ^= GPIO_MONITOR_PIN2;
+//     while (re_trans < 1)
+//     {
+//         re_trans++;
+//         var = 0;
+//         for (; var < 4; var++)
+//         {
+//             while (!(UCA3IFG & UCTXIFG));
+//             UCA3TXBUF = transBuff[var];
+//            // GPIO_MONINOR_OUT4 ^= GPIO_MONITOR_PIN1;
+//             __delay_cycles(100);
+//         }
+//         __no_operation();
+//     }
+//     //GPIO_MONINOR_OUT4 ^= GPIO_MONITOR_PIN2;
+//     __no_operation();
+//     UCA3IE |= UCRXIE;
 }
 
 int32_t combineBytes(char arr[])

@@ -153,7 +153,7 @@ void var_initialization()
     g_MatchNextHop = false;
     g_uartSwitch = true;
     g_nodeType = ICNODE;  // COORDINATOR ICNODE NeutronStar NeutronStarNoAli
-    g_synStrategy = Find; // Find   NeutronStarPlus  Greedy Swift01 Swift01
+    g_synStrategy = Swift02; // Find   NeutronStarPlus  Greedy Swift01 Swift01
     g_preDriftTime = 0;
     g_lastData = 0;
     g_driftTime = 0;
@@ -180,6 +180,7 @@ void main(void)
     crcInit();
     var_initialization();
     timer_counter();
+    __bis_SR_register(GIE);
     // uart
    // GPIO_MONINOR_OUT4 ^= GPIO_MONITOR_PIN1;
     initUART();

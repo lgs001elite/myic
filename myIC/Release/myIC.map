@@ -136,7 +136,7 @@ section   page    origin      length       input sections
                   00001e70    00000004     (.common:g_basicChargeCycles)
                   00001e74    00000004     (.common:g_lastChargeCycles)
                   00001e78    00000004     (.common:g_pairedChargeCycles)
-                  00001e7c    00000004     (.common:g_uartArr)
+                  00001e7c    00000004     (.common:g_uartRecvBuff)
                   00001e80    00000002     (.common:MasterMode)
                   00001e82    00000002     (.common:g_chTimeSlots)
                   00001e84    00000002     (.common:g_driftTime)
@@ -2284,7 +2284,7 @@ ffffffff  __c_args__
 00004006  g_systimeCounter                       
 00001e48  g_transBuffer                          
 00001e9a  g_transDataSeq                         
-00001e7c  g_uartArr                              
+00001e7c  g_uartRecvBuff                              
 00001e9b  g_uartSwitch                           
 00012c30  getCRC                                 
 00012c7c  getUartCRC                             
@@ -3881,7 +3881,7 @@ address   name
 00001e70  g_basicChargeCycles                    
 00001e74  g_lastChargeCycles                     
 00001e78  g_pairedChargeCycles                   
-00001e7c  g_uartArr                              
+00001e7c  g_uartRecvBuff                              
 00001e80  MasterMode                             
 00001e82  g_chTimeSlots                          
 00001e84  g_driftTime                            

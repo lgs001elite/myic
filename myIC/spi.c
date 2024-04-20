@@ -40,7 +40,6 @@ void start_spi_process(void)
 {
     g_packet_id = g_packet_id + 1;
     g_packet_id = g_packet_id % 100;
-    //    __bis_SR_register(GIE);
     while (1)
     {
         receiveDataFromNordic();
@@ -76,14 +75,10 @@ void start_spi_process(void)
         g_receiveIndex = 0;
         while (g_transmitIndex < SPI_DATA_LEN)
         {
-//            if (spi_sender_signal)
-//            {
-//                GPIO_MONINOR_OUT4 ^= GPIO_MONITOR_PIN1;
-//            }
             spi_sender_signal = true;
             UCB1IE |= UCTXIE;
             __bis_SR_register(LPM0_bits + GIE);
-           __delay_cycles(100);
+            __delay_cycles(100);
         }
         SLAVE_CS_OUT |= SLAVE_CS_PIN;
     }

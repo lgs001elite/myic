@@ -1467,7 +1467,7 @@
          <size>0x2</size>
       </object_component>
       <object_component id="oc-775">
-         <name>.common:g_uartArr</name>
+         <name>.common:g_uartRecvBuff</name>
          <uninitialized>true</uninitialized>
          <run_address>0x1e7c</run_address>
          <size>0x4</size>
@@ -16702,7 +16702,7 @@
          <value>0x1e88</value>
       </symbol>
       <symbol id="sm-6bb">
-         <name>g_uartArr</name>
+         <name>g_uartRecvBuff</name>
          <value>0x1e7c</value>
       </symbol>
       <symbol id="sm-6bc">
