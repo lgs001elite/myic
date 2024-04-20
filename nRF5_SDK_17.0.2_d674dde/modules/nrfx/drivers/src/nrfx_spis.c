@@ -372,22 +372,25 @@ static void spis_state_entry_action_execute(NRF_SPIS_Type * p_spis,
  * @param[in] p_cb      SPIS instance control block.
  * @param[in] new_state State where the state machine transits to.
  */
-static void spis_state_change(NRF_SPIS_Type   * p_spis,
-                              spis_cb_t       * p_cb,
+static void spis_state_change(NRF_SPIS_Type *p_spis,
+                              spis_cb_t *p_cb,
                               nrfx_spis_state_t new_state)
 {
     p_cb->spi_state = new_state;
     spis_state_entry_action_execute(p_spis, p_cb);
 }
 
-nrfx_err_t nrfx_spis_buffers_set(nrfx_spis_t const * const p_instance,
-                                 uint8_t           const * p_tx_buffer,
-                                 size_t                    tx_buffer_length,
-                                 uint8_t                 * p_rx_buffer,
-                                 size_t                    rx_buffer_length)
+nrfx_err_t nrfx_spis_buffers_set(nrfx_spis_t const *const p_instance,
+                                 uint8_t const *p_tx_buffer,
+                                 size_t tx_buffer_length,
+                                 uint8_t *p_rx_buffer,
+                                 size_t rx_buffer_length)
 {
+    __LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "stepA\n");
     NRFX_ASSERT(p_tx_buffer != NULL || tx_buffer_length == 0);
-    NRFX_ASSERT(p_rx_buffer != NULL || rx_buffer_length == 0);;
+    __LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "stepB\n");
+    NRFX_ASSERT(p_rx_buffer != NULL || rx_buffer_length == 0);
+    __LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "stepC\n");
 
     spis_cb_t * p_cb = &m_cb[p_instance->drv_inst_idx];
     nrfx_err_t err_code;
@@ -396,6 +399,7 @@ nrfx_err_t nrfx_spis_buffers_set(nrfx_spis_t const * const p_instance,
                               rx_buffer_length,
                               tx_buffer_length))
     {
+        __LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "stepD\n");
         return NRFX_ERROR_INVALID_LENGTH;
     }
     //__LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "SPIS_LENGTH_VALIDATE\n");
@@ -405,11 +409,12 @@ nrfx_err_t nrfx_spis_buffers_set(nrfx_spis_t const * const p_instance,
         (p_rx_buffer != NULL && !nrfx_is_in_ram(p_rx_buffer)))
     {
         err_code = NRFX_ERROR_INVALID_ADDR;
+        __LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "stepE\n");
         NRFX_LOG_WARNING("Function: %s, error code: %s.",
                          __func__,
                          NRFX_LOG_ERROR_STRING_GET(err_code));
-                         __LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "error code1, tx: %d, rx: %d, tx_buffer: %s,  rx_buffer: %s\n", nrfx_is_in_ram(p_tx_buffer),
-                         nrfx_is_in_ram(p_rx_buffer), p_tx_buffer, p_rx_buffer);
+        __LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "error code1, tx: %d, rx: %d, tx_buffer: %s,  rx_buffer: %s\n", nrfx_is_in_ram(p_tx_buffer),
+              nrfx_is_in_ram(p_rx_buffer), p_tx_buffer, p_rx_buffer);
         return err_code;
     }
 
@@ -425,20 +430,25 @@ nrfx_err_t nrfx_spis_buffers_set(nrfx_spis_t const * const p_instance,
             err_code             = NRFX_SUCCESS;
 
             spis_state_change(p_instance->p_reg, p_cb, SPIS_BUFFER_RESOURCE_REQUESTED);
+            __LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "stepF_3\n");
             break;
 
         case SPIS_BUFFER_RESOURCE_REQUESTED:
             err_code = NRFX_ERROR_INVALID_STATE;
+            __LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "stepF_2\n");
             break;
 
         default:
             // @note: execution of this code path would imply internal error in the design.
+            __LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "stepF_1\n");
             err_code = NRFX_ERROR_INTERNAL;
             break;
     }
 
     NRFX_LOG_INFO("Function: %s, error code: %s.", __func__, NRFX_LOG_ERROR_STRING_GET(err_code));
     //__LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "error code2\n");
+    __LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "stepF\n");
+    __LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "----- err_code: %d-----\n", err_code);
     return err_code;
 }
 

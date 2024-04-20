@@ -1442,7 +1442,7 @@ spis_event_handler:
 	.section .rodata
 	.align	2
 .LC3:
-	.ascii	"spis_start\012\000"
+	.ascii	"spis_init\012\000"
 	.align	2
 .LC4:
 	.ascii	"tx_data.tx_data_buf: %s, addr: %x\012\000"
@@ -1460,15 +1460,15 @@ spis_event_handler:
 	.byte	-1
 	.byte	6
 	.space	1
-	.section	.text.spis_start,"ax",%progbits
+	.section	.text.spis_init,"ax",%progbits
 	.align	1
-	.global	spis_start
+	.global	spis_init
 	.syntax unified
 	.thumb
 	.thumb_func
 	.fpu fpv4-sp-d16
-	.type	spis_start, %function
-spis_start:
+	.type	spis_init, %function
+spis_init:
 .LFB288:
 	.loc 4 54 1
 	@ args = 0, pretend = 0, frame = 48
@@ -1714,7 +1714,7 @@ spis_start:
 	.word	spis_xfer_done
 	.word	SWITCH2SPI
 .LFE288:
-	.size	spis_start, .-spis_start
+	.size	spis_init, .-spis_init
 	.section	.debug_frame,"",%progbits
 .Lframe0:
 	.4byte	.LECIE0-.LSCIE0
@@ -6187,7 +6187,7 @@ spis_start:
 	.4byte	0xf34
 	.ascii	"spis_xfer_done\000"
 	.4byte	0xf52
-	.ascii	"spis_start\000"
+	.ascii	"spis_init\000"
 	.4byte	0xfd8
 	.ascii	"spis_event_handler\000"
 	.4byte	0x1035
@@ -6814,7 +6814,7 @@ spis_start:
 .LASF172:
 	.ascii	"nrf_gpio_pin_pull_t\000"
 .LASF228:
-	.ascii	"spis_start\000"
+	.ascii	"spis_init\000"
 .LASF1:
 	.ascii	"char\000"
 .LASF216:

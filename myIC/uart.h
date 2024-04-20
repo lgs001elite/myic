@@ -33,16 +33,20 @@
 #define NeutronStarNoAli 3
 #define Greedy 4
 #define NeutronStarPlus 5
+#define Swift01 6
+#define Swift02  7
 
 char g_synStrategy;
 unsigned int g_receveuartNum;
-char g_uartArr[2];
+char g_uartRecvBuff[4];
+char g_uartTrasBuff[4];
 bool g_uartSwitch;
-extern int16_t g_adjustUnits;
+extern uint16_t g_adjustUnits;
 
 void initGPIO();
 void setTimer();
 void initUART();
+void uart_entry();
 // inline void uartAction();
 
 int uniformInt(int min, int max);

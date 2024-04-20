@@ -162,20 +162,21 @@ static bool next_packet_fetch(advertiser_t * p_adv)
     while (p_adv->p_packet == NULL || should_free_current_packet(p_adv))
     {
         packet_buffer_packet_t * p_packet_buf;
-        __LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "packet_buffer_free\n");
+        //__LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "packet_buffer_free\n");
         if (packet_buffer_pop(&p_adv->buf, &p_packet_buf) == NRF_SUCCESS)
         {
-            // __LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "packet_buffer_pop\n");
+            __LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "packet_buffer_pop\n");
             p_adv->p_packet = (adv_packet_t *) p_packet_buf->packet;
             p_adv->broadcast.params.p_packet = &p_adv->p_packet->packet;
         }
         else
         {
             /* No more packets left. */
-            // __LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "packet_buffer_free\n");
+            __LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "packet_buffer_free\n");
             return false;
         }
     }
+    __LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "packet_buffer_true_line_179\n");
     return true;
 }
 
@@ -221,7 +222,12 @@ static void timeout_event(timestamp_t timestamp, void * p_context)
             has_packet = next_packet_fetch(p_adv);
             if (has_packet)
             {
+                __LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "schedule_success\n");
                 schedule_broadcast(p_adv);
+            }
+            else
+            {
+                __LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "schedule_fail\n");
             }
         }
         
@@ -291,9 +297,9 @@ void advertiser_init(void)
     rand_prng_seed(&m_adv_prng);
 }
 
-void advertiser_instance_init(advertiser_t * p_adv,
+void advertiser_instance_init(advertiser_t *p_adv,
                               advertiser_tx_complete_cb_t tx_complete_cb,
-                              uint8_t * p_buffer,
+                              uint8_t *p_buffer,
                               uint32_t buffer_size)
 {
     NRF_MESH_ASSERT(p_adv != NULL && p_buffer != NULL);

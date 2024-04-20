@@ -162,9 +162,9 @@ void advertiser_init(void);
  * statically allocated buffer that is only dedicated to the given advertiser instance @c p_adv.
  * @param[in] buffer_size The buffer size in bytes.
  */
-void advertiser_instance_init(advertiser_t * p_adv,
+void advertiser_instance_init(advertiser_t *p_adv,
                               advertiser_tx_complete_cb_t tx_complete_cb,
-                              uint8_t * p_buffer,
+                              uint8_t *p_buffer,
                               uint32_t buffer_size);
 
 /**

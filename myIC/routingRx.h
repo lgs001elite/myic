@@ -27,7 +27,7 @@ bool g_sendAck;
 
 // in rx
 char g_sha256_buf[SHA256_BLOCK_SIZE];
-char g_pre_packet_seq;
+extern uint8_t g_pre_packet_seq;
 int8_t g_currentPairedNodeID;
 
 

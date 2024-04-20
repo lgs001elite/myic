@@ -17,6 +17,7 @@
 #include "m2s.h"
 #include "crc.h"
 
-void spis_start(void);
-
+void spis_init(void);
+void spis_execution(void);
+void spis_execution2(void);
 #endif

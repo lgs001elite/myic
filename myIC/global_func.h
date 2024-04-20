@@ -9,7 +9,7 @@
 #define GLOBAL_FUNC_H_
 #include <stdint.h>
 
-void findDelay(int32_t c);
+uint16_t findDelay(uint16_t c);
 int16_t coFindDelay(int16_t c);
 void start_spi_process(void);
 

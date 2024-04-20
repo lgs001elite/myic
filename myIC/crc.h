@@ -29,8 +29,9 @@ typedef int16_t  crc;
 void update_crc();
 
 // in crc, tx
-int16_t getCRC( char const message[]);
+int16_t getCRC(char const message[]);
+int16_t getUartCRC(char const message[]);
 
-void  crcInit(void);
-crc   crcFast( char const message[], int nBytes);
+void crcInit(void);
+crc   crcFast(char const message[], int nBytes);
 #endif /* crc_h */

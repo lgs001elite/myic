@@ -10,9 +10,7 @@
 
 
 #define DUMMY 0x7e
-#define CMD_TYPE_0_SLAVE 0xAA
-#define CMD_TYPE_0_MASTER 0x0
-#define SPI_DATA_LEN 0x1f
+#define SPI_DATA_LEN 31
 #define DRIFTUNIT 0xffff
 
 #define COORDINATOR 0x01

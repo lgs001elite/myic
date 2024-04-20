@@ -453,11 +453,12 @@ int main(void)
                 g_sleepIndicator = false;
                 __delay_cycles(INITIAL_TIME);
                 sendBytes(chargeCycles);
-                while(g_uartTerminalFlag == false)
-                {
-                    //P4OUT ^= BIT2;
-                    __no_operation();
-                }
+                // while(g_uartTerminalFlag == false)
+                // {
+                //     //P4OUT ^= BIT2;
+                //     __no_operation();
+                // }
+                __delay_cycles(1000000);
                 slotStopCounter = false;
                 if (g_sleepCounter > 0)
                 {

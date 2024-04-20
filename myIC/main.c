@@ -24,9 +24,10 @@
 #include "global_vars.h"
 #include "uartHex.h"
 #include "coordinatorFind.h"
+#include "swift.h"
 
-#pragma DATA_SECTION(p_test, ".ram_code")
-double p_test = 0;
+// #pragma DATA_SECTION(p_test, ".ram_code")
+// double p_test = 0;
 
 #pragma PERSISTENT(g_ifFindCoordinator)
 bool g_ifFindCoordinator = false;
@@ -35,7 +36,7 @@ bool g_ifFindCoordinator = false;
 bool g_ifAdjustDrift = false;
 
 #pragma PERSISTENT(g_adjustUnits)
-int16_t g_adjustUnits = 0;
+uint16_t g_adjustUnits = 0;
 
 #pragma PERSISTENT(g_arrLoc)
 char g_arrLoc = 0;
@@ -54,7 +55,7 @@ int g_connectionLen = 0;
 int g_connectionNum = 0;
 
 #pragma PERSISTENT(g_currentNodeLoc)
-int8_t g_currentNodeLoc = 0;
+uint8_t g_currentNodeLoc = 0;
 
 #pragma PERSISTENT(g_TXData)
 char g_TXData = 0;
@@ -75,7 +76,14 @@ char g_rounds = MAXROUND;
 char g_systemStatus = 0;
 
 #pragma PERSISTENT(g_distributedLoc)
-int8_t g_distributedLoc = 0;
+uint8_t g_distributedLoc = 0;
+
+
+#pragma PERSISTENT(swift_attempt)
+uint16_t swift_attempt = 0;
+
+#pragma PERSISTENT(swift_inc)
+uint16_t swift_inc = 0;
 
 // #pragma PERSISTENT(g_currentLoc)
 // int8_t g_currentLoc = 0;
@@ -97,19 +105,26 @@ int g_chargHis[HISLEN] = {0};
 #pragma PERSISTENT(g_locNum)
 char g_locNum = 0;
 
+#pragma PERSISTENT(g_pre_packet_seq)
+uint8_t g_pre_packet_seq = 100;
+
+#pragma PERSISTENT(g_packet_id)
+uint8_t g_packet_id = 0x00;
 
 // Timer0_A0 interrupt service routine
 #if defined(__TI_COMPILER_VERSION__) || defined(__IAR_SYSTEMS_ICC__)
 #pragma vector = TIMER0_A0_VECTOR
-__interrupt void Timer0_A0_ISR(void)
+    __interrupt void
+    Timer0_A0_ISR(void)
 #elif defined(__GNUC__)
-void __attribute__((interrupt(TIMER0_A0_VECTOR))) Timer0_A0_ISR(void)
+    void __attribute__((interrupt(TIMER0_A0_VECTOR))) Timer0_A0_ISR(void)
 #else
 #error Compiler not supported!
 #endif
 {
     TA0CCR0 += DRIFTUNIT;
     g_driftTime = g_driftTime + 1;
+    TA0CCR0 = 0;
 }
 
 #ifdef __debug
@@ -117,15 +132,14 @@ void __attribute__((interrupt(TIMER0_A0_VECTOR))) Timer0_A0_ISR(void)
 #endif
 
 
-void main(void)
+
+void var_initialization()
 {
-    WDTCTL = WDTPW | WDTHOLD;
     MasterMode = IDLE_MODE;
     g_sendAck = false;
     g_receveuartNum = 0;
     g_receiveIndex = 0;
     g_transDataSeq = 0;
-    g_pre_packet_seq = 0xff;
     g_seq_data = 0;
     g_currentPairedNodeID = -1;
     g_nextNodeID = 0;
@@ -139,9 +153,9 @@ void main(void)
     g_MatchNextHop = false;
     g_uartSwitch = true;
     g_nodeType = ICNODE;  // COORDINATOR ICNODE NeutronStar NeutronStarNoAli
-    g_synStrategy = NeutronStarNoAli; // Find   NeutronStarPlus  Greedy
+    g_synStrategy = Swift02; // Find   NeutronStarPlus  Greedy Swift01 Swift01
     g_preDriftTime = 0;
-    lastData = 0;
+    g_lastData = 0;
     g_driftTime = 0;
     g_ICListen = true;
     if (g_nodeType == COORDINATOR)
@@ -149,30 +163,35 @@ void main(void)
         init_hashmap(&map);
         g_currentNodeLoc = 1;
     }
-    crcInit();
-    initGPIO();
-    setTimer();
+}
 
-    // timer
+void timer_counter()
+{
     TA0CCTL0 = CCIE;
-    TA0CCR0 = 0xffff;
+    TA0CCR0 = 0;
     TA0CTL = TASSEL__SMCLK | MC__CONTINOUS;
-    //uart
-    initUART();
+}
+
+void main(void)
+{
+    WDTCTL = WDTPW | WDTHOLD;
+    setTimer();
+    initGPIO();
+    crcInit();
+    var_initialization();
+    timer_counter();
     __bis_SR_register(GIE);
+    // uart
+   // GPIO_MONINOR_OUT4 ^= GPIO_MONITOR_PIN1;
+    initUART();
+    uart_entry();
     __no_operation();
-    //GPIO_MONINOR_OUT4 ^= GPIO_MONITOR_PIN3;
-    // COMMS_LED_OUT ^= COMMS_LED_PIN;
-    // COMMS_LED_OUT ^= COMMS_LED_PIN2;
-    while (g_uartSwitch && (g_nodeType == ICNODE))
-    {
-        //GPIO_MONINOR_OUT4 ^= GPIO_MONITOR_PIN1;
-        __no_operation();
-        __bis_SR_register(GIE);
-    }
-    //GPIO_MONINOR_OUT4 ^= GPIO_MONITOR_PIN3;
     // SPI
     g_ICListen = false;
+    // Close uart trans channel
+    P6SEL0 ^= BIT0;
+    P6SEL0 ^= BIT1;
+    //GPIO_MONINOR_OUT4 ^= GPIO_MONITOR_PIN1;
     initSPI();
     start_spi_process();
     //GPIO_MONINOR_OUT4 ^= GPIO_MONITOR_PIN3;
