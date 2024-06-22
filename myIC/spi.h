@@ -16,17 +16,14 @@
 #include "global_vars.h"
 
 /* The Register Address/Command to use*/
-char TransmitRegAddr;
 char RXByteCtr;
 char TXByteCtr;
-char TransmitIndex;
+char g_transmitIndex;
 
 char g_receiveIndex;
 
-char SlaveType0[SPI_DATA_LEN];
-
-SPI_Mode SPI_Master_ReadReg(char reg_addr, char count);
-SPI_Mode SPI_Master_WriteReg(char reg_addr, char count);
+void SPI_Master_ReadReg(char count);
+void SPI_Master_WriteReg(char count);
 void CopyArray(char *source, char *dest, char count);
 void SendUCB1Data(char val);
 

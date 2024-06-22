@@ -10,17 +10,21 @@
 
 
 #define DUMMY 0x7e
-#define CMD_TYPE_0_SLAVE 0xAA
-#define CMD_TYPE_0_MASTER 0x0
-#define SPI_DATA_LEN 0x1f
+#define SPI_DATA_LEN 31
 #define DRIFTUNIT 0xffff
 
 #define COORDINATOR 0x01
 #define ICNODE 0x02
 
+#define FIND 0
+#define FLYNC 1
+#define PULSAR 2
+#define FREEBEACON 3
+
 #define PACKAGE_PACKET 0x01
 #define PACKAGE_ACK 0x02
 #define DUBBY 0x03
+#define PACKAGE_BROAD 0x04
 
 typedef enum SPI_ModeEnum
 {

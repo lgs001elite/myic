@@ -10,7 +10,7 @@
 
 #include <stdint.h>
 
-void produceNonPacketData(void);
+void producePackets(void);
 
 #define BLE_GAP_AD_TYPE 0x17
 #define SPI_NONCRC_LEN  0x1d

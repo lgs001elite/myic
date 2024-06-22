@@ -101,10 +101,10 @@ int16_t crcFast( char const message[], int nBytes)
     return remainder;
 }
 
-int16_t getCRC( char const message[])
+int16_t getCRC(char const message[])
 {
     crcInit();
-    int16_t crc_result = crcFast(message, 31);
+    int16_t crc_result = crcFast(message, 2);
     return crc_result;
 }
 

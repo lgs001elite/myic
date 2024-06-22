@@ -5,6 +5,7 @@ set(WEAK_SOURCE_FILES
     CACHE INTERNAL "")
 add_subdirectory("common")
 add_subdirectory("beaconing")
+add_subdirectory("coordinator")
 add_subdirectory("pb_remote")
 add_subdirectory("provisioner")
 add_subdirectory("Asink")

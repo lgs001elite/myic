@@ -24,18 +24,19 @@ int32_t g_basicChargeCycles;
 int32_t g_pairedChargeCycles;
 int32_t g_lastChargeCycles;
 bool g_sendAck;
+bool g_sendBroad;
 
 // in rx
 char g_sha256_buf[SHA256_BLOCK_SIZE];
-char g_pre_packet_seq;
+extern uint8_t g_pre_packet_seq;
 int8_t g_currentPairedNodeID;
 
 
 void receiveDataFromNordic();
 void updateCRC(char relayPkt[]);
-void data_is_find(char *receivedData);
-void data_is_ackIC(char *receivedData);
-void data_is_ackCoor(char *receivedData);
-void data_is_datagramIC(char *receivedData);
-void data_is_datagramCoor(char *receivedData);
+void data_from_ic(char *receivedData);
+void ack_from_ic(char *receivedData);
+void data_from_ic_to_coordinator(char *receivedData);
+void broad_from_coordinator(char *receivedData);
+
 #endif /* ROUTINGRX_H_ */

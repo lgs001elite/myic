@@ -1,7 +1,7 @@
 /*
  * routingRx.c
  *
- *  Created on: Dec 20, 2023
+ *  Created on: June 20, 2024
  *      Author: glu250
  */
 #include <stdbool.h>
@@ -15,6 +15,7 @@
 #include "global_vars.h"
 #include "uartHex.h"
 #include "uart.h"
+#include "coordinator.h"
 
 void updateCRC(char relayPkt[])
 {
@@ -84,146 +85,75 @@ bool check_completeness(char *receivedData)
     return true;
 }
 
-
-void data_is_datagramCoor(char *receivedData)
+void data_from_ic(char *receivedData)
 {
-    if (g_nodeType == ICNODE)
-    {
-        int8_t receivedDriftTime = receivedData[10];
-        if ((g_ifAdjustDrift == false) && (g_currentNodeLoc != 1))
-        {
-            g_adjustUnits = g_driftTime  - receivedDriftTime;
-            g_ifAdjustDrift = true;
-            g_driftTime = 0;
-        }
-        g_sendAck    = true;
-        g_nextNodeID = receivedData[5];
-    }
-    else
-    {
-        /*
-            to do here;
-        */
-    }
+    g_sendAck = true;
 }
 
-void data_is_ackCoor(char *receivedData)
+void ack_from_ic(char *receivedData)
 {
-    char aimID = receivedData[6];
+    g_receCounter = g_receCounter + 1;
+}
+
+void data_from_ic_to_coordinator(char *receivedData)
+{
+    char currentLoc = receivedData[8];
     char senderID = receivedData[5];
-    char packetSeq = receivedData[2];
-    char pairedLoc = receivedData[8];
-    char destLoc = receivedData[9];
-    if (aimID == g_nodeAddress)
+    if (currentLoc == -1)
     {
-        if (g_nodeType == ICNODE)
+        if (g_synStrategy == FREEBEACON)
         {
-            g_distributedLoc = receivedData[8];
-            g_currentNodeLoc = receivedData[9];
-            g_gotoLoc = true;
+            hash_table_insert(g_locTable, senderID, g_distributedNodeLoc);
         }
         else
         {
-            /*
-                to do here;
-            */
+            g_distributedNodeLoc = 1;
+        }
+        g_sendBroad = true;
+    }
+    else
+    {
+        if (g_synStrategy == FREEBEACON)
+        {
+            char distributedLoc = hash_table_search(g_locTable, senderID);
+            if (distributedLoc != currentLoc)
+            {
+                g_sendBroad = true;
+                g_distributedNodeLoc = distributedLoc;
+            }
         }
     }
 }
 
-void data_is_datagramIC(char *receivedData)
+void broad_from_coordinator(char *receivedData)
 {
-    char packetSeq = receivedData[2];
-    char senderID = receivedData[5];
-    int8_t receivedDriftTime = receivedData[10];
-    int8_t senderLoc = receivedData[9];
-    if (g_nodeType == ICNODE)
+    uint8_t distributedLoc = receivedData[8];
+    uint8_t globalLoc = receivedData[10];
+    if (g_currentNodeLoc == -1)
     {
-        if (g_currentPairedNodeID != -1)
+        if (globalLoc > distributedLoc)
         {
-            if (g_currentPairedNodeID != g_transBuffer[5])
-            {
-                __no_operation();
-                return;
-            }
+            g_biasForAlign = 30 - globalLoc + distributedLoc;
         }
-        if ((g_ifAdjustDrift == false) && (g_currentNodeLoc == 1) && (senderLoc == 1))
+        else
         {
-            g_adjustUnits = g_driftTime  - receivedDriftTime;
-            g_ifAdjustDrift = true;
-            g_driftTime = 0;
+            g_biasForAlign = distributedLoc - globalLoc;
         }
-        g_sendAck = true;
-        if (g_pre_packet_seq != packetSeq)
+        g_currentNodeLoc = distributedLoc;
+    }
+    else if (distributedLoc != globalLoc)
+    {
+        if (globalLoc > distributedLoc)
         {
-            char locInCoordinator = receivedData[8];
-            char desLoc = receivedData[9];
-            char tempArr[4];
-            tempArr[0] = receivedData[11];
-            tempArr[1] = receivedData[12];
-            tempArr[2] = receivedData[13];
-            tempArr[3] = receivedData[14];
-            g_pairedChargeCycles = combineBytes(tempArr);
-            g_pre_packet_seq = packetSeq;
-            g_nextNodeID = senderID;
-            g_receCounter = g_receCounter + 1;
+            g_biasForAlign = 30 - globalLoc + distributedLoc;
+        }
+        else
+        {
+            g_biasForAlign = distributedLoc - globalLoc;
         }
     }
     else
     {
-        /*
-            to do here;
-        */
-    }
-}
-
-void data_is_ackIC(char *receivedData)
-{
-    char aimID = receivedData[6];
-    char senderID = receivedData[5];
-    char packetSeq = receivedData[2];
-    char pairedLoc = receivedData[8];
-    char destLoc = receivedData[9];
-
-    if (aimID == g_nodeAddress)
-    {
-        if (g_currentPairedNodeID == -1)
-        {
-            g_currentPairedNodeID = senderID;
-            if (g_nodeType == ICNODE)
-            {
-                if (g_currentPairedNodeID != -1)
-                {
-                    if (g_currentPairedNodeID != g_transBuffer[5])
-                    {
-                        __no_operation();
-                        return;
-                    }
-                }
-                if ((aimID == g_nodeAddress) && (packetSeq == g_queueLen))
-                {
-                    g_receCounter = g_receCounter + 1;
-                    __no_operation();
-                }
-                if (aimID == g_nodeAddress)
-                {
-                    g_receCounter = g_receCounter + 1;
-                    __no_operation();
-                }
-            }
-            else
-            {
-                g_sendAck = true;
-                g_nextNodeID = senderID;
-                g_currentNodeLoc = g_currentNodeLoc + 1;
-                /**  IN the phase, we do not need the record the node loc */
-                if (hashmap_find(&map, senderID) == -1)
-                {
-                    hashmap_insert(&map, senderID, g_currentNodeLoc);
-                    g_currentNodeLoc = g_currentNodeLoc + 1;
-                }
-            }
-        }
     }
 }
 
@@ -231,16 +161,14 @@ void receiveDataFromNordic()
 {
     if ((g_receiveBuffer[3] == 0x33) && (g_receiveBuffer[4] == 0x44) && (g_receiveBuffer[5] == 0x55))
     {
-        GPIO_MONINOR_OUT4 ^= GPIO_MONITOR_PIN3;
+        GPIO_MONINOR_OUT1 ^= GPIO_MONITOR_PIN3;
+        return;
     }
-
     if ((g_receiveBuffer[0] != 0x1e) || (g_receiveBuffer[1] != 0x17))
     {
         return;
     }
-    GPIO_MONINOR_OUT4 ^= GPIO_MONITOR_PIN2;
     bool checkResult = check_completeness(g_receiveBuffer);
-    __no_operation();
     if (checkResult == false)
     {
         __no_operation();
@@ -257,40 +185,56 @@ void receiveDataFromNordic()
     }
     char sender_dataType = g_receiveBuffer[3];
     char sender_nodeType = g_receiveBuffer[4];
-    if (sender_nodeType == COORDINATOR)
+    char sender_id = g_receiveBuffer[5];
+    char dest_id = g_receiveBuffer[6];
+
+    // Rewrite from here
+    if (g_nodeType == ICNODE)
     {
-        //GPIO_MONINOR_OUT4 ^= GPIO_MONITOR_PIN1;
-        if (g_nodeType == ICNODE)
+        if (dest_id != g_nodeID)
         {
-            g_ifFindCoordinator = true;
+            return;
         }
-        switch (sender_dataType)
+        if (sender_nodeType == ICNODE)
         {
-            case PACKAGE_PACKET:
-                data_is_datagramCoor(g_receiveBuffer);
-                break;
-            case PACKAGE_ACK:
-                data_is_ackCoor(g_receiveBuffer);
-                break;
-            default:
-                break;
+            if (sender_dataType == PACKAGE_PACKET)
+            {
+                data_from_ic(g_receiveBuffer);
+            }
+            else if (sender_dataType == PACKAGE_ACK)
+            {
+                ack_from_ic(g_receiveBuffer);
+            }
+            else
+            {
+                return;
+            }
+        }
+        else
+        {
+            if (sender_dataType == PACKAGE_BROAD)
+            {
+                broad_from_coordinator(g_receiveBuffer);
+            }
+            else
+            {
+                return;
+            }
         }
     }
-    if (sender_nodeType == ICNODE)
+    else if (g_nodeType == COORDINATOR)
     {
-        //GPIO_MONINOR_OUT4 ^= GPIO_MONITOR_PIN1;
-        switch (sender_dataType)
+        if (sender_nodeType == ICNODE)
         {
-            case PACKAGE_PACKET:
-                data_is_datagramIC(g_receiveBuffer);
-                COMMS_LED_OUT ^= COMMS_LED_PIN;
-                break;
-            case PACKAGE_ACK:
-                COMMS_LED_OUT ^= COMMS_LED_PIN2;
-                data_is_ackIC(g_receiveBuffer);
-                break;
-            default:
-                break;
+            data_from_ic_to_coordinator(g_receiveBuffer);
         }
+        else
+        {
+            return;
+        }
+    }
+    else
+    {
+        return;
     }
 }

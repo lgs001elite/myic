@@ -1,7 +1,7 @@
 /*
  * global_vars.h
  *
- *  Created on: Dec 21, 2023
+ *  Created on: June 21, 2024
  *      Author: glu250
  */
 
@@ -14,39 +14,42 @@
 
 #define HISLEN 20
 
-char g_node_dimension;
+char g_dest_location;
 char g_transBuffer[SPI_DATA_LEN];
-int16_t g_driftTime;
 int8_t g_preDriftTime;
 char g_receiveBuffer[SPI_DATA_LEN];
 char g_nodeType;
 
 extern bool g_ifFindCoordinator;
 SPI_Mode MasterMode;
-int32_t g_chTimeSlots;
-int32_t lastData;
+uint16_t g_chTimeSlots;
+uint16_t g_lastData;
 bool g_ICListen;
-char g_nodeAddress;
+uint8_t g_nodeID;
 char g_nextNodeID;
 
+extern uint8_t g_biasForAlign;
 extern char g_arrLoc;
 extern char g_accuCharge;
 extern  int g_connectionLen;
 extern  int g_connectionNum;
-extern int8_t g_currentNodeLoc;
+extern char g_currentNodeLoc;
+extern uint8_t g_distributedNodeLoc;
 extern  char g_TXData;
 extern int16_t g_MaxChargeCycles;
 extern char g_attConn;
 extern char g_queueLen;
 extern char g_rounds;
 extern char g_systemStatus;
-extern int8_t g_distributedLoc;
+extern uint8_t g_distributedLoc;
 extern  int g_chargHis[HISLEN];
 extern char g_locNum;
 extern bool g_gotoLoc;
 extern bool g_alignLoc;
+extern uint16_t g_freeBeaconBias;
 extern uint16_t g_receCounter;
-extern double p_test;
+extern uint8_t g_packet_id;
+// extern double p_test;
 extern uint32_t g_systimeCounter;
 
 extern bool g_ifAdjustDrift;

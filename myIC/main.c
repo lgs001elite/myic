@@ -23,109 +23,130 @@
 #include "global_func.h"
 #include "global_vars.h"
 #include "uartHex.h"
-#include "coordinatorFind.h"
+#include "coordinator.h"
 
-#pragma DATA_SECTION(p_test, ".ram_code")
-double p_test = 0;
+#pragma PERSISTENT(g_locTable)
+HashTable *g_locTable;
 
 #pragma PERSISTENT(g_ifFindCoordinator)
 bool g_ifFindCoordinator = false;
+
+#pragma PERSISTENT(g_biasForAlign)
+uint8_t g_biasForAlign = 0;
 
 #pragma PERSISTENT(g_ifAdjustDrift)
 bool g_ifAdjustDrift = false;
 
 #pragma PERSISTENT(g_adjustUnits)
-int16_t g_adjustUnits = 0;
+uint16_t g_adjustUnits = 0;
 
 #pragma PERSISTENT(g_arrLoc)
-char g_arrLoc = 0;
+    char g_arrLoc = 0;
 
 #pragma PERSISTENT(g_accuCharge)
-char g_accuCharge = 0;
+    char g_accuCharge = 0;
 
+#pragma PERSISTENT(g_globalLoc)
+    uint8_t g_globalLoc = 0
 
 #pragma PERSISTENT(g_systimeCounter)
-uint32_t g_systimeCounter = 0;
+        uint32_t g_systimeCounter = 0;
 
 #pragma PERSISTENT(g_connectionLen)
-int g_connectionLen = 0;
+    int g_connectionLen = 0;
 
 #pragma PERSISTENT(g_connectionNum)
-int g_connectionNum = 0;
+    int g_connectionNum = 0;
 
 #pragma PERSISTENT(g_currentNodeLoc)
-int8_t g_currentNodeLoc = 0;
+    char g_currentNodeLoc = -1;
+
+#pragma PERSISTENT(g_distributedNodeLoc)
+    uint8_t g_distributedNodeLoc = 0;
 
 #pragma PERSISTENT(g_TXData)
-char g_TXData = 0;
+    char g_TXData = 0;
 
 #pragma PERSISTENT(g_MaxChargeCycles)
-int16_t g_MaxChargeCycles = 0;
+    int16_t g_MaxChargeCycles = 0;
 
 #pragma PERSISTENT(g_attConn)
-char g_attConn = 0;
+    char g_attConn = 0;
 
 #pragma PERSISTENT(g_queueLen)
-char g_queueLen = MAXQUELEN;
+    char g_queueLen = MAXQUELEN;
 
 #pragma PERSISTENT(g_rounds)
-char g_rounds = MAXROUND;
+    char g_rounds = MAXROUND;
 
 #pragma PERSISTENT(g_systemStatus)
-char g_systemStatus = 0;
+    char g_systemStatus = 0;
 
 #pragma PERSISTENT(g_distributedLoc)
-int8_t g_distributedLoc = 0;
+    uint8_t g_distributedLoc = 0;
 
-// #pragma PERSISTENT(g_currentLoc)
-// int8_t g_currentLoc = 0;
+#pragma PERSISTENT(swift_attempt)
+    uint16_t swift_attempt = 0;
+
+#pragma PERSISTENT(swift_inc)
+    uint16_t swift_inc = 0;
+
+    // #pragma PERSISTENT(g_currentLoc)
+    // int8_t g_currentLoc = 0;
 
 #pragma PERSISTENT(g_gotoLoc)
-bool g_gotoLoc = false;
+    bool g_gotoLoc = false;
 
-//#pragma PERSISTENT(g_alignLoc)
-//bool g_alignLoc = false;
+#pragma PERSISTENT(g_alignLoc)
+    bool g_alignLoc = false;
+
+#pragma PERSISTENT(g_freeBeaconBias)
+    uint16_t g_freeBeaconBias = 0;
 
 #pragma PERSISTENT(g_receCounter)
-uint16_t g_receCounter = 0;
+    uint16_t g_receCounter = 0;
 
-// in crc
+    // in crc
 #pragma PERSISTENT(g_chargHis)
-int g_chargHis[HISLEN] = {0};
+    int g_chargHis[HISLEN] = {0};
 
-// in crc
+    // in crc
 #pragma PERSISTENT(g_locNum)
-char g_locNum = 0;
+    char g_locNum = 0;
 
+#pragma PERSISTENT(g_pre_packet_seq)
+    uint8_t g_pre_packet_seq = 100;
 
-// Timer0_A0 interrupt service routine
+#pragma PERSISTENT(g_packet_id)
+    uint8_t g_packet_id = 0x00;
+
+    // Timer0_A0 interrupt service routine
 #if defined(__TI_COMPILER_VERSION__) || defined(__IAR_SYSTEMS_ICC__)
 #pragma vector = TIMER0_A0_VECTOR
-__interrupt void Timer0_A0_ISR(void)
+    __interrupt void
+    Timer0_A0_ISR(void)
 #elif defined(__GNUC__)
-void __attribute__((interrupt(TIMER0_A0_VECTOR))) Timer0_A0_ISR(void)
+    void __attribute__((interrupt(TIMER0_A0_VECTOR))) Timer0_A0_ISR(void)
 #else
 #error Compiler not supported!
 #endif
-{
-    TA0CCR0 += DRIFTUNIT;
-    g_driftTime = g_driftTime + 1;
-}
+    {
+        TA0CCR0 += DRIFTUNIT;
+        TA0CCR0 = 0;
+    }
 
 #ifdef __debug
     #pragma GCC poison printf
 #endif
 
-
-void main(void)
+void var_initialization()
 {
-    WDTCTL = WDTPW | WDTHOLD;
     MasterMode = IDLE_MODE;
     g_sendAck = false;
+    g_sendBroad = false;
     g_receveuartNum = 0;
     g_receiveIndex = 0;
     g_transDataSeq = 0;
-    g_pre_packet_seq = 0xff;
     g_seq_data = 0;
     g_currentPairedNodeID = -1;
     g_nextNodeID = 0;
@@ -134,49 +155,52 @@ void main(void)
     g_basicChargeCycles = 0;
     g_pairedChargeCycles = 0;
     g_lastChargeCycles = 0;
-    g_nodeAddress = 0x02;
-    g_node_dimension = 0x03;
+    g_nodeID = 0x02;
+    g_dest_location = 0x03;
     g_MatchNextHop = false;
     g_uartSwitch = true;
-    g_nodeType = ICNODE;  // COORDINATOR ICNODE NeutronStar NeutronStarNoAli
-    g_synStrategy = NeutronStarNoAli; // Find   NeutronStarPlus  Greedy
+    g_nodeType = ICNODE;
+    g_synStrategy = PULSAR;
     g_preDriftTime = 0;
-    lastData = 0;
-    g_driftTime = 0;
+    g_lastData = 0;
     g_ICListen = true;
     if (g_nodeType == COORDINATOR)
     {
-        init_hashmap(&map);
-        g_currentNodeLoc = 1;
+        if (g_synStrategy == FREEBEACON)
+        {
+            g_locTable = create_table();
+        }
+        g_currentNodeLoc = 0;
     }
-    crcInit();
-    initGPIO();
-    setTimer();
-
-    // timer
-    TA0CCTL0 = CCIE;
-    TA0CCR0 = 0xffff;
-    TA0CTL = TASSEL__SMCLK | MC__CONTINOUS;
-    //uart
-    initUART();
-    __bis_SR_register(GIE);
-    __no_operation();
-    //GPIO_MONINOR_OUT4 ^= GPIO_MONITOR_PIN3;
-    // COMMS_LED_OUT ^= COMMS_LED_PIN;
-    // COMMS_LED_OUT ^= COMMS_LED_PIN2;
-    while (g_uartSwitch && (g_nodeType == ICNODE))
-    {
-        //GPIO_MONINOR_OUT4 ^= GPIO_MONITOR_PIN1;
-        __no_operation();
-        __bis_SR_register(GIE);
-    }
-    //GPIO_MONINOR_OUT4 ^= GPIO_MONITOR_PIN3;
-    // SPI
-    g_ICListen = false;
-    initSPI();
-    start_spi_process();
-    //GPIO_MONINOR_OUT4 ^= GPIO_MONITOR_PIN3;
 }
 
+void timer_counter()
+{
+    TA0CCTL0 = CCIE;
+    TA0CCR0 = 0;
+    TA0CTL = TASSEL__SMCLK | MC__CONTINOUS;
+}
 
-
+void main(void)
+{
+    WDTCTL = WDTPW | WDTHOLD;
+    setTimer();
+    initGPIO();
+    crcInit();
+    var_initialization();
+    timer_counter();
+    __bis_SR_register(GIE);
+    // uart
+    if (g_nodeType == ICNODE)
+    {
+        initUART();
+        uart_entry();
+    }
+    // SPI
+    g_ICListen = false;
+    // Close uart trans channel
+    P6SEL0 ^= BIT0;
+    P6SEL0 ^= BIT1;
+    initSPI();
+    start_spi_process();
+}

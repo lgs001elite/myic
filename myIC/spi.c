@@ -1,7 +1,7 @@
 /*
  * spi.c
  *
- *  Created on: Dec 20, 2023
+ *  Created on: June 20, 2024
  *      Author: glu250
  */
 #include <msp430.h>
@@ -13,18 +13,20 @@
 #include "routingRx.h"
 #include "routingTx.h"
 #include "crc.h"
-
+#include "coordinator.h"
 
 bool testSwitch = true;
 
+#define SLAVE_CS_OUT P5OUT
+#define SLAVE_CS_DIR P5DIR
+#define SLAVE_CS_PIN BIT3
 
-#define SLAVE_CS_OUT    P5OUT
-#define SLAVE_CS_DIR    P5DIR
-#define SLAVE_CS_PIN    BIT3
+#define SLAVE_RST_OUT P1OUT
+#define SLAVE_RST_DIR P1DIR
+#define SLAVE_RST_PIN BIT4
 
-#define SLAVE_RST_OUT   P1OUT
-#define SLAVE_RST_DIR   P1DIR
-#define SLAVE_RST_PIN   BIT4
+static bool spi_sender_signal = false;
+// static bool spi_receiver_signal = false;
 
 void initSPI()
 {
@@ -32,18 +34,22 @@ void initSPI()
     UCB1CTLW0 |= UCCKPL | UCMSB | UCSYNC | UCMST | UCSSEL__SMCLK_L | UCMODE0 | UCSTEM | UC7BIT_0 | UCCKPH; // Added by me
     UCB1BRW = 0x20;
     UCB1CTLW0 &= ~UCSWRST;
+    UCB1IE |= UCRXIE;
 }
 
 void start_spi_process(void)
 {
+    g_packet_id = g_packet_id + 1;
+    g_packet_id = g_packet_id % 100;
     while (1)
     {
-        GPIO_MONINOR_OUT4 ^= GPIO_MONITOR_PIN1;
-        produceNonPacketData();
+        receiveDataFromNordic();
+        // If coordinator needs to reply info
+        producePackets();
         if (g_nodeType == ICNODE)
         {
             g_transBuffer[4] = ICNODE;
-            if(g_sendAck == true)
+            if (g_sendAck == true)
             {
                 g_transBuffer[3] = PACKAGE_ACK;
                 g_sendAck = false;
@@ -52,76 +58,43 @@ void start_spi_process(void)
             {
                 g_transBuffer[3] = PACKAGE_PACKET;
             }
+            g_transBuffer[2] = g_packet_id;
+            update_crc();
+            // For sending process
+            SLAVE_CS_OUT &= ~(SLAVE_CS_PIN);
+            g_transmitIndex = 0;
+            g_receiveIndex = 0;
+            while (g_transmitIndex < SPI_DATA_LEN)
+            {
+                spi_sender_signal = true;
+                UCB1IE |= UCTXIE;
+                __bis_SR_register(LPM0_bits + GIE);
+                __delay_cycles(100);
+            }
         }
         else
         {
-            g_transBuffer[8] = g_currentNodeLoc;
-            g_transBuffer[9] = g_currentNodeLoc;
-            g_transBuffer[3] = PACKAGE_PACKET;
-            if (g_sendAck == true)
+            g_transBuffer[8] = g_distributedNodeLoc;
+            g_transBuffer[10] = g_globalLoc;
+            if (g_sendBroad == true)
             {
-                g_transBuffer[3] = PACKAGE_ACK;
+                g_transBuffer[3] = PACKAGE_BROAD;
+                g_sendBroad = false;
             }
+            update_crc();
+            // For sending process
+            SLAVE_CS_OUT &= ~(SLAVE_CS_PIN);
+            g_transmitIndex = 0;
+            g_receiveIndex = 0;
+            while (g_transmitIndex < SPI_DATA_LEN)
+            {
+                spi_sender_signal = true;
+                UCB1IE |= UCTXIE;
+                __bis_SR_register(LPM0_bits + GIE);
+                __delay_cycles(100);
+            }
+            SLAVE_CS_OUT |= SLAVE_CS_PIN;
         }
-        update_crc();
-        UCB1IE |= UCRXIE;
-        // sending
-        __delay_cycles(100000);
-        SPI_Master_WriteReg(CMD_TYPE_0_MASTER, SPI_DATA_LEN);
-        //COMMS_LED_OUT ^= COMMS_LED_PIN;
-        // receiving
-        __delay_cycles(100000);
-        GPIO_MONINOR_OUT4 ^= GPIO_MONITOR_PIN1;
-        SPI_Master_ReadReg(CMD_TYPE_0_SLAVE, SPI_DATA_LEN);
-        CopyArray(g_receiveBuffer, SlaveType0, SPI_DATA_LEN);
-        __no_operation();
-        receiveDataFromNordic();
-        __no_operation();
-        GPIO_MONINOR_OUT4 ^= GPIO_MONITOR_PIN1;
-    }
-}
-
-SPI_Mode SPI_Master_WriteReg(char reg_addr, char count)
-{
-    MasterMode = TX_REG_ADDRESS_MODE;
-    TransmitRegAddr = reg_addr;
-    TXByteCtr = count;
-    TransmitIndex = 0;
-    g_receiveIndex = 0;
-    SLAVE_CS_OUT &= ~(SLAVE_CS_PIN);
-    SendUCB1Data(TransmitRegAddr);
-    __bis_SR_register(LPM0_bits + GIE);
-    SLAVE_CS_OUT |= SLAVE_CS_PIN;
-    return MasterMode;
-}
-
-SPI_Mode SPI_Master_ReadReg(char reg_addr, char count)
-{
-    MasterMode = TX_REG_ADDRESS_MODE;
-    TransmitRegAddr = reg_addr;
-    RXByteCtr = count;
-    TXByteCtr = 0;
-    g_receiveIndex = 0;
-    SLAVE_CS_OUT &= ~(SLAVE_CS_PIN);
-    SendUCB1Data(TransmitRegAddr);
-    __bis_SR_register(LPM0_bits + GIE);
-    SLAVE_CS_OUT |= SLAVE_CS_PIN;
-    return MasterMode;
-}
-
-void SendUCB1Data(char val)
-{
-    while (!(UCB1IFG & UCTXIFG))
-        ;
-    UCB1TXBUF = val;
-}
-
-void CopyArray(char *source, char *dest, char count)
-{
-    char copyIndex = 0;
-    for (copyIndex = 0; copyIndex < count; copyIndex++)
-    {
-        dest[copyIndex] = source[copyIndex];
     }
 }
 
@@ -135,62 +108,27 @@ void __attribute__((interrupt(USCI_B1_VECTOR))) USCI_B1_ISR(void)
 #error Compiler not supported!
 #endif
 {
-    char ucb1_rx_val = 0;
     switch (__even_in_range(UCB1IV, USCI_SPI_UCTXIFG))
     {
     case USCI_NONE:
         break;
     case USCI_SPI_UCRXIFG:
-        ucb1_rx_val = UCB1RXBUF;
-        g_receiveBuffer[g_receiveIndex++] = ucb1_rx_val;
-        UCB1IFG &= ~UCRXIFG;
-        switch (MasterMode)
+        if (g_receiveIndex < SPI_DATA_LEN)
         {
-        case TX_REG_ADDRESS_MODE:
-            if (RXByteCtr)
-            {
-                MasterMode = RX_DATA_MODE;
-                SendUCB1Data(DUMMY);
-            }
-            else
-            {
-                MasterMode = TX_DATA_MODE;
-                SendUCB1Data(g_transBuffer[TransmitIndex++]);
-                TXByteCtr--;
-            }
-            break;
-        case TX_DATA_MODE:
-            if (TXByteCtr)
-            {
-                SendUCB1Data(g_transBuffer[TransmitIndex++]);
-                TXByteCtr--;
-            }
-            else
-            {
-                MasterMode = IDLE_MODE;
-                __bic_SR_register_on_exit(CPUOFF);
-            }
-            break;
-        case RX_DATA_MODE:
-            if (RXByteCtr)
-            {
-                RXByteCtr--;
-            }
-            if (RXByteCtr == 0)
-            {
-                MasterMode = IDLE_MODE;
-                __bic_SR_register_on_exit(CPUOFF);
-            }
-            else
-            {
-                SendUCB1Data(DUMMY);
-            }
-            break;
-        default:
-            break;
+            g_receiveBuffer[g_receiveIndex++] = UCB1RXBUF;
+            UCB1IFG &= ~UCRXIFG;
         }
+        __bic_SR_register_on_exit(LPM0_bits);
+        spi_sender_signal = false;
+        __no_operation();
         break;
     case USCI_SPI_UCTXIFG:
+        if (g_transmitIndex < SPI_DATA_LEN)
+        {
+            UCB1TXBUF = g_transBuffer[g_transmitIndex++];
+            UCB1IE &= ~UCTXIE;
+        }
+        __no_operation();
         break;
     default:
         break;

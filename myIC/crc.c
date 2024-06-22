@@ -95,9 +95,15 @@ crc crcFast(char const message[], int nBytes)
     return (REFLECT_REMAINDER(remainder) ^ FINAL_XOR_VALUE);
 }
 
-int16_t getCRC( char const message[])
+int16_t getCRC(char const message[])
 {
     int16_t crc_result = crcFast(message, 29);
+    return crc_result;
+}
+
+int16_t getUartCRC(char const message[])
+{
+    int16_t crc_result = crcFast(message, 2);
     return crc_result;
 }
 

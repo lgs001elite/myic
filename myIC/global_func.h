@@ -1,7 +1,7 @@
 /*
  * global_func.h
  *
- *  Created on: Dec 21, 2023
+ *  Created on: June 21, 2024
  *      Author: glu250
  */
 
@@ -9,8 +9,10 @@
 #define GLOBAL_FUNC_H_
 #include <stdint.h>
 
-void findDelay(int32_t c);
-int16_t coFindDelay(int16_t c);
+uint16_t findDelay(uint16_t c);
+uint16_t flyncDelay(uint16_t c);
+uint16_t pulsarDelay(uint16_t c);
+uint16_t freeBeaconDelay(uint16_t c);
 void start_spi_process(void);
 
 #endif /* GLOBAL_FUNC_H_ */
