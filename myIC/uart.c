@@ -203,29 +203,19 @@ static void uartAction()
     __bis_SR_register(GIE); // re-open interrupt
     // Transfer delay time
     uint16_t delayTime = 0;
-    if (g_synStrategy == FIND)
-    {
-        delayTime = findDelay(receivedUart);
-    }
-    else if (g_synStrategy == FLYNC)
-    {
-        delayTime = flyncDelay(receivedUart);
-    }
-    else if (g_synStrategy == PULSAR)
+    if (g_synStrategy == PULSAR)
     {
         delayTime = pulsarDelay(receivedUart);
     }
-    else if (g_synStrategy == FREEBEACON)
-    {
-        delayTime = freeBeaconDelay(receivedUart);
-        delayTime = delayTime + g_freeBeaconBias;
-        g_freeBeaconBias = 0;
-    }
     else
     {
-        delayTime = 0;
+        delayTime = freeBeaconDelay(receivedUart);
     }
-
+    if (g_biasForAlign != 0)
+    {
+        delayTime = delayTime + g_biasForAlign;
+        g_biasForAlign = 0;
+    }
     __delay_cycles(100000);
     uartTrasmit(delayTime);
     if (delayTime == 0)

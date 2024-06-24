@@ -1,9 +1,7 @@
-set(target "beaconing_${PLATFORM}_${SOFTDEVICE}")
+set(target "coordinator_${PLATFORM}_${SOFTDEVICE}")
 
 add_executable(${target}
     "${CMAKE_CURRENT_SOURCE_DIR}/src/main.c"
-    "${CMAKE_CURRENT_SOURCE_DIR}/src/spis.c"
-    "${CMAKE_CURRENT_SOURCE_DIR}/src/m2s.c"
     "${CMAKE_CURRENT_SOURCE_DIR}/src/crc.c"
     "${CMAKE_SOURCE_DIR}/mesh/stack/src/mesh_stack.c"
     "${CMAKE_SOURCE_DIR}/examples/common/src/mesh_provisionee.c"
@@ -38,16 +36,16 @@ target_include_directories(${target} PUBLIC
     "${SDK_ROOT}/components/libraries/delay"
     "${SDK_ROOT}/components/libraries/timer"
     "${SDK_ROOT}/components/boards"
+    "${SDK_ROOT}/components/802_15_4/api/HAL"
     "${SDK_ROOT}/components/libraries/scheduler"
     "${SDK_ROOT}/modules/nrfx/drivers/include"
     "${SDK_ROOT}/modules/nrfx/drivers"
-    "${SDK_ROOT}/components/boards"
-    "${SDK_ROOT}/integration/nrfx/legacy"
-    "${SDK_ROOT}/integration/nrfx"
     "${SDK_ROOT}/modules/nrfx/hal"
     "${SDK_ROOT}/modules/nrfx"
-    "${SDK_ROOT}/modules/nrfx/templates/nRF9160"
+    # "${SDK_ROOT}/modules/nrfx/templates/nRF9160"
     "${SDK_ROOT}/modules/nrfx/templates/nRF52840"
+    "${SDK_ROOT}/integration/nrfx/legacy"
+    "${SDK_ROOT}/integration/nrfx"
     #
     ${BLE_SOFTDEVICE_SUPPORT_INCLUDE_DIRS}
     ${CONFIG_SERVER_INCLUDE_DIRS}

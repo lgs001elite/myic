@@ -18,7 +18,7 @@
 #define NRF_EGU4       NRF_EGU4_S
 #define NRF_EGU5       NRF_EGU5_S
 #define NRF_FPU        NRF_FPU_S
-#define NRF_P0         NRF_P0_S
+//#define NRF_P0         NRF_P0_S
 #define NRF_I2S        NRF_I2S_S
 #define NRF_KMU        NRF_KMU_S
 #define NRF_NVMC       NRF_NVMC_S

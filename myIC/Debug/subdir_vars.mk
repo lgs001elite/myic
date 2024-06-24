@@ -10,8 +10,7 @@ CMD_SRCS += \
 
 C_SRCS += \
 ../bonito.c \
-../coordinatorFind.c \
-../coordinatorList.c \
+../coordinator.c \
 ../crc.c \
 ../distribution.c \
 ../find.c \
@@ -23,14 +22,12 @@ C_SRCS += \
 ../routingRx.c \
 ../routingTx.c \
 ../spi.c \
-../swift.c \
 ../uart.c \
 ../uartHex.c 
 
 C_DEPS += \
 ./bonito.d \
-./coordinatorFind.d \
-./coordinatorList.d \
+./coordinator.d \
 ./crc.d \
 ./distribution.d \
 ./find.d \
@@ -42,14 +39,12 @@ C_DEPS += \
 ./routingRx.d \
 ./routingTx.d \
 ./spi.d \
-./swift.d \
 ./uart.d \
 ./uartHex.d 
 
 OBJS += \
 ./bonito.obj \
-./coordinatorFind.obj \
-./coordinatorList.obj \
+./coordinator.obj \
 ./crc.obj \
 ./distribution.obj \
 ./find.obj \
@@ -61,14 +56,12 @@ OBJS += \
 ./routingRx.obj \
 ./routingTx.obj \
 ./spi.obj \
-./swift.obj \
 ./uart.obj \
 ./uartHex.obj 
 
 OBJS__QUOTED += \
 "bonito.obj" \
-"coordinatorFind.obj" \
-"coordinatorList.obj" \
+"coordinator.obj" \
 "crc.obj" \
 "distribution.obj" \
 "find.obj" \
@@ -80,14 +73,12 @@ OBJS__QUOTED += \
 "routingRx.obj" \
 "routingTx.obj" \
 "spi.obj" \
-"swift.obj" \
 "uart.obj" \
 "uartHex.obj" 
 
 C_DEPS__QUOTED += \
 "bonito.d" \
-"coordinatorFind.d" \
-"coordinatorList.d" \
+"coordinator.d" \
 "crc.d" \
 "distribution.d" \
 "find.d" \
@@ -99,14 +90,12 @@ C_DEPS__QUOTED += \
 "routingRx.d" \
 "routingTx.d" \
 "spi.d" \
-"swift.d" \
 "uart.d" \
 "uartHex.d" 
 
 C_SRCS__QUOTED += \
 "../bonito.c" \
-"../coordinatorFind.c" \
-"../coordinatorList.c" \
+"../coordinator.c" \
 "../crc.c" \
 "../distribution.c" \
 "../find.c" \
@@ -118,7 +107,6 @@ C_SRCS__QUOTED += \
 "../routingRx.c" \
 "../routingTx.c" \
 "../spi.c" \
-"../swift.c" \
 "../uart.c" \
 "../uartHex.c" 
 

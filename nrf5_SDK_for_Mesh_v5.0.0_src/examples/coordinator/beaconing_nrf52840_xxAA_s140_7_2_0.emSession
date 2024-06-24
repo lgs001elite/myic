@@ -63,13 +63,13 @@
  <Watch1>
   <Watches active="1" update="Never">
    <Watchpoint expression="m_rx_buf_spi" name="m_rx_buf_spi" radix="-1" linenumber="103" filename="src/spis.c"/>
-   <Watchpoint expression="p_payload" name="p_payload" radix="16" linenumber="78" filename="src/main.c"/>
+   <Watchpoint expression="p_payload" name="p_payload" radix="16" linenumber="84" filename="src/main.c"/>
    <Watchpoint expression="crc_input" name="crc_input" radix="-1" linenumber="27" filename="src/spis.c"/>
    <Watchpoint expression="res1" name="res1" radix="-1" linenumber="46" filename="src/spis.c"/>
    <Watchpoint expression="res2" name="res2" radix="-1" linenumber="51" filename="src/spis.c"/>
-   <Watchpoint expression="m_tx_buf_spi" name="m_tx_buf_spi" radix="-1" linenumber="91" filename="src/main.c"/>
-   <Watchpoint expression="p_rx_data" name="p_rx_data" radix="-1" linenumber="62" filename="src/main.c"/>
-   <Watchpoint expression="rec_packet" name="rec_packet" radix="-1" linenumber="77" filename="src/main.c"/>
+   <Watchpoint expression="m_tx_buf_spi" name="m_tx_buf_spi" radix="-1" linenumber="98" filename="src/main.c"/>
+   <Watchpoint expression="p_rx_data" name="p_rx_data" radix="-1" linenumber="68" filename="src/main.c"/>
+   <Watchpoint expression="rec_packet" name="rec_packet" radix="-1" linenumber="83" filename="src/main.c"/>
   </Watches>
  </Watch1>
  <Watch2>
@@ -82,10 +82,9 @@
   <Watches active="0" update="Never"/>
  </Watch4>
  <Files>
-  <SessionOpenFile windowGroup="DockEditLeft" x="6" y="132" useTextEdit="1" path="src/main.c" left="0" selected="1" top="89" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="9" y="24" useTextEdit="1" path="src/main.c" left="0" selected="1" top="0" codecName="Default"/>
   <SessionOpenFile windowGroup="DockEditLeft" x="0" y="0" useTextEdit="1" path="src/crc.c" left="0" top="0" codecName="Default"/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="5" y="81" useTextEdit="1" path="../common/src/app_error_weak.c" left="0" top="64" codecName="Default"/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="0" useTextEdit="1" path="../common/src/mesh_app_utils.c" left="0" top="0" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="6" useTextEdit="1" path="include/public.h" left="0" top="0" codecName="Default"/>
  </Files>
  <EMStudioWindow activeProject="beaconing_nrf52840_xxAA_s140_7.2.0" fileDialogDefaultFilter="*.c" autoConnectTarget="J-Link" buildConfiguration="Debug" sessionSettings="" debugSearchFileMap="" fileDialogInitialDirectory="" debugSearchPath="" autoConnectCapabilities="3199"/>
 </session>

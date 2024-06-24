@@ -1,8 +1,10 @@
 build/beaconing_nrf52840_xxAA_s140_7.2.0_Release/obj/nrf_mesh_weak.o: \
- C\:\Users\glu250\Downloads\Next\myic\nrf5_SDK_for_Mesh_v5.0.0_src\examples\common\src\nrf_mesh_weak.c \
- C\:/Users/glu250/AppData/Local/SEGGER/SEGGER\ Embedded\ Studio/v3/packages/libraries/libcxx/include/stdint.h \
- C\:/Users/glu250/AppData/Local/SEGGER/SEGGER\ Embedded\ Studio/v3/packages/libraries/libcxx/include/__config \
- C\:/Program\ Files/SEGGER/SEGGER\ Embedded\ Studio\ for\ ARM\ 5.42/include/stdint.h \
+ C:\Users\glu250\Downloads\myic\nrf5_SDK_for_Mesh_v5.0.0_src\examples\common\src\nrf_mesh_weak.c \
+ C:/Program\ Files/SEGGER/SEGGER\ Embedded\ Studio\ for\ ARM\ 7.30/include/stdint.h \
+ C:/Program\ Files/SEGGER/SEGGER\ Embedded\ Studio\ for\ ARM\ 7.30/include/__SEGGER_RTL.h \
+ C:/Program\ Files/SEGGER/SEGGER\ Embedded\ Studio\ for\ ARM\ 7.30/include/__SEGGER_RTL_ConfDefaults.h \
+ C:/Program\ Files/SEGGER/SEGGER\ Embedded\ Studio\ for\ ARM\ 7.30/include/__SEGGER_RTL_Conf.h \
+ C:/Program\ Files/SEGGER/SEGGER\ Embedded\ Studio\ for\ ARM\ 7.30/include/__SEGGER_RTL_Arm_Conf.h \
  ../../../nRF5_SDK_17.0.2_d674dde/components/softdevice/s140/headers/nrf_error.h \
  ../../mesh/prov/api/nrf_mesh_prov.h \
  ../../../nRF5_SDK_17.0.2_d674dde/components/softdevice/s140/headers/ble.h \
@@ -29,17 +31,14 @@ build/beaconing_nrf52840_xxAA_s140_7.2.0_Release/obj/nrf_mesh_weak.o: \
  ../../../nRF5_SDK_17.0.2_d674dde/modules/nrfx/mdk/nrf52_to_nrf52840.h \
  ../../../nRF5_SDK_17.0.2_d674dde/modules/nrfx/mdk/compiler_abstraction.h \
  ../../../nRF5_SDK_17.0.2_d674dde/components/softdevice/s140/headers/ble_gatts.h \
- C\:/Users/glu250/AppData/Local/SEGGER/SEGGER\ Embedded\ Studio/v3/packages/libraries/libcxx/include/stdbool.h \
- C\:/Program\ Files/SEGGER/SEGGER\ Embedded\ Studio\ for\ ARM\ 5.42/include/stdbool.h \
+ C:/Program\ Files/SEGGER/SEGGER\ Embedded\ Studio\ for\ ARM\ 7.30/include/stdbool.h \
  ../../mesh/prov/api/nrf_mesh_config_prov.h \
  ../../mesh/prov/api/nrf_mesh_prov_types.h \
  ../../mesh/core/api/nrf_mesh_defines.h \
  ../../mesh/prov/api/nrf_mesh_prov_events.h \
  ../../mesh/prov/api/nrf_mesh_prov_bearer.h \
  ../../mesh/core/include/list.h \
- C\:/Users/glu250/AppData/Local/SEGGER/SEGGER\ Embedded\ Studio/v3/packages/libraries/libcxx/include/stddef.h \
- C\:/Program\ Files/SEGGER/SEGGER\ Embedded\ Studio\ for\ ARM\ 5.42/include/stddef.h \
- C\:/Program\ Files/SEGGER/SEGGER\ Embedded\ Studio\ for\ ARM\ 5.42/include/__crossworks.h \
+ C:/Program\ Files/SEGGER/SEGGER\ Embedded\ Studio\ for\ ARM\ 7.30/include/stddef.h \
  ../../mesh/core/api/nrf_mesh_assert.h ../../mesh/core/api/nrf_mesh.h \
  ../../mesh/core/include/timer.h \
  ../../../nRF5_SDK_17.0.2_d674dde/components/softdevice/s140/headers/ble_gap.h \
@@ -56,8 +55,7 @@ build/beaconing_nrf52840_xxAA_s140_7.2.0_Release/obj/nrf_mesh_weak.o: \
  ../../../nRF5_SDK_17.0.2_d674dde/components/softdevice/s140/headers/nrf_svc.h \
  ../../mesh/core/api/nrf_mesh_assert_gcc.h \
  ../../mesh/core/include/bitfield.h \
- C\:/Users/glu250/AppData/Local/SEGGER/SEGGER\ Embedded\ Studio/v3/packages/libraries/libcxx/include/string.h \
- C\:/Program\ Files/SEGGER/SEGGER\ Embedded\ Studio\ for\ ARM\ 5.42/include/string.h \
+ C:/Program\ Files/SEGGER/SEGGER\ Embedded\ Studio\ for\ ARM\ 7.30/include/string.h \
  ../../mesh/core/include/toolchain.h ../../mesh/dfu/api/nrf_mesh_dfu.h \
  ../../mesh/core/api/nrf_mesh_config_core.h \
  ../../mesh/dfu/api/nrf_mesh_config_dfu.h ../../mesh/core/api/nrf_mesh.h \
@@ -68,7 +66,7 @@ build/beaconing_nrf52840_xxAA_s140_7.2.0_Release/obj/nrf_mesh_weak.o: \
  ../../mesh/core/include/timer.h ../../mesh/core/include/packet.h \
  ../../mesh/core/include/utils.h ../../mesh/core/include/hal.h \
  ../../mesh/core/include/log.h \
- C\:/Program\ Files/SEGGER/SEGGER\ Embedded\ Studio\ for\ ARM\ 5.42/include/stdarg.h \
+ C:/Program\ Files/SEGGER/SEGGER\ Embedded\ Studio\ for\ ARM\ 7.30/include/stdarg.h \
  ../../../nRF5_SDK_17.0.2_d674dde/components/libraries/util/nordic_common.h \
  ../../mesh/core/include/cache.h ../../mesh/core/include/bl_if.h \
  ../../mesh/core/include/bl_info_types.h \

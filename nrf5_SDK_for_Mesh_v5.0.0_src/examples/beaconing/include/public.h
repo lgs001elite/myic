@@ -3,14 +3,16 @@
 #include <stdio.h>
 #include <stdbool.h>
 
-#define ACTUALDATAUNITS 33
-#define BROADCASTLEN    32
+#define BROADCASTLEN 31
 
-#define DUBBY 0x05
+#define DUBBY 0x03
 
-void send_datagram_start();
-extern  uint8_t  m_tx_buf_spi[ACTUALDATAUNITS];
-extern  uint8_t m_recBuf[BROADCASTLEN];
+void initialize();
+extern uint8_t m_tx_buf_spi[BROADCASTLEN];
+extern uint8_t m_rx_buf_spi[BROADCASTLEN + 1];
 extern bool spis_xfer_done;
+extern bool listenSwitch;
+extern bool sendSwitch;
+extern uint8_t listeningTimeout;
 
 #endif

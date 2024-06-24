@@ -46,7 +46,6 @@ extern  int g_chargHis[HISLEN];
 extern char g_locNum;
 extern bool g_gotoLoc;
 extern bool g_alignLoc;
-extern uint16_t g_freeBeaconBias;
 extern uint16_t g_receCounter;
 extern uint8_t g_packet_id;
 // extern double p_test;

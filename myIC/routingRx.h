@@ -36,7 +36,6 @@ void receiveDataFromNordic();
 void updateCRC(char relayPkt[]);
 void data_from_ic(char *receivedData);
 void ack_from_ic(char *receivedData);
-void data_from_ic_to_coordinator(char *receivedData);
 void broad_from_coordinator(char *receivedData);
 
 #endif /* ROUTINGRX_H_ */

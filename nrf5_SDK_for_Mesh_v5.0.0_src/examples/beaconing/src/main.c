@@ -30,34 +30,36 @@
 #include "stack_depth.h"
 #endif
 
-#define ADVERTISER_BUFFER_SIZE  (128)
+#define ADVERTISER_BUFFER_SIZE (512)
 bool              g_if_sendNext          = false;
 advertiser_t      m_discovery_advertiser = {0};
 uint8_t           m_adv_buffer_discovery[ADVERTISER_BUFFER_SIZE]; 
 void              adv_init(void);
 adv_packet_t  *   p_broad_packet         = NULL;
+bool listenSwitch = false;
+bool sendSwitch = false;
+uint8_t listeningTimeout = 0;
 
-void send2bearer(advertiser_t * p_adv, uint8_t * adv_packet)
+void send2bearer(advertiser_t *p_adv, uint8_t *adv_packet)
 {
+    p_broad_packet = advertiser_packet_alloc(p_adv, BLE_ADV_PACKET_PAYLOAD_MAX_LENGTH);
     if (p_broad_packet)
     {
         memcpy(p_broad_packet->packet.payload, adv_packet, BLE_ADV_PACKET_PAYLOAD_MAX_LENGTH);
-        p_broad_packet->config.repeats = 1;
+        p_broad_packet->config.repeats = 3;
         advertiser_packet_send(p_adv, p_broad_packet);
     }
-    p_broad_packet = advertiser_packet_alloc(p_adv, BLE_ADV_PACKET_PAYLOAD_MAX_LENGTH);
-}
-
-void send_datagram_start()
-{
-    send2bearer(&m_discovery_advertiser, m_recBuf);
 }
 
 void rx_cb(const nrf_mesh_adv_packet_rx_data_t * p_rx_data)
 {
-    __LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "----- received successfully  seq: %X-----\n", m_tx_buf_spi[0]);
-    __LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "----- received successfully  seq: %X-----\n", m_tx_buf_spi[1]);
-    __LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "----- received successfully  seq: %X-----\n", m_tx_buf_spi[2]);
+    __LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "step7\n");
+    if (listeningTimeout > 100)
+    {
+        nrf_mesh_rx_cb_clear();
+        listenSwitch = false;
+    }
+    listeningTimeout = listeningTimeout + 1;
     if (p_rx_data->p_payload[1] != BLE_GAP_AD_TYPE_PUBLIC_TARGET_ADDRESS)
     {
         return;
@@ -66,35 +68,27 @@ void rx_cb(const nrf_mesh_adv_packet_rx_data_t * p_rx_data)
     {
         return;
     }
-                for (int i = 0; i < 4; i++)
-              {
-                  bsp_board_led_invert(i);
-              }
-    uint8_t rec_packet[32] = {0};
-    rec_packet[0]          = p_rx_data->p_payload[0];
-    rec_packet[1]          = p_rx_data->p_payload[1];
-    rec_packet[2]          = p_rx_data->p_payload[2];
-    rec_packet[3]          = ((p_rx_data->p_payload[3])& 0x0f);
-    rec_packet[4]          = ((p_rx_data->p_payload[3])  & 0xF0)>>4;
-    rec_packet[5]          = ((p_rx_data->p_payload[4]) & 0x0f);
-    rec_packet[6]          = ((p_rx_data->p_payload[4])  & 0xF0)>>4;
-    for (uint8_t i = 5; i < 29; i++)
+    for (uint8_t i = 0; i < BROADCASTLEN; i++)
     {
-        rec_packet[i + 2] = p_rx_data->p_payload[i];
+        m_tx_buf_spi[i] = p_rx_data->p_payload[i];
     }
-    for (uint8_t i = 0; i < 31; i++)
-    {
-        m_tx_buf_spi[i] = rec_packet[i];
-    }
-    m_tx_buf_spi[31] = p_rx_data->p_payload[29];
-    m_tx_buf_spi[32] = p_rx_data->p_payload[30];
-    //__LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "----- received successfully  seq: %X-----\n", m_tx_buf_spi[32]);
-    //spis_xfer_done = true;
+   // bsp_board_led_invert(0);
+    __LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "step8\n");
+}
+
+static void callBackAfterFinish()
+{
+    listenSwitch = true;
+    listeningTimeout = 0;
+    sendSwitch = false;
+    nrf_mesh_rx_cb_set(rx_cb);
+    __LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "step9\n")
+    // nrf_mesh_rx_cb_clear();
 }
 
 void adv_init(void)
 {
-    advertiser_instance_init(&m_discovery_advertiser, NULL, m_adv_buffer_discovery, ADVERTISER_BUFFER_SIZE);
+    advertiser_instance_init(&m_discovery_advertiser, callBackAfterFinish, m_adv_buffer_discovery, ADVERTISER_BUFFER_SIZE);
 }
 
 void node_reset(void)
@@ -134,41 +128,37 @@ void mesh_init(void)
             ERROR_CHECK(status);
     }
     /* Start listening for incoming packets */
-    nrf_mesh_rx_cb_set(rx_cb);
+    // nrf_mesh_rx_cb_set(rx_cb);
     /* Initialize the advertiser */
     adv_init();
 }
 
-void initialize(void)
+void ble_initialize(void)
 {
+// ble ini
 #if defined(NRF51) && defined(NRF_MESH_STACK_DEPTH)
     stack_depth_paint_stack();
 #endif
-    
     ERROR_CHECK(app_timer_init());
     hal_leds_init();
     __LOG_INIT(LOG_SRC_APP, LOG_LEVEL_INFO, log_callback_rtt);
-
     ble_stack_init();
     mesh_init();
- 
+    bearer_adtype_add(BLE_GAP_AD_TYPE_LE_BLUETOOTH_DEVICE_ADDRESS);
+    ERROR_CHECK(mesh_stack_start());
+    advertiser_enable(&m_discovery_advertiser);
     __LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "Mesh initialization complete!\n");
 }
 
-void start(void)
-{  
-    bearer_adtype_add(BLE_GAP_AD_TYPE_LE_BLUETOOTH_DEVICE_ADDRESS);
-    ERROR_CHECK(mesh_stack_start());
-    (void)sd_app_evt_wait();
-    advertiser_enable(&m_discovery_advertiser);
-    (void)sd_app_evt_wait();
-    spis_start();
-    (void)sd_app_evt_wait();
+void initializationSys(void)
+{
+    spi_initialize();
+    ble_initialize();
 }
 
 int main(void)
 {
-    initialize();
-    start();
+    initializationSys();
+    spis_execution();
 }
 

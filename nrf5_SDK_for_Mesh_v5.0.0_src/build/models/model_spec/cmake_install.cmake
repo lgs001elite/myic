@@ -1,8 +1,8 @@
-# Install script for directory: /home/gaosheng/mesh/myic/myic/nrf5_SDK_for_Mesh_v5.0.0_src/models/model_spec
+# Install script for directory: C:/Users/glu250/Downloads/myic/nrf5_SDK_for_Mesh_v5.0.0_src/models/model_spec
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
-  set(CMAKE_INSTALL_PREFIX "/usr/local")
+  set(CMAKE_INSTALL_PREFIX "C:/Program Files (x86)/MBTLE")
 endif()
 string(REGEX REPLACE "/$" "" CMAKE_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}")
 
@@ -34,21 +34,21 @@ endif()
 
 # Set default install directory permissions.
 if(NOT DEFINED CMAKE_OBJDUMP)
-  set(CMAKE_OBJDUMP "/home/gaosheng/gcc-arm-none-eabi-10.3-2021.07/bin/arm-none-eabi-objdump")
+  set(CMAKE_OBJDUMP "C:/Program Files (x86)/Arm GNU Toolchain arm-none-eabi/13.2 Rel1/bin/arm-none-eabi-objdump.exe")
 endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for each subdirectory.
-  include("/home/gaosheng/mesh/myic/myic/nrf5_SDK_for_Mesh_v5.0.0_src/build/models/model_spec/common/cmake_install.cmake")
-  include("/home/gaosheng/mesh/myic/myic/nrf5_SDK_for_Mesh_v5.0.0_src/build/models/model_spec/generic_dtt/cmake_install.cmake")
-  include("/home/gaosheng/mesh/myic/myic/nrf5_SDK_for_Mesh_v5.0.0_src/build/models/model_spec/scene/cmake_install.cmake")
-  include("/home/gaosheng/mesh/myic/myic/nrf5_SDK_for_Mesh_v5.0.0_src/build/models/model_spec/generic_onoff/cmake_install.cmake")
-  include("/home/gaosheng/mesh/myic/myic/nrf5_SDK_for_Mesh_v5.0.0_src/build/models/model_spec/generic_level/cmake_install.cmake")
-  include("/home/gaosheng/mesh/myic/myic/nrf5_SDK_for_Mesh_v5.0.0_src/build/models/model_spec/generic_ponoff/cmake_install.cmake")
-  include("/home/gaosheng/mesh/myic/myic/nrf5_SDK_for_Mesh_v5.0.0_src/build/models/model_spec/sensor/cmake_install.cmake")
-  include("/home/gaosheng/mesh/myic/myic/nrf5_SDK_for_Mesh_v5.0.0_src/build/models/model_spec/light_lightness/cmake_install.cmake")
-  include("/home/gaosheng/mesh/myic/myic/nrf5_SDK_for_Mesh_v5.0.0_src/build/models/model_spec/light_lc/cmake_install.cmake")
-  include("/home/gaosheng/mesh/myic/myic/nrf5_SDK_for_Mesh_v5.0.0_src/build/models/model_spec/light_ctl/cmake_install.cmake")
+  include("C:/Users/glu250/Downloads/myic/nrf5_SDK_for_Mesh_v5.0.0_src/build/models/model_spec/common/cmake_install.cmake")
+  include("C:/Users/glu250/Downloads/myic/nrf5_SDK_for_Mesh_v5.0.0_src/build/models/model_spec/generic_dtt/cmake_install.cmake")
+  include("C:/Users/glu250/Downloads/myic/nrf5_SDK_for_Mesh_v5.0.0_src/build/models/model_spec/scene/cmake_install.cmake")
+  include("C:/Users/glu250/Downloads/myic/nrf5_SDK_for_Mesh_v5.0.0_src/build/models/model_spec/generic_onoff/cmake_install.cmake")
+  include("C:/Users/glu250/Downloads/myic/nrf5_SDK_for_Mesh_v5.0.0_src/build/models/model_spec/generic_level/cmake_install.cmake")
+  include("C:/Users/glu250/Downloads/myic/nrf5_SDK_for_Mesh_v5.0.0_src/build/models/model_spec/generic_ponoff/cmake_install.cmake")
+  include("C:/Users/glu250/Downloads/myic/nrf5_SDK_for_Mesh_v5.0.0_src/build/models/model_spec/sensor/cmake_install.cmake")
+  include("C:/Users/glu250/Downloads/myic/nrf5_SDK_for_Mesh_v5.0.0_src/build/models/model_spec/light_lightness/cmake_install.cmake")
+  include("C:/Users/glu250/Downloads/myic/nrf5_SDK_for_Mesh_v5.0.0_src/build/models/model_spec/light_lc/cmake_install.cmake")
+  include("C:/Users/glu250/Downloads/myic/nrf5_SDK_for_Mesh_v5.0.0_src/build/models/model_spec/light_ctl/cmake_install.cmake")
 
 endif()
 

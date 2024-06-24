@@ -1,13 +1,14 @@
 build/beaconing_nrf52840_xxAA_s140_7.2.0_Debug/obj/lpn.o: \
- C\:\Users\glu250\Downloads\Next\myic\nrf5_SDK_for_Mesh_v5.0.0_src\mesh\core\src\lpn.c \
+ C:\Users\glu250\Downloads\myic\nrf5_SDK_for_Mesh_v5.0.0_src\mesh\core\src\lpn.c \
  ../../mesh/core/api/mesh_lpn.h \
- C\:/Users/glu250/AppData/Local/SEGGER/SEGGER\ Embedded\ Studio/v3/packages/libraries/libcxx/include/stdint.h \
- C\:/Users/glu250/AppData/Local/SEGGER/SEGGER\ Embedded\ Studio/v3/packages/libraries/libcxx/include/__config \
- C\:/Program\ Files/SEGGER/SEGGER\ Embedded\ Studio\ for\ ARM\ 5.42/include/stdint.h \
+ C:/Program\ Files/SEGGER/SEGGER\ Embedded\ Studio\ for\ ARM\ 7.30/include/stdint.h \
+ C:/Program\ Files/SEGGER/SEGGER\ Embedded\ Studio\ for\ ARM\ 7.30/include/__SEGGER_RTL.h \
+ C:/Program\ Files/SEGGER/SEGGER\ Embedded\ Studio\ for\ ARM\ 7.30/include/__SEGGER_RTL_ConfDefaults.h \
+ C:/Program\ Files/SEGGER/SEGGER\ Embedded\ Studio\ for\ ARM\ 7.30/include/__SEGGER_RTL_Conf.h \
+ C:/Program\ Files/SEGGER/SEGGER\ Embedded\ Studio\ for\ ARM\ 7.30/include/__SEGGER_RTL_Arm_Conf.h \
  ../../mesh/core/api/mesh_friendship_types.h \
  ../../mesh/core/api/nrf_mesh_events.h \
- C\:/Users/glu250/AppData/Local/SEGGER/SEGGER\ Embedded\ Studio/v3/packages/libraries/libcxx/include/stdbool.h \
- C\:/Program\ Files/SEGGER/SEGGER\ Embedded\ Studio\ for\ ARM\ 5.42/include/stdbool.h \
+ C:/Program\ Files/SEGGER/SEGGER\ Embedded\ Studio\ for\ ARM\ 7.30/include/stdbool.h \
  ../../mesh/core/api/nrf_mesh.h ../../mesh/core/include/timer.h \
  ../../../nRF5_SDK_17.0.2_d674dde/components/softdevice/s140/headers/ble.h \
  ../../../nRF5_SDK_17.0.2_d674dde/components/softdevice/s140/headers/nrf_svc.h \
@@ -43,9 +44,7 @@ build/beaconing_nrf52840_xxAA_s140_7.2.0_Debug/obj/lpn.o: \
  ../../mesh/dfu/api/nrf_mesh_dfu_types.h \
  ../../mesh/core/api/nrf_mesh_assert.h \
  ../../../nRF5_SDK_17.0.2_d674dde/components/libraries/util/app_util.h \
- C\:/Users/glu250/AppData/Local/SEGGER/SEGGER\ Embedded\ Studio/v3/packages/libraries/libcxx/include/stddef.h \
- C\:/Program\ Files/SEGGER/SEGGER\ Embedded\ Studio\ for\ ARM\ 5.42/include/stddef.h \
- C\:/Program\ Files/SEGGER/SEGGER\ Embedded\ Studio\ for\ ARM\ 5.42/include/__crossworks.h \
+ C:/Program\ Files/SEGGER/SEGGER\ Embedded\ Studio\ for\ ARM\ 7.30/include/stddef.h \
  ../../../nRF5_SDK_17.0.2_d674dde/modules/nrfx/mdk/compiler_abstraction.h \
  ../../../nRF5_SDK_17.0.2_d674dde/components/libraries/util/nordic_common.h \
  ../../../nRF5_SDK_17.0.2_d674dde/components/softdevice/s140/headers/nrf52/nrf_mbr.h \
@@ -59,17 +58,15 @@ build/beaconing_nrf52840_xxAA_s140_7.2.0_Debug/obj/lpn.o: \
  ../../../nRF5_SDK_17.0.2_d674dde/components/libraries/experimental_section_vars/nrf_section.h \
  ../../../nRF5_SDK_17.0.2_d674dde/components/libraries/util/nordic_common.h \
  ../../mesh/core/include/mesh_config_backend_file.h \
- C\:/Users/glu250/AppData/Local/SEGGER/SEGGER\ Embedded\ Studio/v3/packages/libraries/libcxx/include/stdlib.h \
- C\:/Program\ Files/SEGGER/SEGGER\ Embedded\ Studio\ for\ ARM\ 5.42/include/stdlib.h \
+ C:/Program\ Files/SEGGER/SEGGER\ Embedded\ Studio\ for\ ARM\ 7.30/include/stdlib.h \
  ../../mesh/core/api/nrf_mesh_config_core.h \
  ../../mesh/core/include/mesh_config_flashman_glue.h \
  ../../mesh/core/api/flash_manager.h \
  ../../mesh/core/include/packet_buffer.h ../../mesh/core/include/packet.h \
- C\:/Users/glu250/AppData/Local/SEGGER/SEGGER\ Embedded\ Studio/v3/packages/libraries/libcxx/include/string.h \
- C\:/Program\ Files/SEGGER/SEGGER\ Embedded\ Studio\ for\ ARM\ 5.42/include/string.h \
+ C:/Program\ Files/SEGGER/SEGGER\ Embedded\ Studio\ for\ ARM\ 7.30/include/string.h \
  ../../mesh/core/api/nrf_mesh_defines.h ../../mesh/core/include/utils.h \
  ../../mesh/core/include/hal.h ../../mesh/core/include/log.h \
- C\:/Program\ Files/SEGGER/SEGGER\ Embedded\ Studio\ for\ ARM\ 5.42/include/stdarg.h \
+ C:/Program\ Files/SEGGER/SEGGER\ Embedded\ Studio\ for\ ARM\ 7.30/include/stdarg.h \
  ../../mesh/core/api/nrf_mesh.h ../../mesh/core/include/queue.h \
  ../../mesh/core/include/toolchain.h \
  ../../mesh/core/include/bearer_event.h ../../mesh/core/include/timer.h \

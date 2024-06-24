@@ -11,8 +11,7 @@ GEN_CMDS__FLAG :=
 
 ORDERED_OBJS += \
 "./bonito.obj" \
-"./coordinatorFind.obj" \
-"./coordinatorList.obj" \
+"./coordinator.obj" \
 "./crc.obj" \
 "./distribution.obj" \
 "./find.obj" \
@@ -24,7 +23,6 @@ ORDERED_OBJS += \
 "./routingRx.obj" \
 "./routingTx.obj" \
 "./spi.obj" \
-"./swift.obj" \
 "./uart.obj" \
 "./uartHex.obj" \
 "../lnk_msp430fr5994.cmd" \
@@ -159,8 +157,8 @@ myIC.out: $(OBJS) $(CMD_SRCS) $(GEN_CMDS)
 # Other Targets
 clean:
 	-$(RM) $(EXE_OUTPUTS__QUOTED)
-	-$(RM) "bonito.obj" "coordinatorFind.obj" "coordinatorList.obj" "crc.obj" "distribution.obj" "find.obj" "hash.obj" "joint_distribution.obj" "main.obj" "mypredic.obj" "random.obj" "routingRx.obj" "routingTx.obj" "spi.obj" "swift.obj" "uart.obj" "uartHex.obj" 
-	-$(RM) "bonito.d" "coordinatorFind.d" "coordinatorList.d" "crc.d" "distribution.d" "find.d" "hash.d" "joint_distribution.d" "main.d" "mypredic.d" "random.d" "routingRx.d" "routingTx.d" "spi.d" "swift.d" "uart.d" "uartHex.d" 
+	-$(RM) "bonito.obj" "coordinator.obj" "crc.obj" "distribution.obj" "find.obj" "hash.obj" "joint_distribution.obj" "main.obj" "mypredic.obj" "random.obj" "routingRx.obj" "routingTx.obj" "spi.obj" "uart.obj" "uartHex.obj" 
+	-$(RM) "bonito.d" "coordinator.d" "crc.d" "distribution.d" "find.d" "hash.d" "joint_distribution.d" "main.d" "mypredic.d" "random.d" "routingRx.d" "routingTx.d" "spi.d" "uart.d" "uartHex.d" 
 	-@echo 'Finished clean'
 	-@echo ' '
 

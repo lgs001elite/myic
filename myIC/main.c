@@ -100,9 +100,6 @@ uint16_t g_adjustUnits = 0;
 #pragma PERSISTENT(g_alignLoc)
     bool g_alignLoc = false;
 
-#pragma PERSISTENT(g_freeBeaconBias)
-    uint16_t g_freeBeaconBias = 0;
-
 #pragma PERSISTENT(g_receCounter)
     uint16_t g_receCounter = 0;
 

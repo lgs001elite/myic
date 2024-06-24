@@ -57,6 +57,14 @@ void start_spi_process(void)
             else
             {
                 g_transBuffer[3] = PACKAGE_PACKET;
+                if (g_nodeID == 0)
+                {
+                    g_nextNodeID = 1;
+                }
+                else
+                {
+                    g_nextNodeID = 0;
+                }
             }
             g_transBuffer[2] = g_packet_id;
             update_crc();
@@ -71,29 +79,6 @@ void start_spi_process(void)
                 __bis_SR_register(LPM0_bits + GIE);
                 __delay_cycles(100);
             }
-        }
-        else
-        {
-            g_transBuffer[8] = g_distributedNodeLoc;
-            g_transBuffer[10] = g_globalLoc;
-            if (g_sendBroad == true)
-            {
-                g_transBuffer[3] = PACKAGE_BROAD;
-                g_sendBroad = false;
-            }
-            update_crc();
-            // For sending process
-            SLAVE_CS_OUT &= ~(SLAVE_CS_PIN);
-            g_transmitIndex = 0;
-            g_receiveIndex = 0;
-            while (g_transmitIndex < SPI_DATA_LEN)
-            {
-                spi_sender_signal = true;
-                UCB1IE |= UCTXIE;
-                __bis_SR_register(LPM0_bits + GIE);
-                __delay_cycles(100);
-            }
-            SLAVE_CS_OUT |= SLAVE_CS_PIN;
         }
     }
 }

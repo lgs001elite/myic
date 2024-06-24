@@ -1,0 +1,43 @@
+<!DOCTYPE CrossStudio_Session_File>
+<session>
+ <Bookmarks/>
+ <Breakpoints groups="Breakpoints" active_group="Breakpoints"/>
+ <ExecutionProfileWindow/>
+ <FrameBuffer/>
+ <Memory1/>
+ <Memory2/>
+ <Memory3/>
+ <Memory4/>
+ <Project>
+  <ProjectSessionItem path="coordinator_nrf52840_xxAA_s140_7.2.0"/>
+  <ProjectSessionItem path="coordinator_nrf52840_xxAA_s140_7.2.0;coordinator_nrf52840_xxAA_s140_7.2.0"/>
+  <ProjectSessionItem path="coordinator_nrf52840_xxAA_s140_7.2.0;coordinator_nrf52840_xxAA_s140_7.2.0;Application"/>
+ </Project>
+ <Register1/>
+ <Register2/>
+ <Register3/>
+ <Register4/>
+ <Threads>
+  <ThreadsWindow showLists=""/>
+ </Threads>
+ <TraceWindow>
+  <Trace enabled="Yes"/>
+ </TraceWindow>
+ <Watch1>
+  <Watches active="1" update="Never"/>
+ </Watch1>
+ <Watch2>
+  <Watches active="0" update="Never"/>
+ </Watch2>
+ <Watch3>
+  <Watches active="0" update="Never"/>
+ </Watch3>
+ <Watch4>
+  <Watches active="0" update="Never"/>
+ </Watch4>
+ <Files>
+  <SessionOpenFile windowGroup="DockEditLeft" x="21" y="92" useTextEdit="1" path="src/crc.c" left="0" top="59" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="26" y="73" useTextEdit="1" path="../../../nRF5_SDK_17.0.2_d674dde/modules/nrfx/templates/nRF9160/nrfx_config.h" left="0" selected="1" top="46" codecName="Default"/>
+ </Files>
+ <EMStudioWindow activeProject="coordinator_nrf52840_xxAA_s140_7.2.0" fileDialogDefaultFilter="*.c" autoConnectTarget="J-Link" buildConfiguration="Debug" sessionSettings="" debugSearchFileMap="" fileDialogInitialDirectory="" debugSearchPath="" autoConnectCapabilities="3199"/>
+</session>
