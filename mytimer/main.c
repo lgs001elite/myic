@@ -5,49 +5,50 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "rand.h"
 #include "crc.h"
-#include "chargingSets.h"
+#include "office_1.h"
+#include "office_2.h"
+#include "stairs_1.h"
+#include "stairs_2.h"
 
-#define COORDINATOR_pulsar 0
-#define COORDINATOR_freeBeacon 1
-#define RANDOM 2
+#define energy_office_01 0
+#define energy_office_02 1
+#define energy_stairs_01 2
+#define energy_stairs_02 3
+
 
 #define COUNTER_UNIT 0xffff
-
-#define CAR_SIZE 6
-#define JOG_SIZE 5l
-#define OFFICE_Size 5
-#define STAIR_SIZE 6
-#define WASHER_SIZE 5
-#define MAX_LINE_LENGTH 124
 #define SLOT_AMPLIFIER 10
-#define UART_INITIALIZE 1
-#define MAX_SYN_SET 200
-#define INITIAL_TIME 1099999
-char RXData = 0x01;
-char TXData = 0x01;
-uint16_t chargeCycles = 0;
-uint16_t g_slotUnitCounter = 0;
-uint16_t lastReceivedData = 0;
-char g_uartRecvBuff[4] = {0};
-char g_uartTrasBuff[4] = {0};
-bool g_slotStopCounter = false;
-bool g_uartSwitch = true;
-bool g_afterUartWork = false;
-bool g_preventRepeatedUart = true;
-int g_energyMode = RANDOM;
-int g_stairIndex = 0;
-int g_testIndex = 0;
-int g_systemCounter = 0;
-int g_synSet[MAX_SYN_SET] = {0};
-int g_synIndex = 0;
-uint16_t g_sleepCounter = 0;
-int g_lastCounter = 0;
-uint8_t g_reCounter = 0;
-bool g_uartTerminalFlag = false;
-bool g_sleepIndicator = false;
-bool g_powerOff = false;
+#define MAX_ENCOUNTER_THRESHOLD 100
+#define INITIAL_UART_TIME 1099999
+
+static int g_office1_length = sizeof(office_1) / sizeof(office_1[0]);
+static int g_office2_length = sizeof(office_2) / sizeof(office_2[0]);
+static int g_stairs1_length = sizeof(stairs_1) / sizeof(stairs_1[0]);
+static int g_stairs2_length = sizeof(stairs_2) / sizeof(stairs_2[0]);
+
+
+static int g_office1_index = 0;
+static int g_office2_index = 0;
+static int g_stairs1_index = 0;
+static int g_stairs2_index = 0;
+
+
+static uint16_t chargeCycles = 0;
+static uint16_t g_slotUnitCounter = 0;
+static uint16_t lastReceivedData = 0;
+static char g_uartRecvBuff[4] = {0};
+static char g_uartTrasBuff[4] = {0};
+static bool g_slotStopCounter = false;
+static bool g_afterUartWork = false;
+static bool g_preventRepeatedUart = true;
+static int g_energyMode = energy_office_01;
+static int g_synIndex = 0;
+static uint16_t g_extraDelayCounter = 0;
+static uint8_t g_reCounter = 0;
+static bool g_uartTerminalFlag = false;
+static bool g_extraDelayIndicator = false;
+static bool g_powerOff = false;
 static uint16_t g_reUartData = 0;
 static int16_t g_crcCode = 0;
 
@@ -171,20 +172,46 @@ int gaussianMixtureRand(int num_components, int mu[], int sigma[], double weight
     return (int)fmax(fmin(mixture_value, max), min); // Ensure generated integer is within [min, max]
 }
 // Set energy models
-int setg_energyModel(int g_energyModel)
+int set_energyModel(int g_energyModel)
 {
-    if (g_energyMode == COORDINATOR_freeBeacon)
+    int retValue = 0;
+    if (g_energyMode == energy_office_01)
     {
-        return 7;
+        if (g_office1_index == g_office1_length)
+        {
+            g_office1_index = 0;
+        }
+        retValue = office_1[g_office1_index];
+        g_office1_index = g_office1_index + 1;
     }
-    else if (g_energyMode == COORDINATOR_pulsar)
+    else if (g_energyMode == energy_office_02)
     {
-        return 31;
+        if (g_office2_index == g_office2_length)
+        {
+             g_office2_index = 0;
+        }
+        retValue = office_2[g_office2_index];
+        g_office2_index = g_office2_index + 1;
+    }
+    else if (g_energyMode == energy_stairs_01)
+    {
+        if (g_stairs1_index == g_stairs1_length)
+        {
+            g_stairs1_index = 0;
+        }
+        retValue = stairs_1[g_stairs1_index];
+        g_stairs1_index = g_stairs1_index + 1;
     }
     else
     {
-        return generateRandomInt(40, 120);
+        if (g_stairs2_index == g_stairs2_length)
+        {
+            g_stairs2_index = 0;
+        }
+        retValue = stairs_2[g_stairs2_index];
+        g_stairs2_index = g_stairs2_index + 1;
     }
+    return retValue;
 }
 
 uint16_t combineBytes2(char arr[])
@@ -192,17 +219,7 @@ uint16_t combineBytes2(char arr[])
     return ((uint16_t)arr[0] << 8) | arr[1];
 }
 
-static void uartAction();
-static void uartReceive()
-{
-    UCA3IE |= UCRXIE; // Enable USCI_A3 RX interrupt
-    __bis_SR_register(GIE);
-    while (g_reCounter < 4)
-    {
-    }
-    g_reCounter = 0;
-    uartAction();
-}
+
 
 static void uartTransmit(uint16_t num)
 {
@@ -270,11 +287,9 @@ static void uartAction()
     {
         lastReceivedData = g_reUartData;
         g_reUartData = g_reUartData - 0xafff;
-        if ((g_synIndex < MAX_SYN_SET) && (g_reUartData > g_synIndex))
+        if (g_synIndex < MAX_ENCOUNTER_THRESHOLD)
         {
-            g_synSet[g_synIndex] = g_systemCounter;
             g_synIndex = g_synIndex + 1;
-            g_systemCounter = 0;
         }
         else
         {
@@ -284,18 +299,32 @@ static void uartAction()
     }
     else
     {
-        if (g_sleepCounter == 0)
+        if (g_extraDelayCounter == 0)
         {
-            g_sleepCounter = g_reUartData * SLOT_AMPLIFIER;
-
-            if (g_sleepCounter > 1000)
-            {
-                __no_operation();
-            }
+            g_extraDelayCounter = g_reUartData * SLOT_AMPLIFIER;
         }
         lastReceivedData = g_reUartData;
         g_uartTerminalFlag = true;
     }
+}
+
+
+static void uartReceive()
+{
+    UCA3IE |= UCRXIE; // Enable USCI_A3 RX interrupt
+    __bis_SR_register(GIE);
+    while (g_reCounter < 4)
+    {
+    }
+    g_reCounter = 0;
+    uartAction();
+}
+
+
+static void mosfetSwitch()
+{
+    P1OUT ^= BIT2;
+    P6SEL0 ^= BIT0;
 }
 
 int main(void)
@@ -305,76 +334,82 @@ int main(void)
     setTimer();
     initGPIO();
     crcInit();
-    srand(time(NULL));
-    chargeCycles = setg_energyModel(g_energyMode);
+    chargeCycles = set_energyModel(g_energyMode);
     g_slotUnitCounter = (chargeCycles + 1) * SLOT_AMPLIFIER;
     //***************************************
     TA0CCTL0 = CCIE; // TACCR0 interrupt enabled
     TA0CCR0 = 0;
     TA0CTL = TASSEL__SMCLK | MC__CONTINOUS; // SMCLK, continuous mode
-    __bis_SR_register(GIE);
+    __bis_SR_register(GIE); // enable interruption
     initUART();
-    P6SEL0 ^= BIT0;
-    while (g_uartSwitch)
+    P6SEL0 ^= BIT0; // for controlling mosfet
+    while (true) // Starting energy condition emulation
     {
         if (g_slotUnitCounter == 0)
         {
-            P1OUT ^= BIT2;
-            P6SEL0 ^= BIT0;
+            // Calculate the charging time in next round.
+            mosfetSwitch();
             __no_operation();
             g_preventRepeatedUart = true;
             g_uartTerminalFlag = false;
             lastReceivedData = 0;
-            chargeCycles = setg_energyModel(g_energyMode);
+            chargeCycles = set_energyModel(g_energyMode);
             g_slotUnitCounter = (chargeCycles + 1) * SLOT_AMPLIFIER;
-            if ((g_powerOff == true) && (g_energyMode == RANDOM))
+            if (g_powerOff == true)
             {
                 int prob = generateRandomInt(1, 100);
-                if (prob <= 1)
+                if (prob <= 5) // power off with 5% probability
                 {
-                    g_slotUnitCounter = g_slotUnitCounter + SLOT_AMPLIFIER * generateRandomInt(40, 120);
+                    g_slotUnitCounter = g_slotUnitCounter + SLOT_AMPLIFIER * generateRandomInt(0, 50);
                 }
             }
         }
-
-        if ((g_afterUartWork == true) && (g_sleepCounter == 0) && (g_energyMode != COORDINATOR))
+        else if ((g_afterUartWork == true) && (g_extraDelayCounter == 0))
         {
+            // Do delay operations if the node received the feedback from the main board.
             g_afterUartWork = false;
-            P1OUT ^= BIT2;
-            P6SEL0 ^= BIT0;
+            mosfetSwitch(); // turn on switch again after delay
             __no_operation();
+            /*
+             * Initailing uart time do not be regarded
+             * as the charging cycle of an IC node
+             */
             g_slotStopCounter = true;
-            __delay_cycles(INITIAL_TIME);
+            __delay_cycles(INITIAL_UART_TIME);
             uartTransmit(0xffff);
             g_slotStopCounter = false;
+
             __no_operation();
         }
-        if ((g_slotUnitCounter == SLOT_AMPLIFIER) && (g_preventRepeatedUart == true))
+        else if ((g_slotUnitCounter == SLOT_AMPLIFIER) && (g_preventRepeatedUart == true))
         {
             __no_operation();
-            P1OUT ^= BIT2;
-            P6SEL0 ^= BIT0;
+            mosfetSwitch(); // Turn the switch
             g_preventRepeatedUart = false;
-            if (g_energyMode != COORDINATOR)
+
+            // do not consider the the uart time as the part of the working slot
+            g_slotStopCounter = true;
+            g_extraDelayIndicator = false;
+            __delay_cycles(INITIAL_UART_TIME);
+            uartTransmit(chargeCycles);
+            uartReceive();
+            uartReceive();
+            __bis_SR_register(GIE);
+            g_slotStopCounter = false; // ending the uart process
+
+
+            if (g_extraDelayCounter > 0)
             {
-                g_slotStopCounter = true;
-                g_sleepIndicator = false;
-                __delay_cycles(INITIAL_TIME);
-                uartTransmit(chargeCycles);
-                uartReceive();
-                uartReceive();
-                __bis_SR_register(GIE);
-                g_slotStopCounter = false;
-                if (g_sleepCounter > 0)
-                {
-                    g_afterUartWork = true;
-                    P1OUT ^= BIT2;
-                    P6SEL0 ^= BIT0;
-                    g_sleepIndicator = true;
-                    __no_operation();
-                }
+                g_afterUartWork = true;
+                mosfetSwitch(); // turn off switch for delaying some time
+                g_extraDelayIndicator = true;
                 __no_operation();
             }
+            __no_operation();
+        }
+        else
+        {
+            __no_operation();
         }
     }
 }
@@ -390,15 +425,14 @@ void __attribute__((interrupt(TIMER0_A0_VECTOR))) Timer0_A0_ISR(void)
 #endif
 {
     TA0CCR0 += COUNTER_UNIT; // Add Offset to TA0CCR0
-    if ((g_slotUnitCounter > 0) && (g_sleepCounter == 0) && (g_slotStopCounter == false))
+    if ((g_slotUnitCounter > 0) && (g_extraDelayCounter == 0) && (g_slotStopCounter == false))
     {
         g_slotUnitCounter--;
     }
-    if ((g_sleepCounter > 0) && (g_sleepIndicator == true))
+    if ((g_extraDelayCounter > 0) && (g_extraDelayIndicator == true))
     {
-        g_sleepCounter--;
+        g_extraDelayCounter--;
     }
-    g_systemCounter = g_systemCounter + 1;
     TA0CCR0 = 0;
 }
 
