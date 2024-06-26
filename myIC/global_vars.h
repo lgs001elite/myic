@@ -10,7 +10,6 @@
 #include <stdint.h>
 #include <stdbool.h>
 #include "macro.h"
-#include "coordinatorList.h"
 
 #define HISLEN 20
 
@@ -18,7 +17,6 @@ char g_dest_location;
 char g_transBuffer[SPI_DATA_LEN];
 int8_t g_preDriftTime;
 char g_receiveBuffer[SPI_DATA_LEN];
-char g_nodeType;
 
 extern bool g_ifFindCoordinator;
 SPI_Mode MasterMode;
@@ -52,6 +50,5 @@ extern uint8_t g_packet_id;
 extern uint32_t g_systimeCounter;
 
 extern bool g_ifAdjustDrift;
-Hashmap map;
 
 #endif /* GLOBAL_VARS_H_ */

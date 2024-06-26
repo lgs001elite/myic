@@ -23,8 +23,6 @@ spi.obj: ../macro.h
 spi.obj: ../pins.h
 spi.obj: ../global_func.h
 spi.obj: ../global_vars.h
-spi.obj: ../coordinatorList.h
-spi.obj: C:/ti/ccs1240/ccs/tools/compiler/ti-cgt-msp430_21.6.1.LTS/include/stdlib.h
 spi.obj: ../routingRx.h
 spi.obj: ../routingTx.h
 spi.obj: ../crc.h
@@ -74,10 +72,6 @@ C:/ti/ccs1240/ccs/tools/compiler/ti-cgt-msp430_21.6.1.LTS/include/sys/_stdint.h:
 ../global_func.h:
 
 ../global_vars.h:
-
-../coordinatorList.h:
-
-C:/ti/ccs1240/ccs/tools/compiler/ti-cgt-msp430_21.6.1.LTS/include/stdlib.h:
 
 ../routingRx.h:
 

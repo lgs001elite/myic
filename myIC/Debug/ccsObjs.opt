@@ -1,5 +1,4 @@
 "./bonito.obj"
-"./coordinator.obj"
 "./crc.obj"
 "./distribution.obj"
 "./find.obj"

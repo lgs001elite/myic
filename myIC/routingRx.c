@@ -15,7 +15,6 @@
 #include "global_vars.h"
 #include "uartHex.h"
 #include "uart.h"
-#include "coordinator.h"
 
 void updateCRC(char relayPkt[])
 {
@@ -28,16 +27,6 @@ void updateCRC(char relayPkt[])
     int16_t crc_result = crcFast(crc_input, 31);
     relayPkt[31] = (crc_result & 0xFF00) >> 8;
     relayPkt[32] = (crc_result & 0x00FF);
-
-    while (relayPkt[31] >= 0x7F)
-    {
-        relayPkt[31] -= 0x7F;
-    }
-
-    while (relayPkt[32] >= 0x7F)
-    {
-        relayPkt[32] -= 0x7F;
-    }
 }
 
 /** for checking the entire file  **/
@@ -64,17 +53,9 @@ bool check_completeness(char *receivedData)
     char temp1 = receivedData[29];
     char receive = receivedData[30];
 
-    while (res1 >= 0x7F)
-    {
-        res1 -= 0x7F;
-    }
     if (res1 != temp1)
-        {
-            return false;
-        }
-    while (result >= 0x7F)
     {
-        result -= 0x7F;
+        return false;
     }
 
     if (result != receive)
@@ -135,15 +116,15 @@ void broad_from_coordinator(char *receivedData)
         {
             return;
         }
-        if (distributedLoc != globalLoc)
+        if (g_distributedLoc != globalLoc)
         {
-            if (globalLoc > distributedLoc)
+            if (globalLoc > g_distributedLoc)
             {
-                g_biasForAlign = 30 - globalLoc + distributedLoc;
+                g_biasForAlign = 30 - globalLoc + g_distributedLoc;
             }
             else
             {
-                g_biasForAlign = distributedLoc - globalLoc;
+                g_biasForAlign = g_distributedLoc - globalLoc;
             }
         }
     }
@@ -151,11 +132,6 @@ void broad_from_coordinator(char *receivedData)
 
 void receiveDataFromNordic()
 {
-    if ((g_receiveBuffer[3] == 0x33) && (g_receiveBuffer[4] == 0x44) && (g_receiveBuffer[5] == 0x55))
-    {
-        GPIO_MONINOR_OUT1 ^= GPIO_MONITOR_PIN3;
-        return;
-    }
     if ((g_receiveBuffer[0] != 0x1e) || (g_receiveBuffer[1] != 0x17))
     {
         return;
@@ -171,7 +147,7 @@ void receiveDataFromNordic()
         __no_operation();
         return;
     }
-    if ((g_nodeType == ICNODE) && (g_ICListen == true))
+    if ((g_ICListen == true))
     {
         return;
     }
@@ -180,19 +156,16 @@ void receiveDataFromNordic()
     char sender_id = g_receiveBuffer[5];
 
     // Rewrite from here
-    if (g_nodeType == ICNODE)
+    if (sender_dataType == PACKAGE_PACKET)
     {
-        if (sender_dataType == PACKAGE_PACKET)
-        {
-            data_from_ic(g_receiveBuffer);
-        }
-        else if (sender_dataType == PACKAGE_ACK)
-        {
-            ack_from_ic(g_receiveBuffer);
-        }
-        else
-        {
-            broad_from_coordinator(g_receiveBuffer);
-        }
+        data_from_ic(g_receiveBuffer);
+    }
+    else if (sender_dataType == PACKAGE_ACK)
+    {
+        ack_from_ic(g_receiveBuffer);
+    }
+    else
+    {
+        broad_from_coordinator(g_receiveBuffer);
     }
 }

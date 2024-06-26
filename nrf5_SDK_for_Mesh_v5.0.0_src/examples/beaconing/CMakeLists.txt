@@ -2,8 +2,6 @@ set(target "beaconing_${PLATFORM}_${SOFTDEVICE}")
 
 add_executable(${target}
     "${CMAKE_CURRENT_SOURCE_DIR}/src/main.c"
-    "${CMAKE_CURRENT_SOURCE_DIR}/src/spis.c"
-    "${CMAKE_CURRENT_SOURCE_DIR}/src/m2s.c"
     "${CMAKE_CURRENT_SOURCE_DIR}/src/crc.c"
     "${CMAKE_SOURCE_DIR}/mesh/stack/src/mesh_stack.c"
     "${CMAKE_SOURCE_DIR}/examples/common/src/mesh_provisionee.c"

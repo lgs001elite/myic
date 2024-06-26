@@ -6,6 +6,7 @@ set(WEAK_SOURCE_FILES
 add_subdirectory("common")
 add_subdirectory("beaconing")
 add_subdirectory("coordinator")
+add_subdirectory("beacon")
 add_subdirectory("pb_remote")
 add_subdirectory("provisioner")
 

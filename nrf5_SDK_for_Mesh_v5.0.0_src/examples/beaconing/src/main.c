@@ -20,11 +20,24 @@
 #include "nrf_mesh_configure.h"
 #include "ad_type_filter.h"
 #include "define_broadcast_packet.h"
-#include "spis.h"
-#include "m2s.h"
 #include "crc.h"
-#include "public.h"
+#include "nrf_drv_spis.h"
 
+#define BROADCASTLEN 31
+
+#define APP_SCHED_EVENT_SIZE 12
+#define APP_SCHED_QUEUE_SIZE 32
+
+#define SPIS_INSTANCE 1 /**< SPIS instance index. */
+
+const nrf_drv_spis_t spis = NRF_DRV_SPIS_INSTANCE(SPIS_INSTANCE);
+static char g_rx_buf_spi_from_boards[BROADCASTLEN] = {0};
+static char g_tx_buf_spi_to_boards[BROADCASTLEN] = {0};
+
+bool spis_xfer_done = false;
+
+static bool g_received_success_flag_from_board = false;
+APP_TIMER_DEF(g_my_timer_counter);
 
 #if defined(NRF51) && defined(NRF_MESH_STACK_DEPTH)
 #include "stack_depth.h"
@@ -33,33 +46,26 @@
 #define ADVERTISER_BUFFER_SIZE (512)
 bool              g_if_sendNext          = false;
 advertiser_t      m_discovery_advertiser = {0};
-uint8_t           m_adv_buffer_discovery[ADVERTISER_BUFFER_SIZE]; 
-void              adv_init(void);
+char m_adv_buffer_discovery[ADVERTISER_BUFFER_SIZE];
 adv_packet_t  *   p_broad_packet         = NULL;
-bool listenSwitch = false;
-bool sendSwitch = false;
-uint8_t listeningTimeout = 0;
+static bool g_listenSwitch = false;
+static bool g_sendSwitch = false;
+static bool g_receivedMessage = false;
 
-void send2bearer(advertiser_t *p_adv, uint8_t *adv_packet)
+static void send2bearer(advertiser_t *p_adv, char *adv_packet)
 {
     p_broad_packet = advertiser_packet_alloc(p_adv, BLE_ADV_PACKET_PAYLOAD_MAX_LENGTH);
     if (p_broad_packet)
     {
         memcpy(p_broad_packet->packet.payload, adv_packet, BLE_ADV_PACKET_PAYLOAD_MAX_LENGTH);
-        p_broad_packet->config.repeats = 3;
+        p_broad_packet->config.repeats = 1;
         advertiser_packet_send(p_adv, p_broad_packet);
     }
 }
 
-void rx_cb(const nrf_mesh_adv_packet_rx_data_t * p_rx_data)
+void callback_rx_cb(const nrf_mesh_adv_packet_rx_data_t *p_rx_data)
 {
-    __LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "step7\n");
-    if (listeningTimeout > 100)
-    {
-        nrf_mesh_rx_cb_clear();
-        listenSwitch = false;
-    }
-    listeningTimeout = listeningTimeout + 1;
+    __LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "-----A message comes-----\n");
     if (p_rx_data->p_payload[1] != BLE_GAP_AD_TYPE_PUBLIC_TARGET_ADDRESS)
     {
         return;
@@ -68,37 +74,36 @@ void rx_cb(const nrf_mesh_adv_packet_rx_data_t * p_rx_data)
     {
         return;
     }
-    for (uint8_t i = 0; i < BROADCASTLEN; i++)
+    for (int i = 0; i < BROADCASTLEN; i++)
     {
-        m_tx_buf_spi[i] = p_rx_data->p_payload[i];
+        g_tx_buf_spi_to_boards[i] = p_rx_data->p_payload[i];
     }
-   // bsp_board_led_invert(0);
-    __LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "step8\n");
+    g_receivedMessage = true;
+    __LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "-----A message received-----\n");
 }
 
-static void callBackAfterFinish()
+static void callBack_afterBLETRans()
 {
-    listenSwitch = true;
-    listeningTimeout = 0;
-    sendSwitch = false;
-    nrf_mesh_rx_cb_set(rx_cb);
-    __LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "step9\n")
-    // nrf_mesh_rx_cb_clear();
+    g_listenSwitch = true;
+    g_sendSwitch = false;
+    nrf_mesh_rx_cb_set(callback_rx_cb);
+    __LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "-----Callback functions after the advertising-----\n")
 }
 
-void adv_init(void)
+void callback_receiver_work_cycle_switch(void)
 {
-    advertiser_instance_init(&m_discovery_advertiser, callBackAfterFinish, m_adv_buffer_discovery, ADVERTISER_BUFFER_SIZE);
+    nrf_mesh_rx_cb_clear();
+    g_listenSwitch = false;
 }
 
-void node_reset(void)
+static void node_reset(void)
 {
     __LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "----- Node reset  -----\n");
     hal_led_blink_ms(HAL_LED_MASK, LED_BLINK_INTERVAL_MS, LED_BLINK_CNT_RESET);
     mesh_stack_device_reset();
 }
 
-void config_server_evt_cb(const config_server_evt_t * p_evt)
+void callback_config_server_evt_cb(const config_server_evt_t *p_evt)
 {
     if (p_evt->type == CONFIG_SERVER_EVT_NODE_RESET)
     {
@@ -106,14 +111,13 @@ void config_server_evt_cb(const config_server_evt_t * p_evt)
     }
 }
 
-void mesh_init(void)
+static void mesh_init(void)
 {
     mesh_stack_init_params_t init_params =
-    {
-        .core.irq_priority       = NRF_MESH_IRQ_PRIORITY_LOWEST,
-        .core.lfclksrc           = DEV_BOARD_LF_CLK_CFG,
-        .models.config_server_cb = config_server_evt_cb
-    };
+        {
+            .core.irq_priority = NRF_MESH_IRQ_PRIORITY_THREAD,
+            .core.lfclksrc = DEV_BOARD_LF_CLK_CFG,
+            .models.config_server_cb = callback_config_server_evt_cb};
 
     uint32_t status = mesh_stack_init(&init_params, NULL);
     switch (status)
@@ -127,18 +131,11 @@ void mesh_init(void)
         default:
             ERROR_CHECK(status);
     }
-    /* Start listening for incoming packets */
-    // nrf_mesh_rx_cb_set(rx_cb);
-    /* Initialize the advertiser */
-    adv_init();
+    advertiser_instance_init(&m_discovery_advertiser, callBack_afterBLETRans, m_adv_buffer_discovery, ADVERTISER_BUFFER_SIZE);
 }
 
-void ble_initialize(void)
+static void mesh_initialize(void)
 {
-// ble ini
-#if defined(NRF51) && defined(NRF_MESH_STACK_DEPTH)
-    stack_depth_paint_stack();
-#endif
     ERROR_CHECK(app_timer_init());
     hal_leds_init();
     __LOG_INIT(LOG_SRC_APP, LOG_LEVEL_INFO, log_callback_rtt);
@@ -147,18 +144,127 @@ void ble_initialize(void)
     bearer_adtype_add(BLE_GAP_AD_TYPE_LE_BLUETOOTH_DEVICE_ADDRESS);
     ERROR_CHECK(mesh_stack_start());
     advertiser_enable(&m_discovery_advertiser);
+    ret_code_t ret = app_timer_create(&g_my_timer_counter, APP_TIMER_MODE_REPEATED, callback_receiver_work_cycle_switch);
+    APP_ERROR_CHECK(ret);
     __LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "Mesh initialization complete!\n");
 }
 
-void initializationSys(void)
+static bool check_completeness(char *receivedData)
 {
-    spi_initialize();
-    ble_initialize();
+    crcInit();
+    uint16_t crc_result = crcFast(receivedData, 29);
+    char res1 = (crc_result & 0xFF00) >> 8;
+    char res2 = (crc_result & 0x00FF);
+
+    if (res1 != receivedData[29])
+    {
+        return false;
+    }
+
+    if (res2 != receivedData[30])
+    {
+        return false;
+    }
+
+    return true;
+}
+
+void callback_spis_event_handler(nrf_drv_spis_event_t event)
+{
+    if (event.evt_type == NRF_DRV_SPIS_XFER_DONE)
+    {
+        __LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "Received messages from main boards\n");
+        if ((g_rx_buf_spi_from_boards[0] != 0x1e) || (g_rx_buf_spi_from_boards[1] != 0x17))
+        {
+            __LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "Flag: Received the invalid messages\n");
+        }
+        bool checkResult = check_completeness(g_rx_buf_spi_from_boards);
+        if (!checkResult)
+        {
+            __LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "CheckSum: Received the invalid messages%x\n", g_rx_buf_spi_from_boards[9]);
+        }
+        else
+        {
+            g_received_success_flag_from_board = true;
+        }
+        spis_xfer_done = true;
+    }
+}
+
+static void run_spi_ble_mesh(void)
+{
+    // close the receiving radio
+    nrf_mesh_rx_cb_clear();
+    ret_code_t ret;
+    while (true) // SPI-BLE_MESH repetitively
+    {
+        // First waiting for receiving messages from main boards
+        __LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "-----waiting for messages from main boards-----\n");
+        g_received_success_flag_from_board = false;
+        while (g_received_success_flag_from_board == false)
+        {
+            nrfx_spis_buffers_set(&spis, g_tx_buf_spi_to_boards, BROADCASTLEN, g_rx_buf_spi_from_boards, BROADCASTLEN);
+            while (!spis_xfer_done)
+            {
+                (void)sd_app_evt_wait();
+            }
+        }
+        __LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "-----finishing data handover-----\n");
+
+        __LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "-----broadcasting the messages from the main boards-----\n");
+        send2bearer(&m_discovery_advertiser, g_rx_buf_spi_from_boards);
+        g_sendSwitch = true;
+        while (g_sendSwitch)
+        {
+            bool done = nrf_mesh_process();
+            if (done)
+            {
+                callBack_afterBLETRans();
+                sd_app_evt_wait();
+            }
+        }
+        __LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "-----broadcasting process finished-----\n");
+
+        __LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "-----Starting the receiving process after broadcasting-----\n");
+        ret = app_timer_start(g_my_timer_counter, APP_TIMER_TICKS(5), NULL); // set a timer, 5ms
+        while (ret != NRF_SUCCESS)
+        {
+            ret = app_timer_start(g_my_timer_counter, APP_TIMER_TICKS(5), NULL); // set a timer, 5ms
+        }
+        g_receivedMessage = false;
+        while (g_listenSwitch)
+        {
+            (void)sd_app_evt_wait();
+        }
+        __LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "-----Finishing the receiving process after broadcasting-----\n");
+        if (g_receivedMessage == true)
+        {
+            __LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "-----Received packets-----\n");
+        }
+        __LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "Starting new round\n");
+        spis_xfer_done = false;
+        (void)sd_app_evt_wait();
+    }
+}
+
+static void spi_initialize(void)
+{
+    nrf_drv_spis_config_t spis_config = NRF_DRV_SPIS_DEFAULT_CONFIG;
+    spis_config.csn_pin = APP_SPIS_CS_PIN;
+    spis_config.miso_pin = APP_SPIS_MISO_PIN;
+    spis_config.mosi_pin = APP_SPIS_MOSI_PIN;
+    spis_config.sck_pin = APP_SPIS_SCK_PIN;
+    spis_config.irq_priority = 7;
+    APP_ERROR_CHECK(nrf_drv_spis_init(&spis, &spis_config, callback_spis_event_handler));
+    NRF_P0->PIN_CNF[APP_SPIS_MISO_PIN] =
+        (GPIO_PIN_CNF_DRIVE_H0H1 << GPIO_PIN_CNF_DRIVE_Pos) | (GPIO_PIN_CNF_INPUT_Connect << GPIO_PIN_CNF_INPUT_Pos) | (GPIO_PIN_CNF_DIR_Output << GPIO_PIN_CNF_DIR_Pos);
 }
 
 int main(void)
 {
-    initializationSys();
-    spis_execution();
+    spi_initialize();
+    mesh_initialize();
+    run_spi_ble_mesh();
+    return 0;
 }
 

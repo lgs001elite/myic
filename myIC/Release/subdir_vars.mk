@@ -10,7 +10,6 @@ CMD_SRCS += \
 
 C_SRCS += \
 ../bonito.c \
-../coordinator.c \
 ../crc.c \
 ../distribution.c \
 ../find.c \
@@ -27,7 +26,6 @@ C_SRCS += \
 
 C_DEPS += \
 ./bonito.d \
-./coordinator.d \
 ./crc.d \
 ./distribution.d \
 ./find.d \
@@ -44,7 +42,6 @@ C_DEPS += \
 
 OBJS += \
 ./bonito.obj \
-./coordinator.obj \
 ./crc.obj \
 ./distribution.obj \
 ./find.obj \
@@ -61,7 +58,6 @@ OBJS += \
 
 OBJS__QUOTED += \
 "bonito.obj" \
-"coordinator.obj" \
 "crc.obj" \
 "distribution.obj" \
 "find.obj" \
@@ -78,7 +74,6 @@ OBJS__QUOTED += \
 
 C_DEPS__QUOTED += \
 "bonito.d" \
-"coordinator.d" \
 "crc.d" \
 "distribution.d" \
 "find.d" \
@@ -95,7 +90,6 @@ C_DEPS__QUOTED += \
 
 C_SRCS__QUOTED += \
 "../bonito.c" \
-"../coordinator.c" \
 "../crc.c" \
 "../distribution.c" \
 "../find.c" \

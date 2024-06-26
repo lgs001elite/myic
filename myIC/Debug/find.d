@@ -19,8 +19,6 @@ find.obj: ../find.h
 find.obj: ../global_vars.h
 find.obj: C:/ti/ccs1240/ccs/tools/compiler/ti-cgt-msp430_21.6.1.LTS/include/stdbool.h
 find.obj: ../macro.h
-find.obj: ../coordinatorList.h
-find.obj: C:/ti/ccs1240/ccs/tools/compiler/ti-cgt-msp430_21.6.1.LTS/include/stdlib.h
 
 ../find.c:
 
@@ -59,8 +57,4 @@ C:/ti/ccs1240/ccs/tools/compiler/ti-cgt-msp430_21.6.1.LTS/include/machine/_limit
 C:/ti/ccs1240/ccs/tools/compiler/ti-cgt-msp430_21.6.1.LTS/include/stdbool.h:
 
 ../macro.h:
-
-../coordinatorList.h:
-
-C:/ti/ccs1240/ccs/tools/compiler/ti-cgt-msp430_21.6.1.LTS/include/stdlib.h:
 

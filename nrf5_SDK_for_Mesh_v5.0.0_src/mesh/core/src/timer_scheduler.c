@@ -66,11 +66,13 @@ static bool m_is_power_down_triggered;
 *****************************************************************************/
 static void timer_cb(timestamp_t timestamp)
 {
+    // __LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "----- timer cb  -----\n");
     bearer_event_flag_set(m_event_flag);
 }
 
-static void add_evt(timer_event_t* p_evt)
+static void add_evt(timer_event_t *p_evt)
 {
+    // __LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "----- add_evt  -----\n");
     if (m_scheduler.p_head == NULL ||
         TIMER_OLDER_THAN(p_evt->timestamp, m_scheduler.p_head->timestamp))
     {
@@ -96,6 +98,7 @@ static void add_evt(timer_event_t* p_evt)
 
 static void remove_evt(timer_event_t * p_evt)
 {
+    //__LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "----- remove_evt  -----\n");
     if (p_evt == m_scheduler.p_head)
     {
         m_scheduler.p_head = p_evt->p_next;
@@ -121,6 +124,7 @@ static void remove_evt(timer_event_t * p_evt)
 
 static void fire_timers(timestamp_t time_now)
 {
+    //__LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "----- fire_timers  -----\n");
     while (m_scheduler.p_head &&
             TIMER_OLDER_THAN(m_scheduler.p_head->timestamp, time_now + TIMER_MARGIN))
     {
@@ -163,6 +167,7 @@ static void fire_timers(timestamp_t time_now)
 
 static void setup_timeout(timestamp_t time_now)
 {
+    //__LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "----- set_timeout  -----\n");
     if (m_scheduler.p_head != NULL)
     {
         timer_start(m_scheduler.p_head->timestamp, timer_cb);
@@ -175,6 +180,7 @@ static void setup_timeout(timestamp_t time_now)
 
 static bool flag_event_cb(void)
 {
+    //__LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "----- flag_event_cb  -----\n");
     fire_timers(timer_now());
     setup_timeout(timer_now());
     return true;
@@ -185,6 +191,7 @@ static bool flag_event_cb(void)
 *****************************************************************************/
 void timer_sch_init(void)
 {
+    //__LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "----- timer_sch_init  -----\n");
     m_is_power_down_triggered = false;
     memset((scheduler_t*) &m_scheduler, 0, sizeof(m_scheduler));
     m_event_flag = bearer_event_flag_add(flag_event_cb);
@@ -193,6 +200,7 @@ void timer_sch_init(void)
 
 void timer_sch_schedule(timer_event_t* p_timer_evt)
 {
+    //__LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "----- timer_sch_schedule  -----\n");
     NRF_MESH_ASSERT_DEBUG(!m_is_power_down_triggered);
     NRF_MESH_ASSERT_DEBUG(bearer_event_in_correct_irq_priority());
     NRF_MESH_ASSERT(p_timer_evt != NULL);
@@ -206,6 +214,7 @@ void timer_sch_schedule(timer_event_t* p_timer_evt)
 
 void timer_sch_abort(timer_event_t* p_timer_evt)
 {
+    //__LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "----- timer_sch_abort  -----\n");
     NRF_MESH_ASSERT_DEBUG(bearer_event_in_correct_irq_priority());
     NRF_MESH_ASSERT(p_timer_evt != NULL);
     remove_evt(p_timer_evt);
@@ -223,17 +232,19 @@ void timer_sch_reschedule(timer_event_t* p_timer_evt, timestamp_t new_timeout)
     p_timer_evt->timestamp = new_timeout;
     add_evt(p_timer_evt);
     setup_timeout(timer_now());
-    __LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "timer_sch_reschedule\n")
+    //__LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "timer_sch_reschedule\n")
 }
 
 bool timer_sch_is_scheduled(const timer_event_t * p_timer_evt)
 {
+    // __LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "----- is scheduled  -----\n");
     return (p_timer_evt->state == TIMER_EVENT_STATE_ADDED ||
             p_timer_evt->state == TIMER_EVENT_STATE_IN_CALLBACK);
 }
 
 void timer_sch_stop(void)
 {
+    // __LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "----- schduler stop  -----\n");
     m_is_power_down_triggered = true;
     m_scheduler.p_head = NULL;
     timer_stop();

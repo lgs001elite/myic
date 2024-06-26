@@ -119,16 +119,6 @@ void update_crc()
     int16_t crc_result = getCRC(crc_input);
     g_transBuffer[29] = (crc_result & 0xFF00) >> 8;
     g_transBuffer[30] = (crc_result & 0x00FF);
-
-    while (g_transBuffer[29] >= 0x7F)
-    {
-        g_transBuffer[29] -= 0x7F;
-    }
-
-    while (g_transBuffer[30] >= 0x7F)
-    {
-        g_transBuffer[30] -= 0x7F;
-    }
 }
 
 int findMax( int arr[], char n)

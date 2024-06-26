@@ -23,10 +23,6 @@
 #include "global_func.h"
 #include "global_vars.h"
 #include "uartHex.h"
-#include "coordinator.h"
-
-#pragma PERSISTENT(g_locTable)
-HashTable *g_locTable;
 
 #pragma PERSISTENT(g_ifFindCoordinator)
 bool g_ifFindCoordinator = false;
@@ -46,11 +42,8 @@ uint16_t g_adjustUnits = 0;
 #pragma PERSISTENT(g_accuCharge)
     char g_accuCharge = 0;
 
-#pragma PERSISTENT(g_globalLoc)
-    uint8_t g_globalLoc = 0
-
 #pragma PERSISTENT(g_systimeCounter)
-        uint32_t g_systimeCounter = 0;
+    uint32_t g_systimeCounter = 0;
 
 #pragma PERSISTENT(g_connectionLen)
     int g_connectionLen = 0;
@@ -90,9 +83,6 @@ uint16_t g_adjustUnits = 0;
 
 #pragma PERSISTENT(swift_inc)
     uint16_t swift_inc = 0;
-
-    // #pragma PERSISTENT(g_currentLoc)
-    // int8_t g_currentLoc = 0;
 
 #pragma PERSISTENT(g_gotoLoc)
     bool g_gotoLoc = false;
@@ -156,19 +146,10 @@ void var_initialization()
     g_dest_location = 0x03;
     g_MatchNextHop = false;
     g_uartSwitch = true;
-    g_nodeType = ICNODE;
     g_synStrategy = PULSAR;
     g_preDriftTime = 0;
     g_lastData = 0;
     g_ICListen = true;
-    if (g_nodeType == COORDINATOR)
-    {
-        if (g_synStrategy == FREEBEACON)
-        {
-            g_locTable = create_table();
-        }
-        g_currentNodeLoc = 0;
-    }
 }
 
 void timer_counter()
@@ -188,11 +169,8 @@ void main(void)
     timer_counter();
     __bis_SR_register(GIE);
     // uart
-    if (g_nodeType == ICNODE)
-    {
-        initUART();
-        uart_entry();
-    }
+    // initUART();
+    //  uart_entry();
     // SPI
     g_ICListen = false;
     // Close uart trans channel

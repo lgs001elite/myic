@@ -18,7 +18,9 @@ uart.obj: C:/ti/ccs1240/ccs/tools/compiler/ti-cgt-msp430_21.6.1.LTS/include/mach
 uart.obj: C:/ti/ccs1240/ccs/tools/compiler/ti-cgt-msp430_21.6.1.LTS/include/sys/timespec.h
 uart.obj: C:/ti/ccs1240/ccs/tools/compiler/ti-cgt-msp430_21.6.1.LTS/include/sys/_timespec.h
 uart.obj: C:/ti/ccs1240/ccs/tools/compiler/ti-cgt-msp430_21.6.1.LTS/include/xlocale/_time.h
-uart.obj: ../swift.h
+uart.obj: ../uart.h
+uart.obj: ../macro.h
+uart.obj: ../pins.h
 uart.obj: ../global_func.h
 uart.obj: C:/ti/ccs1240/ccs/tools/compiler/ti-cgt-msp430_21.6.1.LTS/include/stdint.h
 uart.obj: C:/ti/ccs1240/ccs/tools/compiler/ti-cgt-msp430_21.6.1.LTS/include/_stdint40.h
@@ -27,16 +29,10 @@ uart.obj: C:/ti/ccs1240/ccs/tools/compiler/ti-cgt-msp430_21.6.1.LTS/include/mach
 uart.obj: C:/ti/ccs1240/ccs/tools/compiler/ti-cgt-msp430_21.6.1.LTS/include/sys/_stdint.h
 uart.obj: ../global_vars.h
 uart.obj: C:/ti/ccs1240/ccs/tools/compiler/ti-cgt-msp430_21.6.1.LTS/include/stdbool.h
-uart.obj: ../macro.h
-uart.obj: ../coordinatorList.h
-uart.obj: C:/ti/ccs1240/ccs/tools/compiler/ti-cgt-msp430_21.6.1.LTS/include/stdlib.h
-uart.obj: ../uart.h
-uart.obj: ../pins.h
 uart.obj: ../uartHex.h
 uart.obj: C:/ti/ccs1240/ccs/tools/compiler/ti-cgt-msp430_21.6.1.LTS/include/stdio.h
 uart.obj: C:/ti/ccs1240/ccs/tools/compiler/ti-cgt-msp430_21.6.1.LTS/include/stdarg.h
 uart.obj: ../crc.h
-uart.obj: ../coordinatorFind.h
 
 ../uart.c:
 
@@ -74,7 +70,11 @@ C:/ti/ccs1240/ccs/tools/compiler/ti-cgt-msp430_21.6.1.LTS/include/sys/_timespec.
 
 C:/ti/ccs1240/ccs/tools/compiler/ti-cgt-msp430_21.6.1.LTS/include/xlocale/_time.h:
 
-../swift.h:
+../uart.h:
+
+../macro.h:
+
+../pins.h:
 
 ../global_func.h:
 
@@ -92,16 +92,6 @@ C:/ti/ccs1240/ccs/tools/compiler/ti-cgt-msp430_21.6.1.LTS/include/sys/_stdint.h:
 
 C:/ti/ccs1240/ccs/tools/compiler/ti-cgt-msp430_21.6.1.LTS/include/stdbool.h:
 
-../macro.h:
-
-../coordinatorList.h:
-
-C:/ti/ccs1240/ccs/tools/compiler/ti-cgt-msp430_21.6.1.LTS/include/stdlib.h:
-
-../uart.h:
-
-../pins.h:
-
 ../uartHex.h:
 
 C:/ti/ccs1240/ccs/tools/compiler/ti-cgt-msp430_21.6.1.LTS/include/stdio.h:
@@ -109,6 +99,4 @@ C:/ti/ccs1240/ccs/tools/compiler/ti-cgt-msp430_21.6.1.LTS/include/stdio.h:
 C:/ti/ccs1240/ccs/tools/compiler/ti-cgt-msp430_21.6.1.LTS/include/stdarg.h:
 
 ../crc.h:
-
-../coordinatorFind.h:
 

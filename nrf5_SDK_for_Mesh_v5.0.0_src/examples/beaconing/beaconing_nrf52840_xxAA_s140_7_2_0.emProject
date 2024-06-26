@@ -33,8 +33,6 @@
 
     <folder Name="Application">
       <file file_name="src/main.c" />
-      <file file_name="src/spis.c" />
-      <file file_name="src/m2s.c" />
       <file file_name="src/crc.c" />
       <file file_name="../common/src/mesh_provisionee.c" />
       <file file_name="../common/src/simple_hal.c" />

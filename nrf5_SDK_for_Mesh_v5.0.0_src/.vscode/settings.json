@@ -1,0 +1,21 @@
+{
+    "files.associations": {
+        "nrf_mesh_dfu.h": "c",
+        "public.h": "c",
+        "crc.h": "c",
+        "define_broadcast_packet.h": "c",
+        "ad_type_filter.h": "c",
+        "nrf_mesh_configure.h": "c",
+        "example_common.h": "c",
+        "nrf_mesh_config_examples.h": "c",
+        "mesh_provisionee.h": "c",
+        "ble_softdevice_support.h": "c",
+        "mesh_stack.h": "c",
+        "mesh_app_utils.h": "c",
+        "advertiser.h": "c",
+        "log.h": "c",
+        "nrf_mesh.h": "c",
+        "simple_hal.h": "c",
+        "ble.h": "c"
+    }
+}

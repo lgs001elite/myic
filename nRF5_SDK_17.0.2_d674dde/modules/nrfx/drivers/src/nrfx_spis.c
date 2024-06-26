@@ -45,7 +45,7 @@
 #define NRFX_SPIS0_ENABLED 1
 #define NRFX_SPIS1_ENABLED 1
 #define NRFX_SPIS2_ENABLED 1
-//#define NRFX_SPIS3_ENABLED 1
+// #define NRFX_SPIS3_ENABLED 1
 
 #if NRFX_CHECK(NRFX_SPIS_ENABLED)
 #if !(NRFX_CHECK(NRFX_SPIS0_ENABLED) || \
@@ -387,7 +387,7 @@ nrfx_err_t nrfx_spis_buffers_set(nrfx_spis_t const * const p_instance,
                                  size_t                    rx_buffer_length)
 {
     NRFX_ASSERT(p_tx_buffer != NULL || tx_buffer_length == 0);
-    NRFX_ASSERT(p_rx_buffer != NULL || rx_buffer_length == 0);;
+    NRFX_ASSERT(p_rx_buffer != NULL || rx_buffer_length == 0);
 
     spis_cb_t * p_cb = &m_cb[p_instance->drv_inst_idx];
     nrfx_err_t err_code;
@@ -404,12 +404,13 @@ nrfx_err_t nrfx_spis_buffers_set(nrfx_spis_t const * const p_instance,
     if ((p_tx_buffer != NULL && !nrfx_is_in_ram(p_tx_buffer)) ||
         (p_rx_buffer != NULL && !nrfx_is_in_ram(p_rx_buffer)))
     {
+        //__LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "buffer size error\n");
         err_code = NRFX_ERROR_INVALID_ADDR;
         NRFX_LOG_WARNING("Function: %s, error code: %s.",
                          __func__,
                          NRFX_LOG_ERROR_STRING_GET(err_code));
-                         __LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "error code1, tx: %d, rx: %d, tx_buffer: %s,  rx_buffer: %s\n", nrfx_is_in_ram(p_tx_buffer),
-                         nrfx_is_in_ram(p_rx_buffer), p_tx_buffer, p_rx_buffer);
+        // __LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "error code1, tx: %d, rx: %d, tx_buffer: %s,  rx_buffer: %s\n", nrfx_is_in_ram(p_tx_buffer),
+        //                nrfx_is_in_ram(p_rx_buffer), p_tx_buffer, p_rx_buffer);
         return err_code;
     }
 
@@ -438,7 +439,7 @@ nrfx_err_t nrfx_spis_buffers_set(nrfx_spis_t const * const p_instance,
     }
 
     NRFX_LOG_INFO("Function: %s, error code: %s.", __func__, NRFX_LOG_ERROR_STRING_GET(err_code));
-    //__LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "error code2\n");
+    //__LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "error code: %d\n", err_code);
     return err_code;
 }
 

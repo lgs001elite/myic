@@ -42,16 +42,12 @@ main.obj: ../spi.h
 main.obj: ../pins.h
 main.obj: ../global_func.h
 main.obj: ../global_vars.h
-main.obj: ../coordinatorList.h
-main.obj: C:/ti/ccs1240/ccs/tools/compiler/ti-cgt-msp430_21.6.1.LTS/include/stdlib.h
 main.obj: ../uart.h
 main.obj: ../distribution.h
 main.obj: C:/ti/ccs1240/ccs/tools/compiler/ti-cgt-msp430_21.6.1.LTS/include/stdio.h
 main.obj: C:/ti/ccs1240/ccs/tools/compiler/ti-cgt-msp430_21.6.1.LTS/include/stdarg.h
 main.obj: ../joint_distribution.h
 main.obj: ../uartHex.h
-main.obj: ../coordinatorFind.h
-main.obj: ../swift.h
 
 ../main.c:
 
@@ -137,10 +133,6 @@ C:/ti/ccs1240/ccs/tools/compiler/ti-cgt-msp430_21.6.1.LTS/include/xlocale/_time.
 
 ../global_vars.h:
 
-../coordinatorList.h:
-
-C:/ti/ccs1240/ccs/tools/compiler/ti-cgt-msp430_21.6.1.LTS/include/stdlib.h:
-
 ../uart.h:
 
 ../distribution.h:
@@ -152,8 +144,4 @@ C:/ti/ccs1240/ccs/tools/compiler/ti-cgt-msp430_21.6.1.LTS/include/stdarg.h:
 ../joint_distribution.h:
 
 ../uartHex.h:
-
-../coordinatorFind.h:
-
-../swift.h:
 

@@ -94,8 +94,9 @@ static uint32_t input_param_check(const ad_listener_t * p_adl)
 
 void ad_listener_init(void)
 {
+    bearer_adtype_filtering_set(true);
     bearer_adtype_mode_set(AD_FILTER_WHITELIST_MODE);
-    bearer_adtype_filtering_set(false); // Modefied by Gaosheng, all types packets can come in
+    bearer_adtype_add(BLE_GAP_AD_TYPE_LE_BLUETOOTH_DEVICE_ADDRESS);
 
     NRF_MESH_SECTION_FOR_EACH(ad_listeners, const ad_listener_t, p_listener)
     {

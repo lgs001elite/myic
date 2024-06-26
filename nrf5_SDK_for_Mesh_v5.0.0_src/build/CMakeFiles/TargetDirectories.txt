@@ -96,6 +96,12 @@ C:/Users/glu250/Downloads/myic/nrf5_SDK_for_Mesh_v5.0.0_src/build/examples/coord
 C:/Users/glu250/Downloads/myic/nrf5_SDK_for_Mesh_v5.0.0_src/build/examples/coordinator/CMakeFiles/flash_coordinator_nrf52840_xxAA_s140_7.2.0.dir
 C:/Users/glu250/Downloads/myic/nrf5_SDK_for_Mesh_v5.0.0_src/build/examples/coordinator/CMakeFiles/edit_cache.dir
 C:/Users/glu250/Downloads/myic/nrf5_SDK_for_Mesh_v5.0.0_src/build/examples/coordinator/CMakeFiles/rebuild_cache.dir
+C:/Users/glu250/Downloads/myic/nrf5_SDK_for_Mesh_v5.0.0_src/build/examples/beacon/CMakeFiles/beacon_nrf52840_xxAA_s140_7.2.0.dir
+C:/Users/glu250/Downloads/myic/nrf5_SDK_for_Mesh_v5.0.0_src/build/examples/beacon/CMakeFiles/merge_beacon_nrf52840_xxAA_s140_7.2.0.dir
+C:/Users/glu250/Downloads/myic/nrf5_SDK_for_Mesh_v5.0.0_src/build/examples/beacon/CMakeFiles/app_flash_beacon_nrf52840_xxAA_s140_7.2.0.dir
+C:/Users/glu250/Downloads/myic/nrf5_SDK_for_Mesh_v5.0.0_src/build/examples/beacon/CMakeFiles/flash_beacon_nrf52840_xxAA_s140_7.2.0.dir
+C:/Users/glu250/Downloads/myic/nrf5_SDK_for_Mesh_v5.0.0_src/build/examples/beacon/CMakeFiles/edit_cache.dir
+C:/Users/glu250/Downloads/myic/nrf5_SDK_for_Mesh_v5.0.0_src/build/examples/beacon/CMakeFiles/rebuild_cache.dir
 C:/Users/glu250/Downloads/myic/nrf5_SDK_for_Mesh_v5.0.0_src/build/examples/pb_remote/CMakeFiles/edit_cache.dir
 C:/Users/glu250/Downloads/myic/nrf5_SDK_for_Mesh_v5.0.0_src/build/examples/pb_remote/CMakeFiles/rebuild_cache.dir
 C:/Users/glu250/Downloads/myic/nrf5_SDK_for_Mesh_v5.0.0_src/build/examples/pb_remote/client/CMakeFiles/pb_remote_client_nrf52840_xxAA_s140_7.2.0.dir

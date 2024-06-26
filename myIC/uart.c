@@ -1,18 +1,15 @@
 /*
  * uart.c
  *
- *  Created on: Dec 20, 2023
+ *  Created on: June 20, 2024
  *      Author: glu250
  */
-#include <msp430.h>
-// #include <stdbool.h>
+#include <msp430.h>>
 #include <stdlib.h>
 #include <time.h>
-#include "swift.h"
 #include "uart.h"
 #include "uartHex.h"
 #include "crc.h"
-#include "coordinatorFind.h"
 
 static bool reEntrance = true;
 static uint16_t receivedUart = 0;

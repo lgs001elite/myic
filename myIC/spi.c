@@ -13,7 +13,6 @@
 #include "routingRx.h"
 #include "routingTx.h"
 #include "crc.h"
-#include "coordinator.h"
 
 bool testSwitch = true;
 
@@ -31,7 +30,7 @@ static bool spi_sender_signal = false;
 void initSPI()
 {
     UCB1CTLW0 = UCSWRST;                                                                                   // **Put state machine in reset**
-    UCB1CTLW0 |= UCCKPL | UCMSB | UCSYNC | UCMST | UCSSEL__SMCLK_L | UCMODE0 | UCSTEM | UC7BIT_0 | UCCKPH; // Added by me
+    UCB1CTLW0 |= UCCKPL_H | UCMSB | UCSYNC | UCMST | UCSSEL__SMCLK_L | UC7BIT__8BIT | UCMODE0 | UCSTEM | UCCKPH; // Added by me
     UCB1BRW = 0x20;
     UCB1CTLW0 &= ~UCSWRST;
     UCB1IE |= UCRXIE;
@@ -41,14 +40,17 @@ void start_spi_process(void)
 {
     g_packet_id = g_packet_id + 1;
     g_packet_id = g_packet_id % 100;
-    while (1)
+    while (true)
     {
         receiveDataFromNordic();
         // If coordinator needs to reply info
         producePackets();
-        if (g_nodeType == ICNODE)
+        if ((g_currentNodeLoc == -1) && (g_synStrategy == FREEBEACON))
         {
-            g_transBuffer[4] = ICNODE;
+            g_transBuffer[3] = PACKAGE_BROAD;
+        }
+        else
+        {
             if (g_sendAck == true)
             {
                 g_transBuffer[3] = PACKAGE_ACK;
@@ -66,20 +68,22 @@ void start_spi_process(void)
                     g_nextNodeID = 0;
                 }
             }
-            g_transBuffer[2] = g_packet_id;
-            update_crc();
-            // For sending process
-            SLAVE_CS_OUT &= ~(SLAVE_CS_PIN);
-            g_transmitIndex = 0;
-            g_receiveIndex = 0;
-            while (g_transmitIndex < SPI_DATA_LEN)
-            {
-                spi_sender_signal = true;
-                UCB1IE |= UCTXIE;
-                __bis_SR_register(LPM0_bits + GIE);
-                __delay_cycles(100);
-            }
         }
+        g_transBuffer[2] = g_packet_id;
+        update_crc();
+        // For sending process
+        SLAVE_CS_OUT &= ~(SLAVE_CS_PIN);
+        g_transmitIndex = 0;
+        g_receiveIndex = 0;
+        while (g_transmitIndex < SPI_DATA_LEN)
+        {
+            spi_sender_signal = true;
+            UCB1IE |= UCTXIE;
+            __bis_SR_register(LPM0_bits + GIE);
+            __delay_cycles(100);
+        }
+        SLAVE_CS_OUT |= SLAVE_CS_PIN;
+        __no_operation();
     }
 }
 

@@ -29,13 +29,10 @@ routingRx.obj: C:/ti/ccs1240/ccs/tools/compiler/ti-cgt-msp430_21.6.1.LTS/include
 routingRx.obj: C:/ti/ccs1240/ccs/ccs_base/msp430/include/legacy.h
 routingRx.obj: ../global_func.h
 routingRx.obj: ../global_vars.h
-routingRx.obj: ../coordinatorList.h
-routingRx.obj: C:/ti/ccs1240/ccs/tools/compiler/ti-cgt-msp430_21.6.1.LTS/include/stdlib.h
 routingRx.obj: ../uartHex.h
 routingRx.obj: C:/ti/ccs1240/ccs/tools/compiler/ti-cgt-msp430_21.6.1.LTS/include/stdio.h
 routingRx.obj: C:/ti/ccs1240/ccs/tools/compiler/ti-cgt-msp430_21.6.1.LTS/include/stdarg.h
 routingRx.obj: ../uart.h
-routingRx.obj: ../swift.h
 
 ../routingRx.c:
 
@@ -95,10 +92,6 @@ C:/ti/ccs1240/ccs/ccs_base/msp430/include/legacy.h:
 
 ../global_vars.h:
 
-../coordinatorList.h:
-
-C:/ti/ccs1240/ccs/tools/compiler/ti-cgt-msp430_21.6.1.LTS/include/stdlib.h:
-
 ../uartHex.h:
 
 C:/ti/ccs1240/ccs/tools/compiler/ti-cgt-msp430_21.6.1.LTS/include/stdio.h:
@@ -106,6 +99,4 @@ C:/ti/ccs1240/ccs/tools/compiler/ti-cgt-msp430_21.6.1.LTS/include/stdio.h:
 C:/ti/ccs1240/ccs/tools/compiler/ti-cgt-msp430_21.6.1.LTS/include/stdarg.h:
 
 ../uart.h:
-
-../swift.h:
 

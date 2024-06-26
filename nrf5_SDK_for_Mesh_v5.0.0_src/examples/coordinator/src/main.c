@@ -21,44 +21,52 @@
 #include "ad_type_filter.h"
 #include "define_broadcast_packet.h"
 #include "crc.h"
-#include "public.h"
 #include "hal_timer.h"
 
-#define MS 1000
-#define WORK_PERIOD 100
-#define SLEEP_PERIOD WORK_PERIOD * 6
-#define WORKING_CYCLE 30
-#define BROADCASTLEN 32
-#define SPI_NONCRC_LEN 31
+#define WORKING_CYCLE_PULSAR 3
+#define WORKING_CYCLE_FREECON 30
 
-static uint8_t m_tx_buf_spi[31];
-static uint8_t m_rx_buf_spi[31];
+#define BROADCASTLEN 31
+#define WORK_LEN 5
+#define SLEEP_LEN (WORK_LEN * 6)
 
-static int current_loc_cycle = 0;
+#define PACKAGE_PACKET 0x01
+#define PACKAGE_ACK 0x02
+#define DUBBY 0x03
+#define PACKAGE_BROAD 0x04
+
+#define FIND 0
+#define FLYNC 1
+#define PULSAR 2
+#define FREEBEACON 3
+
+char g_synStrategy;
+
+static uint8_t m_tx_buf_spi[BROADCASTLEN];
+static uint8_t m_rx_buf_spi[BROADCASTLEN];
+
+static int g_current_loc_cycle = 0;
 static uint16_t g_chTimeSlots = 7; // if the syn scheme is pulsar. the value is 3.
 
-APP_TIMER_DEF(my_timer_counter);
-
-
+APP_TIMER_DEF(g_my_work_timer_counter);
+APP_TIMER_DEF(g_my_sleep_timer_counter);
 
 #define ADVERTISER_BUFFER_SIZE (512)
 static bool g_if_sendNext = false;
 advertiser_t m_discovery_advertiser = {0};
 static uint8_t m_adv_buffer_discovery[ADVERTISER_BUFFER_SIZE];
 adv_packet_t *p_broad_packet = NULL;
-uint8_t listeningTimeout = 0;
 static bool g_work_cycle_switch = false;
+static bool g_work_sleep_switch = false;
 
-static int16_t getCRC(unsigned char const message[])
+void callback_coordinator_work_cycle_switch(void *p_context)
 {
-    int16_t crc_result = crcFast(message, 29);
-    return crc_result;
+    g_work_cycle_switch = false;
 }
 
-
-static void coordinator_work_cycle_switch(void * p_context)
+void callback_coordinator_sleep_cycle_switch(void *p_context)
 {
-   g_work_cycle_switch = false;
+    g_work_sleep_switch = false;
 }
 
 static void send2bearer(advertiser_t *p_adv, uint8_t *adv_packet)
@@ -69,19 +77,13 @@ static void send2bearer(advertiser_t *p_adv, uint8_t *adv_packet)
         memcpy(p_broad_packet->packet.payload, adv_packet, BLE_ADV_PACKET_PAYLOAD_MAX_LENGTH);
         p_broad_packet->config.repeats = 3;
         advertiser_packet_send(p_adv, p_broad_packet);
-       // (void)sd_app_evt_wait();
     }
 }
 
 
 static void rx_cb(const nrf_mesh_adv_packet_rx_data_t *p_rx_data)
 {
-    __LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "step7\n");
-    if (listeningTimeout > 100)
-    {
-        nrf_mesh_rx_cb_clear();
-    }
-    listeningTimeout = listeningTimeout + 1;
+    __LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "-----A message comes-----\n");
     if (p_rx_data->p_payload[1] != BLE_GAP_AD_TYPE_PUBLIC_TARGET_ADDRESS)
     {
         return;
@@ -90,12 +92,11 @@ static void rx_cb(const nrf_mesh_adv_packet_rx_data_t *p_rx_data)
     {
         return;
     }
-    uint8_t i = 0;
-    for (; i < 32; i++)
+    for (uint8_t i = 0; i < BROADCASTLEN; i++)
     {
         m_rx_buf_spi[i] = p_rx_data->p_payload[i];
     }
-    __LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "step8\n");
+    __LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "-----A message received-----\n");
 }
 
 static void producePackets(void)
@@ -128,7 +129,7 @@ static void producePackets(void)
     {
         crc_input[i] = m_tx_buf_spi[i];
     }
-    int16_t crc_result = getCRC(crc_input);
+    int16_t crc_result = crcFast(crc_input, 29);
     m_tx_buf_spi[29] = (crc_result & 0xFF00) >> 8;
     m_tx_buf_spi[30] = (crc_result & 0x00FF);
 
@@ -192,7 +193,9 @@ static void ble_initialize(void)
 #endif
     ERROR_CHECK(app_timer_init());
     hal_leds_init();
-    ret_code_t ret = app_timer_create(&my_timer_counter, APP_TIMER_MODE_REPEATED, coordinator_work_cycle_switch);
+    ret_code_t ret = app_timer_create(&g_my_work_timer_counter, APP_TIMER_MODE_REPEATED, callback_coordinator_work_cycle_switch);
+    APP_ERROR_CHECK(ret);
+    ret = app_timer_create(&g_my_sleep_timer_counter, APP_TIMER_MODE_REPEATED, callback_coordinator_sleep_cycle_switch);
     APP_ERROR_CHECK(ret);
     __LOG_INIT(LOG_SRC_APP, LOG_LEVEL_INFO, log_callback_rtt);
     ble_stack_init();
@@ -205,7 +208,8 @@ static void ble_initialize(void)
 
 static bool check_completeness(char *receivedData)
 {
-    int16_t crc_result = getCRC(receivedData);
+    crcInit();
+    int16_t crc_result = crcFast(receivedData, 29);
     char res1 = (crc_result & 0xFF00) >> 8;
     char result = (crc_result & 0x00FF);
     char temp1 = receivedData[29];
@@ -235,30 +239,39 @@ static bool check_completeness(char *receivedData)
 static void ble_execution(void)
 {
     nrf_mesh_rx_cb_clear();
-    (void)sd_app_evt_wait();
-    while (1)
+    ret_code_t ret;
+    while (true)
     {
-        ret_code_t ret = app_timer_start(my_timer_counter, APP_TIMER_TICKS(5), NULL);
+        // Starting to sleep
+        ret = app_timer_start(g_my_work_timer_counter, APP_TIMER_TICKS(SLEEP_LEN), NULL);
+        APP_ERROR_CHECK(ret);
+        g_work_sleep_switch = true;
+        while (g_work_sleep_switch == true)
+        {
+            (void)sd_app_evt_wait();
+        }
+        // Starting to work
+        ret = app_timer_start(g_my_work_timer_counter, APP_TIMER_TICKS(WORK_LEN), NULL);
         APP_ERROR_CHECK(ret);
         g_work_cycle_switch = true;
         nrf_mesh_rx_cb_set(rx_cb); // starting to listening
-        current_loc_cycle = current_loc_cycle + 7 % WORKING_CYCLE;
-        current_loc_cycle = current_loc_cycle % WORKING_CYCLE;
-        uint32_t startCounter = app_timer_cnt_get();
+        g_current_loc_cycle = (g_current_loc_cycle + 7) % WORKING_CYCLE;
+        g_current_loc_cycle = g_current_loc_cycle % WORKING_CYCLE;
         while (g_work_cycle_switch == true)
         {
             if (check_completeness(m_rx_buf_spi) == true)
             {
                 producePackets();
-                m_tx_buf_spi[10] = current_loc_cycle;
+                m_tx_buf_spi[10] = g_current_loc_cycle;
                 send2bearer(&m_discovery_advertiser, m_tx_buf_spi); // sending acks
                 __LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "success\n");
             }
-            listeningTimeout = 0;
+            (void)sd_app_evt_wait();
         }
-        uint32_t endCounter = app_timer_cnt_get();
-        uint32_t time_interval = endCounter - startCounter;
-        __LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "value:%d\n", time_interval);
+        // uint32_t startCounter = app_timer_cnt_get();
+        // uint32_t endCounter = app_timer_cnt_get();
+        // uint32_t time_interval = endCounter - startCounter;
+        // __LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "value:%d\n", time_interval);
     }
 }
 
@@ -266,4 +279,5 @@ int main(void)
 {
     ble_initialize();
     ble_execution();
+    return 0;
 }

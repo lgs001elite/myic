@@ -1,6 +1,7 @@
 {
     "files.associations": {
         "stdio.h": "c",
-        "spis.h": "c"
+        "spis.h": "c",
+        "m2s.h": "c"
     }
 }

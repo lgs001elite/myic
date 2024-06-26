@@ -27,8 +27,6 @@ routingTx.obj: C:/ti/ccs1240/ccs/tools/compiler/ti-cgt-msp430_21.6.1.LTS/include
 routingTx.obj: C:/ti/ccs1240/ccs/ccs_base/msp430/include/legacy.h
 routingTx.obj: ../global_func.h
 routingTx.obj: ../global_vars.h
-routingTx.obj: ../coordinatorList.h
-routingTx.obj: C:/ti/ccs1240/ccs/tools/compiler/ti-cgt-msp430_21.6.1.LTS/include/stdlib.h
 routingTx.obj: ../crc.h
 
 ../routingTx.c:
@@ -84,10 +82,6 @@ C:/ti/ccs1240/ccs/ccs_base/msp430/include/legacy.h:
 ../global_func.h:
 
 ../global_vars.h:
-
-../coordinatorList.h:
-
-C:/ti/ccs1240/ccs/tools/compiler/ti-cgt-msp430_21.6.1.LTS/include/stdlib.h:
 
 ../crc.h:
 
