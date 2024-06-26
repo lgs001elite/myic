@@ -22,7 +22,6 @@ extern bool g_ifFindCoordinator;
 SPI_Mode MasterMode;
 uint16_t g_chTimeSlots;
 uint16_t g_lastData;
-bool g_ICListen;
 uint8_t g_nodeID;
 char g_nextNodeID;
 
@@ -38,7 +37,6 @@ extern int16_t g_MaxChargeCycles;
 extern char g_attConn;
 extern char g_queueLen;
 extern char g_rounds;
-extern char g_systemStatus;
 extern uint8_t g_distributedLoc;
 extern  int g_chargHis[HISLEN];
 extern char g_locNum;

@@ -16,29 +16,6 @@
 #include "uartHex.h"
 #include "uart.h"
 
-void updateCRC(char relayPkt[])
-{
-    char crc_input[31] = {0};
-    char i = 0;
-    for (; i < 31; i++)
-    {
-        crc_input[i] = relayPkt[i];
-    }
-    int16_t crc_result = crcFast(crc_input, 31);
-    relayPkt[31] = (crc_result & 0xFF00) >> 8;
-    relayPkt[32] = (crc_result & 0x00FF);
-}
-
-/** for checking the entire file  **/
-char *file_sha256(char *file, int32_t file_size)
-{
-    SHA256_CTX ctx;
-    sha256_init(&ctx);
-    sha256_update(&ctx, file, file_size);
-    sha256_final(&ctx, g_sha256_buf);
-    return &g_sha256_buf[0];
-}
-
 bool check_completeness(char *receivedData)
 {
     char rec_result[SPI_NONCRC_LEN];
@@ -66,28 +43,7 @@ bool check_completeness(char *receivedData)
     return true;
 }
 
-void data_from_ic(char *receivedData)
-{
-    char dest_id = g_receiveBuffer[6];
-    if (dest_id != g_nodeID)
-    {
-        return;
-    }
-    g_nextNodeID = g_receiveBuffer[5];
-    g_sendAck = true;
-}
-
-void ack_from_ic(char *receivedData)
-{
-    char dest_id = g_receiveBuffer[6];
-    if (dest_id != g_nodeID)
-    {
-        return;
-    }
-    g_receCounter = g_receCounter + 1;
-}
-
-void broad_from_coordinator(char *receivedData)
+static void received_broad_packet(char *receivedData)
 {
     uint8_t globalLoc = receivedData[10];
     if (g_currentNodeLoc == -1)
@@ -107,16 +63,11 @@ void broad_from_coordinator(char *receivedData)
             g_alignLoc = true;
         }
         g_currentNodeLoc = 0;
-        g_sendAck = true;
+        g_distributedNodeLoc = 0;
     }
     else
     {
-        char dest_id = g_receiveBuffer[6];
-        if (dest_id != g_nodeID)
-        {
-            return;
-        }
-        if (g_distributedLoc != globalLoc)
+        if ((g_distributedLoc != globalLoc) && (g_synStrategy == FREEBEACON))
         {
             if (globalLoc > g_distributedLoc)
             {
@@ -142,30 +93,29 @@ void receiveDataFromNordic()
         __no_operation();
         return;
     }
-    if (g_systemStatus == TRANSMIT)
-    {
-        __no_operation();
-        return;
-    }
-    if ((g_ICListen == true))
-    {
-        return;
-    }
     char sender_dataType = g_receiveBuffer[3];
     char sender_nodeType = g_receiveBuffer[4];
-    char sender_id = g_receiveBuffer[5];
+
+    char dest_id = g_receiveBuffer[6];
+    if (dest_id != g_nodeID)
+    {
+        return;
+    }
 
     // Rewrite from here
     if (sender_dataType == PACKAGE_PACKET)
     {
-        data_from_ic(g_receiveBuffer);
+        g_sendAck = true;
     }
     else if (sender_dataType == PACKAGE_ACK)
     {
-        ack_from_ic(g_receiveBuffer);
+        g_receCounter = g_receCounter + 1;
     }
     else
     {
-        broad_from_coordinator(g_receiveBuffer);
+        if (sender_nodeType == COORDINATOR)
+        {
+            received_broad_packet(g_receiveBuffer);
+        }
     }
 }

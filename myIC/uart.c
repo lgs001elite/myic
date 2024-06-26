@@ -103,16 +103,7 @@ int uniformInt(int min, int max)
 {
     return (rand() % (max - min + 1)) + min;
 }
-static void uartAction();
-void static uartReceive()
-{
-    while (g_receveuartNum != 4)
-    {
-        __no_operation();
-    }
-    g_receveuartNum = 0;
-    uartAction();
-}
+
 
 void static uartTrasmit(uint16_t num)
 {
@@ -134,18 +125,6 @@ void static uartTrasmit(uint16_t num)
     __bis_SR_register(GIE);
 }
 
-void uart_entry()
-{
-    while (g_uartSwitch == true)
-    {
-        UCA3IE |= UCRXIE;
-        __bis_SR_register(GIE);
-        uartReceive();
-        __no_operation();
-    }
-    __bis_SR_register(GIE); // re-enbale interrupt
-    __no_operation();
-}
 
 static void uartAction()
 {
@@ -208,7 +187,7 @@ static void uartAction()
     {
         delayTime = freeBeaconDelay(receivedUart);
     }
-    if (g_biasForAlign != 0)
+    if ((g_biasForAlign != 0) && (g_synStrategy == FREEBEACON))
     {
         delayTime = delayTime + g_biasForAlign;
         g_biasForAlign = 0;
@@ -224,6 +203,31 @@ static void uartAction()
     __no_operation();
     GPIO_MONINOR_OUT4 ^= GPIO_MONITOR_PIN4;
 }
+
+
+void static uartReceive()
+{
+    while (g_receveuartNum != 4)
+    {
+        __no_operation();
+    }
+    g_receveuartNum = 0;
+    uartAction();
+}
+
+void uart_entry()
+{
+    while (g_uartSwitch == true)
+    {
+        UCA3IE |= UCRXIE;
+        __bis_SR_register(GIE);
+        uartReceive();
+        __no_operation();
+    }
+    __bis_SR_register(GIE); // re-enbale interrupt
+    __no_operation();
+}
+
 // UART processsing
 #if defined(__TI_COMPILER_VERSION__) || defined(__IAR_SYSTEMS_ICC__)
 #pragma vector = USCI_A3_VECTOR

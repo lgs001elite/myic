@@ -72,9 +72,6 @@ uint16_t g_adjustUnits = 0;
 #pragma PERSISTENT(g_rounds)
     char g_rounds = MAXROUND;
 
-#pragma PERSISTENT(g_systemStatus)
-    char g_systemStatus = 0;
-
 #pragma PERSISTENT(g_distributedLoc)
     uint8_t g_distributedLoc = 0;
 
@@ -149,7 +146,6 @@ void var_initialization()
     g_synStrategy = PULSAR;
     g_preDriftTime = 0;
     g_lastData = 0;
-    g_ICListen = true;
 }
 
 void timer_counter()
@@ -169,10 +165,9 @@ void main(void)
     timer_counter();
     __bis_SR_register(GIE);
     // uart
-    // initUART();
-    //  uart_entry();
+    initUART();
+    uart_entry();
     // SPI
-    g_ICListen = false;
     // Close uart trans channel
     P6SEL0 ^= BIT0;
     P6SEL0 ^= BIT1;

@@ -3,6 +3,9 @@
         "stddef.h": "c",
         "coordinatorfind.h": "c",
         "global_vars.h": "c",
-        "stdlib.h": "c"
+        "stdlib.h": "c",
+        "global_func.h": "c",
+        "uart.h": "c",
+        "pins.h": "c"
     }
 }

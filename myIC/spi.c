@@ -45,7 +45,7 @@ void start_spi_process(void)
         receiveDataFromNordic();
         // If coordinator needs to reply info
         producePackets();
-        if ((g_currentNodeLoc == -1) && (g_synStrategy == FREEBEACON))
+        if (g_currentNodeLoc == -1)
         {
             g_transBuffer[3] = PACKAGE_BROAD;
         }
@@ -67,9 +67,10 @@ void start_spi_process(void)
                 {
                     g_nextNodeID = 0;
                 }
+                g_transBuffer[6] = g_nextNodeID; // updating the next hop id
             }
+            g_transBuffer[2] = g_packet_id;
         }
-        g_transBuffer[2] = g_packet_id;
         update_crc();
         // For sending process
         SLAVE_CS_OUT &= ~(SLAVE_CS_PIN);

@@ -40,6 +40,9 @@
 #define PULSAR 2
 #define FREEBEACON 3
 
+#define COORDINATOR 0x01
+#define ICNODE 0x02
+
 char g_synStrategy;
 
 static uint8_t m_tx_buf_spi[BROADCASTLEN];
@@ -104,8 +107,8 @@ static void producePackets(void)
     m_tx_buf_spi[0] = 0x1E;
     m_tx_buf_spi[1] = 0x17;
     m_tx_buf_spi[2] = 0x1; // For packetSeq
-    m_tx_buf_spi[3] = 0x4; // message type
-    m_tx_buf_spi[4] = 0x1; // node type
+    m_tx_buf_spi[3] = PACKAGE_BROAD; // message type
+    m_tx_buf_spi[4] = COORDINATOR;   // node type
     m_tx_buf_spi[5] = 0x30;
     m_tx_buf_spi[6] = 0x1;
     m_tx_buf_spi[7] = 0x1;
@@ -236,6 +239,18 @@ static bool check_completeness(char *receivedData)
     return true;
 }
 
+static void coordinator_role()
+{
+
+    if (g_synStrategy == FREEBEACON)
+    {
+        g_current_loc_cycle = (g_current_loc_cycle + 7) % WORKING_CYCLE;
+        g_current_loc_cycle = g_current_loc_cycle % WORKING_CYCLE;
+    }
+    m_tx_buf_spi[6] = m_rx_buf_spi[6]; // next id
+    m_tx_buf_spi[10] = g_current_loc_cycle;
+}
+
 static void ble_execution(void)
 {
     nrf_mesh_rx_cb_clear();
@@ -255,14 +270,12 @@ static void ble_execution(void)
         APP_ERROR_CHECK(ret);
         g_work_cycle_switch = true;
         nrf_mesh_rx_cb_set(rx_cb); // starting to listening
-        g_current_loc_cycle = (g_current_loc_cycle + 7) % WORKING_CYCLE;
-        g_current_loc_cycle = g_current_loc_cycle % WORKING_CYCLE;
         while (g_work_cycle_switch == true)
         {
             if (check_completeness(m_rx_buf_spi) == true)
             {
                 producePackets();
-                m_tx_buf_spi[10] = g_current_loc_cycle;
+                coordinator_role();
                 send2bearer(&m_discovery_advertiser, m_tx_buf_spi); // sending acks
                 __LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "success\n");
             }
