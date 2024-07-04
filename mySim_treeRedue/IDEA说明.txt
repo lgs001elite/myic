@@ -1,0 +1,16 @@
+1. 假设所有节点在一个充电范围内按一定规律变换着充电时间。
+2. 这样节点根据自己一段时间以来记录下的的充电时间取一个中位数作为固定的mapping值
+
+
+问题1： 如何确立充电范围？
+问题2： 如何确立变化规律？
+        根据Bonito的工作， 我们把借用他的工作三个场景的充电时间的模型， 分别是：
+         a. Stairs --> normal distribution
+         b. Cars   --> Exponential distribution
+         c. Office --> Gaussian mixture model
+问题3： mapping后的IC网络是否可以作为一个变换的网络 (第二份工作)
+
+延伸： 是否可以在实物上做一下验证？
+     可供选择的实物模型
+     1. FreeBie: TU Delft 的Jasper的工作
+     2. Kai： a. Find的实物模型； b. Kai最近参与的一个商业项目， 可购买其产品 (商用的稳定性高)
