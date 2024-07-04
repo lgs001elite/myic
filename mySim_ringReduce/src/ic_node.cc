@@ -138,7 +138,6 @@ void basic_node::topology_distribution()
     // Distribute the sink node
     this->sink_networkHandler.push_back(check_and_cast<basic_node *>(this->networkPtr->getSubmodule("sink")));
     this->sink_networkHandler[0]->g_node_id = this->g_ic_num + 1;
-    // this->sink_networkHandler[0]->tx_range = 20;
     auto &displayString3 = this->sink_networkHandler[0]->getDisplayString();
     basic_node::Point pos2(x_sink, y_sink);
     this->sink_networkHandler[0]->place_nodes(pos2.x, pos2.y);
@@ -384,8 +383,6 @@ void basic_node::net_handleMessage(cMessage *msg)
             // If the sink node received the msgs successfully, it will give a ack reply
             scheduleAt(simTime() + this->slot_len * 0.1,
                        new cMessage("sink node sends acks", sink_send_ack_handler));
-//            this->scheduleAt(simTime() + this->slot_len * 0.2,
-//                       new cMessage("Sink notifies for new round", sink_ack_new_handler));
         }
     }
     else if (msg->isSelfMessage() && msg->getKind() == sink_send_ack_handler)
@@ -562,60 +559,6 @@ int basic_node::ic_reduceAction()
     }
 
     return delaySlots;
-
-    // if (this->g_if_reduction_recovery == false)
-    // {
-    //     this->g_if_ic_sending_packets = ic_listen_state;
-    // }
-    // int delay_number = 0;
-    // if ((this->g_if_reduction_recovery == false) && (this->g_if_takeup == false))
-    // {
-    //     // Do sth here for reduce algorithms (rules)
-    //     if (this->ic_reduce_algorithm == ring_reduce_algorithm)
-    //     {
-    //         this->ringReduce();
-    //         if (this->g_ic_reduction_recovery_execution_signal == true)
-    //         {
-    //             this->g_ic_reduction_recovery_execution_signal = false;
-    //             delay_number = delay_number + this->g_ic_cycle - this->g_ic_dynamic_loc;
-    //             this->g_ic_dynamic_loc = this->g_ic_dynamic_loc - this->g_reduction_bias_num;
-    //             if (this->g_ic_dynamic_loc < 0)
-    //             {
-    //                 this->g_ic_dynamic_loc = this->g_ic_dynamic_loc + this->g_ic_cycle;
-    //             }
-    //             delay_number = delay_number + this->g_ic_dynamic_loc;
-    //             this->g_reduction_bias_num = 0;
-    //         }
-    //     }
-    //     else if (this->ic_reduce_algorithm == linked_list_reduce_algorithm)
-    //     {
-    //         this->linkedListReduce();
-    //         if (this->g_ic_reduction_recovery_execution_signal == true)
-    //         {
-    //             this->g_ic_reduction_recovery_execution_signal = false;
-    //             delay_number = delay_number + this->g_ic_cycle - this->g_ic_dynamic_loc;
-    //             this->g_ic_dynamic_loc = this->g_ic_dynamic_loc - this->g_reduction_bias_num;
-    //             delay_number = delay_number + this->g_ic_dynamic_loc;
-    //             this->g_reduction_bias_num = 0;
-    //         }
-    //     }
-    //     else if (this->ic_reduce_algorithm == tree_reduce_algorithm)
-    //     {
-    //         this->treeReduce();
-    //         if (this->g_ic_reduction_recovery_execution_signal == true)
-    //         {
-    //             this->g_ic_reduction_recovery_execution_signal = false;
-    //             delay_number = delay_number + this->g_ic_cycle - this->g_ic_dynamic_loc;
-    //             this->g_ic_dynamic_loc = this->g_ic_dynamic_loc - this->g_reduction_bias_num;
-    //             delay_number = delay_number + this->g_ic_dynamic_loc;
-    //             this->g_reduction_bias_num = 0;
-    //         }
-    //     }
-    //     else
-    //     {
-    //         // do nothing
-    //     }
-    // }
 }
 
 void basic_node::ic_transmitData()
@@ -827,7 +770,7 @@ void basic_node::receive_message(packet_frame *dMsg)
                 else if (msg_type == ack_msg)
                 {
                     this->scheduleAt(simTime() + this->slot_len * 0.1,
-                                     new cMessage("ic node receives the ack from the sender ic node", ic_receive_ack_handler));
+                        new cMessage("ic node receives the ack from the sender ic node", ic_receive_ack_handler));
                 }
                 else
                 {
