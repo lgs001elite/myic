@@ -427,7 +427,14 @@ void basic_node::net_handleMessage(cMessage *msg)
                 }
                 else
                 {
-                    this->g_receivedMsg.setPass_counter(previousPassNum + localPassNum);
+                    if (previousPassNum == 0)
+                    {
+                        this->g_receivedMsg.setPass_counter(1 + localPassNum);
+                    }
+                    else
+                    {
+                        this->g_receivedMsg.setPass_counter(previousPassNum + localPassNum);
+                    }
                 }
                 this->transmission_queue.insert(this->transmission_queue.begin(), this->g_receivedMsg);
                 if ((this->g_node_id % 2)  == 0)
