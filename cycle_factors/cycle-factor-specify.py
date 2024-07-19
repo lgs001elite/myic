@@ -33,12 +33,12 @@ time_threshold = 3600000
 
 
 
-scenarios = ["[300]", "[1,500]", "front-[300,500]", "[300,500]-back"]
+scenarios = ["[300]", "[1,500]", "front-[300,500]", "back-[300,500]"]
 
 
 neutronStarSet = []
 
-repetitive = 1000
+repetitive = 10000
 
 threshold = 502
 
@@ -63,7 +63,7 @@ def energy_model(scenario):
         return uniform_integer_random(1, 300)
     elif scenario =="front-[300,500]":
         return uniform_integer_random(300, 500)
-    elif scenario =="[300,500]-back":
+    elif scenario =="back-[300,500]":
         return uniform_integer_random(300, 500)
     elif scenario == "[1,500]":
         return uniform_integer_random(1, 500)
@@ -137,8 +137,8 @@ if __name__ == "__main__":
         scenario = scenarios[index]
         #randSeed = generate_dynamic_seed()
         #random.seed(randSeed)
-        if scenario == "[300,500]-back":
-            csvRecorder = open("[300,500]-back.csv", 'w', newline='')
+        if scenario == "back-[300,500]":
+            csvRecorder = open("back-[300,500].csv", 'w', newline='')
             fieldnames=["seq", "number"]
             writer = csv.DictWriter(csvRecorder, fieldnames=fieldnames)
             for cycle in range(300, threshold):
