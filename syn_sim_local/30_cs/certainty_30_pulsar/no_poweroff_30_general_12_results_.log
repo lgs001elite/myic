@@ -1,0 +1,70 @@
+2024-07-23 18:17:12,022 - no_poweroff_30_general_12_results_ - INFO - *******************STATIC_TRACE*******************
+2024-07-23 18:17:12,022 - no_poweroff_30_general_12_results_ - INFO - pulsar_averageSyn: 3275.6766666666667
+2024-07-23 18:17:12,022 - no_poweroff_30_general_12_results_ - INFO - pulsar_averageDis: 7491.25
+2024-07-23 18:17:12,022 - no_poweroff_30_general_12_results_ - INFO - pulsar_averageCollisionNum: 0.4166666666666667
+2024-07-23 18:17:12,022 - no_poweroff_30_general_12_results_ - INFO - pulsar_sumCollisionNum: 5
+2024-07-23 18:17:12,276 - no_poweroff_30_general_12_results_ - INFO - *******************COMPLEX_TRACE*******************
+2024-07-23 18:17:12,277 - no_poweroff_30_general_12_results_ - INFO - pulsar_averageSyn: 9318.596666666666
+2024-07-23 18:17:12,277 - no_poweroff_30_general_12_results_ - INFO - pulsar_averageDis: 14532.916666666666
+2024-07-23 18:17:12,277 - no_poweroff_30_general_12_results_ - INFO - pulsar_averageCollisionNum: 0.0
+2024-07-23 18:17:12,277 - no_poweroff_30_general_12_results_ - INFO - pulsar_sumCollisionNum: 0
+2024-07-23 18:17:12,414 - no_poweroff_30_general_12_results_ - INFO - *******************STAIRS_TRACE*******************
+2024-07-23 18:17:12,414 - no_poweroff_30_general_12_results_ - INFO - pulsar_averageSyn: 475.26
+2024-07-23 18:17:12,414 - no_poweroff_30_general_12_results_ - INFO - pulsar_averageDis: 4162.166666666667
+2024-07-23 18:17:12,414 - no_poweroff_30_general_12_results_ - INFO - pulsar_averageCollisionNum: 0.5
+2024-07-23 18:17:12,414 - no_poweroff_30_general_12_results_ - INFO - pulsar_sumCollisionNum: 6
+2024-07-23 18:17:13,199 - no_poweroff_30_general_12_results_ - INFO - *******************CARS_TRACE*******************
+2024-07-23 18:17:13,199 - no_poweroff_30_general_12_results_ - INFO - pulsar_averageSyn: 1181053.6416666666
+2024-07-23 18:17:13,199 - no_poweroff_30_general_12_results_ - INFO - pulsar_averageDis: 292073.1666666667
+2024-07-23 18:17:13,199 - no_poweroff_30_general_12_results_ - INFO - pulsar_averageCollisionNum: 0.0
+2024-07-23 18:17:13,199 - no_poweroff_30_general_12_results_ - INFO - pulsar_sumCollisionNum: 0
+2024-07-23 18:17:13,361 - no_poweroff_30_general_12_results_ - INFO - *******************JOGGING_TRACE*******************
+2024-07-23 18:17:13,362 - no_poweroff_30_general_12_results_ - INFO - pulsar_averageSyn: 17676.166666666668
+2024-07-23 18:17:13,362 - no_poweroff_30_general_12_results_ - INFO - pulsar_averageDis: 17726.583333333332
+2024-07-23 18:17:13,362 - no_poweroff_30_general_12_results_ - INFO - pulsar_averageCollisionNum: 0.0
+2024-07-23 18:17:13,362 - no_poweroff_30_general_12_results_ - INFO - pulsar_sumCollisionNum: 0
+2024-07-23 18:17:13,522 - no_poweroff_30_general_12_results_ - INFO - *******************OFFICE_TRACE*******************
+2024-07-23 18:17:13,522 - no_poweroff_30_general_12_results_ - INFO - pulsar_averageSyn: 3597.7733333333335
+2024-07-23 18:17:13,522 - no_poweroff_30_general_12_results_ - INFO - pulsar_averageDis: 8521.5
+2024-07-23 18:17:13,522 - no_poweroff_30_general_12_results_ - INFO - pulsar_averageCollisionNum: 0.0
+2024-07-23 18:17:13,523 - no_poweroff_30_general_12_results_ - INFO - pulsar_sumCollisionNum: 0
+2024-07-23 18:17:14,127 - no_poweroff_30_general_12_results_ - INFO - *******************WASHER_TRACE*******************
+2024-07-23 18:17:14,127 - no_poweroff_30_general_12_results_ - INFO - pulsar_averageSyn: 509990.9766666667
+2024-07-23 18:17:14,127 - no_poweroff_30_general_12_results_ - INFO - pulsar_averageDis: 174695.08333333334
+2024-07-23 18:17:14,127 - no_poweroff_30_general_12_results_ - INFO - pulsar_averageCollisionNum: 0.0
+2024-07-23 18:17:14,127 - no_poweroff_30_general_12_results_ - INFO - pulsar_sumCollisionNum: 0
+2024-07-23 18:32:31,794 - no_poweroff_30_general_12_results_ - INFO - *******************STATIC_TRACE*******************
+2024-07-23 18:32:31,794 - no_poweroff_30_general_12_results_ - INFO - pulsar_averageSyn: 2975.16
+2024-07-23 18:32:31,794 - no_poweroff_30_general_12_results_ - INFO - pulsar_averageDis: 5764.416666666667
+2024-07-23 18:32:31,794 - no_poweroff_30_general_12_results_ - INFO - pulsar_averageCollisionNum: 0.0
+2024-07-23 18:32:31,794 - no_poweroff_30_general_12_results_ - INFO - pulsar_sumCollisionNum: 0
+2024-07-23 18:32:31,976 - no_poweroff_30_general_12_results_ - INFO - *******************COMPLEX_TRACE*******************
+2024-07-23 18:32:31,976 - no_poweroff_30_general_12_results_ - INFO - pulsar_averageSyn: 8189.373333333333
+2024-07-23 18:32:31,976 - no_poweroff_30_general_12_results_ - INFO - pulsar_averageDis: 13033.583333333334
+2024-07-23 18:32:31,976 - no_poweroff_30_general_12_results_ - INFO - pulsar_averageCollisionNum: 0.0
+2024-07-23 18:32:31,976 - no_poweroff_30_general_12_results_ - INFO - pulsar_sumCollisionNum: 0
+2024-07-23 18:32:32,102 - no_poweroff_30_general_12_results_ - INFO - *******************STAIRS_TRACE*******************
+2024-07-23 18:32:32,103 - no_poweroff_30_general_12_results_ - INFO - pulsar_averageSyn: 512.3533333333334
+2024-07-23 18:32:32,103 - no_poweroff_30_general_12_results_ - INFO - pulsar_averageDis: 3774.3333333333335
+2024-07-23 18:32:32,103 - no_poweroff_30_general_12_results_ - INFO - pulsar_averageCollisionNum: 0.25
+2024-07-23 18:32:32,103 - no_poweroff_30_general_12_results_ - INFO - pulsar_sumCollisionNum: 3
+2024-07-23 18:32:32,859 - no_poweroff_30_general_12_results_ - INFO - *******************CARS_TRACE*******************
+2024-07-23 18:32:32,859 - no_poweroff_30_general_12_results_ - INFO - pulsar_averageSyn: 1197801.2166666666
+2024-07-23 18:32:32,859 - no_poweroff_30_general_12_results_ - INFO - pulsar_averageDis: 269665.5
+2024-07-23 18:32:32,859 - no_poweroff_30_general_12_results_ - INFO - pulsar_averageCollisionNum: 0.0
+2024-07-23 18:32:32,859 - no_poweroff_30_general_12_results_ - INFO - pulsar_sumCollisionNum: 0
+2024-07-23 18:32:33,051 - no_poweroff_30_general_12_results_ - INFO - *******************JOGGING_TRACE*******************
+2024-07-23 18:32:33,052 - no_poweroff_30_general_12_results_ - INFO - pulsar_averageSyn: 18285.0
+2024-07-23 18:32:33,052 - no_poweroff_30_general_12_results_ - INFO - pulsar_averageDis: 25872.166666666668
+2024-07-23 18:32:33,052 - no_poweroff_30_general_12_results_ - INFO - pulsar_averageCollisionNum: 0.0
+2024-07-23 18:32:33,052 - no_poweroff_30_general_12_results_ - INFO - pulsar_sumCollisionNum: 0
+2024-07-23 18:32:33,189 - no_poweroff_30_general_12_results_ - INFO - *******************OFFICE_TRACE*******************
+2024-07-23 18:32:33,189 - no_poweroff_30_general_12_results_ - INFO - pulsar_averageSyn: 3384.8766666666666
+2024-07-23 18:32:33,189 - no_poweroff_30_general_12_results_ - INFO - pulsar_averageDis: 10744.5
+2024-07-23 18:32:33,189 - no_poweroff_30_general_12_results_ - INFO - pulsar_averageCollisionNum: 0.0
+2024-07-23 18:32:33,189 - no_poweroff_30_general_12_results_ - INFO - pulsar_sumCollisionNum: 0
+2024-07-23 18:32:33,675 - no_poweroff_30_general_12_results_ - INFO - *******************WASHER_TRACE*******************
+2024-07-23 18:32:33,675 - no_poweroff_30_general_12_results_ - INFO - pulsar_averageSyn: 431773.44333333336
+2024-07-23 18:32:33,675 - no_poweroff_30_general_12_results_ - INFO - pulsar_averageDis: 179182.25
+2024-07-23 18:32:33,675 - no_poweroff_30_general_12_results_ - INFO - pulsar_averageCollisionNum: 0.0
+2024-07-23 18:32:33,676 - no_poweroff_30_general_12_results_ - INFO - pulsar_sumCollisionNum: 0

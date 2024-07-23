@@ -1,0 +1,26 @@
+2024-07-20 22:19:25,153 - scalability_51_30_results_300_ - INFO - *******************STATIC_TRACE*******************
+2024-07-20 22:19:25,154 - scalability_51_30_results_300_ - INFO - Find_averageSyn: 949693.452
+2024-07-20 22:19:25,154 - scalability_51_30_results_300_ - INFO - Find_averageDis: 0.0
+2024-07-20 22:19:25,154 - scalability_51_30_results_300_ - INFO - Find_averageCollisionNum: 4.733333333333333
+2024-07-20 22:19:25,154 - scalability_51_30_results_300_ - INFO - Find_sumCollisionNum: 142
+2024-07-20 22:19:25,154 - scalability_51_30_results_300_ - INFO - FlyncFind_averageSyn: 308892.2293333333
+2024-07-20 22:19:25,155 - scalability_51_30_results_300_ - INFO - FlyncFind_averageDis: 0.0
+2024-07-20 22:19:25,155 - scalability_51_30_results_300_ - INFO - FlyncFind_averageCollisionNum: 73.73333333333333
+2024-07-20 22:19:25,155 - scalability_51_30_results_300_ - INFO - FlyncFind_sumCollisionNum: 2212
+2024-07-20 22:19:25,155 - scalability_51_30_results_300_ - INFO - Pulsar_averageSyn: 15209.997333333333
+2024-07-20 22:19:25,155 - scalability_51_30_results_300_ - INFO - Pulsar_averageDis: 185374.06666666668
+2024-07-20 22:19:25,155 - scalability_51_30_results_300_ - INFO - Pulsar_averageCollisionNum: 0.0
+2024-07-20 22:19:25,155 - scalability_51_30_results_300_ - INFO - Pulsar_sumCollisionNum: 0
+2024-07-20 22:19:25,155 - scalability_51_30_results_300_ - INFO - Free_beacon_averageSyn: 18905.577333333335
+2024-07-20 22:19:25,155 - scalability_51_30_results_300_ - INFO - Free_beacon_averageDis: 40281.9
+2024-07-20 22:19:25,156 - scalability_51_30_results_300_ - INFO - Free_beacon_averageCollisionNum: 0.26666666666666666
+2024-07-20 22:19:25,156 - scalability_51_30_results_300_ - INFO - Free_beacon_sumCollisionNum: 8
+2024-07-20 22:19:25,156 - scalability_51_30_results_300_ - INFO - Find_averageEnhancedSyn: 50.2335070363363
+2024-07-20 22:19:25,156 - scalability_51_30_results_300_ - INFO - Find_averageEnhancedDis: 0.0
+2024-07-20 22:19:25,156 - scalability_51_30_results_300_ - INFO - Find_averageEnhancedCollisionNum: 1.0
+2024-07-20 22:19:25,157 - scalability_51_30_results_300_ - INFO - FlyncFind_averageEnhancedSyn: 16.338682701252957
+2024-07-20 22:19:25,157 - scalability_51_30_results_300_ - INFO - FlyncFind_averageEnhancedDis: 0.0
+2024-07-20 22:19:25,157 - scalability_51_30_results_300_ - INFO - FlyncFind_averageEnhancedCollisionNum: 1.0
+2024-07-20 22:19:25,158 - scalability_51_30_results_300_ - INFO - Pulsar_averageEnhancedSyn: 0.8045243509446206
+2024-07-20 22:19:25,158 - scalability_51_30_results_300_ - INFO - Pulsar_averageEnhancedDis: 4.601919638017737
+2024-07-20 22:19:25,158 - scalability_51_30_results_300_ - INFO - Pulsar_averageEnhancedCollisionNum: 0.0

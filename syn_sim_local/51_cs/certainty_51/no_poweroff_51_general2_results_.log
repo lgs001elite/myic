@@ -1,0 +1,35 @@
+2024-07-23 18:48:26,074 - no_poweroff_51_general2_results_ - INFO - *******************STATIC_TRACE*******************
+2024-07-23 18:48:26,074 - no_poweroff_51_general2_results_ - INFO - Free_beacon_averageSyn: 3325.18
+2024-07-23 18:48:26,074 - no_poweroff_51_general2_results_ - INFO - Free_beacon_averageDis: 791.0
+2024-07-23 18:48:26,074 - no_poweroff_51_general2_results_ - INFO - Free_beacon_averageCollisionNum: 0.0
+2024-07-23 18:48:26,075 - no_poweroff_51_general2_results_ - INFO - Free_beacon_sumCollisionNum: 0
+2024-07-23 18:48:26,084 - no_poweroff_51_general2_results_ - INFO - *******************COMPLEX_TRACE*******************
+2024-07-23 18:48:26,084 - no_poweroff_51_general2_results_ - INFO - Free_beacon_averageSyn: 1677.88
+2024-07-23 18:48:26,085 - no_poweroff_51_general2_results_ - INFO - Free_beacon_averageDis: 1403.0
+2024-07-23 18:48:26,085 - no_poweroff_51_general2_results_ - INFO - Free_beacon_averageCollisionNum: 0.0
+2024-07-23 18:48:26,085 - no_poweroff_51_general2_results_ - INFO - Free_beacon_sumCollisionNum: 0
+2024-07-23 18:48:26,090 - no_poweroff_51_general2_results_ - INFO - *******************STAIRS_TRACE*******************
+2024-07-23 18:48:26,090 - no_poweroff_51_general2_results_ - INFO - Free_beacon_averageSyn: 115.24
+2024-07-23 18:48:26,090 - no_poweroff_51_general2_results_ - INFO - Free_beacon_averageDis: 281.0
+2024-07-23 18:48:26,090 - no_poweroff_51_general2_results_ - INFO - Free_beacon_averageCollisionNum: 0.0
+2024-07-23 18:48:26,090 - no_poweroff_51_general2_results_ - INFO - Free_beacon_sumCollisionNum: 0
+2024-07-23 18:48:26,164 - no_poweroff_51_general2_results_ - INFO - *******************CARS_TRACE*******************
+2024-07-23 18:48:26,164 - no_poweroff_51_general2_results_ - INFO - Free_beacon_averageSyn: 383870.86
+2024-07-23 18:48:26,164 - no_poweroff_51_general2_results_ - INFO - Free_beacon_averageDis: 25679.0
+2024-07-23 18:48:26,164 - no_poweroff_51_general2_results_ - INFO - Free_beacon_averageCollisionNum: 0.0
+2024-07-23 18:48:26,164 - no_poweroff_51_general2_results_ - INFO - Free_beacon_sumCollisionNum: 0
+2024-07-23 18:48:26,172 - no_poweroff_51_general2_results_ - INFO - *******************JOGGING_TRACE*******************
+2024-07-23 18:48:26,172 - no_poweroff_51_general2_results_ - INFO - Free_beacon_averageSyn: 6544.3
+2024-07-23 18:48:26,172 - no_poweroff_51_general2_results_ - INFO - Free_beacon_averageDis: 3570.5
+2024-07-23 18:48:26,172 - no_poweroff_51_general2_results_ - INFO - Free_beacon_averageCollisionNum: 0.0
+2024-07-23 18:48:26,172 - no_poweroff_51_general2_results_ - INFO - Free_beacon_sumCollisionNum: 0
+2024-07-23 18:48:26,178 - no_poweroff_51_general2_results_ - INFO - *******************OFFICE_TRACE*******************
+2024-07-23 18:48:26,178 - no_poweroff_51_general2_results_ - INFO - Free_beacon_averageSyn: 1158.7
+2024-07-23 18:48:26,178 - no_poweroff_51_general2_results_ - INFO - Free_beacon_averageDis: 612.5
+2024-07-23 18:48:26,179 - no_poweroff_51_general2_results_ - INFO - Free_beacon_averageCollisionNum: 0.0
+2024-07-23 18:48:26,179 - no_poweroff_51_general2_results_ - INFO - Free_beacon_sumCollisionNum: 0
+2024-07-23 18:48:26,257 - no_poweroff_51_general2_results_ - INFO - *******************WASHER_TRACE*******************
+2024-07-23 18:48:26,257 - no_poweroff_51_general2_results_ - INFO - Free_beacon_averageSyn: 174193.54
+2024-07-23 18:48:26,257 - no_poweroff_51_general2_results_ - INFO - Free_beacon_averageDis: 45314.0
+2024-07-23 18:48:26,257 - no_poweroff_51_general2_results_ - INFO - Free_beacon_averageCollisionNum: 0.0
+2024-07-23 18:48:26,257 - no_poweroff_51_general2_results_ - INFO - Free_beacon_sumCollisionNum: 0
