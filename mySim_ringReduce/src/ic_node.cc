@@ -148,9 +148,9 @@ void basic_node::topology_distribution()
 
 void basic_node::set_chargingTimeAndDelay()
 {
+    simtime_t ptr = simTime();
     this->ic_charge_cycle = intuniform(this->energy_range_set[this->charge_model][0],
-                                       this->energy_range_set[this->charge_model][1]) +
-                            1;
+                                       this->energy_range_set[this->charge_model][1]) + 1;
     // aligh with icc to find topology
     int delay_bias = this->ic_charge_cycle % g_ic_cycle;
     if (delay_bias != 0)
@@ -160,10 +160,19 @@ void basic_node::set_chargingTimeAndDelay()
     // judge if power off
     if (this->g_if_power_off == true)
     {
-        int probNum = intuniform(1, 100);
-        if (probNum <= 5)
-        {
-            this->ic_charge_cycle = this->ic_charge_cycle + intuniform(0, g_ic_cycle - 1);
+         int probNum = intuniform(1, 100);
+         if (probNum <= 5)
+         {
+             //this->g_if_power_off = false;
+             int tempChr = intuniform(0, g_ic_cycle - 1);
+             if (tempChr > 0)
+             {
+                 delay_bias = delay_bias + tempChr;
+             }
+             if ((tempChr > 0) && (this->g_ic_loc != -1))
+             {
+                 EV<<"bias happend";
+             }
         }
     }
     // actual charge plus delay time
@@ -275,6 +284,7 @@ void basic_node::net_handleMessage(cMessage *msg)
         if (this->ic_attempt_counter >= g_ic_cycle)
         {
             extraRound = g_ic_cycle * intuniform(0, 1);
+            //this->ic_attempt_counter = 0;
         }
         // ic back to its distrited location
         if (this->delay_global_location > 0)
@@ -298,6 +308,7 @@ void basic_node::net_handleMessage(cMessage *msg)
     else if (msg->isSelfMessage() && msg->getKind() == ic_work_handler)
     {
         simtime_t ptr = simTime();
+        //int currTime = int(ptr);
         if (this->g_ic_self_delay_signal == true)
         {
             this->g_ic_self_delay_signal = false;
@@ -314,6 +325,53 @@ void basic_node::net_handleMessage(cMessage *msg)
         }
         else
         {
+            // restore from poweroff
+            int timeout = int(SIMTIME_DBL(ptr) * 1000) + 1;
+            int bias = 0;
+            bool actionSignal = true;
+            if (((timeout%7) == 0) && (this->g_ic_dynamic_loc != -1))
+            {
+                int currentLoc = timeout%this->g_ic_cycle;
+                int realLoc = this->g_ic_loc;
+                if (this->g_if_ic_sending_packets == ic_send_state)
+                {
+                    realLoc = (this->g_ic_loc + 1) %this->g_ic_cycle;
+                }
+                if (currentLoc != realLoc)
+                {
+                    actionSignal = false;
+                    if (realLoc < currentLoc)
+                    {
+                         bias = this->g_ic_cycle + realLoc - currentLoc;
+                    }
+                    else
+                    {
+                         bias = realLoc - currentLoc;
+                    }
+                    //this->g_ic_dynamic_loc = realLoc;
+                }
+            }
+            if ((this->g_ic_loc != this->g_ic_dynamic_loc) && (actionSignal == true))
+            {
+                if (((this->g_ic_loc + 1) % g_ic_cycle) != this->g_ic_dynamic_loc)
+                {
+                    int currentLoc = timeout%this->g_ic_cycle;
+                    int realLoc = this->g_ic_loc;
+                    if (this->g_if_ic_sending_packets == ic_send_state)
+                    {
+                        realLoc = (this->g_ic_loc + 1) %this->g_ic_cycle;
+                    }
+                    if (realLoc < currentLoc)
+                    {
+                        bias = this->g_ic_cycle + realLoc - currentLoc;
+                    }
+                    else
+                    {
+                        bias = realLoc - currentLoc;
+                    }
+                    //this->g_ic_dynamic_loc = realLoc;
+                }
+            }
             int delaySlots = 0;
             if (this->g_ic_loc == -1)
             {
@@ -329,17 +387,17 @@ void basic_node::net_handleMessage(cMessage *msg)
                 // ic node has been distributed the unique location
                 if (this->g_ic_node_ready_reduce == true)
                 {
-                    // Generate packets
-                    if (this->g_if_produce_packets == false)
-                    {
-                        // Only generate packets once
-                        this->generate_msgs();
-                        this->g_if_produce_packets = true;
-                    }
-                    delaySlots = this->ic_reduceAction();
+                     // Generate packets
+                     if (this->g_if_produce_packets == false)
+                     {
+                          // Only generate packets once
+                          this->generate_msgs();
+                          this->g_if_produce_packets = true;
+                     }
+                     delaySlots = this->ic_reduceAction();
                 }
             }
-
+            delaySlots = delaySlots + bias;
             this->g_ic_self_delay_signal = true;
             scheduleAt(simTime() + this->slot_len * delaySlots,
                        new cMessage("ic delays some time for transmiting to its next", ic_work_handler));
@@ -348,9 +406,19 @@ void basic_node::net_handleMessage(cMessage *msg)
     else if (msg->isSelfMessage() && msg->getKind() == icc_work_handler)
     {
         simtime_t ptr = simTime();
-        this->icc_global_location = (this->icc_global_location + 7) % g_ic_cycle;
+        this->icc_global_location = (this->icc_global_location + this->icc_charging_cycle) % g_ic_cycle;
         this->rx_state = true;
         this->icc_collision_check_counter = 0;
+        //*** This is just for poweroff scenarios
+        /*
+        int tempInt = intuniform(0,100);
+        if (tempInt < int(50))
+        {
+            scheduleAt(simTime() + this->slot_len * 0.1, new cMessage("icc node sends rectify loc to ics", icc_check_handler));
+        }
+        */
+
+        //***
         scheduleAt(simTime() + this->slot_len,
                    new cMessage("icc charging", icc_sleep_handler));
     }
@@ -415,7 +483,7 @@ void basic_node::net_handleMessage(cMessage *msg)
                     }
                     if ((this->g_ic_loc % 2) != 0)
                     {
-                        this->g_ic_dynamic_loc = (this->g_ic_dynamic_loc + 1) % this->g_ic_num;
+                        this->g_ic_dynamic_loc = (this->g_ic_loc + 1) % this->g_ic_cycle;
                     }
                     int localPassNum = pkt_i->getPass_counter();
                     this->transmission_queue.erase(pkt_i);
@@ -437,27 +505,48 @@ void basic_node::net_handleMessage(cMessage *msg)
             }
         }
     }
+    else if (msg->isSelfMessage() && msg->getKind() == ic_receive_icc_rectify_handler)
+    {
+        simtime_t ptr = simTime();
+        int currentLoc = this->g_receivedMsg.getCurrent_slot();
+        if ((this->ic_collision_check_counter == 1) && (this->g_ic_loc != -1)&&
+                (this->g_ic_dynamic_loc != currentLoc))
+        {
+            int bias = 0;
+            if (this->g_ic_dynamic_loc < currentLoc)
+            {
+                  bias = g_ic_cycle + g_ic_dynamic_loc - currentLoc;
+            }
+            else
+            {
+                  bias = g_ic_dynamic_loc - currentLoc;
+            }
+            this->ic_collision_check_counter = 0;
+            this->delay_global_location = bias;
+        }
+    }
     else if (msg->isSelfMessage() && msg->getKind() == ic_receive_broad_handler)
     {
         simtime_t ptr = simTime();
         int currentLoc = this->g_receivedMsg.getCurrent_slot();
         if (this->ic_collision_check_counter == 1)
         {
+            int bias = 0;
             if (this->g_ic_loc == -1)
             {
                 this->g_ic_loc = this->g_node_id;
                 this->g_ic_dynamic_loc = this->g_node_id;
                 this->ic_attempt_counter = 0;
                 this->g_if_node_distribution = true;
-            }
-            int bias = 0;
-            if (this->g_ic_loc < currentLoc)
-            {
-                bias = g_ic_cycle + g_ic_loc - currentLoc;
-            }
-            else
-            {
-                bias = g_ic_loc - currentLoc;
+
+                if (this->g_ic_loc < currentLoc)
+                {
+                     bias = this->g_ic_cycle + g_ic_loc - currentLoc;
+                }
+                else
+                {
+                     bias = g_ic_loc - currentLoc;
+                }
             }
             this->delay_global_location = bias;
         }
@@ -471,14 +560,22 @@ void basic_node::net_handleMessage(cMessage *msg)
             this->ic_attempt_counter = 0;
             if (this->ic_reduce_algorithm == ring_reduce_algorithm)
             {
-                if (this->g_if_reduction_recovery == true)
-                {
-                    this->g_if_reduction_recovery = false;
-                    this->g_ic_reduction_recovery_execution_signal = true;
-                }
                 // received data and do sth here
                 if (this->transmission_queue.cbegin()->getPass_counter() > 0)
                 {
+                    auto checkPkt = this->transmission_queue.begin();
+                    if (checkPkt->getPass_counter() != (this->g_ic_num - 1))
+                    {
+                        if (this->g_if_reduction_recovery == true)
+                        {
+                            this->g_if_reduction_recovery = false;
+                            this->g_ic_reduction_recovery_execution_signal = true;
+                        }
+                    }
+                    else
+                    {
+                        EV<<"terminal node";
+                    }
                     this->transmission_queue.erase(this->transmission_queue.begin());
                 }
                 else
@@ -487,6 +584,11 @@ void basic_node::net_handleMessage(cMessage *msg)
                                                  { return pkt.getMsg_id() == this->ring_packet_start_seq; });
                     if (pkt_i != this->transmission_queue.end())
                     {
+                         if (this->g_if_reduction_recovery == true)
+                         {
+                              this->g_if_reduction_recovery = false;
+                              this->g_ic_reduction_recovery_execution_signal = true;
+                         }
                         this->transmission_queue.erase(pkt_i);
                     }
                     this->ring_packet_start_seq = this->ring_packet_start_seq + this->ring_packet_send_len;
@@ -520,6 +622,10 @@ void basic_node::net_handleMessage(cMessage *msg)
         }
         this->icc_collision_check_counter = 0;
     }
+    else if (msg->isSelfMessage() && msg->getKind() == icc_check_handler)
+    {
+        this->iccCheck();
+    }
     else
     {
         // Nothing to do here, waiting for deletion
@@ -538,7 +644,7 @@ int basic_node::ic_reduceAction()
     {
         if ((this->g_ic_loc % 2) == 0)
         {
-             if ((((g_ic_message_num -this->g_queue_len) % ring_packet_send_len) == 0) && (g_ic_message_num > this->g_queue_len))
+             if ((((g_ic_message_num -this->g_queue_len) % this->ring_packet_send_len) == 0) && (g_ic_message_num > this->g_queue_len))
              {
                  if (this->g_if_takeup == true)
                  {
@@ -634,6 +740,21 @@ void basic_node::transmitIdleBroadcast(packet_frame *packet)
         msg_broad->setNext_id(packet->getSender_id());
         msg_broad->setCurrent_slot(this->icc_global_location);
     }
+
+    for (auto p : this->nodesInRadioRange)
+    {
+        this->sendDirect(msg_broad->dup(), p.first, "ICNodeRadioIn");
+    }
+    delete msg_broad;
+}
+
+
+void basic_node::iccCheck()
+{
+    simtime_t ptr = simTime();
+    packet_frame *msg_broad;
+    msg_broad = this->produce_msg(0, icc_check_msg, type_icc_node, -1);
+    msg_broad->setCurrent_slot(this->icc_global_location); // (this->icc_global_location + 1)%g_ic_cycle
 
     for (auto p : this->nodesInRadioRange)
     {
@@ -753,17 +874,21 @@ void basic_node::receive_message(packet_frame *dMsg)
             scheduleAt(simTime() + this->slot_len * 0.2,
                        new cMessage("ic node sends acks to icc", ic_send_ack_broad_handler));
         }
+        else if((msg_type == icc_check_msg) && (sender_type == type_icc_node))
+        {
+            this->scheduleAt(simTime() + this->slot_len * 0.1,
+                                         new cMessage("ic node receives rectify info from icc", ic_receive_icc_rectify_handler));
+        }
         else
         {
             if (next_id == this->g_node_id)
             {
-                if (msg_type == data_msg)
+                if ((msg_type == data_msg) && (this->g_if_takeup == true))
                 {
                     // First, need to check if the packet has been received
                     this->scheduleAt(simTime() + this->slot_len * 0.1,
                                      new cMessage("ic node receives the data from the sender ic node", ic_receive_data_handler));
                     this->g_ack = this->produce_msg(msg_id, ack_msg, type_ic_node, sender_id);
-                    // Whatever, the sink needs to replay ack
                     scheduleAt(simTime() + this->slot_len * 0.2,
                                new cMessage("ic node sends acks", ic_send_ack_data_handler));
                 }
@@ -774,10 +899,7 @@ void basic_node::receive_message(packet_frame *dMsg)
                 }
                 else
                 {
-                    if (this->g_if_takeup == true)
-                    {
-                         this->g_if_takeup = false;
-                    }
+
                 }
             }
         }

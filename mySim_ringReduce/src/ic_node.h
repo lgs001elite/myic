@@ -45,12 +45,15 @@ using namespace std;
 #define ic_receive_ack_handler 0x0F
 #define icc_check_ack_handler 0xA1
 #define sink_ack_new_handler 0xA2
+#define icc_check_handler 0xA3
+#define ic_receive_icc_rectify_handler 0xA4
 
 // define msg types
 #define broad_msg   0x00
 #define ack_msg     0x01
 #define data_msg 0x02
 #define sink_ack_msg     0x03
+#define icc_check_msg 0x04
 
 // define node types
 #define type_ic_node 1
@@ -151,6 +154,7 @@ private:
     void place_nodes(int x_pos, int y_pos);
     void set_chargingTimeAndDelay();
     void generate_msgs();
+    void iccCheck();
 
     int ic_reduceAction();
     void ic_transmitData();
