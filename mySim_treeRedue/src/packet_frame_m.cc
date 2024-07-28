@@ -193,8 +193,10 @@ packet_frame::packet_frame(const char *name, short kind) : ::omnetpp::cPacket(na
     this->delay_bias = 0;
     this->sender_type = 0;
     this->next_id = 0;
+    this->vir_id = 0;
     this->pass_counter = 0;
     this->node_state = 0;
+    this->reduce_phase = 0;
     this->send_time = 0;
 }
 
@@ -229,8 +231,10 @@ void packet_frame::copy(const packet_frame& other)
     this->delay_bias = other.delay_bias;
     this->sender_type = other.sender_type;
     this->next_id = other.next_id;
+    this->vir_id = other.vir_id;
     this->pass_counter = other.pass_counter;
     this->node_state = other.node_state;
+    this->reduce_phase = other.reduce_phase;
     this->send_time = other.send_time;
 }
 
@@ -249,8 +253,10 @@ void packet_frame::parsimPack(omnetpp::cCommBuffer *b) const
     doParsimPacking(b,this->delay_bias);
     doParsimPacking(b,this->sender_type);
     doParsimPacking(b,this->next_id);
+    doParsimPacking(b,this->vir_id);
     doParsimPacking(b,this->pass_counter);
     doParsimPacking(b,this->node_state);
+    doParsimPacking(b,this->reduce_phase);
     doParsimPacking(b,this->send_time);
 }
 
@@ -269,8 +275,10 @@ void packet_frame::parsimUnpack(omnetpp::cCommBuffer *b)
     doParsimUnpacking(b,this->delay_bias);
     doParsimUnpacking(b,this->sender_type);
     doParsimUnpacking(b,this->next_id);
+    doParsimUnpacking(b,this->vir_id);
     doParsimUnpacking(b,this->pass_counter);
     doParsimUnpacking(b,this->node_state);
+    doParsimUnpacking(b,this->reduce_phase);
     doParsimUnpacking(b,this->send_time);
 }
 
@@ -394,6 +402,16 @@ void packet_frame::setNext_id(int next_id)
     this->next_id = next_id;
 }
 
+int packet_frame::getVir_id() const
+{
+    return this->vir_id;
+}
+
+void packet_frame::setVir_id(int vir_id)
+{
+    this->vir_id = vir_id;
+}
+
 int packet_frame::getPass_counter() const
 {
     return this->pass_counter;
@@ -412,6 +430,16 @@ int packet_frame::getNode_state() const
 void packet_frame::setNode_state(int node_state)
 {
     this->node_state = node_state;
+}
+
+int packet_frame::getReduce_phase() const
+{
+    return this->reduce_phase;
+}
+
+void packet_frame::setReduce_phase(int reduce_phase)
+{
+    this->reduce_phase = reduce_phase;
 }
 
 ::omnetpp::simtime_t packet_frame::getSend_time() const
@@ -489,7 +517,7 @@ const char *packet_frameDescriptor::getProperty(const char *propertyname) const
 int packet_frameDescriptor::getFieldCount() const
 {
     omnetpp::cClassDescriptor *basedesc = getBaseClassDescriptor();
-    return basedesc ? 15+basedesc->getFieldCount() : 15;
+    return basedesc ? 17+basedesc->getFieldCount() : 17;
 }
 
 unsigned int packet_frameDescriptor::getFieldTypeFlags(int field) const
@@ -516,8 +544,10 @@ unsigned int packet_frameDescriptor::getFieldTypeFlags(int field) const
         FD_ISEDITABLE,
         FD_ISEDITABLE,
         FD_ISEDITABLE,
+        FD_ISEDITABLE,
+        FD_ISEDITABLE,
     };
-    return (field>=0 && field<15) ? fieldTypeFlags[field] : 0;
+    return (field>=0 && field<17) ? fieldTypeFlags[field] : 0;
 }
 
 const char *packet_frameDescriptor::getFieldName(int field) const
@@ -541,11 +571,13 @@ const char *packet_frameDescriptor::getFieldName(int field) const
         "delay_bias",
         "sender_type",
         "next_id",
+        "vir_id",
         "pass_counter",
         "node_state",
+        "reduce_phase",
         "send_time",
     };
-    return (field>=0 && field<15) ? fieldNames[field] : nullptr;
+    return (field>=0 && field<17) ? fieldNames[field] : nullptr;
 }
 
 int packet_frameDescriptor::findField(const char *fieldName) const
@@ -564,9 +596,11 @@ int packet_frameDescriptor::findField(const char *fieldName) const
     if (fieldName[0]=='d' && strcmp(fieldName, "delay_bias")==0) return base+9;
     if (fieldName[0]=='s' && strcmp(fieldName, "sender_type")==0) return base+10;
     if (fieldName[0]=='n' && strcmp(fieldName, "next_id")==0) return base+11;
-    if (fieldName[0]=='p' && strcmp(fieldName, "pass_counter")==0) return base+12;
-    if (fieldName[0]=='n' && strcmp(fieldName, "node_state")==0) return base+13;
-    if (fieldName[0]=='s' && strcmp(fieldName, "send_time")==0) return base+14;
+    if (fieldName[0]=='v' && strcmp(fieldName, "vir_id")==0) return base+12;
+    if (fieldName[0]=='p' && strcmp(fieldName, "pass_counter")==0) return base+13;
+    if (fieldName[0]=='n' && strcmp(fieldName, "node_state")==0) return base+14;
+    if (fieldName[0]=='r' && strcmp(fieldName, "reduce_phase")==0) return base+15;
+    if (fieldName[0]=='s' && strcmp(fieldName, "send_time")==0) return base+16;
     return basedesc ? basedesc->findField(fieldName) : -1;
 }
 
@@ -593,9 +627,11 @@ const char *packet_frameDescriptor::getFieldTypeString(int field) const
         "int",
         "int",
         "int",
+        "int",
+        "int",
         "simtime_t",
     };
-    return (field>=0 && field<15) ? fieldTypeStrings[field] : nullptr;
+    return (field>=0 && field<17) ? fieldTypeStrings[field] : nullptr;
 }
 
 const char **packet_frameDescriptor::getFieldPropertyNames(int field) const
@@ -674,9 +710,11 @@ std::string packet_frameDescriptor::getFieldValueAsString(void *object, int fiel
         case 9: return long2string(pp->getDelay_bias());
         case 10: return long2string(pp->getSender_type());
         case 11: return long2string(pp->getNext_id());
-        case 12: return long2string(pp->getPass_counter());
-        case 13: return long2string(pp->getNode_state());
-        case 14: return simtime2string(pp->getSend_time());
+        case 12: return long2string(pp->getVir_id());
+        case 13: return long2string(pp->getPass_counter());
+        case 14: return long2string(pp->getNode_state());
+        case 15: return long2string(pp->getReduce_phase());
+        case 16: return simtime2string(pp->getSend_time());
         default: return "";
     }
 }
@@ -703,9 +741,11 @@ bool packet_frameDescriptor::setFieldValueAsString(void *object, int field, int 
         case 9: pp->setDelay_bias(string2long(value)); return true;
         case 10: pp->setSender_type(string2long(value)); return true;
         case 11: pp->setNext_id(string2long(value)); return true;
-        case 12: pp->setPass_counter(string2long(value)); return true;
-        case 13: pp->setNode_state(string2long(value)); return true;
-        case 14: pp->setSend_time(string2simtime(value)); return true;
+        case 12: pp->setVir_id(string2long(value)); return true;
+        case 13: pp->setPass_counter(string2long(value)); return true;
+        case 14: pp->setNode_state(string2long(value)); return true;
+        case 15: pp->setReduce_phase(string2long(value)); return true;
+        case 16: pp->setSend_time(string2simtime(value)); return true;
         default: return false;
     }
 }

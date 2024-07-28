@@ -35,8 +35,10 @@
  *     int delay_bias;
  *     int sender_type;
  *     int next_id;
+ *     int vir_id;
  *     int pass_counter;
  *     int node_state;
+ *     int reduce_phase;
  *     //    int ic_pass_number;
  *     //    bool sent_flag;
  *     simtime_t send_time;
@@ -58,8 +60,10 @@ class packet_frame : public ::omnetpp::cPacket
     int delay_bias;
     int sender_type;
     int next_id;
+    int vir_id;
     int pass_counter;
     int node_state;
+    int reduce_phase;
     ::omnetpp::simtime_t send_time;
 
   private:
@@ -103,10 +107,14 @@ class packet_frame : public ::omnetpp::cPacket
     virtual void setSender_type(int sender_type);
     virtual int getNext_id() const;
     virtual void setNext_id(int next_id);
+    virtual int getVir_id() const;
+    virtual void setVir_id(int vir_id);
     virtual int getPass_counter() const;
     virtual void setPass_counter(int pass_counter);
     virtual int getNode_state() const;
     virtual void setNode_state(int node_state);
+    virtual int getReduce_phase() const;
+    virtual void setReduce_phase(int reduce_phase);
     virtual ::omnetpp::simtime_t getSend_time() const;
     virtual void setSend_time(::omnetpp::simtime_t send_time);
 };

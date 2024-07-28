@@ -69,7 +69,7 @@ using namespace std;
 #define ic_pos_syn_state   0
 #define ic_neg_syn_state   1
 #define IDLE_STATE 2
-#define g_ic_message_num 30
+#define g_ic_message_num 1800
 
 class basic_node : public cSimpleModule
 {
@@ -90,6 +90,7 @@ private:
     bool g_if_node_distribution;
     bool g_if_takeup;
     int g_ic_loc;
+    int g_odd_pair_id;
     int delay_global_location;
     int icc_global_location;
     int g_if_ic_syn_packets;
@@ -119,6 +120,7 @@ private:
     bool g_ic_reduction_recovery_execution_signal;
     bool g_tree_if_listen_wait;
     bool g_if_do_reduce;
+    bool g_if_final_step;
     int g_ic_dynamic_loc;
     int g_ic_current_seq_loc;
     int sink_collision_check_counter;

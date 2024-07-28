@@ -1,21 +1,21 @@
 version 2
-run General-0-20240704-10:23:41-26012
+run General-0-20240728-17:49:16-24628
 attr configname General
-attr datetime 20240704-10:23:41
+attr datetime 20240728-17:49:16
 attr experiment General
 attr inifile omnetpp.ini
 attr iterationvars ""
 attr iterationvarsf ""
 attr measurement ""
 attr network src.RandomGrid
-attr processid 26012
+attr processid 24628
 attr repetition 0
 attr replication #0
 attr resultdir results
 attr runnumber 0
 attr seedset 0
-param RandomGrid.g_ic_num 6
-param RandomGrid.g_energy_model 1
+param RandomGrid.g_ic_num 30
+param RandomGrid.g_energy_model 0
 param RandomGrid.power_off_switch false
 param RandomGrid.g_reduce_scheme 0
 param RandomGrid.sink.node_type 0
@@ -25,153 +25,153 @@ param RandomGrid.ic[*].g_if_produce_packets false
 
 statistic RandomGrid.sink sim_time:histogram
 field count 1
-field mean 128.37
+field mean 2600.669
 field stddev nan
-field min 128.37
-field max 128.37
-field sum 128.37
-field sqrsum 16478.8569
+field min 2600.669
+field max 2600.669
+field sum 2600.669
+field sqrsum 6763479.247561
 attr interpolationmode none
 attr source sim_time
 attr title "simTime, histogram"
 bin	-inf	0
-bin	127.86	0
-bin	127.88	0
-bin	127.9	0
-bin	127.92	0
-bin	127.94	0
-bin	127.96	0
-bin	127.98	0
-bin	128	0
-bin	128.02	0
-bin	128.04	0
-bin	128.06	0
-bin	128.08	0
-bin	128.1	0
-bin	128.12	0
-bin	128.14	0
-bin	128.16	0
-bin	128.18	0
-bin	128.2	0
-bin	128.22	0
-bin	128.24	0
-bin	128.26	0
-bin	128.28	0
-bin	128.3	0
-bin	128.32	0
-bin	128.34	0
-bin	128.36	1
-bin	128.38	0
-bin	128.4	0
-bin	128.42	0
-bin	128.44	0
-bin	128.46	0
-bin	128.48	0
-bin	128.5	0
-bin	128.52	0
-bin	128.54	0
-bin	128.56	0
-bin	128.58	0
-bin	128.6	0
-bin	128.62	0
-bin	128.64	0
-bin	128.66	0
-bin	128.68	0
-bin	128.7	0
-bin	128.72	0
-bin	128.74	0
-bin	128.76	0
-bin	128.78	0
-bin	128.8	0
-bin	128.82	0
-bin	128.84	0
-bin	128.86	0
-bin	128.88	0
-scalar RandomGrid.sink sim_time:last 128.37
+bin	2600.16	0
+bin	2600.18	0
+bin	2600.2	0
+bin	2600.22	0
+bin	2600.24	0
+bin	2600.26	0
+bin	2600.28	0
+bin	2600.3	0
+bin	2600.32	0
+bin	2600.34	0
+bin	2600.36	0
+bin	2600.38	0
+bin	2600.4	0
+bin	2600.42	0
+bin	2600.44	0
+bin	2600.46	0
+bin	2600.48	0
+bin	2600.5	0
+bin	2600.52	0
+bin	2600.54	0
+bin	2600.56	0
+bin	2600.58	0
+bin	2600.6	0
+bin	2600.62	0
+bin	2600.64	0
+bin	2600.66	1
+bin	2600.68	0
+bin	2600.7	0
+bin	2600.72	0
+bin	2600.74	0
+bin	2600.76	0
+bin	2600.78	0
+bin	2600.8	0
+bin	2600.82	0
+bin	2600.84	0
+bin	2600.86	0
+bin	2600.88	0
+bin	2600.9	0
+bin	2600.92	0
+bin	2600.94	0
+bin	2600.96	0
+bin	2600.98	0
+bin	2601	0
+bin	2601.02	0
+bin	2601.04	0
+bin	2601.06	0
+bin	2601.08	0
+bin	2601.1	0
+bin	2601.12	0
+bin	2601.14	0
+bin	2601.16	0
+bin	2601.18	0
+scalar RandomGrid.sink sim_time:last 2600.669
 attr interpolationmode none
 attr source sim_time
 attr title "simTime, last"
-scalar RandomGrid.sink sim_time:min 128.37
+scalar RandomGrid.sink sim_time:min 2600.669
 attr interpolationmode none
 attr source sim_time
 attr title "simTime, min"
-scalar RandomGrid.sink sim_time:max 128.37
+scalar RandomGrid.sink sim_time:max 2600.669
 attr interpolationmode none
 attr source sim_time
 attr title "simTime, max"
 statistic RandomGrid.sink discovery_time:histogram
 field count 1
-field mean 0.637
+field mean 2.471
 field stddev nan
-field min 0.637
-field max 0.637
-field sum 0.637
-field sqrsum 0.405769
+field min 2.471
+field max 2.471
+field sum 2.471
+field sqrsum 6.105841
 attr interpolationmode none
 attr source discovery_time
 attr title "discovery time, histogram"
 bin	-inf	0
-bin	0.12	0
-bin	0.14	0
-bin	0.16	0
-bin	0.18	0
-bin	0.2	0
-bin	0.22	0
-bin	0.24	0
-bin	0.26	0
-bin	0.28	0
-bin	0.3	0
-bin	0.32	0
-bin	0.34	0
-bin	0.36	0
-bin	0.38	0
-bin	0.4	0
-bin	0.42	0
-bin	0.44	0
-bin	0.46	0
-bin	0.48	0
-bin	0.5	0
-bin	0.52	0
-bin	0.54	0
-bin	0.56	0
-bin	0.58	0
-bin	0.6	0
-bin	0.62	1
-bin	0.64	0
-bin	0.66	0
-bin	0.68	0
-bin	0.7	0
-bin	0.72	0
-bin	0.74	0
-bin	0.76	0
-bin	0.78	0
-bin	0.8	0
-bin	0.82	0
-bin	0.84	0
-bin	0.86	0
-bin	0.88	0
-bin	0.9	0
-bin	0.92	0
-bin	0.94	0
-bin	0.96	0
-bin	0.98	0
-bin	1	0
-bin	1.02	0
-bin	1.04	0
-bin	1.06	0
-bin	1.08	0
-bin	1.1	0
-bin	1.12	0
-bin	1.14	0
-scalar RandomGrid.sink discovery_time:last 0.637
+bin	1.96	0
+bin	1.98	0
+bin	2	0
+bin	2.02	0
+bin	2.04	0
+bin	2.06	0
+bin	2.08	0
+bin	2.1	0
+bin	2.12	0
+bin	2.14	0
+bin	2.16	0
+bin	2.18	0
+bin	2.2	0
+bin	2.22	0
+bin	2.24	0
+bin	2.26	0
+bin	2.28	0
+bin	2.3	0
+bin	2.32	0
+bin	2.34	0
+bin	2.36	0
+bin	2.38	0
+bin	2.4	0
+bin	2.42	0
+bin	2.44	0
+bin	2.46	1
+bin	2.48	0
+bin	2.5	0
+bin	2.52	0
+bin	2.54	0
+bin	2.56	0
+bin	2.58	0
+bin	2.6	0
+bin	2.62	0
+bin	2.64	0
+bin	2.66	0
+bin	2.68	0
+bin	2.7	0
+bin	2.72	0
+bin	2.74	0
+bin	2.76	0
+bin	2.78	0
+bin	2.8	0
+bin	2.82	0
+bin	2.84	0
+bin	2.86	0
+bin	2.88	0
+bin	2.9	0
+bin	2.92	0
+bin	2.94	0
+bin	2.96	0
+bin	2.98	0
+scalar RandomGrid.sink discovery_time:last 2.471
 attr interpolationmode none
 attr source discovery_time
 attr title "discovery time, last"
-scalar RandomGrid.sink discovery_time:min 0.637
+scalar RandomGrid.sink discovery_time:min 2.471
 attr interpolationmode none
 attr source discovery_time
 attr title "discovery time, min"
-scalar RandomGrid.sink discovery_time:max 0.637
+scalar RandomGrid.sink discovery_time:max 2.471
 attr interpolationmode none
 attr source discovery_time
 attr title "discovery time, max"
@@ -536,6 +536,1254 @@ attr interpolationmode none
 attr source discovery_time
 attr title "discovery time, min"
 scalar RandomGrid.ic[5] discovery_time:max nan
+attr interpolationmode none
+attr source discovery_time
+attr title "discovery time, max"
+statistic RandomGrid.ic[6] sim_time:histogram
+field count 0
+field mean nan
+field stddev nan
+field min nan
+field max nan
+field sum 0
+field sqrsum 0
+attr interpolationmode none
+attr source sim_time
+attr title "simTime, histogram"
+bin	-inf	0
+bin	0	0
+bin	1	0
+scalar RandomGrid.ic[6] sim_time:last nan
+attr interpolationmode none
+attr source sim_time
+attr title "simTime, last"
+scalar RandomGrid.ic[6] sim_time:min nan
+attr interpolationmode none
+attr source sim_time
+attr title "simTime, min"
+scalar RandomGrid.ic[6] sim_time:max nan
+attr interpolationmode none
+attr source sim_time
+attr title "simTime, max"
+statistic RandomGrid.ic[6] discovery_time:histogram
+field count 0
+field mean nan
+field stddev nan
+field min nan
+field max nan
+field sum 0
+field sqrsum 0
+attr interpolationmode none
+attr source discovery_time
+attr title "discovery time, histogram"
+bin	-inf	0
+bin	0	0
+bin	1	0
+scalar RandomGrid.ic[6] discovery_time:last nan
+attr interpolationmode none
+attr source discovery_time
+attr title "discovery time, last"
+scalar RandomGrid.ic[6] discovery_time:min nan
+attr interpolationmode none
+attr source discovery_time
+attr title "discovery time, min"
+scalar RandomGrid.ic[6] discovery_time:max nan
+attr interpolationmode none
+attr source discovery_time
+attr title "discovery time, max"
+statistic RandomGrid.ic[7] sim_time:histogram
+field count 0
+field mean nan
+field stddev nan
+field min nan
+field max nan
+field sum 0
+field sqrsum 0
+attr interpolationmode none
+attr source sim_time
+attr title "simTime, histogram"
+bin	-inf	0
+bin	0	0
+bin	1	0
+scalar RandomGrid.ic[7] sim_time:last nan
+attr interpolationmode none
+attr source sim_time
+attr title "simTime, last"
+scalar RandomGrid.ic[7] sim_time:min nan
+attr interpolationmode none
+attr source sim_time
+attr title "simTime, min"
+scalar RandomGrid.ic[7] sim_time:max nan
+attr interpolationmode none
+attr source sim_time
+attr title "simTime, max"
+statistic RandomGrid.ic[7] discovery_time:histogram
+field count 0
+field mean nan
+field stddev nan
+field min nan
+field max nan
+field sum 0
+field sqrsum 0
+attr interpolationmode none
+attr source discovery_time
+attr title "discovery time, histogram"
+bin	-inf	0
+bin	0	0
+bin	1	0
+scalar RandomGrid.ic[7] discovery_time:last nan
+attr interpolationmode none
+attr source discovery_time
+attr title "discovery time, last"
+scalar RandomGrid.ic[7] discovery_time:min nan
+attr interpolationmode none
+attr source discovery_time
+attr title "discovery time, min"
+scalar RandomGrid.ic[7] discovery_time:max nan
+attr interpolationmode none
+attr source discovery_time
+attr title "discovery time, max"
+statistic RandomGrid.ic[8] sim_time:histogram
+field count 0
+field mean nan
+field stddev nan
+field min nan
+field max nan
+field sum 0
+field sqrsum 0
+attr interpolationmode none
+attr source sim_time
+attr title "simTime, histogram"
+bin	-inf	0
+bin	0	0
+bin	1	0
+scalar RandomGrid.ic[8] sim_time:last nan
+attr interpolationmode none
+attr source sim_time
+attr title "simTime, last"
+scalar RandomGrid.ic[8] sim_time:min nan
+attr interpolationmode none
+attr source sim_time
+attr title "simTime, min"
+scalar RandomGrid.ic[8] sim_time:max nan
+attr interpolationmode none
+attr source sim_time
+attr title "simTime, max"
+statistic RandomGrid.ic[8] discovery_time:histogram
+field count 0
+field mean nan
+field stddev nan
+field min nan
+field max nan
+field sum 0
+field sqrsum 0
+attr interpolationmode none
+attr source discovery_time
+attr title "discovery time, histogram"
+bin	-inf	0
+bin	0	0
+bin	1	0
+scalar RandomGrid.ic[8] discovery_time:last nan
+attr interpolationmode none
+attr source discovery_time
+attr title "discovery time, last"
+scalar RandomGrid.ic[8] discovery_time:min nan
+attr interpolationmode none
+attr source discovery_time
+attr title "discovery time, min"
+scalar RandomGrid.ic[8] discovery_time:max nan
+attr interpolationmode none
+attr source discovery_time
+attr title "discovery time, max"
+statistic RandomGrid.ic[9] sim_time:histogram
+field count 0
+field mean nan
+field stddev nan
+field min nan
+field max nan
+field sum 0
+field sqrsum 0
+attr interpolationmode none
+attr source sim_time
+attr title "simTime, histogram"
+bin	-inf	0
+bin	0	0
+bin	1	0
+scalar RandomGrid.ic[9] sim_time:last nan
+attr interpolationmode none
+attr source sim_time
+attr title "simTime, last"
+scalar RandomGrid.ic[9] sim_time:min nan
+attr interpolationmode none
+attr source sim_time
+attr title "simTime, min"
+scalar RandomGrid.ic[9] sim_time:max nan
+attr interpolationmode none
+attr source sim_time
+attr title "simTime, max"
+statistic RandomGrid.ic[9] discovery_time:histogram
+field count 0
+field mean nan
+field stddev nan
+field min nan
+field max nan
+field sum 0
+field sqrsum 0
+attr interpolationmode none
+attr source discovery_time
+attr title "discovery time, histogram"
+bin	-inf	0
+bin	0	0
+bin	1	0
+scalar RandomGrid.ic[9] discovery_time:last nan
+attr interpolationmode none
+attr source discovery_time
+attr title "discovery time, last"
+scalar RandomGrid.ic[9] discovery_time:min nan
+attr interpolationmode none
+attr source discovery_time
+attr title "discovery time, min"
+scalar RandomGrid.ic[9] discovery_time:max nan
+attr interpolationmode none
+attr source discovery_time
+attr title "discovery time, max"
+statistic RandomGrid.ic[10] sim_time:histogram
+field count 0
+field mean nan
+field stddev nan
+field min nan
+field max nan
+field sum 0
+field sqrsum 0
+attr interpolationmode none
+attr source sim_time
+attr title "simTime, histogram"
+bin	-inf	0
+bin	0	0
+bin	1	0
+scalar RandomGrid.ic[10] sim_time:last nan
+attr interpolationmode none
+attr source sim_time
+attr title "simTime, last"
+scalar RandomGrid.ic[10] sim_time:min nan
+attr interpolationmode none
+attr source sim_time
+attr title "simTime, min"
+scalar RandomGrid.ic[10] sim_time:max nan
+attr interpolationmode none
+attr source sim_time
+attr title "simTime, max"
+statistic RandomGrid.ic[10] discovery_time:histogram
+field count 0
+field mean nan
+field stddev nan
+field min nan
+field max nan
+field sum 0
+field sqrsum 0
+attr interpolationmode none
+attr source discovery_time
+attr title "discovery time, histogram"
+bin	-inf	0
+bin	0	0
+bin	1	0
+scalar RandomGrid.ic[10] discovery_time:last nan
+attr interpolationmode none
+attr source discovery_time
+attr title "discovery time, last"
+scalar RandomGrid.ic[10] discovery_time:min nan
+attr interpolationmode none
+attr source discovery_time
+attr title "discovery time, min"
+scalar RandomGrid.ic[10] discovery_time:max nan
+attr interpolationmode none
+attr source discovery_time
+attr title "discovery time, max"
+statistic RandomGrid.ic[11] sim_time:histogram
+field count 0
+field mean nan
+field stddev nan
+field min nan
+field max nan
+field sum 0
+field sqrsum 0
+attr interpolationmode none
+attr source sim_time
+attr title "simTime, histogram"
+bin	-inf	0
+bin	0	0
+bin	1	0
+scalar RandomGrid.ic[11] sim_time:last nan
+attr interpolationmode none
+attr source sim_time
+attr title "simTime, last"
+scalar RandomGrid.ic[11] sim_time:min nan
+attr interpolationmode none
+attr source sim_time
+attr title "simTime, min"
+scalar RandomGrid.ic[11] sim_time:max nan
+attr interpolationmode none
+attr source sim_time
+attr title "simTime, max"
+statistic RandomGrid.ic[11] discovery_time:histogram
+field count 0
+field mean nan
+field stddev nan
+field min nan
+field max nan
+field sum 0
+field sqrsum 0
+attr interpolationmode none
+attr source discovery_time
+attr title "discovery time, histogram"
+bin	-inf	0
+bin	0	0
+bin	1	0
+scalar RandomGrid.ic[11] discovery_time:last nan
+attr interpolationmode none
+attr source discovery_time
+attr title "discovery time, last"
+scalar RandomGrid.ic[11] discovery_time:min nan
+attr interpolationmode none
+attr source discovery_time
+attr title "discovery time, min"
+scalar RandomGrid.ic[11] discovery_time:max nan
+attr interpolationmode none
+attr source discovery_time
+attr title "discovery time, max"
+statistic RandomGrid.ic[12] sim_time:histogram
+field count 0
+field mean nan
+field stddev nan
+field min nan
+field max nan
+field sum 0
+field sqrsum 0
+attr interpolationmode none
+attr source sim_time
+attr title "simTime, histogram"
+bin	-inf	0
+bin	0	0
+bin	1	0
+scalar RandomGrid.ic[12] sim_time:last nan
+attr interpolationmode none
+attr source sim_time
+attr title "simTime, last"
+scalar RandomGrid.ic[12] sim_time:min nan
+attr interpolationmode none
+attr source sim_time
+attr title "simTime, min"
+scalar RandomGrid.ic[12] sim_time:max nan
+attr interpolationmode none
+attr source sim_time
+attr title "simTime, max"
+statistic RandomGrid.ic[12] discovery_time:histogram
+field count 0
+field mean nan
+field stddev nan
+field min nan
+field max nan
+field sum 0
+field sqrsum 0
+attr interpolationmode none
+attr source discovery_time
+attr title "discovery time, histogram"
+bin	-inf	0
+bin	0	0
+bin	1	0
+scalar RandomGrid.ic[12] discovery_time:last nan
+attr interpolationmode none
+attr source discovery_time
+attr title "discovery time, last"
+scalar RandomGrid.ic[12] discovery_time:min nan
+attr interpolationmode none
+attr source discovery_time
+attr title "discovery time, min"
+scalar RandomGrid.ic[12] discovery_time:max nan
+attr interpolationmode none
+attr source discovery_time
+attr title "discovery time, max"
+statistic RandomGrid.ic[13] sim_time:histogram
+field count 0
+field mean nan
+field stddev nan
+field min nan
+field max nan
+field sum 0
+field sqrsum 0
+attr interpolationmode none
+attr source sim_time
+attr title "simTime, histogram"
+bin	-inf	0
+bin	0	0
+bin	1	0
+scalar RandomGrid.ic[13] sim_time:last nan
+attr interpolationmode none
+attr source sim_time
+attr title "simTime, last"
+scalar RandomGrid.ic[13] sim_time:min nan
+attr interpolationmode none
+attr source sim_time
+attr title "simTime, min"
+scalar RandomGrid.ic[13] sim_time:max nan
+attr interpolationmode none
+attr source sim_time
+attr title "simTime, max"
+statistic RandomGrid.ic[13] discovery_time:histogram
+field count 0
+field mean nan
+field stddev nan
+field min nan
+field max nan
+field sum 0
+field sqrsum 0
+attr interpolationmode none
+attr source discovery_time
+attr title "discovery time, histogram"
+bin	-inf	0
+bin	0	0
+bin	1	0
+scalar RandomGrid.ic[13] discovery_time:last nan
+attr interpolationmode none
+attr source discovery_time
+attr title "discovery time, last"
+scalar RandomGrid.ic[13] discovery_time:min nan
+attr interpolationmode none
+attr source discovery_time
+attr title "discovery time, min"
+scalar RandomGrid.ic[13] discovery_time:max nan
+attr interpolationmode none
+attr source discovery_time
+attr title "discovery time, max"
+statistic RandomGrid.ic[14] sim_time:histogram
+field count 0
+field mean nan
+field stddev nan
+field min nan
+field max nan
+field sum 0
+field sqrsum 0
+attr interpolationmode none
+attr source sim_time
+attr title "simTime, histogram"
+bin	-inf	0
+bin	0	0
+bin	1	0
+scalar RandomGrid.ic[14] sim_time:last nan
+attr interpolationmode none
+attr source sim_time
+attr title "simTime, last"
+scalar RandomGrid.ic[14] sim_time:min nan
+attr interpolationmode none
+attr source sim_time
+attr title "simTime, min"
+scalar RandomGrid.ic[14] sim_time:max nan
+attr interpolationmode none
+attr source sim_time
+attr title "simTime, max"
+statistic RandomGrid.ic[14] discovery_time:histogram
+field count 0
+field mean nan
+field stddev nan
+field min nan
+field max nan
+field sum 0
+field sqrsum 0
+attr interpolationmode none
+attr source discovery_time
+attr title "discovery time, histogram"
+bin	-inf	0
+bin	0	0
+bin	1	0
+scalar RandomGrid.ic[14] discovery_time:last nan
+attr interpolationmode none
+attr source discovery_time
+attr title "discovery time, last"
+scalar RandomGrid.ic[14] discovery_time:min nan
+attr interpolationmode none
+attr source discovery_time
+attr title "discovery time, min"
+scalar RandomGrid.ic[14] discovery_time:max nan
+attr interpolationmode none
+attr source discovery_time
+attr title "discovery time, max"
+statistic RandomGrid.ic[15] sim_time:histogram
+field count 0
+field mean nan
+field stddev nan
+field min nan
+field max nan
+field sum 0
+field sqrsum 0
+attr interpolationmode none
+attr source sim_time
+attr title "simTime, histogram"
+bin	-inf	0
+bin	0	0
+bin	1	0
+scalar RandomGrid.ic[15] sim_time:last nan
+attr interpolationmode none
+attr source sim_time
+attr title "simTime, last"
+scalar RandomGrid.ic[15] sim_time:min nan
+attr interpolationmode none
+attr source sim_time
+attr title "simTime, min"
+scalar RandomGrid.ic[15] sim_time:max nan
+attr interpolationmode none
+attr source sim_time
+attr title "simTime, max"
+statistic RandomGrid.ic[15] discovery_time:histogram
+field count 0
+field mean nan
+field stddev nan
+field min nan
+field max nan
+field sum 0
+field sqrsum 0
+attr interpolationmode none
+attr source discovery_time
+attr title "discovery time, histogram"
+bin	-inf	0
+bin	0	0
+bin	1	0
+scalar RandomGrid.ic[15] discovery_time:last nan
+attr interpolationmode none
+attr source discovery_time
+attr title "discovery time, last"
+scalar RandomGrid.ic[15] discovery_time:min nan
+attr interpolationmode none
+attr source discovery_time
+attr title "discovery time, min"
+scalar RandomGrid.ic[15] discovery_time:max nan
+attr interpolationmode none
+attr source discovery_time
+attr title "discovery time, max"
+statistic RandomGrid.ic[16] sim_time:histogram
+field count 0
+field mean nan
+field stddev nan
+field min nan
+field max nan
+field sum 0
+field sqrsum 0
+attr interpolationmode none
+attr source sim_time
+attr title "simTime, histogram"
+bin	-inf	0
+bin	0	0
+bin	1	0
+scalar RandomGrid.ic[16] sim_time:last nan
+attr interpolationmode none
+attr source sim_time
+attr title "simTime, last"
+scalar RandomGrid.ic[16] sim_time:min nan
+attr interpolationmode none
+attr source sim_time
+attr title "simTime, min"
+scalar RandomGrid.ic[16] sim_time:max nan
+attr interpolationmode none
+attr source sim_time
+attr title "simTime, max"
+statistic RandomGrid.ic[16] discovery_time:histogram
+field count 0
+field mean nan
+field stddev nan
+field min nan
+field max nan
+field sum 0
+field sqrsum 0
+attr interpolationmode none
+attr source discovery_time
+attr title "discovery time, histogram"
+bin	-inf	0
+bin	0	0
+bin	1	0
+scalar RandomGrid.ic[16] discovery_time:last nan
+attr interpolationmode none
+attr source discovery_time
+attr title "discovery time, last"
+scalar RandomGrid.ic[16] discovery_time:min nan
+attr interpolationmode none
+attr source discovery_time
+attr title "discovery time, min"
+scalar RandomGrid.ic[16] discovery_time:max nan
+attr interpolationmode none
+attr source discovery_time
+attr title "discovery time, max"
+statistic RandomGrid.ic[17] sim_time:histogram
+field count 0
+field mean nan
+field stddev nan
+field min nan
+field max nan
+field sum 0
+field sqrsum 0
+attr interpolationmode none
+attr source sim_time
+attr title "simTime, histogram"
+bin	-inf	0
+bin	0	0
+bin	1	0
+scalar RandomGrid.ic[17] sim_time:last nan
+attr interpolationmode none
+attr source sim_time
+attr title "simTime, last"
+scalar RandomGrid.ic[17] sim_time:min nan
+attr interpolationmode none
+attr source sim_time
+attr title "simTime, min"
+scalar RandomGrid.ic[17] sim_time:max nan
+attr interpolationmode none
+attr source sim_time
+attr title "simTime, max"
+statistic RandomGrid.ic[17] discovery_time:histogram
+field count 0
+field mean nan
+field stddev nan
+field min nan
+field max nan
+field sum 0
+field sqrsum 0
+attr interpolationmode none
+attr source discovery_time
+attr title "discovery time, histogram"
+bin	-inf	0
+bin	0	0
+bin	1	0
+scalar RandomGrid.ic[17] discovery_time:last nan
+attr interpolationmode none
+attr source discovery_time
+attr title "discovery time, last"
+scalar RandomGrid.ic[17] discovery_time:min nan
+attr interpolationmode none
+attr source discovery_time
+attr title "discovery time, min"
+scalar RandomGrid.ic[17] discovery_time:max nan
+attr interpolationmode none
+attr source discovery_time
+attr title "discovery time, max"
+statistic RandomGrid.ic[18] sim_time:histogram
+field count 0
+field mean nan
+field stddev nan
+field min nan
+field max nan
+field sum 0
+field sqrsum 0
+attr interpolationmode none
+attr source sim_time
+attr title "simTime, histogram"
+bin	-inf	0
+bin	0	0
+bin	1	0
+scalar RandomGrid.ic[18] sim_time:last nan
+attr interpolationmode none
+attr source sim_time
+attr title "simTime, last"
+scalar RandomGrid.ic[18] sim_time:min nan
+attr interpolationmode none
+attr source sim_time
+attr title "simTime, min"
+scalar RandomGrid.ic[18] sim_time:max nan
+attr interpolationmode none
+attr source sim_time
+attr title "simTime, max"
+statistic RandomGrid.ic[18] discovery_time:histogram
+field count 0
+field mean nan
+field stddev nan
+field min nan
+field max nan
+field sum 0
+field sqrsum 0
+attr interpolationmode none
+attr source discovery_time
+attr title "discovery time, histogram"
+bin	-inf	0
+bin	0	0
+bin	1	0
+scalar RandomGrid.ic[18] discovery_time:last nan
+attr interpolationmode none
+attr source discovery_time
+attr title "discovery time, last"
+scalar RandomGrid.ic[18] discovery_time:min nan
+attr interpolationmode none
+attr source discovery_time
+attr title "discovery time, min"
+scalar RandomGrid.ic[18] discovery_time:max nan
+attr interpolationmode none
+attr source discovery_time
+attr title "discovery time, max"
+statistic RandomGrid.ic[19] sim_time:histogram
+field count 0
+field mean nan
+field stddev nan
+field min nan
+field max nan
+field sum 0
+field sqrsum 0
+attr interpolationmode none
+attr source sim_time
+attr title "simTime, histogram"
+bin	-inf	0
+bin	0	0
+bin	1	0
+scalar RandomGrid.ic[19] sim_time:last nan
+attr interpolationmode none
+attr source sim_time
+attr title "simTime, last"
+scalar RandomGrid.ic[19] sim_time:min nan
+attr interpolationmode none
+attr source sim_time
+attr title "simTime, min"
+scalar RandomGrid.ic[19] sim_time:max nan
+attr interpolationmode none
+attr source sim_time
+attr title "simTime, max"
+statistic RandomGrid.ic[19] discovery_time:histogram
+field count 0
+field mean nan
+field stddev nan
+field min nan
+field max nan
+field sum 0
+field sqrsum 0
+attr interpolationmode none
+attr source discovery_time
+attr title "discovery time, histogram"
+bin	-inf	0
+bin	0	0
+bin	1	0
+scalar RandomGrid.ic[19] discovery_time:last nan
+attr interpolationmode none
+attr source discovery_time
+attr title "discovery time, last"
+scalar RandomGrid.ic[19] discovery_time:min nan
+attr interpolationmode none
+attr source discovery_time
+attr title "discovery time, min"
+scalar RandomGrid.ic[19] discovery_time:max nan
+attr interpolationmode none
+attr source discovery_time
+attr title "discovery time, max"
+statistic RandomGrid.ic[20] sim_time:histogram
+field count 0
+field mean nan
+field stddev nan
+field min nan
+field max nan
+field sum 0
+field sqrsum 0
+attr interpolationmode none
+attr source sim_time
+attr title "simTime, histogram"
+bin	-inf	0
+bin	0	0
+bin	1	0
+scalar RandomGrid.ic[20] sim_time:last nan
+attr interpolationmode none
+attr source sim_time
+attr title "simTime, last"
+scalar RandomGrid.ic[20] sim_time:min nan
+attr interpolationmode none
+attr source sim_time
+attr title "simTime, min"
+scalar RandomGrid.ic[20] sim_time:max nan
+attr interpolationmode none
+attr source sim_time
+attr title "simTime, max"
+statistic RandomGrid.ic[20] discovery_time:histogram
+field count 0
+field mean nan
+field stddev nan
+field min nan
+field max nan
+field sum 0
+field sqrsum 0
+attr interpolationmode none
+attr source discovery_time
+attr title "discovery time, histogram"
+bin	-inf	0
+bin	0	0
+bin	1	0
+scalar RandomGrid.ic[20] discovery_time:last nan
+attr interpolationmode none
+attr source discovery_time
+attr title "discovery time, last"
+scalar RandomGrid.ic[20] discovery_time:min nan
+attr interpolationmode none
+attr source discovery_time
+attr title "discovery time, min"
+scalar RandomGrid.ic[20] discovery_time:max nan
+attr interpolationmode none
+attr source discovery_time
+attr title "discovery time, max"
+statistic RandomGrid.ic[21] sim_time:histogram
+field count 0
+field mean nan
+field stddev nan
+field min nan
+field max nan
+field sum 0
+field sqrsum 0
+attr interpolationmode none
+attr source sim_time
+attr title "simTime, histogram"
+bin	-inf	0
+bin	0	0
+bin	1	0
+scalar RandomGrid.ic[21] sim_time:last nan
+attr interpolationmode none
+attr source sim_time
+attr title "simTime, last"
+scalar RandomGrid.ic[21] sim_time:min nan
+attr interpolationmode none
+attr source sim_time
+attr title "simTime, min"
+scalar RandomGrid.ic[21] sim_time:max nan
+attr interpolationmode none
+attr source sim_time
+attr title "simTime, max"
+statistic RandomGrid.ic[21] discovery_time:histogram
+field count 0
+field mean nan
+field stddev nan
+field min nan
+field max nan
+field sum 0
+field sqrsum 0
+attr interpolationmode none
+attr source discovery_time
+attr title "discovery time, histogram"
+bin	-inf	0
+bin	0	0
+bin	1	0
+scalar RandomGrid.ic[21] discovery_time:last nan
+attr interpolationmode none
+attr source discovery_time
+attr title "discovery time, last"
+scalar RandomGrid.ic[21] discovery_time:min nan
+attr interpolationmode none
+attr source discovery_time
+attr title "discovery time, min"
+scalar RandomGrid.ic[21] discovery_time:max nan
+attr interpolationmode none
+attr source discovery_time
+attr title "discovery time, max"
+statistic RandomGrid.ic[22] sim_time:histogram
+field count 0
+field mean nan
+field stddev nan
+field min nan
+field max nan
+field sum 0
+field sqrsum 0
+attr interpolationmode none
+attr source sim_time
+attr title "simTime, histogram"
+bin	-inf	0
+bin	0	0
+bin	1	0
+scalar RandomGrid.ic[22] sim_time:last nan
+attr interpolationmode none
+attr source sim_time
+attr title "simTime, last"
+scalar RandomGrid.ic[22] sim_time:min nan
+attr interpolationmode none
+attr source sim_time
+attr title "simTime, min"
+scalar RandomGrid.ic[22] sim_time:max nan
+attr interpolationmode none
+attr source sim_time
+attr title "simTime, max"
+statistic RandomGrid.ic[22] discovery_time:histogram
+field count 0
+field mean nan
+field stddev nan
+field min nan
+field max nan
+field sum 0
+field sqrsum 0
+attr interpolationmode none
+attr source discovery_time
+attr title "discovery time, histogram"
+bin	-inf	0
+bin	0	0
+bin	1	0
+scalar RandomGrid.ic[22] discovery_time:last nan
+attr interpolationmode none
+attr source discovery_time
+attr title "discovery time, last"
+scalar RandomGrid.ic[22] discovery_time:min nan
+attr interpolationmode none
+attr source discovery_time
+attr title "discovery time, min"
+scalar RandomGrid.ic[22] discovery_time:max nan
+attr interpolationmode none
+attr source discovery_time
+attr title "discovery time, max"
+statistic RandomGrid.ic[23] sim_time:histogram
+field count 0
+field mean nan
+field stddev nan
+field min nan
+field max nan
+field sum 0
+field sqrsum 0
+attr interpolationmode none
+attr source sim_time
+attr title "simTime, histogram"
+bin	-inf	0
+bin	0	0
+bin	1	0
+scalar RandomGrid.ic[23] sim_time:last nan
+attr interpolationmode none
+attr source sim_time
+attr title "simTime, last"
+scalar RandomGrid.ic[23] sim_time:min nan
+attr interpolationmode none
+attr source sim_time
+attr title "simTime, min"
+scalar RandomGrid.ic[23] sim_time:max nan
+attr interpolationmode none
+attr source sim_time
+attr title "simTime, max"
+statistic RandomGrid.ic[23] discovery_time:histogram
+field count 0
+field mean nan
+field stddev nan
+field min nan
+field max nan
+field sum 0
+field sqrsum 0
+attr interpolationmode none
+attr source discovery_time
+attr title "discovery time, histogram"
+bin	-inf	0
+bin	0	0
+bin	1	0
+scalar RandomGrid.ic[23] discovery_time:last nan
+attr interpolationmode none
+attr source discovery_time
+attr title "discovery time, last"
+scalar RandomGrid.ic[23] discovery_time:min nan
+attr interpolationmode none
+attr source discovery_time
+attr title "discovery time, min"
+scalar RandomGrid.ic[23] discovery_time:max nan
+attr interpolationmode none
+attr source discovery_time
+attr title "discovery time, max"
+statistic RandomGrid.ic[24] sim_time:histogram
+field count 0
+field mean nan
+field stddev nan
+field min nan
+field max nan
+field sum 0
+field sqrsum 0
+attr interpolationmode none
+attr source sim_time
+attr title "simTime, histogram"
+bin	-inf	0
+bin	0	0
+bin	1	0
+scalar RandomGrid.ic[24] sim_time:last nan
+attr interpolationmode none
+attr source sim_time
+attr title "simTime, last"
+scalar RandomGrid.ic[24] sim_time:min nan
+attr interpolationmode none
+attr source sim_time
+attr title "simTime, min"
+scalar RandomGrid.ic[24] sim_time:max nan
+attr interpolationmode none
+attr source sim_time
+attr title "simTime, max"
+statistic RandomGrid.ic[24] discovery_time:histogram
+field count 0
+field mean nan
+field stddev nan
+field min nan
+field max nan
+field sum 0
+field sqrsum 0
+attr interpolationmode none
+attr source discovery_time
+attr title "discovery time, histogram"
+bin	-inf	0
+bin	0	0
+bin	1	0
+scalar RandomGrid.ic[24] discovery_time:last nan
+attr interpolationmode none
+attr source discovery_time
+attr title "discovery time, last"
+scalar RandomGrid.ic[24] discovery_time:min nan
+attr interpolationmode none
+attr source discovery_time
+attr title "discovery time, min"
+scalar RandomGrid.ic[24] discovery_time:max nan
+attr interpolationmode none
+attr source discovery_time
+attr title "discovery time, max"
+statistic RandomGrid.ic[25] sim_time:histogram
+field count 0
+field mean nan
+field stddev nan
+field min nan
+field max nan
+field sum 0
+field sqrsum 0
+attr interpolationmode none
+attr source sim_time
+attr title "simTime, histogram"
+bin	-inf	0
+bin	0	0
+bin	1	0
+scalar RandomGrid.ic[25] sim_time:last nan
+attr interpolationmode none
+attr source sim_time
+attr title "simTime, last"
+scalar RandomGrid.ic[25] sim_time:min nan
+attr interpolationmode none
+attr source sim_time
+attr title "simTime, min"
+scalar RandomGrid.ic[25] sim_time:max nan
+attr interpolationmode none
+attr source sim_time
+attr title "simTime, max"
+statistic RandomGrid.ic[25] discovery_time:histogram
+field count 0
+field mean nan
+field stddev nan
+field min nan
+field max nan
+field sum 0
+field sqrsum 0
+attr interpolationmode none
+attr source discovery_time
+attr title "discovery time, histogram"
+bin	-inf	0
+bin	0	0
+bin	1	0
+scalar RandomGrid.ic[25] discovery_time:last nan
+attr interpolationmode none
+attr source discovery_time
+attr title "discovery time, last"
+scalar RandomGrid.ic[25] discovery_time:min nan
+attr interpolationmode none
+attr source discovery_time
+attr title "discovery time, min"
+scalar RandomGrid.ic[25] discovery_time:max nan
+attr interpolationmode none
+attr source discovery_time
+attr title "discovery time, max"
+statistic RandomGrid.ic[26] sim_time:histogram
+field count 0
+field mean nan
+field stddev nan
+field min nan
+field max nan
+field sum 0
+field sqrsum 0
+attr interpolationmode none
+attr source sim_time
+attr title "simTime, histogram"
+bin	-inf	0
+bin	0	0
+bin	1	0
+scalar RandomGrid.ic[26] sim_time:last nan
+attr interpolationmode none
+attr source sim_time
+attr title "simTime, last"
+scalar RandomGrid.ic[26] sim_time:min nan
+attr interpolationmode none
+attr source sim_time
+attr title "simTime, min"
+scalar RandomGrid.ic[26] sim_time:max nan
+attr interpolationmode none
+attr source sim_time
+attr title "simTime, max"
+statistic RandomGrid.ic[26] discovery_time:histogram
+field count 0
+field mean nan
+field stddev nan
+field min nan
+field max nan
+field sum 0
+field sqrsum 0
+attr interpolationmode none
+attr source discovery_time
+attr title "discovery time, histogram"
+bin	-inf	0
+bin	0	0
+bin	1	0
+scalar RandomGrid.ic[26] discovery_time:last nan
+attr interpolationmode none
+attr source discovery_time
+attr title "discovery time, last"
+scalar RandomGrid.ic[26] discovery_time:min nan
+attr interpolationmode none
+attr source discovery_time
+attr title "discovery time, min"
+scalar RandomGrid.ic[26] discovery_time:max nan
+attr interpolationmode none
+attr source discovery_time
+attr title "discovery time, max"
+statistic RandomGrid.ic[27] sim_time:histogram
+field count 0
+field mean nan
+field stddev nan
+field min nan
+field max nan
+field sum 0
+field sqrsum 0
+attr interpolationmode none
+attr source sim_time
+attr title "simTime, histogram"
+bin	-inf	0
+bin	0	0
+bin	1	0
+scalar RandomGrid.ic[27] sim_time:last nan
+attr interpolationmode none
+attr source sim_time
+attr title "simTime, last"
+scalar RandomGrid.ic[27] sim_time:min nan
+attr interpolationmode none
+attr source sim_time
+attr title "simTime, min"
+scalar RandomGrid.ic[27] sim_time:max nan
+attr interpolationmode none
+attr source sim_time
+attr title "simTime, max"
+statistic RandomGrid.ic[27] discovery_time:histogram
+field count 0
+field mean nan
+field stddev nan
+field min nan
+field max nan
+field sum 0
+field sqrsum 0
+attr interpolationmode none
+attr source discovery_time
+attr title "discovery time, histogram"
+bin	-inf	0
+bin	0	0
+bin	1	0
+scalar RandomGrid.ic[27] discovery_time:last nan
+attr interpolationmode none
+attr source discovery_time
+attr title "discovery time, last"
+scalar RandomGrid.ic[27] discovery_time:min nan
+attr interpolationmode none
+attr source discovery_time
+attr title "discovery time, min"
+scalar RandomGrid.ic[27] discovery_time:max nan
+attr interpolationmode none
+attr source discovery_time
+attr title "discovery time, max"
+statistic RandomGrid.ic[28] sim_time:histogram
+field count 0
+field mean nan
+field stddev nan
+field min nan
+field max nan
+field sum 0
+field sqrsum 0
+attr interpolationmode none
+attr source sim_time
+attr title "simTime, histogram"
+bin	-inf	0
+bin	0	0
+bin	1	0
+scalar RandomGrid.ic[28] sim_time:last nan
+attr interpolationmode none
+attr source sim_time
+attr title "simTime, last"
+scalar RandomGrid.ic[28] sim_time:min nan
+attr interpolationmode none
+attr source sim_time
+attr title "simTime, min"
+scalar RandomGrid.ic[28] sim_time:max nan
+attr interpolationmode none
+attr source sim_time
+attr title "simTime, max"
+statistic RandomGrid.ic[28] discovery_time:histogram
+field count 0
+field mean nan
+field stddev nan
+field min nan
+field max nan
+field sum 0
+field sqrsum 0
+attr interpolationmode none
+attr source discovery_time
+attr title "discovery time, histogram"
+bin	-inf	0
+bin	0	0
+bin	1	0
+scalar RandomGrid.ic[28] discovery_time:last nan
+attr interpolationmode none
+attr source discovery_time
+attr title "discovery time, last"
+scalar RandomGrid.ic[28] discovery_time:min nan
+attr interpolationmode none
+attr source discovery_time
+attr title "discovery time, min"
+scalar RandomGrid.ic[28] discovery_time:max nan
+attr interpolationmode none
+attr source discovery_time
+attr title "discovery time, max"
+statistic RandomGrid.ic[29] sim_time:histogram
+field count 0
+field mean nan
+field stddev nan
+field min nan
+field max nan
+field sum 0
+field sqrsum 0
+attr interpolationmode none
+attr source sim_time
+attr title "simTime, histogram"
+bin	-inf	0
+bin	0	0
+bin	1	0
+scalar RandomGrid.ic[29] sim_time:last nan
+attr interpolationmode none
+attr source sim_time
+attr title "simTime, last"
+scalar RandomGrid.ic[29] sim_time:min nan
+attr interpolationmode none
+attr source sim_time
+attr title "simTime, min"
+scalar RandomGrid.ic[29] sim_time:max nan
+attr interpolationmode none
+attr source sim_time
+attr title "simTime, max"
+statistic RandomGrid.ic[29] discovery_time:histogram
+field count 0
+field mean nan
+field stddev nan
+field min nan
+field max nan
+field sum 0
+field sqrsum 0
+attr interpolationmode none
+attr source discovery_time
+attr title "discovery time, histogram"
+bin	-inf	0
+bin	0	0
+bin	1	0
+scalar RandomGrid.ic[29] discovery_time:last nan
+attr interpolationmode none
+attr source discovery_time
+attr title "discovery time, last"
+scalar RandomGrid.ic[29] discovery_time:min nan
+attr interpolationmode none
+attr source discovery_time
+attr title "discovery time, min"
+scalar RandomGrid.ic[29] discovery_time:max nan
 attr interpolationmode none
 attr source discovery_time
 attr title "discovery time, max"

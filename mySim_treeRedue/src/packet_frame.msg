@@ -11,8 +11,10 @@ packet packet_frame {
     int delay_bias;
     int sender_type;
     int next_id;
+    int vir_id;
     int pass_counter;
     int node_state;
+    int reduce_phase;
 //    int ic_pass_number;
 //    bool sent_flag;
     simtime_t send_time;

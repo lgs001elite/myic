@@ -43,7 +43,7 @@ void basic_node::net_initialize()
         this->g_ic_loc = -1;
         this->delay_global_location = 0;
         this->rx_state = false;
-        this->g_if_ic_syn_packets = IDLE_STATE;
+        this->g_if_ic_syn_packets = ic_neg_syn_state;
         this->g_ic_node_ready_reduce = false;
         this->g_ic_dynamic_loc = -1;
         this->g_next_id = -1;
@@ -56,12 +56,13 @@ void basic_node::net_initialize()
         this->ic_tree_reduce_phase = 0;
         this->g_ic_virtual_num = this->g_ic_num;
         this->g_if_takeup = false;
-        this->g_tree_if_listen_wait = false;
         this->g_link_received_signal = false;
         this->g_if_power_off = this->networkPtr->par("power_off_switch");
         this->linked_list_packet_start_seq= 0;
         this->linked_list_packet_send_len = 1;
         this->g_if_do_reduce = true;
+        this->g_odd_pair_id = -1;
+        this->g_if_final_step = false;
     }
 
     if (this->node_type == type_icc_node)
@@ -272,6 +273,7 @@ void basic_node::net_handleMessage(cMessage *msg)
         if (this->ic_attempt_counter >= g_ic_cycle)
         {
             extraRound = g_ic_cycle * intuniform(0, 1);
+            //this->ic_attempt_counter = 0;
         }
         // ic back to its distrited location
         if (this->delay_global_location > 0)
@@ -300,16 +302,21 @@ void basic_node::net_handleMessage(cMessage *msg)
             this->g_ic_self_delay_signal = false;
             if (this->g_queue_len > 0)
             {
-                 if ((this->transmission_queue[0].getPass_counter() == 6) && (this->g_node_id == 0))
+                if ((this->transmission_queue[0].getPass_counter() == this->g_ic_num) && (this->g_node_id == 0))
+                {
+                    this->scheduleAt(simTime() + this->slot_len * 0.1,
+                                     new cMessage("zero node sends data to sink node", tree_send_handler));
+                }
+                 else
                  {
-                      this->scheduleAt(simTime() + this->slot_len * 0.1,
-                         new cMessage("zero node sends data to sink node", tree_send_handler));
-                      this->g_if_ic_syn_packets == ic_neg_syn_state;
+                     if (this->g_if_ic_syn_packets == ic_pos_syn_state)
+                     {
+                         if (intuniform(1, 5) == 1)
+                         {
+                             this->ic_tree_send_signal();
+                         }
+                     }
                  }
-            }
-            if (this->g_if_ic_syn_packets == ic_pos_syn_state)
-            {
-                this->ic_tree_send_signal();
             }
             this->ic_collision_check_counter = 0;
             this->rx_state = true;
@@ -319,14 +326,14 @@ void basic_node::net_handleMessage(cMessage *msg)
         }
         else
         {
+            if (this->ic_attempt_counter < g_ic_cycle)
+            {
+                  this->ic_attempt_counter = this->ic_attempt_counter + 1;
+            }
             int delaySlots = 0;
             if (this->g_ic_loc == -1)
             {
                 this->transmitIdleBroadcast(nullptr);
-                if (this->ic_attempt_counter < g_ic_cycle)
-                {
-                    this->ic_attempt_counter = this->ic_attempt_counter + 1;
-                }
             }
             else
             {
@@ -385,9 +392,6 @@ void basic_node::net_handleMessage(cMessage *msg)
             // received data and do sth here
             this->transmission_queue.insert(this->transmission_queue.begin(), this->g_receivedMsg);
             g_queue_len = g_queue_len + 1;
-            // If the sink node received the msgs successfully, it will give a ack reply
-            scheduleAt(simTime() + this->slot_len * 0.1,
-                       new cMessage("sink node sends acks", sink_send_ack_handler));
         }
     }
     else if (msg->isSelfMessage() && msg->getKind() == sink_send_ack_handler)
@@ -405,7 +409,12 @@ void basic_node::net_handleMessage(cMessage *msg)
         simtime_t ptr = simTime();
         if (this->ic_collision_check_counter == 1)
         {
+            this->ic_attempt_counter = 0;
             // Do sth here for reduce data
+            if (this->g_node_id ==28)
+            {
+                EV<<"to do ebn";
+            }
             auto pkt_i = find_if(this->transmission_queue.begin(), this->transmission_queue.end(), [this](packet_frame pkt)
                                  { return pkt.getMsg_id() == this->g_receivedMsg.getMsg_id(); });
             if (pkt_i != this->transmission_queue.end())
@@ -436,21 +445,20 @@ void basic_node::net_handleMessage(cMessage *msg)
                         this->g_receivedMsg.setPass_counter(previousPassNum + localPassNum);
                     }
                 }
-                this->transmission_queue.insert(this->transmission_queue.begin(), this->g_receivedMsg);
-                if ((this->g_node_id % 2)  == 0)
-                {
-                      this->g_if_do_reduce = reduceDecision();
-                }
+                this->transmission_queue.insert(pkt_i, this->g_receivedMsg);
             }
-            if (this->g_if_do_reduce == false)
+            if (this->g_if_ic_syn_packets == ic_pos_syn_state)
             {
                 this->g_if_ic_syn_packets = ic_neg_syn_state;
-                this->g_ic_reduction_recovery_execution_signal = true;
             }
-            this->ic_collision_check_counter = 0;
+            if ((this->g_node_virtual_id % 2) == 0)
+            {
+                this->g_if_do_reduce = true;
+            }
             scheduleAt(simTime() + this->slot_len * 0.1,
                new cMessage("ic node sends acks", ic_send_ack_data_handler));
         }
+        this->ic_collision_check_counter = 0;
     }
     else if (msg->isSelfMessage() && msg->getKind() == tree_send_handler)
     {
@@ -462,11 +470,11 @@ void basic_node::net_handleMessage(cMessage *msg)
         int currentLoc = this->g_receivedMsg.getCurrent_slot();
         if (this->ic_collision_check_counter == 1)
         {
+            this->ic_attempt_counter = 0;
             if (this->g_ic_loc == -1)
             {
                 this->g_ic_loc = this->g_node_id;
                 this->g_ic_dynamic_loc = this->g_node_id;
-                this->ic_attempt_counter = 0;
                 this->g_if_node_distribution = true;
             }
             int bias = 0;
@@ -495,13 +503,17 @@ void basic_node::net_handleMessage(cMessage *msg)
             {
                 this->transmission_queue.erase(pkt_i);
             }
-            if ((this->g_node_id % 2)  == 0)
+            if ((this->g_node_id % 2) == 0)
             {
-                this->g_if_do_reduce = true;
+                this->g_ic_reduction_recovery_execution_signal = true;
             }
             this->g_queue_len = this->g_queue_len - 1;
-            this->ic_collision_check_counter = 0;
+            if (this->g_node_id == 28)
+            {
+                EV<<"to do ben";
+            }
         }
+        this->ic_collision_check_counter = 0;
     }
     else if (msg->isSelfMessage() && msg->getKind() == ic_send_ack_data_handler)
     {
@@ -513,8 +525,10 @@ void basic_node::net_handleMessage(cMessage *msg)
         simtime_t ptr = simTime();
         if (this->ic_collision_check_counter == 1)
         {
+            this->ic_attempt_counter = 0;
             this->transmitAck();
         }
+        this->ic_collision_check_counter = 0;
     }
     else if (msg->isSelfMessage() && msg->getKind() == icc_broad_handler)
     {
@@ -527,7 +541,11 @@ void basic_node::net_handleMessage(cMessage *msg)
     }
     else if (msg->isSelfMessage() && msg->getKind() == tree_signal_handler)
     {
-        this->ic_transmitData();
+        if (this->ic_collision_check_counter == 1)
+        {
+            this->ic_attempt_counter = 0;
+            this->ic_transmitData();
+        }
         this->ic_collision_check_counter = 0;
     }
     else
@@ -546,13 +564,8 @@ int basic_node::ic_reduceAction()
     int delaySlots = 0;
     if (this->ic_reduce_algorithm == tree_reduce_algorithm)
     {
-        if(this->g_ic_reduction_recovery_execution_signal  == true)
+        if (this->g_ic_reduction_recovery_execution_signal == true)
         {
-            if (this->g_node_id  == 4)
-            {
-                simTime();
-            }
-            this->g_tree_if_listen_wait = true;
             this->g_ic_reduction_recovery_execution_signal = false;
             int originLoc = this->g_ic_dynamic_loc - this->g_reduction_bias_num;
             delaySlots  = this->g_ic_cycle - this->g_ic_dynamic_loc + originLoc;
@@ -560,13 +573,12 @@ int basic_node::ic_reduceAction()
             this->g_reduction_bias_num = 0;
             this->g_node_virtual_id = this->g_node_id;
             this->ic_tree_reduce_phase = 0;
+            this->g_if_do_reduce = true;
+            this->g_if_final_step = false;
         }
         else
         {
-            if ((this->g_if_do_reduce == true))
-            {
-                delaySlots = this->treeReduce();
-            }
+            delaySlots = this->treeReduce();
         }
     }
 
@@ -576,47 +588,13 @@ int basic_node::ic_reduceAction()
 void basic_node::ic_tree_send_signal()
 {
     packet_frame *mPtr = produce_msg(0, tree_send_signal, 0, this->g_ic_dynamic_loc);
+    mPtr->setReduce_phase(this->ic_tree_reduce_phase);
     for (auto p : this->nodesInRadioRange)
     {
          this->sendDirect(mPtr->dup(), p.first, "ICNodeRadioIn");
     }
     delete mPtr;
 }
-
-
-bool basic_node::reduceDecision()
-{
-    bool retValue = false;
-    if ((this->g_node_virtual_id % 2)  == 0)
-    {
-        if ((this->g_node_virtual_id % 4)  == 0)
-        {
-            if (this->ic_tree_reduce_phase > 1)
-            {
-                if ((this->g_ic_dynamic_loc + 1 + 2) <= this->g_ic_num)
-                {
-                    retValue = true;
-                }
-            }
-            else
-            {
-                if ((this->g_ic_dynamic_loc + 1 + 1) <= this->g_ic_num)
-                {
-                    retValue = true;
-                }
-            }
-        }
-        else
-        {
-            if ((this->g_ic_dynamic_loc + 1 + 1) <= this->g_ic_num)
-            {
-                retValue = true;
-            }
-        }
-    }
-    return retValue;
-}
-
 
 void basic_node::ic_transmitData()
 {
@@ -626,14 +604,10 @@ void basic_node::ic_transmitData()
         mPtr->setSender_id(this->g_node_id);
         mPtr->setCurrent_slot(this->g_ic_dynamic_loc);
         mPtr->setNext_id(this->g_receivedMsg.getSender_id());
+        mPtr->setReduce_phase(this->ic_tree_reduce_phase);
         for (auto p : this->nodesInRadioRange)
         {
             this->sendDirect(mPtr->dup(), p.first, "ICNodeRadioIn");
-        }
-        // attempting increases one and do reduce
-        if (this->ic_attempt_counter < g_ic_cycle)
-        {
-            this->ic_attempt_counter = this->ic_attempt_counter + 1;
         }
     }
 }
@@ -650,11 +624,6 @@ void basic_node::ic_transmitDataToSink()
         for (auto p : this->nodesInRadioRange)
         {
             this->sendDirect(mPtr->dup(), p.first, "ICNodeRadioIn");
-        }
-        // attempting increases one and do reduce
-        if (this->ic_attempt_counter < g_ic_cycle)
-        {
-            this->ic_attempt_counter = this->ic_attempt_counter + 1;
         }
     }
 }
@@ -702,6 +671,7 @@ void basic_node::transmitIdleBroadcast(packet_frame *packet)
 /**
  * Receiving and processing packets
  */
+
 void basic_node::receive_message(packet_frame *dMsg)
 {
     simtime_t ptr = simTime();
@@ -711,12 +681,14 @@ void basic_node::receive_message(packet_frame *dMsg)
     int msg_type = dMsg->getMsg_type();
     int sender_type = dMsg->getSender_type();
     int sender_id = dMsg->getSender_id();
+    int vir_id = dMsg->getVir_id();
     int delay_bias = dMsg->getDelay_bias();
     int msg_id = dMsg->getMsg_id();
     int source_id = dMsg->getSource_id();
     int next_id = dMsg->getNext_id();
     int origin_slot = dMsg->getOrigin_slot();
     int current_loc = dMsg->getCurrent_slot();
+    int reducePhase = dMsg->getReduce_phase();
     // process the msgs that received by the sink node
     if ((this->node_type == type_sink_node) && (next_id == this->g_node_id))
     {
@@ -743,12 +715,15 @@ void basic_node::receive_message(packet_frame *dMsg)
             {
                 tempId = this->g_ic_num + tempId;
             }
-            this->g_sink_ack= this->produce_msg(0, sink_ack_msg, type_sink_node, tempId);
+            // this->g_sink_ack= this->produce_msg(0, sink_ack_msg, type_sink_node, tempId);
             if (receivedMsg == false)
             {
                 this->scheduleAt(simTime() + this->slot_len * 0.1,
                                  new cMessage("Sink processes the received msgs", sink_receive_data_handler));
             }
+            // If the sink node received the msgs successfully, it will give a ack reply
+            scheduleAt(simTime() + this->slot_len * 0.2,
+                       new cMessage("sink node sends acks", sink_send_ack_handler));
         }
     }
 
@@ -800,10 +775,6 @@ void basic_node::receive_message(packet_frame *dMsg)
     if (this->node_type == type_ic_node)
     {
         this->ic_collision_check_counter = this->ic_collision_check_counter + 1;
-        if (this->g_node_id == 4)
-        {
-           ptr = simTime();
-        }
         // Statistic the recieved msgs in a time window
         if ((msg_type == broad_msg) && (sender_type == type_icc_node))
         {
@@ -816,29 +787,65 @@ void basic_node::receive_message(packet_frame *dMsg)
         }
         else
         {
-            if (next_id == this->g_node_id)
+            if ((this->g_node_id == 28))
             {
-                if (msg_type == data_msg)
+                EV<<"to do ben";
+            }
+            if ((msg_type == data_msg) &&
+                (next_id == this->g_node_id))
+            {
+                if (reducePhase != (this->ic_tree_reduce_phase - 1))
                 {
-                    // First, need to check if the packet has been received
-                    this->scheduleAt(simTime() + this->slot_len * 0.1,
-                                     new cMessage("ic node receives the data from the sender ic node", ic_receive_data_handler));
-                    this->g_ack = this->produce_msg(msg_id, ack_msg, type_ic_node, sender_id);
+                     return;
                 }
-                else if (msg_type == ack_msg)
+                // First, need to check if the packet has been received
+                this->scheduleAt(simTime() + this->slot_len * 0.1,
+                                 new cMessage("ic node receives the data from the sender ic node", ic_receive_data_handler));
+                this->g_ack = this->produce_msg(msg_id, ack_msg, type_ic_node, sender_id);
+            }
+            else if ((msg_type == ack_msg) &&
+                     (next_id == this->g_node_id))
+            {
+                this->scheduleAt(simTime() + this->slot_len * 0.1,
+                                 new cMessage("ic node receives the ack from the sender ic node", ic_receive_ack_handler));
+            }
+            else if ((msg_type == tree_send_signal) &&
+                     (next_id == this->g_ic_dynamic_loc))
+            {
+                if (reducePhase != (this->ic_tree_reduce_phase + 1))
                 {
-                    this->scheduleAt(simTime() + this->slot_len * 0.1,
-                                     new cMessage("ic node receives the ack from the sender ic node", ic_receive_ack_handler));
+                    return;
                 }
-                else if (msg_type == tree_send_signal)
+                if (this->g_if_ic_syn_packets == ic_pos_syn_state)
                 {
-                    this->scheduleAt(simTime() + this->slot_len * 0.1,
-                       new cMessage("ic node sends signals to start transmitting", tree_signal_handler));
+                    return;
+                }
+                if ((this->g_node_id % 2) != 0)
+                {
+                    if (this->g_odd_pair_id != -1)
+                    {
+                        if (sender_id != this->g_odd_pair_id)
+                        {
+                            return;
+                        }
+                    }
+                    else
+                    {
+                        this->g_odd_pair_id = sender_id;
+                    }
                 }
                 else
                 {
-
+                    if (this->g_if_final_step == false)
+                    {
+                        return;
+                    }
                 }
+                this->scheduleAt(simTime() + this->slot_len * 0.1,
+                                 new cMessage("ic node sends signals to start transmitting", tree_signal_handler));
+            }
+            else
+            {
             }
         }
     }
