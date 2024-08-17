@@ -69,11 +69,7 @@ build/coordinator_nrf52840_xxAA_s140_7.2.0_Debug/obj/advertiser.o: \
  ../../mesh/bearer/api/nrf_mesh_config_bearer.h \
  ../../mesh/core/include/bearer_event.h \
  ../../mesh/core/include/timer_scheduler.h \
- ../../mesh/core/include/queue.h ../../mesh/bearer/include/radio_config.h \
- ../../mesh/core/include/rand.h ../../mesh/core/include/toolchain.h \
- ../../mesh/core/api/nrf_mesh_assert.h ../../mesh/core/api/nrf_mesh.h \
- ../../mesh/core/api/nrf_mesh_assert_gcc.h \
- ../../mesh/core/include/debug_pins.h \
+ ../../mesh/core/include/queue.h ../../mesh/core/include/debug_pins.h \
  ../../../nRF5_SDK_17.0.2_d674dde/components/libraries/delay/nrf_delay.h \
  ../../../nRF5_SDK_17.0.2_d674dde/modules/nrfx/nrfx.h \
  ../../../nRF5_SDK_17.0.2_d674dde/modules/nrfx/templates/nRF52840/nrfx_config.h \
@@ -98,7 +94,6 @@ build/coordinator_nrf52840_xxAA_s140_7.2.0_Debug/obj/advertiser.o: \
  ../../../nRF5_SDK_17.0.2_d674dde/components/libraries/util/sdk_resources.h \
  ../../../nRF5_SDK_17.0.2_d674dde/components/softdevice/s140/headers/nrf_sd_def.h \
  ../../../nRF5_SDK_17.0.2_d674dde/modules/nrfx/drivers/nrfx_errors.h \
- ../../mesh/bearer/api/scanner.h include/public.h \
  ../../../nRF5_SDK_17.0.2_d674dde/components/libraries/log/nrf_log_ctrl.h \
  include/sdk_config.h include/app_config.h \
  ../../../nRF5_SDK_17.0.2_d674dde/components/libraries/log/nrf_log_types.h \
@@ -108,4 +103,8 @@ build/coordinator_nrf52840_xxAA_s140_7.2.0_Debug/obj/advertiser.o: \
  ../../../nRF5_SDK_17.0.2_d674dde/components/libraries/util/app_util.h \
  ../../../nRF5_SDK_17.0.2_d674dde/components/libraries/util/sdk_macros.h \
  ../../../nRF5_SDK_17.0.2_d674dde/components/libraries/log/nrf_log_backend_interface.h \
- ../../../nRF5_SDK_17.0.2_d674dde/components/libraries/experimental_section_vars/nrf_section.h
+ ../../../nRF5_SDK_17.0.2_d674dde/components/libraries/experimental_section_vars/nrf_section.h \
+ ../../mesh/core/api/nrf_mesh_assert.h ../../mesh/core/api/nrf_mesh.h \
+ ../../mesh/core/api/nrf_mesh_assert_gcc.h \
+ ../../mesh/bearer/include/radio_config.h ../../mesh/core/include/rand.h \
+ ../../mesh/bearer/api/scanner.h ../../mesh/core/include/toolchain.h

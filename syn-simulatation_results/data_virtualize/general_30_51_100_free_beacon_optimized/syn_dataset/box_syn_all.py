@@ -13,7 +13,7 @@ node_num_sets = [2, 12, 30]
 node_num_sets_name = ["[2 nodes]", "[12 nodes]", "[30 nodes]"]
 
 energy_scenarios = ["Static_trace", "Complex_trace", "Cars_trace", "Jogging_trace", "Office_trace", "Stairs_trace", "Washer_trace"]
-energy_scenarios_names = ["Static", "Random", "Cars trace", "Jogging trace", 
+energy_scenarios_names = ["Static trace", "Random trace", "Cars trace", "Jogging trace", 
 "Office trace", "Stairs trace", "Washer trace"]
 
 energy_legend_names = ["Static", "Random", "Cars trace", "Jogging trace", 
@@ -21,7 +21,8 @@ energy_legend_names = ["Static", "Random", "Cars trace", "Jogging trace",
 
 title ="box_30-51-100_compare"
 colors = ['steelblue', 'darkorange', 'forestgreen', 'firebrick', "purple", "tomato"]
-
+syn_legend_names = ["Medians", "Means"]
+styles = ['--', '--']
 
 #
 free_beacon_static_30_2  = []
@@ -135,8 +136,9 @@ free_beacon_washer_100_30 = []
 #
 
 
-fontSize  = 12
+fontSize  = 16
 
+plt.rcParams.update({'font.size': 16})
 lineWidth = 1.5
 
 
@@ -233,6 +235,7 @@ for i in range(scenarios_len):
         # Store medians and means
         all_medians.append((k + i * (cycle_len + 1) + 1,median))
         all_means.append((k + i * (cycle_len + 1) + 1,mean))
+        print("ave:"+str(np.mean(data_sets[i][2][k])))
     # Unpack medians and means into x and y coordinates
     median_x, median_y = zip(*all_medians)
     mean_x, mean_y = zip(*all_means)
@@ -243,8 +246,11 @@ for i in range(scenarios_len):
     if  i == 0:
         _ax.set_ylabel("Latency (Slots)", fontsize=fontSize)
     cycle_sets_name = ["#30", "#51", "#100"]
+    if (i == 6):
+        handles = [plt.Line2D([0], [0], color=color, lw=lineWidth, ls=style ) for color, style in zip(colors, styles)]
+        _ax.legend(handles, syn_legend_names, loc='lower right')
     _ax.set_xticklabels(cycle_sets_name)
-    _ax.set_xlabel(energy_scenarios[i], fontsize=fontSize)
+    _ax.set_xlabel(energy_scenarios_names[i], fontsize=fontSize)
     _ax.yaxis.set_major_formatter(ScalarFormatter(useMathText=True))
     _ax.ticklabel_format(style='sci', axis='y', scilimits=(0,0))
     _ax.set_yscale('log')

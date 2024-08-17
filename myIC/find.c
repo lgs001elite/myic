@@ -19,23 +19,21 @@ double paraRange[] = {0.08162253468723255, 0.09523721651237368, 0.12756012326620
                       0.27290992267137204, 0.30433114845446796, 0.3473958282184392, 0.41162111340203345,
                       0.5243514859675414, 0.8358041858099494};
 
-
-uint16_t pulsarDelay(uint16_t c)
+uint16_t flyncDelay(uint16_t c)
 {
-    uint16_t bias = c % 3;
-    if (bias != 0)
+    srand(time(NULL));
+    uint8_t find_i = 0;
+    uint16_t reValue = 0;
+    for (; find_i < 22; find_i++)
     {
-        bias = 3 - bias;
+        if (c >= chargingRange[find_i])
+        {
+            double u = rand() / (RAND_MAX + 1.0);
+            reValue = (uint16_t)ceil(log(1 - u) / log(1 - paraRange[find_i]));
+            break;
+        }
     }
-    if (g_alignLoc == true)
-    {
-        return bias;
-    }
-    else
-    {
-
-        return (bias + 1);
-    }
+    return reValue;
 }
 uint16_t freeBeaconDelay(uint16_t c)
 {

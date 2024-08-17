@@ -17,11 +17,11 @@ node_sets_name = ["2", "10", "50"]
 poweroff_rate = ["1", "10", "20"]
 
 energy_scenarios = ["Static_trace", "Complex_trace", "Cars_trace", "Jogging_trace", "Office_trace", "Stairs_trace", "Washer_trace"]
-energy_scenarios_names = ["Static", "Random", "Cars trace", "Jogging trace", "Office trace", "Stairs trace", "Washer trace"]
+energy_scenarios_names = ["Static trace", "Random trace", "Cars trace", "Jogging trace", "Office trace", "Stairs trace", "Washer trace"]
 
 title ="box_free_beacon_poweroff_rate_"
 colors = ['steelblue', 'darkorange', 'forestgreen', 'firebrick', "purple", "tomato"]
-
+styles = ['-', '-', '-', '-', '--', '--']
 find_static_2_1        = []
 flync_static_2_1       = []
 pulsar_static_2_1      = []
@@ -571,10 +571,11 @@ free_beacon_washer_50_30 = []
 
 
 
-fontSize  = 12
+fontSize  = 16
 
 lineWidth = 1.5
 
+plt.rcParams.update({'font.size': 16})
 
 
 data_sets = [
@@ -849,6 +850,7 @@ for pr in poweroff_rate:
                 # Store medians and means
                 all_medians.append((k + 2 * (methods_len + 1) + 1, median))
                 all_means.append((k + 2 * (methods_len + 1) + 1, mean))
+            print("ave:"+str(np.mean(data_sets[pr_index][j][3][2])))
             # Unpack medians and means into x and y coordinates
             median_x, median_y = zip(*all_medians)
             mean_x, mean_y = zip(*all_means)
@@ -867,19 +869,18 @@ for pr in poweroff_rate:
             # Set y_labels
             if j == 0:
                 _ax.set_ylabel("Latency (Time Slots)", fontsize=fontSize)
-
             _ax.yaxis.set_major_formatter(ScalarFormatter(useMathText=True))
             _ax.ticklabel_format(style='sci', axis='y', scilimits=(0,0))
             _ax.set_yscale('log')
-            if (i == (nums_len -1)):
-                _ax.set_xlabel(energy_scenarios_names[j], fontsize=fontSize)
             if (j == 3):
                 _ax.set_title("#"+poweroff_rate[pr_index]+"% poweroff rate")
             _ax.set_xticks([])
             _ax.tick_params(axis='both', which='major', labelsize=fontSize)
+            if pr == '20':
+                _ax.set_xlabel(energy_scenarios_names[j], fontsize=fontSize)
             if (pr_index == 0) and (j == (scenarios_len -1)):
-                handles = [plt.Line2D([0], [0], color=color, lw=6) for color in colors]
-                _ax.legend(handles, syn_legend_names, loc='lower right')
+               handles = [plt.Line2D([0], [0], color=color, lw=lineWidth, ls=style ) for color, style in zip(colors, styles)]
+               _ax.legend(handles, syn_legend_names, loc='lower right')
     pr_index = pr_index + 1
     fig.savefig(f"poweroff_simulation.pdf", format="pdf", bbox_inches='tight')
 

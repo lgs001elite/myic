@@ -1,13 +1,16 @@
 build/coordinator_nrf52840_xxAA_s140_7.2.0_Debug/obj/app_error_weak.o: \
  C:\Users\glu250\Downloads\myic\nrf5_SDK_for_Mesh_v5.0.0_src\examples\common\src\app_error_weak.c \
- ../../../nRF5_SDK_17.0.2_d674dde/modules/nrfx/mdk/nrf.h \
- ../../../nRF5_SDK_17.0.2_d674dde/modules/nrfx/mdk/nrf52840.h \
- ../../../nRF5_SDK_17.0.2_d674dde/components/toolchain/cmsis/include/core_cm4.h \
+ ../../../nRF5_SDK_17.0.2_d674dde/components/libraries/util/app_error.h \
  C:/Program\ Files/SEGGER/SEGGER\ Embedded\ Studio\ 8.10d/include/stdint.h \
  C:/Program\ Files/SEGGER/SEGGER\ Embedded\ Studio\ 8.10d/include/__SEGGER_RTL.h \
  C:/Program\ Files/SEGGER/SEGGER\ Embedded\ Studio\ 8.10d/include/__SEGGER_RTL_ConfDefaults.h \
  C:/Program\ Files/SEGGER/SEGGER\ Embedded\ Studio\ 8.10d/include/__SEGGER_RTL_Conf.h \
  C:/Program\ Files/SEGGER/SEGGER\ Embedded\ Studio\ 8.10d/include/__SEGGER_RTL_Arm_Conf.h \
+ C:/Program\ Files/SEGGER/SEGGER\ Embedded\ Studio\ 8.10d/include/stdio.h \
+ C:/Program\ Files/SEGGER/SEGGER\ Embedded\ Studio\ 8.10d/include/stdbool.h \
+ ../../../nRF5_SDK_17.0.2_d674dde/modules/nrfx/mdk/nrf.h \
+ ../../../nRF5_SDK_17.0.2_d674dde/modules/nrfx/mdk/nrf52840.h \
+ ../../../nRF5_SDK_17.0.2_d674dde/components/toolchain/cmsis/include/core_cm4.h \
  ../../../nRF5_SDK_17.0.2_d674dde/components/toolchain/cmsis/include/cmsis_version.h \
  ../../../nRF5_SDK_17.0.2_d674dde/components/toolchain/cmsis/include/cmsis_compiler.h \
  ../../../nRF5_SDK_17.0.2_d674dde/components/toolchain/cmsis/include/cmsis_gcc.h \
@@ -17,31 +20,16 @@ build/coordinator_nrf52840_xxAA_s140_7.2.0_Debug/obj/app_error_weak.o: \
  ../../../nRF5_SDK_17.0.2_d674dde/modules/nrfx/mdk/nrf51_to_nrf52840.h \
  ../../../nRF5_SDK_17.0.2_d674dde/modules/nrfx/mdk/nrf52_to_nrf52840.h \
  ../../../nRF5_SDK_17.0.2_d674dde/modules/nrfx/mdk/compiler_abstraction.h \
- ../../../nRF5_SDK_17.0.2_d674dde/components/libraries/util/app_error.h \
- C:/Program\ Files/SEGGER/SEGGER\ Embedded\ Studio\ 8.10d/include/stdio.h \
- C:/Program\ Files/SEGGER/SEGGER\ Embedded\ Studio\ 8.10d/include/stdbool.h \
  ../../../nRF5_SDK_17.0.2_d674dde/components/libraries/util/sdk_errors.h \
  ../../../nRF5_SDK_17.0.2_d674dde/components/softdevice/s140/headers/nrf_error.h \
  ../../../nRF5_SDK_17.0.2_d674dde/components/libraries/util/nordic_common.h \
  ../../../nRF5_SDK_17.0.2_d674dde/components/libraries/util/app_error_weak.h \
- ../../mesh/core/include/log.h \
- C:/Program\ Files/SEGGER/SEGGER\ Embedded\ Studio\ 8.10d/include/stdarg.h \
- C:/Program\ Files/SEGGER/SEGGER\ Embedded\ Studio\ 8.10d/include/stddef.h \
- ../../mesh/core/api/nrf_mesh_defines.h \
- ../../mesh/core/api/nrf_mesh_config_core.h \
- ../../mesh/core/api/nrf_mesh_defines.h \
- ../../../nRF5_SDK_17.0.2_d674dde/components/libraries/util/nordic_common.h \
- C:/Program\ Files/SEGGER/SEGGER\ Embedded\ Studio\ 8.10d/include/string.h \
- ../common/include/mesh_app_utils.h ../../mesh/core/include/toolchain.h \
- ../../../nRF5_SDK_17.0.2_d674dde/components/softdevice/s140/headers/nrf_nvic.h \
- ../../../nRF5_SDK_17.0.2_d674dde/components/softdevice/s140/headers/nrf_svc.h \
- ../../../nRF5_SDK_17.0.2_d674dde/components/softdevice/s140/headers/nrf_error.h \
- ../../../nRF5_SDK_17.0.2_d674dde/components/softdevice/s140/headers/nrf_error_soc.h \
  ../../../nRF5_SDK_17.0.2_d674dde/components/boards/boards.h \
  ../../../nRF5_SDK_17.0.2_d674dde/modules/nrfx/hal/nrf_gpio.h \
  ../../../nRF5_SDK_17.0.2_d674dde/modules/nrfx/nrfx.h \
  ../../../nRF5_SDK_17.0.2_d674dde/modules/nrfx/templates/nRF52840/nrfx_config.h \
  ../../../nRF5_SDK_17.0.2_d674dde/modules/nrfx/drivers/nrfx_common.h \
+ C:/Program\ Files/SEGGER/SEGGER\ Embedded\ Studio\ 8.10d/include/stddef.h \
  ../../../nRF5_SDK_17.0.2_d674dde/modules/nrfx/mdk/nrf_peripherals.h \
  ../../../nRF5_SDK_17.0.2_d674dde/modules/nrfx/mdk/nrf52840_peripherals.h \
  ../../../nRF5_SDK_17.0.2_d674dde/integration/nrfx/nrfx_glue.h \
@@ -53,8 +41,13 @@ build/coordinator_nrf52840_xxAA_s140_7.2.0_Debug/obj/app_error_weak.o: \
  ../../../nRF5_SDK_17.0.2_d674dde/modules/nrfx/mdk/compiler_abstraction.h \
  ../../../nRF5_SDK_17.0.2_d674dde/components/softdevice/s140/headers/nrf52/nrf_mbr.h \
  ../../../nRF5_SDK_17.0.2_d674dde/components/softdevice/s140/headers/nrf_svc.h \
+ ../../../nRF5_SDK_17.0.2_d674dde/components/libraries/util/nordic_common.h \
  ../../../nRF5_SDK_17.0.2_d674dde/components/libraries/util/app_util_platform.h \
  ../../../nRF5_SDK_17.0.2_d674dde/components/softdevice/s140/headers/nrf_soc.h \
+ ../../../nRF5_SDK_17.0.2_d674dde/components/softdevice/s140/headers/nrf_svc.h \
+ ../../../nRF5_SDK_17.0.2_d674dde/components/softdevice/s140/headers/nrf_error.h \
+ ../../../nRF5_SDK_17.0.2_d674dde/components/softdevice/s140/headers/nrf_error_soc.h \
+ ../../../nRF5_SDK_17.0.2_d674dde/components/softdevice/s140/headers/nrf_nvic.h \
  ../../../nRF5_SDK_17.0.2_d674dde/components/libraries/util/nrf_assert.h \
  ../../../nRF5_SDK_17.0.2_d674dde/components/libraries/util/app_error.h \
  ../../../nRF5_SDK_17.0.2_d674dde/modules/nrfx/soc/nrfx_coredep.h \
@@ -64,4 +57,11 @@ build/coordinator_nrf52840_xxAA_s140_7.2.0_Debug/obj/app_error_weak.o: \
  ../../../nRF5_SDK_17.0.2_d674dde/components/softdevice/s140/headers/nrf_sd_def.h \
  ../../../nRF5_SDK_17.0.2_d674dde/components/softdevice/s140/headers/nrf_soc.h \
  ../../../nRF5_SDK_17.0.2_d674dde/modules/nrfx/drivers/nrfx_errors.h \
- ../../../nRF5_SDK_17.0.2_d674dde/components/boards/pca10056.h
+ ../../../nRF5_SDK_17.0.2_d674dde/components/boards/pca10056.h \
+ ../../mesh/core/include/log.h \
+ C:/Program\ Files/SEGGER/SEGGER\ Embedded\ Studio\ 8.10d/include/stdarg.h \
+ ../../mesh/core/api/nrf_mesh_defines.h \
+ ../../mesh/core/api/nrf_mesh_config_core.h \
+ ../../mesh/core/api/nrf_mesh_defines.h \
+ C:/Program\ Files/SEGGER/SEGGER\ Embedded\ Studio\ 8.10d/include/string.h \
+ ../common/include/mesh_app_utils.h ../../mesh/core/include/toolchain.h

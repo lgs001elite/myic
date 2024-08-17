@@ -87,6 +87,31 @@
 #define BEARER_ACCESS_ADDR_DEFAULT BEARER_ACCESS_ADDR_NONCONN
 #endif
 
+// /** Maximum number of channels an advertiser can transmit on. */
+// #ifndef BEARER_ADV_CHANNELS_MAX
+// #define BEARER_ADV_CHANNELS_MAX 3
+// #endif
+
+// /** Default advertisement interval. */
+// #ifndef BEARER_ADV_INT_DEFAULT_MS
+// #define BEARER_ADV_INT_DEFAULT_MS 20 // 30 The minimum value is 20ms.
+// #endif
+
+// /** Default scan interval */
+// #ifndef BEARER_SCAN_INT_DEFAULT_MS
+// #define BEARER_SCAN_INT_DEFAULT_MS  2000 // 2000
+// #endif
+
+// /** Default scan window */
+// #ifndef BEARER_SCAN_WINDOW_DEFAULT_MS
+// #define BEARER_SCAN_WINDOW_DEFAULT_MS 2000  // 2000
+// #endif
+
+// /** Default scanner buffer size */
+// #ifndef SCANNER_BUFFER_SIZE
+// #define SCANNER_BUFFER_SIZE 512 // 512
+// #endif
+
 /** Maximum number of channels an advertiser can transmit on. */
 #ifndef BEARER_ADV_CHANNELS_MAX
 #define BEARER_ADV_CHANNELS_MAX 3
@@ -94,22 +119,22 @@
 
 /** Default advertisement interval. */
 #ifndef BEARER_ADV_INT_DEFAULT_MS
-#define BEARER_ADV_INT_DEFAULT_MS  30 //  The minimum value is 20ms.
+#define BEARER_ADV_INT_DEFAULT_MS 30
 #endif
 
 /** Default scan interval */
 #ifndef BEARER_SCAN_INT_DEFAULT_MS
-#define BEARER_SCAN_INT_DEFAULT_MS  2000 // 2000
+#define BEARER_SCAN_INT_DEFAULT_MS 2000
 #endif
 
 /** Default scan window */
 #ifndef BEARER_SCAN_WINDOW_DEFAULT_MS
-#define BEARER_SCAN_WINDOW_DEFAULT_MS 2000  // 2000
+#define BEARER_SCAN_WINDOW_DEFAULT_MS 2000
 #endif
 
 /** Default scanner buffer size */
 #ifndef SCANNER_BUFFER_SIZE
-#define SCANNER_BUFFER_SIZE 512 // 512
+#define SCANNER_BUFFER_SIZE 512
 #endif
 
 /** Buffer size for the Instaburst RX module. */

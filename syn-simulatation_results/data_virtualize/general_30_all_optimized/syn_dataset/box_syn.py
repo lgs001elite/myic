@@ -214,6 +214,7 @@ for i in range(nums_len):
             # Store medians and means
             all_medians.append((k + i * (methods_len + 1) + 1,median))
             all_means.append((k + i * (methods_len + 1) + 1,mean))
+        print("ave:"+str(np.mean(data_sets[j][3][i])))
         # Unpack medians and means into x and y coordinates
         median_x, median_y = zip(*all_medians)
         mean_x, mean_y = zip(*all_means)

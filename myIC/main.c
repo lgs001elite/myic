@@ -143,7 +143,7 @@ void var_initialization()
     g_dest_location = 0x03;
     g_MatchNextHop = false;
     g_uartSwitch = true;
-    g_synStrategy = PULSAR;
+    g_synStrategy = FLYNC; // FLYNC  FREEBEACON
     g_preDriftTime = 0;
     g_lastData = 0;
 }

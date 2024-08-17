@@ -11,7 +11,7 @@ title ="energy_trace_"
 colors = ['steelblue', 'darkorange', 'forestgreen', 'firebrick', "purple", "tomato", "lime"]
 
 
-fontSize  = 12
+fontSize  = 16
 lineWidth = 1.5
 
 
@@ -58,6 +58,14 @@ for i in range(sets_len):
         medianprops=dict(color=colors[i], linewidth=lineWidth),
         flierprops=dict(marker='o', markerfacecolor=colors[i], markeredgecolor=colors[i], markersize=lineWidth, alpha=0.5),
         showmeans=True)
+    print(trace_names[i]+":")
+    print("min value:"+ str(np.min(data_sets[i])))
+    print("max value:"+ str(np.max(data_sets[i])))
+    print("ave value:"+ str(np.mean(data_sets[i])))
+    print("var value:"+ str(np.var(data_sets[i])))
+    print("sample standard deviation:"+ str(np.std(data_sets[i], ddof=1)))
+    print("default standard deviation:"+ str(np.std(data_sets[i])))
+    print("*****")
     # Extract median and mean for this box plot
     median = boxplot['medians'][0].get_ydata()[0]
     mean = boxplot['means'][0].get_ydata()[0]
@@ -78,7 +86,7 @@ ax.ticklabel_format(style='sci', axis='y', scilimits=(0,0))
 ax.set_yscale('log')
 ax.set_xticks(range((sets_len + 1) + 1, (sets_len + 1) + 1 + 7))
 ax.set_xticklabels(trace_names)
-ax.set_xlabel("# Enery traces")
+ax.set_xlabel("# Enery traces", fontsize=fontSize)
 ax.tick_params(axis='both', which='major', labelsize=fontSize)
 
 

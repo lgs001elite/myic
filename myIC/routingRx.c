@@ -105,10 +105,12 @@ void receiveDataFromNordic()
     // Rewrite from here
     if (sender_dataType == PACKAGE_PACKET)
     {
+        GPIO_MONINOR_OUT4 ^= GPIO_MONITOR_PIN3;
         g_sendAck = true;
     }
     else if (sender_dataType == PACKAGE_ACK)
     {
+        GPIO_MONINOR_OUT4 ^= GPIO_MONITOR_PIN4;
         g_receCounter = g_receCounter + 1;
     }
     else

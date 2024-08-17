@@ -11,10 +11,11 @@ node_sets = [2, 12, 30]
 node_sets_name = ["2", "12", "30"]
 
 energy_scenarios = ["Static_trace", "Complex_trace", "Cars_trace", "Jogging_trace", "Office_trace", "Stairs_trace", "Washer_trace"]
-energy_scenarios_names = ["Static", "Random", "Cars trace", "Jogging trace", "Office trace", "Stairs trace", "Washer trace"]
+energy_scenarios_names = ["Static trace", "Random trace", "Cars trace", "Jogging trace", "Office trace", "Stairs trace", "Washer trace"]
 
 title ="free_beacon_with_30"
 colors = ['steelblue', 'darkorange', 'forestgreen', 'firebrick', "purple", "tomato"]
+styles = ['-', '-', '-', '-', '--', '--']
 
 find_static_2        = []
 flync_static_2       = []
@@ -190,8 +191,8 @@ nums_len = len(node_sets)
 # plot the data
 fig, ax = plt.subplots(nrows=3, ncols=7, figsize=(21, 9),constrained_layout=True)
 # Set global font size
-fontSize = 14
-plt.rcParams.update({'font.size': 14})
+fontSize = 18
+plt.rcParams.update({'font.size': 18})
 lineWidth = 1.5  
 
 for i in range(nums_len):
@@ -214,6 +215,7 @@ for i in range(nums_len):
             # Store medians and means
             all_medians.append((k + i * (methods_len + 1) + 1,median))
             all_means.append((k + i * (methods_len + 1) + 1,mean))
+        print("ave:"+str(np.mean(data_sets[j][3][i])))
         # Unpack medians and means into x and y coordinates
         median_x, median_y = zip(*all_medians)
         mean_x, mean_y = zip(*all_means)
@@ -234,14 +236,14 @@ for i in range(nums_len):
            _ax.set_ylabel("Latency (Time Slots)", fontsize=fontSize)
         
         if (j == 6) and (i == 0):
-            handles = [plt.Line2D([0], [0], color=color, lw=6) for color in colors]
+            handles = [plt.Line2D([0], [0], color=color, lw=lineWidth, ls=style ) for color, style in zip(colors, styles)]
             _ax.legend(handles, syn_legend_names, loc='lower right')
 
         _ax.yaxis.set_major_formatter(ScalarFormatter(useMathText=True))
         _ax.ticklabel_format(style='sci', axis='y', scilimits=(0,0))
         _ax.set_yscale('log')
         if (i == (nums_len -1)):
-            _ax.set_xlabel(energy_scenarios_names[j], fontsize=fontSize)
+            _ax.set_xlabel(energy_scenarios_names[j], fontsize=(fontSize + 2))
         if (j == 3):
             _ax.set_title(node_sets_name[i]+" [nodes]")
         _ax.set_xticks([])

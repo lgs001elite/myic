@@ -64,8 +64,8 @@ build/coordinator_nrf52840_xxAA_s140_7.2.0_Debug/obj/broadcast.o: \
  C:/Program\ Files/SEGGER/SEGGER\ Embedded\ Studio\ 8.10d/include/stdarg.h \
  ../../mesh/core/api/nrf_mesh_config_core.h \
  ../../../nRF5_SDK_17.0.2_d674dde/components/libraries/util/nordic_common.h \
- ../../mesh/bearer/include/radio_config.h \
  ../../mesh/core/include/debug_pins.h \
+ ../../mesh/bearer/include/mesh_pa_lna_internal.h \
  ../../mesh/core/api/nrf_mesh_assert.h ../../mesh/core/api/nrf_mesh.h \
  ../../mesh/core/api/nrf_mesh_assert_gcc.h \
- ../../mesh/bearer/include/mesh_pa_lna_internal.h
+ ../../mesh/bearer/include/radio_config.h

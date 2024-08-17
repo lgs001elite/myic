@@ -128,8 +128,6 @@ void static uartTrasmit(uint16_t num)
 
 static void uartAction()
 {
-    GPIO_MONINOR_OUT4 ^= GPIO_MONITOR_PIN3;
-    GPIO_MONINOR_OUT4 ^= GPIO_MONITOR_PIN4;
     if (debugVar1 == 1)
     {
         __no_operation();
@@ -179,9 +177,9 @@ static void uartAction()
     __bis_SR_register(GIE); // re-open interrupt
     // Transfer delay time
     uint16_t delayTime = 0;
-    if (g_synStrategy == PULSAR)
+    if (g_synStrategy == FLYNC)
     {
-        delayTime = pulsarDelay(receivedUart);
+        delayTime = flyncDelay(receivedUart);
     }
     else
     {
@@ -196,14 +194,11 @@ static void uartAction()
     uartTrasmit(delayTime);
     if (delayTime == 0)
     {
-        GPIO_MONINOR_OUT4 ^= GPIO_MONITOR_PIN3;
         g_uartSwitch = false;
     }
     debugVar1 = 1;
     __no_operation();
-    GPIO_MONINOR_OUT4 ^= GPIO_MONITOR_PIN4;
 }
-
 
 void static uartReceive()
 {

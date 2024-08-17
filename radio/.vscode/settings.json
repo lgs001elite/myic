@@ -1,0 +1,16 @@
+{
+    "files.associations": {
+        "radio_config.h": "c",
+        "nrf_gpio.h": "c",
+        "boards.h": "c",
+        "nrf_delay.h": "c",
+        "bsp.h": "c",
+        "nordic_common.h": "c",
+        "app_timer.h": "c",
+        "nrf_error.h": "c",
+        "app_error.h": "c",
+        "nrf_log.h": "c",
+        "hal_sleep.h": "c",
+        "nrf_log_default_backends.h": "c"
+    }
+}

@@ -1,6 +1,10 @@
 {
     "files.associations": {
         "packet_buffer.h": "c",
-        "random.h": "c"
+        "random.h": "c",
+        "vector": "cpp",
+        "utility": "cpp",
+        "nrf_mesh_config_examples.h": "c",
+        "limits": "c"
     }
 }
