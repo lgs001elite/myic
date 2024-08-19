@@ -322,10 +322,10 @@ void basic_node::net_handleMessage(cMessage *msg)
             this->g_msg_id = -1;
             if (this->g_if_ic_sending_packets == ic_send_state)
             {
-                if (intuniform(1, this->g_ic_num - 1) == 1)
-                {
+               // if (intuniform(1, this->g_ic_num - 1) == 1)
+               // {
                     this->ic_transmitData();
-                }
+               // }
             }
             else
             {
@@ -506,7 +506,7 @@ void basic_node::net_handleMessage(cMessage *msg)
         simtime_t ptr = simTime();
         if (this->ic_collision_check_counter == 1)
         {
-            auto pkt_i = find_if(this->transmission_queue.cbegin(), this->transmission_queue.cend(), [this](packet_frame pkt)
+            auto pkt_i = find_if(this->transmission_queue.begin(), this->transmission_queue.end(), [this](packet_frame pkt)
                                  { return pkt.getMsg_id() == this->g_receivedMsg.getMsg_id(); });
             if (pkt_i != this->transmission_queue.end())
             {
@@ -550,7 +550,7 @@ void basic_node::net_handleMessage(cMessage *msg)
                     return;
                 }
             }
-            auto pkt_i = find_if(this->transmission_queue.cbegin(), this->transmission_queue.cend(), [this](packet_frame pkt)
+            auto pkt_i = find_if(this->transmission_queue.begin(), this->transmission_queue.end(), [this](packet_frame pkt)
                                  { return pkt.getMsg_id() == this->g_msg_id; });
             if (pkt_i != this->transmission_queue.end())
             {
@@ -832,7 +832,7 @@ void basic_node::receive_message(packet_frame *dMsg)
             int tempId = sender_id - 1;
             if (tempId < 0)
             {
-                tempId = this->g_ic_num + tempId;
+                tempId =  this->g_ic_num + tempId;
             }
             this->scheduleAt(simTime() + this->slot_len * 0.1,
                              new cMessage("Sink processes the received msgs", sink_receive_data_handler));

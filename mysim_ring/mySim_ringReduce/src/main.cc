@@ -171,7 +171,7 @@ void basic_node::ringReduce()
                     if (findPkt == true)
                     {
                         this->g_reduction_bias_num = 1;
-                        this->g_ic_dynamic_loc = (this->g_ic_loc + 1) % this->g_ic_num;
+                        this->g_ic_dynamic_loc = (this->g_ic_loc + 1) %  this->g_ic_num;
                         this->g_if_ic_sending_packets = ic_send_state;
                         this->g_if_reduction_recovery = true;
                     }

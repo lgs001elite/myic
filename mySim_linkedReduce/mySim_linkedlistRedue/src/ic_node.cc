@@ -471,7 +471,7 @@ void basic_node::net_handleMessage(cMessage *msg)
         simtime_t ptr = simTime();
         if (this->ic_collision_check_counter == 1)
         {
-            auto pkt_i = find_if(this->transmission_queue.cbegin(), this->transmission_queue.cend(), [this](packet_frame pkt)
+            auto pkt_i = find_if(this->transmission_queue.begin(), this->transmission_queue.end(), [this](packet_frame pkt)
                                  { return pkt.getMsg_id() == this->g_receivedMsg.getMsg_id(); });
             if (pkt_i != this->transmission_queue.end())
             {
@@ -501,7 +501,7 @@ void basic_node::net_handleMessage(cMessage *msg)
         simtime_t ptr = simTime();
         if (this->ic_collision_check_counter == 1)
         {
-            auto pkt_i = find_if(this->transmission_queue.cbegin(), this->transmission_queue.cend(), [this](packet_frame pkt)
+            auto pkt_i = find_if(this->transmission_queue.begin(), this->transmission_queue.end(), [this](packet_frame pkt)
                                  { return pkt.getMsg_id() == this->g_receivedMsg.getMsg_id(); });
             if (pkt_i != this->transmission_queue.end())
             {

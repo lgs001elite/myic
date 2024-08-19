@@ -20,7 +20,7 @@ void basic_node::net_initialize()
     this->tx_range = this->par("tx_range");
     this->radioInGatePtr = this->gate("ICNodeRadioIn");
     this->g_ic_num = this->networkPtr->par("g_ic_num");
-    this->g_ic_cycle = this->networkPtr->par("g_ic_num");
+    this->g_ic_cycle =  100;this->networkPtr->par("g_ic_num");
     this->g_queue_len = 0;
     // Starting to initialize every parameter of nodes in the network
     int init_flag = (int)this->networkPtr->par("init_flag");
@@ -313,10 +313,10 @@ void basic_node::net_handleMessage(cMessage *msg)
                 {
                     if (this->g_if_ic_syn_packets == ic_pos_syn_state)
                     {
-                        if (intuniform(1, this->g_ic_num - 1) == 1)
-                        {
+                        //if (intuniform(1, this->g_ic_num - 1) == 1)
+                       // {
                             this->ic_tree_send_signal();
-                        }
+                       // }
                     }
                 }
             }
