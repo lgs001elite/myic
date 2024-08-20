@@ -1,6 +1,6 @@
 Output/Debug/Obj/coordinator/radio_config.o: \
- C:\Users\glu250\Downloads\riotee_ic\Nordic\nRF5_SDK_17.1.0_ddde560\components\drivers_nrf\radio_config\radio_config.c \
- C:\Users\glu250\Downloads\riotee_ic\Nordic\nRF5_SDK_17.1.0_ddde560\components\drivers_nrf\radio_config\radio_config.h \
+ C:\Users\glu250\Downloads\myic\radio\components\drivers_nrf\radio_config\radio_config.c \
+ C:\Users\glu250\Downloads\myic\radio\components\drivers_nrf\radio_config\radio_config.h \
  ../../../../../../../components/libraries/delay/nrf_delay.h \
  ../../../../../../../modules/nrfx/nrfx.h \
  ../../../../../../../integration/nrfx/nrfx_config.h \

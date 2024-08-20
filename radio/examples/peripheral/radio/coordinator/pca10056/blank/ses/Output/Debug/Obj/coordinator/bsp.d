@@ -1,6 +1,6 @@
 Output/Debug/Obj/coordinator/bsp.o: \
- C:\Users\glu250\Downloads\riotee_ic\Nordic\nRF5_SDK_17.1.0_ddde560\components\libraries\bsp\bsp.c \
- C:\Users\glu250\Downloads\riotee_ic\Nordic\nRF5_SDK_17.1.0_ddde560\components\libraries\bsp\bsp.h \
+ C:\Users\glu250\Downloads\myic\radio\components\libraries\bsp\bsp.c \
+ C:\Users\glu250\Downloads\myic\radio\components\libraries\bsp\bsp.h \
  C:/Program\ Files/SEGGER/SEGGER\ Embedded\ Studio\ 8.10d/include/stdint.h \
  C:/Program\ Files/SEGGER/SEGGER\ Embedded\ Studio\ 8.10d/include/__SEGGER_RTL.h \
  C:/Program\ Files/SEGGER/SEGGER\ Embedded\ Studio\ 8.10d/include/__SEGGER_RTL_ConfDefaults.h \
@@ -52,7 +52,7 @@ Output/Debug/Obj/coordinator/bsp.o: \
  ../../../../../../../components/boards/pca10056.h \
  ../../../../../../../components/libraries/button/app_button.h \
  ../../../../../../../components/libraries/util/app_error.h \
- C:\Users\glu250\Downloads\riotee_ic\Nordic\nRF5_SDK_17.1.0_ddde560\components\libraries\bsp\bsp_config.h \
+ C:\Users\glu250\Downloads\myic\radio\components\libraries\bsp\bsp_config.h \
  ../../../../../../../components/libraries/timer/app_timer.h \
  ../../../../../../../components/libraries/log/nrf_log_instance.h \
  ../../../../../../../components/libraries/experimental_section_vars/nrf_section.h \

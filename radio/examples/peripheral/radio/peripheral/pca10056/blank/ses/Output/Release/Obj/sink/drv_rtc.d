@@ -1,5 +1,5 @@
 Output/Release/Obj/sink/drv_rtc.o: \
- C:\Users\glu250\Downloads\riotee_ic\Nordic\nRF5_SDK_17.1.0_ddde560\components\libraries\timer\drv_rtc.c \
+ C:\Users\glu250\Downloads\myic\radio\components\libraries\timer\drv_rtc.c \
  ../../../../../../../modules/nrfx/nrfx.h \
  ../../../../../../../integration/nrfx/nrfx_config.h \
  ../config/sdk_config.h \

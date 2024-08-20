@@ -1,7 +1,7 @@
 Output/Release/Obj/sink/SEGGER_RTT_printf.o: \
- C:\Users\glu250\Downloads\riotee_ic\Nordic\nRF5_SDK_17.1.0_ddde560\external\segger_rtt\SEGGER_RTT_printf.c \
- C:\Users\glu250\Downloads\riotee_ic\Nordic\nRF5_SDK_17.1.0_ddde560\external\segger_rtt\SEGGER_RTT.h \
- C:\Users\glu250\Downloads\riotee_ic\Nordic\nRF5_SDK_17.1.0_ddde560\external\segger_rtt\SEGGER_RTT_Conf.h \
+ C:\Users\glu250\Downloads\myic\radio\external\segger_rtt\SEGGER_RTT_printf.c \
+ C:\Users\glu250\Downloads\myic\radio\external\segger_rtt\SEGGER_RTT.h \
+ C:\Users\glu250\Downloads\myic\radio\external\segger_rtt\SEGGER_RTT_Conf.h \
  ../../../../../../../components/libraries/util/nordic_common.h \
  ../../../../../../../components/libraries/util/app_util_platform.h \
  C:/Program\ Files/SEGGER/SEGGER\ Embedded\ Studio\ 8.10d/include/stdint.h \

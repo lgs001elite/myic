@@ -28,6 +28,7 @@
   <ProjectSessionItem path="coordinator"/>
   <ProjectSessionItem path="coordinator;coordinator"/>
   <ProjectSessionItem path="coordinator;coordinator;Application"/>
+  <ProjectSessionItem path="coordinator;coordinator;Board Definition"/>
   <ProjectSessionItem path="coordinator;coordinator;None"/>
   <ProjectSessionItem path="coordinator;coordinator;nRF_Drivers"/>
  </Project>
@@ -66,8 +67,7 @@
   <Watches active="0" update="Never"/>
  </Watch4>
  <Files>
-  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="16" useTextEdit="1" path="../../../main.c" left="0" top="0" codecName="Default"/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="9" y="39" useTextEdit="1" path="nrfx_atomic.c" left="0" selected="1" top="12" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="16" useTextEdit="1" path="../../../main.c" left="0" selected="1" top="12" codecName="Default"/>
  </Files>
  <EMStudioWindow activeProject="coordinator" fileDialogDefaultFilter="*.h" autoConnectTarget="J-Link" buildConfiguration="Release" sessionSettings="" debugSearchFileMap="" fileDialogInitialDirectory="C:/Users/glu250/Downloads/myic/radio/modules/nrfx/soc" debugSearchPath="" autoConnectCapabilities="3199"/>
 </session>

@@ -1,5 +1,5 @@
 Output/Debug/Obj/coordinator/nrf_balloc.o: \
- C:\Users\glu250\Downloads\riotee_ic\Nordic\nRF5_SDK_17.1.0_ddde560\components\libraries\balloc\nrf_balloc.c \
+ C:\Users\glu250\Downloads\myic\radio\components\libraries\balloc\nrf_balloc.c \
  ../../../../../../../components/libraries/util/sdk_common.h \
  C:/Program\ Files/SEGGER/SEGGER\ Embedded\ Studio\ 8.10d/include/stdint.h \
  C:/Program\ Files/SEGGER/SEGGER\ Embedded\ Studio\ 8.10d/include/__SEGGER_RTL.h \
@@ -32,7 +32,7 @@ Output/Debug/Obj/coordinator/nrf_balloc.o: \
  ../../../../../../../components/libraries/util/nrf_assert.h \
  ../../../../../../../components/libraries/experimental_section_vars/nrf_section.h \
  ../../../../../../../components/libraries/util/nordic_common.h \
- C:\Users\glu250\Downloads\riotee_ic\Nordic\nRF5_SDK_17.1.0_ddde560\components\libraries\balloc\nrf_balloc.h \
+ C:\Users\glu250\Downloads\myic\radio\components\libraries\balloc\nrf_balloc.h \
  ../../../../../../../components/libraries/util/sdk_errors.h \
  ../../../../../../../components/libraries/util/app_util_platform.h \
  ../../../../../../../components/libraries/util/app_error.h \

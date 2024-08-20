@@ -1,6 +1,6 @@
 Output/Release/Obj/sink/boards.o: \
- C:\Users\glu250\Downloads\riotee_ic\Nordic\nRF5_SDK_17.1.0_ddde560\components\boards\boards.c \
- C:\Users\glu250\Downloads\riotee_ic\Nordic\nRF5_SDK_17.1.0_ddde560\components\boards\boards.h \
+ C:\Users\glu250\Downloads\myic\radio\components\boards\boards.c \
+ C:\Users\glu250\Downloads\myic\radio\components\boards\boards.h \
  ../../../../../../../modules/nrfx/hal/nrf_gpio.h \
  ../../../../../../../modules/nrfx/nrfx.h \
  ../../../../../../../integration/nrfx/nrfx_config.h \
@@ -48,4 +48,4 @@ Output/Release/Obj/sink/boards.o: \
  ../../../../../../../components/libraries/util/sdk_errors.h \
  ../../../../../../../components/libraries/util/sdk_resources.h \
  ../../../../../../../modules/nrfx/drivers/nrfx_errors.h \
- C:\Users\glu250\Downloads\riotee_ic\Nordic\nRF5_SDK_17.1.0_ddde560\components\boards\pca10056.h
+ C:\Users\glu250\Downloads\myic\radio\components\boards\pca10056.h

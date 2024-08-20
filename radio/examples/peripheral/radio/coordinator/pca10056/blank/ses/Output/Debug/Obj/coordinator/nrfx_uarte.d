@@ -1,5 +1,5 @@
 Output/Debug/Obj/coordinator/nrfx_uarte.o: \
- C:\Users\glu250\Downloads\riotee_ic\Nordic\nRF5_SDK_17.1.0_ddde560\modules\nrfx\drivers\src\nrfx_uarte.c \
+ C:\Users\glu250\Downloads\myic\radio\modules\nrfx\drivers\src\nrfx_uarte.c \
  ../../../../../../../modules/nrfx/nrfx.h \
  ../../../../../../../integration/nrfx/nrfx_config.h \
  ../config/sdk_config.h \
@@ -48,7 +48,7 @@ Output/Debug/Obj/coordinator/nrfx_uarte.o: \
  ../../../../../../../modules/nrfx/drivers/nrfx_errors.h \
  ../../../../../../../modules/nrfx/drivers/include/nrfx_uarte.h \
  ../../../../../../../modules/nrfx/hal/nrf_uarte.h \
- C:\Users\glu250\Downloads\riotee_ic\Nordic\nRF5_SDK_17.1.0_ddde560\modules\nrfx\drivers\src\prs/nrfx_prs.h \
+ C:\Users\glu250\Downloads\myic\radio\modules\nrfx\drivers\src\prs/nrfx_prs.h \
  ../../../../../../../modules/nrfx/hal/nrf_gpio.h \
  ../../../../../../../integration/nrfx/nrfx_log.h \
  ../../../../../../../components/libraries/log/nrf_log.h \

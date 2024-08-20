@@ -1,4 +1,5 @@
 "Output/Release/Obj/sink/main.o"
+"Output/Release/Obj/sink/crc.o"
 "Output/Release/Obj/sink/boards.o"
 "Output/Release/Obj/sink/bsp.o"
 "Output/Release/Obj/sink/ses_startup_nrf52840.o"

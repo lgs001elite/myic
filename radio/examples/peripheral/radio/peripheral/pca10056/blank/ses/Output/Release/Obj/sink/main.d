@@ -1,5 +1,7 @@
 Output/Release/Obj/sink/main.o: \
- C:\Users\glu250\Downloads\riotee_ic\Nordic\nRF5_SDK_17.1.0_ddde560\examples\peripheral\radio\riotee_sink\main.c \
+ C:\Users\glu250\Downloads\myic\radio\examples\peripheral\radio\peripheral\main.c \
+ ../../../../../../../components/libraries/timer/app_timer.h \
+ ../config/sdk_config.h \
  ../../../../../../../components/libraries/util/app_error.h \
  C:/Program\ Files/SEGGER/SEGGER\ Embedded\ Studio\ 8.10d/include/stdint.h \
  C:/Program\ Files/SEGGER/SEGGER\ Embedded\ Studio\ 8.10d/include/__SEGGER_RTL.h \
@@ -24,8 +26,6 @@ Output/Release/Obj/sink/main.o: \
  ../../../../../../../components/drivers_nrf/nrf_soc_nosd/nrf_error.h \
  ../../../../../../../components/libraries/util/nordic_common.h \
  ../../../../../../../components/libraries/util/app_error_weak.h \
- ../../../../../../../components/libraries/timer/app_timer.h \
- ../config/sdk_config.h \
  ../../../../../../../components/libraries/util/app_util.h \
  C:/Program\ Files/SEGGER/SEGGER\ Embedded\ Studio\ 8.10d/include/stddef.h \
  ../../../../../../../modules/nrfx/mdk/compiler_abstraction.h \
@@ -58,6 +58,10 @@ Output/Release/Obj/sink/main.o: \
  ../../../../../../../components/libraries/bsp/bsp.h \
  ../../../../../../../components/libraries/button/app_button.h \
  ../../../../../../../components/libraries/delay/nrf_delay.h \
+ ../../../../../../../integration/nrfx/legacy/nrf_drv_spis.h \
+ ../../../../../../../modules/nrfx/drivers/include/nrfx_spis.h \
+ ../../../../../../../modules/nrfx/hal/nrf_spis.h \
+ ../../../../../../../modules/nrfx/hal/nrf_gpio.h \
  ../../../../../../../components/drivers_nrf/radio_config/radio_config.h \
  ../../../../../../../components/libraries/log/nrf_log.h \
  ../../../../../../../components/libraries/util/sdk_common.h \
@@ -74,4 +78,5 @@ Output/Release/Obj/sink/main.o: \
  ../../../../../../../components/libraries/memobj/nrf_memobj.h \
  C:/Program\ Files/SEGGER/SEGGER\ Embedded\ Studio\ 8.10d/include/stdlib.h \
  ../../../../../../../components/libraries/balloc/nrf_balloc.h \
- ../../../../../../../components/libraries/log/nrf_log_default_backends.h
+ ../../../../../../../components/libraries/log/nrf_log_default_backends.h \
+ C:/Users/glu250/Downloads/myic/radio/examples/peripheral/radio/peripheral/crc.h

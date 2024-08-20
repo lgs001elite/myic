@@ -2,10 +2,6 @@
 <session>
  <Bookmarks/>
  <Breakpoints groups="Breakpoints" active_group="Breakpoints">
-  <BreakpointListItem trigger="" line="103" counter="0" hardwareBreakpoint="" isFunctionBreakpoint="false" action="" expression="" group="Breakpoints" type="Breakpoint" state="2" filename="../../../main.c" useHWbreakpoint="false"/>
-  <BreakpointListItem trigger="" line="162" counter="0" hardwareBreakpoint="" isFunctionBreakpoint="false" action="" expression="" group="Breakpoints" type="Breakpoint" state="2" filename="../../../main.c" useHWbreakpoint="false"/>
-  <BreakpointListItem trigger="" line="163" counter="0" hardwareBreakpoint="" isFunctionBreakpoint="false" action="" expression="" group="Breakpoints" type="Breakpoint" state="2" filename="../../../main.c" useHWbreakpoint="false"/>
-  <BreakpointListItem trigger="" line="164" counter="0" hardwareBreakpoint="" isFunctionBreakpoint="false" action="" expression="" group="Breakpoints" type="Breakpoint" state="4" filename="../../../main.c" useHWbreakpoint="false"/>
   <BreakpointListItem trigger="" line="47" counter="0" hardwareBreakpoint="" isFunctionBreakpoint="false" action="" expression="" group="Breakpoints" type="Breakpoint" state="4" filename="../../../../../../../components/802_15_4/api/SysAL/sys_sleep.h" useHWbreakpoint="false"/>
   <Exceptions set="MemManage;UsageFault_Coprocessor;UsageFault_CheckingError;UsageFault_StateError;BusFault;ExceptionEntryReturnFault;HardFault"/>
  </Breakpoints>
@@ -38,6 +34,15 @@
   <ProjectSessionItem path="sink"/>
   <ProjectSessionItem path="sink;sink"/>
   <ProjectSessionItem path="sink;sink;Application"/>
+  <ProjectSessionItem path="sink;sink;Board Definition"/>
+  <ProjectSessionItem path="sink;sink;Board Support"/>
+  <ProjectSessionItem path="sink;sink;None"/>
+  <ProjectSessionItem path="sink;sink;nRF_Drivers"/>
+  <ProjectSessionItem path="sink;sink;nRF_Libraries"/>
+  <ProjectSessionItem path="sink;sink;nRF_Log"/>
+  <ProjectSessionItem path="sink;sink;nRF_Segger_RTT"/>
+  <ProjectSessionItem path="sink;sink;Segger Startup Files"/>
+  <ProjectSessionItem path="sink;sink;System Files"/>
  </Project>
  <Register1>
   <RegisterWindow visibleNodes="CPU - Current Context/r0;CPU - Current Context/r1;CPU - Current Context/r2;CPU - Current Context/r3;CPU - Current Context/r4;CPU - Current Context/r5;CPU - Current Context/r6;CPU - Current Context/r7;CPU - Current Context/r8;CPU - Current Context/r9;CPU - Current Context/r10;CPU - Current Context/r11;CPU - Current Context/r12;CPU - Current Context/sp(r13);CPU - Current Context/lr(r14);CPU - Current Context/pc(r15);CPU - Current Context/apsr;CPU/r0;CPU/r1;CPU/r2;CPU/r3;CPU/r4;CPU/r5;CPU/r6;CPU/r7;CPU/r8;CPU/r9;CPU/r10;CPU/r11;CPU/r12;CPU/sp(r13);CPU/lr(r14);CPU/pc(r15);CPU/xpsr;CPU/MSP;CPU/PSP;CPU/PRIMASK;CPU/BASEPRI;CPU/FAULTMASK;CPU/CONTROL;CPU/internal" binaryNodes="" asciiNodes="" openNodes="CPU - Current Context" name="receiver_pca10056" decimalNodes="" octalNodes="" unsignedNodes=""/>
@@ -67,7 +72,7 @@
  </TraceWindow>
  <Watch1>
   <Watches active="1" update="Never">
-   <Watchpoint expression="packet_receiver" name="packet_receiver" radix="-1" linenumber="164" filename="../../../main.c"/>
+   <Watchpoint expression="packet_receiver" name="packet_receiver" radix="-1" linenumber="168" filename="../../../main.c"/>
   </Watches>
  </Watch1>
  <Watch2>
@@ -80,10 +85,15 @@
   <Watches active="0" update="Never"/>
  </Watch4>
  <Files>
-  <SessionOpenFile windowGroup="DockEditLeft" x="213" y="98" useTextEdit="1" path="../../../main.c" left="0" selected="1" top="83" codecName="Default"/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="0" useTextEdit="1" path="../config/sdk_config.h" left="0" top="278" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="35" y="263" useTextEdit="1" path="../../../main.c" left="0" selected="1" top="247" codecName="Default"/>
   <SessionOpenFile windowGroup="DockEditLeft" x="0" y="0" useTextEdit="1" path="../../../../../../../components/boards/boards.c" left="0" top="150" codecName="Default"/>
   <SessionOpenFile windowGroup="DockEditLeft" x="9" y="46" useTextEdit="1" path="../../../../../../../components/802_15_4/api/SysAL/sys_sleep.h" left="0" top="19" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="34" y="87" useTextEdit="1" path="../../../../../../../modules/nrfx/drivers/include/nrfx_spis.h" left="0" top="88" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="119" y="3971" useTextEdit="1" path="../config/sdk_config.h" left="0" top="0" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="58" y="15" useTextEdit="1" path="flash_placement.xml" left="0" top="0" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="0" useTextEdit="1" path="../../../crc.h" left="0" top="0" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="0" useTextEdit="1" path="../../../../coordinator/crc.c" left="0" top="0" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="0" useTextEdit="1" path="../../../../../../../components/drivers_nrf/radio_config/radio_config.c" left="0" top="195" codecName="Default"/>
  </Files>
- <EMStudioWindow activeProject="sink" fileDialogDefaultFilter="*.c" autoConnectTarget="J-Link" buildConfiguration="Release" sessionSettings="" debugSearchFileMap="" fileDialogInitialDirectory="" debugSearchPath="" autoConnectCapabilities="3199"/>
+ <EMStudioWindow activeProject="sink" fileDialogDefaultFilter="*" autoConnectTarget="J-Link" buildConfiguration="Release" sessionSettings="" debugSearchFileMap="" fileDialogInitialDirectory="C:/Users/glu250/Downloads/myic/radio/examples/peripheral/radio/peripheral" debugSearchPath="" autoConnectCapabilities="3199"/>
 </session>

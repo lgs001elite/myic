@@ -1,6 +1,6 @@
 Output/Debug/Obj/coordinator/app_timer2.o: \
- C:\Users\glu250\Downloads\riotee_ic\Nordic\nRF5_SDK_17.1.0_ddde560\components\libraries\timer\app_timer2.c \
- C:\Users\glu250\Downloads\riotee_ic\Nordic\nRF5_SDK_17.1.0_ddde560\components\libraries\timer\app_timer.h \
+ C:\Users\glu250\Downloads\myic\radio\components\libraries\timer\app_timer2.c \
+ C:\Users\glu250\Downloads\myic\radio\components\libraries\timer\app_timer.h \
  ../config/sdk_config.h \
  ../../../../../../../components/libraries/util/app_error.h \
  C:/Program\ Files/SEGGER/SEGGER\ Embedded\ Studio\ 8.10d/include/stdint.h \
@@ -63,5 +63,5 @@ Output/Debug/Obj/coordinator/app_timer2.o: \
  ../../../../../../../components/libraries/strerror/nrf_strerror.h \
  ../../../../../../../components/libraries/log/src/nrf_log_internal.h \
  ../../../../../../../components/libraries/log/nrf_log_types.h \
- C:\Users\glu250\Downloads\riotee_ic\Nordic\nRF5_SDK_17.1.0_ddde560\components\libraries\timer\drv_rtc.h \
+ C:\Users\glu250\Downloads\myic\radio\components\libraries\timer\drv_rtc.h \
  ../../../../../../../modules/nrfx/hal/nrf_rtc.h

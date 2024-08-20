@@ -1,6 +1,6 @@
 Output/Release/Obj/sink/nrf_drv_uart.o: \
- C:\Users\glu250\Downloads\riotee_ic\Nordic\nRF5_SDK_17.1.0_ddde560\integration\nrfx\legacy\nrf_drv_uart.c \
- C:\Users\glu250\Downloads\riotee_ic\Nordic\nRF5_SDK_17.1.0_ddde560\integration\nrfx\legacy\nrf_drv_uart.h \
+ C:\Users\glu250\Downloads\myic\radio\integration\nrfx\legacy\nrf_drv_uart.c \
+ C:\Users\glu250\Downloads\myic\radio\integration\nrfx\legacy\nrf_drv_uart.h \
  ../../../../../../../modules/nrfx/nrfx.h \
  ../../../../../../../integration/nrfx/nrfx_config.h \
  ../config/sdk_config.h \

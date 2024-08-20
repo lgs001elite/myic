@@ -1,5 +1,5 @@
 Output/Release/Obj/sink/nrf_log_default_backends.o: \
- C:\Users\glu250\Downloads\riotee_ic\Nordic\nRF5_SDK_17.1.0_ddde560\components\libraries\log\src\nrf_log_default_backends.c \
+ C:\Users\glu250\Downloads\myic\radio\components\libraries\log\src\nrf_log_default_backends.c \
  ../../../../../../../components/libraries/util/sdk_common.h \
  C:/Program\ Files/SEGGER/SEGGER\ Embedded\ Studio\ 8.10d/include/stdint.h \
  C:/Program\ Files/SEGGER/SEGGER\ Embedded\ Studio\ 8.10d/include/__SEGGER_RTL.h \
@@ -47,8 +47,7 @@ Output/Release/Obj/sink/nrf_log_default_backends.o: \
  ../../../../../../../components/libraries/log/nrf_log_instance.h \
  ../../../../../../../components/libraries/experimental_section_vars/nrf_section.h \
  ../../../../../../../components/libraries/util/nordic_common.h \
- C:\Users\glu250\Downloads\riotee_ic\Nordic\nRF5_SDK_17.1.0_ddde560\components\libraries\log\src\nrf_log_internal.h \
+ C:\Users\glu250\Downloads\myic\radio\components\libraries\log\src\nrf_log_internal.h \
  ../../../../../../../components/libraries/log/nrf_log_types.h \
  ../../../../../../../components/libraries/util/nrf_assert.h \
- ../../../../../../../components/libraries/log/nrf_log_backend_rtt.h \
  ../../../../../../../components/libraries/log/nrf_log_backend_uart.h

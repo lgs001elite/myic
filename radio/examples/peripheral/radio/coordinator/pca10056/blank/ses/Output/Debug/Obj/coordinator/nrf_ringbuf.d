@@ -1,6 +1,6 @@
 Output/Debug/Obj/coordinator/nrf_ringbuf.o: \
- C:\Users\glu250\Downloads\riotee_ic\Nordic\nRF5_SDK_17.1.0_ddde560\components\libraries\ringbuf\nrf_ringbuf.c \
- C:\Users\glu250\Downloads\riotee_ic\Nordic\nRF5_SDK_17.1.0_ddde560\components\libraries\ringbuf\nrf_ringbuf.h \
+ C:\Users\glu250\Downloads\myic\radio\components\libraries\ringbuf\nrf_ringbuf.c \
+ C:\Users\glu250\Downloads\myic\radio\components\libraries\ringbuf\nrf_ringbuf.h \
  C:/Program\ Files/SEGGER/SEGGER\ Embedded\ Studio\ 8.10d/include/stdint.h \
  C:/Program\ Files/SEGGER/SEGGER\ Embedded\ Studio\ 8.10d/include/__SEGGER_RTL.h \
  C:/Program\ Files/SEGGER/SEGGER\ Embedded\ Studio\ 8.10d/include/__SEGGER_RTL_ConfDefaults.h \

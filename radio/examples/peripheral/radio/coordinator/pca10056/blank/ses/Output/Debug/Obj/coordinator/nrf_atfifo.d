@@ -1,5 +1,5 @@
 Output/Debug/Obj/coordinator/nrf_atfifo.o: \
- C:\Users\glu250\Downloads\riotee_ic\Nordic\nRF5_SDK_17.1.0_ddde560\components\libraries\atomic_fifo\nrf_atfifo.c \
+ C:\Users\glu250\Downloads\myic\radio\components\libraries\atomic_fifo\nrf_atfifo.c \
  C:/Program\ Files/SEGGER/SEGGER\ Embedded\ Studio\ 8.10d/include/string.h \
  C:/Program\ Files/SEGGER/SEGGER\ Embedded\ Studio\ 8.10d/include/__SEGGER_RTL.h \
  C:/Program\ Files/SEGGER/SEGGER\ Embedded\ Studio\ 8.10d/include/__SEGGER_RTL_ConfDefaults.h \
@@ -23,7 +23,7 @@ Output/Debug/Obj/coordinator/nrf_atfifo.o: \
  ../../../../../../../modules/nrfx/mdk/nrf51_to_nrf52840.h \
  ../../../../../../../modules/nrfx/mdk/nrf52_to_nrf52840.h \
  ../../../../../../../modules/nrfx/mdk/compiler_abstraction.h \
- C:\Users\glu250\Downloads\riotee_ic\Nordic\nRF5_SDK_17.1.0_ddde560\components\libraries\atomic_fifo\nrf_atfifo.h \
+ C:\Users\glu250\Downloads\myic\radio\components\libraries\atomic_fifo\nrf_atfifo.h \
  ../config/sdk_config.h \
  ../../../../../../../components/libraries/util/nordic_common.h \
  ../../../../../../../components/libraries/util/nrf_assert.h \
@@ -32,7 +32,7 @@ Output/Debug/Obj/coordinator/nrf_atfifo.o: \
  ../../../../../../../components/libraries/log/nrf_log_instance.h \
  ../../../../../../../components/libraries/experimental_section_vars/nrf_section.h \
  ../../../../../../../components/libraries/log/nrf_log_types.h \
- C:\Users\glu250\Downloads\riotee_ic\Nordic\nRF5_SDK_17.1.0_ddde560\components\libraries\atomic_fifo\nrf_atfifo_internal.h \
+ C:\Users\glu250\Downloads\myic\radio\components\libraries\atomic_fifo\nrf_atfifo_internal.h \
  ../../../../../../../components/libraries/log/nrf_log.h \
  ../../../../../../../components/libraries/util/sdk_common.h \
  ../../../../../../../components/libraries/util/sdk_os.h \

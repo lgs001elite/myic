@@ -22,12 +22,12 @@ static char packet_receiver[ BROADCASTLEN ] = { 0 }; /**< Packet to receive. */
 
 APP_TIMER_DEF( g_my_work_timer_counter );
 APP_TIMER_DEF( g_my_sleep_timer_counter );
-#define TIME_UNIT 1
+#define TIME_UNIT 30
 #define SLEEP_LEN ( 6 * TIME_UNIT )
-#define WORK_LEN ( 7 * TIME_UNIT )
-#define CHARGE_CYCLE ( 2 * TIME_UNIT )
+#define WORK_LEN (1 * TIME_UNIT)
+#define CHARGE_CYCLE (7 * TIME_UNIT)
 
-#define IC_CYCLE ( 51 * TIME_UNIT )
+#define IC_CYCLE (6 * TIME_UNIT)
 
 static bool g_if_inSleep = false;
 static bool g_if_inWork = false;
@@ -82,6 +82,10 @@ static void producePackets( char currLoc, char nextID ) {
 }
 
 static bool check_completeness( char *receivedData ) {
+    if ((receivedData[0] != 0x1e) || (receivedData[1] != 0x17))
+    {
+        return false;
+    }
   crcInit( );
   int16_t crc_result = crcFast( receivedData, 29 );
   char res1 = ( crc_result & 0xFF00 ) >> 8;
@@ -155,9 +159,13 @@ uint32_t read_packet( ) {
   while ( NRF_RADIO->EVENTS_END == 0U ) {
     // wait
     counter = counter + 1;
+    if (counter > 11101)
+    {
+        break;
+    }
   }
-  NRF_LOG_INFO( "Waiting for receiving:%d\n", counter );
-  NRF_LOG_FLUSH( );
+  // NRF_LOG_INFO( "Waiting for receiving:%d\n", counter );
+  // NRF_LOG_FLUSH( );
   if ( NRF_RADIO->CRCSTATUS == 1U ) {
     result = packet_receiver;
   }
@@ -206,10 +214,10 @@ static void initialization( ) {
 
   clock_initialization( );
   // app_timer registration
-  APP_ERROR_CHECK( app_timer_create( &g_my_work_timer_counter, APP_TIMER_MODE_REPEATED,
-      callback_coordinator_work_cycle_switch ) );
-  APP_ERROR_CHECK( app_timer_create( &g_my_sleep_timer_counter, APP_TIMER_MODE_REPEATED,
-      callback_coordinator_sleep_cycle_switch ) );
+  APP_ERROR_CHECK(app_timer_create(&g_my_work_timer_counter, APP_TIMER_MODE_SINGLE_SHOT,
+                                   callback_coordinator_work_cycle_switch));
+  APP_ERROR_CHECK(app_timer_create(&g_my_sleep_timer_counter, APP_TIMER_MODE_SINGLE_SHOT,
+                                   callback_coordinator_sleep_cycle_switch));
 
   err_code = app_timer_init( );
   APP_ERROR_CHECK( err_code );
@@ -239,48 +247,58 @@ static void initialization( ) {
 int main( void ) {
   initialization( );
   nrf_gpio_cfg_output( 28 );
+  uint32_t lastSentTimer = 0;
+  uint32_t thisSentTimer = 0;
   while ( true ) {
-    APP_ERROR_CHECK( app_timer_start( g_my_sleep_timer_counter, APP_TIMER_TICKS( SLEEP_LEN ), NULL ) );
-    g_if_inSleep = true;
-    while ( g_if_inSleep == true ) {
-      __WFE( );
+      app_timer_start(g_my_sleep_timer_counter, APP_TIMER_TICKS(SLEEP_LEN), NULL);
+      g_if_inSleep = true;
+      while (g_if_inSleep == true)
+      {
+          __WFE();
     }
-    APP_ERROR_CHECK( app_timer_start( g_my_work_timer_counter, APP_TIMER_TICKS( WORK_LEN ), NULL ) );
-    g_if_inWork = true;
+    app_timer_start(g_my_work_timer_counter, APP_TIMER_TICKS(WORK_LEN), NULL);
     g_if_send = false;
-    g_curr_loc = ( g_curr_loc + CHARGE_CYCLE ) % IC_CYCLE;
-    nrf_gpio_pin_set( 28 );
+    nrf_gpio_pin_set(28);
+    g_curr_loc = (g_curr_loc + CHARGE_CYCLE) % IC_CYCLE;
     uint32_t startCounter = app_timer_cnt_get( );
+    g_if_inWork = true;
     while ( g_if_inWork == true ) {
-
-      /*
-      producePackets( 12, 12 );
-      NRF_RADIO->PACKETPTR = packet_sender;
-      send_packet( );
-      */
-
-      if ( g_if_send == true ) {
-        NRF_RADIO->PACKETPTR = packet_sender;
-        send_packet( );
-        g_if_send = false;
-      }
-      NRF_RADIO->PACKETPTR = packet_receiver;
-      uint8_t *received = read_packet( );
-      // interpret the packet
-      if ( check_completeness( packet_receiver ) == true ) {
-        int senderID = packet_receiver[ 2 ];
-        int currLoc = packet_receiver[ 3 ];
-        if ( currLoc != g_curr_loc ) {
-          g_if_send = true;
-          producePackets( currLoc, senderID );
+        packet_receiver[0] = 0xff;
+        NRF_RADIO->PACKETPTR = packet_receiver;
+        uint8_t *received = read_packet();
+        // interpret the packet
+        if (check_completeness(packet_receiver) == true)
+        {
+            int senderID = packet_receiver[2];
+            int currLoc = packet_receiver[3];
+            if (currLoc != g_curr_loc)
+            {
+                g_if_send = true;
+                producePackets(currLoc, senderID);
+                NRF_LOG_INFO("Received!\n");
+                NRF_LOG_FLUSH();
+            }
         }
-      }
-
-      __WFE( );
+        if (g_if_send == true)
+        {
+            NRF_RADIO->PACKETPTR = packet_sender;
+            send_packet();
+            NRF_LOG_INFO("Sent!\n");
+            NRF_LOG_FLUSH();
+            thisSentTimer = app_timer_cnt_get();
+            uint32_t time_interval = thisSentTimer - lastSentTimer;
+            NRF_LOG_INFO("Sending interval:%d\n", time_interval);
+            NRF_LOG_FLUSH();
+            lastSentTimer = app_timer_cnt_get();
+            g_if_send = false;
+        }
+        __WFE();
     }
-    nrf_gpio_pin_clear( 28 );
-    uint32_t endCounter = app_timer_cnt_get( );
+    nrf_gpio_pin_clear(28);
+    uint32_t endCounter = app_timer_cnt_get();
     uint32_t time_interval = endCounter - startCounter;
-    NRF_LOG_INFO( "Working interval:%d\n", time_interval );
+    NRF_LOG_INFO("Working interval:%d\n", time_interval);
+    NRF_LOG_FLUSH();
+    __WFE();
   }
 }

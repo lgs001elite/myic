@@ -1,6 +1,6 @@
 Output/Release/Obj/sink/app_error_handler_gcc.o: \
- C:\Users\glu250\Downloads\riotee_ic\Nordic\nRF5_SDK_17.1.0_ddde560\components\libraries\util\app_error_handler_gcc.c \
- C:\Users\glu250\Downloads\riotee_ic\Nordic\nRF5_SDK_17.1.0_ddde560\components\libraries\util\sdk_common.h \
+ C:\Users\glu250\Downloads\myic\radio\components\libraries\util\app_error_handler_gcc.c \
+ C:\Users\glu250\Downloads\myic\radio\components\libraries\util\sdk_common.h \
  C:/Program\ Files/SEGGER/SEGGER\ Embedded\ Studio\ 8.10d/include/stdint.h \
  C:/Program\ Files/SEGGER/SEGGER\ Embedded\ Studio\ 8.10d/include/__SEGGER_RTL.h \
  C:/Program\ Files/SEGGER/SEGGER\ Embedded\ Studio\ 8.10d/include/__SEGGER_RTL_ConfDefaults.h \
@@ -9,12 +9,12 @@ Output/Release/Obj/sink/app_error_handler_gcc.o: \
  C:/Program\ Files/SEGGER/SEGGER\ Embedded\ Studio\ 8.10d/include/stdbool.h \
  C:/Program\ Files/SEGGER/SEGGER\ Embedded\ Studio\ 8.10d/include/string.h \
  ../config/sdk_config.h \
- C:\Users\glu250\Downloads\riotee_ic\Nordic\nRF5_SDK_17.1.0_ddde560\components\libraries\util\nordic_common.h \
+ C:\Users\glu250\Downloads\myic\radio\components\libraries\util\nordic_common.h \
  ../../../../../../../modules/nrfx/mdk/compiler_abstraction.h \
- C:\Users\glu250\Downloads\riotee_ic\Nordic\nRF5_SDK_17.1.0_ddde560\components\libraries\util\sdk_os.h \
- C:\Users\glu250\Downloads\riotee_ic\Nordic\nRF5_SDK_17.1.0_ddde560\components\libraries\util\sdk_errors.h \
+ C:\Users\glu250\Downloads\myic\radio\components\libraries\util\sdk_os.h \
+ C:\Users\glu250\Downloads\myic\radio\components\libraries\util\sdk_errors.h \
  ../../../../../../../components/drivers_nrf/nrf_soc_nosd/nrf_error.h \
- C:\Users\glu250\Downloads\riotee_ic\Nordic\nRF5_SDK_17.1.0_ddde560\components\libraries\util\app_util.h \
+ C:\Users\glu250\Downloads\myic\radio\components\libraries\util\app_util.h \
  C:/Program\ Files/SEGGER/SEGGER\ Embedded\ Studio\ 8.10d/include/stddef.h \
  ../../../../../../../modules/nrfx/mdk/nrf.h \
  ../../../../../../../modules/nrfx/mdk/nrf52840.h \
@@ -28,8 +28,8 @@ Output/Release/Obj/sink/app_error_handler_gcc.o: \
  ../../../../../../../modules/nrfx/mdk/nrf51_to_nrf52840.h \
  ../../../../../../../modules/nrfx/mdk/nrf52_to_nrf52840.h \
  ../../../../../../../modules/nrfx/mdk/compiler_abstraction.h \
- C:\Users\glu250\Downloads\riotee_ic\Nordic\nRF5_SDK_17.1.0_ddde560\components\libraries\util\sdk_macros.h \
- C:\Users\glu250\Downloads\riotee_ic\Nordic\nRF5_SDK_17.1.0_ddde560\components\libraries\util\nrf_assert.h \
- C:\Users\glu250\Downloads\riotee_ic\Nordic\nRF5_SDK_17.1.0_ddde560\components\libraries\util\app_error.h \
+ C:\Users\glu250\Downloads\myic\radio\components\libraries\util\sdk_macros.h \
+ C:\Users\glu250\Downloads\myic\radio\components\libraries\util\nrf_assert.h \
+ C:\Users\glu250\Downloads\myic\radio\components\libraries\util\app_error.h \
  C:/Program\ Files/SEGGER/SEGGER\ Embedded\ Studio\ 8.10d/include/stdio.h \
- C:\Users\glu250\Downloads\riotee_ic\Nordic\nRF5_SDK_17.1.0_ddde560\components\libraries\util\app_error_weak.h
+ C:\Users\glu250\Downloads\myic\radio\components\libraries\util\app_error_weak.h

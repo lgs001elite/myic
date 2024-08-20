@@ -5,6 +5,9 @@
         "vector": "cpp",
         "utility": "cpp",
         "nrf_mesh_config_examples.h": "c",
-        "limits": "c"
+        "limits": "c",
+        "string.h": "c",
+        "radio_config.h": "c",
+        "leds.h": "c"
     }
 }

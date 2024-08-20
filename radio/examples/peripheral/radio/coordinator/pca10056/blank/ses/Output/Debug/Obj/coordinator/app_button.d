@@ -1,5 +1,5 @@
 Output/Debug/Obj/coordinator/app_button.o: \
- C:\Users\glu250\Downloads\riotee_ic\Nordic\nRF5_SDK_17.1.0_ddde560\components\libraries\button\app_button.c \
+ C:\Users\glu250\Downloads\myic\radio\components\libraries\button\app_button.c \
  ../../../../../../../components/libraries/util/sdk_common.h \
  C:/Program\ Files/SEGGER/SEGGER\ Embedded\ Studio\ 8.10d/include/stdint.h \
  C:/Program\ Files/SEGGER/SEGGER\ Embedded\ Studio\ 8.10d/include/__SEGGER_RTL.h \
@@ -30,7 +30,7 @@ Output/Debug/Obj/coordinator/app_button.o: \
  ../../../../../../../modules/nrfx/mdk/compiler_abstraction.h \
  ../../../../../../../components/libraries/util/sdk_macros.h \
  ../../../../../../../components/libraries/util/nrf_assert.h \
- C:\Users\glu250\Downloads\riotee_ic\Nordic\nRF5_SDK_17.1.0_ddde560\components\libraries\button\app_button.h \
+ C:\Users\glu250\Downloads\myic\radio\components\libraries\button\app_button.h \
  ../../../../../../../components/libraries/util/app_error.h \
  C:/Program\ Files/SEGGER/SEGGER\ Embedded\ Studio\ 8.10d/include/stdio.h \
  ../../../../../../../components/libraries/util/app_error_weak.h \

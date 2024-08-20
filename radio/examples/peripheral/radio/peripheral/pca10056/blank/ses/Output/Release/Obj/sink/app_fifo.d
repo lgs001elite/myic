@@ -1,5 +1,5 @@
 Output/Release/Obj/sink/app_fifo.o: \
- C:\Users\glu250\Downloads\riotee_ic\Nordic\nRF5_SDK_17.1.0_ddde560\components\libraries\fifo\app_fifo.c \
+ C:\Users\glu250\Downloads\myic\radio\components\libraries\fifo\app_fifo.c \
  ../../../../../../../components/libraries/util/sdk_common.h \
  C:/Program\ Files/SEGGER/SEGGER\ Embedded\ Studio\ 8.10d/include/stdint.h \
  C:/Program\ Files/SEGGER/SEGGER\ Embedded\ Studio\ 8.10d/include/__SEGGER_RTL.h \
@@ -29,6 +29,4 @@ Output/Release/Obj/sink/app_fifo.o: \
  ../../../../../../../modules/nrfx/mdk/nrf52_to_nrf52840.h \
  ../../../../../../../modules/nrfx/mdk/compiler_abstraction.h \
  ../../../../../../../components/libraries/util/sdk_macros.h \
- ../../../../../../../components/libraries/util/nrf_assert.h \
- C:\Users\glu250\Downloads\riotee_ic\Nordic\nRF5_SDK_17.1.0_ddde560\components\libraries\fifo\app_fifo.h \
- C:/Program\ Files/SEGGER/SEGGER\ Embedded\ Studio\ 8.10d/include/stdlib.h
+ ../../../../../../../components/libraries/util/nrf_assert.h

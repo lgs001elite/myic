@@ -1,5 +1,5 @@
 Output/Debug/Obj/coordinator/nrfx_gpiote.o: \
- C:\Users\glu250\Downloads\riotee_ic\Nordic\nRF5_SDK_17.1.0_ddde560\modules\nrfx\drivers\src\nrfx_gpiote.c \
+ C:\Users\glu250\Downloads\myic\radio\modules\nrfx\drivers\src\nrfx_gpiote.c \
  ../../../../../../../modules/nrfx/nrfx.h \
  ../../../../../../../integration/nrfx/nrfx_config.h \
  ../config/sdk_config.h \
