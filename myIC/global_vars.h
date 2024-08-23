@@ -18,6 +18,9 @@ char g_transBuffer[SPI_DATA_LEN];
 int8_t g_preDriftTime;
 char g_receiveBuffer[SPI_DATA_LEN];
 
+extern bool g_receData;
+extern bool g_receAck;
+
 extern bool g_ifFindCoordinator;
 SPI_Mode MasterMode;
 uint16_t g_chTimeSlots;
@@ -30,7 +33,7 @@ extern char g_arrLoc;
 extern char g_accuCharge;
 extern  int g_connectionLen;
 extern  int g_connectionNum;
-extern char g_currentNodeLoc;
+extern int g_currentNodeLoc;
 extern uint8_t g_distributedNodeLoc;
 extern  char g_TXData;
 extern int16_t g_MaxChargeCycles;
@@ -38,7 +41,7 @@ extern char g_attConn;
 extern char g_queueLen;
 extern char g_rounds;
 extern uint8_t g_distributedLoc;
-extern  int g_chargHis[HISLEN];
+//extern  int g_chargHis[HISLEN];
 extern char g_locNum;
 extern bool g_gotoLoc;
 extern bool g_alignLoc;
@@ -46,7 +49,7 @@ extern uint16_t g_receCounter;
 extern uint8_t g_packet_id;
 // extern double p_test;
 extern uint32_t g_systimeCounter;
-
+extern  int g_fbAttemptNum;
 extern bool g_ifAdjustDrift;
 
 #endif /* GLOBAL_VARS_H_ */

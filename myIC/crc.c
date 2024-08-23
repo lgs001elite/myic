@@ -167,23 +167,23 @@ float findMaxRate( int arr[], char n)
     return maxRate;
 }
 
-void putInArray(int num)
-{
-    if (g_locNum >= HISLEN)
-    {
-        int i = 0;
-        for (; i < (HISLEN - 1); i++)
-        {
-            g_chargHis[i] = g_chargHis[i + 1];
-        }
-        g_chargHis[HISLEN - 1] = num;
-    }
-    else
-    {
-        g_chargHis[g_locNum] = num;
-        g_locNum = g_locNum + 1;
-    }
-}
+// void putInArray(int num)
+// {
+//     if (g_locNum >= HISLEN)
+//     {
+//         int i = 0;
+//         for (; i < (HISLEN - 1); i++)
+//         {
+//             g_chargHis[i] = g_chargHis[i + 1];
+//         }
+//         g_chargHis[HISLEN - 1] = num;
+//     }
+//     else
+//     {
+//         g_chargHis[g_locNum] = num;
+//         g_locNum = g_locNum + 1;
+//     }
+// }
 
 
 

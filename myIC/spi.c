@@ -13,6 +13,7 @@
 #include "routingRx.h"
 #include "routingTx.h"
 #include "crc.h"
+#include "uart.h"
 
 bool testSwitch = true;
 
@@ -29,7 +30,7 @@ static bool spi_sender_signal = false;
 
 void initSPI()
 {
-    UCB1CTLW0 = UCSWRST;                                                                                   // **Put state machine in reset**
+    UCB1CTLW0 = UCSWRST;                                                                                         // **Put state machine in reset**
     UCB1CTLW0 |= UCCKPL_H | UCMSB | UCSYNC | UCMST | UCSSEL__SMCLK_L | UC7BIT__8BIT | UCMODE0 | UCSTEM | UCCKPH; // Added by me
     UCB1BRW = 0x20;
     UCB1CTLW0 &= ~UCSWRST;
@@ -45,32 +46,25 @@ void start_spi_process(void)
         receiveDataFromNordic();
         // If coordinator needs to reply info
         producePackets();
-        if (g_currentNodeLoc == -1)
+        if (g_sendAck == true)
         {
-            g_transBuffer[3] = PACKAGE_BROAD;
+            g_transBuffer[3] = PACKAGE_ACK;
+            g_sendAck = false;
         }
         else
         {
-            if (g_sendAck == true)
+            g_transBuffer[3] = PACKAGE_PACKET;
+            if (g_nodeID == 0)
             {
-                g_transBuffer[3] = PACKAGE_ACK;
-                g_sendAck = false;
+                g_nextNodeID = 1;
             }
             else
             {
-                g_transBuffer[3] = PACKAGE_PACKET;
-                if (g_nodeID == 0)
-                {
-                    g_nextNodeID = 1;
-                }
-                else
-                {
-                    g_nextNodeID = 0;
-                }
-                g_transBuffer[6] = g_nextNodeID; // updating the next hop id
+                g_nextNodeID = 0;
             }
-            g_transBuffer[2] = g_packet_id;
+            g_transBuffer[6] = g_nextNodeID; // updating the next hop id
         }
+        g_transBuffer[2] = g_packet_id;
         update_crc();
         // For sending process
         SLAVE_CS_OUT &= ~(SLAVE_CS_PIN);
@@ -83,6 +77,7 @@ void start_spi_process(void)
             __bis_SR_register(LPM0_bits + GIE);
             __delay_cycles(100);
         }
+        GPIO_MONINOR_OUT4 ^= GPIO_MONITOR_PIN2;
         SLAVE_CS_OUT |= SLAVE_CS_PIN;
         __no_operation();
     }

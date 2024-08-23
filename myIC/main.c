@@ -23,6 +23,7 @@
 #include "global_func.h"
 #include "global_vars.h"
 #include "uartHex.h"
+#include "uart.h"
 
 #pragma PERSISTENT(g_ifFindCoordinator)
 bool g_ifFindCoordinator = false;
@@ -52,7 +53,7 @@ uint16_t g_adjustUnits = 0;
     int g_connectionNum = 0;
 
 #pragma PERSISTENT(g_currentNodeLoc)
-    char g_currentNodeLoc = -1;
+    int g_currentNodeLoc = -1;
 
 #pragma PERSISTENT(g_distributedNodeLoc)
     uint8_t g_distributedNodeLoc = 0;
@@ -91,8 +92,8 @@ uint16_t g_adjustUnits = 0;
     uint16_t g_receCounter = 0;
 
     // in crc
-#pragma PERSISTENT(g_chargHis)
-    int g_chargHis[HISLEN] = {0};
+// #pragma PERSISTENT(g_chargHis)
+//     int g_chargHis[HISLEN] = {0};
 
     // in crc
 #pragma PERSISTENT(g_locNum)
@@ -104,7 +105,16 @@ uint16_t g_adjustUnits = 0;
 #pragma PERSISTENT(g_packet_id)
     uint8_t g_packet_id = 0x00;
 
-    // Timer0_A0 interrupt service routine
+#pragma PERSISTENT(g_fbAttemptNum)
+    int g_fbAttemptNum = 0;
+
+#pragma PERSISTENT(g_receData)
+    bool g_receData = false;
+
+#pragma PERSISTENT(g_receAck)
+    bool g_receAck = false;
+
+// Timer0_A0 interrupt service routine
 #if defined(__TI_COMPILER_VERSION__) || defined(__IAR_SYSTEMS_ICC__)
 #pragma vector = TIMER0_A0_VECTOR
     __interrupt void
@@ -143,9 +153,11 @@ void var_initialization()
     g_dest_location = 0x03;
     g_MatchNextHop = false;
     g_uartSwitch = true;
-    g_synStrategy = FLYNC; // FLYNC  FREEBEACON
+    g_synStrategy = FIND; // FIND  FREEBEACON
     g_preDriftTime = 0;
-    g_lastData = 0;
+    g_lastData = 10000;
+    g_receData = false;
+    g_receAck = false;
 }
 
 void timer_counter()

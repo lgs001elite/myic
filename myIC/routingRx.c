@@ -25,14 +25,24 @@ bool check_completeness(char *receivedData)
         rec_result[i] = receivedData[i];
     }
     int16_t crc_result = getCRC(receivedData);
-    char res1  = (crc_result & 0xFF00) >> 8;
-    char result  = (crc_result & 0x00FF);
+    char res1 = (crc_result & 0xFF00) >> 8;
+    char result = (crc_result & 0x00FF);
     char temp1 = receivedData[29];
     char receive = receivedData[30];
+
+    while (res1 >= 0x7f)
+    {
+        res1 -= 0x7f;
+    }
 
     if (res1 != temp1)
     {
         return false;
+    }
+
+    while (result >= 0x7f)
+    {
+        result -= 0x7f;
     }
 
     if (result != receive)
@@ -45,38 +55,20 @@ bool check_completeness(char *receivedData)
 
 static void received_broad_packet(char *receivedData)
 {
-    uint8_t globalLoc = receivedData[10];
     if (g_currentNodeLoc == -1)
     {
-        // For two nodes, they have same syn location.
-        // Therefore, we do not need to distribute different locations fo synchronization
-        if (globalLoc != 0)
+        if (g_synStrategy == FREEBEACON)
         {
-            if (g_synStrategy == PULSAR)
-            {
-                g_biasForAlign = 3 - globalLoc;
-            }
-            else
-            {
-                g_biasForAlign = 30 - globalLoc;
-            }
-            g_alignLoc = true;
+            g_biasForAlign = receivedData[10];
+            g_currentNodeLoc = receivedData[9];
+            g_distributedNodeLoc = receivedData[8];
         }
-        g_currentNodeLoc = 0;
-        g_distributedNodeLoc = 0;
     }
     else
     {
-        if ((g_distributedLoc != globalLoc) && (g_synStrategy == FREEBEACON))
+        if (g_synStrategy == FREEBEACON)
         {
-            if (globalLoc > g_distributedLoc)
-            {
-                g_biasForAlign = 30 - globalLoc + g_distributedLoc;
-            }
-            else
-            {
-                g_biasForAlign = g_distributedLoc - globalLoc;
-            }
+            g_biasForAlign = receivedData[10];
         }
     }
 }
@@ -96,22 +88,25 @@ void receiveDataFromNordic()
     char sender_dataType = g_receiveBuffer[3];
     char sender_nodeType = g_receiveBuffer[4];
 
-    char dest_id = g_receiveBuffer[6];
-    if (dest_id != g_nodeID)
-    {
-        return;
-    }
-
     // Rewrite from here
     if (sender_dataType == PACKAGE_PACKET)
     {
-        GPIO_MONINOR_OUT4 ^= GPIO_MONITOR_PIN3;
-        g_sendAck = true;
+        if (g_receData == false)
+        {
+            GPIO_MONINOR_OUT4 ^= GPIO_MONITOR_PIN3;
+            g_sendAck = true;
+            g_receData = true;
+        }
     }
     else if (sender_dataType == PACKAGE_ACK)
     {
-        GPIO_MONINOR_OUT4 ^= GPIO_MONITOR_PIN4;
-        g_receCounter = g_receCounter + 1;
+        if (g_receAck == false)
+        {
+            GPIO_MONINOR_OUT4 ^= GPIO_MONITOR_PIN4;
+            g_receCounter = g_receCounter + 1;
+            g_receData = true;
+            g_fbAttemptNum = 0;
+        }
     }
     else
     {

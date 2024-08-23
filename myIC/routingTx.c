@@ -22,11 +22,11 @@ void producePackets(void)
     g_transBuffer[1]  = BLE_GAP_AD_TYPE;
     g_transBuffer[2]  = 0x01; // For packetSeq
     g_transBuffer[3]  = DUBBY; // message type
-    g_transBuffer[4] = ICNODE; // node type
-    g_transBuffer[5] = g_nodeID;
+    g_transBuffer[4]  = ICNODE; // node type
+    g_transBuffer[5]  = g_nodeID;
     g_transBuffer[6]  = g_nextNodeID;
-    g_transBuffer[7] = g_dest_location;
-    g_transBuffer[8] = g_distributedNodeLoc;
+    g_transBuffer[7]  = g_dest_location;
+    g_transBuffer[8]  = g_distributedNodeLoc;
     g_transBuffer[9]  = g_currentNodeLoc; // des in coordinator circle.
     g_transBuffer[10] = 0;
     int8_t i = 3;

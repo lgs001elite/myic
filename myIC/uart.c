@@ -171,26 +171,35 @@ static void uartAction()
         g_uartSwitch = false;
         return;
     }
+    __bis_SR_register(GIE); // re-open interrupt
     // Transfer syn counter
     uint16_t t_synCounter = g_receCounter + 0xafff;
     uartTrasmit(t_synCounter);
-    __bis_SR_register(GIE); // re-open interrupt
     // Transfer delay time
     uint16_t delayTime = 0;
-    if (g_synStrategy == FLYNC)
+    if (g_synStrategy == FIND)
     {
-        delayTime = flyncDelay(receivedUart);
+        delayTime = findDelay(receivedUart);
     }
-    else
+    if (g_synStrategy == FREEBEACON)
     {
         delayTime = freeBeaconDelay(receivedUart);
-    }
-    if ((g_biasForAlign != 0) && (g_synStrategy == FREEBEACON))
-    {
-        delayTime = delayTime + g_biasForAlign;
-        g_biasForAlign = 0;
+        if (g_biasForAlign != 0)
+        {
+            delayTime = delayTime + g_biasForAlign;
+            g_biasForAlign = 0;
+        }
+        if (g_fbAttemptNum < 51)
+        {
+            g_fbAttemptNum = g_fbAttemptNum + 1;
+        }
+        else
+        {
+            delayTime = delayTime + 51 * uniformInt(0,1);
+        }
     }
     __delay_cycles(100000);
+    delayTime = 0;
     uartTrasmit(delayTime);
     if (delayTime == 0)
     {

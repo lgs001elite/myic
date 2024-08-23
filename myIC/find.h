@@ -8,6 +8,10 @@
 #ifndef FIND_H_
 #define FIND_H_
 
-volatile int32_t geometric_distribution(double p);
+
+uint16_t findDelay(uint16_t c);
+uint16_t flyncDelay(uint16_t c);
+uint16_t pulsarDelay(uint16_t c);
+uint16_t freeBeaconDelay(uint16_t c);
 
 #endif /* FIND_H_ */

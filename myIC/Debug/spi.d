@@ -26,6 +26,7 @@ spi.obj: ../global_vars.h
 spi.obj: ../routingRx.h
 spi.obj: ../routingTx.h
 spi.obj: ../crc.h
+spi.obj: ../uart.h
 
 ../spi.c:
 
@@ -78,4 +79,6 @@ C:/ti/ccs1240/ccs/tools/compiler/ti-cgt-msp430_21.6.1.LTS/include/sys/_stdint.h:
 ../routingTx.h:
 
 ../crc.h:
+
+../uart.h:
 
