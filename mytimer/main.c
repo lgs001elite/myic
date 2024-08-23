@@ -18,7 +18,7 @@
 
 
 #define COUNTER_UNIT 0xffff
-#define SLOT_AMPLIFIER 10
+#define SLOT_AMPLIFIER 100
 #define MAX_ENCOUNTER_THRESHOLD 100
 #define INITIAL_UART_TIME 1099999
 
@@ -39,7 +39,6 @@ static uint16_t g_slotUnitCounter = 0;
 static uint16_t lastReceivedData = 0;
 static char g_uartRecvBuff[4] = {0};
 static char g_uartTrasBuff[4] = {0};
-static bool g_slotStopCounter = false;
 static bool g_afterUartWork = false;
 static bool g_preventRepeatedUart = true;
 static int g_energyMode = energy_office_01;
@@ -172,14 +171,14 @@ int gaussianMixtureRand(int num_components, int mu[], int sigma[], double weight
     return (int)fmax(fmin(mixture_value, max), min); // Ensure generated integer is within [min, max]
 }
 // Set energy models
-int set_energyModel(int g_energyModel)
+int set_energyModel()
 {
     int retValue = 0;
     if (g_energyMode == energy_office_01)
     {
         if (g_office1_index == g_office1_length)
         {
-            g_office1_index = 0;
+            g_office1_index = generateRandomInt(0,g_office1_length);
         }
         retValue = office_1[g_office1_index];
         g_office1_index = g_office1_index + 1;
@@ -188,7 +187,7 @@ int set_energyModel(int g_energyModel)
     {
         if (g_office2_index == g_office2_length)
         {
-             g_office2_index = 0;
+             g_office2_index = generateRandomInt(0,g_office2_length);
         }
         retValue = office_2[g_office2_index];
         g_office2_index = g_office2_index + 1;
@@ -289,7 +288,8 @@ static void uartAction()
         g_reUartData = g_reUartData - 0xafff;
         if (g_synIndex < MAX_ENCOUNTER_THRESHOLD)
         {
-            g_synIndex = g_synIndex + 1;
+            //g_synIndex = g_synIndex + 1;
+            g_synIndex = g_reUartData;
         }
         else
         {
@@ -334,7 +334,7 @@ int main(void)
     setTimer();
     initGPIO();
     crcInit();
-    chargeCycles = set_energyModel(g_energyMode);
+    chargeCycles = set_energyModel();
     g_slotUnitCounter = (chargeCycles + 1) * SLOT_AMPLIFIER;
     //***************************************
     TA0CCTL0 = CCIE; // TACCR0 interrupt enabled
@@ -353,14 +353,15 @@ int main(void)
             g_preventRepeatedUart = true;
             g_uartTerminalFlag = false;
             lastReceivedData = 0;
-            chargeCycles = set_energyModel(g_energyMode);
+            chargeCycles = set_energyModel();
+            P4OUT ^= BIT1;
             g_slotUnitCounter = (chargeCycles + 1) * SLOT_AMPLIFIER;
             if (g_powerOff == true)
             {
                 int prob = generateRandomInt(1, 100);
-                if (prob <= 5) // power off with 5% probability
+                if (prob <= 10) // power off with 10% probability
                 {
-                    g_slotUnitCounter = g_slotUnitCounter + SLOT_AMPLIFIER * generateRandomInt(0, 50);
+                    g_slotUnitCounter = g_slotUnitCounter + SLOT_AMPLIFIER * generateRandomInt(0, 30);
                 }
             }
         }
@@ -374,29 +375,25 @@ int main(void)
              * Initailing uart time do not be regarded
              * as the charging cycle of an IC node
              */
-            g_slotStopCounter = true;
             __delay_cycles(INITIAL_UART_TIME);
             uartTransmit(0xffff);
-            g_slotStopCounter = false;
-
             __no_operation();
+            __bis_SR_register(GIE);
         }
         else if ((g_slotUnitCounter == SLOT_AMPLIFIER) && (g_preventRepeatedUart == true))
         {
+            P4OUT ^= BIT1;
             __no_operation();
             mosfetSwitch(); // Turn the switch
             g_preventRepeatedUart = false;
 
             // do not consider the the uart time as the part of the working slot
-            g_slotStopCounter = true;
             g_extraDelayIndicator = false;
             __delay_cycles(INITIAL_UART_TIME);
             uartTransmit(chargeCycles);
             uartReceive();
             uartReceive();
             __bis_SR_register(GIE);
-            g_slotStopCounter = false; // ending the uart process
-
 
             if (g_extraDelayCounter > 0)
             {
@@ -405,10 +402,6 @@ int main(void)
                 g_extraDelayIndicator = true;
                 __no_operation();
             }
-            __no_operation();
-        }
-        else
-        {
             __no_operation();
         }
     }
@@ -425,7 +418,7 @@ void __attribute__((interrupt(TIMER0_A0_VECTOR))) Timer0_A0_ISR(void)
 #endif
 {
     TA0CCR0 += COUNTER_UNIT; // Add Offset to TA0CCR0
-    if ((g_slotUnitCounter > 0) && (g_extraDelayCounter == 0) && (g_slotStopCounter == false))
+    if ((g_slotUnitCounter > 0) && (g_extraDelayCounter == 0))
     {
         g_slotUnitCounter--;
     }
