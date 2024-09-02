@@ -23,7 +23,6 @@ void basic_node::handleMessage(cMessage *msg)
     net_handleMessage(msg);
 }
 
-
 /**
  * @brief setting nodes' coordinators
  *
@@ -56,7 +55,7 @@ void basic_node::duplicate_msg(packet_frame *ori, packet_frame *dMsg)
     ori->setSource_id(dMsg->getSource_id());
     ori->setOrigin_slot(dMsg->getOrigin_slot());
     ori->setNode_state(dMsg->getNode_state());
-//    ori->setPass_counter(dMsg->getPass_counter());
+    //    ori->setPass_counter(dMsg->getPass_counter());
 }
 
 /**
@@ -130,8 +129,7 @@ void basic_node::determineNodesInRadioRadio()
                                  { return p1.second < p2.second; });
 }
 
-
-bool  basic_node::ringAction()
+bool basic_node::ringAction()
 {
     if ((this->g_ic_loc % 2) == 0)
     {
@@ -144,6 +142,18 @@ bool  basic_node::ringAction()
     return true;
 }
 
+bool basic_node::ringAction_pulsar()
+{
+    if ((this->g_ic_loc % 2) == 1)
+    {
+        int startPoint = this->g_ic_loc / 2 + 1;
+        if (startPoint > g_ic_message_num)
+        {
+            return false;
+        }
+    }
+    return true;
+}
 
 void basic_node::ringReduce()
 {
@@ -154,33 +164,30 @@ void basic_node::ringReduce()
         {
             if (this->ringAction())
             {
-                if (ic_reduce_algorithm == ring_reduce_algorithm)
+                bool findPkt = false;
+                for (auto pkt : this->transmission_queue)
                 {
-                    bool findPkt = false;
-                    for (auto pkt: this->transmission_queue)
-                    {
-                        if (pkt.getMsg_id() == this->ring_packet_start_seq)
-                        {
-                            findPkt = true;
-                        }
-                    }
-                    if (this->transmission_queue[0].getPass_counter() > 0)
+                    if (pkt.getMsg_id() == this->ring_packet_start_seq)
                     {
                         findPkt = true;
                     }
-                    if (findPkt == true)
-                    {
-                        this->g_reduction_bias_num = 1;
-                        this->g_ic_dynamic_loc = (this->g_ic_loc + 1) %  this->g_ic_num;
-                        this->g_if_ic_sending_packets = ic_send_state;
-                        this->g_if_reduction_recovery = true;
-                    }
-                    else
-                    {
-                        this->g_reduction_bias_num = 0;
-                        this->g_if_takeup = true;
-                        this->g_if_ic_sending_packets = ic_listen_state;
-                    }
+                }
+                if (this->transmission_queue[0].getPass_counter() > 0)
+                {
+                    findPkt = true;
+                }
+                if (findPkt == true)
+                {
+                    this->g_reduction_bias_num = 1;
+                    this->g_ic_dynamic_loc = (this->g_ic_loc + 1) % this->g_ic_cycle;
+                    this->g_if_ic_sending_packets = ic_send_state;
+                    this->g_if_reduction_recovery = true;
+                }
+                else
+                {
+                    this->g_reduction_bias_num = 0;
+                    this->g_if_takeup = true;
+                    this->g_if_ic_sending_packets = ic_listen_state;
                 }
             }
             else
@@ -195,17 +202,17 @@ void basic_node::ringReduce()
             ptr = simTime();
             if (this->g_ic_reduction_recovery_execution_signal == true)
             {
-                 this->g_ic_reduction_recovery_execution_signal = false;
-                 int bias = this->g_ic_dynamic_loc - this->g_reduction_bias_num;
-                 if (bias < 0)
-                 {
-                      bias = bias + this->g_ic_cycle;
-                 }
-                 // record the recoveried loc
-                 this->g_reduction_bias_num = this->g_ic_cycle - this->g_ic_dynamic_loc + bias;
-                 this->g_ic_dynamic_loc = bias;
-                 this->g_if_takeup = true;
-                 this->g_if_ic_sending_packets = ic_listen_state;
+                this->g_ic_reduction_recovery_execution_signal = false;
+                int bias = this->g_ic_dynamic_loc - this->g_reduction_bias_num;
+                if (bias < 0)
+                {
+                    bias = bias + this->g_ic_cycle;
+                }
+                // record the recoveried loc
+                this->g_reduction_bias_num = this->g_ic_cycle - this->g_ic_dynamic_loc + bias;
+                this->g_ic_dynamic_loc = bias;
+                this->g_if_takeup = true;
+                this->g_if_ic_sending_packets = ic_listen_state;
             }
             else
             {
@@ -222,12 +229,12 @@ void basic_node::ringReduce()
             // recovery from the bias location
             if (this->g_ic_reduction_recovery_execution_signal == true)
             {
-                 this->g_ic_reduction_recovery_execution_signal = false;
-                 int bias = this->g_ic_dynamic_loc - this->g_reduction_bias_num;
-                 if (bias < 0)
-                 {
-                      bias = bias + this->g_ic_cycle;
-                 }
+                this->g_ic_reduction_recovery_execution_signal = false;
+                int bias = this->g_ic_dynamic_loc - this->g_reduction_bias_num;
+                if (bias < 0)
+                {
+                    bias = bias + this->g_ic_cycle;
+                }
                 // record the recoveried loc
                 this->g_reduction_bias_num = this->g_ic_cycle - this->g_ic_dynamic_loc + bias;
                 this->g_ic_dynamic_loc = bias;
@@ -237,9 +244,212 @@ void basic_node::ringReduce()
         }
         else
         {
-              this->g_reduction_bias_num = 0;
-              this->g_if_takeup = true;
-              this->g_if_ic_sending_packets = ic_listen_state;
+            this->g_reduction_bias_num = 0;
+            this->g_if_takeup = true;
+            this->g_if_ic_sending_packets = ic_listen_state;
+        }
+    }
+}
+
+void basic_node::ringReduce_find()
+{
+    simtime_t ptr = simTime();
+    if ((this->g_ic_dynamic_loc % 2) == 0)
+    {
+        if ((this->g_ic_loc % 2) == 0)
+        {
+            if (this->ringAction())
+            {
+                bool findPkt = false;
+                for (auto pkt : this->transmission_queue)
+                {
+                    if (pkt.getMsg_id() == this->ring_packet_start_seq)
+                    {
+                        findPkt = true;
+                    }
+                }
+                if (this->transmission_queue[0].getPass_counter() > 0)
+                {
+                    findPkt = true;
+                }
+                if (findPkt == true)
+                {
+                    this->g_reduction_bias_num = 1;
+                    this->g_ic_dynamic_loc = (this->g_ic_loc + 1) % this->g_ic_cycle;
+                    this->g_if_ic_sending_packets = ic_send_state;
+                    this->g_if_reduction_recovery = true;
+                }
+                else
+                {
+                    this->g_reduction_bias_num = 0;
+                    this->g_if_takeup = true;
+                    this->g_if_ic_sending_packets = ic_listen_state;
+                }
+            }
+            else
+            {
+                this->g_reduction_bias_num = 0;
+                this->g_if_takeup = true;
+                this->g_if_ic_sending_packets = ic_listen_state;
+            }
+        }
+        else
+        {
+            ptr = simTime();
+            if (this->g_ic_reduction_recovery_execution_signal == true)
+            {
+                this->g_ic_reduction_recovery_execution_signal = false;
+                int bias = this->g_ic_dynamic_loc - this->g_reduction_bias_num;
+                if (bias < 0)
+                {
+                    bias = bias + this->g_ic_cycle;
+                }
+                // record the recoveried loc
+                this->g_reduction_bias_num = this->g_ic_cycle - this->g_ic_dynamic_loc + bias;
+                this->g_ic_dynamic_loc = bias;
+                this->g_if_takeup = true;
+                this->g_if_ic_sending_packets = ic_listen_state;
+            }
+            else
+            {
+                this->g_reduction_bias_num = 1;
+                this->g_if_ic_sending_packets = ic_send_state;
+                this->g_if_reduction_recovery = true;
+            }
+        }
+    }
+    else
+    {
+        if ((this->g_ic_loc % 2) == 0)
+        {
+            // recovery from the bias location
+            if (this->g_ic_reduction_recovery_execution_signal == true)
+            {
+                this->g_ic_reduction_recovery_execution_signal = false;
+                int bias = this->g_ic_dynamic_loc - this->g_reduction_bias_num;
+                if (bias < 0)
+                {
+                    bias = bias + this->g_ic_cycle;
+                }
+                // record the recoveried loc
+                this->g_reduction_bias_num = this->g_ic_cycle - this->g_ic_dynamic_loc + bias;
+                this->g_ic_dynamic_loc = bias;
+                this->g_if_takeup = true;
+                this->g_if_ic_sending_packets = ic_listen_state;
+            }
+        }
+        else
+        {
+            this->g_reduction_bias_num = 0;
+            this->g_if_takeup = true;
+            this->g_if_ic_sending_packets = ic_listen_state;
+        }
+    }
+}
+
+void basic_node::ringReduce_pulsar()
+{
+    simtime_t ptr = simTime();
+    if ((this->g_ic_dynamic_loc % 2) == 1)
+    {
+        if ((this->g_ic_loc % 2) == 1)
+        {
+            if (this->ringAction_pulsar())
+            {
+                bool findPkt = false;
+                for (auto pkt : this->transmission_queue)
+                {
+                    if (pkt.getMsg_id() == this->ring_packet_start_seq)
+                    {
+                        findPkt = true;
+                    }
+                }
+                if (this->transmission_queue[0].getPass_counter() > 0)
+                {
+                    findPkt = true;
+                }
+                if (findPkt == true)
+                {
+                    this->g_reduction_bias_num = 1;
+                    this->g_ic_dynamic_loc = (this->g_ic_loc + 1) % this->g_ic_cycle;
+                    this->g_if_ic_sending_packets = ic_send_state;
+                    this->g_if_reduction_recovery = true;
+                    // pulsar adaptive
+                    if (this->g_ic_dynamic_loc == 0)
+                    {
+                        this->g_ic_dynamic_loc = (this->g_ic_loc + 2) % this->g_ic_cycle;
+                        this->g_reduction_bias_num = 2;
+                    }
+                }
+                else
+                {
+                    this->g_reduction_bias_num = 0;
+                    this->g_if_takeup = true;
+                    this->g_if_ic_sending_packets = ic_listen_state;
+                }
+            }
+            else
+            {
+                this->g_reduction_bias_num = 0;
+                this->g_if_takeup = true;
+                this->g_if_ic_sending_packets = ic_listen_state;
+            }
+        }
+        else
+        {
+            ptr = simTime();
+            if (this->g_ic_reduction_recovery_execution_signal == true)
+            {
+                this->g_ic_reduction_recovery_execution_signal = false;
+                int bias = this->g_ic_dynamic_loc - this->g_reduction_bias_num;
+                if (bias < 0)
+                {
+                    bias = bias + this->g_ic_cycle;
+                }
+                // record the recoveried loc
+                this->g_reduction_bias_num = this->g_ic_cycle - this->g_ic_dynamic_loc + bias;
+                this->g_ic_dynamic_loc = bias;
+                this->g_if_takeup = true;
+                this->g_if_ic_sending_packets = ic_listen_state;
+            }
+            else
+            {
+                this->g_reduction_bias_num = 1;
+                this->g_if_ic_sending_packets = ic_send_state;
+                this->g_if_reduction_recovery = true;
+                // pulsar adaptive
+                if (this->g_ic_dynamic_loc == 1)
+                {
+                    this->g_reduction_bias_num = 2;
+                }
+            }
+        }
+    }
+    else
+    {
+        if ((this->g_ic_loc % 2) == 1)
+        {
+            // recovery from the bias location
+            if (this->g_ic_reduction_recovery_execution_signal == true)
+            {
+                this->g_ic_reduction_recovery_execution_signal = false;
+                int bias = this->g_ic_dynamic_loc - this->g_reduction_bias_num;
+                if (bias < 0)
+                {
+                    bias = bias + this->g_ic_cycle;
+                }
+                // record the recoveried loc
+                this->g_reduction_bias_num = this->g_ic_cycle - this->g_ic_dynamic_loc + bias;
+                this->g_ic_dynamic_loc = bias;
+                this->g_if_takeup = true;
+                this->g_if_ic_sending_packets = ic_listen_state;
+            }
+        }
+        else
+        {
+            this->g_reduction_bias_num = 0;
+            this->g_if_takeup = true;
+            this->g_if_ic_sending_packets = ic_listen_state;
         }
     }
 }

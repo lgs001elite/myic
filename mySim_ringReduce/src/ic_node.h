@@ -60,16 +60,16 @@ using namespace std;
 #define type_icc_node  2
 #define type_sink_node 0
 
-// define the reduce algorithms
-#define tree_reduce_algorithm 0
-#define linked_list_reduce_algorithm 1
-#define ring_reduce_algorithm 2
-
 // define ic nodes states
 #define ic_send_state   0
 #define ic_listen_state 1
 #define IDLE_STATE 2
 #define g_ic_message_num 1800
+
+// Syn schemes
+#define FREE_BEACON 0
+#define PULSAR 1
+#define FIND 2
 
 class basic_node : public cSimpleModule
 {
@@ -114,7 +114,7 @@ private:
     int g_node_id;
     int g_next_id;
     int tx_range;
-    int g_tx_attemp_num;
+    int g_role_play_counter;
     int g_reduction_bias_num;
     bool g_if_reduction_recovery;
     bool g_ic_self_delay_signal;
@@ -122,7 +122,7 @@ private:
     int g_ic_dynamic_loc;
     int g_ic_current_seq_loc;
     int sink_collision_check_counter;
-    int ic_reduce_algorithm;
+    int g_syn_scheme;
 
     int ring_packet_send_len;
     int ring_packet_start_seq;
@@ -160,7 +160,7 @@ private:
     void set_chargingTimeAndDelay();
     void generate_msgs();
     void iccCheck();
-
+    uint16_t findDelay(uint16_t c);
     int ic_reduceAction();
     void ic_transmitData();
     void transmitAck();
@@ -170,6 +170,8 @@ private:
     void treeReduce();
     void linkedListReduce();
     void ringReduce();
+    void ringReduce_find();
+    void ringReduce_pulsar();
 
     void checkAllReady();
     void checkEndSim();
@@ -177,6 +179,7 @@ private:
     void distributeLocalNodeVector();
 
     bool ringAction();
+    bool ringAction_pulsar();
 };
 
 Define_Module(basic_node);

@@ -8,6 +8,8 @@
         "limits": "c",
         "string.h": "c",
         "radio_config.h": "c",
-        "leds.h": "c"
+        "leds.h": "c",
+        "string": "cpp",
+        "random": "cpp"
     }
 }

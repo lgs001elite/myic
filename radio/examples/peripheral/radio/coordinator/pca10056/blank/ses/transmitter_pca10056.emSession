@@ -1,13 +1,9 @@
 <!DOCTYPE CrossStudio_Session_File>
 <session>
  <Bookmarks/>
- <Breakpoints groups="Breakpoints;V7M Exceptions" active_group="Breakpoints">
-  <BreakpointListItem trigger="" line="111" counter="0" hardwareBreakpoint="" isFunctionBreakpoint="false" action="" expression="" group="Breakpoints" type="Breakpoint" state="2" filename="../../../crc.c" useHWbreakpoint="false"/>
-  <BreakpointListItem trigger="" line="257" counter="0" hardwareBreakpoint="" isFunctionBreakpoint="false" action="" expression="" group="Breakpoints" type="Breakpoint" state="2" filename="../../../main.c" useHWbreakpoint="false"/>
-  <BreakpointListItem trigger="" line="260" counter="0" hardwareBreakpoint="" isFunctionBreakpoint="false" action="" expression="" group="Breakpoints" type="Breakpoint" state="2" filename="../../../main.c" useHWbreakpoint="false"/>
-  <BreakpointListItem trigger="" line="47" counter="0" hardwareBreakpoint="" isFunctionBreakpoint="false" action="" expression="" group="Breakpoints" type="Breakpoint" state="2" filename="../../../main.c" useHWbreakpoint="false"/>
-  <BreakpointListItem trigger="" line="71" counter="0" hardwareBreakpoint="" isFunctionBreakpoint="false" action="" expression="" group="Breakpoints" type="Breakpoint" state="2" filename="../../../main.c" useHWbreakpoint="false"/>
-  <BreakpointListItem trigger="" line="75" counter="0" hardwareBreakpoint="" isFunctionBreakpoint="false" action="" expression="" group="Breakpoints" type="Breakpoint" state="2" filename="../../../main.c" useHWbreakpoint="false"/>
+ <Breakpoints groups="Breakpoints" active_group="Breakpoints">
+  <BreakpointListItem trigger="Execute" line="-1" counter="0" hardwareBreakpoint="" isFunctionBreakpoint="false" action="" expression="0x726" group="Breakpoints" type="Breakpoint" state="3" filename="" useHWbreakpoint="false"/>
+  <BreakpointListItem trigger="" line="112" counter="0" hardwareBreakpoint="" isFunctionBreakpoint="false" action="" expression="" group="Breakpoints" type="Breakpoint" state="4" filename="../../../crc.c" useHWbreakpoint="false"/>
  </Breakpoints>
  <ExecutionProfileWindow/>
  <FrameBuffer>
@@ -19,7 +15,7 @@
   <MemoryWindow addressSpace="" dataSize="1" autoEvaluate="0" viewMode="0" viewType="4" addressOrder="0" columnsText="" refreshPeriod="0" name="transmitter_pca10056" sizeText="" addressText=""/>
   <MemoryWindow addressSpace="" dataSize="1" autoEvaluate="0" viewMode="0" viewType="4" addressOrder="0" columnsText="" refreshPeriod="0" name="transmitter_pca10056_Release" sizeText="" addressText=""/>
   <MemoryWindow addressSpace="" dataSize="1" autoEvaluate="0" viewMode="0" viewType="4" addressOrder="0" columnsText="" refreshPeriod="0" name="coordinator_Release" sizeText="" addressText=""/>
-  <MemoryWindow addressSpace="" dataSize="1" autoEvaluate="0" viewMode="0" viewType="4" addressOrder="0" columnsText="" refreshPeriod="0" name="coordinator_Debug" sizeText="" addressText=""/>
+  <MemoryWindow addressSpace="" dataSize="1" autoEvaluate="0" viewMode="0" viewType="4" addressOrder="0" columnsText="" refreshPeriod="0" name="coordinator_Debug" sizeText="" addressText="0x0"/>
  </Memory1>
  <Memory2>
   <MemoryWindow addressSpace="" dataSize="1" autoEvaluate="0" viewMode="0" viewType="4" addressOrder="0" columnsText="" refreshPeriod="0" name="transmitter_pca10056" sizeText="" addressText=""/>
@@ -43,6 +39,7 @@
   <ProjectSessionItem path="coordinator"/>
   <ProjectSessionItem path="coordinator;coordinator"/>
   <ProjectSessionItem path="coordinator;coordinator;Application"/>
+  <ProjectSessionItem path="coordinator;coordinator;Board Definition"/>
   <ProjectSessionItem path="coordinator;coordinator;nRF_Segger_RTT"/>
   <ProjectSessionItem path="coordinator;coordinator;Segger Startup Files"/>
   <ProjectSessionItem path="coordinator;coordinator;System Files"/>
@@ -79,10 +76,10 @@
  </TraceWindow>
  <Watch1>
   <Watches active="1" update="Never">
-   <Watchpoint expression="packet_receiver" name="packet_receiver" radix="-1" linenumber="162" filename="../../../main.c"/>
-   <Watchpoint expression="res1" name="res1" radix="16" linenumber="95" filename="../../../main.c"/>
-   <Watchpoint expression="temp1" name="temp1" radix="-1" linenumber="89" filename="../../../main.c"/>
-   <Watchpoint expression="packet_sender" name="packet_sender" radix="-1" linenumber="72" filename="../../../main.c"/>
+   <Watchpoint expression="packet_receiver" name="packet_receiver" radix="-1" linenumber="170" filename="../../../main.c"/>
+   <Watchpoint expression="res1" name="res1" radix="16" linenumber="100" filename="../../../main.c"/>
+   <Watchpoint expression="temp1" name="temp1" radix="-1" linenumber="94" filename="../../../main.c"/>
+   <Watchpoint expression="packet_sender" name="packet_sender" radix="-1" linenumber="73" filename="../../../main.c"/>
    <Watchpoint expression="remainder" name="remainder" radix="-1" linenumber="105" filename="../../../crc.c"/>
    <Watchpoint expression="message" name="message" radix="-1" linenumber="93" filename="../../../crc.c"/>
   </Watches>
@@ -97,8 +94,12 @@
   <Watches active="0" update="Never"/>
  </Watch4>
  <Files>
-  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="278" useTextEdit="1" path="../../../main.c" left="0" selected="1" top="254" codecName="Default"/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="110" useTextEdit="1" path="../../../crc.c" left="0" top="68" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="142" y="265" useTextEdit="1" path="../../../main.c" left="0" selected="1" top="250" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="110" useTextEdit="1" path="../../../crc.c" left="0" top="72" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="39" y="648" useTextEdit="1" path="../config/sdk_config.h" left="0" top="624" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="55" y="43" useTextEdit="1" path="flash_placement.xml" left="0" top="0" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="109" useTextEdit="1" path="../../../../../../../../../riotee_ic/Nordic/nRF5_SDK_17.1.0_ddde560/modules/nrfx/mdk/ses_startup_nrf_common.s" left="0" top="83" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="71" useTextEdit="1" path="../../../../../../../../../riotee_ic/Nordic/nRF5_SDK_17.1.0_ddde560/modules/nrfx/mdk/ses_startup_nrf52840.s" left="0" top="42" codecName="Default"/>
  </Files>
  <EMStudioWindow activeProject="coordinator" fileDialogDefaultFilter="*" autoConnectTarget="J-Link" buildConfiguration="Debug" sessionSettings="" debugSearchFileMap="" fileDialogInitialDirectory="C:/Users/glu250/Downloads/myic/radio/examples/peripheral/radio/coordinator" debugSearchPath="" autoConnectCapabilities="3711"/>
 </session>

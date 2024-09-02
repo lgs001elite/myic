@@ -25,7 +25,7 @@ APP_TIMER_DEF( g_my_sleep_timer_counter );
 #define TIME_UNIT 410 // 2450
 #define SLEEP_LEN ( 6 * TIME_UNIT )
 #define WORK_LEN ( 1 * TIME_UNIT )
-#define CHARGE_CYCLE ( 7 )
+#define CHARGE_CYCLE (7) // find_min_coprime(int n)
 
 #define IC_CYCLE ( 30 )
 
@@ -42,6 +42,29 @@ static uint8_t g_delay_bias = 0;
 
 #define PACKAGE_BROAD 0x04
 #define COORDINATOR 0x01
+
+// Function to compute the greatest common divisor (GCD) of two numbers
+int gcd(int a, int b)
+{
+  while (b != 0)
+  {
+    int temp = b;
+    b = a % b;
+    a = temp;
+  }
+  return a;
+}
+
+// Function to find the minimum co-prime number greater than 1
+int find_min_coprime(int n)
+{
+  int x = 2; // Start with the smallest number greater than 1
+  while (gcd(n, x) != 1)
+  {
+    x++;
+  }
+  return x;
+}
 
 static void producePackets( char bias, char nextID ) {
   packet_sender[ 0 ] = 0x1E;
