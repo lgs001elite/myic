@@ -30,10 +30,10 @@ static int gcd(int a, int b)
 }
 
 // Function to find the minimum co-prime number greater than 1
-static int find_min_coprime(int n)
+static int find_min_coprime(int n1, int n2)
 {
     int x = 2; // Start with the smallest number greater than 1
-    while (gcd(n, x) != 1)
+    while (gcd(n1, x) != 1 || gcd(n2, x) != 1)
     {
         x++;
     }
@@ -62,7 +62,7 @@ void basic_node::net_initialize()
     }
     if (this->g_syn_scheme == FREE_BEACON)
     {
-        this->g_ic_cycle = this->networkPtr->par("g_ic_freebeacon_syn_cycle");
+        this->g_ic_syn_cycle = this->networkPtr->par("g_ic_freebeacon_syn_cycle");
     }
     this->g_queue_len = 0;
     // Starting to initialize every parameter of nodes in the network
@@ -95,6 +95,7 @@ void basic_node::net_initialize()
             this->g_ic_loc = -1;
             this->g_ic_dynamic_loc = -1;
         }
+        this->g_ic_scale_loc = -1;
         this->delay_global_location = 0;
         this->rx_state = false;
         this->g_if_ic_syn_packets = ic_neg_syn_state;
@@ -116,7 +117,7 @@ void basic_node::net_initialize()
         {
             if (this->g_syn_scheme == FREE_BEACON)
             {
-                this->icc_charging_cycle = find_min_coprime(this->g_ic_cycle);
+                this->icc_charging_cycle = find_min_coprime(this->g_ic_cycle, this->g_ic_syn_cycle);
             }
             else
             {
@@ -126,6 +127,7 @@ void basic_node::net_initialize()
         this->icc_collision_check_counter = 0;
         this->rx_state = false;
         this->icc_global_location = 0;
+        this->icc_global_location_scale = 0;
     }
 
     if (this->node_type == type_sink_node)
@@ -226,10 +228,21 @@ void basic_node::set_chargingTimeAndDelay()
     // aligh with icc to find topology
     if (this->g_syn_scheme == FREE_BEACON)
     {
-        delay_bias = this->ic_charge_cycle % this->g_ic_cycle;
-        if (delay_bias != 0)
+        if (this->g_ic_dynamic_loc == -1)
         {
-            delay_bias = this->g_ic_cycle - delay_bias;
+            delay_bias = this->ic_charge_cycle % this->g_ic_cycle;
+            if (delay_bias != 0)
+            {
+                delay_bias = this->g_ic_cycle - delay_bias;
+            }
+        }
+        else
+        {
+            delay_bias = this->ic_charge_cycle % this->g_ic_syn_cycle;
+            if (delay_bias != 0)
+            {
+                delay_bias = this->g_ic_syn_cycle - delay_bias;
+            }
         }
     }
     else if (this->g_syn_scheme == PULSAR)
@@ -351,11 +364,32 @@ void basic_node::net_handleMessage(cMessage *msg)
     else if (msg->isSelfMessage() && msg->getKind() == ic_sleep_handler)
     {
         simtime_t ptr = simTime();
+        this->set_chargingTimeAndDelay();
         this->rx_state = false;
         int extraRound = 0;
-        if (this->ic_attempt_counter >= g_ic_cycle)
+        if (this->g_syn_scheme == PULSAR)
         {
-            extraRound = g_ic_cycle * intuniform(0, 1);
+            if (this->ic_attempt_counter >= g_ic_cycle)
+            {
+                extraRound = g_ic_cycle * intuniform(0, 1);
+            }
+        }
+        if (this->g_syn_scheme == FREE_BEACON)
+        {
+            if (this->g_ic_loc == -1)
+            {
+                if (this->ic_attempt_counter >= g_ic_cycle)
+                {
+                    extraRound = g_ic_cycle * intuniform(0, 1);
+                }
+            }
+            else
+            {
+                if (this->ic_attempt_counter >= g_ic_syn_cycle)
+                {
+                    extraRound = g_ic_syn_cycle * intuniform(0, 1);
+                }
+            }
         }
         // ic back to its distrited location
         if (this->delay_global_location > 0)
@@ -398,7 +432,7 @@ void basic_node::net_handleMessage(cMessage *msg)
                     }
                     else
                     {
-                        if ((this->g_ic_loc != -1) && (this->g_syn_scheme == FREE_BEACON))
+                        if (this->g_ic_scale_loc != -1)
                         {
                             int probNum = intuniform(1, 100);
                             if (probNum <= 1)
@@ -411,7 +445,6 @@ void basic_node::net_handleMessage(cMessage *msg)
             }
             this->ic_collision_check_counter = 0;
             this->rx_state = true;
-            this->set_chargingTimeAndDelay();
             scheduleAt(simTime() + this->slot_len,
                        new cMessage("ic from working to sleep ", ic_sleep_handler));
         }
@@ -423,9 +456,19 @@ void basic_node::net_handleMessage(cMessage *msg)
                 if (this->g_ic_loc == -1)
                 {
                     this->transmitIdleBroadcast(nullptr);
-                    if (this->ic_attempt_counter < g_ic_cycle)
+                    if (this->g_syn_scheme == PULSAR)
                     {
-                        this->ic_attempt_counter = this->ic_attempt_counter + 1;
+                        if (this->ic_attempt_counter < g_ic_cycle)
+                        {
+                            this->ic_attempt_counter = this->ic_attempt_counter + 1;
+                        }
+                    }
+                    else
+                    {
+                        if (this->ic_attempt_counter < g_ic_syn_cycle)
+                        {
+                            this->ic_attempt_counter = this->ic_attempt_counter + 1;
+                        }
                     }
                 }
                 else
@@ -460,6 +503,7 @@ void basic_node::net_handleMessage(cMessage *msg)
     {
         simtime_t ptr = simTime();
         this->icc_global_location = (this->icc_global_location + this->icc_charging_cycle) % g_ic_cycle;
+        this->icc_global_location_scale = (this->icc_global_location_scale + this->icc_charging_cycle) % g_ic_syn_cycle;
         this->rx_state = true;
         this->icc_collision_check_counter = 0;
         scheduleAt(simTime() + this->slot_len,
@@ -586,37 +630,48 @@ void basic_node::net_handleMessage(cMessage *msg)
             {
                 if (this->g_syn_scheme == FREE_BEACON)
                 {
+                    currentLoc = this->g_receivedMsg.getScale_slot();
                     this->g_ic_loc = this->g_node_id;
+                    this->g_ic_scale_loc = this->g_node_id;
                     this->g_ic_dynamic_loc = this->g_node_id;
+                    if (this->g_ic_dynamic_loc < currentLoc)
+                    {
+                        bias = this->g_ic_syn_cycle + g_ic_loc - currentLoc;
+                    }
+                    else
+                    {
+                        bias = g_ic_loc - currentLoc;
+                    }
                 }
 
                 if (this->g_syn_scheme == PULSAR)
                 {
                     this->g_ic_loc = this->g_node_id + 1;
                     this->g_ic_dynamic_loc = this->g_node_id + 1;
+                    if (this->g_ic_loc < currentLoc)
+                    {
+                        bias = this->g_ic_cycle + g_ic_loc - currentLoc;
+                    }
+                    else
+                    {
+                        bias = g_ic_loc - currentLoc;
+                    }
                 }
 
                 this->g_if_node_distribution = true;
                 this->g_ic_node_ready_reduce = true;
                 this->ic_attempt_counter = 0;
-                if (this->g_ic_loc < currentLoc)
+            }
+            else
+            {
+                currentLoc = this->g_receivedMsg.getScale_slot();
+                if (this->g_ic_dynamic_loc < currentLoc)
                 {
-                    bias = this->g_ic_cycle + g_ic_loc - currentLoc;
+                    bias = this->g_ic_syn_cycle + g_ic_loc - currentLoc;
                 }
                 else
                 {
                     bias = g_ic_loc - currentLoc;
-                }
-            }
-            else
-            {
-                if (this->g_ic_dynamic_loc < currentLoc)
-                {
-                    bias = this->g_ic_cycle + g_ic_dynamic_loc - currentLoc;
-                }
-                else
-                {
-                    bias = g_ic_dynamic_loc - currentLoc;
                 }
             }
             this->delay_global_location = bias;
@@ -625,10 +680,6 @@ void basic_node::net_handleMessage(cMessage *msg)
     else if (msg->isSelfMessage() && msg->getKind() == ic_receive_ack_handler)
     {
         simtime_t ptr = simTime();
-        if ((this->g_node_id == 0) && (this->g_queue_len == 1794))
-        {
-            EV << "to do ben";
-        }
         if (this->ic_collision_check_counter == 1)
         {
             // Judge if recover to its original location
@@ -701,7 +752,7 @@ int basic_node::ic_reduceAction()
         {
             this->g_ic_reduction_recovery_execution_signal = false;
             int originLoc = this->g_ic_dynamic_loc - this->g_reduction_bias_num;
-            delaySlots = this->g_ic_cycle - this->g_ic_dynamic_loc + originLoc;
+            delaySlots = this->g_ic_syn_cycle - this->g_ic_dynamic_loc + originLoc;
             this->g_ic_dynamic_loc = originLoc;
             this->g_reduction_bias_num = 0;
             this->g_node_virtual_id = this->g_node_id;
@@ -765,9 +816,22 @@ void basic_node::ic_tree_send_signal()
     {
         this->sendDirect(mPtr->dup(), p.first, "ICNodeRadioIn");
     }
-    if ((this->ic_attempt_counter < g_ic_cycle) && (this->g_syn_scheme != FIND))
+    if (this->g_syn_scheme != FIND)
     {
-        this->ic_attempt_counter = this->ic_attempt_counter + 1;
+        if (this->g_syn_scheme == PULSAR)
+        {
+            if (this->ic_attempt_counter < g_ic_cycle)
+            {
+                this->ic_attempt_counter = this->ic_attempt_counter + 1;
+            }
+        }
+        else
+        {
+            if (this->ic_attempt_counter < g_ic_syn_cycle)
+            {
+                this->ic_attempt_counter = this->ic_attempt_counter + 1;
+            }
+        }
     }
     delete mPtr;
 }
@@ -838,6 +902,7 @@ void basic_node::transmitIdleBroadcast(packet_frame *packet)
         msg_broad = this->produce_msg(0, broad_msg, type_icc_node, -1);
         msg_broad->setNext_id(packet->getSender_id());
         msg_broad->setCurrent_slot(this->icc_global_location);
+        msg_broad->setScale_slot(this->icc_global_location_scale);
     }
 
     for (auto p : this->nodesInRadioRange)
@@ -860,7 +925,6 @@ void basic_node::receive_message(packet_frame *dMsg)
     int msg_type = dMsg->getMsg_type();
     int sender_type = dMsg->getSender_type();
     int sender_id = dMsg->getSender_id();
-    int vir_id = dMsg->getVir_id();
     int delay_bias = dMsg->getDelay_bias();
     int msg_id = dMsg->getMsg_id();
     int source_id = dMsg->getSource_id();
@@ -883,20 +947,42 @@ void basic_node::receive_message(packet_frame *dMsg)
     }
 
     // process the msgs that received by the icc node
-    if ((this->node_type == type_icc_node) && (this->g_syn_scheme != FIND) && (sender_type == type_ic_node) && (this->icc_global_location != current_loc))
+    if ((this->node_type == type_icc_node) && (this->g_syn_scheme != FIND) && (sender_type == type_ic_node))
     {
+        if (this->g_syn_scheme == FREE_BEACON)
+        {
+            if (this->icc_global_location_scale == current_loc)
+            {
+                return;
+            }
+        }
+        else if (this->g_syn_scheme == PULSAR)
+        {
+            if (this->icc_global_location == current_loc)
+            {
+                return;
+            }
+        }
+        else
+        {
+            return;
+        }
+
         // Statistic the recieved msgs in a time window
         this->icc_collision_check_counter = this->icc_collision_check_counter + 1;
-        if ((next_id != this->g_node_id) && (current_loc != -1) && (this->g_syn_scheme == FREE_BEACON))
-        {
-            scheduleAt(simTime() + this->slot_len * 0.3,
-                       new cMessage("icc node sends loc to ics", icc_broad_handler));
-        }
         if (next_id == this->g_node_id)
         {
             if (msg_type == broad_msg)
             {
                 scheduleAt(simTime() + this->slot_len * 0.1,
+                           new cMessage("icc node sends loc to ics", icc_broad_handler));
+            }
+        }
+        else
+        {
+            if ((next_id != this->g_node_id) && (this->g_syn_scheme == FREE_BEACON))
+            {
+                scheduleAt(simTime() + this->slot_len * 0.3,
                            new cMessage("icc node sends loc to ics", icc_broad_handler));
             }
         }

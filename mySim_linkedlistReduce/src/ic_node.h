@@ -90,7 +90,8 @@ private:
     int g_ic_loc;
     int delay_global_location;
     int icc_global_location;
-    int g_if_ic_sending_packets;
+    int icc_global_location_scale;
+    int g_if_ic_syn;
     bool g_if_send;
 
     // Simulator Knowledge
@@ -115,7 +116,7 @@ private:
     bool g_ic_self_delay_signal;
     bool g_ic_reduction_recovery_execution_signal;
     int g_ic_dynamic_loc;
-    int g_ic_current_seq_loc;
+    int g_ic_scale_loc;
     int sink_collision_check_counter;
     int g_syn_scheme;
     int g_ic_syn_cycle;

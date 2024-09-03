@@ -186,10 +186,10 @@ packet_frame::packet_frame(const char *name, short kind) : ::omnetpp::cPacket(na
     this->sender_id = 0;
     this->msg_type = 0;
     this->msg_id = 0;
-    this->charge_cycle = 0;
+    this->syn_signal = false;
     this->origin_slot = 0;
     this->current_slot = 0;
-    this->lag_bias = 0;
+    this->scale_slot = 0;
     this->delay_bias = 0;
     this->sender_type = 0;
     this->next_id = 0;
@@ -222,10 +222,10 @@ void packet_frame::copy(const packet_frame& other)
     this->sender_id = other.sender_id;
     this->msg_type = other.msg_type;
     this->msg_id = other.msg_id;
-    this->charge_cycle = other.charge_cycle;
+    this->syn_signal = other.syn_signal;
     this->origin_slot = other.origin_slot;
     this->current_slot = other.current_slot;
-    this->lag_bias = other.lag_bias;
+    this->scale_slot = other.scale_slot;
     this->delay_bias = other.delay_bias;
     this->sender_type = other.sender_type;
     this->next_id = other.next_id;
@@ -242,10 +242,10 @@ void packet_frame::parsimPack(omnetpp::cCommBuffer *b) const
     doParsimPacking(b,this->sender_id);
     doParsimPacking(b,this->msg_type);
     doParsimPacking(b,this->msg_id);
-    doParsimPacking(b,this->charge_cycle);
+    doParsimPacking(b,this->syn_signal);
     doParsimPacking(b,this->origin_slot);
     doParsimPacking(b,this->current_slot);
-    doParsimPacking(b,this->lag_bias);
+    doParsimPacking(b,this->scale_slot);
     doParsimPacking(b,this->delay_bias);
     doParsimPacking(b,this->sender_type);
     doParsimPacking(b,this->next_id);
@@ -262,10 +262,10 @@ void packet_frame::parsimUnpack(omnetpp::cCommBuffer *b)
     doParsimUnpacking(b,this->sender_id);
     doParsimUnpacking(b,this->msg_type);
     doParsimUnpacking(b,this->msg_id);
-    doParsimUnpacking(b,this->charge_cycle);
+    doParsimUnpacking(b,this->syn_signal);
     doParsimUnpacking(b,this->origin_slot);
     doParsimUnpacking(b,this->current_slot);
-    doParsimUnpacking(b,this->lag_bias);
+    doParsimUnpacking(b,this->scale_slot);
     doParsimUnpacking(b,this->delay_bias);
     doParsimUnpacking(b,this->sender_type);
     doParsimUnpacking(b,this->next_id);
@@ -324,14 +324,14 @@ void packet_frame::setMsg_id(int msg_id)
     this->msg_id = msg_id;
 }
 
-int packet_frame::getCharge_cycle() const
+bool packet_frame::getSyn_signal() const
 {
-    return this->charge_cycle;
+    return this->syn_signal;
 }
 
-void packet_frame::setCharge_cycle(int charge_cycle)
+void packet_frame::setSyn_signal(bool syn_signal)
 {
-    this->charge_cycle = charge_cycle;
+    this->syn_signal = syn_signal;
 }
 
 int packet_frame::getOrigin_slot() const
@@ -354,14 +354,14 @@ void packet_frame::setCurrent_slot(int current_slot)
     this->current_slot = current_slot;
 }
 
-int packet_frame::getLag_bias() const
+int packet_frame::getScale_slot() const
 {
-    return this->lag_bias;
+    return this->scale_slot;
 }
 
-void packet_frame::setLag_bias(int lag_bias)
+void packet_frame::setScale_slot(int scale_slot)
 {
-    this->lag_bias = lag_bias;
+    this->scale_slot = scale_slot;
 }
 
 int packet_frame::getDelay_bias() const
@@ -534,10 +534,10 @@ const char *packet_frameDescriptor::getFieldName(int field) const
         "sender_id",
         "msg_type",
         "msg_id",
-        "charge_cycle",
+        "syn_signal",
         "origin_slot",
         "current_slot",
-        "lag_bias",
+        "scale_slot",
         "delay_bias",
         "sender_type",
         "next_id",
@@ -557,10 +557,10 @@ int packet_frameDescriptor::findField(const char *fieldName) const
     if (fieldName[0]=='s' && strcmp(fieldName, "sender_id")==0) return base+2;
     if (fieldName[0]=='m' && strcmp(fieldName, "msg_type")==0) return base+3;
     if (fieldName[0]=='m' && strcmp(fieldName, "msg_id")==0) return base+4;
-    if (fieldName[0]=='c' && strcmp(fieldName, "charge_cycle")==0) return base+5;
+    if (fieldName[0]=='s' && strcmp(fieldName, "syn_signal")==0) return base+5;
     if (fieldName[0]=='o' && strcmp(fieldName, "origin_slot")==0) return base+6;
     if (fieldName[0]=='c' && strcmp(fieldName, "current_slot")==0) return base+7;
-    if (fieldName[0]=='l' && strcmp(fieldName, "lag_bias")==0) return base+8;
+    if (fieldName[0]=='s' && strcmp(fieldName, "scale_slot")==0) return base+8;
     if (fieldName[0]=='d' && strcmp(fieldName, "delay_bias")==0) return base+9;
     if (fieldName[0]=='s' && strcmp(fieldName, "sender_type")==0) return base+10;
     if (fieldName[0]=='n' && strcmp(fieldName, "next_id")==0) return base+11;
@@ -584,7 +584,7 @@ const char *packet_frameDescriptor::getFieldTypeString(int field) const
         "int",
         "int",
         "int",
-        "int",
+        "bool",
         "int",
         "int",
         "int",
@@ -667,10 +667,10 @@ std::string packet_frameDescriptor::getFieldValueAsString(void *object, int fiel
         case 2: return long2string(pp->getSender_id());
         case 3: return long2string(pp->getMsg_type());
         case 4: return long2string(pp->getMsg_id());
-        case 5: return long2string(pp->getCharge_cycle());
+        case 5: return bool2string(pp->getSyn_signal());
         case 6: return long2string(pp->getOrigin_slot());
         case 7: return long2string(pp->getCurrent_slot());
-        case 8: return long2string(pp->getLag_bias());
+        case 8: return long2string(pp->getScale_slot());
         case 9: return long2string(pp->getDelay_bias());
         case 10: return long2string(pp->getSender_type());
         case 11: return long2string(pp->getNext_id());
@@ -696,10 +696,10 @@ bool packet_frameDescriptor::setFieldValueAsString(void *object, int field, int 
         case 2: pp->setSender_id(string2long(value)); return true;
         case 3: pp->setMsg_type(string2long(value)); return true;
         case 4: pp->setMsg_id(string2long(value)); return true;
-        case 5: pp->setCharge_cycle(string2long(value)); return true;
+        case 5: pp->setSyn_signal(string2bool(value)); return true;
         case 6: pp->setOrigin_slot(string2long(value)); return true;
         case 7: pp->setCurrent_slot(string2long(value)); return true;
-        case 8: pp->setLag_bias(string2long(value)); return true;
+        case 8: pp->setScale_slot(string2long(value)); return true;
         case 9: pp->setDelay_bias(string2long(value)); return true;
         case 10: pp->setSender_type(string2long(value)); return true;
         case 11: pp->setNext_id(string2long(value)); return true;

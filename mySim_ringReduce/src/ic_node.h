@@ -93,6 +93,9 @@ private:
     int delay_global_location;
     int icc_global_location;
     int g_if_ic_sending_packets;
+    int g_ic_syn_cycle;
+    int g_ic_scale_loc;
+    int icc_global_location_scale;
 
     // Simulator Knowledge
     double x_pos;
@@ -109,7 +112,6 @@ private:
     int ic_listen_counter;
     int ic_collision_check_counter;
     bool g_if_produce_packets;
-    bool g_if_power_off;
     int node_type;
     int g_node_id;
     int g_next_id;

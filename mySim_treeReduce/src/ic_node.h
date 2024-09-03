@@ -93,11 +93,13 @@ private:
     int g_odd_pair_id;
     int delay_global_location;
     int icc_global_location;
+    int icc_global_location_scale;
     int g_if_ic_syn_packets;
     int g_role_play_counter;
     int g_ic_syn_cycle;
     int g_bias_recovery;
     bool g_if_start_syn;
+    int g_ic_scale_loc;
 
     // Simulator Knowledge
     double x_pos;
@@ -179,11 +181,6 @@ private:
     void ic_search_tree_virtualID();
 
     void distributeLocalNodeVector();
-
-    bool ringAction();
-    bool ringAction_find();
-    bool ringAction_pulsar();
-    bool reduceDecision();
 };
 
 Define_Module(basic_node);

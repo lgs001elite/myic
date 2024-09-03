@@ -8,9 +8,9 @@ network RandomGrid
         int init_flag          = default(0);
         int g_ic_num            = default(0);
         int g_energy_model  = default(0);
-        int g_syn_scheme = default(0);
         int poweroff_rate = default(0);
-        bool power_off_switch  = default(false);
+        int g_syn_scheme = default(0);
+        int g_ic_freebeacon_syn_cycle = default(0);
     submodules:
         sink:basic_node;
         icc: basic_node;

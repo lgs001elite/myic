@@ -4,17 +4,15 @@ packet packet_frame {
     int sender_id;        
     int msg_type;         
     int msg_id;          
-    int charge_cycle;
+    bool syn_signal;
     int origin_slot;
     int current_slot;
-    int lag_bias;
+    int scale_slot;
     int delay_bias;
     int sender_type;
     int next_id;
     int pass_counter;
     int node_state;
-//    int ic_pass_number;
-//    bool sent_flag;
     simtime_t send_time;
 }
 

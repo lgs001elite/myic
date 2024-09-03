@@ -42,11 +42,10 @@ void basic_node::place_nodes(int x_pos, int y_pos)
  */
 void basic_node::duplicate_msg(packet_frame *ori, packet_frame *dMsg)
 {
-    ori->setCharge_cycle(dMsg->getCharge_cycle());
     ori->setCurrent_slot(dMsg->getCurrent_slot());
     ori->setDelay_bias(dMsg->getDelay_bias());
     ori->setDest_id(dMsg->getDest_id());
-    ori->setLag_bias(dMsg->getLag_bias());
+    ori->setScale_slot(dMsg->getScale_slot());
     ori->setMsg_id(dMsg->getMsg_id());
     ori->setMsg_type(dMsg->getMsg_type());
     ori->setNext_id(dMsg->getNext_id());
@@ -57,7 +56,7 @@ void basic_node::duplicate_msg(packet_frame *ori, packet_frame *dMsg)
     ori->setSource_id(dMsg->getSource_id());
     ori->setOrigin_slot(dMsg->getOrigin_slot());
     ori->setNode_state(dMsg->getNode_state());
-    ori->setVir_id(dMsg->getVir_id());
+    ori->setReduce_phase(dMsg->getReduce_phase());
 }
 
 /**
@@ -74,16 +73,14 @@ packet_frame *basic_node::produce_msg(int packet_id, int msg_type, int sender_ty
     dMsg->setDest_id(31);
     dMsg->setSource_id(this->g_node_id);
     dMsg->setSender_id(this->g_node_id);
-    dMsg->setVir_id(this->g_node_virtual_id);
     dMsg->setMsg_type(msg_type);
     dMsg->setSender_type(sender_type);
     dMsg->setMsg_id(packet_id);
-    dMsg->setCharge_cycle(0);
+    dMsg->setSyn_signal(false);
     dMsg->setSend_time(0);
-    dMsg->setLag_bias(0);
+    dMsg->setScale_slot(g_ic_scale_loc);
     dMsg->setOrigin_slot(this->g_ic_loc);
     dMsg->setCurrent_slot(this->g_ic_dynamic_loc);
-    dMsg->setReduce_phase(this->ic_tree_reduce_phase);
     dMsg->setNext_id(next_id);
     dMsg->setPass_counter(0);
     dMsg->setNode_state(IDLE_STATE);
@@ -145,7 +142,7 @@ int basic_node::treeReduce()
         int biasStep = int(pow(2, this->ic_tree_reduce_phase));
         if (this->ic_tree_reduce_phase > 0)
         {
-            if ((this->g_ic_dynamic_loc + 1 + biasStep) <= this->g_ic_syn_cycle)
+            if ((this->g_ic_dynamic_loc + 1 + biasStep) <= this->g_ic_cycle)
             {
                 this->g_ic_dynamic_loc = biasStep + this->g_ic_dynamic_loc;
                 this->g_reduction_bias_num = this->g_reduction_bias_num + biasStep;
@@ -154,10 +151,10 @@ int basic_node::treeReduce()
             }
             else
             {
-                if (this->g_ic_dynamic_loc != (this->g_ic_syn_cycle - 1))
+                if (this->g_ic_dynamic_loc != (this->g_ic_cycle - 1))
                 {
-                    biasStep = this->g_ic_syn_cycle - this->g_ic_dynamic_loc - 1;
-                    this->g_ic_dynamic_loc = this->g_ic_syn_cycle - 1;
+                    biasStep = this->g_ic_cycle - this->g_ic_dynamic_loc - 1;
+                    this->g_ic_dynamic_loc = this->g_ic_cycle - 1;
                     this->g_reduction_bias_num = this->g_reduction_bias_num + biasStep;
                     this->g_if_ic_syn_packets = ic_pos_syn_state;
                     this->ic_tree_reduce_phase = this->ic_tree_reduce_phase + 1;
@@ -176,7 +173,7 @@ int basic_node::treeReduce()
         }
         else
         {
-            if ((this->g_ic_dynamic_loc + 1 + biasStep) <= this->g_ic_syn_cycle)
+            if ((this->g_ic_dynamic_loc + 1 + biasStep) <= this->g_ic_cycle)
             {
                 this->g_ic_dynamic_loc = 1 + this->g_ic_dynamic_loc;
                 this->g_reduction_bias_num = this->g_reduction_bias_num + 1;
@@ -210,7 +207,7 @@ int basic_node::treeReduce_find()
         int biasStep = int(pow(2, this->ic_tree_reduce_phase));
         if (this->ic_tree_reduce_phase > 0)
         {
-            if ((this->g_ic_dynamic_loc + 1 + biasStep) <= this->g_ic_syn_cycle)
+            if ((this->g_ic_dynamic_loc + 1 + biasStep) <= this->g_ic_cycle)
             {
                 this->g_ic_dynamic_loc = biasStep + this->g_ic_dynamic_loc;
                 this->g_reduction_bias_num = this->g_reduction_bias_num + biasStep;
@@ -219,10 +216,10 @@ int basic_node::treeReduce_find()
             }
             else
             {
-                if (this->g_ic_dynamic_loc != (this->g_ic_syn_cycle - 1))
+                if (this->g_ic_dynamic_loc != (this->g_ic_cycle - 1))
                 {
-                    biasStep = this->g_ic_syn_cycle - this->g_ic_dynamic_loc - 1;
-                    this->g_ic_dynamic_loc = this->g_ic_syn_cycle - 1;
+                    biasStep = this->g_ic_cycle - this->g_ic_dynamic_loc - 1;
+                    this->g_ic_dynamic_loc = this->g_ic_cycle - 1;
                     this->g_reduction_bias_num = this->g_reduction_bias_num + biasStep;
                     this->g_if_ic_syn_packets = ic_pos_syn_state;
                     this->ic_tree_reduce_phase = this->ic_tree_reduce_phase + 1;
@@ -241,7 +238,7 @@ int basic_node::treeReduce_find()
         }
         else
         {
-            if ((this->g_ic_dynamic_loc + 1 + biasStep) <= this->g_ic_syn_cycle)
+            if ((this->g_ic_dynamic_loc + 1 + biasStep) <= this->g_ic_cycle)
             {
                 this->g_ic_dynamic_loc = 1 + this->g_ic_dynamic_loc;
                 this->g_reduction_bias_num = this->g_reduction_bias_num + 1;
@@ -275,7 +272,7 @@ int basic_node::treeReduce_pulsar()
         int biasStep = int(pow(2, this->ic_tree_reduce_phase));
         if (this->ic_tree_reduce_phase > 0)
         {
-            if ((this->g_ic_dynamic_loc + 1 + biasStep) <= this->g_ic_syn_cycle)
+            if ((this->g_ic_dynamic_loc + 1 + biasStep) <= this->g_ic_cycle)
             {
                 this->g_ic_dynamic_loc = biasStep + this->g_ic_dynamic_loc;
                 this->g_reduction_bias_num = this->g_reduction_bias_num + biasStep;
@@ -284,10 +281,10 @@ int basic_node::treeReduce_pulsar()
             }
             else
             {
-                if (this->g_ic_dynamic_loc != (this->g_ic_syn_cycle - 1))
+                if (this->g_ic_dynamic_loc != (this->g_ic_cycle - 1))
                 {
-                    biasStep = this->g_ic_syn_cycle - this->g_ic_dynamic_loc - 1;
-                    this->g_ic_dynamic_loc = this->g_ic_syn_cycle - 1;
+                    biasStep = this->g_ic_cycle - this->g_ic_dynamic_loc - 1;
+                    this->g_ic_dynamic_loc = this->g_ic_cycle - 1;
                     this->g_reduction_bias_num = this->g_reduction_bias_num + biasStep;
                     this->g_if_ic_syn_packets = ic_pos_syn_state;
                     this->ic_tree_reduce_phase = this->ic_tree_reduce_phase + 1;
@@ -306,7 +303,7 @@ int basic_node::treeReduce_pulsar()
         }
         else
         {
-            if ((this->g_ic_dynamic_loc + 1 + biasStep) <= this->g_ic_syn_cycle)
+            if ((this->g_ic_dynamic_loc + 1 + biasStep) <= this->g_ic_cycle)
             {
                 this->g_ic_dynamic_loc = 1 + this->g_ic_dynamic_loc;
                 this->g_reduction_bias_num = this->g_reduction_bias_num + 1;
