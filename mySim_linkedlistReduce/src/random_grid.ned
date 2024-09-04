@@ -14,7 +14,7 @@ network RandomGrid
     submodules:
         sink:basic_node;
         icc: basic_node;
-        ic[6]: basic_node;
+        ic[100]: basic_node;
 }
 
 

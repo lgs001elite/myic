@@ -392,7 +392,7 @@ void basic_node::net_handleMessage(cMessage *msg)
         {
             if (this->ic_attempt_counter >= g_ic_cycle)
             {
-                extraRound = g_ic_cycle * intuniform(0, 1);
+                extraRound = g_ic_cycle * intuniform(0, this->g_ic_num);
             }
         }
         if (this->g_syn_scheme == FREE_BEACON)
@@ -401,14 +401,14 @@ void basic_node::net_handleMessage(cMessage *msg)
             {
                 if (this->ic_attempt_counter >= g_ic_cycle)
                 {
-                    extraRound = g_ic_cycle * intuniform(0, 1);
+                    extraRound = g_ic_cycle * intuniform(0, this->g_ic_num);
                 }
             }
             else
             {
                 if (this->ic_attempt_counter >= g_ic_syn_cycle)
                 {
-                    extraRound = g_ic_syn_cycle * intuniform(0, 1);
+                    extraRound = g_ic_syn_cycle * intuniform(0, this->g_ic_num);
                 }
             }
         }
