@@ -136,7 +136,7 @@ private:
     vector<basic_node *> icc_networkHandler;
     vector<basic_node *> sink_networkHandler;
 
-    int energy_range_set[3][2] = {{5, 15}, {40, 120}, {100, 500}};
+    int energy_range_set[3][2] = {{30, 120}, {300, 500}, {100, 500}};
 
     simsignal_t discovery_time;
     simsignal_t sim_time;
@@ -166,6 +166,7 @@ private:
     void linkedListReduce();
     void linkedListReduce_find();
     void linkedListReduce_pulsar();
+    void linkedListReduce_improve();
 
     void checkAllReady();
     void checkEndSim();

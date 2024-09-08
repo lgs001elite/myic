@@ -127,6 +127,39 @@ void basic_node::determineNodesInRadioRadio()
                                  { return p1.second < p2.second; });
 }
 
+void basic_node::linkedListReduce_improve()
+{
+    simtime_t ptr = simTime();
+    if (this->g_node_id == 0)
+    {
+        if (this->g_if_reduction_recovery == false)
+        {
+            this->g_if_reduction_recovery = true;
+            this->g_if_send = true;
+        }
+    }
+    else
+    {
+        if (this->g_link_received_signal == true)
+        {
+            this->g_if_reduction_recovery = true;
+            this->g_if_send = true;
+            this->g_link_received_signal = false;
+        }
+        else
+        {
+            if (this->g_queue_len > 0)
+            {
+                if (this->transmission_queue[0].getPass_counter() > 0)
+                {
+                    this->g_if_reduction_recovery = true;
+                    this->g_if_send = true;
+                }
+            }
+        }
+    }
+}
+
 void basic_node::linkedListReduce()
 {
     simtime_t ptr = simTime();

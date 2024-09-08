@@ -53,6 +53,7 @@ void basic_node::net_initialize()
     this->g_syn_scheme = this->networkPtr->par("g_syn_scheme");
     this->g_ic_num = this->networkPtr->par("g_ic_num");
     this->g_ic_cycle = this->networkPtr->par("g_ic_num");
+    /*
     if (this->g_syn_scheme == PULSAR)
     {
         this->g_ic_cycle = this->g_ic_cycle + 1;
@@ -60,8 +61,11 @@ void basic_node::net_initialize()
     }
     else
     {
-        this->g_ic_syn_cycle = this->networkPtr->par("g_ic_syn_cycle");
+    */
+    this->g_ic_syn_cycle = this->networkPtr->par("g_ic_syn_cycle");
+    /*
     }
+    */
     this->g_queue_len = 0;
     // Starting to initialize every parameter of nodes in the network
     int init_flag = (int)this->networkPtr->par("init_flag");
@@ -231,6 +235,7 @@ void basic_node::set_chargingTimeAndDelay()
     {
         delay_bias = findDelay(this->ic_charge_cycle - 1);
     }
+    /*
     else if (this->g_syn_scheme == PULSAR)
     {
         delay_bias = this->ic_charge_cycle % g_ic_cycle;
@@ -243,6 +248,7 @@ void basic_node::set_chargingTimeAndDelay()
             delay_bias = 1 + delay_bias;
         }
     }
+    */
     else
     {
         if ((this->g_ic_loc == -1) || (this->g_if_ic_syn == false))
@@ -377,25 +383,27 @@ void basic_node::net_handleMessage(cMessage *msg)
         this->set_chargingTimeAndDelay();
         this->rx_state = false;
         int extraRound = 0;
+        /*
         if (this->g_syn_scheme == PULSAR)
         {
-            if (this->ic_attempt_counter >= g_ic_cycle)
+            if (this->ic_attempt_counter >= (this->g_ic_cycle))
             {
                 extraRound = g_ic_cycle * intuniform(0, this->g_ic_num);
             }
         }
-        if (this->g_syn_scheme == FREE_BEACON)
+        */
+        if (this->g_syn_scheme != FIND)
         {
             if (this->g_ic_loc == -1)
             {
-                if (this->ic_attempt_counter >= g_ic_cycle)
+                if (this->ic_attempt_counter >= (this->g_ic_cycle))
                 {
                     extraRound = g_ic_cycle * intuniform(0, this->g_ic_num);
                 }
             }
             else
             {
-                if (this->ic_attempt_counter >= g_ic_syn_cycle)
+                if (this->ic_attempt_counter >= (this->g_ic_syn_cycle))
                 {
                     extraRound = g_ic_syn_cycle * intuniform(0, this->g_ic_num);
                 }
@@ -451,20 +459,24 @@ void basic_node::net_handleMessage(cMessage *msg)
                 if (this->g_ic_loc == -1)
                 {
                     this->transmitIdleBroadcast(nullptr);
+                    /*
                     if (this->g_syn_scheme == PULSAR)
                     {
-                        if (this->ic_attempt_counter < g_ic_cycle)
+                        if (this->ic_attempt_counter < (g_ic_cycle))
                         {
                             this->ic_attempt_counter = this->ic_attempt_counter + 1;
                         }
                     }
                     else
                     {
-                        if (this->ic_attempt_counter < g_ic_cycle)
-                        {
-                            this->ic_attempt_counter = this->ic_attempt_counter + 1;
-                        }
+                    */
+                    if (this->ic_attempt_counter < (g_ic_cycle))
+                    {
+                        this->ic_attempt_counter = this->ic_attempt_counter + 1;
                     }
+                    /*
+                    }
+                    */
                 }
                 else
                 {
@@ -563,30 +575,48 @@ void basic_node::net_handleMessage(cMessage *msg)
         if (this->ic_collision_check_counter == 1)
         {
             int bias = 0;
+            /*
             if (this->g_syn_scheme != PULSAR)
             {
-                if ((this->g_ic_loc == -1) && (this->g_ic_scale_loc == -1))
-                {
-                    this->g_ic_loc = this->g_node_id;
-                    this->g_ic_scale_loc = this->g_node_id;
-                    this->g_ic_dynamic_loc = this->g_node_id;
-                    this->ic_attempt_counter = 0;
-                    this->g_if_node_distribution = true;
-                    this->g_if_ic_syn = true;
-                }
-                if (this->g_if_ic_syn == true)
+            */
+            if ((this->g_ic_loc == -1) && (this->g_ic_scale_loc == -1))
+            {
+                this->g_ic_loc = this->g_node_id;
+                this->g_ic_scale_loc = this->g_node_id;
+                this->g_ic_dynamic_loc = this->g_node_id;
+                this->ic_attempt_counter = 0;
+                this->g_if_node_distribution = true;
+                this->g_if_ic_syn = true;
+                currentLoc = this->g_receivedMsg.getScale_slot();
+                bias = g_ic_syn_cycle - currentLoc;
+            }
+            else
+            {
+                if (this->g_syn_scheme != PULSAR)
                 {
                     currentLoc = this->g_receivedMsg.getScale_slot();
-                    if (this->g_ic_dynamic_loc < currentLoc)
-                    {
-                        bias = g_ic_syn_cycle + g_ic_dynamic_loc - currentLoc;
-                    }
-                    else
-                    {
-                        bias = g_ic_dynamic_loc - currentLoc;
-                    }
+                    bias = g_ic_syn_cycle - currentLoc;
                 }
             }
+            /*
+            if (this->g_if_ic_syn == true)
+            {
+                currentLoc = this->g_receivedMsg.getScale_slot();
+                bias = g_ic_syn_cycle - currentLoc;
+                // if (this->g_ic_dynamic_loc < currentLoc)
+                // {
+                //     bias = g_ic_syn_cycle + g_ic_dynamic_loc - currentLoc;
+                // }
+                // else
+                // {
+                //     bias = g_ic_dynamic_loc - currentLoc;
+                // }
+            }
+            */
+            /*
+            }
+            */
+            /*
             else
             {
                 if (this->g_ic_loc == -1)
@@ -605,6 +635,7 @@ void basic_node::net_handleMessage(cMessage *msg)
                     bias = g_ic_dynamic_loc - currentLoc;
                 }
             }
+            */
             this->delay_global_location = bias;
         }
     }
@@ -698,7 +729,7 @@ int basic_node::ic_reduceAction()
 {
     simtime_t ptr = simTime();
     int delaySlots = 0;
-    if (this->g_syn_scheme == FREE_BEACON)
+    if (this->g_syn_scheme != FIND)
     {
         this->g_reduction_bias_num = 0;
         if (this->g_ic_reduction_recovery_execution_signal == false)
@@ -715,9 +746,10 @@ int basic_node::ic_reduceAction()
             this->g_reduction_bias_num = this->g_ic_syn_cycle - this->g_ic_dynamic_loc + bias;
             this->g_ic_dynamic_loc = bias;
         }
-        delaySlots = this->g_reduction_bias_num;
+        // delaySlots = this->g_reduction_bias_num;
         this->g_reduction_bias_num = 0;
     }
+    /*
     else if (this->g_syn_scheme == PULSAR)
     {
         this->g_reduction_bias_num = 0;
@@ -738,6 +770,7 @@ int basic_node::ic_reduceAction()
         delaySlots = this->g_reduction_bias_num;
         this->g_reduction_bias_num = 0;
     }
+    */
     else
     {
         this->g_reduction_bias_num = 0;
@@ -778,14 +811,18 @@ void basic_node::ic_transmitData()
         }
         else
         {
+            /*
             if (this->g_syn_scheme == PULSAR)
             {
                 mPtr->setNext_id(this->g_ic_dynamic_loc - 1);
             }
             else
             {
-                mPtr->setNext_id(this->g_ic_dynamic_loc);
+            */
+            mPtr->setNext_id(this->g_ic_dynamic_loc);
+            /*
             }
+            */
         }
         for (auto p : this->nodesInRadioRange)
         {
@@ -795,20 +832,24 @@ void basic_node::ic_transmitData()
         // attempting increases one and do reduce
         if (this->g_syn_scheme != FIND)
         {
+            /*
             if (this->g_syn_scheme == PULSAR)
             {
-                if (this->ic_attempt_counter < g_ic_cycle)
+                if (this->ic_attempt_counter < (g_ic_cycle))
                 {
                     this->ic_attempt_counter = this->ic_attempt_counter + 1;
                 }
             }
             else
             {
-                if (this->ic_attempt_counter < g_ic_syn_cycle)
-                {
-                    this->ic_attempt_counter = this->ic_attempt_counter + 1;
-                }
+            */
+            if (this->ic_attempt_counter < (g_ic_syn_cycle))
+            {
+                this->ic_attempt_counter = this->ic_attempt_counter + 1;
             }
+            /*
+            }
+            */
         }
     }
 }
@@ -861,7 +902,6 @@ void basic_node::receive_message(packet_frame *dMsg)
     int msg_id = dMsg->getMsg_id();
     int source_id = dMsg->getSource_id();
     int next_id = dMsg->getNext_id();
-    int origin_slot = dMsg->getOrigin_slot();
     int current_loc = dMsg->getCurrent_slot();
     // process the msgs that received by the sink node
     if ((this->node_type == type_sink_node) && (next_id == this->g_node_id))
@@ -880,13 +920,14 @@ void basic_node::receive_message(packet_frame *dMsg)
     // process the msgs that received by the icc node
     if ((this->node_type == type_icc_node) && (this->g_syn_scheme != FIND) && (sender_type == type_ic_node))
     {
-        if (this->g_syn_scheme == FREE_BEACON)
+        if (current_loc != -1)
         {
-            if (this->icc_global_location_scale == current_loc)
+            if (0 == this->icc_global_location)
             {
                 return;
             }
         }
+        /*
         else if (this->g_syn_scheme == PULSAR)
         {
             if (this->icc_global_location == current_loc)
@@ -898,6 +939,7 @@ void basic_node::receive_message(packet_frame *dMsg)
         {
             return;
         }
+        */
 
         // Statistic the recieved msgs in a time window
         this->icc_collision_check_counter = this->icc_collision_check_counter + 1;
