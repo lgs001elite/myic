@@ -1,15 +1,15 @@
-file 1012 1725458605                                            
+file 1012 1725475581                                            
 version 2
-run General-0-20240904-16:03:22-1503
+run General-0-20240904-20:46:17-1481
 attr configname General
-attr datetime 20240904-16:03:22
+attr datetime 20240904-20:46:17
 attr experiment General
 attr inifile omnetpp.ini
 attr iterationvars "$0=0, $1=0"
 attr iterationvarsf 0,0-
 attr measurement "$0=0, $1=0"
 attr network RandomGrid
-attr processid 1503
+attr processid 1481
 attr repetition 0
 attr replication #0
 attr resultdir results
@@ -33,6 +33,6 @@ vector 1 RandomGrid.sink sim_time:vector ETV
 attr interpolationmode none
 attr source sim_time
 attr title "simTime, vector"
-0	966 19 1271 1271 0.255 0.255 1 0.255 0.255 0.255 0.065025
-1	985 26 3077777 3077777 934.902 934.902 1 934.902 934.902 934.902 874041.749604
+0	966 17 1520 1520 0.37 0.37 1 0.37 0.37 0.37 0.1369
+1	983 28 4464689 4464689 1431.534 1431.534 1 1431.534 1431.534 1431.534 2049289.593156
 

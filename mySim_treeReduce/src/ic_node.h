@@ -87,19 +87,15 @@ private:
 
     int g_poweroff_rate;
     bool g_sink_check_all_is_ready;
-    bool g_ic_node_ready_reduce;
     bool g_if_node_distribution;
     int g_ic_loc;
     int g_odd_pair_id;
     int delay_global_location;
     int icc_global_location;
-    int icc_global_location_scale;
     int g_if_ic_syn_packets;
     int g_role_play_counter;
-    int g_ic_syn_cycle;
     int g_bias_recovery;
     bool g_if_start_syn;
-    int g_ic_scale_loc;
 
     // Simulator Knowledge
     double x_pos;
@@ -116,9 +112,7 @@ private:
     int g_node_id;
     int g_node_virtual_id;
     int g_ic_virtual_num;
-    int g_next_id;
     int tx_range;
-    int g_reduction_bias_num;
     bool g_if_reduction_recovery;
     bool g_ic_self_delay_signal;
     bool g_ic_reduction_recovery_execution_signal;
@@ -144,7 +138,7 @@ private:
     vector<basic_node *> icc_networkHandler;
     vector<basic_node *> sink_networkHandler;
 
-    int energy_range_set[3][2] = {{5, 15}, {40, 120}, {100, 500}};
+    int energy_range_set[3][2] = {{30, 120}, {300, 500}, {100, 500}};
 
     simsignal_t discovery_time;
     simsignal_t sim_time;

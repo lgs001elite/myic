@@ -1,15 +1,15 @@
-file 873 1725465526                                             
+file 874 1725482306                                             
 version 2
-run General-13-20240904-17:32:24-3091
+run General-13-20240904-22:12:06-2571
 attr configname General
-attr datetime 20240904-17:32:24
+attr datetime 20240904-22:12:06
 attr experiment General
 attr inifile omnetpp.ini
 attr iterationvars "$0=1, $1=500"
 attr iterationvarsf 1,500-
 attr measurement "$0=1, $1=500"
 attr network RandomGrid
-attr processid 3091
+attr processid 2571
 attr repetition 0
 attr replication #0
 attr resultdir results
@@ -29,5 +29,5 @@ vector 0 RandomGrid.sink discovery_time:vector ETV
 attr interpolationmode none
 attr source discovery_time
 attr title "discovery time, vector"
-0	854 18 730 730 0.203 0.203 1 0.203 0.203 0.203 0.041209
+0	854 19 1480 1480 0.693 0.693 1 0.693 0.693 0.693 0.480249
 

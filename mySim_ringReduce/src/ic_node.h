@@ -61,10 +61,10 @@ using namespace std;
 #define type_sink_node 0
 
 // define ic nodes states
-#define ic_send_state   0
-#define ic_listen_state 1
+#define LISTEN_STATE 0
+#define SEND_STATE 1
 #define IDLE_STATE 2
-#define g_ic_message_num 1800
+#define SUM_MSG_NUM 1800
 
 // Syn schemes
 #define FREE_BEACON 0
@@ -81,7 +81,7 @@ private:
     };
     vector<packet_frame> transmission_queue;
     int g_queue_len;
-    packet_frame g_receivedMsg;
+    packet_frame *g_receivedMsg;
     packet_frame *g_ack;
     packet_frame *g_sink_ack;
 
@@ -94,8 +94,6 @@ private:
     int icc_global_location;
     int g_if_ic_sending_packets;
     int g_ic_syn_cycle;
-    int g_ic_scale_loc;
-    int icc_global_location_scale;
 
     // Simulator Knowledge
     double x_pos;
@@ -104,30 +102,26 @@ private:
     int g_ic_num;
     int g_poweroff_rate;
     int g_index_received_ack;
-    int g_msg_id;
+    int g_send_msg_id;
     int g_ic_cycle;
     int ic_charge_cycle;
     int charge_model;
     int ic_attempt_counter;
-    int ic_listen_counter;
+    int ic_wait_counter;
     int ic_collision_check_counter;
     bool g_if_produce_packets;
     int node_type;
     int g_node_id;
-    int g_next_id;
     int tx_range;
     int g_role_play_counter;
-    int g_reduction_bias_num;
-    bool g_if_reduction_recovery;
     bool g_ic_self_delay_signal;
     bool g_ic_reduction_recovery_execution_signal;
     int g_ic_dynamic_loc;
-    int g_ic_current_seq_loc;
     int sink_collision_check_counter;
     int g_syn_scheme;
 
     int ring_packet_send_len;
-    int ring_packet_start_seq;
+    int g_ring_packet_send_loc;
 
     map<int, int> sink_neigh_icc_distribution;
     int icc_charging_cycle;
@@ -141,7 +135,7 @@ private:
     vector<basic_node *> icc_networkHandler;
     vector<basic_node *> sink_networkHandler;
 
-    int energy_range_set[3][2] = {{5, 15}, {40, 120}, {100, 500}};
+    int energy_range_set[3][2] = {{30, 120}, {300, 500}, {100, 500}};
 
     simsignal_t discovery_time;
     simsignal_t sim_time;
@@ -169,11 +163,9 @@ private:
     void transmitSinkAck();
     void transmitIdleBroadcast(packet_frame *packet);
 
-    void treeReduce();
-    void linkedListReduce();
-    void ringReduce();
-    void ringReduce_find();
-    void ringReduce_pulsar();
+    int ringReduce();
+    int ringReduce_find();
+    int ringReduce_pulsar();
 
     void checkAllReady();
     void checkEndSim();

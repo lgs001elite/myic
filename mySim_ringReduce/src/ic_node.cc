@@ -30,10 +30,10 @@ static int gcd(int a, int b)
 }
 
 // Function to find the minimum co-prime number greater than 1
-static int find_min_coprime(int n1, int n2)
+static int find_min_coprime(int n1)
 {
     int x = 2; // Start with the smallest number greater than 1
-    while (gcd(n1, x) != 1 || gcd(n2, x) != 1)
+    while (gcd(n1, x) != 1)
     {
         x++;
     }
@@ -52,18 +52,10 @@ void basic_node::net_initialize()
     this->radioInGatePtr = this->gate("ICNodeRadioIn");
     this->g_ic_num = this->networkPtr->par("g_ic_num");
     this->g_ic_cycle = this->networkPtr->par("g_ic_num");
+    this->g_ic_cycle = this->g_ic_cycle + 1;
     this->g_syn_scheme = this->networkPtr->par("g_syn_scheme");
-    this->g_ic_syn_cycle = this->g_ic_num;
-    if (this->g_syn_scheme == PULSAR)
-    {
-        this->g_ic_cycle = this->g_ic_cycle + 1;
-        this->g_ic_syn_cycle = this->g_ic_num + 1;
-    }
-    if (this->g_syn_scheme == FREE_BEACON)
-    {
-        this->g_ic_syn_cycle = this->networkPtr->par("g_ic_freebeacon_syn_cycle");
-    }
     this->g_queue_len = 0;
+    g_receivedMsg = this->produce_msg(0, 0, 0, 0);
     // Starting to initialize every parameter of nodes in the network
     int init_flag = (int)this->networkPtr->par("init_flag");
     if (init_flag == 0)
@@ -79,11 +71,11 @@ void basic_node::net_initialize()
     if (this->node_type == type_ic_node)
     {
         this->g_poweroff_rate = this->networkPtr->par("poweroff_rate");
-        this->ic_listen_counter = 0;
         this->ic_collision_check_counter = 0;
         this->ic_attempt_counter = 0;
-        this->g_role_play_counter = 0;
-        this->g_msg_id = -1;
+        this->ic_wait_counter = 0;
+        this->g_role_play_counter = 1000000000;
+        this->g_send_msg_id = -1;
         this->charge_model = this->networkPtr->par("g_energy_model");
 
         if (this->g_syn_scheme == FIND)
@@ -98,49 +90,33 @@ void basic_node::net_initialize()
             this->g_ic_loc = -1;
             this->g_ic_dynamic_loc = -1;
         }
-        this->g_ic_scale_loc = -1;
         this->delay_global_location = 0;
         this->rx_state = false;
-        this->g_if_ic_sending_packets = IDLE_STATE;
-        this->g_next_id = -1;
         this->g_ic_self_delay_signal = false;
         this->g_ic_reduction_recovery_execution_signal = false;
-        this->g_ic_current_seq_loc = 0;
         this->g_if_produce_packets = false;
-        this->g_reduction_bias_num = 0;
-        this->g_if_reduction_recovery = false;
-        this->g_if_takeup = false;
+        this->g_ic_reduction_recovery_execution_signal = false;
         // ring-reduce
         int extra = this->g_ic_num % 2;
         int step = this->g_ic_num / 2;
+        this->ring_packet_send_len = step + extra;
         if ((this->g_node_id % 2) == 0)
         {
-            this->ring_packet_start_seq = this->g_node_id / 2;
+            this->g_if_ic_sending_packets = SEND_STATE;
+            this->g_ring_packet_send_loc = this->g_node_id / 2;
         }
         else
         {
-            this->ring_packet_start_seq = 0;
+            this->g_if_ic_sending_packets = LISTEN_STATE;
+            this->g_ring_packet_send_loc = 0;
         }
-        this->ring_packet_send_len = step + extra;
     }
-
+    this->icc_charging_cycle = find_min_coprime(this->g_ic_cycle);
     if (this->node_type == type_icc_node)
     {
-        if (this->g_syn_scheme != FIND)
-        {
-            if (this->g_syn_scheme == FREE_BEACON)
-            {
-                this->icc_charging_cycle = find_min_coprime(this->g_ic_cycle, this->g_ic_syn_cycle);
-            }
-            else
-            {
-                this->icc_charging_cycle = this->g_ic_cycle;
-            }
-        }
         this->icc_collision_check_counter = 0;
         this->rx_state = false;
         this->icc_global_location = 0;
-        this->icc_global_location_scale = 0;
     }
 
     if (this->node_type == type_sink_node)
@@ -148,7 +124,6 @@ void basic_node::net_initialize()
         this->sink_collision_check_counter = 0;
         this->rx_state = true;
         this->g_sink_check_all_is_ready = false;
-        this->discovery_time = registerSignal("discovery_time");
         this->sim_time = registerSignal("sim_time");
     }
     // Every node decides which nodes are in its communication range
@@ -239,35 +214,16 @@ void basic_node::set_chargingTimeAndDelay()
                             1;
     int delay_bias = 0;
     // aligh with icc to find topology
-    if (this->g_syn_scheme == FREE_BEACON)
+    if (this->g_syn_scheme != FIND)
     {
-        if (this->g_ic_dynamic_loc == -1)
-        {
-            delay_bias = this->ic_charge_cycle % this->g_ic_cycle;
-            if (delay_bias != 0)
-            {
-                delay_bias = this->g_ic_cycle - delay_bias;
-            }
-        }
-        else
-        {
-            delay_bias = this->ic_charge_cycle % this->g_ic_syn_cycle;
-            if (delay_bias != 0)
-            {
-                delay_bias = this->g_ic_syn_cycle - delay_bias;
-            }
-        }
-    }
-    else if (this->g_syn_scheme == PULSAR)
-    {
-        delay_bias = this->ic_charge_cycle % g_ic_cycle;
+        delay_bias = this->ic_charge_cycle % this->g_ic_cycle;
         if (delay_bias != 0)
         {
-            delay_bias = g_ic_cycle - delay_bias;
+            delay_bias = this->g_ic_cycle - delay_bias;
         }
-        if (this->g_ic_loc == -1)
+        if ((this->g_syn_scheme == PULSAR) && (this->g_ic_loc == -1))
         {
-            delay_bias = 1 + delay_bias;
+            delay_bias = delay_bias + 1;
         }
     }
     else
@@ -278,15 +234,10 @@ void basic_node::set_chargingTimeAndDelay()
     int probNum = intuniform(1, 100);
     if (probNum <= g_poweroff_rate)
     {
-        int tempChr = intuniform(this->energy_range_set[this->charge_model][0],
-                                 this->energy_range_set[this->charge_model][1]);
+        int tempChr = intuniform(501, 1500);
         if (tempChr > 0)
         {
             delay_bias = delay_bias + tempChr;
-        }
-        if ((tempChr > 0) && (this->g_ic_loc != -1))
-        {
-            EV << "bias happend";
         }
     }
     // actual charge plus delay time
@@ -296,9 +247,9 @@ void basic_node::set_chargingTimeAndDelay()
 void basic_node::generate_msgs()
 {
     // Produce packets
-    for (int i = 0; i < g_ic_message_num; i++)
+    for (int i = 0; i < SUM_MSG_NUM; i++)
     {
-        packet_frame *send_msg = this->produce_msg(g_ic_message_num - i - 1, data_msg, type_ic_node, -1);
+        packet_frame *send_msg = this->produce_msg(SUM_MSG_NUM - i - 1, data_msg, type_ic_node, -1);
         this->g_queue_len = this->g_queue_len + 1;
         this->transmission_queue.insert(this->transmission_queue.begin(), *send_msg);
         delete send_msg;
@@ -307,7 +258,23 @@ void basic_node::generate_msgs()
 
 void basic_node::checkEndSim()
 {
-    if (this->g_queue_len == g_ic_message_num)
+    if (this->g_queue_len == SUM_MSG_NUM)
+    {
+        emit(this->sim_time, simTime(), nullptr);
+        endSimulation();
+    }
+
+    bool finishFlag = false;
+    for (int ic_index = 0; ic_index < this->g_ic_num; ic_index++)
+    {
+        if ((this->ic_networkHandler[ic_index]->g_queue_len == 0) &&
+            (this->g_queue_len != 0))
+        {
+            finishFlag = true;
+            break;
+        }
+    }
+    if (finishFlag == true)
     {
         emit(this->sim_time, simTime(), nullptr);
         endSimulation();
@@ -333,12 +300,6 @@ void basic_node::checkAllReady()
             }
         }
     }
-    // After syn completed, starting to reduce
-    if (this->g_sink_check_all_is_ready == true)
-    {
-        // endSimulation();
-        emit(this->discovery_time, simTime(), nullptr);
-    }
 }
 
 /**
@@ -357,7 +318,7 @@ void basic_node::net_handleMessage(cMessage *msg)
             scheduleAt(simTime(), new cMessage("Go to the sink node", sink_handler));
         }
         // Go to the icc function entrance if the node is the icc node
-        if ((this->node_type == type_icc_node) && (this->g_syn_scheme != FIND))
+        if ((this->node_type == type_icc_node))
         {
             scheduleAt(simTime(), new cMessage("Go the icc node", icc_sleep_handler));
         }
@@ -388,28 +349,11 @@ void basic_node::net_handleMessage(cMessage *msg)
         this->set_chargingTimeAndDelay();
         this->rx_state = false;
         int extraRound = 0;
-        if (this->g_syn_scheme == PULSAR)
+        if (this->g_syn_scheme != FIND)
         {
             if (this->ic_attempt_counter >= g_ic_cycle)
             {
-                extraRound = g_ic_cycle * intuniform(0, this->g_ic_num);
-            }
-        }
-        if (this->g_syn_scheme == FREE_BEACON)
-        {
-            if (this->g_ic_loc == -1)
-            {
-                if (this->ic_attempt_counter >= g_ic_cycle)
-                {
-                    extraRound = g_ic_cycle * intuniform(0, this->g_ic_num);
-                }
-            }
-            else
-            {
-                if (this->ic_attempt_counter >= g_ic_syn_cycle)
-                {
-                    extraRound = g_ic_syn_cycle * intuniform(0, this->g_ic_num);
-                }
+                extraRound = g_ic_cycle * intuniform(0, 1);
             }
         }
         // ic back to its distrited location
@@ -417,10 +361,6 @@ void basic_node::net_handleMessage(cMessage *msg)
         {
             extraRound = extraRound + this->delay_global_location;
             this->delay_global_location = 0;
-        }
-        if (this->g_syn_scheme == FIND)
-        {
-            extraRound = 0;
         }
         scheduleAt(simTime() + this->slot_len * (this->ic_charge_cycle - 1 + extraRound),
                    new cMessage("ic charging and delaying", ic_work_handler));
@@ -438,84 +378,61 @@ void basic_node::net_handleMessage(cMessage *msg)
         if (this->g_ic_self_delay_signal == true)
         {
             this->g_ic_self_delay_signal = false;
-            this->g_msg_id = -1;
+            this->g_send_msg_id = -1;
             this->ic_collision_check_counter = 0;
             this->rx_state = true;
             if (this->g_syn_scheme != FIND)
             {
-                if ((this->g_if_ic_sending_packets == ic_send_state) && (this->g_queue_len > 0))
+                if ((this->g_if_ic_sending_packets == SEND_STATE) && (this->g_queue_len > 0))
                 {
                     this->ic_transmitData();
+                    if ((this->g_node_id % 2) == 0)
+                    {
+
+                        this->ic_wait_counter = this->ic_wait_counter + 1;
+                        if (this->ic_wait_counter > this->g_role_play_counter)
+                        {
+                            this->g_role_play_counter = this->ic_wait_counter;
+                            this->ic_wait_counter = 0;
+                            this->g_if_ic_sending_packets = LISTEN_STATE;
+                            this->g_ic_reduction_recovery_execution_signal = true;
+                        }
+                    }
                 }
                 else
                 {
-                    if (((this->g_ic_scale_loc % 2) == 0) && (this->g_queue_len > 0) && (this->g_syn_scheme == FREE_BEACON) && (this->g_ic_scale_loc != -1))
+                    if ((this->g_ic_loc != -1) && (this->g_syn_scheme == FREE_BEACON))
                     {
-                        int attempt_threshold = this->g_ic_syn_cycle * this->g_ic_num * 10;
-                        if (this->ic_listen_counter < attempt_threshold)
+                        int probNum = intuniform(1, 100);
+                        if (probNum <= 1)
                         {
-                            this->ic_listen_counter = this->ic_listen_counter + 1;
-                        }
-                        else
-                        {
-                            this->ic_listen_counter = 0;
-                            if (this->g_if_ic_sending_packets == ic_listen_state)
-                            {
-                                if (this->g_if_takeup == true)
-                                {
-                                    this->g_if_takeup = false;
-                                }
-                            }
+                            this->transmitIdleBroadcast(nullptr);
                         }
                     }
-                    if (((this->g_ic_loc % 2) != 0) && (this->g_queue_len > 0) && (this->g_syn_scheme == PULSAR) && (this->g_ic_loc != -1))
+                    if (this->g_syn_scheme != FIND)
                     {
-                        int attempt_threshold = this->g_ic_cycle * this->g_ic_num * 10;
-                        if (this->ic_listen_counter < attempt_threshold)
+                        if (this->ic_attempt_counter < g_ic_cycle)
                         {
-                            this->ic_listen_counter = this->ic_listen_counter + 1;
+                            this->ic_attempt_counter = this->ic_attempt_counter + 1;
                         }
-                        else
+                    }
+                    if ((this->g_node_id % 2) == 0)
+                    {
+                        this->ic_wait_counter = this->ic_wait_counter + 1;
+                        if (this->ic_wait_counter > this->g_role_play_counter)
                         {
-                            this->ic_listen_counter = 0;
-                            if (this->g_if_ic_sending_packets == ic_listen_state)
-                            {
-                                if (this->g_if_takeup == true)
-                                {
-                                    this->g_if_takeup = false;
-                                }
-                            }
+                            this->g_role_play_counter = this->ic_wait_counter;
+                            this->ic_wait_counter = 0;
+                            this->g_if_ic_sending_packets = SEND_STATE;
                         }
                     }
                 }
             }
             else
             {
-                if (this->g_if_ic_sending_packets == ic_send_state)
+                if ((this->g_if_ic_sending_packets == SEND_STATE) && (this->g_queue_len > 0))
                 {
                     this->ic_transmitData();
-                }
-                else
-                {
-                    if (((this->g_ic_loc % 2) == 0) && (this->g_queue_len > 0))
-                    {
-                        int attempt_threshold = this->g_ic_cycle * this->g_ic_num * 10;
-                        if (this->ic_listen_counter < attempt_threshold)
-                        {
-                            this->ic_listen_counter = this->ic_listen_counter + 1;
-                        }
-                        else
-                        {
-                            this->ic_listen_counter = 0;
-                            if (this->g_if_ic_sending_packets == ic_listen_state)
-                            {
-                                if (this->g_if_takeup == true)
-                                {
-                                    this->g_if_takeup = false;
-                                }
-                            }
-                        }
-                    }
                 }
             }
             scheduleAt(simTime() + this->slot_len,
@@ -529,19 +446,9 @@ void basic_node::net_handleMessage(cMessage *msg)
                 if (this->g_ic_loc == -1)
                 {
                     this->transmitIdleBroadcast(nullptr);
-                    if (this->g_syn_scheme == PULSAR)
+                    if (this->ic_attempt_counter < g_ic_cycle)
                     {
-                        if (this->ic_attempt_counter < g_ic_cycle)
-                        {
-                            this->ic_attempt_counter = this->ic_attempt_counter + 1;
-                        }
-                    }
-                    else
-                    {
-                        if (this->ic_attempt_counter < g_ic_syn_cycle)
-                        {
-                            this->ic_attempt_counter = this->ic_attempt_counter + 1;
-                        }
+                        this->ic_attempt_counter = this->ic_attempt_counter + 1;
                     }
                 }
                 else
@@ -576,7 +483,6 @@ void basic_node::net_handleMessage(cMessage *msg)
     {
         simtime_t ptr = simTime();
         this->icc_global_location = (this->icc_global_location + this->icc_charging_cycle) % g_ic_cycle;
-        this->icc_global_location_scale = (this->icc_global_location_scale + this->icc_charging_cycle) % g_ic_syn_cycle;
         this->rx_state = true;
         this->icc_collision_check_counter = 0;
         scheduleAt(simTime() + this->slot_len,
@@ -595,8 +501,8 @@ void basic_node::net_handleMessage(cMessage *msg)
         simtime_t ptr = simTime();
         if (this->sink_collision_check_counter == 1)
         {
-            int msg_id = this->g_receivedMsg.getMsg_id();
-            int source_id = this->g_receivedMsg.getSource_id();
+            int msg_id = this->g_receivedMsg->getMsg_id();
+            int source_id = this->g_receivedMsg->getSource_id();
             bool receivedMsg = false;
             for (int i = 0; i < this->g_queue_len; i++)
             {
@@ -610,7 +516,7 @@ void basic_node::net_handleMessage(cMessage *msg)
             // received data and do sth here
             if (receivedMsg == false)
             {
-                this->transmission_queue.insert(this->transmission_queue.begin(), this->g_receivedMsg);
+                this->transmission_queue.insert(this->transmission_queue.begin(), *this->g_receivedMsg);
                 g_queue_len = g_queue_len + 1;
             }
             // If the sink node received the msgs successfully, it will give a ack reply
@@ -633,60 +539,33 @@ void basic_node::net_handleMessage(cMessage *msg)
         simtime_t ptr = simTime();
         if (this->ic_collision_check_counter == 1)
         {
-            if (this->g_node_id == 3)
-            {
-                EV << "to do ben";
-            }
             auto pkt_i = find_if(this->transmission_queue.begin(), this->transmission_queue.end(), [this](packet_frame pkt)
-                                 { return pkt.getMsg_id() == this->g_receivedMsg.getMsg_id(); });
+                                 { return pkt.getMsg_id() == this->g_receivedMsg->getMsg_id(); });
             if (pkt_i != this->transmission_queue.end())
             {
                 int localPassNum = pkt_i->getPass_counter();
-                int previousPassNum = this->g_receivedMsg.getPass_counter();
+                int previousPassNum = this->g_receivedMsg->getPass_counter();
                 if (localPassNum == 0)
                 {
-                    if (this->g_if_takeup == true)
-                    {
-                        this->g_if_takeup = false;
-                    }
                     if (previousPassNum == 0)
                     {
-                        this->g_receivedMsg.setPass_counter(previousPassNum + 2);
+                        this->g_receivedMsg->setPass_counter(2);
                     }
                     else
                     {
-                        this->g_receivedMsg.setPass_counter(previousPassNum + 1);
+                        this->g_receivedMsg->setPass_counter(previousPassNum + 1);
                     }
-                    if (this->g_syn_scheme == FREE_BEACON)
-                    {
-                        if ((this->g_ic_loc % 2) != 0)
-                        {
-                            this->g_ic_dynamic_loc = (this->g_ic_loc + 1) % this->g_ic_cycle;
-                        }
-                    }
-                    if (this->g_syn_scheme == FIND)
-                    {
-                        if ((this->g_ic_loc % 2) != 0)
-                        {
-                            this->g_ic_dynamic_loc = (this->g_ic_loc + 1) % this->g_ic_cycle;
-                        }
-                    }
-                    if (this->g_syn_scheme == PULSAR)
-                    {
-                        if ((this->g_ic_loc % 2) == 0)
-                        {
-                            this->g_ic_dynamic_loc = (this->g_ic_loc + 1) % this->g_ic_cycle;
-                            if (this->g_ic_dynamic_loc == 0)
-                            {
-                                this->g_ic_dynamic_loc = 1;
-                            }
-                        }
-                    }
-
-                    this->transmission_queue.erase(pkt_i);
-                    this->transmission_queue.insert(this->transmission_queue.begin(), this->g_receivedMsg);
                 }
+                if ((this->g_node_id % 2) == 0)
+                {
+                    this->g_role_play_counter = this->ic_wait_counter;
+                    this->ic_wait_counter = 0;
+                }
+                this->g_if_ic_sending_packets = SEND_STATE;
+                this->transmission_queue.erase(pkt_i);
+                this->transmission_queue.insert(this->transmission_queue.begin(), *this->g_receivedMsg);
             }
+
             scheduleAt(simTime() + this->slot_len * 0.1,
                        new cMessage("ic node sends acks", ic_send_ack_data_handler));
         }
@@ -696,84 +575,73 @@ void basic_node::net_handleMessage(cMessage *msg)
         simtime_t ptr = simTime();
         if (this->ic_collision_check_counter == 1)
         {
-            if (this->g_node_id == 3)
-            {
-                EV << "to do ben";
-            }
             auto pkt_i = find_if(this->transmission_queue.begin(), this->transmission_queue.end(), [this](packet_frame pkt)
-                                 { return pkt.getMsg_id() == this->g_msg_id; });
+                                 { return pkt.getMsg_id() == this->g_send_msg_id; });
             if (pkt_i != this->transmission_queue.end())
             {
                 this->ic_attempt_counter = 0;
-                if (this->g_if_reduction_recovery == true)
+                if (((*pkt_i).getMsg_id() == this->g_ring_packet_send_loc) && ((this->g_node_id % 2) == 0))
                 {
-                    this->g_if_reduction_recovery = false;
-                    this->g_ic_reduction_recovery_execution_signal = true;
+                    this->g_ring_packet_send_loc = this->g_ring_packet_send_loc + this->ring_packet_send_len;
                 }
-                if ((*pkt_i).getMsg_id() == this->ring_packet_start_seq)
+                if ((this->g_node_id % 2) == 0)
                 {
-                    this->ring_packet_start_seq = this->ring_packet_start_seq + this->ring_packet_send_len;
+                    this->g_role_play_counter = this->ic_wait_counter;
+                    this->ic_wait_counter = 0;
                 }
                 this->transmission_queue.erase(pkt_i);
                 this->g_queue_len = this->g_queue_len - 1;
+                this->g_if_ic_sending_packets = LISTEN_STATE;
+                this->g_ic_reduction_recovery_execution_signal = true;
             }
         }
     }
     else if (msg->isSelfMessage() && msg->getKind() == ic_receive_broad_handler)
     {
         simtime_t ptr = simTime();
-        int currentLoc = this->g_receivedMsg.getCurrent_slot();
         if (this->ic_collision_check_counter == 1)
         {
+            int currentLoc = this->g_receivedMsg->getCurrent_slot();
             int bias = 0;
             if (this->g_ic_loc == -1)
             {
-                if (this->g_syn_scheme == FREE_BEACON)
-                {
-                    currentLoc = this->g_receivedMsg.getScale_slot();
-                    this->g_ic_loc = this->g_node_id;
-                    this->g_ic_scale_loc = this->g_node_id;
-                    this->g_ic_dynamic_loc = this->g_node_id;
-                    if (this->g_ic_dynamic_loc < currentLoc)
-                    {
-                        bias = this->g_ic_syn_cycle + g_ic_loc - currentLoc;
-                    }
-                    else
-                    {
-                        bias = g_ic_loc - currentLoc;
-                    }
-                }
-
                 if (this->g_syn_scheme == PULSAR)
                 {
                     this->g_ic_loc = this->g_node_id + 1;
                     this->g_ic_dynamic_loc = this->g_node_id + 1;
-                    if (this->g_ic_loc < currentLoc)
-                    {
-                        bias = this->g_ic_cycle + g_ic_loc - currentLoc;
-                    }
-                    else
-                    {
-                        bias = g_ic_loc - currentLoc;
-                    }
-                }
-
-                this->g_if_node_distribution = true;
-                this->g_ic_node_ready_reduce = true;
-                this->ic_attempt_counter = 0;
-            }
-            else
-            {
-                currentLoc = this->g_receivedMsg.getScale_slot();
-                if (this->g_ic_dynamic_loc < currentLoc)
-                {
-                    bias = this->g_ic_syn_cycle + g_ic_loc - currentLoc;
                 }
                 else
                 {
-                    bias = g_ic_loc - currentLoc;
+                    this->g_ic_loc = this->g_node_id;
+                    this->g_ic_dynamic_loc = this->g_node_id;
+                }
+                this->ic_attempt_counter = 0;
+                this->g_if_node_distribution = true;
+
+                if (this->g_ic_dynamic_loc < currentLoc)
+                {
+                    bias = g_ic_cycle + g_ic_dynamic_loc - currentLoc;
+                }
+                else
+                {
+                    bias = g_ic_dynamic_loc - currentLoc;
                 }
             }
+            else
+            {
+                if (this->g_syn_scheme == FREE_BEACON)
+                {
+                    if (this->g_ic_dynamic_loc < currentLoc)
+                    {
+                        bias = g_ic_cycle + g_ic_dynamic_loc - currentLoc;
+                    }
+                    else
+                    {
+                        bias = g_ic_dynamic_loc - currentLoc;
+                    }
+                }
+            }
+
             this->delay_global_location = bias;
         }
     }
@@ -790,7 +658,7 @@ void basic_node::net_handleMessage(cMessage *msg)
         simtime_t ptr = simTime();
         if (this->icc_collision_check_counter == 1)
         {
-            this->transmitIdleBroadcast(&this->g_receivedMsg);
+            this->transmitIdleBroadcast(this->g_receivedMsg);
         }
         this->icc_collision_check_counter = 0;
     }
@@ -810,73 +678,41 @@ int basic_node::ic_reduceAction()
     int delaySlots = 0;
     if (this->g_syn_scheme == FREE_BEACON)
     {
-        if ((this->g_ic_loc % 2) == 0)
+        if (this->g_ic_reduction_recovery_execution_signal == true)
         {
-            if (((g_ic_message_num - this->g_queue_len) % this->ring_packet_send_len) == 0)
-            {
-                if (this->g_if_takeup == true)
-                {
-                    this->g_if_takeup = false;
-                }
-            }
+            this->g_ic_reduction_recovery_execution_signal = false;
+            delaySlots = this->g_ic_cycle - this->g_ic_dynamic_loc + this->g_ic_loc;
+            this->g_ic_dynamic_loc = this->g_ic_loc;
         }
-        if ((this->g_if_reduction_recovery == false) && (this->g_if_takeup == false))
+        else
         {
-            if (this->g_queue_len > 0)
-            {
-                if (this->g_node_id == 1)
-                {
-                    EV << "to do ben";
-                }
-                if (this->g_node_id == 3)
-                {
-                    EV << "to do ben";
-                }
-                this->ringReduce();
-                delaySlots = this->g_reduction_bias_num;
-            }
+            delaySlots = this->ringReduce();
         }
     }
     else if (this->g_syn_scheme == PULSAR)
     {
-        if ((this->g_ic_loc % 2) != 0)
+        if (this->g_ic_reduction_recovery_execution_signal == true)
         {
-            if (((g_ic_message_num - this->g_queue_len) % this->ring_packet_send_len) == 0)
-            {
-                if (this->g_if_takeup == true)
-                {
-                    this->g_if_takeup = false;
-                }
-            }
+            this->g_ic_reduction_recovery_execution_signal = false;
+            delaySlots = this->g_ic_cycle - this->g_ic_dynamic_loc + this->g_ic_loc;
+            this->g_ic_dynamic_loc = this->g_ic_loc;
         }
-        if ((this->g_if_reduction_recovery == false) && (this->g_if_takeup == false))
+        else
         {
-            if (this->g_queue_len > 0)
-            {
-                this->ringReduce_pulsar();
-                delaySlots = this->g_reduction_bias_num;
-            }
+            delaySlots = this->ringReduce_pulsar();
         }
     }
     else
     {
-        if ((this->g_ic_loc % 2) == 0)
+        if (this->g_ic_reduction_recovery_execution_signal == true)
         {
-            if (((g_ic_message_num - this->g_queue_len) % this->ring_packet_send_len) == 0)
-            {
-                if (this->g_if_takeup == true)
-                {
-                    this->g_if_takeup = false;
-                }
-            }
+            this->g_ic_reduction_recovery_execution_signal = false;
+            delaySlots = this->g_ic_cycle - this->g_ic_dynamic_loc + this->g_ic_loc;
+            this->g_ic_dynamic_loc = this->g_ic_loc;
         }
-        if ((this->g_if_reduction_recovery == false) && (this->g_if_takeup == false))
+        else
         {
-            if (this->g_queue_len > 0)
-            {
-                this->ringReduce_find();
-                delaySlots = 0;
-            }
+            delaySlots = this->ringReduce_find();
         }
     }
 
@@ -888,130 +724,47 @@ void basic_node::ic_transmitData()
     if (this->g_queue_len > 0)
     {
         packet_frame *mPtr = &this->transmission_queue[0];
-        if (((this->g_ic_scale_loc % 2) == 0) && (mPtr->getPass_counter() == 0) && (this->g_syn_scheme == FREE_BEACON))
+        if (((this->g_node_id % 2) == 0) && (mPtr->getPass_counter()) == 0)
         {
             auto pkt_i = find_if(this->transmission_queue.begin(), this->transmission_queue.end(), [this](packet_frame pkt)
-                                 { return pkt.getMsg_id() == this->ring_packet_start_seq; });
+                                 { return pkt.getMsg_id() == this->g_ring_packet_send_loc; });
             if (pkt_i != this->transmission_queue.end())
             {
                 mPtr = &(*pkt_i);
+            }
+            else
+            {
+                //                this->g_role_play_counter = this->ic_wait_counter;
+                //                this->ic_wait_counter = 0;
+                this->g_if_ic_sending_packets = LISTEN_STATE;
+                this->g_ic_reduction_recovery_execution_signal = true;
+                return;
             }
         }
-        if (((this->g_ic_loc % 2) != 0) && (mPtr->getPass_counter() == 0) && (this->g_syn_scheme == PULSAR))
+        if (((this->g_node_id % 2) == 1) && (mPtr->getPass_counter()) == 0)
         {
-            auto pkt_i = find_if(this->transmission_queue.begin(), this->transmission_queue.end(), [this](packet_frame pkt)
-                                 { return pkt.getMsg_id() == this->ring_packet_start_seq; });
-            if (pkt_i != this->transmission_queue.end())
-            {
-                mPtr = &(*pkt_i);
-            }
-        }
-        if (((this->g_ic_loc % 2) == 0) && (mPtr->getPass_counter() == 0) && (this->g_syn_scheme == FIND))
-        {
-            auto pkt_i = find_if(this->transmission_queue.begin(), this->transmission_queue.end(), [this](packet_frame pkt)
-                                 { return pkt.getMsg_id() == this->ring_packet_start_seq; });
-            if (pkt_i != this->transmission_queue.end())
-            {
-                mPtr = &(*pkt_i);
-            }
+            //            this->g_role_play_counter = this->ic_wait_counter;
+            //            this->ic_wait_counter = 0;
+            this->g_if_ic_sending_packets = LISTEN_STATE;
+            this->g_ic_reduction_recovery_execution_signal = true;
+            return;
         }
 
         mPtr->setSender_id(this->g_node_id);
         mPtr->setCurrent_slot(this->g_ic_dynamic_loc);
-        this->g_msg_id = mPtr->getMsg_id();
+        this->g_send_msg_id = mPtr->getMsg_id();
         if (mPtr->getPass_counter() == this->g_ic_num)
         {
             mPtr->setNext_id((this->g_ic_num + 1));
         }
         else
         {
-            if (this->g_syn_scheme == FREE_BEACON)
+            int senderId = this->g_node_id + 1;
+            if (senderId == this->g_ic_num)
             {
-                mPtr->setNext_id(this->g_ic_dynamic_loc);
+                senderId = 0;
             }
-            if (this->g_syn_scheme == FIND)
-            {
-                mPtr->setNext_id(this->g_ic_dynamic_loc);
-            }
-            if (this->g_syn_scheme == PULSAR)
-            {
-                mPtr->setNext_id(this->g_ic_dynamic_loc - 1);
-            }
-            if (((this->g_ic_scale_loc % 2) == 0) && (this->g_syn_scheme == FREE_BEACON) && (this->g_ic_scale_loc != -1))
-            {
-                int attempt_threshold = this->g_ic_syn_cycle * this->g_ic_num * 10;
-                if (this->g_role_play_counter < attempt_threshold)
-                {
-                    this->g_role_play_counter = this->g_role_play_counter + 1;
-                }
-                else
-                {
-                    this->g_role_play_counter = 0;
-                    this->ic_attempt_counter = 0;
-                    if (this->g_if_ic_sending_packets == ic_send_state)
-                    {
-                        if (this->g_if_takeup == true)
-                        {
-                            this->g_if_takeup = false;
-                        }
-                    }
-                    if (this->g_if_reduction_recovery == true)
-                    {
-                        this->g_if_reduction_recovery = false;
-                        this->g_ic_reduction_recovery_execution_signal = true;
-                    }
-                }
-            }
-            if (((this->g_ic_loc % 2) == 0) && (this->g_syn_scheme == FIND))
-            {
-                int attempt_threshold = this->g_ic_cycle * this->g_ic_num * 10;
-                if (this->g_role_play_counter < attempt_threshold)
-                {
-                    this->g_role_play_counter = this->g_role_play_counter + 1;
-                }
-                else
-                {
-                    this->g_role_play_counter = 0;
-                    this->ic_attempt_counter = 0;
-                    if (this->g_if_ic_sending_packets == ic_send_state)
-                    {
-                        if (this->g_if_takeup == true)
-                        {
-                            this->g_if_takeup = false;
-                        }
-                    }
-                    if (this->g_if_reduction_recovery == true)
-                    {
-                        this->g_if_reduction_recovery = false;
-                        this->g_ic_reduction_recovery_execution_signal = true;
-                    }
-                }
-            }
-            if (((this->g_ic_loc % 2) != 0) && (this->g_syn_scheme == PULSAR) && (this->g_ic_loc != -1))
-            {
-                int attempt_threshold = this->g_ic_cycle * this->g_ic_num * 10;
-                if (this->g_role_play_counter < attempt_threshold)
-                {
-                    this->g_role_play_counter = this->g_role_play_counter + 1;
-                }
-                else
-                {
-                    this->g_role_play_counter = 0;
-                    this->ic_attempt_counter = 0;
-                    if (this->g_if_ic_sending_packets == ic_send_state)
-                    {
-                        if (this->g_if_takeup == true)
-                        {
-                            this->g_if_takeup = false;
-                        }
-                    }
-                    if (this->g_if_reduction_recovery == true)
-                    {
-                        this->g_if_reduction_recovery = false;
-                        this->g_ic_reduction_recovery_execution_signal = true;
-                    }
-                }
-            }
+            mPtr->setNext_id(senderId);
         }
         for (auto p : this->nodesInRadioRange)
         {
@@ -1020,19 +773,9 @@ void basic_node::ic_transmitData()
         // attempting increases one and do reduce
         if (this->g_syn_scheme != FIND)
         {
-            if (this->g_syn_scheme == PULSAR)
+            if (this->ic_attempt_counter < g_ic_cycle)
             {
-                if (this->ic_attempt_counter < g_ic_cycle)
-                {
-                    this->ic_attempt_counter = this->ic_attempt_counter + 1;
-                }
-            }
-            else
-            {
-                if (this->ic_attempt_counter < g_ic_syn_cycle)
-                {
-                    this->ic_attempt_counter = this->ic_attempt_counter + 1;
-                }
+                this->ic_attempt_counter = this->ic_attempt_counter + 1;
             }
         }
     }
@@ -1065,7 +808,6 @@ void basic_node::transmitIdleBroadcast(packet_frame *packet)
         msg_broad = this->produce_msg(0, broad_msg, type_icc_node, -1);
         msg_broad->setNext_id(packet->getSender_id());
         msg_broad->setCurrent_slot(this->icc_global_location);
-        msg_broad->setScale_slot(this->icc_global_location_scale);
     }
     else
     {
@@ -1087,7 +829,7 @@ void basic_node::receive_message(packet_frame *dMsg)
 {
     simtime_t ptr = simTime();
     // first duplicate received msg, to prevent deleting msg unexpectedly
-    this->duplicate_msg(&this->g_receivedMsg, dMsg);
+    this->duplicate_msg(this->g_receivedMsg, dMsg);
     // retrieve some info from the packet
     int msg_type = dMsg->getMsg_type();
     int sender_type = dMsg->getSender_type();
@@ -1113,26 +855,8 @@ void basic_node::receive_message(packet_frame *dMsg)
     }
 
     // process the msgs that received by the icc node
-    if ((this->node_type == type_icc_node) && (this->g_syn_scheme != FIND) && (sender_type == type_ic_node))
+    if ((this->node_type == type_icc_node) && (sender_type == type_ic_node) && (this->g_syn_scheme != FIND))
     {
-        if (this->g_syn_scheme == FREE_BEACON)
-        {
-            if (this->icc_global_location_scale == current_loc)
-            {
-                return;
-            }
-        }
-        else if (this->g_syn_scheme == PULSAR)
-        {
-            if (this->icc_global_location == current_loc)
-            {
-                return;
-            }
-        }
-        else
-        {
-            return;
-        }
 
         // Statistic the recieved msgs in a time window
         this->icc_collision_check_counter = this->icc_collision_check_counter + 1;
@@ -1146,7 +870,7 @@ void basic_node::receive_message(packet_frame *dMsg)
         }
         else
         {
-            if (this->g_syn_scheme == FREE_BEACON)
+            if ((this->g_syn_scheme == FREE_BEACON) && (current_loc != this->icc_global_location))
             {
                 scheduleAt(simTime() + this->slot_len * 0.3,
                            new cMessage("icc node sends loc to ics", icc_broad_handler));
@@ -1161,18 +885,18 @@ void basic_node::receive_message(packet_frame *dMsg)
         this->ic_collision_check_counter = this->ic_collision_check_counter + 1;
         if (next_id == this->g_node_id)
         {
-            if ((msg_type == data_msg) && (this->g_if_ic_sending_packets == ic_listen_state))
+            if ((msg_type == data_msg) && (this->g_if_ic_sending_packets == LISTEN_STATE))
             {
                 // First, need to check if the packet has been received
                 this->scheduleAt(simTime() + this->slot_len * 0.1,
                                  new cMessage("ic node receives the data from the sender ic node", ic_receive_data_handler));
                 this->g_ack = this->produce_msg(msg_id, ack_msg, type_ic_node, sender_id);
             }
-            if ((msg_type == ack_msg) && (this->g_if_ic_sending_packets == ic_send_state))
+            if ((msg_type == ack_msg) && (this->g_if_ic_sending_packets == SEND_STATE))
             {
-                if (this->g_msg_id != -1)
+                if (this->g_send_msg_id != -1)
                 {
-                    if (this->g_msg_id != msg_id)
+                    if (this->g_send_msg_id != msg_id)
                     {
                         return;
                     }

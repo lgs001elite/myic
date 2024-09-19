@@ -1,15 +1,15 @@
-file 855 1725459571                                             
+file 854 1725476955                                             
 version 2
-run General-8-20240904-16:11:34-30056
+run General-8-20240904-21:01:17-1513
 attr configname General
-attr datetime 20240904-16:11:34
+attr datetime 20240904-21:01:17
 attr experiment General
 attr inifile omnetpp.ini
 attr iterationvars "$0=10, $1=2"
 attr iterationvarsf 10,2-
 attr measurement "$0=10, $1=2"
 attr network RandomGrid
-attr processid 30056
+attr processid 1513
 attr repetition 0
 attr replication #0
 attr resultdir results
@@ -17,7 +17,7 @@ attr runnumber 8
 attr seedset 8
 param RandomGrid.poweroff_rate 10
 param RandomGrid.g_syn_scheme 2
-param RandomGrid.g_ic_syn_cycle 6
+param RandomGrid.g_ic_syn_cycle 30
 param RandomGrid.g_ic_num 30
 param RandomGrid.g_energy_model 1
 param RandomGrid.sink.node_type 0
@@ -29,5 +29,5 @@ vector 0 RandomGrid.sink sim_time:vector ETV
 attr interpolationmode none
 attr source sim_time
 attr title "simTime, vector"
-0	820 34 973746541 973746541 147653.346 147653.346 1 147653.346 147653.346 147653.346 21801510584.996
+0	819 34 973746541 973746541 147653.346 147653.346 1 147653.346 147653.346 147653.346 21801510584.996
 

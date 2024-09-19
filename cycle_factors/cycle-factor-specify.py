@@ -219,5 +219,6 @@ if __name__ == "__main__":
     #axs[1][1].set_xticks(x_ticks)
     
     plt.savefig("cycle_size_syn.pdf", format='pdf')
+    plt.show()
     plt.close("all")
 

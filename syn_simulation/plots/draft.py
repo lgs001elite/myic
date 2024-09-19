@@ -1,0 +1,1 @@
+washer_30Sets = [free_beacon_washer_30_30, free_beacon_washer_51_30, free_beacon_washer_100_30]

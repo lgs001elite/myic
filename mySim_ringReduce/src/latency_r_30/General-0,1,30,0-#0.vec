@@ -1,0 +1,37 @@
+version 2
+run General-15-20240908-23:58:36-28540
+attr configname General
+attr datetime 20240908-23:58:36
+attr experiment General
+attr inifile omnetpp.ini
+attr iterationvars "$0=0, $1=1, $2=30, $3=0"
+attr iterationvarsf 0,1,30,0-
+attr measurement "$0=0, $1=1, $2=30, $3=0"
+attr network RandomGrid
+attr processid 28540
+attr repetition 0
+attr replication #0
+attr resultdir results
+attr runnumber 15
+attr seedset 15
+param RandomGrid.poweroff_rate 0
+param RandomGrid.g_syn_scheme 1
+param RandomGrid.g_ic_freebeacon_syn_cycle 30
+param RandomGrid.g_energy_model 0
+param RandomGrid.g_ic_num 30
+param RandomGrid.sink.node_type 0
+param RandomGrid.icc.node_type 2
+param RandomGrid.ic[*].node_type 1
+param RandomGrid.ic[*].g_if_produce_packets false
+
+vector 0 RandomGrid.sink discovery_time:vector ETV
+attr interpolationmode none
+attr source discovery_time
+attr title "discovery time, vector"
+vector 1 RandomGrid.sink sim_time:vector ETV
+attr interpolationmode none
+attr source sim_time
+attr title "simTime, vector"
+0	105080	24.57	24.57
+1	1022714800	335191.14	335191.14
+

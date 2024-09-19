@@ -75,7 +75,7 @@ packet_frame *basic_node::produce_msg(int packet_id, int msg_type, int sender_ty
     dMsg->setMsg_id(packet_id);
     dMsg->setSyn_signal(false);
     dMsg->setSend_time(0);
-    dMsg->setScale_slot(g_ic_scale_loc);
+    dMsg->setScale_slot(0);
     dMsg->setOrigin_slot(this->g_ic_loc);
     dMsg->setCurrent_slot(this->g_ic_dynamic_loc);
     dMsg->setNext_id(next_id);
@@ -127,38 +127,38 @@ void basic_node::determineNodesInRadioRadio()
                                  { return p1.second < p2.second; });
 }
 
-void basic_node::linkedListReduce_improve()
-{
-    simtime_t ptr = simTime();
-    if (this->g_node_id == 0)
-    {
-        if (this->g_if_reduction_recovery == false)
-        {
-            this->g_if_reduction_recovery = true;
-            this->g_if_send = true;
-        }
-    }
-    else
-    {
-        if (this->g_link_received_signal == true)
-        {
-            this->g_if_reduction_recovery = true;
-            this->g_if_send = true;
-            this->g_link_received_signal = false;
-        }
-        else
-        {
-            if (this->g_queue_len > 0)
-            {
-                if (this->transmission_queue[0].getPass_counter() > 0)
-                {
-                    this->g_if_reduction_recovery = true;
-                    this->g_if_send = true;
-                }
-            }
-        }
-    }
-}
+// void basic_node::linkedListReduce_improve()
+// {
+//     simtime_t ptr = simTime();
+//     if (this->g_node_id == 0)
+//     {
+//         if (this->g_if_reduction_recovery == false)
+//         {
+//             this->g_if_reduction_recovery = true;
+//             this->g_if_send = true;
+//         }
+//     }
+//     else
+//     {
+//         if (this->g_link_received_signal == true)
+//         {
+//             this->g_if_reduction_recovery = true;
+//             this->g_if_send = true;
+//             this->g_link_received_signal = false;
+//         }
+//         else
+//         {
+//             if (this->g_queue_len > 0)
+//             {
+//                 if (this->transmission_queue[0].getPass_counter() > 0)
+//                 {
+//                     this->g_if_reduction_recovery = true;
+//                     this->g_if_send = true;
+//                 }
+//             }
+//         }
+//     }
+// }
 
 void basic_node::linkedListReduce()
 {
@@ -168,7 +168,7 @@ void basic_node::linkedListReduce()
         if (this->g_if_reduction_recovery == false)
         {
             this->g_reduction_bias_num = 1;
-            this->g_ic_dynamic_loc = this->g_ic_scale_loc + 1;
+            this->g_ic_dynamic_loc = this->g_ic_loc + 1;
             this->g_if_reduction_recovery = true;
             this->g_if_send = true;
         }
@@ -177,10 +177,10 @@ void basic_node::linkedListReduce()
     {
         if (this->g_link_received_signal == true)
         {
-            if (this->g_node_id != (this->g_ic_cycle - 1))
+            if (this->g_node_id != (this->g_ic_num - 1))
             {
                 this->g_reduction_bias_num = 1;
-                this->g_ic_dynamic_loc = this->g_ic_scale_loc + 1;
+                this->g_ic_dynamic_loc = this->g_ic_loc + 1;
             }
             this->g_if_reduction_recovery = true;
             this->g_if_send = true;
@@ -192,12 +192,12 @@ void basic_node::linkedListReduce()
             {
                 if (this->transmission_queue[0].getPass_counter() > 0)
                 {
-                    if (this->g_node_id != (this->g_ic_cycle - 1))
+                    if (this->g_node_id != (this->g_ic_num - 1))
                     {
-                        if (this->g_ic_dynamic_loc == this->g_ic_scale_loc)
+                        if (this->g_ic_dynamic_loc == this->g_ic_loc)
                         {
                             this->g_reduction_bias_num = 1;
-                            this->g_ic_dynamic_loc = this->g_ic_scale_loc + 1;
+                            this->g_ic_dynamic_loc = this->g_ic_loc + 1;
                         }
                     }
                     this->g_if_reduction_recovery = true;
@@ -225,7 +225,7 @@ void basic_node::linkedListReduce_pulsar()
     {
         if (this->g_link_received_signal == true)
         {
-            if (this->g_node_id != (this->g_ic_cycle - 2))
+            if (this->g_node_id != (this->g_ic_num - 1))
             {
                 this->g_reduction_bias_num = 1;
                 this->g_ic_dynamic_loc = this->g_ic_loc + 1;
@@ -240,7 +240,7 @@ void basic_node::linkedListReduce_pulsar()
             {
                 if (this->transmission_queue[0].getPass_counter() > 0)
                 {
-                    if (this->g_node_id != (this->g_ic_cycle - 2))
+                    if (this->g_node_id != (this->g_ic_num - 1))
                     {
                         if (this->g_ic_dynamic_loc == this->g_ic_loc)
                         {
@@ -273,7 +273,7 @@ void basic_node::linkedListReduce_find()
     {
         if (this->g_link_received_signal == true)
         {
-            if (this->g_node_id != (this->g_ic_cycle - 1))
+            if (this->g_node_id != (this->g_ic_num - 1))
             {
                 this->g_reduction_bias_num = 1;
                 this->g_ic_dynamic_loc = this->g_ic_loc + 1;
@@ -288,7 +288,7 @@ void basic_node::linkedListReduce_find()
             {
                 if (this->transmission_queue[0].getPass_counter() > 0)
                 {
-                    if (this->g_node_id != (this->g_ic_cycle - 1))
+                    if (this->g_node_id != (this->g_ic_num - 1))
                     {
                         if (this->g_ic_dynamic_loc == this->g_ic_loc)
                         {

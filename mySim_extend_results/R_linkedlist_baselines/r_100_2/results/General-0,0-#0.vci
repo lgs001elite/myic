@@ -1,15 +1,15 @@
-file 1012 1725464782                                            
+file 1012 1725524107                                            
 version 2
-run General-0-20240904-17:45:12-12227
+run General-0-20240905-10:13:56-27166
 attr configname General
-attr datetime 20240904-17:45:12
+attr datetime 20240905-10:13:56
 attr experiment General
 attr inifile omnetpp.ini
 attr iterationvars "$0=0, $1=0"
 attr iterationvarsf 0,0-
 attr measurement "$0=0, $1=0"
 attr network RandomGrid
-attr processid 12227
+attr processid 27166
 attr repetition 0
 attr replication #0
 attr resultdir results

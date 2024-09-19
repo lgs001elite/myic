@@ -1,15 +1,15 @@
-file 844 1725455655                                             
+file 844 1725474692                                             
 version 2
-run General-5-20240904-15:14:10-21682
+run General-5-20240904-20:31:27-25926
 attr configname General
-attr datetime 20240904-15:14:10
+attr datetime 20240904-20:31:27
 attr experiment General
 attr inifile omnetpp.ini
 attr iterationvars "$0=1, $1=2"
 attr iterationvarsf 1,2-
 attr measurement "$0=1, $1=2"
 attr network RandomGrid
-attr processid 21682
+attr processid 25926
 attr repetition 0
 attr replication #0
 attr resultdir results

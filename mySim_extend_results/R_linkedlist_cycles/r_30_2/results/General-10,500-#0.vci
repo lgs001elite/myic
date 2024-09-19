@@ -1,0 +1,33 @@
+file 871 1725588413                                             
+version 2
+run General-14-20240906-03:35:39-8133
+attr configname General
+attr datetime 20240906-03:35:39
+attr experiment General
+attr inifile omnetpp.ini
+attr iterationvars "$0=10, $1=500"
+attr iterationvarsf 10,500-
+attr measurement "$0=10, $1=500"
+attr network RandomGrid
+attr processid 8133
+attr repetition 0
+attr replication #0
+attr resultdir results
+attr runnumber 14
+attr seedset 14
+param RandomGrid.poweroff_rate 10
+param RandomGrid.g_syn_scheme 0
+param RandomGrid.g_ic_syn_cycle 500
+param RandomGrid.g_ic_num 30
+param RandomGrid.g_energy_model 2
+param RandomGrid.sink.node_type 0
+param RandomGrid.icc.node_type 2
+param RandomGrid.ic[*].node_type 1
+param RandomGrid.ic[*].g_if_produce_packets false
+
+vector 0 RandomGrid.sink discovery_time:vector ETV
+attr interpolationmode none
+attr source discovery_time
+attr title "discovery time, vector"
+0	848 22 29913 29913 14.784 14.784 1 14.784 14.784 14.784 218.566656
+

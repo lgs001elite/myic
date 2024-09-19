@@ -235,5 +235,6 @@ if __name__ == "__main__":
             axs[1][index - 4].ticklabel_format(axis='y', style='sci', scilimits=(0, 0))
     plt.legend()
     plt.savefig("cycle_size_syn.pdf", format='pdf')
+    plt.show()
     plt.close("all")
 

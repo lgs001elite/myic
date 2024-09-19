@@ -5,6 +5,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <time.h>
 #include "crc.h"
 #include "office_1.h"
 #include "office_2.h"
@@ -127,6 +128,7 @@ int geometricRandom(double p)
     {
         exit(EXIT_FAILURE);
     }
+    srand(time(0));
     // Generate a random value between 0 and 1(
     double u = (double)rand() / RAND_MAX;
     // Calculate the number of trials until the first success
@@ -136,11 +138,13 @@ int geometricRandom(double p)
 // Function to generate random integers within a specified range [min, max]
 int generateRandomInt(int min, int max)
 {
+    srand(time(0));
     return (rand() % (max - min + 1)) + min;
 }
 // Function to generate integer random numbers from an exponential distribution
 int exponentialRand(double lambda, int min, int max)
 {
+    srand(time(0));
     double u = (double)rand() / RAND_MAX;
     double expo_value = -log(1.0 - u) / lambda;
     return (int)fmax(fmin(expo_value, max), min); // Ensure generated integer is within [min, max]
@@ -148,6 +152,7 @@ int exponentialRand(double lambda, int min, int max)
 // Function to generate integer random numbers from a Gaussian (Normal) distribution
 int gaussianRand(int mu, int sigma, int min, int max)
 {
+    srand(time(0));
     double u1 = (double)rand() / RAND_MAX;
     double u2 = (double)rand() / RAND_MAX;
     double z = sqrt(-2.0 * log(u1)) * cos(2.0 * M_PI * u2);
@@ -157,6 +162,7 @@ int gaussianRand(int mu, int sigma, int min, int max)
 // Function to generate integer random numbers from a Gaussian mixture distribution
 int gaussianMixtureRand(int num_components, int mu[], int sigma[], double weights[], int min, int max)
 {
+    srand(time(0));
     double u = (double)rand() / RAND_MAX;
     int component = 0;
     while (u > weights[component])

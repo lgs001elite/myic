@@ -101,42 +101,62 @@ cdf_4 = np.arange(1, len(sorted_intervals_4) + 1) / len(sorted_intervals_4)
 
 # Plotting the CDFs
 plt.rcParams['font.size'] = str(23)
-fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(14, 6))
-#AX1
-ax1.plot(sorted_intervals_1, cdf_1, label='Find', linewidth=line_width)
-ax1.plot(sorted_intervals_2, cdf_2, label='FreeBeacon', linestyle='--', linewidth=line_width)
-ax1.set_xlabel('Syn time[ms]')
-ax1.set_ylabel('CDF')
-ax1.set_title('With 10% power-off')
-# plt.xlim(right=0)
-ax1.set_ylim(bottom=0)
-ax1.set_xscale('log')
-ax1.legend()
+fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(10, 4))
+
+
+ax1.boxplot([sorted_intervals_1, sorted_intervals_2], 
+            labels=['Find', 'FreeBeacon'])
+ax1.set_title('10% power-off')
+ax1.set_yscale('log')
 print(np.average(sorted_intervals_1))
 print(np.average(sorted_intervals_2))
-print(2000000/np.size(sorted_intervals_1))
-print(2000000/np.size(sorted_intervals_2))
-print("****************")
 
-#AX2
-ax2.plot(sorted_intervals_3, cdf_3, label='Find', linewidth=line_width)
-ax2.plot(sorted_intervals_4, cdf_4, label='FreeBeacon', linestyle='--', linewidth=line_width)
-ax2.set_xlabel('Syn time[ms]')
-ax2.set_title('With no power-off')
-# plt.xlim(right=0)
-ax2.set_ylim(bottom=0)
-ax2.set_xscale('log')
-ax2.legend()
+
+
+ax2.boxplot([sorted_intervals_3, sorted_intervals_4], 
+            labels=['Find', 'FreeBeacon'])
+ax2.set_title('no power-off')
+ax2.set_yscale('log')
 print(np.average(sorted_intervals_3))
 print(np.average(sorted_intervals_4))
-print(2000000/np.size(sorted_intervals_3))
-print(2000000/np.size(sorted_intervals_4))
 
 
-print(np.size(sorted_intervals_1))
-print(np.size(sorted_intervals_2))
-print(np.size(sorted_intervals_3))
-print(np.size(sorted_intervals_4))
+
+#AX1
+# ax1.box(sorted_intervals_1, cdf_1, label='Find', linewidth=line_width)
+# ax1.box(sorted_intervals_2, cdf_2, label='FreeBeacon', linestyle='--', linewidth=line_width)
+# ax1.set_xlabel('Syn time[ms]')
+# ax1.set_ylabel('CDF')
+# ax1.set_title('With 10% power-off')
+# # plt.xlim(right=0)
+# ax1.set_ylim(bottom=0)
+# ax1.set_xscale('log')
+# ax1.legend()
+# print(np.average(sorted_intervals_1))
+# print(np.average(sorted_intervals_2))
+# print(2000000/np.size(sorted_intervals_1))
+# print(2000000/np.size(sorted_intervals_2))
+# print("****************")
+
+# #AX2
+# ax2.plot(sorted_intervals_3, cdf_3, label='Find', linewidth=line_width)
+# ax2.plot(sorted_intervals_4, cdf_4, label='FreeBeacon', linestyle='--', linewidth=line_width)
+# ax2.set_xlabel('Syn time[ms]')
+# ax2.set_title('With no power-off')
+# # plt.xlim(right=0)
+# ax2.set_ylim(bottom=0)
+# ax2.set_xscale('log')
+# ax2.legend()
+# print(np.average(sorted_intervals_3))
+# print(np.average(sorted_intervals_4))
+# print(2000000/np.size(sorted_intervals_3))
+# print(2000000/np.size(sorted_intervals_4))
+
+
+# print(np.size(sorted_intervals_1))
+# print(np.size(sorted_intervals_2))
+# print(np.size(sorted_intervals_3))
+# print(np.size(sorted_intervals_4))
 
 
 # 131623.85570133332
@@ -150,5 +170,5 @@ print(np.size(sorted_intervals_4))
 # 111111.11111111111
 
 plt.tight_layout()
-plt.savefig("syn_prototype.pdf", format='pdf')
+plt.savefig("syn_prototype_box.pdf", format='pdf')
 plt.close("all")
